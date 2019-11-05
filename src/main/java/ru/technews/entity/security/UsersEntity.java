@@ -1,7 +1,10 @@
-package ru.ibs.intern.traineeship.entity.security;
+package ru.technews.entity.security;
 
-import ru.ibs.intern.traineeship.entity.BaseEntity;
-import ru.ibs.intern.traineeship.entity.profile.UserProfileDataEntity;
+
+import ru.technews.entity.BaseEntity;
+import ru.technews.entity.profile.UserProfileDataEntity;
+import ru.technews.entity.security.RolesEntity;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;

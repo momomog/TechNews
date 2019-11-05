@@ -1,9 +1,10 @@
-package ru.ibs.intern.traineeship.entity.profile;
+package ru.technews.entity.profile;
 
-import ru.ibs.intern.traineeship.entity.BaseEntity;
-import ru.ibs.intern.traineeship.entity.security.UsersEntity;
+
+import ru.technews.entity.BaseEntity;
+import ru.technews.entity.security.UsersEntity;
+
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "user_profile_data")
@@ -33,16 +34,16 @@ public class UserProfileDataEntity extends BaseEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_avatar_id", insertable = false, updatable = false)
     private UserProfilePhotoEntity profilePhoto;
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "user_location_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private CitiesEntity location;
+//
+//    @ManyToOne(cascade = CascadeType.PERSIST)
+//    @JoinColumn(name = "user_location_id", referencedColumnName = "id", insertable = false, updatable = false)
+//    private CitiesEntity location;
 
     @OneToOne(mappedBy = "userProfileData", cascade = CascadeType.ALL)
     private UsersEntity users;
 
-    @OneToMany(mappedBy = "profileData", fetch = FetchType.EAGER)
-    private Set<ProfileSkillsEntity> skills;
+//    @OneToMany(mappedBy = "profileData", fetch = FetchType.EAGER)
+//    private Set<ProfileSkillsEntity> skills;
 
     public UserProfileDataEntity() {
     }
@@ -127,14 +128,14 @@ public class UserProfileDataEntity extends BaseEntity {
     public void setProfilePhoto(UserProfilePhotoEntity profilePhoto) {
         this.profilePhoto = profilePhoto;
     }
-
-    public CitiesEntity getLocation() {
-        return location;
-    }
-
-    public void setLocation(CitiesEntity location) {
-        this.location = location;
-    }
+//
+//    public CitiesEntity getLocation() {
+//        return location;
+//    }
+//
+//    public void setLocation(CitiesEntity location) {
+//        this.location = location;
+//    }
 
     public UsersEntity getUsers() {
         return users;
@@ -144,11 +145,11 @@ public class UserProfileDataEntity extends BaseEntity {
         this.users = users;
     }
 
-    public Set<ProfileSkillsEntity> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(Set<ProfileSkillsEntity> skills) {
-        this.skills = skills;
-    }
+//    public Set<ProfileSkillsEntity> getSkills() {
+//        return skills;
+//    }
+//
+//    public void setSkills(Set<ProfileSkillsEntity> skills) {
+//        this.skills = skills;
+//    }
 }

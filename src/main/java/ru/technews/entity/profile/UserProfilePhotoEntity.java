@@ -1,6 +1,7 @@
-package ru.ibs.intern.traineeship.entity.profile;
+package ru.technews.entity.profile;
 
-import ru.ibs.intern.traineeship.entity.BaseEntity;
+
+import ru.technews.entity.BaseEntity;
 import javax.persistence.*;
 
 @Entity

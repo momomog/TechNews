@@ -1,4 +1,4 @@
-package ru.ibs.intern.traineeship.config;
+package ru.technews.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,15 +19,15 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
-import ru.ibs.intern.traineeship.config.security.CustomAccessDeniedHandler;
-import ru.ibs.intern.traineeship.config.security.CustomAuthenticationFailureHandler;
-import ru.ibs.intern.traineeship.config.security.CustomLogoutSuccessHandler;
-import ru.ibs.intern.traineeship.config.security.RefererAuthenticationSuccessHandler;
+import ru.technews.config.security.CustomAccessDeniedHandler;
+import ru.technews.config.security.CustomAuthenticationFailureHandler;
+import ru.technews.config.security.CustomLogoutSuccessHandler;
+import ru.technews.config.security.RefererAuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@ComponentScan(basePackages = "ru.ibs.intern.traineeship.service.security")
+@ComponentScan(basePackages = "ru.technews.service.security")
 @Profile("!https")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 

@@ -1,4 +1,4 @@
-package ru.ibs.intern.traineeship.common;
+package ru.technews.common;
 
 public class Const {
     public static final String INDEX_URL = "/index";                 //стартовая страница

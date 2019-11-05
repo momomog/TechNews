@@ -1,12 +1,13 @@
-package ru.ibs.intern.traineeship.service.profile;
+package ru.technews.service.profile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.ibs.intern.traineeship.dao.BaseDao;
-import ru.ibs.intern.traineeship.dao.profile.UserProfilePhotoDao;
-import ru.ibs.intern.traineeship.entity.profile.UserProfilePhotoEntity;
-import ru.ibs.intern.traineeship.service.BaseService;
+import ru.technews.dao.BaseDao;
+import ru.technews.dao.profile.UserProfilePhotoDao;
+import ru.technews.entity.profile.UserProfilePhotoEntity;
+import ru.technews.service.BaseService;
+
 
 @Service
 @Transactional

@@ -1,4 +1,4 @@
-package ru.ibs.intern.traineeship.dao;
+package ru.technews.dao;
 
 import org.springframework.data.repository.Repository;
 import java.io.Serializable;

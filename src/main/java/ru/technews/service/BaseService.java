@@ -1,8 +1,9 @@
-package ru.ibs.intern.traineeship.service;
+package ru.technews.service;
 
 import org.springframework.transaction.annotation.Transactional;
-import ru.ibs.intern.traineeship.dao.BaseDao;
-import ru.ibs.intern.traineeship.entity.BaseEntity;
+import ru.technews.dao.BaseDao;
+import ru.technews.entity.BaseEntity;
+
 import java.util.List;
 
 @Transactional

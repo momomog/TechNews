@@ -1,6 +1,6 @@
-package ru.ibs.intern.traineeship.entity.security;
+package ru.technews.entity.security;
 
-import ru.ibs.intern.traineeship.entity.BaseEntity;
+import ru.technews.entity.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

@@ -1,4 +1,4 @@
-package ru.ibs.intern.traineeship.config.security;
+package ru.technews.config.security;
 
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;

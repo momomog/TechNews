@@ -1,4 +1,4 @@
-package ru.ibs.intern.traineeship.config.security;
+package ru.technews.config.security;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;

@@ -1,4 +1,4 @@
-package ru.ibs.intern.traineeship.config;
+package ru.technews.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "ru.ibs.intern.traineeship")
+@ComponentScan(basePackages = "ru.technews")
 public class RootConfig implements WebMvcConfigurer {
     @Bean
     public ViewResolver internalResourceViewResolver() {

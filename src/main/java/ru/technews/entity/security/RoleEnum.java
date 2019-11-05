@@ -1,4 +1,4 @@
-package ru.ibs.intern.traineeship.entity.security;
+package ru.technews.entity.security;
 
 public enum RoleEnum {
 

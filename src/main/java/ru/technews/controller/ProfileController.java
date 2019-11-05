@@ -1,4 +1,4 @@
-package ru.ibs.intern.traineeship.controller.profile;
+package ru.technews.controller;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -11,13 +11,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.ibs.intern.traineeship.config.security.MyUserDetails;
-import ru.ibs.intern.traineeship.entity.profile.UserProfileDataEntity;
-import ru.ibs.intern.traineeship.entity.profile.UserProfilePhotoEntity;
-import ru.ibs.intern.traineeship.entity.security.UsersEntity;
-import ru.ibs.intern.traineeship.service.UsersService;
-import ru.ibs.intern.traineeship.service.profile.UserProfileDataService;
-import ru.ibs.intern.traineeship.service.profile.UserProfilePhotoService;
+import ru.technews.config.security.MyUserDetails;
+import ru.technews.entity.profile.UserProfileDataEntity;
+import ru.technews.entity.profile.UserProfilePhotoEntity;
+import ru.technews.entity.security.UsersEntity;
+import ru.technews.service.UsersService;
+import ru.technews.service.profile.UserProfileDataService;
+import ru.technews.service.profile.UserProfilePhotoService;
+
 
 import java.io.IOException;
 import java.io.InputStream;

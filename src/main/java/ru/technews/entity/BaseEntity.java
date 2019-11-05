@@ -1,4 +1,4 @@
-package ru.ibs.intern.traineeship.entity;
+package ru.technews.entity;
 
 import javax.persistence.*;
 

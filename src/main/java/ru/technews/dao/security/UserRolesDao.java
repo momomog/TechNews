@@ -1,9 +1,10 @@
-package ru.ibs.intern.traineeship.dao.security;
+package ru.technews.dao.security;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.ibs.intern.traineeship.dao.BaseDao;
-import ru.ibs.intern.traineeship.entity.security.UserRolesEntity;
+import ru.technews.dao.BaseDao;
+import ru.technews.entity.security.UserRolesEntity;
+
 
 @Repository
 @Transactional

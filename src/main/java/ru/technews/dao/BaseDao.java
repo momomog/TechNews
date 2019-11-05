@@ -1,11 +1,12 @@
-package ru.ibs.intern.traineeship.dao;
+package ru.technews.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.GenericTypeResolver;
-import ru.ibs.intern.traineeship.entity.BaseEntity;
+import ru.technews.entity.BaseEntity;
+
 import java.util.List;
 
 public abstract class BaseDao<E extends BaseEntity> implements CRUDDao<E, Long> {

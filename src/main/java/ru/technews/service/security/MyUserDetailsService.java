@@ -1,4 +1,4 @@
-package ru.ibs.intern.traineeship.service.security;
+package ru.technews.service.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +9,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.ibs.intern.traineeship.config.security.MyUserDetails;
-import ru.ibs.intern.traineeship.dao.security.UsersDao;
-import ru.ibs.intern.traineeship.entity.security.UsersEntity;
+import ru.technews.config.security.MyUserDetails;
+import ru.technews.dao.security.UsersDao;
+import ru.technews.entity.security.UsersEntity;
+
 
 @Service
 @ComponentScan(basePackages = "ru.ibs.intern.traineeship.dao")

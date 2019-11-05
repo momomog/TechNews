@@ -1,11 +1,12 @@
-package ru.ibs.intern.traineeship;
+package ru.technews;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
-import ru.ibs.intern.traineeship.config.RootConfig;
-import ru.ibs.intern.traineeship.config.security.SessionListener;
+import ru.technews.config.RootConfig;
+import ru.technews.config.security.SessionListener;
+
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;

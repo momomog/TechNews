@@ -1,9 +1,10 @@
-package ru.ibs.intern.traineeship.config.security;
+package ru.technews.config.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.ibs.intern.traineeship.entity.security.UsersEntity;
+import ru.technews.entity.security.UsersEntity;
+
 
 import java.util.Collection;
 import java.util.stream.Collectors;

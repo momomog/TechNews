@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="merlushkin">
+        <createTable tableName="app_setting">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="value" type="varchar(1000)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="merlushkin">
+        <addColumn tableName="app_setting">
+            <column name="code" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="fokin-001" author="fokin">
+        <createTable tableName="cities">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="offset" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="fokin-002" author="fokin">
+        <createTable tableName="user_profile_avatar">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="file_name" type="varchar(1000)">
+            </column>
+            <column name="photo_content" type="LONGVARBINARY">
+                <constraints nullable="false"/>
+            </column>
+            <column name="size" type="bigint">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="fokin-003" author="fokin">
+        <createTable tableName="user_profile_data">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="role" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="middle_name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="skype" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_avatar_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_user_avatar_id" references="user_profile_avatar(id)"/>
+            </column>
+            <column name="user_location_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_user_location_id" references="cities(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="fokin-004" author="fokin">
+        <insert tableName="cities">
+            <column name="id">1</column>
+            <column name="id" value="1"/>
+            <column name="name" value="Москва"/>
+            <column name="offset" value="+0"/>
+        </insert>
+        <insert tableName="cities">
+            <column name="id" value="2"/>
+            <column name="name" value="Санкт-Петербург"/>
+            <column name="offset" value="+0"/>
+        </insert>
+        <insert tableName="cities">
+            <column name="id" value="3"/>
+            <column name="name" value="Ульяновск"/>
+            <column name="offset" value="+1"/>
+        </insert>
+        <insert tableName="cities">
+            <column name="id" value="4"/>
+            <column name="name" value="Пермь"/>
+            <column name="offset" value="+2"/>
+        </insert>
+        <insert tableName="cities">
+            <column name="id">2</column>
+            <column name="id" value="5"/>
+            <column name="name" value="Нижний Новгород"/>
+            <column name="offset" value="+0"/>
+        </insert>
+        <insert tableName="cities">
+            <column name="id">3</column>
+            <column name="id" value="6"/>
+            <column name="name" value="Пенза"/>
+            <column name="offset" value="+0"/>
+        </insert>
+        <insert tableName="cities">
+            <column name="id">4</column>
+            <column name="id" value="7"/>
+            <column name="name" value="Уфа"/>
+            <column name="offset" value="+2"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="VBazyaev-001" author="VBazyaev">
+        <createTable tableName="INTERNS">
+            <column name="ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="MENTOR_NAME" type="varchar(100)"/>
+            <column name="INTERNSHIP_DATE_START" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INTERNSHIP_DATE_END" type="date">
+            </column>
+            <column name="INTERN_NAME" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INTERN_SURNAME" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INTERN_PATRONYMIC" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="VBazyaev-002" author="VBazyaev">
+        <insert tableName="INTERNS">
+            <column name="id">1</column>
+            <column name="INTERN_NAME">Иван</column>
+            <column name="INTERN_SURNAME">Иванов</column>
+            <column name="INTERN_PATRONYMIC">Иванович</column>
+            <column name="MENTOR_NAME">Тествый Тест Тестович</column>
+            <column name="INTERNSHIP_DATE_START">01.03.2019</column>
+            <column name="INTERNSHIP_DATE_END">01.06.2019</column>
+        </insert>
+        <insert tableName="INTERNS">
+            <column name="id">2</column>
+            <column name="INTERN_NAME">Сергей</column>
+            <column name="INTERN_SURNAME">Сергеев</column>
+            <column name="INTERN_PATRONYMIC">Сергеевич</column>
+            <column name="MENTOR_NAME">Тествый тест тестович</column>
+            <column name="INTERNSHIP_DATE_START">01.03.2019</column>
+            <column name="INTERNSHIP_DATE_END">01.06.2019</column>
+        </insert>
+    </changeSet>
+
+    <changeSet author="SHRoza" id="SHRoza-1">
+        <createTable tableName="mentors">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="mentors_pkey"/>
+            </column>
+            <column name="surname" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="patronymic" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet  id="ASalmin-1" author="ASalmin">
+        <createTable tableName="resources">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="resources_pkey"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="file" type="BLOB"/>
+            <column name="filename" type="VARCHAR(255)"/>
+            <column name="link" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="merlushkin-001" author="merlushkin">
+        <createTable tableName="learning">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(100)"/>
+            <column name="technology" type="varchar(100)"/>
+            <column name="description" type="varchar(2000)"/>
+            <column name="duration" type="int"/>
+        </createTable>
+
+        <insert tableName="learning">
+            <column name="name">Java</column>
+            <column name="technology">Синтаксис языка Java</column>
+            <column name="description">Изучение основных типов данных, массивов, операторов и циклов.</column>
+            <column name="duration">7</column>
+        </insert>
+
+        <insert tableName="learning">
+            <column name="name">Java</column>
+            <column name="technology">ООП</column>
+            <column name="description">Абстракция, наследование, инкапсуляция, полиморфизм.</column>
+            <column name="duration">3</column>
+        </insert>
+
+        <insert tableName="learning">
+            <column name="name">Java</column>
+            <column name="technology">Классы и методы</column>
+            <column name="description">Интерфейсы, абстрактные классы, перегрузка, конструкторы</column>
+            <column name="duration">5</column>
+        </insert>
+
+        <insert tableName="learning">
+            <column name="name">Java</column>
+            <column name="technology">Многопоточность</column>
+            <column name="description">Знакомство с нитями: Thread, Runnable, start, join, interrupt, sleep, synchronized, volatile, yield</column>
+            <column name="duration">5</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="VBazyaev-003" author="VBazyaev">
+        <dropColumn tableName="user_profile_data" columnName="email"/>
+        <dropColumn tableName="user_profile_data" columnName="skype"/>
+
+        <addColumn tableName="user_profile_data">
+            <column name="email" type="varchar(100)"/>
+            <column name="skype" type="varchar(100)"/>
+        </addColumn>
+    </changeSet>
+
+<!--    Таблица пользователей (для авторизации)-->
+    <changeSet id="fokin-005" author="fokin">
+        <createTable tableName="users">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="email" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_profile_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_user_profile_data_id" references="user_profile_data(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+<!--    Таблица ролей пользователей (для авторизации)-->
+    <changeSet id="fokin-006" author="fokin">
+        <createTable tableName="roles">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="fokin-007" author="fokin">
+        <insert tableName="roles">
+            <column name="id" value="1"/>
+            <column name="name" value="ROLE_INTERN"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="id" value="2"/>
+            <column name="name" value="ROLE_MENTOR"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="id" value="3"/>
+            <column name="name" value="ROLE_HR"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="VBazyaev-004" author="VBazyaev">
+        <insert tableName="user_profile_avatar">
+            <column name="photo_content" value=""/>
+        </insert>
+        <insert tableName="user_profile_avatar">
+            <column name="photo_content" value=""/>
+        </insert>
+        <insert tableName="user_profile_avatar">
+            <column name="photo_content" value=""/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="VBazyaev-005" author="VBazyaev">
+        <insert tableName="user_profile_data">
+            <column name="role" value="ROLE_INTERN"/>
+            <column name="first_name">i</column>
+            <column name="middle_name">i</column>
+            <column name="last_name">i</column>
+            <column name="user_avatar_id">1</column>
+            <column name="user_location_id">1</column>
+        </insert>
+        <insert tableName="user_profile_data">
+            <column name="role" value="ROLE_MENTOR"/>
+            <column name="first_name">m</column>
+            <column name="middle_name">m</column>
+            <column name="last_name">m</column>
+            <column name="user_avatar_id">2</column>
+            <column name="user_location_id">1</column>
+        </insert>
+        <insert tableName="user_profile_data">
+            <column name="role" value="ROLE_HR"/>
+            <column name="first_name">h</column>
+            <column name="middle_name">h</column>
+            <column name="last_name">h</column>
+            <column name="user_avatar_id">3</column>
+            <column name="user_location_id">1</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="fokin-008" author="fokin">
+        <insert tableName="users">
+            <column name="email" value="i"/>
+            <column name="password" value="$2a$10$WY/qNg6OO.1EcGvwzU8sN.zjgTigV.RxqV.koPxDAE4Oxr6OvYlra"/>
+            <column name="user_profile_id" value="1"/>
+        </insert>
+        <insert tableName="users">
+            <column name="email" value="m"/>
+            <column name="password" value="$2a$10$LBURD5hbqvqoHwR/NN.ZYOWRF1XRR7RphPElQAyZtOEH6PG24AImS"/>
+            <column name="user_profile_id" value="2"/>
+        </insert>
+        <insert tableName="users">
+            <column name="email" value="h"/>
+            <column name="password" value="$2a$10$h4c4WegpO4JYlksEvcVNreu7/oS8TEdIZ977daNjzR.5uoRfg3LCW"/>
+            <column name="user_profile_id" value="3"/>
+        </insert>
+    </changeSet>
+
+<!--    Таблица связи пользователя с ролью (для авторизации)-->
+    <changeSet id="fokin-009" author="fokin">
+        <createTable tableName="user_roles ">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_user_id" references="users(id)"/>
+            </column>
+            <column name="role_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_role_id" references="roles(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="merlushkin-002" author="merlushkin">
+        <createTable tableName="dict_offices">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(100)" />
+        </createTable>
+
+        <insert tableName="dict_offices">
+            <column name="name">Москва</column>
+        </insert>
+
+        <insert tableName="dict_offices">
+            <column name="name">Санкт-Петербург</column>
+        </insert>
+
+        <insert tableName="dict_offices">
+            <column name="name">Ульяновск</column>
+        </insert>
+
+        <insert tableName="dict_offices">
+            <column name="name">Пермь</column>
+        </insert>
+
+        <insert tableName="dict_offices">
+            <column name="name">Белгород</column>
+        </insert>
+
+        <insert tableName="dict_offices">
+            <column name="name">Пенза</column>
+        </insert>
+
+        <insert tableName="dict_offices">
+            <column name="name">Уфа</column>
+        </insert>
+
+        <insert tableName="dict_offices">
+            <column name="name">Нижний Новгород</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="merlushkin-003" author="merlushkin">
+        <createTable tableName="dict_technologies">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(100)" />
+        </createTable>
+
+        <insert tableName="dict_technologies">
+            <column name="name">Java Core</column>
+        </insert>
+
+        <insert tableName="dict_technologies">
+            <column name="name">ExtJs</column>
+        </insert>
+
+        <insert tableName="dict_technologies">
+            <column name="name">ReactJs</column>
+        </insert>
+
+        <insert tableName="dict_technologies">
+            <column name="name">Spring</column>
+        </insert>
+
+        <insert tableName="dict_technologies">
+            <column name="name">Hibernate</column>
+        </insert>
+    </changeSet>
+    <changeSet id="fokin-010" author="fokin">
+        <insert tableName="user_roles">
+            <column name="user_id" value="1"/>
+            <column name="role_id" value="1"/>
+        </insert>
+        <insert tableName="user_roles">
+            <column name="user_id" value="2"/>
+            <column name="role_id" value="2"/>
+        </insert>
+        <insert tableName="user_roles">
+            <column name="user_id" value="3"/>
+            <column name="role_id" value="3"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="ASalmin-2" author="ASalmin">
+        <createTable tableName="training_course">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="training_course_pk"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="ASalmin-3" author="ASalmin">
+        <createTable tableName="training_course_programs">
+            <column name="training_course_id" type="BIGINT"/>
+            <column name="training_program_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="ASalmin-4" author="ASalmin">
+        <createTable tableName="training_programs">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="programs_pk"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="ASalmin-5" author="ASalmin">
+        <addForeignKeyConstraint baseColumnNames="training_course_id" baseTableName="training_course_programs" constraintName="training_course_id_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="training_course"/>
+    </changeSet>
+    <changeSet id="ASalmin-6" author="ASalmin">
+        <addForeignKeyConstraint baseColumnNames="training_program_id" baseTableName="training_course_programs" constraintName="training_programs_id_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="training_programs"/>
+    </changeSet>
+    <changeSet id="ASalmin-7" author="ASalmin">
+        <createTable tableName="training_programs_item">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="training_programs_item_pk"/>
+            </column>
+            <column name="training_program_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="training_programs_item_fk" references="training_programs(id)" />
+            </column>
+            <column name="learning_id" type="BIGINT"/>
+            <column name="ordr" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="ASalmin-8" author="ASalmin">
+        <insert tableName="training_course">
+            <column name="name" value="Грейд 0-1"/>
+            <column name="description" value="Стажёрская Программа"/>
+        </insert>
+        <insert tableName="training_programs">
+            <column name="name" value="React"/>
+            <column name="description" value="1"/>
+        </insert>
+        <insert tableName="training_programs">
+            <column name="name" value="Java"/>
+            <column name="description" value="1"/>
+        </insert>
+        <insert tableName="training_course_programs">
+            <column name="training_course_id" value="1"/>
+            <column name="training_program_id" value="1"/>
+        </insert>
+        <insert tableName="training_course_programs">
+            <column name="training_course_id" value="1"/>
+            <column name="training_program_id" value="2"/>
+        </insert>
+        <insert tableName="training_programs_item">
+            <column name="training_program_id" value="2"/>
+            <column name="learning_id" value="1"/>
+            <column name="ordr" value="1"/>
+        </insert>
+        <insert tableName="training_programs_item">
+            <column name="training_program_id" value="1"/>
+            <column name="learning_id" value="2"/>
+            <column name="ordr" value="2"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="VBazyaev-006" author="VBazyaev">
+        <createTable tableName="profile_skills">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="profile_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_user_profile_data_id" references="user_profile_data(id)"/>
+            </column>
+            <column name="skill_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_dic_technology_id" references="dict_technologies(id)"/>
+            </column>
+            <column name="level" type="varchar(100)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="VBazyaev-007" author="VBazyaev">
+        <insert tableName="profile_skills">
+            <column name="profile_id">2</column>
+            <column name="skill_id">3</column>
+            <column name="level">Senior</column>
+        </insert>
+        <insert tableName="profile_skills">
+            <column name="profile_id">2</column>
+            <column name="skill_id">4</column>
+            <column name="level">Middle</column>
+        </insert>
+        <insert tableName="profile_skills">
+            <column name="profile_id">1</column>
+            <column name="skill_id">4</column>
+            <column name="level">Junior</column>
+        </insert>
+    </changeSet>
+    <changeSet id="SKonkov-001" author="SKonkov">
+        <addColumn schemaName="public"
+                   tableName="learning">
+            <column name="technology_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="SKonkov-002" author="SKonkov">
+        <addColumn schemaName="public"
+                   tableName="interns">
+            <column name="mentor_id" type="bigint"/>
+            <column name="intern_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="SKonkov-003" author="SKonkov">
+        <createTable tableName="interns_courses">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="intern_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_ic_user_id" references="interns(id)"/>
+            </column>
+            <column name="course_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_ic_course_id" references="training_course(id)"/>
+            </column>
+            <column name="done" type="integer">
+            </column>
+            <column name="start_date" type="date">
+            </column>
+            <column name="end_date" type="date">
+            </column>
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>

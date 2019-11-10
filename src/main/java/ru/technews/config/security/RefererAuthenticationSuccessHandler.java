@@ -21,7 +21,6 @@ public class RefererAuthenticationSuccessHandler extends SavedRequestAwareAuthen
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
-        // profile url
-        response.sendRedirect(request.getContextPath() );
+        response.sendRedirect(request.getContextPath() + "/profile");
     }
 }

@@ -1,6 +1,7 @@
 package ru.technews.dao;
 
 import org.springframework.data.repository.Repository;
+
 import java.io.Serializable;
 import java.util.List;
 

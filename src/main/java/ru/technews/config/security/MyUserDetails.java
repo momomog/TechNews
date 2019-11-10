@@ -5,7 +5,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.technews.entity.security.UsersEntity;
 
-
 import java.util.Collection;
 import java.util.stream.Collectors;
 

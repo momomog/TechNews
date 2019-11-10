@@ -1,8 +1,6 @@
 package ru.technews.entity.profile;
 
-
 import ru.technews.entity.BaseEntity;
-import ru.technews.entity.security.UsersEntity;
 
 import javax.persistence.*;
 
@@ -28,32 +26,28 @@ public class UserProfileDataEntity extends BaseEntity {
     @Column(name = "user_location_id")
     private Long userLocationId;
 
-    @Column(name = "user_avatar_id")
+    @Column(name = "user_avatar_id", insertable = false, updatable = false)
     private Long userAvatarId;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_avatar_id", insertable = false, updatable = false)
+    @JoinColumn(name = "user_avatar_id")
     private UserProfilePhotoEntity profilePhoto;
-//
-//    @ManyToOne(cascade = CascadeType.PERSIST)
-//    @JoinColumn(name = "user_location_id", referencedColumnName = "id", insertable = false, updatable = false)
-//    private CitiesEntity location;
 
-    @OneToOne(mappedBy = "userProfileData", cascade = CascadeType.ALL)
-    private UsersEntity users;
-
-//    @OneToMany(mappedBy = "profileData", fetch = FetchType.EAGER)
-//    private Set<ProfileSkillsEntity> skills;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "user_location_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private CitiesEntity location;
 
     public UserProfileDataEntity() {
     }
 
-    public UserProfileDataEntity(String role, String firstName, String middleName, String lastName, String email, Long userLocationId) {
+    public UserProfileDataEntity(String role, String firstName, String middleName, String lastName, String email,
+                                 String skype, Long userLocationId) {
         this.role = role;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.email = email;
+        this.skype = skype;
         this.userLocationId = userLocationId;
     }
 
@@ -128,28 +122,12 @@ public class UserProfileDataEntity extends BaseEntity {
     public void setProfilePhoto(UserProfilePhotoEntity profilePhoto) {
         this.profilePhoto = profilePhoto;
     }
-//
-//    public CitiesEntity getLocation() {
-//        return location;
-//    }
-//
-//    public void setLocation(CitiesEntity location) {
-//        this.location = location;
-//    }
 
-    public UsersEntity getUsers() {
-        return users;
+    public CitiesEntity getLocation() {
+        return location;
     }
 
-    public void setUsers(UsersEntity users) {
-        this.users = users;
+    public void setLocation(CitiesEntity location) {
+        this.location = location;
     }
-
-//    public Set<ProfileSkillsEntity> getSkills() {
-//        return skills;
-//    }
-//
-//    public void setSkills(Set<ProfileSkillsEntity> skills) {
-//        this.skills = skills;
-//    }
 }

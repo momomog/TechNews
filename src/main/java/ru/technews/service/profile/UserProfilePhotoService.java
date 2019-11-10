@@ -8,7 +8,6 @@ import ru.technews.dao.profile.UserProfilePhotoDao;
 import ru.technews.entity.profile.UserProfilePhotoEntity;
 import ru.technews.service.BaseService;
 
-
 @Service
 @Transactional
 public class UserProfilePhotoService extends BaseService<UserProfilePhotoEntity> {

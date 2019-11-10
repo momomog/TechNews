@@ -1,24 +1,19 @@
-package ru.technews.controller;
+package ru.technews.controller.profile;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.technews.config.security.MyUserDetails;
 import ru.technews.entity.profile.UserProfileDataEntity;
 import ru.technews.entity.profile.UserProfilePhotoEntity;
-import ru.technews.entity.security.UsersEntity;
-import ru.technews.service.UsersService;
 import ru.technews.service.profile.UserProfileDataService;
 import ru.technews.service.profile.UserProfilePhotoService;
-
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,34 +25,27 @@ public class ProfileController {
 
     private Logger logger = LoggerFactory.getLogger(ProfileController.class);
 
-    private final UserProfileDataService userProfileDataService;
+    @Autowired
+    private UserProfileDataService userProfileDataService;
 
-    private final UsersService usersService;
-
-    private final UserProfilePhotoService userProfilePhotoService;
-
-    public ProfileController(UserProfileDataService userProfileDataService, UsersService usersService, UserProfilePhotoService userProfilePhotoService) {
-        this.userProfileDataService = userProfileDataService;
-        this.usersService = usersService;
-        this.userProfilePhotoService = userProfilePhotoService;
-    }
+    @Autowired
+    private UserProfilePhotoService userProfilePhotoService;
 
     // Получение данных профиля пользователя
     // Запрос без параметров - id пользователя из сессии, иначе из параметров
     @GetMapping
     public String getUserProfileData(@RequestParam(name = "id", required = false) Long id, ModelMap model) {
         UserProfileDataEntity user;
+
         if (id == null) {
-            //Берётся пользователь из сессии
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            MyUserDetails details = (MyUserDetails) auth.getPrincipal();
-            Long sessionUserId = details.getUserDetails().getId();
+            // Здесь будет браться ID пользователя из сессии
+            Long sessionUserId = 1L;
             user = userProfileDataService.findById(sessionUserId);
         } else {
             user = userProfileDataService.findById(id);
         }
 
-        model.addAttribute("profile", user);
+        model.addAttribute("user", user);
         return "profile/profile";
     }
 
@@ -73,6 +61,7 @@ public class ProfileController {
     // example: " /profile/update?id=5 "
     @PostMapping(params = "id", value = "/update")
     public RedirectView updateProfile(
+            @RequestParam(value = "role") String role,
             @RequestParam(value = "firstName") String firstName,
             @RequestParam(value = "middleName") String middleName,
             @RequestParam(value = "lastName") String lastName,
@@ -81,24 +70,26 @@ public class ProfileController {
             @RequestParam(value = "photo") MultipartFile photo,
             @RequestParam(value = "locationId") Long locationId,
             @RequestParam(value = "id") Long id) {
-        UserProfileDataEntity userProfile = userProfileDataService.findById(id);
-        UsersEntity user = userProfile.getUsers();
-        userProfile.setFirstName(firstName);
-        userProfile.setMiddleName(middleName);
-        userProfile.setLastName(lastName);
-        userProfile.setSkype(skype);
-        userProfile.setUserLocationId(locationId);
+        UserProfileDataEntity user = userProfileDataService.findById(id);
+        user.setFirstName(firstName);
+        user.setMiddleName(middleName);
+        user.setLastName(lastName);
+        user.setRole(role);
+        user.setEmail(email);
+        user.setSkype(skype);
+        user.setUserLocationId(locationId);
 
         // Если фото не загружено, то остаётся старое фото. Полное удаление фото при редактировании пока не предусмотрено.
         try {
             if (photo.getSize() != 0) {
-                userProfile.getProfilePhoto().setName(photo.getOriginalFilename());
-                userProfile.getProfilePhoto().setPhotoContent(photo.getBytes());
-                userProfile.getProfilePhoto().setSize(photo.getSize());
+                UserProfilePhotoEntity profilePhoto = userProfilePhotoService.findById(user.getUserAvatarId());
+                profilePhoto.setName(photo.getOriginalFilename());
+                profilePhoto.setPhotoContent(photo.getBytes());
+                profilePhoto.setSize(photo.getSize());
+                user.setProfilePhoto(profilePhoto);
             }
-            user.setUserProfileData(userProfile);
-            user.setEmail(email);
-            usersService.update(user);
+
+            userProfileDataService.update(user);
         } catch (IOException e) {
             e.printStackTrace();
         }

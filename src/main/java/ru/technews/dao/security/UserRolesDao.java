@@ -5,7 +5,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.technews.dao.BaseDao;
 import ru.technews.entity.security.UserRolesEntity;
 
-
 @Repository
 @Transactional
 public class UserRolesDao extends BaseDao<UserRolesEntity> {

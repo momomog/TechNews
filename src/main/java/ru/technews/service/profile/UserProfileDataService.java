@@ -8,7 +8,6 @@ import ru.technews.dao.profile.UserProfileDataDao;
 import ru.technews.entity.profile.UserProfileDataEntity;
 import ru.technews.service.BaseService;
 
-
 @Service
 @Transactional
 public class UserProfileDataService extends BaseService<UserProfileDataEntity> {
@@ -20,5 +19,4 @@ public class UserProfileDataService extends BaseService<UserProfileDataEntity> {
     public BaseDao<UserProfileDataEntity> getBaseDao() {
         return dao;
     }
-
 }

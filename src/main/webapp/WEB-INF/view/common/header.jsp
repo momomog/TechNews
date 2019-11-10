@@ -1,4 +1,4 @@
-<%@ page import="ru.ibs.intern.traineeship.common.Const" %>
+<%@ page import="ru.technews.common.Const" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
@@ -31,35 +31,14 @@
             <ul class="navbar-nav d-flex mr-auto text-center align-items-center">
 
                 <security:authorize access="isAuthenticated()">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<%=Const.DASHBOARD_URL%>">Dashboard</a>
-                    </li>
-                </security:authorize>
-                <security:authorize access="hasRole('ROLE_MENTOR')">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<%=Const.COURSES_URL%>">Курсы</a>
-                    </li>
-                </security:authorize>
-                <security:authorize access="hasRole('ROLE_MENTOR')">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<%=Const.PROGRAMS_URL%>">Программы обучения</a>
-                    </li>
-                </security:authorize>
-
-                <security:authorize access="isAuthenticated()">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<%=Const.LEARNING_URL%>">Список тем для изучения</a>
+                    <li class="nav-item active">
+                        <a class="nav-link line" href="<%=Const.PROFILE_URL%>">Профиль</a>
                     </li>
                 </security:authorize>
 
                 <security:authorize access="hasRole('ROLE_INTERN')">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Список задач</a>
-                    </li>
-                </security:authorize>
-                <security:authorize access="isAuthenticated()">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<%=Const.PROFILE_SKILL_URL%>">Навыки</a>
                     </li>
                 </security:authorize>
 
@@ -74,25 +53,38 @@
                         <a class="nav-link" href="#">Список менторов</a>
                     </li>
                 </security:authorize>
-<!--
+
                 <security:authorize access="hasRole('ROLE_INTERN') || hasRole('ROLE_MENTOR')">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Список компетенций</a>
                     </li>
                 </security:authorize>
--->
-                <security:authorize access="hasRole('ROLE_HR') || hasRole('ROLE_MENTOR') ">
+
+                <security:authorize access="isAuthenticated()">
                     <li class="nav-item">
-                        <a class="nav-link" href="<%=Const.USER_URL%>">Пользователи</a>
+                        <a class="nav-link" href="<%=Const.LEARNING_URL%>">Список тем для изучения</a>
                     </li>
                 </security:authorize>
 
-                <security:authorize access="hasRole('ROLE_INTERN') || hasRole('ROLE_MENTOR')">
+                <security:authorize access="hasRole('ROLE_INTERN')">
                     <li class="nav-item">
-                        <a class="nav-link" href="<%=Const.LIB_URL%>">Список ресурсов</a>
+                        <a class="nav-link" href="#">Список ресурсов</a>
                     </li>
                 </security:authorize>
-<!--              <security:authorize access="hasRole('ROLE_MENTOR') || hasRole('ROLE_HR')">
+
+                <security:authorize access="hasRole('ROLE_MENTOR')">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">План обучения</a>
+                    </li>
+                </security:authorize>
+
+                <security:authorize access="hasRole('ROLE_HR')">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Планы обучения</a>
+                    </li>
+                </security:authorize>
+
+                <security:authorize access="hasRole('ROLE_MENTOR') || hasRole('ROLE_HR')">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Список компетенций по грейдам</a>
                     </li>
@@ -103,15 +95,10 @@
                         <a class="nav-link" href="#">Список компетенций</a>
                     </li>
                 </security:authorize>
--->
-                <security:authorize access="hasRole('ROLE_MENTOR')">
-                <li class="nav-item">
-                    <a class="nav-link" href="<%=Const.DICT_URL%>">Справочники</a>
-                </li>
-                </security:authorize>
+
                 <security:authorize access="isAuthenticated()">
-                    <li class="nav-item active">
-                        <a class="nav-link line" href="<%=Const.PROFILE_URL%>">Профиль</a>
+                    <li class="nav-item">
+                        <a class="nav-link lh-1" href="#">Цели стажерской программы</a>
                     </li>
                 </security:authorize>
 

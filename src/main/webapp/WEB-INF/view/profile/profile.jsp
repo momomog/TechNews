@@ -1,4 +1,4 @@
-<%@ page import="ru.ibs.intern.traineeship.common.Const" %>
+<%@ page import="ru.technews.common.Const" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
@@ -11,30 +11,30 @@
 <body>
 
 <jsp:include page="../common/header.jsp"/>
-<jsp:useBean id="profile" scope="request" type="ru.ibs.intern.traineeship.entity.profile.UserProfileDataEntity"/>
+<jsp:useBean id="user" scope="request" type="ru.technews.entity.profile.UserProfileDataEntity"/>
 
 <div class="container emp-profile mw-50">
     <div class="row">
         <div class="col-md-4">
             <div class="profile-img">
-                <img src="<%=Const.PHOTO_PROFILE_URL + "?id=" + profile.getUserAvatarId()%>" alt="user_photo">
+                <img src="<%=Const.PHOTO_PROFILE_URL + "?id=" + user.getUserAvatarId()%>" alt="user_photo">
             </div>
         </div>
         <div class="col-md-6">
             <div class="profile-head">
                 <h3>
-                    ${profile.firstName} ${profile.lastName}
+                    ${user.firstName} ${user.lastName}
                 </h3>
                 <h6>
                     <%
-                        switch (profile.getRole()) {
-                            case "ROLE_INTERN":
+                        switch (user.getRole()) {
+                            case "INTERN":
                                 out.println("стажёр-консультант");
                                 break;
-                            case "ROLE_MENTOR":
+                            case "MENTOR":
                                 out.println("ментор");
                                 break;
-                            case "ROLE_HR":
+                            case "HR":
                                 out.println("менеджер по персоналу");
                                 break;
                         }
@@ -60,7 +60,7 @@
                         </div>
                         <div class="col-md-9">
                             <p>
-                                ${profile.firstName} ${profile.middleName} ${profile.lastName}
+                                ${user.firstName} ${user.middleName} ${user.lastName}
                             </p>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                         </div>
                         <div class="col-md-9">
                             <p>
-                                ${profile.users.email}
+                                ${user.email}
                             </p>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                         </div>
                         <div class="col-md-9">
                             <p>
-                                ${profile.skype}
+                                ${user.skype}
                             </p>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                         </div>
                         <div class="col-md-9">
                             <p>
-                                ${profile.location.name} (${profile.location.offset})
+                                ${user.location.name} (${user.location.offset})
                             </p>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                                 <label for="firstName" class="col-sm-3 control-label required-field">Имя</label>
                                 <div class="col-sm-9 mw-100">
                                     <input type="text" id="firstName" placeholder="Имя" class="form-control"
-                                           name="firstName" value=${profile.firstName} autofocus required>
+                                           name="firstName" value=${user.firstName} autofocus required>
                                 </div>
                             </div>
                         </div>
@@ -139,7 +139,7 @@
                                 <label for="middleName" class="col-sm-3 control-label">Отчество</label>
                                 <div class="col-sm-9 mw-100">
                                     <input type="text" id="middleName" placeholder="Отчество" class="form-control"
-                                           name="middleName" value=${profile.middleName}>
+                                           name="middleName" value=${user.middleName}>
                                 </div>
                             </div>
                         </div>
@@ -148,7 +148,18 @@
                         <label for="lastName" class="col-sm-3 control-label required-field">Фамилия</label>
                         <div class="col-sm-9 mw-100">
                             <input type="text" id="lastName" placeholder="Фамилия" class="form-control" name="lastName"
-                                   value=${profile.lastName} required>
+                                   value=${user.lastName} required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label required-field">Тип</label>
+                        <div class="col-sm-9 mw-100">
+                            <select id="role" class="form-control" name="role" required>
+                                <option value="" disabled selected>Выберите тип...</option>
+                                <option value="INTERN">Стажёр-консультант</option>
+                                <option value="MENTOR">Ментор</option>
+                                <option value="HR">Менеджер по персоналу</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row">
@@ -157,22 +168,22 @@
                                 <label for="email" class="col-sm-3 control-label required-field">Почта</label>
                                 <div class="col-sm-9 mw-100">
                                     <input type="email" id="email" placeholder="Почта" class="form-control" name="email"
-                                           value=${profile.users.email} required>
+                                           value=${user.email} required>
                                 </div>
                             </div>
                         </div>
                         <div class="col-6 pl-0">
                             <div class="form-group">
-                                <label for="skype" class="col-sm-3 control-label">Skype</label>
+                                <label for="skype" class="col-sm-3 control-label required-field">Skype</label>
                                 <div class="col-sm-9 mw-100">
                                     <input type="text" id="skype" placeholder="Skype" class="form-control" name="skype"
-                                           value=${profile.skype}>
+                                           value=${user.skype} required>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">Город</label>
+                        <label class="col-sm-3 control-label required-field">Город</label>
                         <div class="col-sm-9 mw-100">
                             <select id="locationId" class="form-control" name="locationId" required>
                                 <option value="" disabled selected>Выберите город...</option>
@@ -215,13 +226,13 @@
     });
 
     // сет роли юзера
-    $("#role").val("${profile.role}");
+    $("#role").val("${user.role}");
 
     // Получение id города
     const cities = ["Москва", "Санкт-Петербург", "Ульяновск", "Пермь", "Нижний Новгород", "Пенза", "Уфа"];
     let locationId;
     cities.map((city, index) => {
-        if ("${profile.location.name}".startsWith(city)) {
+        if ("${user.location.name}".startsWith(city)) {
             locationId = index + 1;
         }
     });
@@ -230,7 +241,7 @@
         $("#locationId").val(locationId);
 
     // сет action-ссылки формы редактирования профиля по id-параметру
-    $("#updateProfileForm").attr("action", "/profile/update?id=" + ${profile.id});
+    $("#updateProfileForm").attr("action", "/profile/update?id=" + ${user.id});
 </script>
 
 </body>

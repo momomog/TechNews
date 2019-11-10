@@ -27,7 +27,7 @@ import ru.technews.config.security.RefererAuthenticationSuccessHandler;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@ComponentScan(basePackages = "ru.technews.service.security")
+@ComponentScan(basePackages = "ru.technews")
 @Profile("!https")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -38,9 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
-        PasswordEncoder passwordEncoder = passwordEncoder();
-        authProvider.setPasswordEncoder(passwordEncoder);
-        System.out.println("Password 111111 = "+passwordEncoder.encode("111111"));
+        authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
 
@@ -56,13 +54,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/anonymous*").anonymous()
                     .antMatchers("/login*", "/", "/index", "/registration").permitAll()
-                    .antMatchers("/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
                     .loginPage("/login.html")
                     .loginProcessingUrl("/perform_login")
-                    .defaultSuccessUrl("/dashboard", true)
+                    .defaultSuccessUrl("/profile", true)
                     .successHandler(authenticationSuccessHandler())
                     .failureForwardUrl("/login.html")
                     .failureHandler(authenticationFailureHandler())
@@ -81,9 +78,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web
                 // Ресурсы, который доступны неавторизованному пользователю
                 .ignoring()
-                .antMatchers("/resources/css/**")
-                .antMatchers("/resources/images/public/**")
-                .antMatchers("/resources/js/**");
+                    .antMatchers("/resources/css/**")
+                    .antMatchers("/resources/images/public/**")
+                    .antMatchers("/resources/js/**");
     }
 
     @Bean

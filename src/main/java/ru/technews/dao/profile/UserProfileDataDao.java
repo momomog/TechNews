@@ -5,7 +5,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.technews.dao.BaseDao;
 import ru.technews.entity.profile.UserProfileDataEntity;
 
-
 @Repository
 @Transactional
 public class UserProfileDataDao extends BaseDao<UserProfileDataEntity> {

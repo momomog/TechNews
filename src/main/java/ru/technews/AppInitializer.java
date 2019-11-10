@@ -7,7 +7,6 @@ import org.springframework.web.servlet.DispatcherServlet;
 import ru.technews.config.RootConfig;
 import ru.technews.config.security.SessionListener;
 
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 

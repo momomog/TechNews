@@ -13,7 +13,6 @@ import ru.technews.config.security.MyUserDetails;
 import ru.technews.dao.security.UsersDao;
 import ru.technews.entity.security.UsersEntity;
 
-
 @Service
 @ComponentScan(basePackages = "ru.ibs.intern.traineeship.dao")
 public class MyUserDetailsService implements UserDetailsService {

@@ -1,4 +1,4 @@
-<%@ page import="ru.ibs.intern.traineeship.common.Const" %>
+<%@ page import="ru.technews.common.Const" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
@@ -28,6 +28,17 @@
             <img class="mb-1 mr-auto ml-auto" src="<spring:url value="/resources/images/public/index_picture.jpg"/>" alt="ibs_logo"
                  width="500" height="350">
         </div>
+    </div>
+    <div class="mb-3">
+        <div class="text-center">Не имеете аккаунта?
+            <a class="text-decoration-none" href=<%=Const.REGISTRATION_URL%>>Зарегистрироваться</a>
+        </div>
+    </div>
+    <div class="mb-3">
+        <form action="profile/all" method="get">
+            <input type="submit" class="btn btn-primary btn-block w-auto mr-auto ml-auto"
+                   value="Получить список всех пользователей">
+        </form>
     </div>
 </div>
 

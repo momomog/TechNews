@@ -8,7 +8,6 @@ import ru.technews.dao.security.UserRolesDao;
 import ru.technews.entity.security.UserRolesEntity;
 import ru.technews.service.BaseService;
 
-
 @Service
 @Transactional
 public class UserRolesService extends BaseService<UserRolesEntity> {

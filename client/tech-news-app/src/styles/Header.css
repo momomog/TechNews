@@ -10,3 +10,11 @@
     text-decoration: none!important;
     color: grey;
 }
+
+.navbar-body {
+    margin-bottom: 5px;
+}
+
+.navlink {
+    font-size: 1.15em;
+}

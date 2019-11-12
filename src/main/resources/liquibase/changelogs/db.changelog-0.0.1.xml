@@ -7,200 +7,146 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-
-
-
-    <changeSet id="fokin-001" author="fokin">
-        <createTable tableName="cities">
+    <changeSet id="001" author="SFokin">
+        <createTable tableName="posts">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(100)">
+            <column name="title" type="varchar(1000)">
                 <constraints nullable="false"/>
             </column>
-            <column name="offset" type="varchar(10)">
+            <column name="image_url" type="varchar(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pre_desc" type="varchar(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="full_desc" type="varchar(10000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comments_count" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
 
-    <changeSet id="fokin-002" author="fokin">
-        <createTable tableName="user_profile_avatar">
+    <changeSet id="002" author="SFokin">
+        <createTable tableName="comments">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="file_name" type="varchar(1000)">
-            </column>
-            <column name="photo_content" type="LONGVARBINARY">
+            <column name="author" type="varchar(1000)">
                 <constraints nullable="false"/>
             </column>
-            <column name="size" type="bigint">
+            <column name="body" type="varchar(10000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="post_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_post_id" references="posts(id)"/>
             </column>
         </createTable>
     </changeSet>
-
-    <changeSet id="fokin-003" author="fokin">
-        <createTable tableName="user_profile_data">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="role" type="varchar(10)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="first_name" type="varchar(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="middle_name" type="varchar(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="last_name" type="varchar(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="email" type="varchar(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="skype" type="varchar(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="user_avatar_id" type="bigint">
-                <constraints nullable="false" foreignKeyName="fk_user_avatar_id" references="user_profile_avatar(id)"/>
-            </column>
-            <column name="user_location_id" type="bigint">
-                <constraints nullable="false" foreignKeyName="fk_user_location_id" references="cities(id)"/>
-            </column>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="fokin-004" author="fokin">
-        <insert tableName="cities">
-            <column name="id" value="1"/>
-            <column name="name" value="Москва"/>
-            <column name="offset" value="+0"/>
-        </insert>
-        <insert tableName="cities">
-            <column name="id" value="2"/>
-            <column name="name" value="Санкт-Петербург"/>
-            <column name="offset" value="+0"/>
-        </insert>
-        <insert tableName="cities">
-            <column name="id" value="3"/>
-            <column name="name" value="Ульяновск"/>
-            <column name="offset" value="+1"/>
-        </insert>
-        <insert tableName="cities">
-            <column name="id" value="4"/>
-            <column name="name" value="Пермь"/>
-            <column name="offset" value="+2"/>
-        </insert>
-        <insert tableName="cities">
-            <column name="id" value="5"/>
-            <column name="name" value="Нижний Новгород"/>
-            <column name="offset" value="+0"/>
-        </insert>
-        <insert tableName="cities">
-            <column name="id" value="6"/>
-            <column name="name" value="Пенза"/>
-            <column name="offset" value="+0"/>
-        </insert>
-        <insert tableName="cities">
-            <column name="id" value="7"/>
-            <column name="name" value="Уфа"/>
-            <column name="offset" value="+2"/>
-        </insert>
-    </changeSet>
-
 
 <!--    Таблица пользователей (для авторизации)-->
-    <changeSet id="fokin-005" author="fokin">
-        <createTable tableName="users">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="email" type="varchar(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="password" type="varchar(200)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-
+<!--    <changeSet id="fokin-005" author="fokin">-->
+<!--        <createTable tableName="users">-->
+<!--            <column name="id" type="bigint" autoIncrement="true">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="email" type="varchar(100)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="password" type="varchar(200)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+<!---->
 <!--    Таблица ролей пользователей (для авторизации)-->
-    <changeSet id="fokin-006" author="fokin">
-        <createTable tableName="roles">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="name" type="varchar(30)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
+<!--    <changeSet id="fokin-006" author="fokin">-->
+<!--        <createTable tableName="roles">-->
+<!--            <column name="id" type="bigint" autoIncrement="true">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="name" type="varchar(30)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+<!---->
+<!--    <changeSet id="fokin-007" author="fokin">-->
+<!--        <insert tableName="roles">-->
+<!--            <column name="id" value="1"/>-->
+<!--            <column name="name" value="ROLE_INTERN"/>-->
+<!--        </insert>-->
+<!--        <insert tableName="roles">-->
+<!--            <column name="id" value="2"/>-->
+<!--            <column name="name" value="ROLE_MENTOR"/>-->
+<!--        </insert>-->
+<!--        <insert tableName="roles">-->
+<!--            <column name="id" value="3"/>-->
+<!--            <column name="name" value="ROLE_HR"/>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
+<!---->
+<!--    <changeSet id="fokin-008" author="fokin">-->
+<!--        <insert tableName="users">-->
+<!--            <column name="id" value="1"/>-->
+<!--            <column name="email" value="i"/>-->
+<!--            <column name="password" value="$2a$10$WY/qNg6OO.1EcGvwzU8sN.zjgTigV.RxqV.koPxDAE4Oxr6OvYlra"/>-->
+<!--        </insert>-->
+<!--        <insert tableName="users">-->
+<!--            <column name="id" value="2"/>-->
+<!--            <column name="email" value="m"/>-->
+<!--            <column name="password" value="$2a$10$LBURD5hbqvqoHwR/NN.ZYOWRF1XRR7RphPElQAyZtOEH6PG24AImS"/>-->
+<!--        </insert>-->
+<!--        <insert tableName="users">-->
+<!--            <column name="id" value="3"/>-->
+<!--            <column name="email" value="h"/>-->
+<!--            <column name="password" value="$2a$10$h4c4WegpO4JYlksEvcVNreu7/oS8TEdIZ977daNjzR.5uoRfg3LCW"/>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
+<!---->
+<!--&lt;!&ndash;    Таблица связи пользователя с ролью (для авторизации)&ndash;&gt;-->
+<!--    <changeSet id="fokin-009" author="fokin">-->
+<!--        <createTable tableName="user_roles ">-->
+<!--            <column name="id" type="bigint" autoIncrement="true">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="user_id" type="bigint">-->
+<!--                <constraints nullable="false" foreignKeyName="fk_user_id" references="users(id)"/>-->
+<!--            </column>-->
+<!--            <column name="role_id" type="bigint">-->
+<!--                <constraints nullable="false" foreignKeyName="fk_role_id" references="roles(id)"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
 
-    <changeSet id="fokin-007" author="fokin">
-        <insert tableName="roles">
-            <column name="id" value="1"/>
-            <column name="name" value="ROLE_INTERN"/>
-        </insert>
-        <insert tableName="roles">
-            <column name="id" value="2"/>
-            <column name="name" value="ROLE_MENTOR"/>
-        </insert>
-        <insert tableName="roles">
-            <column name="id" value="3"/>
-            <column name="name" value="ROLE_HR"/>
-        </insert>
-    </changeSet>
-
-    <changeSet id="fokin-008" author="fokin">
-        <insert tableName="users">
-            <column name="id" value="1"/>
-            <column name="email" value="i"/>
-            <column name="password" value="$2a$10$WY/qNg6OO.1EcGvwzU8sN.zjgTigV.RxqV.koPxDAE4Oxr6OvYlra"/>
-        </insert>
-        <insert tableName="users">
-            <column name="id" value="2"/>
-            <column name="email" value="m"/>
-            <column name="password" value="$2a$10$LBURD5hbqvqoHwR/NN.ZYOWRF1XRR7RphPElQAyZtOEH6PG24AImS"/>
-        </insert>
-        <insert tableName="users">
-            <column name="id" value="3"/>
-            <column name="email" value="h"/>
-            <column name="password" value="$2a$10$h4c4WegpO4JYlksEvcVNreu7/oS8TEdIZ977daNjzR.5uoRfg3LCW"/>
-        </insert>
-    </changeSet>
-
-<!--    Таблица связи пользователя с ролью (для авторизации)-->
-    <changeSet id="fokin-009" author="fokin">
-        <createTable tableName="user_roles ">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="user_id" type="bigint">
-                <constraints nullable="false" foreignKeyName="fk_user_id" references="users(id)"/>
-            </column>
-            <column name="role_id" type="bigint">
-                <constraints nullable="false" foreignKeyName="fk_role_id" references="roles(id)"/>
-            </column>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="fokin-010" author="fokin">
-        <insert tableName="user_roles">
-            <column name="id" value="1"/>
-            <column name="user_id" value="1"/>
-            <column name="role_id" value="1"/>
-        </insert>
-        <insert tableName="user_roles">
-            <column name="id" value="2"/>
-            <column name="user_id" value="2"/>
-            <column name="role_id" value="2"/>
-        </insert>
-        <insert tableName="user_roles">
-            <column name="id" value="3"/>
-            <column name="user_id" value="3"/>
-            <column name="role_id" value="3"/>
-        </insert>
-    </changeSet>
+<!--    <changeSet id="fokin-010" author="fokin">-->
+<!--        <insert tableName="user_roles">-->
+<!--            <column name="id" value="1"/>-->
+<!--            <column name="user_id" value="1"/>-->
+<!--            <column name="role_id" value="1"/>-->
+<!--        </insert>-->
+<!--        <insert tableName="user_roles">-->
+<!--            <column name="id" value="2"/>-->
+<!--            <column name="user_id" value="2"/>-->
+<!--            <column name="role_id" value="2"/>-->
+<!--        </insert>-->
+<!--        <insert tableName="user_roles">-->
+<!--            <column name="id" value="3"/>-->
+<!--            <column name="user_id" value="3"/>-->
+<!--            <column name="role_id" value="3"/>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
 
 </databaseChangeLog>

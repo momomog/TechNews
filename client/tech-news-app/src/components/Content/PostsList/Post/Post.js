@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 
-import '../../../styles/Posts.css'
+import '../../../../styles/Posts.css'
 
 function Post(props) {
 
@@ -10,7 +10,7 @@ function Post(props) {
     }
 
     return (
-        <div className="well">
+        <div className="well post">
             <div className="media">
                 <NavLink className="pull-left" to="/post">
                     <img className="media-object post-picture" alt="post picture"

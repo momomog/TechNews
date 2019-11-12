@@ -3,23 +3,23 @@ import {NavLink} from "react-router-dom";
 
 function NavLinks() {
     return (
-        <div className="navbar">
+        <div className="navbar navbar-body">
             <div className="navbar-inner">
                 <div className="container">
                     <ul className="nav">
                         <li>
-                            <NavLink to="/all">Все новости</NavLink>
+                            <NavLink to="/all" className="navlink">Все новости</NavLink>
                         </li>
 
                         <li>
-                            <a href="#">Смартфоны</a>
+                            <NavLink to="#" className="navlink">Смартфоны</NavLink>
                         </li>
 
                         <li>
-                            <a href="#">Ноутбуки</a>
+                            <NavLink to="#" className="navlink">Ноутбуки</NavLink>
                         </li>
                         <li>
-                            <a href="#">Компьютерное железо</a>
+                            <NavLink to="#" className="navlink">Компьютерное железо</NavLink>
                         </li>
                     </ul>
                 </div>

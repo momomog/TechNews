@@ -1,0 +1,10 @@
+.post-picture {
+    width: 170px!important;
+    height: 150px!important;
+}
+
+.post-title {
+    text-decoration: none!important;
+    font-size: 1.3em;
+    color: grey;
+}

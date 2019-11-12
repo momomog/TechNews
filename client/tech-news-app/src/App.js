@@ -1,15 +1,17 @@
 import React from 'react';
+import {BrowserRouter} from "react-router-dom";
+
 import Header from "./components/Header/Header";
 import Content from "./components/Content/Content";
 import Footer from "./components/Footer/Footer";
 
-function App() {
+function App(props) {
   return (
-      <div>
+      <BrowserRouter>
           <Header/>
-          <Content/>
+          <Content posts={props.store.postsList}/>
           <Footer/>
-      </div>
+      </BrowserRouter>
   );
 }
 

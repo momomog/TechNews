@@ -10,7 +10,7 @@ function Post(props) {
     }
 
     return (
-        <div className="well post">
+        <div className="well post center-block ">
             <div className="media">
                 <NavLink className="pull-left" to="/post">
                     <img className="media-object post-picture" alt="post picture"
@@ -45,12 +45,6 @@ function Post(props) {
                             <span className="glyphicon glyphicon-star"></span>
                             <span className="glyphicon glyphicon-star"></span>
                             <span className="glyphicon glyphicon-star-empty"></span>
-                        </li>
-                        <li>|</li>
-                        <li>
-                            <span><i className="fa fa-facebook-square"></i> </span>
-                            <span><i className="fa fa-twitter-square"></i> </span>
-                            <span><i className="fa fa-google-plus-square"></i> </span>
                         </li>
                     </ul>
                 </div>

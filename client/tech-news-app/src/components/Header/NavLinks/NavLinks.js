@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 function NavLinks() {
     return (
         <div className="navbar navbar-body">
-            <div className="navbar-inner">
+            <div className="navbar-inner w-100">
                 <div className="container">
                     <ul className="nav">
                         <li>

@@ -6,7 +6,9 @@ function PostsList(props) {
         <div>
             {
                 props.posts.map((post) => {
-                    return <Post post={post}  key={post.id}/>
+                    return <Post post={post}
+                                 setCurrentPostId={props.setCurrentPostId}
+                                 key={post.id}/>
                 })
             }
         </div>

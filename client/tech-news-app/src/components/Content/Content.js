@@ -1,16 +1,14 @@
 import React from 'react';
 import {Route} from "react-router-dom";
 
-import '../../styles/Container.css'
-
-import PostsList from "./PostsList/PostsList";
 import PostReview from "./PostsReview/PostReview";
+import PostsListWrapper from "./PostsList/PostsListWrapper";
 
 function Content(props) {
     return (
         <div className="container container-body">
-            <Route exact path="/" render={() => <PostsList posts={props.posts}/>}/>
-            <Route path="/all" render={() => <PostsList posts={props.posts}/>}/>
+            <Route exact path="/" render={() => <PostsListWrapper/>}/>
+            <Route path="/all" render={() => <PostsListWrapper/>}/>
             <Route path='/post' render={() => <PostReview/>}/>
             {/*<Route path='/post/:postId' render={() => <PostReviewContainer/>}/>*/}
         </div>

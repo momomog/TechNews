@@ -1,7 +1,7 @@
+const SET_CURRENT_POST_ID = 'SET-CURRENT-POST-ID';
 
 
-
-let state = {
+let initialState = {
     postsList: [{
         id: 1,
         title: 'Kospet Prime — полноценный смартфон в корпусе часов',
@@ -13,7 +13,7 @@ let state = {
             '                        аккумулятор, Android со всеми нужными функциями и возможность установки SIM-карты.',
         publicationTime: '2 дня, 8 часов',
         commentsCount: 4
-    },{
+    }, {
         id: 2,
         title: 'Стала известна ключевая характеристика Samsung Galaxy S11',
         photoURL: 'http://s.4pda.to/rvgGmwMz2QXmOVCiJAIpo8h2Sk6cuZySJacli.jpg',
@@ -36,4 +36,18 @@ let state = {
     currentCommentText: ''
 };
 
-export default state;
+export const postsReducer = (state = initialState, action) => {
+    debugger;
+    switch (action.type) {
+        case SET_CURRENT_POST_ID: {
+            return {
+                ...state,
+                currentPostId: action.currentPostId
+            };
+        }
+        default:
+            return state;
+    }
+};
+
+export const setCurrentPostIdAction = (id) => ({type: SET_CURRENT_POST_ID, currentPostId: id});

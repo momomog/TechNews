@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import state from './redux/postsReducer'
+import {Provider} from "react-redux";
+import store from "./redux/ReduxStore";
+
 import * as serviceWorker from './serviceWorker';
 
+import './styles/Index.css';
+import './styles/Posts.css';
+import './styles/Header.css';
+import './styles/Footer.css';
+
 ReactDOM.render(
-    <App store={state}/>,
+    <Provider store={store}>
+        <App/>
+    </Provider>,
     document.getElementById('root'));
 
 

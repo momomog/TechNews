@@ -1,69 +1,33 @@
 import React from 'react';
+import Parser from 'html-react-parser';
 
-function PostReview() {
+function PostReview(props) {
     return (
         <div>
             <div className="container">
                 <div className="row">
                     <div className="col-lg-10 center-block">
-                        <h2 className="mt-4">Kospet Prime — полноценный смартфон в корпусе часов</h2>
+                        <h2 className="mt-4">{props.post.title}</h2>
                         <div className="row">
                             <span className="col-lg-8 post-author">
-                                Admin Admin
+                                {props.post.author}
                             </span>
                             <span className="col-lg-4 text-right text-secondary">
-                                Posted on January 1, 2018 at 12:00 PM
+                                Опубликовано {props.post.publicationTime}
                             </span>
                         </div>
                         <hr/>
                         <div className="col-lg-12 mb-2">
                             <img className="card-img-top post-review-pic center-block"
-                                 src="http://s.4pda.to/rvgGmYc5LQQviIz2z010z1FjoDTj0fWz2Ah7cZ6h.png"
-                                 alt="Card image cap"/>
+                                 src={props.post.photoURL}
+                                 alt="Card image"/>
                             <hr/>
                         </div>
 
-                        <p className="lead">
-                            Дисплей на 40 дюймов, разрешение 1920x1080, яркость 240 кд/м² — смотреть
-                            блокбастеры на таком ТВ одно удовольствие. Да ещё и в компании друзей, ведь угол обзора
-                            составляет 178 градусов — если кто-то сядет в стороне, ему будет видно.
-                        </p>
-                        <p>
-                            Модель работает на платформе Android и поддерживает Wi-Fi, что позволяет ставить приложения
-                            из Play Market и расширять возможности. Добавьте пару USB-входов: можно скачать любимые
-                            фильмы или фотоотчёт об отпуске на флешку и смотреть на большом экране. Кроме того, в
-                            Skyline 40LST5970 есть разъём для наушников, что оценят семьи с детьми.
-                        </p>
-                        <p>
-                            Крепление у устройства — стандарта VESА 200 x 200 мм, так что экран несложно разместить на
-                            стене. А два динамика суммарной мощностью в 20 Вт создают эффект объёмного звучания. Вишенка
-                            на торте — цена в 10 555 рублей. Если интересны подробности о других моделях, на официальном
-                            сайте есть варианты на любой кошелёк и вкус.
-                        </p>
+                        <div>
+                            {Parser(props.post.description)}
+                        </div>
 
-                        <blockquote className="blockquote">
-                            <p className="mb-0">
-                                Иначе говоря, Skyline предлагает достойные характеристики, белорусскую
-                                сборку с годовой гарантией и большой выбор разных моделей по невысокой цене. Приобрести
-                                телевизоры можно на маркетплейсе «Беру».
-                            </p>
-                            <footer className="blockquote-footer">
-                                Someone famous in Source Title
-                            </footer>
-                        </blockquote>
-
-                        <p>
-                            На сей раз, в честь релиза переиздания RDR2 для компьютеров, они решили проверить на
-                            прочность Артура Моргана и банду Датча. Пара ловких движений в файлах — и бестселлер 2018-го
-                            смотрится так, будто попал на полки в 2007 году: мыльные текстуры, лесенки, о которые можно
-                            порезаться... джентльменский набор дешёвых тайтлов времён PlayStation 3 и Xbox 360.
-                        </p>
-                        <p>
-                            Пока сотрудники Eurogamer и Digital Foundry восторгаются новейшими технологиями и пылинки с
-                            блокбастеров сдувают, их коллеги с Gamespot занимаются форменным хулиганством в рамках
-                            рубрики Potato Mode. Умельцы превращают самые красивые игры современности в неприглядных
-                            чудищ, которым место на консолях позапрошлого поколения. В лучшем случае.
-                        </p>
                         <hr/>
 
                         <div className="card my-4">

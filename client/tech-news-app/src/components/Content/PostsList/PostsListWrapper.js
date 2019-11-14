@@ -6,6 +6,11 @@ import {setCurrentPostIdAction} from "../../../redux/PostsReducer";
 
 class PostsListWrapper extends React.Component {
 
+    // запрос постов с сервера
+    // componentDidMount() {
+    //     this.props.getPosts(this.props.currentPostsPage);
+    // }
+
     setCurrentPostId = (postNumber) => {
         this.props.setCurrentPostId(postNumber);
     };

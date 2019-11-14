@@ -30,6 +30,9 @@
             <column name="full_desc" type="varchar(10000)">
                 <constraints nullable="false"/>
             </column>
+            <column name="category_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
             <column name="comments_count" type="bigint">
                 <constraints nullable="false"/>
             </column>

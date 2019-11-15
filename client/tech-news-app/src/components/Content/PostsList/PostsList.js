@@ -1,9 +1,13 @@
 import React from 'react';
 import Post from "./Post/Post";
+import PagesNavigation from "./PagesNavigation/PagesNavigation";
 
 function PostsList(props) {
     return (
         <div>
+            <div className="row">
+                <PagesNavigation/>
+            </div>
             {
                 props.posts.map((post) => {
                     return <Post post={post}
@@ -11,6 +15,9 @@ function PostsList(props) {
                                  key={post.id}/>
                 })
             }
+            <div className="row">
+                <PagesNavigation/>
+            </div>
         </div>
     )
 }

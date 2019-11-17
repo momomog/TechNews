@@ -42,12 +42,6 @@
                     </li>
                 </security:authorize>
 
-                <security:authorize access="hasRole('ROLE_MENTOR') || hasRole('ROLE_HR')">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<%=Const.INTERNS_URL%>">Список стажеров</a>
-                    </li>
-                </security:authorize>
-
                 <security:authorize access="hasRole('ROLE_HR')">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Список менторов</a>
@@ -57,12 +51,6 @@
                 <security:authorize access="hasRole('ROLE_INTERN') || hasRole('ROLE_MENTOR')">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Список компетенций</a>
-                    </li>
-                </security:authorize>
-
-                <security:authorize access="isAuthenticated()">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<%=Const.LEARNING_URL%>">Список тем для изучения</a>
                     </li>
                 </security:authorize>
 

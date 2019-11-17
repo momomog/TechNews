@@ -1,13 +1,21 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
+import {SECTION_ALL_POSTS} from "../../../common/Const";
 
-function Auth() {
+function TopHeader(props) {
+
+    //изменяет секцию на "все новости", ставит активную первую страницу пагинации
+    function clickLogo() {
+        props.setPosts(SECTION_ALL_POSTS);
+        props.setCurrentPostPage(1);
+        props.changeSection(SECTION_ALL_POSTS);
+    }
     return (
         <div className="row-fluid">
             <div className="span12">
                 <div className="span6">
-                    <h1 className="muted">
-                        <NavLink to="/all" className="site-logo">Tech-news</NavLink>
+                    <h1 className="muted" onClick={clickLogo}>
+                        <NavLink to="/posts/all" className="site-logo">Tech-news</NavLink>
                     </h1>
                 </div>
                 <div className="span4 offset2 auth-button">
@@ -19,4 +27,4 @@ function Auth() {
     )
 }
 
-export default Auth;
+export default TopHeader;

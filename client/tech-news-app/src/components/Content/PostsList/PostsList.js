@@ -1,22 +1,23 @@
 import React from 'react';
 import Post from "./Post/Post";
-import PagesNavigation from "./PagesNavigation/PagesNavigation";
+import PagesNavigationWrapper from "./PagesNavigation/PagesNavigationWrapper";
 
 function PostsList(props) {
     return (
         <div>
             <div className="row">
-                <PagesNavigation/>
+                <PagesNavigationWrapper/>
             </div>
             {
                 props.posts.map((post) => {
                     return <Post post={post}
                                  setCurrentPostId={props.setCurrentPostId}
+                                 currentSectionId={props.currentSectionId}
                                  key={post.id}/>
                 })
             }
             <div className="row">
-                <PagesNavigation/>
+                <PagesNavigationWrapper/>
             </div>
         </div>
     )

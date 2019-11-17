@@ -1,10 +1,10 @@
 .post-picture {
-    width: 170px!important;
-    height: 150px!important;
+    width: 170px !important;
+    height: 150px !important;
 }
 
 .post-title {
-    text-decoration: none!important;
+    text-decoration: none !important;
     font-size: 1.3em;
     color: grey;
 }
@@ -15,14 +15,31 @@
 }
 
 .post-review-pic {
-    width: 500px!important;
-    height: 350px!important;
+    width: 500px !important;
+    height: 350px !important;
 }
 
 
- /*post-review*/
+/*post-review*/
 .post-author {
     font-size: 1.2em;
+}
+
+/*post-comment*/
+.post-author-comment {
+    font-size: 1.1em;
+}
+
+.comment-icon {
+    font-size: 18px !important;
+    color: grey;
+}
+
+.pagin-links {
+    display: block!important;
+    width: max-content!important;
+    margin-right: auto!important;
+    margin-left: auto!important;
 }
 
 

@@ -1,95 +1,50 @@
-let desc = '<p className="lead">\n' +
-    '                            Дисплей на 40 дюймов, разрешение 1920x1080, яркость 240 кд/м² — смотреть\n' +
-    '                            блокбастеры на таком ТВ одно удовольствие. Да ещё и в компании друзей, ведь угол обзора\n' +
-    '                            составляет 178 градусов — если кто-то сядет в стороне, ему будет видно.\n' +
-    '                        </p>\n' +
-    '                        <p>\n' +
-    '                            Модель работает на платформе Android и поддерживает Wi-Fi, что позволяет ставить приложения\n' +
-    '                            из Play Market и расширять возможности. Добавьте пару USB-входов: можно скачать любимые\n' +
-    '                            фильмы или фотоотчёт об отпуске на флешку и смотреть на большом экране. Кроме того, в\n' +
-    '                            Skyline 40LST5970 есть разъём для наушников, что оценят семьи с детьми.\n' +
-    '                        </p>\n' +
-    '                        <p>\n' +
-    '                            Крепление у устройства — стандарта VESА 200 x 200 мм, так что экран несложно разместить на\n' +
-    '                            стене. А два динамика суммарной мощностью в 20 Вт создают эффект объёмного звучания. Вишенка\n' +
-    '                            на торте — цена в 10 555 рублей. Если интересны подробности о других моделях, на официальном\n' +
-    '                            сайте есть варианты на любой кошелёк и вкус.\n' +
-    '                        </p>\n' +
-    '\n' +
-    '                        <blockquote className="blockquote">\n' +
-    '                            <p className="mb-0">\n' +
-    '                                Иначе говоря, Skyline предлагает достойные характеристики, белорусскую\n' +
-    '                                сборку с годовой гарантией и большой выбор разных моделей по невысокой цене. Приобрести\n' +
-    '                                телевизоры можно на маркетплейсе «Беру».\n' +
-    '                            </p>\n' +
-    '                            <footer className="blockquote-footer">\n' +
-    '                                Someone famous in Source Title\n' +
-    '                            </footer>\n' +
-    '                        </blockquote>\n' +
-    '\n' +
-    '                        <p>\n' +
-    '                            На сей раз, в честь релиза переиздания RDR2 для компьютеров, они решили проверить на\n' +
-    '                            прочность Артура Моргана и банду Датча. Пара ловких движений в файлах — и бестселлер 2018-го\n' +
-    '                            смотрится так, будто попал на полки в 2007 году: мыльные текстуры, лесенки, о которые можно\n' +
-    '                            порезаться... джентльменский набор дешёвых тайтлов времён PlayStation 3 и Xbox 360.\n' +
-    '                        </p>\n' +
-    '                        <p>\n' +
-    '                            Пока сотрудники Eurogamer и Digital Foundry восторгаются новейшими технологиями и пылинки с\n' +
-    '                            блокбастеров сдувают, их коллеги с Gamespot занимаются форменным хулиганством в рамках\n' +
-    '                            рубрики Potato Mode. Умельцы превращают самые красивые игры современности в неприглядных\n' +
-    '                            чудищ, которым место на консолях позапрошлого поколения. В лучшем случае.\n' +
-    '                        </p>';
+import PostAPI from "../api/PostAPI";
 
 const SET_CURRENT_POST_ID = 'SET-CURRENT-POST-ID';
+const SET_POSTS_COUNT = 'SET-POSTS-COUNT';
+const SET_CURRENT_POST_PAGE = 'SET-CURRENT-POST-PAGE';
+const SET_CURRENT_POST_DATA = 'SET-CURRENT-POST-DATA';
+const SET_POSTS = 'SET-POSTS';
 
 
 
 
 let initialState = {
-    postsList: [{
-        id: 1,
-        title: 'Kospet Prime — полноценный смартфон в корпусе часов',
-        photoURL: 'http://s.4pda.to/rvgGmYc5LQQviIz2z010z1FjoDTj0fWz2Ah7cZ6h.png',
-        author: 'Admin Admin',
-        description: 'Большинство умных часов позиционируется как дополнительный аксессуар, позволяющий\n' +
-            '                        просматривать входящие сообщения и отслеживать физическую активность. В случае с Kospet\n' +
-            '                        Prime речь идёт о полноценном смартфоне на запястье. В них есть сразу две камеры, огромный\n' +
-            '                        аккумулятор, Android со всеми нужными функциями и возможность установки SIM-карты.',
-        publicationTime: '2 дня, 8 часов',
-        commentsCount: 4
-    }, {
-        id: 2,
-        title: 'Стала известна ключевая характеристика Samsung Galaxy S11',
-        photoURL: 'http://s.4pda.to/rvgGmwMz2QXmOVCiJAIpo8h2Sk6cuZySJacli.jpg',
-        author: 'Admin Admin',
-        description: 'Вслед за первыми слухами о модели процессора будущего флагмана Samsung в сети появилась\n' +
-            '}\n' +
-            '{                более точная информация о модели процессора, который получит готовящийся к релизу Galaxy S11.\n' +
-            '}\n' +
-            '{                Новая утечка раскрыла модель CPU, на базе которого будет построен ещё не анонсированный\n' +
-            '}\n' +
-            '{                гаджет.',
-        publicationTime: '5 дней, 2 часа',
-        commentsCount: 7
-    }],
-    currentPostData: {
-        id: 1,
-        title: 'Kospet Prime — полноценный смартфон в корпусе часов',
-        photoURL: 'http://s.4pda.to/rvgGmYc5LQQviIz2z010z1FjoDTj0fWz2Ah7cZ6h.png',
-        author: 'Admin Admin',
-        description: desc,
-        publicationTime: '1 января 2018 12:00',
-        commentsCount: 4
-    },
+    postList: [],
+    currentPostData: {},
     currentPostComments: {},
     currentPostId: '',
     postsCount: 0,
-    currentPostsPage: 1,
+    currentPostPage: 1,
     currentCommentText: ''
 };
 
 export const postsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SET_POSTS: {
+            return {
+                ...state,
+                postList: action.posts
+            };
+        }
+        case SET_POSTS_COUNT: {
+            return {
+                ...state,
+                postsCount: action.postsCount
+            };
+        }
+        case SET_CURRENT_POST_PAGE: {
+            return {
+                ...state,
+                currentPostPage: action.currentPostPage
+            };
+        }
+        case SET_CURRENT_POST_DATA: {
+            return {
+                ...state,
+                currentPostData: action.currentPostData
+            };
+        }
         case SET_CURRENT_POST_ID: {
             return {
                 ...state,
@@ -101,4 +56,38 @@ export const postsReducer = (state = initialState, action) => {
     }
 };
 
+export const getAllPosts = (sectionId, postPage) => {
+    return (dispatch) => {
+        PostAPI.getAllPosts(sectionId, postPage).then(data => {
+            dispatch(setPostsAction(data.posts));
+            dispatch(setPostsCountAction(data.postsCount));
+        });
+    };
+};
+
+export const setPostPageAndGetPosts = (sectionId, postPage) => {
+    return (dispatch) => {
+        dispatch(setCurrentPostPageAction(postPage));
+        PostAPI.getAllPosts(sectionId, postPage).then(data => {
+            dispatch(setPostsAction(data.posts));
+            dispatch(setPostsCountAction(data.postsCount));
+        });
+    };
+};
+
+export const getPostData = (sectionId, postId) => {
+    return (dispatch) => {
+        PostAPI.getPostData(sectionId, postId)
+            .then(data => {
+                dispatch(setCurrentPostDataAction(data));
+            });
+    };
+};
+
+export const setPostsAction = (posts) => ({type: SET_POSTS, posts: posts});
+export const setPostsCountAction = (count) => ({type: SET_POSTS_COUNT, postsCount: count});
+export const setCurrentPostPageAction = (postPageNumber) => ({type: SET_CURRENT_POST_PAGE, currentPostPage: postPageNumber});
 export const setCurrentPostIdAction = (id) => ({type: SET_CURRENT_POST_ID, currentPostId: id});
+
+export const setCurrentPostDataAction = (data) => ({type: SET_CURRENT_POST_DATA, currentPostData: data});
+

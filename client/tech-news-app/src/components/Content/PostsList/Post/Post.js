@@ -1,5 +1,7 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
+import {getSectionName} from "../../../../common/Const";
+import Common from "../../../../common/Common";
 
 function Post(props) {
 
@@ -7,16 +9,20 @@ function Post(props) {
         props.setCurrentPostId(props.post.id)
     }
 
+    function createPostLink() {
+        return '/posts/' + getSectionName(props.currentSectionId) + '/post/' + props.post.id;
+    }
+
     return (
         <div className="well post center-block ">
             <div className="media">
-                <NavLink className="pull-left" to="/post">
+                <NavLink to={createPostLink()} className="pull-left">
                     <img className="media-object post-picture" alt="post picture"
-                         src={props.post.photoURL} onClick={setCurrentPostId}/>
+                         src={props.post.imageUrl} onClick={setCurrentPostId}/>
                 </NavLink>
                 <div className="media-body">
                     <h4 className="media-heading" onClick={setCurrentPostId}>
-                        <NavLink to="/post" className="post-title">
+                        <NavLink to={createPostLink()} className="post-title">
                             {props.post.title}
                         </NavLink>
                     </h4>
@@ -24,13 +30,13 @@ function Post(props) {
                         {props.post.author}
                     </p>
                     <p>
-                        {props.post.description}
+                        {props.post.preDescription}
                     </p>
                     <ul className="list-inline list-unstyled">
                         <li>
                             <span>
                                 <i className="glyphicon glyphicon-calendar">&ensp;</i>
-                                {props.post.publicationTime}
+                                {Common.dateParser(props.post.date)}
                             </span>
                         </li>
                         <li>|</li>

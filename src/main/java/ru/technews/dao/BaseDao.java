@@ -61,11 +61,11 @@ public abstract class BaseDao<E extends BaseEntity> implements CRUDDao<E, Long> 
         getCurrentSession().update(entity);
     }
 
-    private Session getCurrentSession() {
+    protected Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
 
-    private Class<E> getTargetClass() {
+    protected Class<E> getTargetClass() {
         return this.entityClass;
     }
 }

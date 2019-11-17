@@ -1,65 +1,65 @@
-package ru.technews.config.security;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import ru.technews.entity.security.UsersEntity;
-
-import java.util.Collection;
-import java.util.stream.Collectors;
-
-/**
- * Имплементация MyUserDetails для security
- *
- */
-public class MyUserDetails implements UserDetails {
-
-    private UsersEntity user;
-
-    public MyUserDetails(UsersEntity user) {
-        this.user = user;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getAuthorities().stream().map(authority -> new SimpleGrantedAuthority(authority.getName())).collect(Collectors.toList());
-    }
-
-    public Long getId() {
-        return user.getId();
-    }
-
-    @Override
-    public String getPassword() {
-        return user.getPassword();
-    }
-
-    @Override
-    public String getUsername() {
-        return user.getEmail();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-    public UsersEntity getUserDetails() {
-        return user;
-    }
-}
+//package ru.technews.config.security;
+//
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import ru.technews.entity.security.UsersEntity;
+//
+//import java.util.Collection;
+//import java.util.stream.Collectors;
+//
+///**
+// * Имплементация MyUserDetails для security
+// *
+// */
+//public class MyUserDetails implements UserDetails {
+//
+//    private UsersEntity user;
+//
+//    public MyUserDetails(UsersEntity user) {
+//        this.user = user;
+//    }
+//
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return user.getAuthorities().stream().map(authority -> new SimpleGrantedAuthority(authority.getName())).collect(Collectors.toList());
+//    }
+//
+//    public Long getId() {
+//        return user.getId();
+//    }
+//
+//    @Override
+//    public String getPassword() {
+//        return user.getPassword();
+//    }
+//
+//    @Override
+//    public String getUsername() {
+//        return user.getEmail();
+//    }
+//
+//    @Override
+//    public boolean isAccountNonExpired() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isCredentialsNonExpired() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isEnabled() {
+//        return true;
+//    }
+//
+//    public UsersEntity getUserDetails() {
+//        return user;
+//    }
+//}

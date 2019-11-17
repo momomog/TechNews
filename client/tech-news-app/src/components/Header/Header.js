@@ -1,13 +1,18 @@
 import React from 'react';
 import NavLinks from "./NavLinks/NavLinks";
-import Auth from "./Auth/Auth";
+import TopHeader from "./TopHeader/TopHeader";
 
-function Header() {
+function Header(props) {
     return (
         <div className="container">
             <div className="head">
-                <Auth/>
-                <NavLinks/>
+                <TopHeader changeSection={props.changeSection}
+                           setPosts={props.setPosts}
+                           setCurrentPostPage={props.setCurrentPostPage}/>
+                <NavLinks changeSection={props.changeSection}
+                          setPosts={props.setPosts}
+                          setCurrentPostPage={props.setCurrentPostPage}
+                          currentSectionId={props.currentSectionId}/>
             </div>
         </div>
     )

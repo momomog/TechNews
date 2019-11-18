@@ -76,10 +76,10 @@
             <column name="password" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_at" type="TIMESTAMP">
+            <column name="createdAt" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
-            <column name="updated_at" type="TIMESTAMP">
+            <column name="updatedAt" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
         </createTable>

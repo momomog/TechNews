@@ -6,7 +6,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -20,7 +19,7 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @ComponentScan(basePackages = "ru.technews")
 @EnableJpaRepositories(value = "ru.technews.repository", entityManagerFactoryRef = "sessionFactory")
-//@EnableTransactionManagement
+//transactionManagerRef = "transactionManager"
 @EntityScan(basePackageClasses = {
         Jsr310JpaConverters.class
 })

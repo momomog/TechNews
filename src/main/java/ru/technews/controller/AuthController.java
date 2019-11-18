@@ -27,11 +27,9 @@ import ru.technews.security.JwtTokenProvider;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.time.Instant;
 import java.util.Collections;
 
-/**
- * Created by rajeevkumarsingh on 02/08/17.
- */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -69,12 +67,12 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if(userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
 
-        if(userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
@@ -84,6 +82,8 @@ public class AuthController {
                 signUpRequest.getEmail(), signUpRequest.getPassword());
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setCreatedAt(Instant.now());
+        user.setUpdatedAt(Instant.now());
 
         Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
                 .orElseThrow(() -> new AppException("User Role not set."));

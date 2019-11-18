@@ -7,9 +7,6 @@ import ru.technews.entity.security.User;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by rajeevkumarsingh on 02/08/17.
- */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);

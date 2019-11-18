@@ -2,6 +2,7 @@ package ru.technews;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 import ru.technews.config.RootConfig;
 import ru.technews.config.security.SessionListener;
@@ -21,8 +22,8 @@ public class AppInitializer implements WebApplicationInitializer {
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
 
-//        servletContext.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain"))
-//                .addMappingForUrlPatterns(null, false, "/*");
+        servletContext.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain"))
+                .addMappingForUrlPatterns(null, false, "/*");
         servletContext.addListener(new SessionListener());
     }
 }

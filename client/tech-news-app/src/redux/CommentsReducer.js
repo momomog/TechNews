@@ -3,6 +3,7 @@ import CommentAPI from "../api/CommentAPI";
 const CHANGE_COMMENT_TEXT = 'CHANGE-COMMENT-TEXT';
 const SET_POST_COMMENTS = 'SET-POST-COMMENTS';
 
+
 let initialState = {
     postComments: {},
     commentText: ''
@@ -33,7 +34,7 @@ export const changeCommentTextAction = (text) => ({type: CHANGE_COMMENT_TEXT, co
 export const getPostComments = (sectionId, postId) => {
     return (dispatch) => {
         CommentAPI.getPostComments(sectionId, postId)
-            .then( data => {
+            .then(data => {
                 dispatch(setPostCommentsAction(data.comments));
             });
     };

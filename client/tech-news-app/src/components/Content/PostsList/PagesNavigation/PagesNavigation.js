@@ -4,32 +4,39 @@ import {getSectionName,} from "../../../../common/Const";
 
 function PagesNavigation(props) {
 
-    function setCurrentPostPage(e) {
-        props.setPosts(props.currentSectionId, Number(e.target.textContent));
+    function setPostPage(e) {
+        props.setPosts(props.sectionId, Number(e.target.textContent));
     }
 
     function setPrevNextPostPage(page) {
-        props.setPosts(props.currentSectionId, page);
+        props.setPosts(props.sectionId, page);
     }
 
     return (
         <div className="col-lg-4 center-block mb-3">
             <nav aria-label="Page navigation example">
                 <ul className="pagination justify-content-center pagin-links">
-                    <li className={getPreviousButtonClass()} onClick={ () => {setPrevNextPostPage(props.currentPostPage - 1)}}>
-                        <NavLink className="page-link" to={"/posts/" + getSectionName(props.currentSectionId) + '/' + (props.currentPostPage - 1)}
+                    <li className={getPreviousButtonClass()} onClick={() => {
+                        setPrevNextPostPage(props.postPage - 1)
+                    }}>
+                        <NavLink className="page-link"
+                                 to={"/posts/" + getSectionName(props.sectionId) + '/' + (props.postPage - 1)}
                                  tabIndex="-1">Назад</NavLink>
                     </li>
+
                     {
                         initPagesArray().map((page) => {
-                            return <li className={getNavigationButtonClass(page)} onClick={setCurrentPostPage}>
-                                <NavLink to={"/posts/" + getSectionName(props.currentSectionId) + '/' + page}
+                            return <li className={getNavigationButtonClass(page)} onClick={setPostPage} key={page.id}>
+                                <NavLink to={"/posts/" + getSectionName(props.sectionId) + '/' + page}
                                          className="page-link">{page}</NavLink>
                             </li>
                         })
                     }
-                    <li className={getNextButtonClass()} onClick={ () => {setPrevNextPostPage(props.currentPostPage + 1)}}>
-                        <NavLink to={"/posts/" + getSectionName(props.currentSectionId) + '/' + (props.currentPostPage + 1)}
+
+                    <li className={getNextButtonClass()} onClick={() => {
+                        setPrevNextPostPage(props.postPage + 1)
+                    }}>
+                        <NavLink to={"/posts/" + getSectionName(props.sectionId) + '/' + (props.postPage + 1)}
                                  className="page-link">Вперед</NavLink>
                     </li>
                 </ul>
@@ -49,7 +56,7 @@ function PagesNavigation(props) {
 
     // блокировка кнопки "назад", если номер страницы-пагинации 1
     function getPreviousButtonClass() {
-        if (props.currentPostPage === 1) {
+        if (props.postPage === 1) {
             return 'page-item disabled'
         }
         return 'page-item'
@@ -57,7 +64,7 @@ function PagesNavigation(props) {
 
     // блокировка кнопки "вперед", если номер страницы-пагинации последний
     function getNextButtonClass() {
-        if (props.currentPostPage === Math.ceil(props.postsCount / 5)) {
+        if (props.postPage === Math.ceil(props.postsCount / 5)) {
             return 'page-item disabled'
         }
         return 'page-item'
@@ -65,7 +72,7 @@ function PagesNavigation(props) {
 
     // active для текущей страницы-пагинации
     function getNavigationButtonClass(pageNumber) {
-        if (props.currentPostPage === pageNumber) {
+        if (props.postPage === pageNumber) {
             return 'page-item active'
         }
         return 'page-item'

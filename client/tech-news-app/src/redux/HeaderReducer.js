@@ -1,7 +1,8 @@
 const CHANGE_SECTION = 'CHANGE-SECTION';
 
+
 let initialState = {
-    currentSectionId: 1
+    sectionId: 1
 };
 
 export const headerReducer = (state = initialState, action) => {
@@ -9,7 +10,7 @@ export const headerReducer = (state = initialState, action) => {
         case CHANGE_SECTION: {
             return {
                 ...state,
-                currentSectionId: action.currentSectionId
+                sectionId: action.sectionId
             };
         }
         default:
@@ -17,4 +18,4 @@ export const headerReducer = (state = initialState, action) => {
     }
 };
 
-export const chooseSectionAction = (sectionId) => ({type: CHANGE_SECTION, currentSectionId: sectionId});
+export const chooseSectionAction = (sectionId) => ({type: CHANGE_SECTION, sectionId: sectionId});

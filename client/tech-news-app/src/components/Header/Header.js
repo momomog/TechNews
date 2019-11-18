@@ -8,11 +8,11 @@ function Header(props) {
             <div className="head">
                 <TopHeader changeSection={props.changeSection}
                            setPosts={props.setPosts}
-                           setCurrentPostPage={props.setCurrentPostPage}/>
+                           setPostPage={props.setPostPage}/>
                 <NavLinks changeSection={props.changeSection}
                           setPosts={props.setPosts}
-                          setCurrentPostPage={props.setCurrentPostPage}
-                          currentSectionId={props.currentSectionId}/>
+                          setPostPage={props.setPostPage}
+                          sectionId={props.sectionId}/>
             </div>
         </div>
     )

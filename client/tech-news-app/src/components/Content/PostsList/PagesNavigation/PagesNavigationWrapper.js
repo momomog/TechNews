@@ -12,18 +12,18 @@ class PagesNavigationWrapper extends React.Component {
     render() {
         return (
             <PagesNavigation setPosts={this.setPosts}
-                             currentPostPage={this.props.currentPostPage}
+                             postPage={this.props.postPage}
                              postsCount={this.props.postsCount}
-                             currentSectionId={this.props.currentSectionId}/>
+                             sectionId={this.props.sectionId}/>
         )
     }
 }
 
 let mapStateToProps = (state) => {
     return {
-        currentPostPage: state.postsData.currentPostPage,
+        postPage: state.postsData.postPage,
         postsCount: state.postsData.postsCount,
-        currentSectionId: state.headerData.currentSectionId
+        sectionId: state.headerData.sectionId
     }
 };
 

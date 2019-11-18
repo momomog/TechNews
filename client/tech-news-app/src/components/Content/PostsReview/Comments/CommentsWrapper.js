@@ -7,7 +7,7 @@ import {changeCommentTextAction, getPostComments, sendNewPostComment} from "../.
 class CommentsWrapper extends React.Component {
 
     componentDidMount() {
-        this.props.getPostComments(this.props.currentSectionId, this.props.match.params.postId);
+        this.props.getPostComments(this.props.sectionId, this.props.match.params.postId);
     }
 
     changeCommentText = (text) => {
@@ -17,15 +17,14 @@ class CommentsWrapper extends React.Component {
     addNewCommentary = () => {
         this.props.addNewComment(this.props.match.params.postId, this.props.commentText);
         this.props.changeCommentText('');
-        this.props.getPostComments(this.props.currentSectionId, this.props.match.params.postId);
+        this.props.getPostComments(this.props.sectionId, this.props.match.params.postId);
     };
 
     render() {
         return <Comments comments={this.props.postComments}
                          commentText={this.props.commentText}
                          changeCommentText={this.changeCommentText}
-                         addNewCommentary={this.addNewCommentary}
-        />
+                         addNewCommentary={this.addNewCommentary}/>
     }
 
 }
@@ -33,7 +32,7 @@ class CommentsWrapper extends React.Component {
 let mapStateToProps = (state) => {
     return {
         commentText: state.commentsData.commentText,
-        currentSectionId: state.headerData.currentSectionId,
+        sectionId: state.headerData.sectionId,
         postComments: state.commentsData.postComments
     }
 };

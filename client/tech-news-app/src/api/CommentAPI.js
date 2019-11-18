@@ -17,8 +17,7 @@ class CommentAPI {
             postId: postId,
             commentText: commentText,
             author: 'Admin Fadmin'
-        })
-            .then(response => response.data)
+        }).then(response => response.data)
     };
 }
 

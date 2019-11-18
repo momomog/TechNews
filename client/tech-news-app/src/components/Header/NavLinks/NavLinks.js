@@ -5,9 +5,8 @@ import {SECTION_ALL_POSTS, SECTION_HARDWARE, SECTION_MOBILE, SECTION_NOTEBOOKS} 
 function NavLinks(props) {
 
     function setPostsAndChangeSection(sectionId) {
-        debugger
         props.setPosts(sectionId);
-        props.setCurrentPostPage(1);
+        props.setPostPage(1);
         props.changeSection(sectionId);
     }
 
@@ -35,11 +34,6 @@ function NavLinks(props) {
             </div>
         </div>
     );
-
-    // function setLinkClass() {
-    //     if (props.currentSectionId)
-    // }
-
 }
 
 export default NavLinks;

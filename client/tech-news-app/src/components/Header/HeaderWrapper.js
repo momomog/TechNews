@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {getAllPosts, setCurrentPostPageAction} from "../../redux/PostsReducer";
+import {getAllPosts, setPostPageAction} from "../../redux/PostsReducer";
 import Header from "./Header";
 import {chooseSectionAction} from "../../redux/HeaderReducer";
 
@@ -12,18 +12,18 @@ class HeaderWrapper extends React.Component {
 
     render() {
         return (<Header setPosts={this.setPosts}
-                        currentSectionId={this.props.currentSectionId}
+                        sectionId={this.props.sectionId}
                         // isAuth={this.props.isAuth}
                         changeSection={this.props.changeSection}
                         // setAuthActive={this.props.setAuthActive}
-                        setCurrentPostPage={this.props.setCurrentPostPage}
+                        setPostPage={this.props.setPostPage}
         />)
     }
 }
 
 let mapStateToProps = (state) => {
     return {
-        currentSectionId: state.headerData.currentSectionId,
+        sectionId: state.headerData.sectionId,
         // isAuth: state.authData.isAuth,
     }
 };
@@ -32,7 +32,7 @@ let mapDispatchToProps = (dispatch) => {
     return {
         changeSection: sectionId => dispatch(chooseSectionAction(sectionId)),
         // setAuthActive: isActive => dispatch(setAuthStatusAction(isActive)),
-        setCurrentPostPage: pageNumber => dispatch(setCurrentPostPageAction(pageNumber)),
+        setPostPage: pageNumber => dispatch(setPostPageAction(pageNumber)),
         getAllPosts: (sectionId, postPage) => dispatch(getAllPosts(sectionId, postPage))
     }
 };

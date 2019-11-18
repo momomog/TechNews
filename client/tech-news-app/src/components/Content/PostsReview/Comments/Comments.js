@@ -3,11 +3,11 @@ import Comment from "./Comment/Comment";
 
 function Comments(props) {
 
-   function changeInputCommentText(e) {
+    function changeInputCommentText(e) {
         props.changeCommentText(e.target.value);
     }
 
-   function addNewCommentary() {
+    function addNewCommentary() {
         if (props.commentText.trim()) {
             props.addNewCommentary();
         }
@@ -17,22 +17,22 @@ function Comments(props) {
         <div>
             <div className="my-4">
                 <h5 className="card-header">Оставьте комментарий:</h5>
-                <div className="card-body">
+                <div className="card-body comment-input">
                     <form>
                         <div className="form-group">
-                            <textarea className="form-control" rows="3"
+                            <textarea className="form-control text-area" rows="3"
                                       placeholder="Введите текст комментария..."
                                       onChange={changeInputCommentText}
-                                      onKeyPress={ event => {
+                                      value={props.commentText}
+                                      onKeyPress={event => {
                                           if (event.key === 'Enter') {
                                               event.preventDefault();
                                               addNewCommentary();
-                                          }}}
-                                      value={props.commentText}/>
+                                          }
+                                      }}/>
                         </div>
                         <button type="submit" className="btn btn-primary"
-                                disabled={!props.commentText}
-                                onClick={addNewCommentary}>
+                                disabled={!props.commentText} onClick={addNewCommentary}>
                             Отправить
                         </button>
                     </form>
@@ -42,7 +42,7 @@ function Comments(props) {
             {
                 props.comments.length > 0
                     ? props.comments.map((comment) => {
-                        return <Comment comment={comment}/>
+                        return <Comment comment={comment} key={comment.id}/>
                     })
                     : ''
             }

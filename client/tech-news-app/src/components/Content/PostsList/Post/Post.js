@@ -5,12 +5,12 @@ import Common from "../../../../common/Common";
 
 function Post(props) {
 
-    function setCurrentPostId() {
-        props.setCurrentPostId(props.post.id)
+    function setPostId() {
+        props.setPostId(props.post.id)
     }
 
     function createPostLink() {
-        return '/posts/' + getSectionName(props.currentSectionId) + '/post/' + props.post.id;
+        return '/posts/' + getSectionName(props.sectionId) + '/post/' + props.post.id;
     }
 
     return (
@@ -18,10 +18,10 @@ function Post(props) {
             <div className="media">
                 <NavLink to={createPostLink()} className="pull-left">
                     <img className="media-object post-picture" alt="post picture"
-                         src={props.post.imageUrl} onClick={setCurrentPostId}/>
+                         src={props.post.imageUrl} onClick={setPostId}/>
                 </NavLink>
                 <div className="media-body">
-                    <h4 className="media-heading" onClick={setCurrentPostId}>
+                    <h4 className="media-heading" onClick={setPostId}>
                         <NavLink to={createPostLink()} className="post-title">
                             {props.post.title}
                         </NavLink>

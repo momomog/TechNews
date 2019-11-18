@@ -16,7 +16,7 @@ function Comment(props) {
                             {Common.dateTimeParser(props.comment.date)}
                         </span>
                     </div>
-                    <div className="mt-1 mb-3">
+                    <div className="mt-1 mb-3" align="justify">
                         {props.comment.commentText}
                     </div>
                     <div className="row">

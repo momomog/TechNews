@@ -16,6 +16,9 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @ComponentScan(basePackages = "ru.technews")
 public class RootConfig implements WebMvcConfigurer {
+
+    private final long MAX_AGE_SECS = 3600;
+
     @Bean
     public ViewResolver internalResourceViewResolver() {
         InternalResourceViewResolver bean = new InternalResourceViewResolver();
@@ -36,8 +39,8 @@ public class RootConfig implements WebMvcConfigurer {
     public CommonsMultipartResolver createMultipartResolver() {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
         resolver.setDefaultEncoding("utf-8");
-        resolver.setMaxUploadSize(100971520); //20MB
-        resolver.setMaxInMemorySize(5048576); //1MB
+        resolver.setMaxUploadSize(100971520);
+        resolver.setMaxInMemorySize(5048576);
         return resolver;
     }
 
@@ -46,8 +49,11 @@ public class RootConfig implements WebMvcConfigurer {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*")
-                        .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
+                registry
+                        .addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedMethods("HEAD", "OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE")
+                        .maxAge(MAX_AGE_SECS);
             }
         };
     }

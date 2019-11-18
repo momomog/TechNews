@@ -27,13 +27,33 @@ function PostReview(props) {
                             <hr/>
                         </div>
 
-                        <div>
+                        <div className="post-author-comment">
                             {
                                 props.post.fullDescription ? Parser(props.post.fullDescription) : ''
                             }
                         </div>
 
                         <hr/>
+
+                        <div className="row disabled">
+                            <div className="rating ml-4">
+                                <span className="mr-2 post-author-comment"> Оцените пост!</span>
+                                <input type="radio" id="star5" name="rating" value="5"/>
+                                <label htmlFor="star5" title="Отлично">5 stars</label>
+
+                                <input type="radio" id="star4" name="rating" value="4"/>
+                                <label htmlFor="star4" title="Хорошо">4 stars</label>
+
+                                <input type="radio" id="star3" name="rating" value="3"/>
+                                <label htmlFor="star3" title="Средне">3 stars</label>
+
+                                <input type="radio" id="star2" name="rating" value="2"/>
+                                <label htmlFor="star2" title="Плохо">2 stars</label>
+
+                                <input type="radio" id="star1" name="rating" value="1"/>
+                                <label htmlFor="star1" title="Ужасно">1 star</label>
+                            </div>
+                        </div>
 
                         <CommentsWrapper/>
 

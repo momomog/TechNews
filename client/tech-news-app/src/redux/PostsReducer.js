@@ -1,22 +1,18 @@
 import PostAPI from "../api/PostAPI";
 
-const SET_CURRENT_POST_ID = 'SET-CURRENT-POST-ID';
+const SET_POST_ID = 'SET-POST-ID';
 const SET_POSTS_COUNT = 'SET-POSTS-COUNT';
-const SET_CURRENT_POST_PAGE = 'SET-CURRENT-POST-PAGE';
-const SET_CURRENT_POST_DATA = 'SET-CURRENT-POST-DATA';
+const SET_POST_PAGE = 'SET-POST-PAGE';
+const SET_POST_DATA = 'SET-POST-DATA';
 const SET_POSTS = 'SET-POSTS';
-
-
 
 
 let initialState = {
     postList: [],
-    currentPostData: {},
-    currentPostComments: {},
-    currentPostId: '',
+    postData: {},
+    postId: '',
     postsCount: 0,
-    currentPostPage: 1,
-    currentCommentText: ''
+    postPage: 1
 };
 
 export const postsReducer = (state = initialState, action) => {
@@ -33,22 +29,22 @@ export const postsReducer = (state = initialState, action) => {
                 postsCount: action.postsCount
             };
         }
-        case SET_CURRENT_POST_PAGE: {
+        case SET_POST_PAGE: {
             return {
                 ...state,
-                currentPostPage: action.currentPostPage
+                postPage: action.postPage
             };
         }
-        case SET_CURRENT_POST_DATA: {
+        case SET_POST_DATA: {
             return {
                 ...state,
-                currentPostData: action.currentPostData
+                postData: action.postData
             };
         }
-        case SET_CURRENT_POST_ID: {
+        case SET_POST_ID: {
             return {
                 ...state,
-                currentPostId: action.currentPostId
+                postId: action.postId
             };
         }
         default:
@@ -67,7 +63,7 @@ export const getAllPosts = (sectionId, postPage) => {
 
 export const setPostPageAndGetPosts = (sectionId, postPage) => {
     return (dispatch) => {
-        dispatch(setCurrentPostPageAction(postPage));
+        dispatch(setPostPageAction(postPage));
         PostAPI.getAllPosts(sectionId, postPage).then(data => {
             dispatch(setPostsAction(data.posts));
             dispatch(setPostsCountAction(data.postsCount));
@@ -79,15 +75,14 @@ export const getPostData = (sectionId, postId) => {
     return (dispatch) => {
         PostAPI.getPostData(sectionId, postId)
             .then(data => {
-                dispatch(setCurrentPostDataAction(data));
+                dispatch(setPostDataAction(data));
             });
     };
 };
 
 export const setPostsAction = (posts) => ({type: SET_POSTS, posts: posts});
 export const setPostsCountAction = (count) => ({type: SET_POSTS_COUNT, postsCount: count});
-export const setCurrentPostPageAction = (postPageNumber) => ({type: SET_CURRENT_POST_PAGE, currentPostPage: postPageNumber});
-export const setCurrentPostIdAction = (id) => ({type: SET_CURRENT_POST_ID, currentPostId: id});
-
-export const setCurrentPostDataAction = (data) => ({type: SET_CURRENT_POST_DATA, currentPostData: data});
+export const setPostPageAction = (postPageNumber) => ({type: SET_POST_PAGE, postPage: postPageNumber});
+export const setPostIdAction = (id) => ({type: SET_POST_ID, postId: id});
+export const setPostDataAction = (data) => ({type: SET_POST_DATA, postData: data});
 

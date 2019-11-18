@@ -8,25 +8,24 @@ import {getPostData} from "../../../redux/PostsReducer";
 class PostReviewWrapper extends React.Component {
 
     componentDidMount() {
-        this.props.getPostData(this.props.currentSectionId, this.props.match.params.postId);
+        this.props.getPostData(this.props.sectionId, this.props.match.params.postId);
     }
 
     render() {
-        return <PostReview post={this.props.currentPostData}/>
+        return <PostReview post={this.props.postData}/>
     }
-
 }
 
 let mapStateToProps = (state) => {
     return {
-        currentPostData: state.postsData.currentPostData,
-        currentSectionId: state.headerData.currentSectionId,
+        postData: state.postsData.postData,
+        sectionId: state.headerData.sectionId,
     }
 };
 
 let mapDispatchToProps = (dispatch) => {
     return {
-         getPostData: (sectionId, postId) => dispatch(getPostData(sectionId, postId))
+        getPostData: (sectionId, postId) => dispatch(getPostData(sectionId, postId))
     }
 };
 

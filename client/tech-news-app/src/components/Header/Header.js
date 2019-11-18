@@ -1,14 +1,14 @@
 import React from 'react';
 import NavLinks from "./NavLinks/NavLinks";
-import TopHeader from "./TopHeader/TopHeader";
+import LoginWrapper from "./Login/LoginWrapper";
 
 function Header(props) {
     return (
         <div className="container">
             <div className="head">
-                <TopHeader changeSection={props.changeSection}
-                           setPosts={props.setPosts}
-                           setPostPage={props.setPostPage}/>
+                <LoginWrapper changeSection={props.changeSection}
+                       setPosts={props.setPosts}
+                       setPostPage={props.setPostPage}/>
                 <NavLinks changeSection={props.changeSection}
                           setPosts={props.setPosts}
                           setPostPage={props.setPostPage}

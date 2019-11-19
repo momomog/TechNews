@@ -77,7 +77,6 @@ public class PostController {
 
     // добавить новый комментарий
     @PostMapping(value = "/post/{postId}/new_comment")
-    @ResponseBody
     public ResponseEntity<?> addNewComment(@PathVariable("postId") Long postId,
                                            @RequestBody CommentEntity comment) {
         comment.setDate(LocalDateTime.now());

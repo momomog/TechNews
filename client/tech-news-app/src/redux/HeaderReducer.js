@@ -1,11 +1,16 @@
+import {setPostsAction, setPostsCountAction} from "./PostsReducer";
+import AuthAPI from "../api/AuthAPI";
+
 const CHANGE_SECTION = 'CHANGE-SECTION';
 const SET_IS_AUTH = 'SET-IS-AUTH';
+const SET_ERROR_AUTH_CODE = 'SET-ERROR-AUTH-CODE';
 const SET_USER_DATA = 'SET-USER-DATA';
 
 
 let initialState = {
     sectionId: 1,
     isAuth: false,
+    errorAuthCode: '',
     userData: {}
 };
 
@@ -20,7 +25,13 @@ export const headerReducer = (state = initialState, action) => {
         case SET_IS_AUTH: {
             return {
                 ...state,
-                isAuth: action.isAuth
+                isAuth: action.isAuth,
+            };
+        }
+        case SET_ERROR_AUTH_CODE: {
+            return {
+                ...state,
+                errorAuthCode: action.errorAuthCode
             };
         }
         case SET_USER_DATA: {
@@ -36,4 +47,19 @@ export const headerReducer = (state = initialState, action) => {
 
 export const chooseSectionAction = (sectionId) => ({type: CHANGE_SECTION, sectionId: sectionId});
 export const setIsAuthAction = (isAuth) => ({type: SET_IS_AUTH, isAuth: isAuth});
+export const setErrorAuthCodeAction = (code) => ({type: SET_ERROR_AUTH_CODE, errorAuthCode: code});
 export const setUserDataAction = (userData) => ({type: SET_USER_DATA, userData: userData});
+
+export const login = (loginRequest) => {
+    return (dispatch) => {
+        AuthAPI.login(loginRequest)
+            .then(response => {
+                // localStorage.setItem('accessToken', response.accessToken);
+                dispatch(setIsAuthAction(true));
+            })
+            .catch( function (error)  {
+                dispatch(setErrorAuthCodeAction(401));
+            });
+        ;
+    };
+};

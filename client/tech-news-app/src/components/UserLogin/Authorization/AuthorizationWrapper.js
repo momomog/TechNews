@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {login, setErrorAuthCodeAction} from "../../../redux/HeaderReducer";
+import {login, setAuthErrorCodeAction} from "../../../redux/AuthReducer";
 import Authorization from "./Authorization";
 
 class AuthorizationWrapper extends React.Component {
@@ -12,11 +12,11 @@ class AuthorizationWrapper extends React.Component {
     render() {
         return (
             <Authorization isAuth={this.props.isAuth}
-                           errorAuthCode={this.props.errorAuthCode}
+                           authErrorCode={this.props.authErrorCode}
                            isErrorAuth={this.props.isErrorAuth}
                            userData={this.props.userData}
                            onLogin={this.onLogin}
-                           setErrorAuthCode={this.props.setErrorAuthCode}/>
+                           setAuthErrorCode={this.props.setAuthErrorCode}/>
         )
     }
 
@@ -24,10 +24,10 @@ class AuthorizationWrapper extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        isAuth: state.headerData.isAuth,
-        errorAuthCode: state.headerData.errorAuthCode,
-        isErrorAuth: state.headerData.isErrorAuth,
-        userData: state.headerData.userData
+        isAuth: state.authData.isAuth,
+        authErrorCode: state.authData.authErrorCode,
+        isErrorAuth: state.authData.isErrorAuth,
+        userData: state.authData.userData
     }
 };
 
@@ -35,7 +35,7 @@ let mapDispatchToProps = (dispatch) => {
     return {
         // setIsAuth: isAuth => dispatch(setIsAuthAction(isAuth)),
         login: loginRequest => dispatch(login(loginRequest)),
-        setErrorAuthCode: code => dispatch(setErrorAuthCodeAction(code)),
+        setAuthErrorCode: code => dispatch(setAuthErrorCodeAction(code)),
         // setUserData: userData => dispatch(setUserDataAction(userData))
     }
 };

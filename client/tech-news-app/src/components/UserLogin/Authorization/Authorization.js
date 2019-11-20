@@ -1,26 +1,20 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
-
-import {Form, Input, Button, Icon, notification} from 'antd';
-
-const FormItem = Form.Item;
+import {NavLink, Redirect} from "react-router-dom";
+import Common from "../../../common/Common";
 
 
 class Authorization extends React.Component {
 
-    componentDidMount() {
-
-    }
-
     constructor(props) {
         super(props);
-        this.onLoginClick = this.onLoginClick.bind(this);
-        this.onLoginFieldsChange = this.onLoginFieldsChange.bind(this);
-        this.onLoginFieldsClick = this.onLoginFieldsClick.bind(this);
         this.state = {
             login: '',
             password: ''
         };
+
+        this.onLoginClick = this.onLoginClick.bind(this);
+        this.onLoginFieldsChange = this.onLoginFieldsChange.bind(this);
+        this.onClearErrorText = this.onClearErrorText.bind(this);
     }
 
     onLoginClick() {
@@ -40,14 +34,15 @@ class Authorization extends React.Component {
         }
     }
 
-    onLoginFieldsClick() {
-        this.props.setErrorAuthCode('');
+    onClearErrorText() {
+        this.props.setAuthErrorCode('');
     }
 
     render() {
-
         return (
-            <div className="container">
+        this.props.isAuth
+            ? <Redirect to="profile"/>
+            : <div className="container">
                 <div id="loginbox" className="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 mt-5">
                     <div className="panel panel-info">
                         <div className="panel-heading">
@@ -62,7 +57,7 @@ class Authorization extends React.Component {
                                 </span>
                                     <input id="login-username" type="text" className="input-group-form"
                                            name="usernameOrEmail" onChange={this.onLoginFieldsChange}
-                                           onClick={this.onLoginFieldsClick} placeholder="имя пользователя или почта"
+                                           onClick={this.onClearErrorText} placeholder="имя пользователя или почта"
                                            required/>
                                 </div>
                                 <div className="input-group mb-2">
@@ -71,20 +66,18 @@ class Authorization extends React.Component {
                                 </span>
                                     <input id="login-password" type="password" className="input-group-form"
                                            name="password" onChange={this.onLoginFieldsChange}
-                                           onClick={this.onLoginFieldsClick} placeholder="пароль" required/>
+                                           onClick={this.onClearErrorText} placeholder="пароль" required/>
                                 </div>
 
                                 <div>
                                     <div className="col-md-12">
                                         <div className="pt-3 text-center text-danger">
 
-                                            {this.props.errorAuthCode
-                                                ? <div>
-                                                    Не удалось войти. <br/>
-                                                    Проверьте правильность введенных данных
-                                                </div>
+                                            {this.props.authErrorCode
+                                                ? Common.showErrorText(this.props.authErrorCode)
                                                 : ''
                                             }
+
                                         </div>
                                     </div>
                                 </div>
@@ -109,8 +102,8 @@ class Authorization extends React.Component {
                                     <div className="col-md-12 control">
                                         <div className="border-top pt-3">
                                             Не имеете аккаунт?
-                                            <NavLink to="/registration"
-                                                     className="navlink reg"> Зарегистрироваться</NavLink>
+                                            <NavLink to="/registration" className="navlink reg"> Зарегистрироваться
+                                            </NavLink>
                                         </div>
                                     </div>
                                 </div>
@@ -118,10 +111,7 @@ class Authorization extends React.Component {
                         </div>
                     </div>
                 </div>
-
             </div>
-
-
         )
     }
 

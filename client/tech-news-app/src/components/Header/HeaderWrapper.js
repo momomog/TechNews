@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {getAllPosts, setPostPageAction} from "../../redux/PostsReducer";
 import Header from "./Header";
-import {chooseSectionAction, setIsAuthAction, setUserDataAction} from "../../redux/HeaderReducer";
+import {chooseSectionAction, setIsAuthAction, setUserDataAction} from "../../redux/AuthReducer";
 
 class HeaderWrapper extends React.Component {
 
@@ -12,21 +12,23 @@ class HeaderWrapper extends React.Component {
 
     render() {
         return (<Header setPosts={this.setPosts}
-                        sectionId={this.props.sectionId}
-                        changeSection={this.props.changeSection}
-                        setPostPage={this.props.setPostPage}
-                        isAuth={this.props.isAuth}
-                        userData={this.props.userData}
-                        setIsAuth={this.props.setIsAuth}
-                        setUserData={this.props.setUserData}/>)
+                        {...this.props}
+                        // sectionId={this.props.sectionId}
+                        // changeSection={this.props.changeSection}
+                        // setPostPage={this.props.setPostPage}
+                        // isAuth={this.props.isAuth}
+                        // userData={this.props.userData}
+                        // setIsAuth={this.props.setIsAuth}
+                        // setUserData={this.props.setUserData}
+        />)
     }
 }
 
 let mapStateToProps = (state) => {
     return {
-        sectionId: state.headerData.sectionId,
-        isAuth: state.headerData.isAuth,
-        userData: state.headerData.userData
+        sectionId: state.authData.sectionId,
+        isAuth: state.authData.isAuth,
+        userData: state.authData.userData
     }
 };
 

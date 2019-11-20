@@ -16,12 +16,12 @@ function Login(props) {
     return (
         <div className="row-fluid">
             <div className="span12">
-                <div className="span6">
+                <div className="span9">
                     <h1 className="muted" onClick={clickLogo}>
                         <NavLink to="/posts/all" className="site-logo">Tech-news</NavLink>
                     </h1>
                 </div>
-                <div className="span4 offset2 auth-button">
+                <div className="span3 auth-button">
 
                     {
                         props.isAuth

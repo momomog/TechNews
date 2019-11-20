@@ -32,7 +32,7 @@ class CommentsWrapper extends React.Component {
 let mapStateToProps = (state) => {
     return {
         commentText: state.commentsData.commentText,
-        sectionId: state.headerData.sectionId,
+        sectionId: state.authData.sectionId,
         postComments: state.commentsData.postComments
     }
 };

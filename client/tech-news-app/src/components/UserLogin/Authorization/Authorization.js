@@ -53,7 +53,7 @@ class Authorization extends React.Component {
                             <form id="loginform" className="form-horizontal" role="form">
                                 <div className="input-group mb-3">
                                 <span className="input-group-addon">
-                                    <i className="glyphicon glyphicon-user"></i>
+                                    <i className="glyphicon glyphicon-user"/>
                                 </span>
                                     <input id="login-username" type="text" className="input-group-form"
                                            name="usernameOrEmail" onChange={this.onLoginFieldsChange}
@@ -62,7 +62,7 @@ class Authorization extends React.Component {
                                 </div>
                                 <div className="input-group mb-2">
                                 <span className="input-group-addon">
-                                    <i className="glyphicon glyphicon-lock"></i>
+                                    <i className="glyphicon glyphicon-lock"/>
                                 </span>
                                     <input id="login-password" type="password" className="input-group-form"
                                            name="password" onChange={this.onLoginFieldsChange}

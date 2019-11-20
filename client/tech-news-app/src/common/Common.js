@@ -28,6 +28,7 @@ class Common {
             return jwt_decode(localStorage.getItem('accessToken'));
     }
 
+    // Текст ошибки в зависимости от ответа сервера
     showErrorText(code) {
         switch (code) {
             case 401: return <div>Не удалось войти.<br/>Проверьте правильность введенных данных</div>;

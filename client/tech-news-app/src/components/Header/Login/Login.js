@@ -2,7 +2,6 @@ import React from 'react';
 import {NavLink} from "react-router-dom";
 import {SECTION_ALL_POSTS} from "../../../common/Const";
 import AuthButton from "./AuthButton/AuthButton";
-import User from "./User/User";
 
 function Login(props) {
 
@@ -25,7 +24,7 @@ function Login(props) {
 
                     {
                         props.isAuth
-                            ? <User/>
+                            ? <div/>
                             : <AuthButton/>
                     }
 

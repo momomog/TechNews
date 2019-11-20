@@ -13,7 +13,11 @@ function Header(props) {
                 <NavLinks changeSection={props.changeSection}
                           setPosts={props.setPosts}
                           setPostPage={props.setPostPage}
-                          sectionId={props.sectionId}/>
+                          sectionId={props.sectionId}
+                          isAuth={props.isAuth}
+                          userData={props.userData}
+                          setIsAuth={props.setIsAuth}
+                          setUserData={props.setUserData}/>
             </div>
         </div>
     )

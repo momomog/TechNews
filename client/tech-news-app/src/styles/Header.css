@@ -71,3 +71,9 @@ input.hidden {
     border-bottom: 1px #f8f8f8 solid;
     margin: 5px 0 5px 0
 }
+
+.btn-primary-outline {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}

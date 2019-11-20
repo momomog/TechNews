@@ -13,7 +13,7 @@ let initialState = {
     isAuth: !!localStorage.getItem('accessToken'),
     userId: '',
     authErrorCode: '',
-    userData: {}
+    userData: ''
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -79,6 +79,7 @@ export const getUserData = (userId) => {
         AuthAPI.getCurrentUser(userId)
             .then(response => {
                 dispatch(setUserDataAction(response));
+                dispatch(setUserIdAction(userId));
             })
     };
 };

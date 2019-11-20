@@ -30,7 +30,7 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
     return {
         // setIsAuth: isAuth => dispatch(setIsAuthAction(isAuth)),
-        getUserData: userData => dispatch(getUserData(userData))
+        getUserData: userId => dispatch(getUserData(userId))
     }
 };
 

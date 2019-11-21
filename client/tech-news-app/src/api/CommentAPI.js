@@ -13,7 +13,6 @@ class CommentAPI {
     };
 
     sendNewPostComment(postId, commentText, authorName, authorId) {
-        debugger;
         return instance.post('/posts/post/' + postId + '/new_comment', {
             postId: postId,
             commentText: commentText,

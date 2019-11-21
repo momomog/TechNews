@@ -9,7 +9,6 @@ import ru.technews.service.post.CommentService;
 import ru.technews.service.post.PostService;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,7 +80,7 @@ public class PostController {
     public ResponseEntity<?> addNewComment(@PathVariable("postId") Long postId,
                                            @RequestBody CommentEntity comment) {
         comment.setDate(LocalDateTime.now());
-        comment.setLikesCount(new ArrayList<>());
+        comment.setLikesCount(new Integer[]{});
         commentService.save(comment);
 
         PostEntity post = postService.findById(postId);

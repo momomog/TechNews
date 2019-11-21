@@ -2,12 +2,13 @@ package ru.technews.entity.post;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 import ru.technews.entity.BaseEntity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "comments")
@@ -36,6 +37,10 @@ public class CommentEntity extends BaseEntity {
     private Long postId;
 
     // Пост, к которому относится комментарий
-    @Column(name = "likes_count")
-    private List<Long> likesCount;
+    @Type(type = "ru.technews.payload.IntArrayUserType")
+    @Column(
+            name = "likes_count",
+            columnDefinition = "integer[]"
+    )
+    private Integer[] likesCount;
 }

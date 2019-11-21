@@ -12,11 +12,13 @@ class CommentAPI {
             .then(response => response.data)
     };
 
-    sendNewPostComment(postId, commentText) {
+    sendNewPostComment(postId, commentText, authorName, authorId) {
+        debugger;
         return instance.post('/posts/post/' + postId + '/new_comment', {
             postId: postId,
             commentText: commentText,
-            author: 'Admin Fadmin'
+            authorName: authorName,
+            authorId: authorId
         }).then(response => response.data)
     };
 }

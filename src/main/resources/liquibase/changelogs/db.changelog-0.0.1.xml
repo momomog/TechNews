@@ -44,13 +44,19 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="author" type="varchar(1000)">
+            <column name="author_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author_name" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
             <column name="comment_text" type="varchar(10000)">
                 <constraints nullable="false"/>
             </column>
             <column name="date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="likes_count" type="bigint []">
                 <constraints nullable="false"/>
             </column>
             <column name="post_id" type="bigint">
@@ -76,10 +82,10 @@
             <column name="password" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_at" type="TIMESTAMP">
+            <column name="createdat" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
-            <column name="updated_at" type="TIMESTAMP">
+            <column name="updatedat" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
         </createTable>

@@ -1,5 +1,6 @@
 import React from "react";
 import Comment from "./Comment/Comment";
+import Common from "../../../../common/Common";
 
 function Comments(props) {
 
@@ -15,11 +16,13 @@ function Comments(props) {
 
     return (
         <div>
-            <div className="my-4">
-                <h5 className="card-header">Оставьте комментарий:</h5>
-                <div className="card-body comment-input">
-                    <form>
-                        <div className="form-group">
+            {
+                props.isAuth
+                    ? <div className="my-4">
+                        <h5 className="card-header">Оставьте свой комментарий:</h5>
+                        <div className="card-body comment-input">
+                            <form>
+                                <div className="form-group">
                             <textarea className="form-control text-area" rows="3"
                                       placeholder="Введите текст комментария..."
                                       onChange={changeInputCommentText}
@@ -30,21 +33,27 @@ function Comments(props) {
                                               addNewCommentary();
                                           }
                                       }}/>
+                                </div>
+                                <button type="submit" className="btn btn-primary"
+                                        disabled={!props.commentText} onClick={addNewCommentary}>
+                                    Отправить
+                                </button>
+                            </form>
                         </div>
-                        <button type="submit" className="btn btn-primary"
-                                disabled={!props.commentText} onClick={addNewCommentary}>
-                            Отправить
-                        </button>
-                    </form>
-                </div>
-            </div>
+                    </div>
 
+                    : <div className="my-4 mb-5">
+                        <h4 className="card-header">Войдите на сайт для возможности оставлять комментарии!</h4>
+                    </div>
+            }
+
+            <h5 className="card-header mb-4">{props.comments.length + ' ' + Common.getCommentaryCountText(props.comments.length)}</h5>
             {
                 props.comments.length > 0
                     ? props.comments.map((comment) => {
                         return <Comment comment={comment} key={comment.id}/>
                     })
-                    : ''
+                    : <div className="ml-4">Ваш комментарий будет первым...</div>
             }
         </div>
     )

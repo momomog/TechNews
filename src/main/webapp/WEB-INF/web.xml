@@ -17,14 +17,14 @@
         <tracking-mode>COOKIE</tracking-mode>
     </session-config>
 
-<!--    <error-page>-->
-<!--        <error-code>404</error-code>-->
-<!--        <location>/WEB-INF/view/common/error-pages/page-404.jsp</location>-->
-<!--    </error-page>-->
-<!--    <error-page>-->
-<!--        <error-code>500</error-code>-->
-<!--        <location>/WEB-INF/view/common/error-pages/page-500.jsp</location>-->
-<!--    </error-page>-->
+    <error-page>
+        <error-code>401</error-code>
+        <location>/errors/unauthorised</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/errors/int_server_error</location>
+    </error-page>
 
     <filter>
         <filter-name>encodingFilter</filter-name>

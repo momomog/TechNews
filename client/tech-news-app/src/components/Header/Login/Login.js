@@ -1,8 +1,9 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 import {SECTION_ALL_POSTS} from "../../../common/Const";
+import AuthButton from "./AuthButton/AuthButton";
 
-function TopHeader(props) {
+function Login(props) {
 
     //изменяет секцию на "все новости", ставит активную первую страницу пагинации
     function clickLogo() {
@@ -14,20 +15,23 @@ function TopHeader(props) {
     return (
         <div className="row-fluid">
             <div className="span12">
-                <div className="span6">
+                <div className="span9">
                     <h1 className="muted" onClick={clickLogo}>
                         <NavLink to="/posts/all" className="site-logo">Tech-news</NavLink>
                     </h1>
                 </div>
-                <div className="span4 offset2 auth-button">
-                    <NavLink className="btn btn-info pull-right sing-in-button"
-                             to="http://localhost:8080/login">Войти</NavLink>
-                    <NavLink className="btn btn-info pull-right"
-                             to="http://localhost:8080/registration">Регистрация</NavLink>
+                <div className="span3 auth-button">
+
+                    {
+                        props.isAuth
+                            ? ''
+                            : <AuthButton/>
+                    }
+
                 </div>
             </div>
         </div>
     )
 }
 
-export default TopHeader;
+export default Login;

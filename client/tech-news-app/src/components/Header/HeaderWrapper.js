@@ -2,7 +2,13 @@ import React from 'react';
 import {connect} from "react-redux";
 import {getAllPosts, setPostPageAction} from "../../redux/PostsReducer";
 import Header from "./Header";
-import {chooseSectionAction} from "../../redux/HeaderReducer";
+import {
+    chooseSectionAction,
+    getUserData,
+    setIsAuthAction,
+    setUserDataAction
+} from "../../redux/AuthReducer";
+import Common from "../../common/Common";
 
 class HeaderWrapper extends React.Component {
 
@@ -10,30 +16,39 @@ class HeaderWrapper extends React.Component {
         this.props.getAllPosts(sectionId, 1);
     };
 
+    componentDidMount() {
+        let user = Common.decodeJWTToken();
+
+        if (user && user.sub && !this.props.userData) {
+            this.props.getUserData(user.sub);
+            this.props.setIsAuth(true);
+        }
+    }
+
     render() {
-        return (<Header setPosts={this.setPosts}
-                        sectionId={this.props.sectionId}
-                        // isAuth={this.props.isAuth}
-                        changeSection={this.props.changeSection}
-                        // setAuthActive={this.props.setAuthActive}
-                        setPostPage={this.props.setPostPage}
-        />)
+        return (
+            <Header setPosts={this.setPosts}
+                    {...this.props}/>
+        )
     }
 }
 
 let mapStateToProps = (state) => {
     return {
-        sectionId: state.headerData.sectionId,
-        // isAuth: state.authData.isAuth,
+        sectionId: state.authData.sectionId,
+        isAuth: state.authData.isAuth,
+        userData: state.authData.userData
     }
 };
 
 let mapDispatchToProps = (dispatch) => {
     return {
         changeSection: sectionId => dispatch(chooseSectionAction(sectionId)),
-        // setAuthActive: isActive => dispatch(setAuthStatusAction(isActive)),
         setPostPage: pageNumber => dispatch(setPostPageAction(pageNumber)),
-        getAllPosts: (sectionId, postPage) => dispatch(getAllPosts(sectionId, postPage))
+        getAllPosts: (sectionId, postPage) => dispatch(getAllPosts(sectionId, postPage)),
+        setIsAuth: isAuth => dispatch(setIsAuthAction(isAuth)),
+        setUserData: userData => dispatch(setUserDataAction(userData)),
+        getUserData: userId => dispatch(getUserData(userId))
     }
 };
 

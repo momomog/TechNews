@@ -26,7 +26,7 @@ public class HibernateConfig {
         this.env = env;
     }
 
-    @Bean
+    @Bean(name = "sessionFactory")
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
@@ -53,8 +53,7 @@ public class HibernateConfig {
         return properties;
     }
 
-
-    @Bean
+    @Bean(name = "transactionManager")
     PlatformTransactionManager hibernateTransactionManager() {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory().getObject());

@@ -26,7 +26,7 @@ function PagesNavigation(props) {
 
                     {
                         initPagesArray().map((page) => {
-                            return <li className={getNavigationButtonClass(page)} onClick={setPostPage} key={page.id}>
+                            return <li className={getNavigationButtonClass(page)} onClick={setPostPage} key={page}>
                                 <NavLink to={"/posts/" + getSectionName(props.sectionId) + '/' + page}
                                          className="page-link">{page}</NavLink>
                             </li>

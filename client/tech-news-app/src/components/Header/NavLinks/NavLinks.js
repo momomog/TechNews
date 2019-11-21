@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 import {SECTION_ALL_POSTS, SECTION_HARDWARE, SECTION_MOBILE, SECTION_NOTEBOOKS} from "../../../common/Const";
+import User from "./User/User";
 
 function NavLinks(props) {
 
@@ -15,7 +16,7 @@ function NavLinks(props) {
             <div className="navbar-inner w-100">
                 <div className="container">
                     <ul className="nav">
-                        <li onClick={() => {setPostsAndChangeSection(SECTION_ALL_POSTS)}}>
+                        <li className="nav-item" onClick={() => {setPostsAndChangeSection(SECTION_ALL_POSTS)}}>
                             <NavLink to="/posts/all" className="navlink">Все новости</NavLink>
                         </li>
 
@@ -26,12 +27,21 @@ function NavLinks(props) {
                         <li onClick={() => {setPostsAndChangeSection(SECTION_NOTEBOOKS)}}>
                             <NavLink to="/posts/notebooks" className="navlink">Ноутбуки</NavLink>
                         </li>
-                        <li onClick={() => {setPostsAndChangeSection(SECTION_HARDWARE)}}>
+                        <li className="right" onClick={() => {setPostsAndChangeSection(SECTION_HARDWARE)}}>
                             <NavLink to="/posts/hardware" className="navlink">Компьютерное железо</NavLink>
+                        </li>
+                    </ul>
+                    <ul className="nav navbar-right">
+                        <li>
+                            <User isAuth={props.isAuth}
+                                  userData={props.userData}
+                                  setUserData={props.setUserData}
+                                  setIsAuth={props.setIsAuth}/>
                         </li>
                     </ul>
                 </div>
             </div>
+
         </div>
     );
 }

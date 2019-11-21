@@ -1,18 +1,25 @@
 import React from 'react';
 import NavLinks from "./NavLinks/NavLinks";
-import TopHeader from "./TopHeader/TopHeader";
+import Login from "./Login/Login";
+import {NotificationContainer} from "react-notifications";
 
 function Header(props) {
     return (
         <div className="container">
+            <NotificationContainer/>
             <div className="head">
-                <TopHeader changeSection={props.changeSection}
-                           setPosts={props.setPosts}
-                           setPostPage={props.setPostPage}/>
+                <Login changeSection={props.changeSection}
+                       setPosts={props.setPosts}
+                       setPostPage={props.setPostPage}
+                       isAuth={props.isAuth}/>
                 <NavLinks changeSection={props.changeSection}
                           setPosts={props.setPosts}
                           setPostPage={props.setPostPage}
-                          sectionId={props.sectionId}/>
+                          sectionId={props.sectionId}
+                          isAuth={props.isAuth}
+                          userData={props.userData}
+                          setIsAuth={props.setIsAuth}
+                          setUserData={props.setUserData}/>
             </div>
         </div>
     )

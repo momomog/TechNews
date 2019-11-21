@@ -15,19 +15,23 @@ import java.time.LocalDateTime;
 @Setter
 public class CommentEntity extends BaseEntity {
 
-    // содержимое комментария
+    // Содержимое комментария
     @Column(name = "comment_text")
     private String commentText;
 
-    // автор комментария
-    @Column(name = "author")
-    private String author;
+    // ID автора комментария
+    @Column(name = "author_id")
+    private Long authorId;
 
-    // дата комментария
+    // Имя автор комментария
+    @Column(name = "author_name")
+    private String authorName;
+
+    // Дата комментария
     @Column(name = "date", columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private LocalDateTime date;
 
-    // пост, к которому относится комментарий
+    // Пост, к которому относится комментарий
     @Column(name = "post_id")
     private Long postId;
 }

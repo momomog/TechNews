@@ -22,10 +22,10 @@
     text-decoration: none !important;
 }
 
-.navlink.reg {
+.reg {
     font-size: 1em;
+    text-decoration: none !important;
 }
-
 
 .input-group-form {
     display: block;

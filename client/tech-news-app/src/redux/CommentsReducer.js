@@ -40,9 +40,9 @@ export const getPostComments = (sectionId, postId) => {
     };
 };
 
-export const sendNewPostComment = (postId, commentText) => {
+export const sendNewPostComment = (postId, commentText, authorName, authorId) => {
     return () => {
-        CommentAPI.sendNewPostComment(postId, commentText)
+        CommentAPI.sendNewPostComment(postId, commentText, authorName, authorId)
             .then(function (data) {
                 // console.log(data);
             })

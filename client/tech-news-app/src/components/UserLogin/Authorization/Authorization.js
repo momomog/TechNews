@@ -1,6 +1,7 @@
 import React from "react";
 import {NavLink, Redirect} from "react-router-dom";
 import Common from "../../../common/Common";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 class Authorization extends React.Component {
@@ -97,7 +98,6 @@ class Authorization extends React.Component {
                                            onClick={this.onLoginClick}>Войти</a>
                                     </div>
                                 </div>
-
                                 <div className="form-group">
                                     <div className="col-md-12 control">
                                         <div className="border-top pt-3">

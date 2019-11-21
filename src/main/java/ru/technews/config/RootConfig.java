@@ -19,7 +19,6 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @ComponentScan(basePackages = "ru.technews")
 @EnableJpaRepositories(value = "ru.technews.repository", entityManagerFactoryRef = "sessionFactory")
-//transactionManagerRef = "transactionManager"
 @EntityScan(basePackageClasses = {
         Jsr310JpaConverters.class
 })

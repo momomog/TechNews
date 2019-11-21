@@ -1,5 +1,6 @@
 import AuthAPI from "../api/AuthAPI";
 import Common from "../common/Common";
+import {NotificationManager} from "react-notifications";
 
 const CHANGE_SECTION = 'CHANGE-SECTION';
 const SET_IS_AUTH = 'SET-IS-AUTH';
@@ -63,6 +64,7 @@ export const login = (loginRequest) => {
     return (dispatch) => {
         AuthAPI.login(loginRequest)
             .then(response => {
+                NotificationManager.success('Вы успешно авторизовались в системе', 'Добро пожаловать');
                 localStorage.setItem('accessToken', response.accessToken);
                 let decodeToken = Common.decodeJWTToken(response.accessToken);
                 dispatch(setUserIdAction(decodeToken.sub));
@@ -70,6 +72,8 @@ export const login = (loginRequest) => {
             })
             .catch(function (error) {
                 dispatch(setAuthErrorCodeAction(error.code));
+                if (error.message)
+                    dispatch(setAuthErrorCodeAction(error.message));
             });
     };
 };

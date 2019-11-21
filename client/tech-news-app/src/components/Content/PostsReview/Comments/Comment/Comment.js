@@ -5,12 +5,12 @@ import Common from "../../../../../common/Common";
 function Comment(props) {
     return (
         <div>
-            <div className="media mb-4 border-bottom">
+            <div className="media card-body">
                 <img className="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt=""/>
                 <div className="media-body">
                     <div className="row">
                         <span className="col-lg-8 post-author-comment font-italic">
-                            {props.comment.author}
+                            @{props.comment.authorName}
                         </span>
                         <span className="col-lg-4 text-right text-secondary">
                             {Common.dateTimeParser(props.comment.date)}
@@ -21,7 +21,7 @@ function Comment(props) {
                     </div>
                     <div className="row">
                         <span className="col-lg-1">
-                            <a href="#">Ответить</a>
+                            <a href="#" className="text-secondary reg">Ответить</a>
                         </span>
                         <span className="col-lg-2">
                             <i className="fa fa-thumbs-up comment-icon mr-2"></i>
@@ -31,7 +31,7 @@ function Comment(props) {
                     </div>
                 </div>
             </div>
-            <hr/>
+            <div className="border-bottom"/>
         </div>
     )
 }

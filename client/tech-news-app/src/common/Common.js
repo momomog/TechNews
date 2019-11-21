@@ -20,6 +20,13 @@ class Common {
         return (number < 10 ? '0' : '') + number
     }
 
+    // Окончание количества комментариев в зависимости от значения
+    getCommentaryCountText(number) {
+        if (number === 1) return 'комментарий';
+        else if ([2,3,4].indexOf(number) !== -1) return 'комментария';
+        return 'комментариев';
+    }
+
     // Раскодирование JWT-токена
     decodeJWTToken(token) {
         if (token)

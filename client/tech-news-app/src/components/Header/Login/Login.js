@@ -24,7 +24,7 @@ function Login(props) {
 
                     {
                         props.isAuth
-                            ? <div/>
+                            ? ''
                             : <AuthButton/>
                     }
 

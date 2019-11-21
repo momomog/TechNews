@@ -15,7 +15,12 @@ class CommentsWrapper extends React.Component {
     };
 
     addNewCommentary = () => {
-        this.props.addNewComment(this.props.match.params.postId, this.props.commentText);
+        this.props.addNewComment(
+            this.props.match.params.postId,
+            this.props.commentText,
+            this.props.userData.username,
+            this.props.userData.id
+        );
         this.props.changeCommentText('');
         this.props.getPostComments(this.props.sectionId, this.props.match.params.postId);
     };
@@ -23,6 +28,8 @@ class CommentsWrapper extends React.Component {
     render() {
         return <Comments comments={this.props.postComments}
                          commentText={this.props.commentText}
+                         isAuth={this.props.isAuth}
+            // userData={this.props.userData}
                          changeCommentText={this.changeCommentText}
                          addNewCommentary={this.addNewCommentary}/>
     }
@@ -33,7 +40,9 @@ let mapStateToProps = (state) => {
     return {
         commentText: state.commentsData.commentText,
         sectionId: state.authData.sectionId,
-        postComments: state.commentsData.postComments
+        postComments: state.commentsData.postComments,
+        isAuth: state.authData.isAuth,
+        userData: state.authData.userData
     }
 };
 
@@ -41,7 +50,7 @@ let mapDispatchToProps = (dispatch) => {
     return {
         changeCommentText: (text) => dispatch(changeCommentTextAction(text)),
         getPostComments: (sectionId, postId) => dispatch(getPostComments(sectionId, postId)),
-        addNewComment: (postId, commentText) => dispatch(sendNewPostComment(postId, commentText))
+        addNewComment: (postId, commentText, authorName, authorId) => dispatch(sendNewPostComment(postId, commentText, authorName, authorId))
     }
 };
 

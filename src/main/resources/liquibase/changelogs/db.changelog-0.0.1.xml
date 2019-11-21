@@ -56,6 +56,9 @@
             <column name="date" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
+            <column name="likes_count" type="bigint []">
+                <constraints nullable="false"/>
+            </column>
             <column name="post_id" type="bigint">
                 <constraints nullable="false" foreignKeyName="fk_post_id" references="posts(id)"/>
             </column>

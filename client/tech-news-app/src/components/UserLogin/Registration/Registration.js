@@ -11,23 +11,32 @@ class Registration extends React.Component {
             email: '',
             password: '',
             repeatPassword: '',
-            isUserNameAvailability: this.props.isUsernameAvailability,
-            isEmailNameAvailability: true,
             isSamePasswords: true,
-        };
-        // this.handleInputChange = this.handleInputChange.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
-        // this.validateUsernameAvailability = this.validateUsernameAvailability.bind(this);
-        // this.validateEmailAvailability = this.validateEmailAvailability.bind(this);
-        // this.isFormInvalid = this.isFormInvalid.bind(this);
+        }
     }
+
+
+    onRegistrationClick = () => {
+        if (this.state.password !== this.state.repeatPassword)
+            this.setState({'isSamePasswords': false})
+
+
+    };
 
     validateUsernameAvailability = () => {
         this.props.checkUsernameAvailability(this.state.userName);
     };
 
+    validateEmailAvailability = () => {
+        this.props.checkEmailAvailability(this.state.email);
+    };
+
     onFieldsChange = (e) => {
         this.setState({[e.target.name]: e.target.value});
+    };
+
+    onPasswordFieldClear = () => {
+        this.setState({'isSamePasswords': true});
     };
 
     render() {
@@ -92,7 +101,7 @@ class Registration extends React.Component {
                                         </div>
 
                                         {
-                                            this.state.isUserNameAvailability
+                                            !this.props.isUsernameAvailability
                                                 ? <div className="col-12">
                                                     <div className="col-sm-12">
                                                         <div className="text-danger text-center">
@@ -116,16 +125,23 @@ class Registration extends React.Component {
                                             <div className="col-sm-12 mw-100">
                                                 <input type="email" placeholder="Почта"
                                                        onChange={this.onFieldsChange}
+                                                       onBlur={this.validateEmailAvailability}
                                                        className="form-control input-group-form" name="email" required/>
                                             </div>
                                         </div>
-                                        <div className="col-12">
-                                            <div className="col-sm-12">
-                                                <div className="text-danger text-center">
-                                                    Данный почтовый адрес уже зарегистрирован
+
+                                        {
+                                            !this.props.isEmailAvailability
+                                                ? <div className="col-12">
+                                                    <div className="col-sm-12">
+                                                        <div className="text-danger text-center">
+                                                            Данный почтовый адрес уже зарегистрирован
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                                : ''
+                                        }
+
                                     </div>
 
                                     <div className="row">
@@ -138,6 +154,7 @@ class Registration extends React.Component {
                                             <div className="col-sm-12 mw-100">
                                                 <input type="password" placeholder="Пароль"
                                                        onChange={this.onFieldsChange}
+                                                       onClick={this.onPasswordFieldClear}
                                                        className="form-control input-group-form" name="password" required/>
                                             </div>
                                         </div>
@@ -153,22 +170,30 @@ class Registration extends React.Component {
                                             <div className="col-sm-12 mw-100">
                                                 <input type="password" placeholder="Повторите пароль"
                                                        onChange={this.onFieldsChange}
+                                                       onClick={this.onPasswordFieldClear}
                                                        className="form-control input-group-form" name="repeatPassword"
                                                        required/>
                                             </div>
                                         </div>
-                                        <div className="col-12">
-                                            <div className="col-sm-12">
-                                                <div className="text-danger text-center">
-                                                    Введенные пароли не совпадают
+
+                                        {
+                                            !this.state.isSamePasswords
+                                                ? <div className="col-12">
+                                                    <div className="col-sm-12">
+                                                        <div className="text-danger text-center">
+                                                            Введенные пароли не совпадают
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                                : ''
+                                        }
+
                                     </div>
 
                                     <div className="form-group mt-3">
                                         <div className="col-sm-12">
-                                            <input type="submit" className="btn btn-success btn-block w-auto"
+                                            <input type="submit" onClick={this.onRegistrationClick}
+                                                   className="btn btn-success btn-block w-auto"
                                                    value="Зарегистрировать"/>
                                         </div>
                                     </div>

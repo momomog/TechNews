@@ -100,8 +100,18 @@ export const checkUsernameAvailability = (userName) => {
     return (dispatch) => {
         AuthAPI.checkUsernameAvailability(userName)
             .then(response => {
-                debugger;
-                dispatch(setUsernameAvailabilityAction(response.isAvailable));
+                dispatch(setUsernameAvailabilityAction(response.available));
+            })
+            .catch(function (error) {
+            });
+    };
+};
+
+export const checkEmailAvailability = (email) => {
+    return (dispatch) => {
+        AuthAPI.checkEmailAvailability(email)
+            .then(response => {
+                dispatch(setEmailAvailabilityAction(response.available));
             })
             .catch(function (error) {
             });

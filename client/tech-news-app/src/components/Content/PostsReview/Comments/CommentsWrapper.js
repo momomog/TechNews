@@ -2,7 +2,12 @@ import React from 'react';
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import Comments from "./Comments";
-import {changeCommentTextAction, getPostComments, sendNewPostComment} from "../../../../redux/CommentsReducer";
+import {
+    changeCommentTextAction,
+    getPostComments,
+    likeComment,
+    sendNewPostComment
+} from "../../../../redux/CommentsReducer";
 
 class CommentsWrapper extends React.Component {
 
@@ -12,6 +17,11 @@ class CommentsWrapper extends React.Component {
 
     changeCommentText = (text) => {
         this.props.changeCommentText(text);
+    };
+
+    likeCommentary = (commentId) => {
+        this.props.likeComment(this.props.match.params.postId, commentId, this.props.userData.id);
+        this.props.getPostComments(this.props.sectionId, this.props.match.params.postId);
     };
 
     addNewCommentary = () => {
@@ -29,9 +39,9 @@ class CommentsWrapper extends React.Component {
         return <Comments comments={this.props.postComments}
                          commentText={this.props.commentText}
                          isAuth={this.props.isAuth}
-            // userData={this.props.userData}
                          changeCommentText={this.changeCommentText}
-                         addNewCommentary={this.addNewCommentary}/>
+                         addNewCommentary={this.addNewCommentary}
+                         likeCommentary={this.likeCommentary}/>
     }
 
 }
@@ -50,7 +60,8 @@ let mapDispatchToProps = (dispatch) => {
     return {
         changeCommentText: (text) => dispatch(changeCommentTextAction(text)),
         getPostComments: (sectionId, postId) => dispatch(getPostComments(sectionId, postId)),
-        addNewComment: (postId, commentText, authorName, authorId) => dispatch(sendNewPostComment(postId, commentText, authorName, authorId))
+        addNewComment: (postId, commentText, authorName, authorId) => dispatch(sendNewPostComment(postId, commentText, authorName, authorId)),
+        likeComment: (postId, commentId, userId) => dispatch(likeComment(postId, commentId, userId))
     }
 };
 

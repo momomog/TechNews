@@ -5,16 +5,18 @@ import {NotificationManager} from "react-notifications";
 const CHANGE_SECTION = 'CHANGE-SECTION';
 const SET_IS_AUTH = 'SET-IS-AUTH';
 const SET_USER_ID = 'SET-USER_ID';
-const SET_ERROR_AUTH_CODE = 'SET-ERROR-AUTH-CODE';
 const SET_USER_DATA = 'SET-USER-DATA';
+const SET_USERNAME_AVAILABILITY = 'SET-USERNAME-AVAILABILITY';
+const SET_EMAIL_AVAILABILITY = 'SET-EMAIL-AVAILABILITY';
 
 
 let initialState = {
     sectionId: 1,
     isAuth: !!localStorage.getItem('accessToken'),
     userId: '',
-    authErrorCode: '',
-    userData: ''
+    userData: '',
+    isUsernameAvailability: true,
+    isEmailAvailability: true
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -37,10 +39,16 @@ export const authReducer = (state = initialState, action) => {
                 userId: action.userId,
             };
         }
-        case SET_ERROR_AUTH_CODE: {
+        case SET_USERNAME_AVAILABILITY: {
             return {
                 ...state,
-                authErrorCode: action.authErrorCode
+                isUsernameAvailability: action.isAvailable
+            };
+        }
+        case SET_EMAIL_AVAILABILITY: {
+            return {
+                ...state,
+                isEmailAvailability: action.isAvailable
             };
         }
         case SET_USER_DATA: {
@@ -57,8 +65,9 @@ export const authReducer = (state = initialState, action) => {
 export const chooseSectionAction = (sectionId) => ({type: CHANGE_SECTION, sectionId: sectionId});
 export const setIsAuthAction = (isAuth) => ({type: SET_IS_AUTH, isAuth: isAuth});
 export const setUserIdAction = (userId) => ({type: SET_USER_ID, userId: userId});
-export const setAuthErrorCodeAction = (code) => ({type: SET_ERROR_AUTH_CODE, authErrorCode: code});
 export const setUserDataAction = (userData) => ({type: SET_USER_DATA, userData: userData});
+export const setUsernameAvailabilityAction = (isAvailable) => ({type: SET_USERNAME_AVAILABILITY, isAvailable: isAvailable});
+export const setEmailAvailabilityAction = (isAvailable) => ({type: SET_EMAIL_AVAILABILITY, isAvailable: isAvailable});
 
 export const login = (loginRequest) => {
     return (dispatch) => {
@@ -71,9 +80,8 @@ export const login = (loginRequest) => {
                 dispatch(setIsAuthAction(true));
             })
             .catch(function (error) {
-                dispatch(setAuthErrorCodeAction(error.code));
-                if (error.message)
-                    dispatch(setAuthErrorCodeAction(error.message));
+                let errorMessage = Common.showErrorText(error.code);
+                NotificationManager.error(errorMessage, 'Не удалось войти');
             });
     };
 };
@@ -85,5 +93,17 @@ export const getUserData = (userId) => {
                 dispatch(setUserDataAction(response));
                 dispatch(setUserIdAction(userId));
             })
+    };
+};
+
+export const checkUsernameAvailability = (userName) => {
+    return (dispatch) => {
+        AuthAPI.checkUsernameAvailability(userName)
+            .then(response => {
+                debugger;
+                dispatch(setUsernameAvailabilityAction(response.isAvailable));
+            })
+            .catch(function (error) {
+            });
     };
 };

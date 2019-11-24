@@ -10,6 +10,7 @@ import './styles/Index.css';
 import './styles/Posts.css';
 import './styles/Header.css';
 import './styles/Footer.css';
+import './styles/UserLogin.css';
 import 'react-notifications/lib/notifications.css';
 
 ReactDOM.render(

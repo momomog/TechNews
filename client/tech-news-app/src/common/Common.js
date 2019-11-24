@@ -23,7 +23,7 @@ class Common {
     // Окончание количества комментариев в зависимости от значения
     getCommentaryCountText(number) {
         if (number === 1) return 'комментарий';
-        else if ([2,3,4].indexOf(number) !== -1) return 'комментария';
+        else if ([2, 3, 4].indexOf(number) !== -1) return 'комментария';
         return 'комментариев';
     }
 
@@ -38,9 +38,12 @@ class Common {
     // Текст ошибки в зависимости от ответа сервера
     showErrorText(code) {
         switch (code) {
-            case 401: return <div>Не удалось войти.<br/>Проверьте правильность введенных данных</div>;
-            case 500: return <div>Произошла внутренняя ошибка сервера.<br/>Попробуйте повторить запрос позже</div>;
-            default: return <div>Неизвестная ошибка</div>
+            case 401:
+                return 'Проверьте правильность введенных данных';
+            case 500:
+                return 'Произошла внутренняя ошибка сервера. Попробуйте повторить запрос позже';
+            default:
+                return 'Неизвестная ошибка';
         }
     }
 }

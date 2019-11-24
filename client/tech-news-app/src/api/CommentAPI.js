@@ -3,7 +3,9 @@ import {getSectionName} from "../common/Const";
 
 const instance = axios.create({
     baseURL: 'http://localhost:8080/',
-    headers: {}
+    headers: {
+        Authorization: localStorage.getItem('accessToken') ? 'Bearer ' + localStorage.getItem('accessToken') : ''
+    }
 });
 
 class CommentAPI {
@@ -18,6 +20,14 @@ class CommentAPI {
             commentText: commentText,
             authorName: authorName,
             authorId: authorId
+        }).then(response => response.data)
+    };
+
+    likeComment(postId, commentId, userId) {
+        debugger;
+        return instance.post('/posts/post/' + postId + '/like_comment', {
+            commentId: commentId,
+            userId: userId
         }).then(response => response.data)
     };
 }

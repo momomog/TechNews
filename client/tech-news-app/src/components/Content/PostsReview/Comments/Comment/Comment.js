@@ -3,6 +3,11 @@ import React from "react";
 import Common from "../../../../../common/Common";
 
 function Comment(props) {
+
+    function like() {
+            props.likeCommentary(props.comment.id);
+    }
+
     return (
         <div>
             <div className="media card-body">
@@ -24,14 +29,17 @@ function Comment(props) {
                             <a href="#" className="text-secondary reg">Ответить</a>
                         </span>
                         <span className="col-lg-2">
-                            <i className="fa fa-thumbs-up comment-icon mr-2"></i>
-                            0
-                            <i className="fa fa-thumbs-down comment-icon ml-2"></i>
+                            <i id='like'  className="fa fa-heart comment-icon mr-2" onClick={like}/>
+                            <span className="comment-count">{props.comment.likes.length}</span>
                         </span>
                     </div>
                 </div>
             </div>
-            <div className="border-bottom"/>
+
+            {
+                props.comment.id === props.lastCommentId ? '' : <div className="border-bottom"/>
+            }
+
         </div>
     )
 }

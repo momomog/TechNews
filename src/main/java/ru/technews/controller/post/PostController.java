@@ -1,14 +1,13 @@
 package ru.technews.controller.post;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import ru.technews.entity.post.CommentEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.technews.entity.post.PostEntity;
-import ru.technews.service.post.CommentService;
 import ru.technews.service.post.PostService;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,8 +19,8 @@ public class PostController {
     @Autowired
     PostService postService;
 
-    @Autowired
-    CommentService commentService;
+//    @Autowired
+//    CommentService commentService;
 
     private static Map<String, Object> response = new HashMap<>();
 
@@ -66,28 +65,6 @@ public class PostController {
     public PostEntity getPostData(@PathVariable("section") String section,
                                   @PathVariable("id") Long id) {
         return postService.findById(id);
-    }
-
-    //комментарии поста
-    @GetMapping(value = "/{section}/post/{id}/comments")
-    public Map<String, Object> getPostComments(@PathVariable("section") String section,
-                                               @PathVariable("id") Long id) {
-        return commentService.getPostComments(id);
-    }
-
-    // добавить новый комментарий
-    @PostMapping(value = "/post/{postId}/new_comment")
-    public ResponseEntity<?> addNewComment(@PathVariable("postId") Long postId,
-                                           @RequestBody CommentEntity comment) {
-        comment.setDate(LocalDateTime.now());
-        comment.setLikesCount(new Integer[]{});
-        commentService.save(comment);
-
-        PostEntity post = postService.findById(postId);
-        post.setCommentsCount(post.getCommentsCount() + 1);
-        postService.update(post);
-
-        return ResponseEntity.ok("successful!");
     }
 }
 

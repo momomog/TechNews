@@ -51,3 +51,15 @@ export const sendNewPostComment = (postId, commentText, authorName, authorId) =>
             });
     };
 };
+
+export const likeComment = (postId, commentId, userId) => {
+    return () => {
+        CommentAPI.likeComment(postId, commentId, userId)
+            .then(function (data) {
+                // console.log(data);
+            })
+            .catch(function (error) {
+                // console.log(error);
+            });
+    };
+};

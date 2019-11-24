@@ -39,8 +39,8 @@ public class CommentEntity extends BaseEntity {
     // Пост, к которому относится комментарий
     @Type(type = "ru.technews.payload.IntArrayUserType")
     @Column(
-            name = "likes_count",
+            name = "likes",
             columnDefinition = "integer[]"
     )
-    private Integer[] likesCount;
+    private Integer[] likes;
 }

@@ -1,0 +1,9 @@
+.reg-label {
+    font-size: 1.05em;
+    font-weight: normal;
+}
+
+.required-field:after {
+    content: "*";
+    color: red;
+}

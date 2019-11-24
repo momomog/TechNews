@@ -51,7 +51,10 @@ function Comments(props) {
             {
                 props.comments.length > 0
                     ? props.comments.map((comment) => {
-                        return <Comment comment={comment} key={comment.id}/>
+                        return <Comment comment={comment}
+                                        lastCommentId={props.comments[props.comments.length - 1].id}
+                                        likeCommentary={props.likeCommentary}
+                                        key={comment.id}/>
                     })
                     : <div className="ml-4">Ваш комментарий будет первым...</div>
             }

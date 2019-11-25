@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Registration from "./Registration";
-import {checkEmailAvailability, checkUsernameAvailability, login, signup} from "../../../redux/AuthReducer";
+import {checkEmailAvailability, checkUsernameAvailability, signup} from "../../../redux/AuthReducer";
 
 class RegistrationWrapper extends React.Component {
 
     signup = (signupRequest) => {
-      this.props.signup(signupRequest);
+        this.props.signup(signupRequest);
     };
 
     render() {

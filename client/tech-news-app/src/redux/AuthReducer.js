@@ -87,14 +87,14 @@ export const login = (loginRequest) => {
 };
 
 export const signup = (signupRequest) => {
-    debugger;
     return (dispatch) => {
         AuthAPI.signup(signupRequest)
             .then(response => {
-                //notification + redirect to signin
+                NotificationManager.success('Для продолжения работы войдите на сайт', 'Вы успешно зарегистрировались');
+                window.location.href = '/authorization';
             })
             .catch(function (error) {
-                // bad req notification
+                NotificationManager.error('При попытке регистрации произошла неизвестная ошибка', 'Ошибка');
             });
     };
 };

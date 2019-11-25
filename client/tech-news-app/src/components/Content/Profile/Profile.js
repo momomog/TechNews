@@ -1,7 +1,6 @@
 import React from "react";
 
 function Profile(props) {
-    debugger;
 
     return (
         <div>
@@ -36,6 +35,13 @@ function Profile(props) {
                                     <div className="col-sm-3"/>
                                     <div className="col-sm-3 col-xs-6 tital">Дата регистрации:</div>
                                     <div className="col-sm-3">15 Jun 2016</div>
+                                    <div className="col-sm-3"/>
+                                    <div className="clearfix"></div>
+                                    <div className="bot-border"></div>
+
+                                    <div className="col-sm-3"/>
+                                    <div className="col-sm-3 col-xs-6 tital">Почтовый адрес:</div>
+                                    <div className="col-sm-3">{props.user.email}</div>
                                     <div className="col-sm-3"/>
                                     <div className="clearfix"></div>
                                     <div className="bot-border"></div>

@@ -20,7 +20,8 @@ class CommentsWrapper extends React.Component {
     };
 
     likeCommentary = (commentId) => {
-        this.props.likeComment(this.props.match.params.postId, commentId, this.props.userData.id);
+        if (this.props.userData && this.props.userData.id)
+            this.props.likeComment(this.props.match.params.postId, commentId, this.props.userData.id);
         this.props.getPostComments(this.props.sectionId, this.props.match.params.postId);
     };
 

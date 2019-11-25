@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ru.technews.entity.profile.UserProfileData;
 import ru.technews.entity.security.User;
 
 import java.util.Collection;
@@ -30,16 +31,19 @@ public class UserPrincipal implements UserDetails {
     @JsonIgnore
     private String password;
 
+    private UserProfileData profileData;
+
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserPrincipal(Long id, String firstName, String lastName, String username,
-                         String email, String password, Collection<? extends GrantedAuthority> authorities) {
+                         String email, String password, UserProfileData profileData,  Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.profileData = profileData;
         this.authorities = authorities;
     }
 
@@ -55,6 +59,7 @@ public class UserPrincipal implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
+                user.getProfileData(),
                 authorities
         );
     }

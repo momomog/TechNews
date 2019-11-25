@@ -91,6 +91,9 @@
             <column name="updatedat" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_user_id" references="users(id)"/>
+            </column>
         </createTable>
     </changeSet>
 
@@ -128,6 +131,24 @@
             <column name="id" value="2"/>
             <column name="name" value="ROLE_ADMIN"/>
         </insert>
+    </changeSet>
+
+    <changeSet id="007" author="SFokin">
+        <createTable tableName="users_data">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="birthdate" type="TIMESTAMP">
+            </column>
+            <column name="country" type="varchar(100)">
+            </column>
+            <column name="city" type="varchar(100)">
+            </column>
+            <column name="vk" type="varchar(100)">
+            </column>
+            <column name="instagram" type="varchar(100)">
+            </column>
+        </createTable>
     </changeSet>
 
 </databaseChangeLog>

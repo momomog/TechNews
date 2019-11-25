@@ -3,6 +3,7 @@ package ru.technews.entity.security;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
+import ru.technews.entity.profile.UserProfileData;
 import ru.technews.entity.security.audit.DateAudit;
 
 import javax.persistence.*;
@@ -58,15 +59,20 @@ public class User extends DateAudit {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserProfileData profileData;
+
     public User() {
 
     }
 
-    public User(String firstName, String lastName, String username, String email, String password) {
+    public User(String firstName, String lastName, String username, String email, String password, UserProfileData profileData) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.profileData = profileData;
     }
 }

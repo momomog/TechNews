@@ -24,7 +24,6 @@ class CommentAPI {
     };
 
     likeComment(postId, commentId, userId) {
-        debugger;
         return instance.post('/posts/post/' + postId + '/like_comment', {
             commentId: commentId,
             userId: userId

@@ -1,14 +1,19 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Registration from "./Registration";
-import {checkEmailAvailability, checkUsernameAvailability, login} from "../../../redux/AuthReducer";
+import {checkEmailAvailability, checkUsernameAvailability, login, signup} from "../../../redux/AuthReducer";
 
 class RegistrationWrapper extends React.Component {
+
+    signup = (signupRequest) => {
+      this.props.signup(signupRequest);
+    };
 
     render() {
         return (
             <Registration isUsernameAvailability={this.props.isUsernameAvailability}
                           isEmailAvailability={this.props.isEmailAvailability}
+                          signup={this.signup}
                           checkUsernameAvailability={this.props.checkUsernameAvailability}
                           checkEmailAvailability={this.props.checkEmailAvailability}/>
         )
@@ -17,8 +22,6 @@ class RegistrationWrapper extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        isAuth: state.authData.isAuth,
-        userData: state.authData.userData,
         isUsernameAvailability: state.authData.isUsernameAvailability,
         isEmailAvailability: state.authData.isEmailAvailability,
     }
@@ -26,7 +29,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        login: loginRequest => dispatch(login(loginRequest)),
+        signup: signupRequest => dispatch(signup(signupRequest)),
         checkUsernameAvailability: userName => dispatch(checkUsernameAvailability(userName)),
         checkEmailAvailability: email => dispatch(checkEmailAvailability(email))
     }

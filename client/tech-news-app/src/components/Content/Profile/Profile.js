@@ -26,7 +26,7 @@ function Profile(props) {
                                         <br/>
                                     </div>
                                     <div className="col-sm-5">
-                                        <h2 style={{color: "#00b1b1"}}>{props.user.name} </h2>
+                                        <h2 style={{color: "#00b1b1"}}>{props.user.firstName + ' ' + props.user.lastName} </h2>
                                         <span><p>@{props.user.username}</p></span>
                                     </div>
                                     <div className="col-sm-1"/>

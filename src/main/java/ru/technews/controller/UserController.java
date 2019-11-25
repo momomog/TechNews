@@ -22,7 +22,7 @@ public class UserController {
     @GetMapping("/user/me")
     @PreAuthorize("hasRole('USER')")
     public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
-        return new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
+        return new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getFirstName(), currentUser.getLastName());
     }
 
     @GetMapping("/user/checkUsernameAvailability")
@@ -42,6 +42,7 @@ public class UserController {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
-        return new UserProfile(user.getId(), user.getUsername(), user.getName(), user.getCreatedAt(), 1L, 1L);
+        return new UserProfile(user.getId(), user.getUsername(), user.getFirstName(), user.getLastName(),
+                user.getCreatedAt(), 1L, 1L);
     }
 }

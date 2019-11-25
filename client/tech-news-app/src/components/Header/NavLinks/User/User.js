@@ -17,7 +17,7 @@ function User(props) {
                     ? <div>
                         <button type="button" className="btn btn-primary-outline dropdown-toggle" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                            {props.userData.name}
+                            {props.userData.firstName + ' ' + props.userData.lastName}
                         </button>
                         <div className="dropdown-menu">
                             <NavLink className="dropdown-item" to="/profile">Профиль</NavLink>

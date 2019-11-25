@@ -32,7 +32,8 @@
 
 .comment-icon {
     font-size: 14px !important;
-    color: grey;
+    /*color: grey;*/
+    color: #d73d4c;
 }
 
 .comment-count {
@@ -46,7 +47,7 @@
 }
 
 .comment-icon:active {
-    color: green;
+    color: #8d0f15;
     box-shadow: grey;
 }
 

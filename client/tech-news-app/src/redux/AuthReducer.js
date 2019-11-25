@@ -86,6 +86,19 @@ export const login = (loginRequest) => {
     };
 };
 
+export const signup = (signupRequest) => {
+    debugger;
+    return (dispatch) => {
+        AuthAPI.signup(signupRequest)
+            .then(response => {
+                //notification + redirect to signin
+            })
+            .catch(function (error) {
+                // bad req notification
+            });
+    };
+};
+
 export const getUserData = (userId) => {
     return (dispatch) => {
         AuthAPI.getCurrentUser(userId)

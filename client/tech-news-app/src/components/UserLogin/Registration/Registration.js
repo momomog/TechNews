@@ -16,9 +16,18 @@ class Registration extends React.Component {
     }
 
 
-    onRegistrationClick = () => {
+    onRegistrationClick = (e) => {
+        e.preventDefault();
         if (this.state.password !== this.state.repeatPassword)
-            this.setState({'isSamePasswords': false})
+            this.setState({'isSamePasswords': false});
+
+            this.props.signup({
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                username: this.state.userName,
+                email: this.state.email,
+                password: this.state.password
+            });
 
 
     };
@@ -93,7 +102,7 @@ class Registration extends React.Component {
                                         </div>
                                         <div className="col-12">
                                             <div className="col-sm-12 mw-100">
-                                                <input type="text" placeholder="Никнейм"
+                                                <input type="text" placeholder="Никнейм" minLength="3"
                                                        onChange={this.onFieldsChange}
                                                        onBlur={this.validateUsernameAvailability}
                                                        className="form-control input-group-form" name="userName" required/>
@@ -152,7 +161,7 @@ class Registration extends React.Component {
                                         </div>
                                         <div className="col-12">
                                             <div className="col-sm-12 mw-100">
-                                                <input type="password" placeholder="Пароль"
+                                                <input type="password" placeholder="Пароль" minLength="6"
                                                        onChange={this.onFieldsChange}
                                                        onClick={this.onPasswordFieldClear}
                                                        className="form-control input-group-form" name="password" required/>
@@ -168,7 +177,7 @@ class Registration extends React.Component {
                                         </div>
                                         <div className="col-12">
                                             <div className="col-sm-12 mw-100">
-                                                <input type="password" placeholder="Повторите пароль"
+                                                <input type="password" placeholder="Повторите пароль" minLength="6"
                                                        onChange={this.onFieldsChange}
                                                        onClick={this.onPasswordFieldClear}
                                                        className="form-control input-group-form" name="repeatPassword"

@@ -62,6 +62,11 @@
     padding: 1.25rem 1.25rem 0 1.25rem !important;
 }
 
+.comment-author-photo {
+    width: 50px!important;
+    height: 50px!important;
+}
+
 .text-area {
     max-height: 200px;
 }

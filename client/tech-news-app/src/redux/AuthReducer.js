@@ -77,7 +77,7 @@ export const setUserIdAction = (userId) => ({type: SET_USER_ID, userId: userId})
 export const setUserDataAction = (userData) => ({type: SET_USER_DATA, userData: userData});
 export const setUsernameAvailabilityAction = (isAvailable) => ({type: SET_USERNAME_AVAILABILITY, isAvailable: isAvailable});
 export const setEmailAvailabilityAction = (isAvailable) => ({type: SET_EMAIL_AVAILABILITY, isAvailable: isAvailable});
-export const setIsSuccessLoadPhotoAction = (isSuccess) => ({type: SET_EMAIL_AVAILABILITY, isSuccess: isSuccess});
+export const setIsSuccessLoadPhotoAction = (isSuccess) => ({type: SET_IS_SUCCESS_LOAD_PHOTO, isSuccess: isSuccess});
 
 export const login = (loginRequest) => {
     return (dispatch) => {
@@ -120,7 +120,6 @@ export const getUserData = (userId) => {
 };
 
 export const onLoadPhoto = (photoBody) => {
-    debugger;
     return (dispatch) => {
         ProfileAPI.onLoadPhoto(photoBody)
             .then(response => {

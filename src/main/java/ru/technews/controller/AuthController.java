@@ -8,20 +8,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.technews.entity.profile.UserProfileData;
 import ru.technews.entity.security.Role;
 import ru.technews.entity.security.RoleName;
 import ru.technews.entity.security.User;
 import ru.technews.exception.AppException;
-import ru.technews.payload.ApiResponse;
-import ru.technews.payload.JwtAuthenticationResponse;
-import ru.technews.payload.LoginRequest;
-import ru.technews.payload.SignUpRequest;
+import ru.technews.payload.*;
 import ru.technews.repository.RoleRepository;
 import ru.technews.repository.UserRepository;
 import ru.technews.security.JwtTokenProvider;
@@ -98,5 +92,17 @@ public class AuthController {
                 .buildAndExpand(result.getUsername()).toUri();
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
+    }
+
+    @GetMapping("/user/checkUsernameAvailability")
+    public UserIdentityAvailability checkUsernameAvailability(@RequestParam(value = "username") String username) {
+        Boolean isAvailable = !userRepository.existsByUsername(username);
+        return new UserIdentityAvailability(isAvailable);
+    }
+
+    @GetMapping("/user/checkEmailAvailability")
+    public UserIdentityAvailability checkEmailAvailability(@RequestParam(value = "email") String email) {
+        Boolean isAvailable = !userRepository.existsByEmail(email);
+        return new UserIdentityAvailability(isAvailable);
     }
 }

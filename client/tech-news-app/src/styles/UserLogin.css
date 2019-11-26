@@ -8,3 +8,7 @@
     color: red;
 }
 
+.profile-photo {
+    width: 220px!important;
+    height: 220px!important;
+}

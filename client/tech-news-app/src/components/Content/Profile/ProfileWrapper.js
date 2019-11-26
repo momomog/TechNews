@@ -23,7 +23,7 @@ class ProfileWrapper extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        // isAuth: state.authData.isAuth,
+        isSuccessLoadPhoto: state.authData.isSuccessLoadPhoto,
         userData: state.authData.userData
     }
 };

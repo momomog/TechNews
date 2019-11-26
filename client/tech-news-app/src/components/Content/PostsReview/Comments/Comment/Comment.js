@@ -3,6 +3,7 @@ import React from "react";
 import Common from "../../../../../common/Common";
 
 function Comment(props) {
+    debugger;
 
     function like() {
             props.likeCommentary(props.comment.id);
@@ -11,7 +12,8 @@ function Comment(props) {
     return (
         <div>
             <div className="media card-body">
-                <img className="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt=""/>
+                <img className="d-flex mr-3 rounded-circle comment-author-photo"
+                     src={'http://localhost:8080/api/user/photo?id=' + props.comment.authorId} alt=""/>
                 <div className="media-body">
                     <div className="row">
                         <span className="col-lg-8 post-author-comment font-italic">

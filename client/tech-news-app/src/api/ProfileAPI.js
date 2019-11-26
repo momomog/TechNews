@@ -10,9 +10,11 @@ const instance = axios.create({
 
 class ProfileAPI {
     onLoadPhoto(photoBody) {
-        return instance.post('profile/me/load_photo',{
-            photo: photoBody,
-        }).then(response => response.data)
+        const formData = new FormData();
+        formData.append('photo', photoBody);
+
+        return instance.post('api/user/me/load_photo', formData)
+            .then(response => response.data)
     };
 
     getPostData(sectionId, postId) {

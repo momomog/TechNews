@@ -148,6 +148,8 @@
             </column>
             <column name="instagram" type="varchar(100)">
             </column>
+            <column name="photo_content" type="LONGVARBINARY">
+            </column>
         </createTable>
     </changeSet>
 

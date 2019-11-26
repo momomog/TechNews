@@ -2,6 +2,10 @@ import React from "react";
 
 function Profile(props) {
 
+    function onLoadPhoto(e) {
+        props.onLoadPhoto(e.target.files[0]);
+    }
+
     return (
         <div>
             <div className="row">
@@ -19,7 +23,7 @@ function Profile(props) {
                                                  className="img-circle img-responsive"/>
                                             <label className="btn btn-primary-outline mt-1 p-0 text-secondary">
                                                 загрузить фото профиля
-                                                <input type="file" hidden/>
+                                                <input type="file" onChange={onLoadPhoto} name="photo" hidden/>
                                             </label>
                                         </div>
                                         <br/>

@@ -1,4 +1,5 @@
 import AuthAPI from "../api/AuthAPI";
+import ProfileAPI from "../api/ProfileAPI";
 import Common from "../common/Common";
 import {NotificationManager} from "react-notifications";
 
@@ -8,6 +9,7 @@ const SET_USER_ID = 'SET-USER_ID';
 const SET_USER_DATA = 'SET-USER-DATA';
 const SET_USERNAME_AVAILABILITY = 'SET-USERNAME-AVAILABILITY';
 const SET_EMAIL_AVAILABILITY = 'SET-EMAIL-AVAILABILITY';
+const SET_IS_SUCCESS_LOAD_PHOTO = 'SET-IS-SUCCESS-LOAD-PHOTO';
 
 
 let initialState = {
@@ -16,7 +18,8 @@ let initialState = {
     userId: '',
     userData: '',
     isUsernameAvailability: true,
-    isEmailAvailability: true
+    isEmailAvailability: true,
+    isSuccessLoadPhoto: false
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -51,6 +54,12 @@ export const authReducer = (state = initialState, action) => {
                 isEmailAvailability: action.isAvailable
             };
         }
+        case SET_IS_SUCCESS_LOAD_PHOTO: {
+            return {
+                ...state,
+                isSuccessLoadPhoto: action.isSuccess
+            };
+        }
         case SET_USER_DATA: {
             return {
                 ...state,
@@ -68,6 +77,7 @@ export const setUserIdAction = (userId) => ({type: SET_USER_ID, userId: userId})
 export const setUserDataAction = (userData) => ({type: SET_USER_DATA, userData: userData});
 export const setUsernameAvailabilityAction = (isAvailable) => ({type: SET_USERNAME_AVAILABILITY, isAvailable: isAvailable});
 export const setEmailAvailabilityAction = (isAvailable) => ({type: SET_EMAIL_AVAILABILITY, isAvailable: isAvailable});
+export const setIsSuccessLoadPhotoAction = (isSuccess) => ({type: SET_EMAIL_AVAILABILITY, isSuccess: isSuccess});
 
 export const login = (loginRequest) => {
     return (dispatch) => {
@@ -108,6 +118,17 @@ export const getUserData = (userId) => {
             })
     };
 };
+
+export const onLoadPhoto = (photoBody) => {
+    debugger;
+    return (dispatch) => {
+        ProfileAPI.onLoadPhoto(photoBody)
+            .then(response => {
+               dispatch(setIsSuccessLoadPhotoAction(true));
+            })
+    };
+};
+
 
 export const checkUsernameAvailability = (userName) => {
     return (dispatch) => {

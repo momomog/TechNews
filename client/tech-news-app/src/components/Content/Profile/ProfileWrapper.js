@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {getUserData} from "../../../redux/AuthReducer";
+import {getUserData, onLoadPhoto} from "../../../redux/AuthReducer";
 import Profile from "./Profile";
 import Common from "../../../common/Common";
 
@@ -15,7 +15,8 @@ class ProfileWrapper extends React.Component {
 
     render() {
         return (
-            <Profile user={this.props.userData}/>
+            <Profile user={this.props.userData}
+                     onLoadPhoto={this.props.onLoadPhoto}/>
         )
     }
 }
@@ -29,7 +30,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        // setIsAuth: isAuth => dispatch(setIsAuthAction(isAuth)),
+        onLoadPhoto: photoBody => dispatch(onLoadPhoto(photoBody)),
         getUserData: userId => dispatch(getUserData(userId))
     }
 };

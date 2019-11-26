@@ -31,6 +31,8 @@ public class UserProfileData extends BaseEntity {
 
     private String instagram;
 
+    private byte[] photo;
+
     @JsonIgnore
     @OneToOne(mappedBy = "profileData")
     private User user;

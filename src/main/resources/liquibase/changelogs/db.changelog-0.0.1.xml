@@ -56,7 +56,7 @@
             <column name="date" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
-            <column name="likes" type="INT []">
+            <column name="likes" type="integer []">
                 <constraints nullable="false"/>
             </column>
             <column name="post_id" type="bigint">
@@ -148,7 +148,7 @@
             </column>
             <column name="instagram" type="varchar(100)">
             </column>
-            <column name="photo_content" type="LONGVARBINARY">
+            <column name="photo" type="LONGVARBINARY">
             </column>
         </createTable>
     </changeSet>

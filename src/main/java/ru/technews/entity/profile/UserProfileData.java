@@ -31,6 +31,7 @@ public class UserProfileData extends BaseEntity {
 
     private String instagram;
 
+    @JsonIgnore
     private byte[] photo;
 
     @JsonIgnore

@@ -9,7 +9,7 @@ import RegistrationWrapper from "../UserLogin/Registration/RegistrationWrapper";
 
 function Content() {
     return (
-        <div className="container">
+        <div className="container main-content">
             <Route exact path="/" render={() => <PostsListWrapper/>}/>
             <Route exact path="/posts/:sectionName" render={() => <PostsListWrapper/>}/>
             <Route exact path="/posts/:sectionName/:page" render={() => <PostsListWrapper/>}/>

@@ -5,21 +5,19 @@ import {NotificationManager} from "react-notifications";
 
 const CHANGE_SECTION = 'CHANGE-SECTION';
 const SET_IS_AUTH = 'SET-IS-AUTH';
-const SET_USER_ID = 'SET-USER_ID';
+const SET_CURRENT_USER_DATA = 'SET-CURRENT-USER-DATA';
 const SET_USER_DATA = 'SET-USER-DATA';
 const SET_USERNAME_AVAILABILITY = 'SET-USERNAME-AVAILABILITY';
 const SET_EMAIL_AVAILABILITY = 'SET-EMAIL-AVAILABILITY';
-const SET_IS_SUCCESS_LOAD_PHOTO = 'SET-IS-SUCCESS-LOAD-PHOTO';
 
 
 let initialState = {
     sectionId: 1,
-    isAuth: !!localStorage.getItem('accessToken'),
-    userId: '',
+    isAuth: Common.getToken(),
+    currentUserData: '',
     userData: '',
     isUsernameAvailability: true,
-    isEmailAvailability: true,
-    isSuccessLoadPhoto: false
+    isEmailAvailability: true
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -36,12 +34,6 @@ export const authReducer = (state = initialState, action) => {
                 isAuth: action.isAuth,
             };
         }
-        case SET_USER_ID: {
-            return {
-                ...state,
-                userId: action.userId,
-            };
-        }
         case SET_USERNAME_AVAILABILITY: {
             return {
                 ...state,
@@ -54,10 +46,10 @@ export const authReducer = (state = initialState, action) => {
                 isEmailAvailability: action.isAvailable
             };
         }
-        case SET_IS_SUCCESS_LOAD_PHOTO: {
+        case SET_CURRENT_USER_DATA: {
             return {
                 ...state,
-                isSuccessLoadPhoto: action.isSuccess
+                currentUserData: action.currentUserData
             };
         }
         case SET_USER_DATA: {
@@ -73,20 +65,17 @@ export const authReducer = (state = initialState, action) => {
 
 export const chooseSectionAction = (sectionId) => ({type: CHANGE_SECTION, sectionId: sectionId});
 export const setIsAuthAction = (isAuth) => ({type: SET_IS_AUTH, isAuth: isAuth});
-export const setUserIdAction = (userId) => ({type: SET_USER_ID, userId: userId});
+export const setCurrentUserDataAction = (userData) => ({type: SET_CURRENT_USER_DATA, currentUserData: userData});
 export const setUserDataAction = (userData) => ({type: SET_USER_DATA, userData: userData});
 export const setUsernameAvailabilityAction = (isAvailable) => ({type: SET_USERNAME_AVAILABILITY, isAvailable: isAvailable});
 export const setEmailAvailabilityAction = (isAvailable) => ({type: SET_EMAIL_AVAILABILITY, isAvailable: isAvailable});
-export const setIsSuccessLoadPhotoAction = (isSuccess) => ({type: SET_IS_SUCCESS_LOAD_PHOTO, isSuccess: isSuccess});
 
 export const login = (loginRequest) => {
     return (dispatch) => {
         AuthAPI.login(loginRequest)
             .then(response => {
                 NotificationManager.success('Вы успешно авторизовались в системе', 'Добро пожаловать');
-                localStorage.setItem('accessToken', response.accessToken);
-                let decodeToken = Common.decodeJWTToken(response.accessToken);
-                dispatch(setUserIdAction(decodeToken.sub));
+                Common.setToken(response.accessToken);
                 dispatch(setIsAuthAction(true));
             })
             .catch(function (error) {
@@ -109,12 +98,20 @@ export const signup = (signupRequest) => {
     };
 };
 
-export const getUserData = (userId) => {
+export const getCurrentUserData = (userId) => {
     return (dispatch) => {
         AuthAPI.getCurrentUser(userId)
             .then(response => {
+                dispatch(setCurrentUserDataAction(response));
+            })
+    };
+};
+
+export const getUserData = (username) => {
+    return (dispatch) => {
+        AuthAPI.getUserProfile(username)
+            .then(response => {
                 dispatch(setUserDataAction(response));
-                dispatch(setUserIdAction(userId));
             })
     };
 };
@@ -123,7 +120,6 @@ export const onLoadPhoto = (photoBody) => {
     return (dispatch) => {
         ProfileAPI.onLoadPhoto(photoBody)
             .then(response => {
-               dispatch(setIsSuccessLoadPhotoAction(true));
             })
     };
 };

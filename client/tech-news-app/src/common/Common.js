@@ -27,12 +27,27 @@ class Common {
         return 'комментариев';
     }
 
+    // Сет токена авторизации
+    setToken(token) {
+        localStorage.setItem('accessToken', token);
+    }
+
+    // Гет токена авторизации
+    getToken() {
+       return localStorage.getItem('accessToken');
+    }
+
+    // Удаление токена авторизации
+    removeToken() {
+        localStorage.removeItem('accessToken');
+    }
+
     // Раскодирование JWT-токена
     decodeJWTToken(token) {
         if (token)
             return jwt_decode(token);
-        if (localStorage.getItem('accessToken'))
-            return jwt_decode(localStorage.getItem('accessToken'));
+        if (this.getToken())
+            return jwt_decode(this.getToken());
     }
 
     // Текст ошибки в зависимости от ответа сервера

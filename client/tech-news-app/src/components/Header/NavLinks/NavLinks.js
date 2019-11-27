@@ -34,8 +34,8 @@ function NavLinks(props) {
                     <ul className="nav navbar-right">
                         <li>
                             <User isAuth={props.isAuth}
-                                  userData={props.userData}
-                                  setUserData={props.setUserData}
+                                  currentUserData={props.currentUserData}
+                                  setCurrentUserData={props.setCurrentUserData}
                                   setIsAuth={props.setIsAuth}/>
                         </li>
                     </ul>

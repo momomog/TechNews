@@ -10,7 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.technews.entity.profile.UserProfileData;
 import ru.technews.entity.security.User;
 import ru.technews.exception.ResourceNotFoundException;
-import ru.technews.payload.UserProfile;
 import ru.technews.payload.UserSummary;
 import ru.technews.repository.UserRepository;
 import ru.technews.security.CurrentUser;
@@ -31,23 +30,24 @@ public class UserController {
     UserProfileDataService userProfileDataService;
 
     @GetMapping("/user/me")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
         return new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getFirstName(),
-                currentUser.getLastName(), currentUser.getEmail(), currentUser.getProfileData());
+                currentUser.getLastName(), currentUser.getEmail(), currentUser.getProfileData(), currentUser.getCreateAt());
     }
 
     @GetMapping("/users/{username}")
-    public UserProfile getUserProfile(@PathVariable(value = "username") String username) {
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public UserSummary getUserProfile(@PathVariable(value = "username") String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
-        return new UserProfile(user.getId(), user.getUsername(), user.getFirstName(), user.getLastName(),
-                user.getCreatedAt(), 1L, 1L);
+        return new UserSummary(user.getId(), user.getUsername(), user.getFirstName(),
+                user.getLastName(), user.getEmail(), user.getProfileData(), user.getCreatedAt());
     }
 
     @PostMapping(value = "/user/me/load_photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity getUserPhoto(@CurrentUser UserPrincipal currentUser,
                                        @RequestParam MultipartFile photo) throws IOException {
         UserProfileData profile = currentUser.getProfileData();
@@ -62,16 +62,16 @@ public class UserController {
 
     @ResponseBody
     @GetMapping(value = "/user/photo", params = "id", produces = MediaType.IMAGE_JPEG_VALUE)
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public byte[] getProfilePhoto(@RequestParam(name = "id") Long id) throws IOException {
         UserProfileData profilePhoto = userProfileDataService.findById(id);
 
         // Если у пользователя нет фото профиля, возвращаем общее фото профиля из папки resources
-        if (profilePhoto == null || profilePhoto.getPhoto().length == 0) {
+        if (profilePhoto == null || profilePhoto.getPhoto() == null) {
             InputStream noProfileImageIS = getClass().getClassLoader().getResourceAsStream("/images/empty_profile_photo.jpg");
             if (noProfileImageIS != null) {
                 return IOUtils.toByteArray(noProfileImageIS);
             } else {
-//                logger.error("Общее фото пользователя по пути \"resources/images/empty_profile_photo.jpg\" не найдено");
                 return null;
             }
         }

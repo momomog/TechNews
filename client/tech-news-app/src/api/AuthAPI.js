@@ -1,3 +1,5 @@
+import Common from "../common/Common";
+
 const API_BASE_URL = 'http://localhost:8080/api';
 const ACCESS_TOKEN = 'accessToken';
 
@@ -6,8 +8,8 @@ const request = (options) => {
         'Content-Type': 'application/json',
     });
 
-    if (localStorage.getItem(ACCESS_TOKEN)) {
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem(ACCESS_TOKEN))
+    if (Common.getToken()) {
+        headers.append('Authorization', 'Bearer ' + Common.getToken())
     }
 
     const defaults = {headers: headers};
@@ -57,7 +59,7 @@ class AuthAPI {
 
 
     getCurrentUser() {
-        if (!localStorage.getItem(ACCESS_TOKEN)) {
+        if (!Common.getToken()) {
             return Promise.reject("No access token set.");
         }
 

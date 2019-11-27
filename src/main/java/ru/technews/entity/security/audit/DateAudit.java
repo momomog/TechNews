@@ -11,12 +11,12 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(
-        value = {"createdAt", "updatedAt"},
+        value = {"updatedAt"},
         allowGetters = true
 )
 @Getter
@@ -25,10 +25,10 @@ public abstract class DateAudit implements Serializable {
 
     @CreatedDate
     @Column(name = "createdat")
-    private Instant createdAt;
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
     @Column(name = "updatedat")
-    private Instant updatedAt;
+    private LocalDateTime updatedAt;
 
 }

@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import ru.technews.entity.profile.UserProfileData;
 import ru.technews.entity.security.User;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -33,10 +34,12 @@ public class UserPrincipal implements UserDetails {
 
     private UserProfileData profileData;
 
+    private LocalDateTime createAt;
+
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserPrincipal(Long id, String firstName, String lastName, String username,
-                         String email, String password, UserProfileData profileData,  Collection<? extends GrantedAuthority> authorities) {
+                         String email, String password, UserProfileData profileData, LocalDateTime createAt, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -45,6 +48,7 @@ public class UserPrincipal implements UserDetails {
         this.password = password;
         this.profileData = profileData;
         this.authorities = authorities;
+        this.createAt = createAt;
     }
 
     public static UserPrincipal create(User user) {
@@ -60,6 +64,7 @@ public class UserPrincipal implements UserDetails {
                 user.getEmail(),
                 user.getPassword(),
                 user.getProfileData(),
+                user.getCreatedAt(),
                 authorities
         );
     }

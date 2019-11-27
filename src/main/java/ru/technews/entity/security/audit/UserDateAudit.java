@@ -10,7 +10,7 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 @JsonIgnoreProperties(
-        value = {"createdBy", "updatedBy"},
+        value = {"updatedBy"},
         allowGetters = true
 )
 @Getter

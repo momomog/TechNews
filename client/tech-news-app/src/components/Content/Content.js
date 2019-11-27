@@ -16,7 +16,7 @@ function Content() {
             <Route exact path='/posts/:sectionName/post/:postId' render={() => <PostReviewWrapper/>}/>
             <Route exact path='/authorization' render={() => <AuthorizationWrapper/>}/>
             <Route exact path='/registration' render={() => <RegistrationWrapper/>}/>
-            <Route exact path='/profile' render={() => <ProfileWrapper/>}/>
+            <Route path={['/profile/', '/profile/{username}']} render={() => <ProfileWrapper/>}/>
         </div>
     )
 }

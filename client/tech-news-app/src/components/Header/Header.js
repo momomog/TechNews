@@ -17,9 +17,9 @@ function Header(props) {
                           setPostPage={props.setPostPage}
                           sectionId={props.sectionId}
                           isAuth={props.isAuth}
-                          userData={props.userData}
+                          currentUserData={props.currentUserData}
                           setIsAuth={props.setIsAuth}
-                          setUserData={props.setUserData}/>
+                          setCurrentUserData={props.setCurrentUserData}/>
             </div>
         </div>
     )

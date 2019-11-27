@@ -1,12 +1,13 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
+import Common from "../../../../common/Common";
 
 function User(props) {
 
     function onLogout() {
-        localStorage.removeItem('accessToken');
+        Common.removeToken();
         props.setIsAuth(false);
-        props.setUserData('');
+        props.setCurrentUserData('');
     }
 
 
@@ -17,12 +18,12 @@ function User(props) {
                     ? <div>
                         <button type="button" className="btn btn-primary-outline dropdown-toggle" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                            {props.userData.firstName + ' ' + props.userData.lastName}
+                            {props.currentUserData.firstName + ' ' + props.currentUserData.lastName}
                         </button>
                         <div className="dropdown-menu">
                             <NavLink className="dropdown-item" to="/profile">Профиль</NavLink>
-                            <NavLink className="dropdown-item" to="/profile">Another action</NavLink>
-                            <NavLink className="dropdown-item" to="/profile">Something else here</NavLink>
+                            <NavLink className="dropdown-item" to="/profile2">Another action</NavLink>
+                            <NavLink className="dropdown-item" to="/profile3">Something else here</NavLink>
                             <div className="dropdown-divider"/>
                             <span onClick={onLogout}>
                                 <NavLink className="dropdown-item" to="/posts/all">Выйти</NavLink>

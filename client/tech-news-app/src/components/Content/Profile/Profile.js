@@ -1,10 +1,33 @@
 import React from "react";
+import Common from "../../../common/Common";
 
 function Profile(props) {
+    // let profileImage = React.createRef();
 
     function onLoadPhoto(e) {
         props.onLoadPhoto(e.target.files[0]);
         window.location = "/profile";
+    }
+
+    function getUserPhotoUrl() {
+        if (props.user.id || props.currentUser.id) {
+            if (props.isNotCurrentUser) {
+                return 'http://localhost:8080/api/user/photo?id=' + props.user.id;
+            }
+            // const src = 'http://localhost:8080/api/user/photo?id=' + props.currentUser.id;
+            // const options = {
+            //     headers: {
+            //         Authorization: 'Bearer ' + Common.getToken()
+            //     }
+            // };
+            // fetch(src, options)
+            //     .then(res => res.blob())
+            //     .then(blob => {
+            //         debugger;
+            //         profileImage.src = URL.createObjectURL(blob);
+            //     });
+            return 'http://localhost:8080/api/user/photo?id=' + props.currentUser.id;
+        }
     }
 
     return (
@@ -20,17 +43,40 @@ function Profile(props) {
                                     <div className="col-sm-4">
                                         <div align="center">
                                             <img alt="User Pic" className="img-circle profile-photo mt-3"
-                                                 src={'http://localhost:8080/api/user/photo?id=' + props.user.id}/>
-                                            <label className="btn btn-primary-outline mt-1 p-0 text-secondary">
-                                                загрузить фото профиля
-                                                <input type="file" onChange={onLoadPhoto} name="photo" accept="image/*" hidden/>
-                                            </label>
+                                                 src={getUserPhotoUrl()}/>
+
+                                            {
+                                                props.isNotCurrentUser
+                                                    ? ''
+                                                    :
+                                                    <label className="btn btn-primary-outline mt-1 p-0 text-secondary">
+                                                        загрузить фото профиля
+                                                        <input type="file" onChange={onLoadPhoto} name="photo"
+                                                               accept="image/*"
+                                                               hidden/>
+                                                    </label>
+                                            }
+
                                         </div>
                                         <br/>
                                     </div>
                                     <div className="col-sm-5">
-                                        <h2 style={{color: "#00b1b1"}}>{props.user.firstName + ' ' + props.user.lastName} </h2>
-                                        <span><p>@{props.user.username}</p></span>
+                                        <h2 style={{color: "#00b1b1"}}>
+                                            {
+                                                props.isNotCurrentUser
+                                                    ? props.user.firstName + ' ' + props.user.lastName
+                                                    : props.currentUser.firstName + ' ' + props.currentUser.lastName
+                                            }
+                                        </h2>
+                                        <span>
+                                            <p>
+                                                 @{
+                                                props.isNotCurrentUser
+                                                    ? props.user.username
+                                                    : props.currentUser.username
+                                            }
+                                            </p>
+                                        </span>
                                     </div>
                                     <div className="col-sm-1"/>
                                     <div className="clearfix mb-5"/>
@@ -38,14 +84,26 @@ function Profile(props) {
 
                                     <div className="col-sm-3"/>
                                     <div className="col-sm-3 col-xs-6 tital">Дата регистрации:</div>
-                                    <div className="col-sm-3">15 Jun 2016</div>
+                                    <div className="col-sm-3">
+                                        {
+                                            props.isNotCurrentUser
+                                                ? Common.dateParser(props.user.createAt)
+                                                : Common.dateParser(props.currentUser.createAt)
+                                        }
+                                    </div>
                                     <div className="col-sm-3"/>
                                     <div className="clearfix"/>
                                     <div className="bot-border"/>
 
                                     <div className="col-sm-3"/>
                                     <div className="col-sm-3 col-xs-6 tital">Почтовый адрес:</div>
-                                    <div className="col-sm-3">{props.user.email}</div>
+                                    <div className="col-sm-3">
+                                        {
+                                            props.isNotCurrentUser
+                                                ? props.user.email
+                                                : props.currentUser.email
+                                        }
+                                    </div>
                                     <div className="col-sm-3"/>
                                     <div className="clearfix"/>
                                     <div className="bot-border"/>

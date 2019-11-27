@@ -22,7 +22,7 @@ import ru.technews.security.JwtTokenProvider;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Collections;
 
 @RestController
@@ -77,8 +77,8 @@ public class AuthController {
                 signUpRequest.getEmail(), signUpRequest.getPassword(), new UserProfileData());
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setCreatedAt(Instant.now());
-        user.setUpdatedAt(Instant.now());
+        user.setCreatedAt(LocalDateTime.now());
+        user.setUpdatedAt(LocalDateTime.now());
 
         Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
                 .orElseThrow(() -> new AppException("User Role not set."));

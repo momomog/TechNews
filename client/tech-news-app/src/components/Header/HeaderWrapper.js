@@ -4,9 +4,9 @@ import {getAllPosts, setPostPageAction} from "../../redux/PostsReducer";
 import Header from "./Header";
 import {
     chooseSectionAction,
-    getUserData,
+    getCurrentUserData,
     setIsAuthAction,
-    setUserDataAction
+    setCurrentUserDataAction
 } from "../../redux/AuthReducer";
 import Common from "../../common/Common";
 
@@ -19,8 +19,8 @@ class HeaderWrapper extends React.Component {
     componentDidMount() {
         let user = Common.decodeJWTToken();
 
-        if (user && user.sub && !this.props.userData) {
-            this.props.getUserData(user.sub);
+        if (user && user.sub && !this.props.currentUserData) {
+            this.props.getCurrentUserData(user.sub);
             this.props.setIsAuth(true);
         }
     }
@@ -37,7 +37,7 @@ let mapStateToProps = (state) => {
     return {
         sectionId: state.authData.sectionId,
         isAuth: state.authData.isAuth,
-        userData: state.authData.userData
+        currentUserData: state.authData.currentUserData
     }
 };
 
@@ -47,8 +47,8 @@ let mapDispatchToProps = (dispatch) => {
         setPostPage: pageNumber => dispatch(setPostPageAction(pageNumber)),
         getAllPosts: (sectionId, postPage) => dispatch(getAllPosts(sectionId, postPage)),
         setIsAuth: isAuth => dispatch(setIsAuthAction(isAuth)),
-        setUserData: userData => dispatch(setUserDataAction(userData)),
-        getUserData: userId => dispatch(getUserData(userId))
+        setCurrentUserData: userData => dispatch(setCurrentUserDataAction(userData)),
+        getCurrentUserData: userId => dispatch(getCurrentUserData(userId))
     }
 };
 

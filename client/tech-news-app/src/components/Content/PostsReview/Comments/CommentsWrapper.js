@@ -20,8 +20,8 @@ class CommentsWrapper extends React.Component {
     };
 
     likeCommentary = (commentId) => {
-        if (this.props.userData && this.props.userData.id)
-            this.props.likeComment(this.props.match.params.postId, commentId, this.props.userData.id);
+        if (this.props.currentUserData && this.props.currentUserData.id)
+            this.props.likeComment(this.props.match.params.postId, commentId, this.props.currentUserData.id);
         this.props.getPostComments(this.props.sectionId, this.props.match.params.postId);
     };
 
@@ -29,8 +29,8 @@ class CommentsWrapper extends React.Component {
         this.props.addNewComment(
             this.props.match.params.postId,
             this.props.commentText,
-            this.props.userData.username,
-            this.props.userData.id
+            this.props.currentUserData.username,
+            this.props.currentUserData.id
         );
         this.props.changeCommentText('');
         this.props.getPostComments(this.props.sectionId, this.props.match.params.postId);
@@ -53,7 +53,7 @@ let mapStateToProps = (state) => {
         sectionId: state.authData.sectionId,
         postComments: state.commentsData.postComments,
         isAuth: state.authData.isAuth,
-        userData: state.authData.userData
+        currentUserData: state.authData.currentUserData
     }
 };
 

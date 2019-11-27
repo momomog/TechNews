@@ -12,7 +12,7 @@ class AuthorizationWrapper extends React.Component {
     render() {
         return (
             <Authorization isAuth={this.props.isAuth}
-                           userData={this.props.userData}
+                           currentUserData={this.props.currentUserData}
                            onLogin={this.onLogin}/>
         )
     }
@@ -21,7 +21,7 @@ class AuthorizationWrapper extends React.Component {
 let mapStateToProps = (state) => {
     return {
         isAuth: state.authData.isAuth,
-        userData: state.authData.userData
+        currentUserData: state.authData.currentUserData
     }
 };
 

@@ -1,9 +1,9 @@
 import React from "react";
 
 import Common from "../../../../../common/Common";
+import {NavLink} from "react-router-dom";
 
 function Comment(props) {
-    debugger;
 
     function like() {
             props.likeCommentary(props.comment.id);
@@ -12,12 +12,16 @@ function Comment(props) {
     return (
         <div>
             <div className="media card-body">
-                <img className="d-flex mr-3 rounded-circle comment-author-photo"
-                     src={'http://localhost:8080/api/user/photo?id=' + props.comment.authorId} alt=""/>
+                <NavLink to={'/profile/' + props.comment.authorName}>
+                    <img className="d-flex mr-3 rounded-circle comment-author-photo"
+                         src={'http://localhost:8080/api/user/photo?id=' + props.comment.authorId} alt=""/>
+                </NavLink>
                 <div className="media-body">
                     <div className="row">
                         <span className="col-lg-8 post-author-comment font-italic">
-                            @{props.comment.authorName}
+                            <NavLink to={'/profile/' + props.comment.authorName} className="comment-author-link">
+                                @{props.comment.authorName}
+                            </NavLink>
                         </span>
                         <span className="col-lg-4 text-right text-secondary">
                             {Common.dateTimeParser(props.comment.date)}

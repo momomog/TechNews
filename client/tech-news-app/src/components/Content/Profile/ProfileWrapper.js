@@ -31,9 +31,9 @@ class ProfileWrapper extends React.Component {
     render() {
         if (this.props.isAuth) {
             return <Profile currentUser={this.props.currentUserData}
-                     user={this.props.userData}
-                     isNotCurrentUser={this.isNotCurrentUser()}
-                     onLoadPhoto={this.props.onLoadPhoto}/>
+                            user={this.props.userData}
+                            isNotCurrentUser={this.isNotCurrentUser()}
+                            onLoadPhoto={this.props.onLoadPhoto}/>
         }
 
         return <Redirect to="/authorization"/>

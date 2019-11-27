@@ -6,7 +6,9 @@ function Profile(props) {
 
     function onLoadPhoto(e) {
         props.onLoadPhoto(e.target.files[0]);
-        window.location = "/profile";
+        setTimeout(function () {
+            window.location = "/profile";
+        }, 400);
     }
 
     function getUserPhotoUrl() {
@@ -52,8 +54,7 @@ function Profile(props) {
                                                     <label className="btn btn-primary-outline mt-1 p-0 text-secondary">
                                                         загрузить фото профиля
                                                         <input type="file" onChange={onLoadPhoto} name="photo"
-                                                               accept="image/*"
-                                                               hidden/>
+                                                               accept="image/*" hidden/>
                                                     </label>
                                             }
 
@@ -77,10 +78,18 @@ function Profile(props) {
                                             }
                                             </p>
                                         </span>
+                                        <div className="profile-social-icon">
+                                            <i id="social-fb" className="fa fa-facebook-square fa-2x social mr-2"/>
+                                            <i id="social-gp" className="fa fa-instagram fa-2x social mr-2"/>
+                                            <i id="social-fb" className="fa fa-vk fa-2x social mr-2"/>
+                                            <i id="social-tw" className="fa fa-twitter-square fa-2x social mr-2м"/>
+                                        </div>
                                     </div>
                                     <div className="col-sm-1"/>
-                                    <div className="clearfix mb-5"/>
+                                    <div className="clearfix mb-2"/>
                                     <hr className="mt-1 mb-1"/>
+
+
 
                                     <div className="col-sm-3"/>
                                     <div className="col-sm-3 col-xs-6 tital">Дата регистрации:</div>
@@ -95,8 +104,10 @@ function Profile(props) {
                                     <div className="clearfix"/>
                                     <div className="bot-border"/>
 
+
+
                                     <div className="col-sm-3"/>
-                                    <div className="col-sm-3 col-xs-6 tital">Почтовый адрес:</div>
+                                    <div className="col-sm-3 col-xs-6 tital">Email:</div>
                                     <div className="col-sm-3">
                                         {
                                             props.isNotCurrentUser
@@ -108,16 +119,18 @@ function Profile(props) {
                                     <div className="clearfix"/>
                                     <div className="bot-border"/>
 
+
+
                                     <div className="col-sm-3"/>
                                     <div className="col-sm-3 col-xs-6 tital ">Дата рождения:</div>
-                                    <div className="col-sm-3">11 Jun 1998</div>
+                                    <div className="col-sm-3">11.01.1998, 21 год</div>
                                     <div className="col-sm-3"/>
                                     <div className="clearfix"/>
                                     <div className="bot-border"/>
 
                                     <div className="col-sm-3"/>
-                                    <div className="col-sm-3 col-xs-6 tital ">Место рождения:</div>
-                                    <div className="col-sm-3">Shirdi</div>
+                                    <div className="col-sm-3 col-xs-6 tital ">Город:</div>
+                                    <div className="col-sm-3">Россия, Киров</div>
                                     <div className="col-sm-3"/>
                                     <div className="clearfix"/>
                                     <div className="bot-border"/>

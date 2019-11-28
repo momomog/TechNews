@@ -22,8 +22,7 @@ function User(props) {
                         </button>
                         <div className="dropdown-menu">
                             <NavLink className="dropdown-item" to="/profile">Профиль</NavLink>
-                            <NavLink className="dropdown-item" to="/profile2">Another action</NavLink>
-                            <NavLink className="dropdown-item" to="/profile3">Something else here</NavLink>
+                            <NavLink className="dropdown-item" to="/profile/edit">Редактировать</NavLink>
                             <div className="dropdown-divider"/>
                             <span onClick={onLogout}>
                                 <NavLink className="dropdown-item" to="/posts/all">Выйти</NavLink>

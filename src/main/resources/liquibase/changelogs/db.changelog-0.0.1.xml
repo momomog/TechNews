@@ -144,9 +144,13 @@
             </column>
             <column name="city" type="varchar(100)">
             </column>
-            <column name="vk" type="varchar(100)">
+            <column name="vk" type="varchar(50)">
             </column>
-            <column name="instagram" type="varchar(100)">
+            <column name="instagram" type="varchar(50)">
+            </column>
+            <column name="twitter" type="varchar(50)">
+            </column>
+            <column name="facebook" type="varchar(50)">
             </column>
             <column name="photo" type="LONGVARBINARY">
             </column>

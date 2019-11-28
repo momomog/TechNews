@@ -9,12 +9,12 @@
 }
 
 .profile-photo {
-    width: 220px!important;
-    height: 220px!important;
+    width: 220px !important;
+    height: 220px !important;
 }
 
 .main-content {
-    min-height: 70vh!important;
+    min-height: 70vh !important;
 }
 
 .profile-social-icon {
@@ -26,6 +26,26 @@
 }
 
 .soc-name {
-    margin-top:4.9rem!important;
+    margin-top: 1.5rem !important;
     font-size: 1.1em;
+}
+
+.soc-input {
+    margin-top: -1% !important;
+}
+
+.MuiInput-underline:before {
+    border-bottom: none !important;
+}
+
+.MuiInput-underline:after {
+    border-bottom: none !important;
+}
+
+.MuiFormLabel-root {
+    font-size: 1.3rem !important;
+}
+
+.date-picker {
+    margin-left: 4.7rem !important
 }

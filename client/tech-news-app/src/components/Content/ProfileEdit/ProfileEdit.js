@@ -18,17 +18,17 @@ class ProfileEdit extends React.Component {
             lastName: '',
             country: '',
             city: '',
-            birthDate: new Date()
+            birthDate: '',
+            isSetState: false
         }
     }
 
     onFieldsChange = (e) => {
-        debugger;
         this.setState({[e.target.name]: e.target.value});
     };
 
     onInitState = () => {
-        if (!this.props.currentUser)
+        if (!this.props.currentUser || this.state.isSetState)
             return;
         let user = this.props.currentUser;
 
@@ -41,12 +41,13 @@ class ProfileEdit extends React.Component {
             lastName: user.lastName,
             country: user.profileData.country,
             city: user.profileData.city,
-            birthDate: Common.intArrayToDate(user.profileData.birthDate)
+            birthDate: Common.intArrayToDate(user.profileData.birthDate),
+            isSetState: true
         });
     };
 
     updateProfileData = () => {
-       // TO DO prepare server for this action
+        this.props.updateUserData(this.state);
     };
 
     render() {

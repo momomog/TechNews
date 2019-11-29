@@ -6,40 +6,47 @@ class Common {
     // Парсинг даты в вид ДД.ММ.ГГГГ
     dateParser(date) {
         if (date)
-            return date[2] + '.' + this.pad(date[1]) + '.' + this.pad(date[0]);
+            return this.pad(date[2]) + '.' + this.pad(date[1]) + '.' + date[0];
     }
 
     // Парсинг даты в вид ДД.ММ.ГГГГ ЧЧ:ММ
     dateTimeParser(date) {
         if (date)
-            return date[2] + '.' + this.pad(date[1]) + '.' + this.pad(date[0]) + ' ' + this.pad(date[3]) + ':' + this.pad(date[4]);
+            return this.pad(date[2]) + '.' + this.pad(date[1]) + '.' + date[0] + ' ' + this.pad(date[3]) + ':' + this.pad(date[4]);
     }
 
     // Парсинг массива даты в объект Date
     intArrayToDate(date) {
         if (date)
-            return new Date('' + date[2] + ',' + date[1] + ',' + date[0]);
+            return new Date(date[0], date[1] - 1, date[2]);
     }
 
     // Возраст
     getUserAge(date) {
         if (date) {
-            debugger;
-            let birthDate = new Date('' + date[1] + ',' + date[2]  + ',' + date[0]);
-            let difference =  new Date() - birthDate;
-            return Math.ceil(difference / (1000 * 60 * 60 * 24));
+            let birthDate = new Date('' + date[1] + ',' + date[2] + ',' + date[0]);
+            let difference = new Date() - birthDate;
+            let age = Math.floor((difference / (1000 * 60 * 60 * 24) / 365));
+
+            if (age.toString().endsWith('1')) return age + ' год';
+            else if (['2', '3', '4'].indexOf(age.toString()) !== -1) return age + ' года';
+            return age + ' лет';
         }
     }
 
     // Прибавление 0, если число даты меньше 10
     pad(number) {
-        return (number < 10 ? '0' : '') + number
+        return (number < 10 ? '0' : '') + number;
     }
 
     // Окончание количества комментариев в зависимости от значения
     getCommentaryCountText(number) {
-        if (number === 1) return 'комментарий';
-        else if ([2, 3, 4].indexOf(number) !== -1) return 'комментария';
+        if (number) {
+            let num = number.toString();
+            if (num.endsWith('1') && number !== 11) return 'комментарий';
+            else if (['2', '3', '4'].indexOf(num[num.length - 1]) !== -1
+                || (['2', '3', '4'].indexOf(num[0]) !== -1)) return 'комментария';
+        }
         return 'комментариев';
     }
 
@@ -50,7 +57,7 @@ class Common {
 
     // Гет токена авторизации
     getToken() {
-       return localStorage.getItem('accessToken');
+        return localStorage.getItem('accessToken');
     }
 
     // Удаление токена авторизации

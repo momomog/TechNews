@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.technews.entity.profile.UserProfileData;
 import ru.technews.entity.security.User;
 import ru.technews.exception.ResourceNotFoundException;
+import ru.technews.payload.UserProfileDataRequest;
 import ru.technews.payload.UserSummary;
 import ru.technews.repository.UserRepository;
 import ru.technews.security.CurrentUser;
@@ -77,5 +78,30 @@ public class UserController {
         }
 
         return profilePhoto.getPhoto();
+    }
+
+    // обновление данных профиля
+    @PostMapping(value = "/user/me/update_user_data")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<?> likeComment(@CurrentUser UserPrincipal currentUser,
+                                         @RequestBody UserProfileDataRequest profileRequest) {
+
+        User user = userRepository.findUserByEmail(currentUser.getEmail());
+        user.setFirstName(profileRequest.getFirstName());
+        user.setLastName(profileRequest.getLastName());
+
+        UserProfileData profileData = currentUser.getProfileData();
+        profileData.setBirthDate(profileRequest.getBirthDate().plusDays(1));
+        profileData.setVk(profileRequest.getVk());
+        profileData.setInstagram(profileRequest.getInstagram());
+        profileData.setTwitter(profileRequest.getTwitter());
+        profileData.setFacebook(profileRequest.getFacebook());
+        profileData.setCountry(profileRequest.getCountry());
+        profileData.setCity(profileRequest.getCity());
+
+        userRepository.save(user);
+        userProfileDataService.update(profileData);
+
+        return ResponseEntity.ok("successful!");
     }
 }

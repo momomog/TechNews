@@ -1,5 +1,6 @@
 import React from "react";
 import Common from "../../../common/Common";
+import {Link, NavLink} from "react-router-dom";
 
 function Profile(props) {
     // let profileImage = React.createRef();
@@ -80,7 +81,9 @@ function Profile(props) {
                                             </p>
                                         </span>
                                             <div className="profile-social-icon">
-                                                <i id="social-fb" className="fa fa-facebook-square fa-2x social mr-2"/>
+                                                <a target="_blank" href="//https://vk.com/id47945255">
+                                                    <i id="social-fb" className="fa fa-facebook-square fa-2x social mr-2"/>
+                                                </a>
                                                 <i id="social-gp" className="fa fa-instagram fa-2x social mr-2"/>
                                                 <i id="social-fb" className="fa fa-vk fa-2x social mr-2"/>
                                                 <i id="social-tw" className="fa fa-twitter-square fa-2x social mr-2м"/>
@@ -130,7 +133,6 @@ function Profile(props) {
                                                     ? Common.dateParser(props.user.profileData.birthDate) + ', ' + Common.getUserAge(props.user.profileData.birthDate)
                                                     : Common.dateParser(props.currentUser.profileData.birthDate) + ', ' + Common.getUserAge(props.currentUser.profileData.birthDate)
                                             }
-                                            {/*11.01.1998, 21 год*/}
                                         </div>
                                         <div className="col-sm-3"/>
                                         <div className="clearfix"/>
@@ -138,7 +140,13 @@ function Profile(props) {
 
                                         <div className="col-sm-3"/>
                                         <div className="col-sm-3 col-xs-6 tital ">Город:</div>
-                                        <div className="col-sm-3">Россия, Киров</div>
+                                        <div className="col-sm-3">
+                                            {
+                                                props.isNotCurrentUser
+                                                    ? props.user.profileData.country + ', ' + props.user.profileData.city
+                                                    : props.currentUser.profileData.country + ', ' + props.currentUser.profileData.city
+                                            }
+                                        </div>
                                         <div className="col-sm-3"/>
                                         <div className="clearfix"/>
                                         <div className="bot-border"/>

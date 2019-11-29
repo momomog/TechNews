@@ -18,6 +18,11 @@ class ProfileAPI {
             .then(response => response.data)
     };
 
+    onUpdateUserData(userDataRequest) {
+        return instance.post('api/user/me/update_user_data', userDataRequest)
+            .then(response => response.data)
+    };
+
 }
 
 export default new ProfileAPI();

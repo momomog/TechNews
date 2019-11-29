@@ -98,6 +98,18 @@ export const signup = (signupRequest) => {
     };
 };
 
+export const updateUserData = (userDataRequest) => {
+    return (dispatch) => {
+        ProfileAPI.onUpdateUserData(userDataRequest)
+            .then(response => {
+                NotificationManager.success('Ваши данные успешно обновлены', 'Успешно');
+            })
+            .catch(function (error) {
+                NotificationManager.error('Не удалось обновить данные профиля', 'Ошибка');
+            });
+    };
+};
+
 export const getCurrentUserData = (userId) => {
     return (dispatch) => {
         AuthAPI.getCurrentUser(userId)

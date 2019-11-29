@@ -15,6 +15,22 @@ class Common {
             return date[2] + '.' + this.pad(date[1]) + '.' + this.pad(date[0]) + ' ' + this.pad(date[3]) + ':' + this.pad(date[4]);
     }
 
+    // Парсинг массива даты в объект Date
+    intArrayToDate(date) {
+        if (date)
+            return new Date('' + date[2] + ',' + date[1] + ',' + date[0]);
+    }
+
+    // Возраст
+    getUserAge(date) {
+        if (date) {
+            debugger;
+            let birthDate = new Date('' + date[1] + ',' + date[2]  + ',' + date[0]);
+            let difference =  new Date() - birthDate;
+            return Math.ceil(difference / (1000 * 60 * 60 * 24));
+        }
+    }
+
     // Прибавление 0, если число даты меньше 10
     pad(number) {
         return (number < 10 ? '0' : '') + number

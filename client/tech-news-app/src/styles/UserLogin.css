@@ -47,5 +47,9 @@
 }
 
 .date-picker {
-    margin-left: 4.7rem !important
+    margin-left: 5.3rem !important
+}
+
+.MuiSvgIcon-root {
+    font-size: 2rem !important;
 }

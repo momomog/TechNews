@@ -2,11 +2,16 @@ import React from 'react';
 import Parser from 'html-react-parser';
 import Common from "../../../common/Common";
 import CommentsWrapper from "./Comments/CommentsWrapper";
+import PostAdminPanel from "../AdminPanel/PostAdminPanel/PostAdminPanel";
 
 function PostReview(props) {
 
     return (
         <div>
+            {
+                Common.isUserAdmin ? <PostAdminPanel/> : ''
+            }
+
             <div className="container">
                 <div className="row">
                     <div className="col-lg-10 center-block">

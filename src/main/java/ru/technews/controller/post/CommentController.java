@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.technews.entity.post.CommentEntity;
 import ru.technews.entity.post.PostEntity;
+import ru.technews.payload.ActionCompleteResponse;
 import ru.technews.payload.LikeRequest;
 import ru.technews.service.post.CommentService;
 import ru.technews.service.post.PostService;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/posts")
+@RequestMapping(value = "/api/posts")
 public class CommentController {
 
     @Autowired
@@ -44,7 +45,7 @@ public class CommentController {
         post.setCommentsCount(post.getCommentsCount() + 1);
         postService.update(post);
 
-        return ResponseEntity.ok("successful!");
+        return ResponseEntity.ok(new ActionCompleteResponse(true));
     }
 
     // лайк/дизлайк комментария
@@ -63,7 +64,7 @@ public class CommentController {
         comment.setLikes(authorsList.toArray(new Integer[authorsList.size()]));
         commentService.update(comment);
 
-        return ResponseEntity.ok("successful!");
+        return ResponseEntity.ok(new ActionCompleteResponse(true));
     }
 
 }

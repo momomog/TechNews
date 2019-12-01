@@ -1,34 +1,36 @@
-import * as axios from "axios";
 import {getSectionName} from "../common/Const";
-import Common from "../common/Common";
-
-const instance = axios.create({
-    baseURL: 'http://localhost:8080/',
-    headers: {
-        Authorization: Common.getToken() ? 'Bearer ' + Common.getToken() : ''
-    }
-});
+import {API_BASE_URL, request} from "./BaseRequest";
 
 class CommentAPI {
     getPostComments(sectionId, postId) {
-        return instance.get('posts/' + getSectionName(sectionId) + '/post/' + postId + '/comments')
-            .then(response => response.data)
+        return request({
+            url: API_BASE_URL + '/posts/' + getSectionName(sectionId) + '/post/' + postId + '/comments',
+            method: 'GET'
+        });
     };
 
     sendNewPostComment(postId, commentText, authorName, authorId) {
-        return instance.post('/posts/post/' + postId + '/new_comment', {
-            postId: postId,
-            commentText: commentText,
-            authorName: authorName,
-            authorId: authorId
-        }).then(response => response.data)
+        return request({
+            url: API_BASE_URL + '/posts/post/' + postId + '/new_comment',
+            method: 'POST',
+            body: JSON.stringify({
+                postId: postId,
+                commentText: commentText,
+                authorName: authorName,
+                authorId: authorId
+            })
+        });
     };
 
     likeComment(postId, commentId, userId) {
-        return instance.post('/posts/post/' + postId + '/like_comment', {
-            commentId: commentId,
-            userId: userId
-        }).then(response => response.data)
+        return request({
+            url: API_BASE_URL + '/posts/post/' + postId + '/like_comment',
+            method: 'POST',
+            body: JSON.stringify({
+                commentId: commentId,
+                userId: userId
+            })
+        });
     };
 }
 

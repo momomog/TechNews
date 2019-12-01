@@ -53,3 +53,35 @@
 .MuiSvgIcon-root {
     font-size: 2rem !important;
 }
+
+.dropdown-item.active {
+    color: #212529;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.dropdown-item.active:hover {
+    color: #212529;
+    text-decoration: none;
+    background-color: #f8f9fa;
+}
+
+.MuiTypography-body2 {
+    font-size: 1.4rem !important;
+}
+
+.MuiTypography-caption {
+    font-size: 1.4rem !important;
+}
+
+.MuiTypography-body1 {
+    font-size: 1.4rem !important;
+}
+
+.MuiButton-root {
+    font-size: 1.2rem !important;
+}
+
+.MuiTypography-subtitle1 {
+    font-size: 1.4rem !important;
+}

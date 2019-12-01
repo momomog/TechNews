@@ -1,6 +1,12 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
-import {SECTION_ALL_POSTS, SECTION_HARDWARE, SECTION_MOBILE, SECTION_NOTEBOOKS} from "../../../common/Const";
+import {
+    SECTION_ALL_POSTS,
+    SECTION_HARDWARE,
+    SECTION_MOBILE,
+    SECTION_NOTEBOOKS,
+    SECTION_OTHER
+} from "../../../common/Const";
 import User from "./User/User";
 
 function NavLinks(props) {
@@ -27,8 +33,11 @@ function NavLinks(props) {
                         <li onClick={() => {setPostsAndChangeSection(SECTION_NOTEBOOKS)}}>
                             <NavLink to="/posts/notebooks" className="navlink">Ноутбуки</NavLink>
                         </li>
-                        <li className="right" onClick={() => {setPostsAndChangeSection(SECTION_HARDWARE)}}>
+                        <li onClick={() => {setPostsAndChangeSection(SECTION_HARDWARE)}}>
                             <NavLink to="/posts/hardware" className="navlink">Компьютерное железо</NavLink>
+                        </li>
+                        <li onClick={() => {setPostsAndChangeSection(SECTION_OTHER)}}>
+                            <NavLink to="/posts/other" className="navlink">Разное</NavLink>
                         </li>
                     </ul>
                     <ul className="nav navbar-right">

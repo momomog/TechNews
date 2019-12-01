@@ -1,30 +1,4 @@
-import Common from "../common/Common";
-
-const API_BASE_URL = 'http://localhost:8080/api';
-const ACCESS_TOKEN = 'accessToken';
-
-const request = (options) => {
-    const headers = new Headers({
-        'Content-Type': 'application/json',
-    });
-
-    if (Common.getToken()) {
-        headers.append('Authorization', 'Bearer ' + Common.getToken())
-    }
-
-    const defaults = {headers: headers};
-    options = Object.assign({}, defaults, options);
-
-    return fetch(options.url, options)
-        .then(response =>
-            response.json().then(json => {
-                if (!response.ok) {
-                    return Promise.reject(json);
-                }
-                return json;
-            })
-        );
-};
+import {API_BASE_URL, request} from "./BaseRequest";
 
 class AuthAPI {
     login(loginRequest) {
@@ -53,25 +27,6 @@ class AuthAPI {
     checkEmailAvailability(email) {
         return request({
             url: API_BASE_URL + "/auth/user/checkEmailAvailability?email=" + email,
-            method: 'GET'
-        });
-    }
-
-
-    getCurrentUser() {
-        if (!Common.getToken()) {
-            return Promise.reject("No access token set.");
-        }
-
-        return request({
-            url: API_BASE_URL + "/user/me",
-            method: 'GET'
-        });
-    }
-
-    getUserProfile(username) {
-        return request({
-            url: API_BASE_URL + "/users/" + username,
             method: 'GET'
         });
     }

@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.technews.entity.profile.UserProfileData;
 import ru.technews.entity.security.User;
 import ru.technews.exception.ResourceNotFoundException;
+import ru.technews.payload.ActionCompleteResponse;
 import ru.technews.payload.UserProfileDataRequest;
 import ru.technews.payload.UserSummary;
 import ru.technews.repository.UserRepository;
@@ -30,6 +31,7 @@ public class UserController {
     @Autowired
     UserProfileDataService userProfileDataService;
 
+    // данные текущего авторизованного пользователя
     @GetMapping("/user/me")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
@@ -37,6 +39,7 @@ public class UserController {
                 currentUser.getLastName(), currentUser.getEmail(), currentUser.getProfileData(), currentUser.getCreateAt());
     }
 
+    // данные пользователя по юзернейму
     @GetMapping("/users/{username}")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public UserSummary getUserProfile(@PathVariable(value = "username") String username) {
@@ -47,20 +50,23 @@ public class UserController {
                 user.getLastName(), user.getEmail(), user.getProfileData(), user.getCreatedAt());
     }
 
+    // Обновление фото профиля
     @PostMapping(value = "/user/me/load_photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity getUserPhoto(@CurrentUser UserPrincipal currentUser,
-                                       @RequestParam MultipartFile photo) throws IOException {
+    public ResponseEntity updateUserPhoto(@CurrentUser UserPrincipal currentUser,
+                                          @RequestParam MultipartFile photo) throws IOException {
         UserProfileData profile = currentUser.getProfileData();
-        if (photo.getBytes() != null){
+
+        if (photo.getBytes() != null) {
             profile.setPhoto(photo.getBytes());
         }
 
         userProfileDataService.update(profile);
 
-        return ResponseEntity.ok("Profile photo was update");
+        return ResponseEntity.ok(new ActionCompleteResponse(true));
     }
 
+    // получение фото пользователя
     @ResponseBody
     @GetMapping(value = "/user/photo", params = "id", produces = MediaType.IMAGE_JPEG_VALUE)
 //    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
@@ -91,7 +97,12 @@ public class UserController {
         user.setLastName(profileRequest.getLastName());
 
         UserProfileData profileData = currentUser.getProfileData();
-        profileData.setBirthDate(profileRequest.getBirthDate().plusDays(1));
+
+        if (profileRequest.getBirthDate() == null) {
+            profileData.setBirthDate(null);
+        } else {
+            profileData.setBirthDate(profileRequest.getBirthDate().plusDays(1));
+        }
         profileData.setVk(profileRequest.getVk());
         profileData.setInstagram(profileRequest.getInstagram());
         profileData.setTwitter(profileRequest.getTwitter());
@@ -102,6 +113,6 @@ public class UserController {
         userRepository.save(user);
         userProfileDataService.update(profileData);
 
-        return ResponseEntity.ok("successful!");
+        return ResponseEntity.ok(new ActionCompleteResponse(true));
     }
 }

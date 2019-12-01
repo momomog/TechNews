@@ -19,28 +19,12 @@ public class PostService extends BaseService<PostEntity> {
         return postDao.findAllPostsByPage(page);
     }
 
-    public List findAllMobilePosts() {
-        return postDao.findAllMobilePosts();
+    public List findAllCategoryPosts(Long section) {
+        return postDao.findAllCategoryPosts(section);
     }
 
-    public List findAllNotebooksPosts() {
-        return postDao.findAllNotebooksPosts();
-    }
-
-    public List findAllHardwarePosts() {
-        return postDao.findAllHardwarePosts();
-    }
-
-    public List findMobilePostsByPage(Integer page) {
-        return postDao.findMobilePostsByPage(page);
-    }
-
-    public List findNotebooksPostsByPage(Integer page) {
-        return postDao.findNotebooksPostsByPage(page);
-    }
-
-    public List findHardwarePostsByPage(Integer page) {
-        return postDao.findHardwarePostsByPage(page);
+    public List findCategoryPostsByPage(Long category, Integer page) {
+        return postDao.findCategoryPostsByPage(category, page);
     }
 
     @Override

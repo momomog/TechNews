@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {Redirect, withRouter} from "react-router-dom";
-import {getCurrentUserData, updateUserData} from "../../../redux/AuthReducer";
+import {getCurrentUserData, updateUserData} from "../../../redux/ProfileReducer";
 import ProfileEdit from "./ProfileEdit";
 
 class ProfileEditWrapper extends React.Component {
@@ -27,7 +27,7 @@ class ProfileEditWrapper extends React.Component {
 let mapStateToProps = (state) => {
     return {
         isAuth: state.authData.isAuth,
-        currentUserData: state.authData.currentUserData,
+        currentUserData: state.profileData.currentUserData,
     }
 };
 

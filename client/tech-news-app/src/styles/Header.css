@@ -77,3 +77,12 @@ input.hidden {
     border-color: transparent;
     box-shadow: none;
 }
+
+.navbar .nav > li > a {
+    padding: 10px 10px 10px !important;
+}
+
+.navbar-inner {
+    padding-right: 0!important;
+
+}

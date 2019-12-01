@@ -1,12 +1,9 @@
 import AuthAPI from "../api/AuthAPI";
-import ProfileAPI from "../api/ProfileAPI";
 import Common from "../common/Common";
 import {NotificationManager} from "react-notifications";
 
 const CHANGE_SECTION = 'CHANGE-SECTION';
 const SET_IS_AUTH = 'SET-IS-AUTH';
-const SET_CURRENT_USER_DATA = 'SET-CURRENT-USER-DATA';
-const SET_USER_DATA = 'SET-USER-DATA';
 const SET_USERNAME_AVAILABILITY = 'SET-USERNAME-AVAILABILITY';
 const SET_EMAIL_AVAILABILITY = 'SET-EMAIL-AVAILABILITY';
 
@@ -14,8 +11,6 @@ const SET_EMAIL_AVAILABILITY = 'SET-EMAIL-AVAILABILITY';
 let initialState = {
     sectionId: 1,
     isAuth: Common.getToken(),
-    currentUserData: '',
-    userData: '',
     isUsernameAvailability: true,
     isEmailAvailability: true
 };
@@ -46,18 +41,6 @@ export const authReducer = (state = initialState, action) => {
                 isEmailAvailability: action.isAvailable
             };
         }
-        case SET_CURRENT_USER_DATA: {
-            return {
-                ...state,
-                currentUserData: action.currentUserData
-            };
-        }
-        case SET_USER_DATA: {
-            return {
-                ...state,
-                userData: action.userData
-            };
-        }
         default:
             return state;
     }
@@ -65,8 +48,6 @@ export const authReducer = (state = initialState, action) => {
 
 export const chooseSectionAction = (sectionId) => ({type: CHANGE_SECTION, sectionId: sectionId});
 export const setIsAuthAction = (isAuth) => ({type: SET_IS_AUTH, isAuth: isAuth});
-export const setCurrentUserDataAction = (userData) => ({type: SET_CURRENT_USER_DATA, currentUserData: userData});
-export const setUserDataAction = (userData) => ({type: SET_USER_DATA, userData: userData});
 export const setUsernameAvailabilityAction = (isAvailable) => ({type: SET_USERNAME_AVAILABILITY, isAvailable: isAvailable});
 export const setEmailAvailabilityAction = (isAvailable) => ({type: SET_EMAIL_AVAILABILITY, isAvailable: isAvailable});
 
@@ -79,6 +60,7 @@ export const login = (loginRequest) => {
                 dispatch(setIsAuthAction(true));
             })
             .catch(function (error) {
+                debugger;
                 let errorMessage = Common.showErrorText(error.code);
                 NotificationManager.error(errorMessage, 'Не удалось войти');
             });
@@ -97,45 +79,6 @@ export const signup = (signupRequest) => {
             });
     };
 };
-
-export const updateUserData = (userDataRequest) => {
-    return (dispatch) => {
-        ProfileAPI.onUpdateUserData(userDataRequest)
-            .then(response => {
-                NotificationManager.success('Ваши данные успешно обновлены', 'Успешно');
-            })
-            .catch(function (error) {
-                NotificationManager.error('Не удалось обновить данные профиля', 'Ошибка');
-            });
-    };
-};
-
-export const getCurrentUserData = (userId) => {
-    return (dispatch) => {
-        AuthAPI.getCurrentUser(userId)
-            .then(response => {
-                dispatch(setCurrentUserDataAction(response));
-            })
-    };
-};
-
-export const getUserData = (username) => {
-    return (dispatch) => {
-        AuthAPI.getUserProfile(username)
-            .then(response => {
-                dispatch(setUserDataAction(response));
-            })
-    };
-};
-
-export const onLoadPhoto = (photoBody) => {
-    return (dispatch) => {
-        ProfileAPI.onLoadPhoto(photoBody)
-            .then(response => {
-            })
-    };
-};
-
 
 export const checkUsernameAvailability = (userName) => {
     return (dispatch) => {

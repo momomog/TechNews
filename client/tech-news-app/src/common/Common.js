@@ -66,12 +66,26 @@ class Common {
     }
 
     // Раскодирование JWT-токена
-    decodeJWTToken(token) {
-        if (token)
-            return jwt_decode(token);
+    decodeJWTToken() {
         if (this.getToken())
             return jwt_decode(this.getToken());
     }
+
+    // проверка является ли пользователь администратором
+    isUserAdmin = () => {
+        let user = this.decodeJWTToken();
+        let isAdmin = false;
+
+        if (user && user.roles) {
+            user.roles.forEach(role => {
+                // if (role.authority === 'ROLE_ADMIN')
+                if (role.authority === 'ROLE_USER')
+                    isAdmin = true;
+            });
+        }
+
+        return isAdmin;
+    };
 
     // Текст ошибки в зависимости от ответа сервера
     showErrorText(code) {

@@ -21,7 +21,7 @@ class AuthorizationWrapper extends React.Component {
 let mapStateToProps = (state) => {
     return {
         isAuth: state.authData.isAuth,
-        currentUserData: state.authData.currentUserData
+        currentUserData: state.profileData.currentUserData
     }
 };
 

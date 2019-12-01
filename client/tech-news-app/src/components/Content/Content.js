@@ -7,6 +7,7 @@ import AuthorizationWrapper from "../UserLogin/Authorization/AuthorizationWrappe
 import ProfileWrapper from "./Profile/ProfileWrapper";
 import RegistrationWrapper from "../UserLogin/Registration/RegistrationWrapper";
 import ProfileEditWrapper from "./ProfileEdit/ProfileEditWrapper";
+import AdminPanel from "./AdminPanel/AdminPanel";
 
 function Content() {
     return (
@@ -16,8 +17,9 @@ function Content() {
             <Route exact path='/posts/:sectionName/post/:postId' render={() => <PostReviewWrapper/>}/>
             <Route exact path='/authorization' render={() => <AuthorizationWrapper/>}/>
             <Route exact path='/registration' render={() => <RegistrationWrapper/>}/>
-            <Route exact path={['/profile', '/profile/{username}']} render={() => <ProfileWrapper/>}/>
-            <Route exact path='/profile/edit' render={() => <ProfileEditWrapper/>}/>
+            <Route exact path={['/profile', '/profile/:username']} render={() => <ProfileWrapper/>}/>
+            <Route exact path='/profile/me/edit' render={() => <ProfileEditWrapper/>}/>
+            <Route exact path='/admin-panel' render={() => <AdminPanel/>}/>
         </div>
     )
 }

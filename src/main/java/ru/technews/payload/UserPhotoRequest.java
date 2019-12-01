@@ -10,5 +10,4 @@ public class UserPhotoRequest {
 
     MultipartFile photo;
 
-
 }

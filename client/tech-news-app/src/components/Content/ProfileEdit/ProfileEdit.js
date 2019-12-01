@@ -2,9 +2,11 @@ import 'date-fns';
 import React from 'react';
 import DateFnsUtils from '@date-io/date-fns';
 import {KeyboardDatePicker, MuiPickersUtilsProvider,} from '@material-ui/pickers';
+import "moment/locale/ru";
 import TextField from "@material-ui/core/TextField";
 import {NavLink} from "react-router-dom";
 import Common from "../../../common/Common";
+import * as moment from "moment";
 
 class ProfileEdit extends React.Component {
     constructor(props) {
@@ -55,6 +57,7 @@ class ProfileEdit extends React.Component {
             return '';
 
         let user = this.props.currentUser;
+
         return (
             <div className="row" onAnimationEnd={this.onInitState}>
                 <div className="col-md-11 center-block ">
@@ -128,7 +131,7 @@ class ProfileEdit extends React.Component {
                             <div className="row p-2 ml-4">
                                 <div className="col-5 date-picker d-flex justify-content-end">
                                     <span className="mr-2 soc-name">Дата рождения </span>
-                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <MuiPickersUtilsProvider libInstance={moment} utils={DateFnsUtils}>
                                         <KeyboardDatePicker
                                             className="soc-input"
                                             label=" "

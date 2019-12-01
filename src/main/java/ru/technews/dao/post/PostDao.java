@@ -19,39 +19,15 @@ public class PostDao extends BaseDao<PostEntity> implements PostCategoryConst {
         return query.getResultList();
     }
 
-    public List findAllMobilePosts() {
+    public List findAllCategoryPosts(Long section) {
         Query query = getCurrentSession().createQuery("FROM PostEntity  WHERE categoryId=:category order by id desc");
-        query.setParameter("category", CATEGORY_MOBILE);
+        query.setParameter("category", section);
         return query.getResultList();
     }
 
-    public List findMobilePostsByPage(Integer page) {
+    public List findCategoryPostsByPage(Long category, Integer page) {
         Query query = getCurrentSession().createQuery("FROM PostEntity  WHERE categoryId=:category order by id desc");
-        query.setParameter("category", CATEGORY_MOBILE);
-        return query.setFirstResult(count * (page - 1)).setMaxResults(count).getResultList();
-    }
-
-    public List findAllNotebooksPosts() {
-        Query query = getCurrentSession().createQuery("FROM PostEntity  WHERE categoryId=:category order by id desc");
-        query.setParameter("category", CATEGORY_NOTEBOOKS);
-        return query.getResultList();
-    }
-
-    public List findNotebooksPostsByPage(Integer page) {
-        Query query = getCurrentSession().createQuery("FROM PostEntity  WHERE categoryId=:category order by id desc");
-        query.setParameter("category", CATEGORY_NOTEBOOKS);
-        return query.setFirstResult(count * (page - 1)).setMaxResults(count).getResultList();
-    }
-
-    public List findAllHardwarePosts() {
-        Query query = getCurrentSession().createQuery("FROM PostEntity  WHERE categoryId=:category order by id desc");
-        query.setParameter("category", CATEGORY_HARDWARE);
-        return query.getResultList();
-    }
-
-    public List findHardwarePostsByPage(Integer page) {
-        Query query = getCurrentSession().createQuery("FROM PostEntity  WHERE categoryId=:category order by id desc");
-        query.setParameter("category", CATEGORY_HARDWARE);
+        query.setParameter("category", category);
         return query.setFirstResult(count * (page - 1)).setMaxResults(count).getResultList();
     }
 }

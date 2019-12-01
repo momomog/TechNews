@@ -53,7 +53,7 @@ let mapStateToProps = (state) => {
         sectionId: state.authData.sectionId,
         postComments: state.commentsData.postComments,
         isAuth: state.authData.isAuth,
-        currentUserData: state.authData.currentUserData
+        currentUserData: state.profileData.currentUserData
     }
 };
 

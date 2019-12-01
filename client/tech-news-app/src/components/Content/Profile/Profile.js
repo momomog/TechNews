@@ -1,9 +1,8 @@
 import React from "react";
 import Common from "../../../common/Common";
-import {Link, NavLink} from "react-router-dom";
 
 function Profile(props) {
-    // let profileImage = React.createRef();
+    let user = props.isNotCurrentUser ? props.user : props.currentUser;
 
     function onLoadPhoto(e) {
         props.onLoadPhoto(e.target.files[0]);
@@ -12,28 +11,7 @@ function Profile(props) {
         }, 400);
     }
 
-    function getUserPhotoUrl() {
-        if (props.user.id || props.currentUser.id) {
-            if (props.isNotCurrentUser) {
-                return 'http://localhost:8080/api/user/photo?id=' + props.user.id;
-            }
-            // const src = 'http://localhost:8080/api/user/photo?id=' + props.currentUser.id;
-            // const options = {
-            //     headers: {
-            //         Authorization: 'Bearer ' + Common.getToken()
-            //     }
-            // };
-            // fetch(src, options)
-            //     .then(res => res.blob())
-            //     .then(blob => {
-            //         debugger;
-            //         profileImage.src = URL.createObjectURL(blob);
-            //     });
-            return 'http://localhost:8080/api/user/photo?id=' + props.currentUser.id;
-        }
-    }
-
-    if (props.user || props.currentUser) {
+    if (user.profileData) {
         return (
             <div>
                 <div className="row">
@@ -47,14 +25,14 @@ function Profile(props) {
                                         <div className="col-sm-4">
                                             <div align="center">
                                                 <img alt="User Pic" className="img-circle profile-photo mt-3"
-                                                     src={getUserPhotoUrl()}/>
+                                                     src={`http://localhost:8080/api/user/photo?id=${user.id}`}/>
 
                                                 {
                                                     props.isNotCurrentUser
                                                         ? ''
-                                                        :
-                                                        <label className="btn btn-primary-outline mt-1 p-0 text-secondary">
-                                                            загрузить фото профиля
+                                                        : <label
+                                                            className="btn btn-primary-outline mt-1 p-0 text-secondary">
+                                                            загрузить фото
                                                             <input type="file" onChange={onLoadPhoto} name="photo"
                                                                    accept="image/*" hidden/>
                                                         </label>
@@ -66,27 +44,49 @@ function Profile(props) {
                                         <div className="col-sm-5">
                                             <h2 style={{color: "#00b1b1"}}>
                                                 {
-                                                    props.isNotCurrentUser
-                                                        ? props.user.firstName + ' ' + props.user.lastName
-                                                        : props.currentUser.firstName + ' ' + props.currentUser.lastName
+                                                    user.firstName + ' ' + user.lastName
                                                 }
                                             </h2>
                                             <span>
                                             <p>
                                                  @{
-                                                props.isNotCurrentUser
-                                                    ? props.user.username
-                                                    : props.currentUser.username
-                                            }
+                                                    user.username
+                                                  }
                                             </p>
                                         </span>
                                             <div className="profile-social-icon">
-                                                <a target="_blank" href="//https://vk.com/id47945255">
-                                                    <i id="social-fb" className="fa fa-facebook-square fa-2x social mr-2"/>
-                                                </a>
-                                                <i id="social-gp" className="fa fa-instagram fa-2x social mr-2"/>
-                                                <i id="social-fb" className="fa fa-vk fa-2x social mr-2"/>
-                                                <i id="social-tw" className="fa fa-twitter-square fa-2x social mr-2м"/>
+                                                {
+                                                    user.profileData.facebook
+                                                        ? <a href={'https://www.facebook.com/' + user.profileData.facebook} target="_blank">
+                                                            <i id="social-fb" className="fa fa-facebook-square fa-2x social mr-2"/>
+                                                        </a>
+                                                        : <i id="social-fb" className="fa fa-facebook-square fa-2x social mr-2"/>
+                                                }
+
+                                                {
+                                                    user.profileData.instagram
+                                                        ? <a href={'https://www.instagram.com/' + user.profileData.instagram} target="_blank">
+                                                            <i id="social-gp" className="fa fa-instagram fa-2x social mr-2"/>
+                                                        </a>
+                                                        : <i id="social-gp" className="fa fa-instagram fa-2x social mr-2"/>
+                                                }
+
+                                                {
+                                                    user.profileData.vk
+                                                        ? <a href={'https://www.vk.com/' + user.profileData.vk} target="_blank">
+                                                            <i id="social-fb" className="fa fa-vk fa-2x social mr-2"/>
+                                                        </a>
+                                                        : <i id="social-fb" className="fa fa-vk fa-2x social mr-2"/>
+                                                }
+
+                                                {
+                                                    user.profileData.twitter
+                                                        ? <a href={'https://www.twitter.com/' + user.profileData.twitter} target="_blank">
+                                                            <i id="social-tw" className="fa fa-twitter-square fa-2x social mr-2м"/>
+                                                        </a>
+                                                        : <i id="social-tw" className="fa fa-twitter-square fa-2x social mr-2м"/>
+                                                }
+
                                             </div>
                                         </div>
                                         <div className="col-sm-1"/>
@@ -94,44 +94,37 @@ function Profile(props) {
                                         <hr className="mt-1 mb-1"/>
 
 
-
                                         <div className="col-sm-3"/>
                                         <div className="col-sm-3 col-xs-6 tital">Дата регистрации:</div>
                                         <div className="col-sm-3">
                                             {
-                                                props.isNotCurrentUser
-                                                    ? Common.dateParser(props.user.createAt)
-                                                    : Common.dateParser(props.currentUser.createAt)
+                                                Common.dateParser(user.createAt)
                                             }
                                         </div>
                                         <div className="col-sm-3"/>
                                         <div className="clearfix"/>
                                         <div className="bot-border"/>
-
 
 
                                         <div className="col-sm-3"/>
                                         <div className="col-sm-3 col-xs-6 tital">Email:</div>
                                         <div className="col-sm-3">
                                             {
-                                                props.isNotCurrentUser
-                                                    ? props.user.email
-                                                    : props.currentUser.email
+                                                user.email
                                             }
                                         </div>
                                         <div className="col-sm-3"/>
                                         <div className="clearfix"/>
                                         <div className="bot-border"/>
-
 
 
                                         <div className="col-sm-3"/>
                                         <div className="col-sm-3 col-xs-6 tital ">Дата рождения:</div>
                                         <div className="col-sm-3">
                                             {
-                                                props.isNotCurrentUser
-                                                    ? Common.dateParser(props.user.profileData.birthDate) + ', ' + Common.getUserAge(props.user.profileData.birthDate)
-                                                    : Common.dateParser(props.currentUser.profileData.birthDate) + ', ' + Common.getUserAge(props.currentUser.profileData.birthDate)
+                                                user.profileData.birthDate
+                                                    ? Common.dateParser(user.profileData.birthDate) + ', ' + Common.getUserAge(user.profileData.birthDate)
+                                                    : <i>Не указано</i>
                                             }
                                         </div>
                                         <div className="col-sm-3"/>
@@ -139,12 +132,18 @@ function Profile(props) {
                                         <div className="bot-border"/>
 
                                         <div className="col-sm-3"/>
-                                        <div className="col-sm-3 col-xs-6 tital ">Город:</div>
+                                        <div className="col-sm-3 col-xs-6 tital ">Страна, город:</div>
                                         <div className="col-sm-3">
                                             {
-                                                props.isNotCurrentUser
-                                                    ? props.user.profileData.country + ', ' + props.user.profileData.city
-                                                    : props.currentUser.profileData.country + ', ' + props.currentUser.profileData.city
+                                                user.profileData.country
+                                                    ? user.profileData.country + ', '
+                                                    : <i>Не указано, </i>
+                                            }
+
+                                            {
+                                                user.profileData.city
+                                                    ? user.profileData.city
+                                                    : <i>не указано</i>
                                             }
                                         </div>
                                         <div className="col-sm-3"/>
@@ -161,7 +160,6 @@ function Profile(props) {
     } else {
         return <div>Empty profile data</div>
     }
-
 
 
 }

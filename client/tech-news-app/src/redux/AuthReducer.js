@@ -60,7 +60,6 @@ export const login = (loginRequest) => {
                 dispatch(setIsAuthAction(true));
             })
             .catch(function (error) {
-                debugger;
                 let errorMessage = Common.showErrorText(error.code);
                 NotificationManager.error(errorMessage, 'Не удалось войти');
             });
@@ -86,8 +85,6 @@ export const checkUsernameAvailability = (userName) => {
             .then(response => {
                 dispatch(setUsernameAvailabilityAction(response.available));
             })
-            .catch(function (error) {
-            });
     };
 };
 
@@ -97,7 +94,5 @@ export const checkEmailAvailability = (email) => {
             .then(response => {
                 dispatch(setEmailAvailabilityAction(response.available));
             })
-            .catch(function (error) {
-            });
     };
 };

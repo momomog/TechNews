@@ -5,17 +5,17 @@
   xmlns="http://xmlns.jcp.org/xml/ns/javaee"
   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
-  <display-name>ws-tsr</display-name>
+  <display-name>tech-news</display-name>
 
-    <session-config>
-        <session-timeout>10000</session-timeout>
-        <cookie-config>
-            <name>cook</name>
-            <http-only>true</http-only>
-            <max-age>10000</max-age>
-        </cookie-config>
-        <tracking-mode>COOKIE</tracking-mode>
-    </session-config>
+<!--    <session-config>-->
+<!--        <session-timeout>10000</session-timeout>-->
+<!--        <cookie-config>-->
+<!--            <name>cook</name>-->
+<!--            <http-only>true</http-only>-->
+<!--            <max-age>10000</max-age>-->
+<!--        </cookie-config>-->
+<!--        <tracking-mode>COOKIE</tracking-mode>-->
+<!--    </session-config>-->
 
     <error-page>
         <error-code>401</error-code>

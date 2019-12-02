@@ -1,4 +1,5 @@
 import CommentAPI from "../api/CommentAPI";
+import {NotificationManager} from "react-notifications";
 
 const CHANGE_COMMENT_TEXT = 'CHANGE-COMMENT-TEXT';
 const SET_POST_COMMENTS = 'SET-POST-COMMENTS';
@@ -44,10 +45,10 @@ export const sendNewPostComment = (postId, commentText, authorName, authorId) =>
     return () => {
         CommentAPI.sendNewPostComment(postId, commentText, authorName, authorId)
             .then(function (data) {
-                // console.log(data);
+
             })
             .catch(function (error) {
-                // console.log(error);
+                NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось добавить комментарий');
             });
     };
 };
@@ -56,10 +57,10 @@ export const likeComment = (postId, commentId, userId) => {
     return () => {
         CommentAPI.likeComment(postId, commentId, userId)
             .then(function (data) {
-                // console.log(data);
+
             })
             .catch(function (error) {
-                // console.log(error);
+                NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось оценить комментарий');
             });
     };
 };

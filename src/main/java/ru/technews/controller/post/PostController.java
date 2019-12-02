@@ -1,14 +1,20 @@
 package ru.technews.controller.post;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 import ru.technews.common.PostCategoryConst;
 import ru.technews.entity.post.PostEntity;
+import ru.technews.entity.profile.UserProfileData;
+import ru.technews.payload.ActionCompleteResponse;
+import ru.technews.service.post.CommentService;
 import ru.technews.service.post.PostService;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +25,9 @@ public class PostController implements PostCategoryConst {
 
     @Autowired
     PostService postService;
+
+    @Autowired
+    CommentService commentService;
 
     private static Map<String, Object> response = new HashMap<>();
 
@@ -61,9 +70,19 @@ public class PostController implements PostCategoryConst {
 
     // данные конкретного поста
     @GetMapping(value = "/{section}/post/{id}")
-    public PostEntity getPostData(@PathVariable("section") String section,
+    public PostEntity getPostDataById(@PathVariable("section") String section,
                                   @PathVariable("id") Long id) {
         return postService.findById(id);
+    }
+
+    // Удаление поста
+    @GetMapping(value = "/delete-post", params = "id")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity getProfilePhoto(@RequestParam(name = "id") Long id) {
+        commentService.deleteCommentsByPostId(id);
+        postService.deleteById(id);
+
+        return ResponseEntity.ok(new ActionCompleteResponse(true));
     }
 }
 

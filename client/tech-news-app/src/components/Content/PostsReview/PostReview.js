@@ -2,14 +2,14 @@ import React from 'react';
 import Parser from 'html-react-parser';
 import Common from "../../../common/Common";
 import CommentsWrapper from "./Comments/CommentsWrapper";
-import PostAdminPanel from "../AdminPanel/PostAdminPanel/PostAdminPanel";
+import PostAdminPanelWrapper from "../AdminPanel/PostAdminPanel/PostAdminPanelWrapper";
 
 function PostReview(props) {
 
     return (
         <div>
             {
-                Common.isUserAdmin ? <PostAdminPanel/> : ''
+                Common.isUserAdmin() ? <PostAdminPanelWrapper postId={props.post.id}/> : ''
             }
 
             <div className="container">

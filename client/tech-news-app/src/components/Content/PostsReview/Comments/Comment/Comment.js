@@ -2,6 +2,7 @@ import React from "react";
 
 import Common from "../../../../../common/Common";
 import {NavLink} from "react-router-dom";
+import {API_BASE_URL} from "../../../../../api/BaseRequest";
 
 function Comment(props) {
 
@@ -14,7 +15,7 @@ function Comment(props) {
             <div className="media card-body">
                 <NavLink to={'/profile/' + props.comment.authorName}>
                     <img className="d-flex mr-3 rounded-circle comment-author-photo"
-                         src={'http://localhost:8080/api/user/photo?id=' + props.comment.authorId} alt=""/>
+                         src={API_BASE_URL +`/user/photo?id=${props.comment.authorId}`} alt=""/>
                 </NavLink>
                 <div className="media-body">
                     <div className="row">

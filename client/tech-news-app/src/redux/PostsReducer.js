@@ -1,4 +1,5 @@
 import PostAPI from "../api/PostAPI";
+import {NotificationManager} from "react-notifications";
 
 const SET_POST_ID = 'SET-POST-ID';
 const SET_POSTS_COUNT = 'SET-POSTS-COUNT';
@@ -76,6 +77,18 @@ export const getPostData = (sectionId, postId) => {
         PostAPI.getPostData(sectionId, postId)
             .then(data => {
                 dispatch(setPostDataAction(data));
+            });
+    };
+};
+
+export const deletePostById = (postId) => {
+    return (dispatch) => {
+        PostAPI.deletePostById(postId)
+            .then(response => {
+                NotificationManager.success(`Пост номер ${postId} успешно удален`, 'Успешно');
+            })
+            .catch(function (error) {
+                NotificationManager.error(`Не удалось удалить пост номер ${postId}`, 'Ошибка');
             });
     };
 };

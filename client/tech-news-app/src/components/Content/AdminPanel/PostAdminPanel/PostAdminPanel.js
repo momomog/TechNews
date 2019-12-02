@@ -6,59 +6,65 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-function PostAdminPanel() {
+class PostAdminPanel extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            openModal: false
+        }
+    }
 
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
+    handleOpenModal = () => {
+        this.setState({openModal: true})
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    handleCloseModal = () => {
+        this.setState({openModal: false})
     };
 
-    return (
-        <div className="row">
-            <div className="col-md-11 center-block ">
-                <div className="panel panel-default">
-                    <div className="panel-heading">
-                        <span className="post-author-comment">Панель управления постом</span>
-                        <button type="button" className="btn btn-primary ml-3">Редактировать</button>
-                        <button type="button" className="btn btn-danger ml-2">Удалить</button>
+    onDeletePost = () => {
+        this.props.deletePostById();
+        this.setState({openModal: false});
+    };
 
-                        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-                            Open alert dialog
-                        </Button>
-                        <Dialog
-                            open={open}
-                            onClose={handleClose}
-                            aria-labelledby="alert-dialog-title"
-                            aria-describedby="alert-dialog-description">
-                            <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
-                            <DialogContent>
-                                <DialogContentText id="alert-dialog-description">
-                                    Let Google help apps determine location. This means sending anonymous location data to
-                                    Google, even when no apps are running.
-                                </DialogContentText>
-                            </DialogContent>
-                            <DialogActions>
-                                <Button onClick={handleClose} color="primary">
-                                    Disagree
-                                </Button>
-                                <Button onClick={handleClose} color="primary" autoFocus>
-                                    Agree
-                                </Button>
-                            </DialogActions>
-                        </Dialog>
+    render() {
+        return (
+            <div className="row">
+                <div className="col-md-11 center-block ">
+                    <div className="panel panel-default">
+                        <div className="panel-heading border-bottom-0">
+                            <span className="post-author-comment">Панель управления постом</span>
+                            <button type="button" className="btn btn-primary ml-3">Редактировать</button>
+                            <button type="button" className="btn btn-danger ml-2"
+                                    onClick={this.handleOpenModal}>Удалить
+                            </button>
 
-
-
+                            <Dialog
+                                open={this.state.openModal}
+                                onClose={this.handleCloseModal}
+                                aria-labelledby="alert-dialog-title"
+                                aria-describedby="alert-dialog-description">
+                                <DialogTitle id="alert-dialog-title">{"Удалить пост"}</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText id="alert-dialog-description">
+                                        Вы уверены? Это действие невозможно будет отменить
+                                    </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={this.handleCloseModal} color="primary">
+                                        Отмена
+                                    </Button>
+                                    <Button onClick={this.onDeletePost} color="primary" autoFocus>
+                                        Удалить
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default PostAdminPanel;

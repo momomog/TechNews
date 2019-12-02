@@ -15,8 +15,6 @@ class User extends React.Component {
     };
 
     render() {
-        let isAdmin = Common.isUserAdmin();
-
         return (
             <div className="dropdown">
                 {
@@ -31,7 +29,7 @@ class User extends React.Component {
                                 <NavLink className="dropdown-item" to="/profile/me/edit">Редактировать</NavLink>
                                 <div className="dropdown-divider"/>
                                 {
-                                    isAdmin
+                                    Common.isUserAdmin()
                                         ? <span>
                                             <NavLink className="dropdown-item" to="/admin-panel">Панель администрирования</NavLink>
                                             <div className="dropdown-divider"/>

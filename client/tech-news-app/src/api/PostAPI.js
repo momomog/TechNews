@@ -15,6 +15,13 @@ class PostAPI {
             method: 'GET'
         });
     };
+
+    deletePostById(postId) {
+        return request({
+            url: API_BASE_URL + '/posts/delete-post?id=' + postId,
+            method: 'GET'
+        });
+    };
 }
 
 export default new PostAPI();

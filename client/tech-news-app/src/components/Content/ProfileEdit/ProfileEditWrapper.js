@@ -4,14 +4,13 @@ import {compose} from "redux";
 import {Redirect, withRouter} from "react-router-dom";
 import {getCurrentUserData, updateUserData} from "../../../redux/ProfileReducer";
 import ProfileEdit from "./ProfileEdit";
+import Common from "../../../common/Common";
 
 class ProfileEditWrapper extends React.Component {
 
     updateUserData = (userDataRequest) => {
         this.props.updateUserData(userDataRequest);
-        setTimeout(function () {
-            window.location = "/profile";
-        }, 400);
+        Common.changeLocation('/profile', 400);
     };
 
     render() {

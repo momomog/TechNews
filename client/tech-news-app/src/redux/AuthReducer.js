@@ -72,7 +72,7 @@ export const signup = (signupRequest) => {
         AuthAPI.signup(signupRequest)
             .then(response => {
                 NotificationManager.success('Для продолжения работы войдите на сайт', 'Вы успешно зарегистрировались');
-                window.location.href = '/authorization';
+                Common.changeLocation('/authorization', 400);
             })
             .catch(function (error) {
                 NotificationManager.error('При попытке регистрации произошла неизвестная ошибка', 'Ошибка');

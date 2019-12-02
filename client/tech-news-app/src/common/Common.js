@@ -6,13 +6,13 @@ class Common {
     // Парсинг даты в вид ДД.ММ.ГГГГ
     dateParser(date) {
         if (date)
-            return this.pad(date[2]) + '.' + this.pad(date[1]) + '.' + date[0];
+            return Common.pad(date[2]) + '.' + Common.pad(date[1]) + '.' + date[0];
     }
 
     // Парсинг даты в вид ДД.ММ.ГГГГ ЧЧ:ММ
     dateTimeParser(date) {
         if (date)
-            return this.pad(date[2]) + '.' + this.pad(date[1]) + '.' + date[0] + ' ' + this.pad(date[3]) + ':' + this.pad(date[4]);
+            return Common.pad(date[2]) + '.' + Common.pad(date[1]) + '.' + date[0] + ' ' + Common.pad(date[3]) + ':' + Common.pad(date[4]);
     }
 
     // Парсинг массива даты в объект Date
@@ -28,15 +28,10 @@ class Common {
             let difference = new Date() - birthDate;
             let age = Math.floor((difference / (1000 * 60 * 60 * 24) / 365));
 
-            if (age.toString().endsWith('1')) return age + ' год';
+            if (age.toString().endsWith('1') && age !== 11) return age + ' год';
             else if (['2', '3', '4'].indexOf(age.toString()) !== -1) return age + ' года';
             return age + ' лет';
         }
-    }
-
-    // Прибавление 0, если число даты меньше 10
-    pad(number) {
-        return (number < 10 ? '0' : '') + number;
     }
 
     // Окончание количества комментариев в зависимости от значения
@@ -72,20 +67,26 @@ class Common {
     }
 
     // проверка является ли пользователь администратором
-    isUserAdmin = () => {
+    isUserAdmin() {
         let user = this.decodeJWTToken();
         let isAdmin = false;
 
         if (user && user.roles) {
             user.roles.forEach(role => {
-                // if (role.authority === 'ROLE_ADMIN')
-                if (role.authority === 'ROLE_USER')
+                if (role.authority === 'ROLE_ADMIN')
                     isAdmin = true;
             });
         }
 
         return isAdmin;
     };
+
+    // Смена локации
+    changeLocation(path = 'posts/all', timeout = 400) {
+        setTimeout(function () {
+            window.location = path;
+        }, timeout);
+    }
 
     // Текст ошибки в зависимости от ответа сервера
     showErrorText(code) {
@@ -97,6 +98,15 @@ class Common {
             default:
                 return 'Неизвестная ошибка';
         }
+    }
+
+    // *
+    // * private methods
+    // *
+
+    // Прибавление 0 к дате, если число даты меньше 10
+    static pad(number) {
+        return (number < 10 ? '0' : '') + number;
     }
 }
 

@@ -1,5 +1,6 @@
 package ru.technews.entity.post;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import ru.technews.entity.BaseEntity;
@@ -36,9 +37,10 @@ public class PostEntity extends BaseEntity {
     @Column(name = "date", columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private LocalDate date;
 
-    //ссылка на изображение
-    @Column(name = "image_url")
-    private String imageUrl;
+    //изображение
+    @JsonIgnore
+    @Column(name = "photo")
+    private byte[] photo;
 
     //категория новостей
     @Column(name = "category_id")

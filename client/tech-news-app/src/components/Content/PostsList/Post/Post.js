@@ -2,6 +2,7 @@ import React from 'react';
 import {NavLink} from "react-router-dom";
 import {getSectionName} from "../../../../common/Const";
 import Common from "../../../../common/Common";
+import * as BaseRequest from "../../../../api/BaseRequest";
 
 function Post(props) {
 
@@ -18,7 +19,7 @@ function Post(props) {
             <div className="media">
                 <NavLink to={createPostLink()} className="pull-left">
                     <img className="media-object post-picture" alt="post picture"
-                         src={props.post.imageUrl} onClick={setPostId}/>
+                         src={BaseRequest.API_BASE_URL + '/posts/post/photo?id=' + props.post.id} onClick={setPostId}/>
                 </NavLink>
                 <div className="media-body">
                     <h4 className="media-heading" onClick={setPostId}>

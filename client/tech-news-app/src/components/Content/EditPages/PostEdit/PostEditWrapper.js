@@ -14,6 +14,7 @@ class PostEditWrapper extends React.Component {
 
     updatePostData = (postDataRequest, photoBody) => {
         this.props.updatePostData(this.props.match.params.postId, postDataRequest);
+
         if (photoBody)
             this.props.updatePostPhoto(this.props.match.params.postId, photoBody);
         let path = '/posts/' + this.props.match.params.sectionName + '/post/' + this.props.match.params.postId;

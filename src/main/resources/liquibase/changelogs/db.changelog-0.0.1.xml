@@ -15,7 +15,7 @@
             <column name="title" type="varchar(1000)">
                 <constraints nullable="false"/>
             </column>
-            <column name="image_url" type="varchar(1000)">
+            <column name="photo" type="LONGVARBINARY">
                 <constraints nullable="false"/>
             </column>
             <column name="author" type="varchar(100)">

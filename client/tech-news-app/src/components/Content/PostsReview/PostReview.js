@@ -3,6 +3,7 @@ import Parser from 'html-react-parser';
 import Common from "../../../common/Common";
 import CommentsWrapper from "./Comments/CommentsWrapper";
 import PostAdminPanelWrapper from "../AdminPanel/PostAdminPanel/PostAdminPanelWrapper";
+import * as BaseRequest from "../../../api/BaseRequest";
 
 function PostReview(props) {
 
@@ -27,7 +28,7 @@ function PostReview(props) {
                         <hr/>
                         <div className="col-lg-12 mb-2">
                             <img className="card-img-top post-review-pic center-block"
-                                 src={props.post.imageUrl}
+                                 src={BaseRequest.API_BASE_URL + '/posts/post/photo?id=' + props.post.id}
                                  alt="Card image"/>
                             <hr/>
                         </div>

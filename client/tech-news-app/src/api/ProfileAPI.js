@@ -32,7 +32,7 @@ class ProfileAPI {
         }
 
         return request({
-            url: API_BASE_URL + '/user/me/load_photo',
+            url: API_BASE_URL + '/user/me/load-photo',
             headers: headers,
             method: 'POST',
             body: formData

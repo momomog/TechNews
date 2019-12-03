@@ -42,7 +42,7 @@ class PostAPI {
         }
 
         return request({
-            url: API_BASE_URL + '/posts/post/update-photo?id=' + postId,
+            url: API_BASE_URL + '/posts/post/' + postId + '/load-photo',
             headers: headers,
             method: 'POST',
             body: formData

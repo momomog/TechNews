@@ -1,11 +1,15 @@
 package ru.technews.controller.post;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.technews.common.PostCategoryConst;
 import ru.technews.entity.post.PostEntity;
+import ru.technews.entity.profile.UserProfileData;
 import ru.technews.payload.ActionCompleteResponse;
 import ru.technews.payload.PostDataRequest;
 import ru.technews.security.CurrentUser;
@@ -13,6 +17,8 @@ import ru.technews.security.UserPrincipal;
 import ru.technews.service.post.CommentService;
 import ru.technews.service.post.PostService;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -113,6 +119,41 @@ public class PostController implements PostCategoryConst {
         }
 
         return ResponseEntity.ok(new ActionCompleteResponse(true));
+    }
+
+    // Обновление фото поста
+    @PostMapping(value = "/post/{id}/load-photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity updateUserPhoto(@PathVariable("id") Long id,
+                                          @RequestParam MultipartFile photo) throws IOException {
+        PostEntity post = postService.findById(id);
+
+        if (photo.getBytes().length != 0) {
+            post.setPhoto(photo.getBytes());
+        }
+
+        postService.update(post);
+
+        return ResponseEntity.ok(new ActionCompleteResponse(true));
+    }
+
+    // получение фото поста
+    @GetMapping(value = "/post/photo", params = "id", produces = MediaType.IMAGE_JPEG_VALUE)
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public byte[] getPostPhoto(@RequestParam(name = "id") Long id) throws IOException {
+        PostEntity post = postService.findById(id);
+
+        // Если у поста нет фото, возвращаем общее фото из папки resources
+        if (post == null || post.getPhoto() == null) {
+            InputStream noProfileImageIS = getClass().getClassLoader().getResourceAsStream("/images/empty_post_picture.jpg");
+            if (noProfileImageIS != null) {
+                return IOUtils.toByteArray(noProfileImageIS);
+            } else {
+                return null;
+            }
+        }
+
+        return post.getPhoto();
     }
 
 }

@@ -51,13 +51,13 @@ public class UserController {
     }
 
     // Обновление фото профиля
-    @PostMapping(value = "/user/me/load_photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/user/me/load-photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity updateUserPhoto(@CurrentUser UserPrincipal currentUser,
                                           @RequestParam MultipartFile photo) throws IOException {
         UserProfileData profile = currentUser.getProfileData();
 
-        if (photo.getBytes() != null) {
+        if (photo.getBytes().length != 0) {
             profile.setPhoto(photo.getBytes());
         }
 
@@ -67,14 +67,13 @@ public class UserController {
     }
 
     // получение фото пользователя
-//    @ResponseBody
     @GetMapping(value = "/user/photo", params = "id", produces = MediaType.IMAGE_JPEG_VALUE)
 //    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public byte[] getProfilePhoto(@RequestParam(name = "id") Long id) throws IOException {
-        UserProfileData profilePhoto = userProfileDataService.findById(id);
+        UserProfileData profile = userProfileDataService.findById(id);
 
         // Если у пользователя нет фото профиля, возвращаем общее фото профиля из папки resources
-        if (profilePhoto == null || profilePhoto.getPhoto() == null) {
+        if (profile == null || profile.getPhoto() == null) {
             InputStream noProfileImageIS = getClass().getClassLoader().getResourceAsStream("/images/empty_profile_photo.jpg");
             if (noProfileImageIS != null) {
                 return IOUtils.toByteArray(noProfileImageIS);
@@ -83,7 +82,7 @@ public class UserController {
             }
         }
 
-        return profilePhoto.getPhoto();
+        return profile.getPhoto();
     }
 
     // обновление данных профиля

@@ -109,7 +109,6 @@ export const updatePostPhoto = (postId, photoBody) => {
     return (dispatch) => {
         PostAPI.onUpdatePostPhoto(postId, photoBody)
             .then(response => {
-                NotificationManager.success('Данные поста успешно обновлены', 'Успешно');
             })
             .catch(function (error) {
                 NotificationManager.error('Не удалось обновить данные поста', 'Ошибка');

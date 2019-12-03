@@ -2,6 +2,7 @@ import 'date-fns';
 import React from 'react';
 import "moment/locale/ru";
 import {NavLink} from "react-router-dom";
+import * as BaseRequest from "../../../../api/BaseRequest";
 
 class PostEdit extends React.Component {
     constructor(props) {
@@ -18,7 +19,6 @@ class PostEdit extends React.Component {
     };
 
     onPhotoChange = (e) => {
-        debugger;
         this.setState({photo: e.target.files[0]});
     };
 
@@ -57,7 +57,7 @@ class PostEdit extends React.Component {
                                 <div className="row p-3 ml-4 mr-4">
                                     <div className="col-3">
                                         <img className="post-edit-picture" alt="post-photo"
-                                             src="https://s1.1zoom.ru/big0/930/Coast_Sunrises_and_sunsets_Waves_USA_Ocean_Kaneohe_521540_1280x775.jpg"/>
+                                             src={BaseRequest.API_BASE_URL + '/posts/post/photo?id=' + this.props.post.id}/>
                                         <span className="ml-5 text-secondary">текущее изображение</span>
                                     </div>
                                     <div className="col-9">

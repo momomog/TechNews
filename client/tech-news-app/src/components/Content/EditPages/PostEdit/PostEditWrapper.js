@@ -4,7 +4,7 @@ import {compose} from "redux";
 import {withRouter} from "react-router-dom";
 import Common from "../../../../common/Common";
 import PostEdit from "./PostEdit";
-import {getPostData, updatePostData} from "../../../../redux/PostsReducer";
+import {getPostData, updatePostData, updatePostPhoto} from "../../../../redux/PostsReducer";
 
 class PostEditWrapper extends React.Component {
 
@@ -12,8 +12,10 @@ class PostEditWrapper extends React.Component {
         this.props.getPostData(this.props.sectionId, this.props.match.params.postId);
     }
 
-    updatePostData = (postDataRequest) => {
+    updatePostData = (postDataRequest, photoBody) => {
         this.props.updatePostData(this.props.match.params.postId, postDataRequest);
+        if (photoBody)
+            this.props.updatePostPhoto(this.props.match.params.postId, photoBody);
         let path = '/posts/' + this.props.match.params.sectionName + '/post/' + this.props.match.params.postId;
         Common.changeLocation(path, 700);
     };
@@ -36,6 +38,7 @@ let mapDispatchToProps = (dispatch) => {
     return {
         getPostData: (sectionId, postId) => dispatch(getPostData(sectionId, postId)),
         updatePostData: (postId, postDataRequest) => dispatch(updatePostData(postId, postDataRequest)),
+        updatePostPhoto: (postId, photoBody) => dispatch(updatePostPhoto(postId, photoBody)),
     }
 };
 

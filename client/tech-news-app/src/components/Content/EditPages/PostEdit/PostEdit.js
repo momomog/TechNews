@@ -9,7 +9,7 @@ class PostEdit extends React.Component {
         this.state = {
             title: '',
             fullDescription: '',
-            image: ''
+            photo: ''
         }
     }
 
@@ -17,11 +17,16 @@ class PostEdit extends React.Component {
         this.setState({[e.target.name]: e.target.value});
     };
 
+    onPhotoChange = (e) => {
+        debugger;
+        this.setState({photo: e.target.files[0]});
+    };
+
     updatePostData = () => {
         this.props.updatePostData({
             title: this.state.title,
-            fullDescription: this.state.fullDescription,
-        });
+            fullDescription: this.state.fullDescription
+        }, this.state.photo);
     };
 
     render() {
@@ -48,6 +53,17 @@ class PostEdit extends React.Component {
                                           defaultValue={this.props.post.fullDescription} required/>
                                 </div>
 
+                                <h5 className="card-header ml-4 mr-4 ">Фотография</h5>
+                                <div className="row p-3 ml-4 mr-4">
+                                    <div className="col-3">
+                                        <img className="post-edit-picture" alt="post-photo"
+                                             src="https://s1.1zoom.ru/big0/930/Coast_Sunrises_and_sunsets_Waves_USA_Ocean_Kaneohe_521540_1280x775.jpg"/>
+                                        <span className="ml-5 text-secondary">текущее изображение</span>
+                                    </div>
+                                    <div className="col-9">
+                                        <input className="post-edit-pic-input" type="file" onChange={this.onPhotoChange} name="photo" accept="image/*"/>
+                                    </div>
+                                </div>
                                 <div className="row p-2 ml-4 mr-1">
                                     <div className="col-12 mt-5 d-flex justify-content-end">
                                         <NavLink to={'/posts/' + this.props.sectionName + '/post/' + this.props.post.id}>

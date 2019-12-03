@@ -1,5 +1,6 @@
 import {getSectionName} from "../common/Const";
 import {API_BASE_URL, request} from "./BaseRequest";
+import Common from "../common/Common";
 
 class PostAPI {
     getAllPosts(sectionId, postPage) {
@@ -28,6 +29,23 @@ class PostAPI {
             url: API_BASE_URL + '/posts/post/update?id=' + postId,
             method: 'POST',
             body: JSON.stringify(postDataRequest)
+        });
+    };
+
+    onUpdatePostPhoto(postId, photoBody) {
+        const formData = new FormData();
+        formData.append('photo', photoBody);
+        const headers = new Headers({});
+
+        if (Common.getToken()) {
+            headers.append('Authorization', 'Bearer ' + Common.getToken());
+        }
+
+        return request({
+            url: API_BASE_URL + '/posts/post/update-photo?id=' + postId,
+            headers: headers,
+            method: 'POST',
+            body: formData
         });
     };
 }

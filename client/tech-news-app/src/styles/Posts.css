@@ -127,10 +127,19 @@
     font-size: 1.8rem !important;
 }
 
-.vv {
-    min-height: auto !important;
+.post-edit-picture {
+    width: 250px !important;
+    height: 200px !important;
 }
 
+select, input[type="file"] {
+    height: 40px !important;
+    *margin-top: 4px;
+}
 
+.post-edit-pic-input {
+    margin-left: -3%;
+    margin-top: 24.5%;
+}
 
 

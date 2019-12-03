@@ -5,6 +5,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import {NavLink} from "react-router-dom";
 
 class PostAdminPanel extends React.Component {
     constructor(props, context) {
@@ -34,7 +35,9 @@ class PostAdminPanel extends React.Component {
                     <div className="panel panel-default">
                         <div className="panel-heading border-bottom-0">
                             <span className="post-author-comment">Панель управления постом</span>
-                            <button type="button" className="btn btn-primary ml-3">Редактировать</button>
+                            <NavLink to={this.props.postId + '/edit'}>
+                                <button type="button" className="btn btn-primary ml-3">Редактировать</button>
+                            </NavLink>
                             <button type="button" className="btn btn-danger ml-2"
                                     onClick={this.handleOpenModal}>Удалить
                             </button>

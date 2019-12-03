@@ -5,7 +5,7 @@ import {KeyboardDatePicker, MuiPickersUtilsProvider,} from '@material-ui/pickers
 import "moment/locale/ru";
 import TextField from "@material-ui/core/TextField";
 import {NavLink} from "react-router-dom";
-import Common from "../../../common/Common";
+import Common from "../../../../common/Common";
 import * as moment from "moment";
 
 class ProfileEdit extends React.Component {

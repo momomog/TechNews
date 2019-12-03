@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {Redirect, withRouter} from "react-router-dom";
-import {getCurrentUserData, updateUserData} from "../../../redux/ProfileReducer";
 import ProfileEdit from "./ProfileEdit";
-import Common from "../../../common/Common";
+import Common from "../../../../common/Common";
+import {updateUserData} from "../../../../redux/ProfileReducer";
 
 class ProfileEditWrapper extends React.Component {
 
@@ -32,7 +32,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        getCurrentUserData: userId => dispatch(getCurrentUserData(userId)),
+        // getCurrentUserData: userId => dispatch(getCurrentUserData(userId)),
         updateUserData: userDataRequest => dispatch(updateUserData(userDataRequest)),
     }
 };

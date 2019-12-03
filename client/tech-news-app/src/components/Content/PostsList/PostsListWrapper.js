@@ -8,7 +8,6 @@ import {SECTION_ALL_POSTS} from "../../../common/Const";
 class PostsListWrapper extends React.Component {
 
     componentDidMount() {
-        debugger;
         this.props.postPage
         ? this.props.getAllPosts(this.props.sectionId, this.props.postPage)
         : this.props.getAllPosts(SECTION_ALL_POSTS, 1);

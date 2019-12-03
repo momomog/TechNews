@@ -14,7 +14,8 @@ class PostAdminPanelWrapper extends React.Component {
     };
 
     render() {
-        return <PostAdminPanel deletePostById={this.deletePostById}/>
+        return <PostAdminPanel postId={this.props.postId}
+                               deletePostById={this.deletePostById}/>
     }
 }
 

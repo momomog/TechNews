@@ -22,6 +22,14 @@ class PostAPI {
             method: 'GET'
         });
     };
+
+    onUpdatePostData(postId, postDataRequest) {
+        return request({
+            url: API_BASE_URL + '/posts/post/update?id=' + postId,
+            method: 'POST',
+            body: JSON.stringify(postDataRequest)
+        });
+    };
 }
 
 export default new PostAPI();

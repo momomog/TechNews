@@ -38,7 +38,17 @@ function PostReview(props) {
                             }
                         </div>
 
-                        <hr/>
+                        <hr className="mb-2"/>
+                        {
+                            props.post.editDate
+                                ? <div className="text-secondary mb-4">
+                                    {
+                                        'Редактировано пользователем @' + props.post.editAuthor + ' ' +
+                                        Common.dateTimeParser(props.post.editDate)
+                                    }
+                                </div>
+                                : ''
+                        }
 
                         <div className="row disabled">
                             <div className="rating ml-4">

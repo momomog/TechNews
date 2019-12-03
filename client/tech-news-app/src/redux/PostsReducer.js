@@ -93,6 +93,18 @@ export const deletePostById = (postId) => {
     };
 };
 
+export const updatePostData = (postId, postDataRequest) => {
+    return (dispatch) => {
+        PostAPI.onUpdatePostData(postId, postDataRequest)
+            .then(response => {
+                NotificationManager.success('Данные поста успешно обновлены', 'Успешно');
+            })
+            .catch(function (error) {
+                NotificationManager.error('Не удалось обновить данные поста', 'Ошибка');
+            });
+    };
+};
+
 export const setPostsAction = (posts) => ({type: SET_POSTS, posts: posts});
 export const setPostsCountAction = (count) => ({type: SET_POSTS_COUNT, postsCount: count});
 export const setPostPageAction = (postPageNumber) => ({type: SET_POST_PAGE, postPage: postPageNumber});

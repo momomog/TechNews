@@ -41,7 +41,7 @@ class ProfileAPI {
 
     onUpdateUserData(userDataRequest) {
         return request({
-            url: API_BASE_URL + '/user/me/update_user_data',
+            url: API_BASE_URL + '/user/me/update',
             method: 'POST',
             body: JSON.stringify(userDataRequest)
         });

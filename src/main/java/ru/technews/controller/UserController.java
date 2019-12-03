@@ -67,7 +67,7 @@ public class UserController {
     }
 
     // получение фото пользователя
-    @ResponseBody
+//    @ResponseBody
     @GetMapping(value = "/user/photo", params = "id", produces = MediaType.IMAGE_JPEG_VALUE)
 //    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public byte[] getProfilePhoto(@RequestParam(name = "id") Long id) throws IOException {
@@ -87,7 +87,7 @@ public class UserController {
     }
 
     // обновление данных профиля
-    @PostMapping(value = "/user/me/update_user_data")
+    @PostMapping(value = "/user/me/update")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<?> likeComment(@CurrentUser UserPrincipal currentUser,
                                          @RequestBody UserProfileDataRequest profileRequest) {

@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "posts")
@@ -42,6 +43,18 @@ public class PostEntity extends BaseEntity {
     //категория новостей
     @Column(name = "category_id")
     private Long categoryId;
+
+    // Дата, время редактирования профиля
+    @Column(name = "edit_date", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private LocalDateTime editDate;
+
+    // Имя редактора поста
+    @Column(name = "edit_author_name")
+    private String editAuthor;
+
+    // ИД автора редактора поста
+    @Column(name = "edit_author_id")
+    private Long editAuthorId;
 
     // количество комментариев
     @Column(name = "comments_count")

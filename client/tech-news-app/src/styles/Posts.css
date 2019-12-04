@@ -128,7 +128,7 @@
 }
 
 .post-edit-picture {
-    width: 250px !important;
+    max-width: 250px !important;
     height: 200px !important;
 }
 
@@ -138,8 +138,13 @@ select, input[type="file"] {
 }
 
 .post-edit-pic-input {
-    margin-left: -3%;
-    margin-top: 24.5%;
+    margin-top: 28%;
+    margin-left: -8%;
+}
+
+.tox .tox-notification {
+    position: absolute;
+    visibility: hidden!important;
 }
 
 

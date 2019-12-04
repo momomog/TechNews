@@ -125,13 +125,15 @@ public class PostController implements PostCategoryConst {
     @PostMapping(value = "/post/{id}/load-photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity updateUserPhoto(@PathVariable("id") Long id,
-                                          @RequestParam MultipartFile photo) throws IOException {
+                                          @RequestParam MultipartFile photo) throws IOException, InterruptedException {
         PostEntity post = postService.findById(id);
 
         if (photo.getBytes().length != 0) {
             post.setPhoto(photo.getBytes());
         }
 
+        // Искусственная задержка для полной обработки фото перед обновлением
+        Thread.sleep(700);
         postService.update(post);
 
         return ResponseEntity.ok(new ActionCompleteResponse(true));

@@ -13,11 +13,14 @@ import PostEditWrapper from "./EditPages/PostEdit/PostEditWrapper";
 function Content() {
     return (
         <div className="container main-content">
+            {/*Страницы с постом*/}
             <Route exact path={['/', '/posts/:sectionName', '/posts/:sectionName/:page']} render={() => <PostsListWrapper/>}/>
             <Route exact path='/posts/:sectionName/post/:postId' render={() => <PostReviewWrapper/>}/>
-            <Route exact path='/authorization' render={() => <AuthorizationWrapper/>}/>
-            <Route exact path='/registration' render={() => <RegistrationWrapper/>}/>
             <Route exact path={['/profile', '/profile/:username']} render={() => <ProfileWrapper/>}/>
+
+
+            <Route exact path='/registration' render={() => <RegistrationWrapper/>}/>
+            <Route exact path='/authorization' render={() => <AuthorizationWrapper/>}/>
             <Route exact path='/admin-panel' render={() => <AdminPanel/>}/>
 
              {/*Страницы-редакторы*/}

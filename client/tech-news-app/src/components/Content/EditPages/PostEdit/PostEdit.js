@@ -2,6 +2,7 @@ import 'date-fns';
 import React from 'react';
 import "moment/locale/ru";
 import {NavLink} from "react-router-dom";
+import {Editor} from '@tinymce/tinymce-react';
 import * as BaseRequest from "../../../../api/BaseRequest";
 
 class PostEdit extends React.Component {
@@ -14,8 +15,12 @@ class PostEdit extends React.Component {
         }
     }
 
-    onFieldsChange = (e) => {
-        this.setState({[e.target.name]: e.target.value});
+    onTitleChange = (e) => {
+        this.setState({title: e.target.value});
+    };
+
+    onDescriptionChange = (e) => {
+        this.setState({fullDescription: e});
     };
 
     onPhotoChange = (e) => {
@@ -37,33 +42,39 @@ class PostEdit extends React.Component {
                         <div className="panel-heading"><h4>Редактирование поста</h4></div>
                         <div className="panel-body">
                             <form>
+
+                                <h5 className="card-header ml-4 mr-4">Фотография</h5>
+                                <div className="row p-3 ml-4 mr-4">
+                                    <div className="col-4">
+                                        <img className="post-edit-picture" alt="post-photo"
+                                             src={BaseRequest.API_BASE_URL + '/posts/post/photo?id=' + this.props.post.id}/>
+                                        <span className="ml-lg-5 text-secondary">текущее изображение</span>
+                                    </div>
+                                    <div className="col-8">
+                                        <input className="post-edit-pic-input" type="file" onChange={this.onPhotoChange}
+                                               name="photo" accept="image/*"/>
+                                    </div>
+                                </div>
+
                                 <h5 className="card-header ml-4 mr-4">Заголовок</h5>
                                 <div className="row p-3 ml-4 mr-4">
                                     <input type="text" name="title" className="input-group-form"
                                            defaultValue={this.props.post.title}
                                            placeholder="Введите заголовок поста"
-                                           onChange={this.onFieldsChange} required/>
+                                           onChange={this.onTitleChange} required/>
                                 </div>
 
                                 <h5 className="card-header ml-4 mr-4 ">Описание</h5>
-                                <div className="row p-3 ml-4 mr-4">
-                                <textarea className="form-control text-area vv" rows="12" name="fullDescription"
-                                          placeholder="Введите описание поста..."
-                                          onChange={this.onFieldsChange}
-                                          defaultValue={this.props.post.fullDescription} required/>
+                                <div className="p-3 ml-4 mr-4">
+                                    <Editor
+                                        apiKey="API_KEY"
+                                        inline={true}
+                                        initialValue={this.props.post.fullDescription}
+                                        onEditorChange={this.onDescriptionChange}
+                                        init={{plugins: ['link table', 'code']}}
+                                    />
                                 </div>
 
-                                <h5 className="card-header ml-4 mr-4 ">Фотография</h5>
-                                <div className="row p-3 ml-4 mr-4">
-                                    <div className="col-3">
-                                        <img className="post-edit-picture" alt="post-photo"
-                                             src={BaseRequest.API_BASE_URL + '/posts/post/photo?id=' + this.props.post.id}/>
-                                        <span className="ml-5 text-secondary">текущее изображение</span>
-                                    </div>
-                                    <div className="col-9">
-                                        <input className="post-edit-pic-input" type="file" onChange={this.onPhotoChange} name="photo" accept="image/*"/>
-                                    </div>
-                                </div>
                                 <div className="row p-2 ml-4 mr-1">
                                     <div className="col-12 mt-5 d-flex justify-content-end">
                                         <NavLink to={'/posts/' + this.props.sectionName + '/post/' + this.props.post.id}>

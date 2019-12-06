@@ -7,8 +7,9 @@ import AuthorizationWrapper from "../UserLogin/Authorization/AuthorizationWrappe
 import ProfileWrapper from "./Profile/ProfileWrapper";
 import RegistrationWrapper from "../UserLogin/Registration/RegistrationWrapper";
 import ProfileEditWrapper from "./EditPages/ProfileEdit/ProfileEditWrapper";
-import AdminPanel from "./AdminPanel/AdminPanel";
 import PostEditWrapper from "./EditPages/PostEdit/PostEditWrapper";
+import AdminPanelWrapper from "./AdminPanel/AdminPanelWrapper";
+import NewPostPageWrapper from "./EditPages/NewPostPage/NewPostPageWrapper";
 
 function Content() {
     return (
@@ -17,11 +18,12 @@ function Content() {
             <Route exact path={['/', '/posts/:sectionName', '/posts/:sectionName/:page']} render={() => <PostsListWrapper/>}/>
             <Route exact path='/posts/:sectionName/post/:postId' render={() => <PostReviewWrapper/>}/>
             <Route exact path={['/profile', '/profile/:username']} render={() => <ProfileWrapper/>}/>
+            <Route exact path='/new-post' render={() => <NewPostPageWrapper/>}/>
 
 
             <Route exact path='/registration' render={() => <RegistrationWrapper/>}/>
             <Route exact path='/authorization' render={() => <AuthorizationWrapper/>}/>
-            <Route exact path='/admin-panel' render={() => <AdminPanel/>}/>
+            <Route exact path='/admin-panel' render={() => <AdminPanelWrapper/>}/>
 
              {/*Страницы-редакторы*/}
             <Route exact path='/profile/me/edit' render={() => <ProfileEditWrapper/>}/>

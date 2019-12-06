@@ -32,6 +32,24 @@ class PostAPI {
         });
     };
 
+    onCreateNewPost(postDataRequest, photoBody) {
+        const formData = new FormData();
+        formData.append('photo', photoBody);
+        formData.append('postData', postDataRequest);
+        const headers = new Headers({});
+
+        if (Common.getToken()) {
+            headers.append('Authorization', 'Bearer ' + Common.getToken());
+        }
+
+        return request({
+            url: API_BASE_URL + '/posts/new-post',
+            headers: headers,
+            method: 'POST',
+            body: formData
+        });
+    };
+
     onUpdatePostPhoto(postId, photoBody) {
         const formData = new FormData();
         formData.append('photo', photoBody);

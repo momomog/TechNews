@@ -1,0 +1,104 @@
+import 'date-fns';
+import React from 'react';
+import "moment/locale/ru";
+import {NavLink} from "react-router-dom";
+import {Editor} from '@tinymce/tinymce-react';
+import * as BaseRequest from "../../../../api/BaseRequest";
+
+class NewPostPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: '',
+            fullDescription: '',
+            category: '',
+            photo: ''
+        }
+    }
+
+    onTitleChange = (e) => {
+        this.setState({title: e.target.value});
+    };
+
+    onDescriptionChange = (e) => {
+        this.setState({fullDescription: e});
+    };
+
+    onPhotoChange = (e) => {
+        this.setState({photo: e.target.files[0]});
+    };
+
+    createNewPost = () => {
+        this.props.createNewPost({
+            title: this.state.title,
+            fullDescription: this.state.fullDescription
+        }, this.state.photo);
+    };
+
+    render() {
+        return (
+            <div className="row">
+                <div className="col-md-11 center-block ">
+                    <div className="panel panel-default">
+                        <div className="panel-heading"><h4>Редактирование поста</h4></div>
+                        <div className="panel-body">
+                            <form>
+
+                                <h5 className="card-header ml-4 mr-4">Фотография</h5>
+                                <div className="row p-3 ml-1 mr-4">
+                                    <div className="col-8">
+                                        <input  type="file" onChange={this.onPhotoChange}
+                                               name="photo" accept="image/*"/>
+                                    </div>
+                                </div>
+
+                                <h5 className="card-header ml-4 mr-4">Заголовок</h5>
+                                <div className="row p-3 ml-4 mr-4">
+                                    <input type="text" name="title" className="input-group-form"
+                                           placeholder="Введите заголовок поста"
+                                           onChange={this.onTitleChange} required/>
+                                </div>
+
+                                <h5 className="card-header ml-4 mr-4 ">Описание</h5>
+                                <div className="p-3 ml-4 mr-4">
+                                    <Editor
+                                        apiKey="API_KEY"
+                                        // inline={true}
+                                        onEditorChange={this.onDescriptionChange}
+                                        init={{plugins: ['link table', 'code']}}
+                                    />
+                                </div>
+
+                                <h5 className="card-header ml-4 mr-4">Категория</h5>
+                                <div className="row p-3 ml-4 mr-4">
+                                    <select className="form-control" name="category" required>
+                                        <option value="" disabled selected>Выберите тип...</option>
+                                        <option value="2">Смартфоны</option>
+                                        <option value="3">Ноутбуки</option>
+                                        <option value="4">Компьютерное железо</option>
+                                        <option value="5">Разное</option>
+                                    </select>
+                                </div>
+
+                                <div className="row p-2 ml-4 mr-1">
+                                    <div className="col-12 mt-5 d-flex justify-content-end">
+                                        <NavLink to="/admin-panel">
+                                            <button type="button" className="btn btn-light mr-3">
+                                                Вернуться назад
+                                            </button>
+                                        </NavLink>
+                                        <button type="button" className="btn btn-success" onClick={this.createNewPost}>
+                                            Создать
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
+export default NewPostPage;

@@ -105,6 +105,17 @@ export const updatePostData = (postId, postDataRequest) => {
     };
 };
 
+export const createNewPost = (postDataRequest, photoBody) => {
+    return (dispatch) => {
+        PostAPI.onCreateNewPost(postDataRequest, photoBody)
+            .then(response => {
+            })
+            .catch(function (error) {
+                NotificationManager.error('Не удалось обновить данные поста', 'Ошибка');
+            });
+    };
+};
+
 export const updatePostPhoto = (postId, photoBody) => {
     return (dispatch) => {
         PostAPI.onUpdatePostPhoto(postId, photoBody)

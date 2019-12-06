@@ -16,8 +16,8 @@ class NewPostPage extends React.Component {
         }
     }
 
-    onTitleChange = (e) => {
-        this.setState({title: e.target.value});
+    onFieldChange = (e) => {
+        this.setState({[e.target.name]: e.target.value});
     };
 
     onDescriptionChange = (e) => {
@@ -47,7 +47,7 @@ class NewPostPage extends React.Component {
                                 <h5 className="card-header ml-4 mr-4">Фотография</h5>
                                 <div className="row p-3 ml-1 mr-4">
                                     <div className="col-8">
-                                        <input  type="file" onChange={this.onPhotoChange}
+                                        <input type="file" onChange={this.onPhotoChange}
                                                name="photo" accept="image/*"/>
                                     </div>
                                 </div>
@@ -56,28 +56,27 @@ class NewPostPage extends React.Component {
                                 <div className="row p-3 ml-4 mr-4">
                                     <input type="text" name="title" className="input-group-form"
                                            placeholder="Введите заголовок поста"
-                                           onChange={this.onTitleChange} required/>
+                                           onChange={this.onFieldChange} required/>
+                                </div>
+
+                                <h5 className="card-header ml-4 mr-4">Категория</h5>
+                                <div className="row p-3 ml-4 mr-4">
+                                    <select className="form-control" name="category" onChange={this.onFieldChange} required>
+                                        <option value="" disabled defaultValue>Выберите тип...</option>
+                                        <option value="2">Смартфоны</option>
+                                        <option value="3">Ноутбуки</option>
+                                        <option value="4">Компьютерное железо</option>
+                                        <option value="5">Разное</option>
+                                    </select>
                                 </div>
 
                                 <h5 className="card-header ml-4 mr-4 ">Описание</h5>
                                 <div className="p-3 ml-4 mr-4">
                                     <Editor
                                         apiKey="API_KEY"
-                                        // inline={true}
                                         onEditorChange={this.onDescriptionChange}
                                         init={{plugins: ['link table', 'code']}}
                                     />
-                                </div>
-
-                                <h5 className="card-header ml-4 mr-4">Категория</h5>
-                                <div className="row p-3 ml-4 mr-4">
-                                    <select className="form-control" name="category" required>
-                                        <option value="" disabled selected>Выберите тип...</option>
-                                        <option value="2">Смартфоны</option>
-                                        <option value="3">Ноутбуки</option>
-                                        <option value="4">Компьютерное железо</option>
-                                        <option value="5">Разное</option>
-                                    </select>
                                 </div>
 
                                 <div className="row p-2 ml-4 mr-1">

@@ -144,7 +144,11 @@ select, input[type="file"] {
 
 .tox .tox-notification {
     position: absolute;
-    visibility: hidden!important;
+    visibility: hidden !important;
+}
+
+.tox .tox-statusbar a, .tox .tox-statusbar__path-item, .tox .tox-statusbar__wordcount {
+    visibility: hidden !important;
 }
 
 

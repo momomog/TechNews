@@ -11,6 +11,7 @@ import ru.technews.common.PostCategoryConst;
 import ru.technews.entity.post.PostEntity;
 import ru.technews.entity.profile.UserProfileData;
 import ru.technews.payload.ActionCompleteResponse;
+import ru.technews.payload.NewPostDataRequest;
 import ru.technews.payload.PostDataRequest;
 import ru.technews.security.CurrentUser;
 import ru.technews.security.UserPrincipal;
@@ -88,6 +89,18 @@ public class PostController implements PostCategoryConst {
     public PostEntity getPostDataById(@PathVariable("section") String section,
                                       @PathVariable("id") Long id) {
         return postService.findById(id);
+    }
+
+    // Создание нового поста
+    @PostMapping(value = "/new-post")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity createNewPost(@CurrentUser UserPrincipal currentUser,
+                                        @RequestBody NewPostDataRequest postRequest,
+                                        @RequestParam MultipartFile photo) {
+
+
+
+        return ResponseEntity.ok(new ActionCompleteResponse(true));
     }
 
     // Удаление поста

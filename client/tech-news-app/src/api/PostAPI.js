@@ -35,7 +35,7 @@ class PostAPI {
     onCreateNewPost(postDataRequest, photoBody) {
         const formData = new FormData();
         formData.append('photo', photoBody);
-        formData.append('postData', postDataRequest);
+        formData.append('postData', JSON.stringify(postDataRequest));
         const headers = new Headers({});
 
         if (Common.getToken()) {

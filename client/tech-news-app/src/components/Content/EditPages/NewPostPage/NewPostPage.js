@@ -31,7 +31,8 @@ class NewPostPage extends React.Component {
     createNewPost = () => {
         this.props.createNewPost({
             title: this.state.title,
-            fullDescription: this.state.fullDescription
+            fullDescription: this.state.fullDescription,
+            category: this.state.category
         }, this.state.photo);
     };
 
@@ -62,7 +63,7 @@ class NewPostPage extends React.Component {
                                 <h5 className="card-header ml-4 mr-4">Категория</h5>
                                 <div className="row p-3 ml-4 mr-4">
                                     <select className="form-control" name="category" onChange={this.onFieldChange} required>
-                                        <option value="" disabled defaultValue>Выберите тип...</option>
+                                        <option value="" disabled selected>Выберите тип...</option>
                                         <option value="2">Смартфоны</option>
                                         <option value="3">Ноутбуки</option>
                                         <option value="4">Компьютерное железо</option>

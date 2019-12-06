@@ -31,7 +31,7 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
     return {
         // getPostData: (sectionId, postId) => dispatch(getPostData(sectionId, postId)),
-        createNewPost: (postDataRequest) => dispatch(createNewPost(postDataRequest)),
+        createNewPost: (postDataRequest, photoBody) => dispatch(createNewPost(postDataRequest, photoBody)),
         // createPostPhoto: (postId, photoBody) => dispatch(createPostPhoto(postId, photoBody)),
     }
 };

@@ -32,6 +32,13 @@ class CommentAPI {
             })
         });
     };
+
+    deleteComment(postId, commentId) {
+        return request({
+            url: API_BASE_URL + '/posts/post/' + postId + '/delete_comment?id=' + commentId,
+            method: 'GET'
+        });
+    };
 }
 
 export default new CommentAPI();

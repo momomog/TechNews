@@ -55,14 +55,27 @@ public class CommentController {
         CommentEntity comment = commentService.findById(like.getCommentId());
         List<Integer> authorsList = new ArrayList<>(Arrays.asList(comment.getLikes()));
 
-            if (!authorsList.contains(like.getUserId())) {
-                authorsList.add(like.getUserId());
-            } else {
-                authorsList.remove(like.getUserId());
-            }
+        if (!authorsList.contains(like.getUserId())) {
+            authorsList.add(like.getUserId());
+        } else {
+            authorsList.remove(like.getUserId());
+        }
 
         comment.setLikes(authorsList.toArray(new Integer[authorsList.size()]));
         commentService.update(comment);
+
+        return ResponseEntity.ok(new ActionCompleteResponse(true));
+    }
+
+    // удаление комментария
+    @GetMapping(value = "/post/{postId}/delete_comment", params = "id")
+    public ResponseEntity<?> deleteComment(@PathVariable("postId") Long postId,
+                                           @RequestParam(name = "id") Long id) {
+        commentService.deleteById(id);
+
+        PostEntity post = postService.findById(postId);
+        post.setCommentsCount(post.getCommentsCount() - 1);
+        postService.update(post);
 
         return ResponseEntity.ok(new ActionCompleteResponse(true));
     }

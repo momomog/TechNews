@@ -64,3 +64,15 @@ export const likeComment = (postId, commentId, userId) => {
             });
     };
 };
+
+export const deleteComment = (postId, commentId) => {
+    return () => {
+        CommentAPI.deleteComment(postId, commentId)
+            .then(function (data) {
+
+            })
+            .catch(function (error) {
+                NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось удалить комментарий');
+            });
+    };
+};

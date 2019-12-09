@@ -103,7 +103,6 @@ class Common {
     // *
     // * private methods
     // *
-
     // Прибавление 0 к дате, если число даты меньше 10
     static pad(number) {
         return (number < 10 ? '0' : '') + number;

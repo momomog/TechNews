@@ -5,9 +5,13 @@ import {NavLink} from "react-router-dom";
 import {API_BASE_URL} from "../../../../../api/BaseRequest";
 
 function Comment(props) {
-
+debugger;
     function like() {
-            props.likeCommentary(props.comment.id);
+        props.likeCommentary(props.comment.id);
+    }
+
+    function deleteCommentary() {
+        props.deleteCommentary(props.comment.id);
     }
 
     return (
@@ -15,7 +19,7 @@ function Comment(props) {
             <div className="media card-body">
                 <NavLink to={'/profile/' + props.comment.authorName}>
                     <img className="d-flex mr-3 rounded-circle comment-author-photo"
-                         src={API_BASE_URL +`/user/photo?id=${props.comment.authorId}`} alt=""/>
+                         src={API_BASE_URL + `/user/photo?id=${props.comment.authorId}`} alt=""/>
                 </NavLink>
                 <div className="media-body">
                     <div className="row">
@@ -32,11 +36,24 @@ function Comment(props) {
                         {props.comment.commentText}
                     </div>
                     <div className="row">
-                        <span className="col-lg-1">
-                            <a href="#" className="text-secondary reg">Ответить</a>
-                        </span>
+                        {
+                            props.isAuth
+                                ? <span className="col-lg-1">
+                                    <a href="#" className="text-secondary reg">Ответить</a>
+                                  </span>
+                                : ''
+                        }
+
+                        {
+                            props.isAuth && props.comment.authorId === props.currentUserData.id || Common.isUserAdmin()
+                                ? <span className="col-lg-1">
+                                    <a onClick={deleteCommentary} className="text-secondary reg">Удалить</a>
+                                  </span>
+                                : ''
+                        }
+
                         <span className="col-lg-2">
-                            <i id='like'  className="fa fa-heart comment-icon mr-2" onClick={like}/>
+                            <i id='like' className="fa fa-heart comment-icon mr-2" onClick={like}/>
                             <span className="comment-count">{props.comment.likes.length}</span>
                         </span>
                     </div>

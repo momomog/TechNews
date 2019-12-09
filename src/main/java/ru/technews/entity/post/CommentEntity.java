@@ -36,7 +36,7 @@ public class CommentEntity extends BaseEntity {
     @Column(name = "post_id")
     private Long postId;
 
-    // Пост, к которому относится комментарий
+    // Массив ID авторов, которым понравился комментарий
     @Type(type = "ru.technews.payload.IntArrayUserType")
     @Column(
             name = "likes",

@@ -56,6 +56,8 @@ function Comments(props) {
                                         isAuth={props.isAuth}
                                         currentUserData={props.currentUserData}
                                         likeCommentary={props.likeCommentary}
+                                        updateCommentary={props.updateCommentary}
+                                        addNewCommentary={props.addNewCommentary}
                                         deleteCommentary={props.deleteCommentary}
                                         key={comment.id}/>
                     })

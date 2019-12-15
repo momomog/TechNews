@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.technews.common.PostCategoryConst;
 import ru.technews.entity.post.PostEntity;
-import ru.technews.entity.profile.UserProfileData;
 import ru.technews.payload.ActionCompleteResponse;
 import ru.technews.payload.NewPostDataRequest;
 import ru.technews.payload.PostDataRequest;
@@ -98,6 +97,7 @@ public class PostController implements PostCategoryConst {
                                         @RequestBody NewPostDataRequest postRequest,
                                         @RequestParam MultipartFile photo) {
 
+        // method body
 
 
         return ResponseEntity.ok(new ActionCompleteResponse(true));

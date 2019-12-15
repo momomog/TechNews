@@ -25,6 +25,7 @@
 .reg {
     font-size: 1em;
     text-decoration: none !important;
+    cursor: pointer;
 }
 
 .input-group-form {

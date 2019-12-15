@@ -8,7 +8,10 @@ import ru.technews.entity.BaseEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "comments")
@@ -43,4 +46,11 @@ public class CommentEntity extends BaseEntity {
             columnDefinition = "integer[]"
     )
     private Integer[] likes;
+
+    // ИД комментария, к которому принадлежит данный комментарий
+    @Column(name = "parent_comment_id")
+    private Long parentCommentId;
+
+    @Transient
+    private List<CommentEntity> replyComments = new ArrayList<>();
 }

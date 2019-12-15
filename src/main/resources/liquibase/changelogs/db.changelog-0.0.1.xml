@@ -68,6 +68,9 @@
             <column name="likes" type="integer []">
                 <constraints nullable="false"/>
             </column>
+            <column name="parent_comment_id" type="bigint">
+                <constraints nullable="true"/>
+            </column>
             <column name="post_id" type="bigint">
                 <constraints nullable="false" foreignKeyName="fk_post_id" references="posts(id)"/>
             </column>

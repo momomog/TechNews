@@ -73,6 +73,7 @@
 
 .text-area {
     max-height: 200px;
+    overflow: hidden;
 }
 
 .rating {
@@ -149,6 +150,11 @@ select, input[type="file"] {
 
 .tox .tox-statusbar a, .tox .tox-statusbar__path-item, .tox .tox-statusbar__wordcount {
     visibility: hidden !important;
+}
+
+
+.popup-content {
+     background: #f4f4f4;
 }
 
 

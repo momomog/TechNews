@@ -41,9 +41,9 @@ export const getPostComments = (sectionId, postId) => {
     };
 };
 
-export const sendNewPostComment = (postId, commentText, authorName, authorId) => {
+export const sendNewPostComment = (commentRequest) => {
     return () => {
-        CommentAPI.sendNewPostComment(postId, commentText, authorName, authorId)
+        CommentAPI.sendNewPostComment(commentRequest)
             .then(function (data) {
 
             })
@@ -73,6 +73,18 @@ export const deleteComment = (postId, commentId) => {
             })
             .catch(function (error) {
                 NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось удалить комментарий');
+            });
+    };
+};
+
+export const updateComment = (postId, commentId, commentText) => {
+    return () => {
+        CommentAPI.updateComment(postId, commentId, commentText)
+            .then(function (data) {
+
+            })
+            .catch(function (error) {
+                NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось обновить комментарий');
             });
     };
 };

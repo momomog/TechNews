@@ -6,7 +6,7 @@ import {
     changeCommentTextAction, deleteComment,
     getPostComments,
     likeComment,
-    sendNewPostComment
+    sendNewPostComment, updateComment
 } from "../../../../redux/CommentsReducer";
 
 class CommentsWrapper extends React.Component {
@@ -31,13 +31,20 @@ class CommentsWrapper extends React.Component {
         this.props.getPostComments(this.props.sectionId, this.props.match.params.postId);
     };
 
-    addNewCommentary = () => {
-        this.props.addNewComment(
-            this.props.match.params.postId,
-            this.props.commentText,
-            this.props.currentUserData.username,
-            this.props.currentUserData.id
-        );
+    updateCommentary = (commentId, commentText) => {
+        if (this.props.currentUserData && this.props.currentUserData.id)
+            this.props.updateComment(this.props.match.params.postId, commentId, commentText);
+        this.props.getPostComments(this.props.sectionId, this.props.match.params.postId);
+    };
+
+    addNewCommentary = (request) => {
+        this.props.addNewComment({
+            postId: this.props.match.params.postId,
+            authorId: this.props.currentUserData.id,
+            authorName: this.props.currentUserData.username,
+            commentText: request ? request.commentText : this.props.commentText,
+            parentCommentId: request ? request.parentCommentId : null,
+        });
         this.props.changeCommentText('');
         this.props.getPostComments(this.props.sectionId, this.props.match.params.postId);
     };
@@ -50,6 +57,7 @@ class CommentsWrapper extends React.Component {
                          changeCommentText={this.changeCommentText}
                          addNewCommentary={this.addNewCommentary}
                          likeCommentary={this.likeCommentary}
+                         updateCommentary={this.updateCommentary}
                          deleteCommentary={this.deleteCommentary}/>
     }
 
@@ -69,9 +77,10 @@ let mapDispatchToProps = (dispatch) => {
     return {
         changeCommentText: (text) => dispatch(changeCommentTextAction(text)),
         getPostComments: (sectionId, postId) => dispatch(getPostComments(sectionId, postId)),
-        addNewComment: (postId, commentText, authorName, authorId) => dispatch(sendNewPostComment(postId, commentText, authorName, authorId)),
+        addNewComment: (commentRequest) => dispatch(sendNewPostComment(commentRequest)),
         likeComment: (postId, commentId, userId) => dispatch(likeComment(postId, commentId, userId)),
-        deleteComment: (postId, commentId) => dispatch(deleteComment(postId, commentId))
+        deleteComment: (postId, commentId) => dispatch(deleteComment(postId, commentId)),
+        updateComment: (postId, commentId, commentText) => dispatch(updateComment(postId, commentId, commentText))
     }
 };
 

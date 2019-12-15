@@ -9,16 +9,11 @@ class CommentAPI {
         });
     };
 
-    sendNewPostComment(postId, commentText, authorName, authorId) {
+    sendNewPostComment(commentRequest) {
         return request({
-            url: API_BASE_URL + '/posts/post/' + postId + '/new_comment',
+            url: API_BASE_URL + '/posts/post/' + commentRequest.postId + '/new_comment',
             method: 'POST',
-            body: JSON.stringify({
-                postId: postId,
-                commentText: commentText,
-                authorName: authorName,
-                authorId: authorId
-            })
+            body: JSON.stringify(commentRequest)
         });
     };
 
@@ -37,6 +32,17 @@ class CommentAPI {
         return request({
             url: API_BASE_URL + '/posts/post/' + postId + '/delete_comment?id=' + commentId,
             method: 'GET'
+        });
+    };
+
+    updateComment(postId, commentId, commentText) {
+        debugger;
+        return request({
+            url: API_BASE_URL + '/posts/post/' + postId + '/update_comment?id=' + commentId,
+            method: 'POST',
+            body: JSON.stringify({
+                commentText: commentText
+            })
         });
     };
 }

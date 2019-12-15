@@ -57,7 +57,7 @@ function Comments(props) {
                                         currentUserData={props.currentUserData}
                                         likeCommentary={props.likeCommentary}
                                         updateCommentary={props.updateCommentary}
-                                        addNewCommentary={props.addNewCommentary}
+                                        addCommentary={props.addNewCommentary}
                                         deleteCommentary={props.deleteCommentary}
                                         key={comment.id}/>
                     })

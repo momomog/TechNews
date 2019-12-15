@@ -154,7 +154,12 @@ select, input[type="file"] {
 
 
 .popup-content {
-     background: #f4f4f4;
+    background: #f4f4f4;
+}
+
+.answer-area {
+    width: 82% !important;
+    margin-left: 4.6rem !important;
 }
 
 

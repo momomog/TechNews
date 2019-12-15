@@ -27,6 +27,7 @@ public class CommentDao extends BaseDao<CommentEntity> {
         query.setParameter("id", id);
         List comments = query.getResultList();
         List<Long> removeElementsId = new ArrayList<>();
+        response.put("commentsCount", comments.size());
 
         // Формирование вложенности комментариев
         for (Object comment : comments) {
@@ -57,9 +58,7 @@ public class CommentDao extends BaseDao<CommentEntity> {
             }
         } while (isCircle);
 
-
         response.put("comments", comments);
-        response.put("commentsCount", comments.size());
         return response;
     }
 

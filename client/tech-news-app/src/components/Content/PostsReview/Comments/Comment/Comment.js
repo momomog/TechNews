@@ -31,14 +31,28 @@ class Comment extends React.Component {
         this.setState({isEditMode: false})
     };
 
+    addCommentary = () => {
+        debugger;
+        this.props.addCommentary({
+            commentText: this.state.commentAnswerText,
+            parentCommentId: this.state.commentAnswerParentId
+        });
+        this.setState({isAnswerMode: false})
+    };
+
     changeInputCommentText = (e) => {
         this.setState({commentEditText: e.target.value});
+    };
+
+    changeAnswerCommentText = (e) => {
+        this.setState({commentAnswerText: e.target.value});
     };
 
 
     onClickEditCommentary = (e) => {
         this.setState({
             isEditMode: true,
+            isAnswerMode: false,
             commentId: this.props.comment.id,
             commentEditText: this.props.comment.commentText
         });
@@ -46,9 +60,10 @@ class Comment extends React.Component {
 
     onClickAnswerCommentary = (e) => {
         this.setState({
+            isEditMode: false,
             isAnswerMode: true,
             commentAnswerParentId: this.props.comment.id,
-            commentEditText: this.props.comment.authorName + ', '
+            commentAnswerText: this.props.comment.authorName + ', '
         });
     };
 
@@ -101,7 +116,7 @@ class Comment extends React.Component {
                                       {commentText}
                                   </div>
                                     <div className="row">
-                                        <span className="col-lg-7">
+                                        <span className="col-lg-12">
                                         <i id='like' className="fa fa-heart comment-icon mr-2 ml-1"
                                            onClick={this.like}/>
                                         <span className="comment-count">{likes.length}</span>
@@ -142,6 +157,36 @@ class Comment extends React.Component {
                                                     : ''
                                             }
 
+                                            {
+                                                this.state.isAnswerMode && this.state.commentAnswerParentId === id
+                                                ? <div className="mb-3">
+                                                       <textarea className="form-control text-area mt-2 answer-area" rows="3"
+                                                                 onChange={this.changeAnswerCommentText}
+                                                                 onKeyUp={(e) => {
+                                                                     e.target.style.height = "1px";
+                                                                     e.target.style.height = (20 + e.target.scrollHeight) + "px";
+                                                                 }}
+                                                                 value={this.state.commentAnswerText}
+                                                                 defaultValue={this.state.commentAnswerText}
+                                                                 // onKeyPress={event => {
+                                                                 //     if (event.key === 'Enter') {
+                                                                 //         event.preventDefault();
+                                                                 //         this.updateCommentary();
+                                                                 //     }
+                                                                 // }}
+                                                       />
+                                                       <div className="mt-2">
+                                                          <span>
+                                                              <a onClick={this.addCommentary} className="text-secondary reg ml-4 answer-area">Отправить</a>
+                                                          </span>
+                                                          <span>
+                                                              <a onClick={() => {this.setState({isAnswerMode: false})}} className="text-secondary reg ml-4">Отменить</a>
+                                                          </span>
+                                                       </div>
+                                                  </div>
+                                                : ''
+                                            }
+
                                         </span>
                                     </div>
                                 </div>
@@ -160,19 +205,18 @@ class Comment extends React.Component {
                 {
                     replyComments && replyComments.length > 0 ?
                         replyComments.map((comment) => {
-                            debugger;
-                        return <div className="ml-5">
-                            <Comment comment={comment}
-                                // lastCommentId={props.comments[props.comments.length - 1].id}
-                                     isAuth={this.props.isAuth}
-                                     currentUserData={this.props.currentUserData}
-                                     likeCommentary={this.props.likeCommentary}
-                                     updateCommentary={this.props.updateCommentary}
-                                     deleteCommentary={this.props.deleteCommentary}
-                                     key={comment.id} />
-                        </div>
-                    })
-                    : ''
+                            return <div className="ml-5">
+                                <Comment comment={comment}
+                                         isAuth={this.props.isAuth}
+                                         currentUserData={this.props.currentUserData}
+                                         likeCommentary={this.props.likeCommentary}
+                                         updateCommentary={this.props.updateCommentary}
+                                         addCommentary={this.props.addCommentary}
+                                         deleteCommentary={this.props.deleteCommentary}
+                                         key={comment.id}/>
+                            </div>
+                        })
+                        : ''
                 }
 
             </div>

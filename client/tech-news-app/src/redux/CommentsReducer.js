@@ -7,6 +7,7 @@ const SET_POST_COMMENTS = 'SET-POST-COMMENTS';
 
 let initialState = {
     postComments: {},
+    commentsCount: 0,
     commentText: ''
 };
 
@@ -15,7 +16,8 @@ export const commentsReducer = (state = initialState, action) => {
         case SET_POST_COMMENTS: {
             return {
                 ...state,
-                postComments: action.postComments
+                postComments: action.postComments,
+                commentsCount: action.commentsCount
             };
         }
         case CHANGE_COMMENT_TEXT: {
@@ -29,14 +31,14 @@ export const commentsReducer = (state = initialState, action) => {
     }
 };
 
-export const setPostCommentsAction = (comments) => ({type: SET_POST_COMMENTS, postComments: comments});
+export const setPostCommentsAction = (comments, commentsCount) => ({type: SET_POST_COMMENTS, postComments: comments, commentsCount: commentsCount});
 export const changeCommentTextAction = (text) => ({type: CHANGE_COMMENT_TEXT, commentText: text});
 
 export const getPostComments = (sectionId, postId) => {
     return (dispatch) => {
         CommentAPI.getPostComments(sectionId, postId)
             .then(data => {
-                dispatch(setPostCommentsAction(data.comments));
+                dispatch(setPostCommentsAction(data.comments, data.commentsCount));
             });
     };
 };

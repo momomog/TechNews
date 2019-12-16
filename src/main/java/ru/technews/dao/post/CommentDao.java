@@ -68,6 +68,7 @@ public class CommentDao extends BaseDao<CommentEntity> {
         if (comments.size() > 0) {
             CommentEntity comment = getCurrentSession().get(CommentEntity.class, commentId);
             comment.setCommentText("Данный комментарий был удален автором или администратором");
+            comment.setIsDeleted(true);
             getCurrentSession().saveOrUpdate(comment);
             return;
         }

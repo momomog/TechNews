@@ -54,6 +54,7 @@ class CommentsWrapper extends React.Component {
     render() {
         return <Comments comments={this.props.postComments}
                          commentText={this.props.commentText}
+                         commentsCount={this.props.commentsCount}
                          isAuth={this.props.isAuth}
                          currentUserData={this.props.currentUserData}
                          changeCommentText={this.changeCommentText}
@@ -70,6 +71,7 @@ let mapStateToProps = (state) => {
         commentText: state.commentsData.commentText,
         sectionId: state.authData.sectionId,
         postComments: state.commentsData.postComments,
+        commentsCount: state.commentsData.commentsCount,
         isAuth: state.authData.isAuth,
         currentUserData: state.profileData.currentUserData
     }

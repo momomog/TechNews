@@ -3,7 +3,7 @@ import Comment from "./Comment/Comment";
 import Common from "../../../../common/Common";
 
 function Comments(props) {
-
+debugger;
     function changeInputCommentText(e) {
         props.changeCommentText(e.target.value);
     }
@@ -47,7 +47,7 @@ function Comments(props) {
                     </div>
             }
 
-            <h5 className="card-header mb-4">{props.comments.length + ' ' + Common.getCommentaryCountText(props.comments.length)}</h5>
+            <h5 className="card-header mb-4">{props.commentsCount + ' ' + Common.getCommentaryCountText(props.comments.length)}</h5>
             {
                 props.comments.length > 0
                     ? props.comments.map((comment) => {

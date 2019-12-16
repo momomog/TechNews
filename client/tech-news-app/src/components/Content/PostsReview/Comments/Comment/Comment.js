@@ -70,7 +70,7 @@ class Comment extends React.Component {
     };
 
     render() {
-        const {id, authorName, authorId, date, commentText, likes, parentCommentAuthorName, replyComments} = this.props.comment;
+        const {id, authorName, authorId, date, commentText, likes, parentCommentAuthorName, isDeleted, replyComments} = this.props.comment;
 
         return (
             <div>
@@ -139,7 +139,7 @@ class Comment extends React.Component {
                                             }
 
                                             {
-                                                this.props.isAuth && authorId === this.props.currentUserData.id || Common.isUserAdmin()
+                                                (this.props.isAuth && authorId === this.props.currentUserData.id  || Common.isUserAdmin()) && !isDeleted
                                                     ? <span className="ml-3">
                                                         <a onClick={this.onClickEditCommentary} className="text-secondary reg">Редактировать</a>
                                                     </span>
@@ -147,7 +147,7 @@ class Comment extends React.Component {
                                             }
 
                                             {
-                                                this.props.isAuth && authorId === this.props.currentUserData.id || Common.isUserAdmin()
+                                                (this.props.isAuth && authorId === this.props.currentUserData.id  || Common.isUserAdmin()) && !isDeleted
                                                     ? <span className="ml-3">
                                                     <Popup trigger={<a className="text-secondary reg">Удалить</a>}
                                                            position="top center"

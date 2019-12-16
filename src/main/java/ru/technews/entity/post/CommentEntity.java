@@ -51,6 +51,10 @@ public class CommentEntity extends BaseEntity {
     @Column(name = "parent_comment_id")
     private Long parentCommentId;
 
+    // ИД комментария, к которому принадлежит данный комментарий
+    @Column(name = "parent_comment_author_name")
+    private String parentCommentAuthorName;
+
     @Transient
     private List<CommentEntity> replyComments = new ArrayList<>();
 }

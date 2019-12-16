@@ -11,9 +11,11 @@ class Comment extends React.Component {
         this.state = {
             isEditMode: false,
             isAnswerMode: false,
+            isOpenPopup: false,
             commentId: '',
             commentEditText: '',
             commentAnswerParentId: '',
+            commentAnswerParentAuthorName: '',
             commentAnswerText: ''
         };
     }
@@ -32,10 +34,10 @@ class Comment extends React.Component {
     };
 
     addCommentary = () => {
-        debugger;
         this.props.addCommentary({
             commentText: this.state.commentAnswerText,
-            parentCommentId: this.state.commentAnswerParentId
+            parentCommentId: this.state.commentAnswerParentId,
+            parentCommentAuthorName: this.state.commentAnswerParentAuthorName
         });
         this.setState({isAnswerMode: false})
     };
@@ -63,12 +65,12 @@ class Comment extends React.Component {
             isEditMode: false,
             isAnswerMode: true,
             commentAnswerParentId: this.props.comment.id,
-            commentAnswerText: this.props.comment.authorName + ', '
+            commentAnswerParentAuthorName: this.props.comment.authorName
         });
     };
 
     render() {
-        const {id, authorName, authorId, date, commentText, likes, replyComments} = this.props.comment;
+        const {id, authorName, authorId, date, commentText, likes, parentCommentAuthorName, replyComments} = this.props.comment;
 
         return (
             <div>
@@ -113,7 +115,14 @@ class Comment extends React.Component {
                               </div>
                             : <div>
                                   <div className="mt-1 mb-3" align="justify">
-                                      {commentText}
+                                      {
+                                          parentCommentAuthorName
+                                              ? <div>
+                                                  <span className="font-weight-bold ml-1">{parentCommentAuthorName}</span>
+                                                  <span>, {commentText}</span>
+                                                </div>
+                                              : commentText
+                                      }
                                   </div>
                                     <div className="row">
                                         <span className="col-lg-12">
@@ -168,12 +177,6 @@ class Comment extends React.Component {
                                                                  }}
                                                                  value={this.state.commentAnswerText}
                                                                  defaultValue={this.state.commentAnswerText}
-                                                                 // onKeyPress={event => {
-                                                                 //     if (event.key === 'Enter') {
-                                                                 //         event.preventDefault();
-                                                                 //         this.updateCommentary();
-                                                                 //     }
-                                                                 // }}
                                                        />
                                                        <div className="mt-2">
                                                           <span>

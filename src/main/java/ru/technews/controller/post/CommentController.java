@@ -76,7 +76,8 @@ public class CommentController {
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<?> deleteComment(@PathVariable("postId") Long postId,
                                            @RequestParam(name = "id") Long id) {
-        commentService.deleteById(id);
+//        commentService.deleteById(id);
+        commentService.deleteComment(id);
 
         PostEntity post = postService.findById(postId);
         post.setCommentsCount(post.getCommentsCount() - 1);

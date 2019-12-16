@@ -24,6 +24,10 @@ public class CommentService extends BaseService<CommentEntity> {
         return commentDao.getPostComments(id);
     }
 
+    public void deleteComment(Long commentId) {
+        commentDao.deleteComment(commentId);
+    }
+
     public void deleteCommentsByPostId(Long postId) {
         commentDao.deleteCommentsByPostId(postId);
     }

@@ -23,43 +23,60 @@ public class CommentDao extends BaseDao<CommentEntity> {
         }
 
         Map<String, Object> response = new HashMap<>();
+        List<CommentEntity> deleteComments = new ArrayList<>();
         Query query = getCurrentSession().createQuery("from CommentEntity where postId = :id order by id");
         query.setParameter("id", id);
         List comments = query.getResultList();
-        List<Long> removeElementsId = new ArrayList<>();
         response.put("commentsCount", comments.size());
 
-        // Формирование вложенности комментариев
+        // Создание копии комментариев
+        List<CommentEntity> responseComments = new ArrayList<>();
         for (Object comment : comments) {
             CommentEntity com = (CommentEntity) comment;
+            responseComments.add(com);
+        }
+
+        // Формирование вложенности комментариев
+        for (int j = 0; j < comments.size(); j++) {
+            CommentEntity com = (CommentEntity) comments.get(j);
             if (com.getParentCommentId() != null) {
-                for (Object innerComment : comments) {
-                    CommentEntity innerCom = (CommentEntity) innerComment;
+                for (int i = 0; i < comments.size(); i++) {
+                    CommentEntity innerCom = (CommentEntity) comments.get(i);
                     if (com.getParentCommentId().equals(innerCom.getId())) {
-                        innerCom.getReplyComments().add(com);
-                        removeElementsId.add(com.getId());
+                        innerCom.getReplyComments().add(responseComments.get(j));
+                        deleteComments.add(responseComments.get(j));
                     }
                 }
             }
         }
 
         // Удаление вложенных комментариев из общего списка
-        boolean isCircle = true;
-        do {
-            out: for (Long el : removeElementsId) {
-                for (Object comment : comments) {
-                    CommentEntity com = (CommentEntity) comment;
-                    if (com.getId().equals(el)) {
-                        comments.remove(com);
-                        continue out;
-                    }
-                }
-                isCircle = false;
-            }
-        } while (isCircle);
+        for (CommentEntity el : deleteComments) {
+            responseComments.remove(el);
+        }
 
-        response.put("comments", comments);
+        response.put("comments", responseComments);
         return response;
+    }
+
+    // Удаление комментария поста
+    public void deleteComment(Long commentId) {
+        Query query = getCurrentSession().createQuery("from CommentEntity where parentCommentId=:commentId");
+        query.setParameter("commentId", commentId);
+        List comments = query.getResultList();
+
+        if (comments.size() > 0) {
+            CommentEntity comment = getCurrentSession().get(CommentEntity.class, commentId);
+            comment.setCommentText("Данный комментарий был удален автором или администратором");
+            getCurrentSession().saveOrUpdate(comment);
+            return;
+        }
+
+        query = getCurrentSession().createQuery("delete FROM CommentEntity  WHERE id=:commentId");
+        query.setParameter("commentId", commentId);
+        query.executeUpdate();
+
+
     }
 
     // Удаление всех комментариев поста

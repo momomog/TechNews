@@ -38,12 +38,14 @@ class CommentsWrapper extends React.Component {
     };
 
     addNewCommentary = (request) => {
+        debugger;
         this.props.addNewComment({
             postId: this.props.match.params.postId,
             authorId: this.props.currentUserData.id,
             authorName: this.props.currentUserData.username,
             commentText: request ? request.commentText : this.props.commentText,
             parentCommentId: request ? request.parentCommentId : null,
+            parentCommentAuthorName: request ? request.parentCommentAuthorName : null
         });
         this.props.changeCommentText('');
         this.props.getPostComments(this.props.sectionId, this.props.match.params.postId);

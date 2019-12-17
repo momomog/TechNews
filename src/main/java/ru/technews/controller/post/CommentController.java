@@ -42,6 +42,7 @@ public class CommentController {
                                            @RequestBody CommentEntity comment) {
         comment.setDate(LocalDateTime.now());
         comment.setLikes(new Integer[]{});
+        comment.setIsDeleted(false);
         commentService.save(comment);
 
         PostEntity post = postService.findById(postId);
@@ -76,7 +77,6 @@ public class CommentController {
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<?> deleteComment(@PathVariable("postId") Long postId,
                                            @RequestParam(name = "id") Long id) {
-//        commentService.deleteById(id);
         commentService.deleteComment(id);
 
         PostEntity post = postService.findById(postId);

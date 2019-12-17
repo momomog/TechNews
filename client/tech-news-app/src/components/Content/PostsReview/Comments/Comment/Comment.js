@@ -21,11 +21,13 @@ class Comment extends React.Component {
     }
 
     like = () => {
-        this.props.likeCommentary(this.props.comment.id);
+        if (this.props.isAuth && !this.props.comment.isDeleted)
+            this.props.likeCommentary(this.props.comment.id);
     };
 
     deleteCommentary = () => {
         this.props.deleteCommentary(this.props.comment.id);
+        this.setState({commentEditText: ''});
     };
 
     updateCommentary = () => {
@@ -51,7 +53,7 @@ class Comment extends React.Component {
     };
 
 
-    onClickEditCommentary = (e) => {
+    onClickEditCommentary = () => {
         this.setState({
             isEditMode: true,
             isAnswerMode: false,
@@ -60,7 +62,7 @@ class Comment extends React.Component {
         });
     };
 
-    onClickAnswerCommentary = (e) => {
+    onClickAnswerCommentary = () => {
         this.setState({
             isEditMode: false,
             isAnswerMode: true,
@@ -70,7 +72,9 @@ class Comment extends React.Component {
     };
 
     render() {
-        const {id, authorName, authorId, date, commentText, likes, parentCommentAuthorName, isDeleted, replyComments} = this.props.comment;
+        const {
+            id, authorName, authorId, date, commentText, likes, parentCommentAuthorName,
+            isDeleted, replyComments} = this.props.comment;
 
         return (
             <div>
@@ -96,11 +100,11 @@ class Comment extends React.Component {
                             ? <div>
                                     <textarea className="form-control text-area mt-2" rows="3"
                                               onChange={this.changeInputCommentText}
+                                              value={this.state.commentEditText}
                                               onKeyUp={(e) => {
                                                   e.target.style.height = "1px";
                                                   e.target.style.height = (20 + e.target.scrollHeight) + "px";
                                               }}
-                                              value={this.state.commentEditText}
                                               onKeyPress={event => {
                                                   if (event.key === 'Enter') {
                                                       event.preventDefault();
@@ -116,7 +120,9 @@ class Comment extends React.Component {
                             : <div>
                                   <div className="mt-1 mb-3" align="justify">
                                       {
-                                          parentCommentAuthorName
+                                          isDeleted
+                                          ? <i>{commentText}</i>
+                                          : parentCommentAuthorName
                                               ? <div>
                                                   <span className="font-weight-bold ml-1">{parentCommentAuthorName}</span>
                                                   <span>, {commentText}</span>
@@ -133,35 +139,46 @@ class Comment extends React.Component {
                                             {
                                                 this.props.isAuth
                                                     ? <span>
-                                                        <a onClick={this.onClickAnswerCommentary} className="text-secondary reg ml-4">Ответить</a>
-                                                    </span>
+                                                         <a onClick={this.onClickAnswerCommentary} className="text-secondary reg ml-4">Ответить</a>
+                                                      </span>
                                                     : ''
                                             }
 
                                             {
                                                 (this.props.isAuth && authorId === this.props.currentUserData.id  || Common.isUserAdmin()) && !isDeleted
                                                     ? <span className="ml-3">
-                                                        <a onClick={this.onClickEditCommentary} className="text-secondary reg">Редактировать</a>
-                                                    </span>
+                                                         <a onClick={this.onClickEditCommentary} className="text-secondary reg">Редактировать</a>
+                                                      </span>
                                                     : ''
                                             }
 
                                             {
                                                 (this.props.isAuth && authorId === this.props.currentUserData.id  || Common.isUserAdmin()) && !isDeleted
                                                     ? <span className="ml-3">
-                                                    <Popup trigger={<a className="text-secondary reg">Удалить</a>}
-                                                           position="top center"
-                                                           open={this.state.isOpenPopup}
-                                                           onOpen={() => {this.setState({isOpenPopup: true})}}
-                                                           arrowStyle={{backgroundColor: "transparent", border: "none"}}
-                                                           contentStyle={{backgroundColor: "#f4f4f4", border: "none", borderRadius: "5px"}}>
-                                                        <div>
-                                                            <div className="text-center text-dark">Вы уверены?</div>
-                                                            <a onClick={this.deleteCommentary} className="text-secondary reg ml-5">Удалить</a>
-                                                            <a onClick={() => {this.setState({isOpenPopup: false})}} className="text-secondary reg ml-4">Отменить</a>
-                                                        </div>
-                                                    </Popup>
-
+                                                          <Popup trigger={<a className="text-secondary reg">Удалить</a>}
+                                                                 position="top center"
+                                                                 open={this.state.isOpenPopup}
+                                                                 onOpen={() => {
+                                                                     this.setState({isOpenPopup: true})
+                                                                 }}
+                                                                 arrowStyle={{
+                                                                     backgroundColor: "transparent",
+                                                                     border: "none"
+                                                                 }}
+                                                                 contentStyle={{
+                                                                     backgroundColor: "#f4f4f4",
+                                                                     border: "none",
+                                                                     borderRadius: "5px"
+                                                                 }}>
+                                                          <div>
+                                                              <div className="text-center text-dark">Вы уверены?</div>
+                                                              <a onClick={this.deleteCommentary}
+                                                                 className="text-secondary reg ml-5">Удалить</a>
+                                                              <a onClick={() => {
+                                                                  this.setState({isOpenPopup: false})
+                                                              }} className="text-secondary reg ml-4">Отменить</a>
+                                                          </div>
+                                                          </Popup>
                                                       </span>
                                                     : ''
                                             }
@@ -171,12 +188,12 @@ class Comment extends React.Component {
                                                 ? <div className="mb-3">
                                                        <textarea className="form-control text-area mt-2 answer-area" rows="3"
                                                                  onChange={this.changeAnswerCommentText}
+                                                                 value={this.state.commentAnswerText}
+                                                                 defaultValue={this.state.commentAnswerText}
                                                                  onKeyUp={(e) => {
                                                                      e.target.style.height = "1px";
                                                                      e.target.style.height = (20 + e.target.scrollHeight) + "px";
                                                                  }}
-                                                                 value={this.state.commentAnswerText}
-                                                                 defaultValue={this.state.commentAnswerText}
                                                        />
                                                        <div className="mt-2">
                                                           <span>
@@ -195,9 +212,6 @@ class Comment extends React.Component {
                                 </div>
                         }
 
-
-
-
                     </div>
                 </div>
 
@@ -206,18 +220,18 @@ class Comment extends React.Component {
                 }
 
                 {
-                    replyComments && replyComments.length > 0 ?
-                        replyComments.map((comment) => {
+                    replyComments && replyComments.length > 0
+                        ? replyComments.map((comment) => {
                             return <div className="ml-5">
-                                <Comment comment={comment}
-                                         isAuth={this.props.isAuth}
-                                         currentUserData={this.props.currentUserData}
-                                         likeCommentary={this.props.likeCommentary}
-                                         updateCommentary={this.props.updateCommentary}
-                                         addCommentary={this.props.addCommentary}
-                                         deleteCommentary={this.props.deleteCommentary}
-                                         key={comment.id}/>
-                            </div>
+                                       <Comment comment={comment}
+                                                isAuth={this.props.isAuth}
+                                                currentUserData={this.props.currentUserData}
+                                                likeCommentary={this.props.likeCommentary}
+                                                updateCommentary={this.props.updateCommentary}
+                                                addCommentary={this.props.addCommentary}
+                                                deleteCommentary={this.props.deleteCommentary}
+                                                key={comment.id}/>
+                                  </div>
                         })
                         : ''
                 }
@@ -225,8 +239,6 @@ class Comment extends React.Component {
             </div>
         )
     }
-
-
 }
 
 export default Comment;

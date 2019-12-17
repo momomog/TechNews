@@ -3,34 +3,30 @@ import {NavLink, Redirect} from "react-router-dom";
 
 
 class Authorization extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
             login: '',
             password: ''
         };
-
-        this.onLoginClick = this.onLoginClick.bind(this);
-        this.onLoginFieldsChange = this.onLoginFieldsChange.bind(this);
     }
 
-    onLoginClick() {
+    onLoginClick = () => {
         this.props.onLogin({
             usernameOrEmail: this.state.login,
             password: this.state.password
         });
 
-    }
+    };
 
-    onLoginFieldsChange(e) {
+    onLoginFieldsChange = (e) => {
         if (e.target.name === 'usernameOrEmail') {
             this.setState({login: e.target.value})
         }
         if (e.target.name === 'password') {
             this.setState({password: e.target.value})
         }
-    }
+    };
 
     render() {
         return (

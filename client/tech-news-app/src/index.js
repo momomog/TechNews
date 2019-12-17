@@ -16,8 +16,7 @@ import 'react-notifications/lib/notifications.css';
 ReactDOM.render(
     <Provider store={store}>
         <App/>
-    </Provider>,
-    document.getElementById('root'));
+    </Provider>, document.getElementById('root'));
 
 
 serviceWorker.unregister();

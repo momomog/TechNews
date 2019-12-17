@@ -3,9 +3,9 @@ import {Route} from "react-router-dom";
 
 import PostsListWrapper from "./PostsList/PostsListWrapper";
 import PostReviewWrapper from "./PostsReview/PostReviewWrapper";
-import AuthorizationWrapper from "../UserLogin/Authorization/AuthorizationWrapper";
+import AuthorizationWrapper from "../Autentification/Authorization/AuthorizationWrapper";
 import ProfileWrapper from "./Profile/ProfileWrapper";
-import RegistrationWrapper from "../UserLogin/Registration/RegistrationWrapper";
+import RegistrationWrapper from "../Autentification/Registration/RegistrationWrapper";
 import ProfileEditWrapper from "./EditPages/ProfileEdit/ProfileEditWrapper";
 import PostEditWrapper from "./EditPages/PostEdit/PostEditWrapper";
 import AdminPanelWrapper from "./AdminPanel/AdminPanelWrapper";

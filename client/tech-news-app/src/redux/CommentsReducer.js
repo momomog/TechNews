@@ -44,7 +44,6 @@ export const getPostComments = (sectionId, postId) => {
 };
 
 export const sendNewPostComment = (commentRequest) => {
-    debugger;
     return () => {
         CommentAPI.sendNewPostComment(commentRequest)
             .then(function (data) {

@@ -55,7 +55,8 @@ public class CommentEntity extends BaseEntity {
     @Column(name = "parent_comment_author_name")
     private String parentCommentAuthorName;
 
-    // Удалено содержимое комментария
+    // Удалено ли содержимое комментария
+    @Type(type = "numeric_boolean")
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 

@@ -36,7 +36,6 @@ class CommentAPI {
     };
 
     updateComment(postId, commentId, commentText) {
-        debugger;
         return request({
             url: API_BASE_URL + '/posts/post/' + postId + '/update_comment?id=' + commentId,
             method: 'POST',

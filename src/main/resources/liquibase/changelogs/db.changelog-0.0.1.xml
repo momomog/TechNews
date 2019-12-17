@@ -65,7 +65,7 @@
             <column name="date" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
-            <column name="likes" type="integer []">
+            <column name="likes" type="integer []" defaultValueComputed="'{None}'::integer[]">
                 <constraints nullable="false"/>
             </column>
             <column name="parent_comment_id" type="bigint">

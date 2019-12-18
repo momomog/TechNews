@@ -19,15 +19,21 @@
     height: 350px !important;
 }
 
-
-/*post-review*/
 .post-author {
     font-size: 1.2em;
 }
 
-/*post-comment*/
 .post-author-comment {
     font-size: 1.1em;
+}
+
+.post-description {
+    font-size: 1.1em;
+}
+
+.post-description span, a {
+    font-size: 1.05em!important;
+    background-color: transparent !important;
 }
 
 .comment-author-link {

@@ -29,6 +29,10 @@ public class PostEntity extends BaseEntity {
     @Column(name = "full_desc")
     private String fullDescription;
 
+    // ID автора
+    @Column(name = "author_id")
+    private Long authorId;
+
     // автор
     @Column(name = "author")
     private String author;

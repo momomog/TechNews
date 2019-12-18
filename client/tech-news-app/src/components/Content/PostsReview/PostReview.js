@@ -33,7 +33,7 @@ function PostReview(props) {
                             <hr/>
                         </div>
 
-                        <div className="post-author-comment">
+                        <div className="post-description">
                             {
                                 props.post.fullDescription ? Parser(props.post.fullDescription) : ''
                             }

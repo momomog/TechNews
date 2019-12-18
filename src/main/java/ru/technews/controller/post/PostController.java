@@ -10,15 +10,16 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.technews.common.PostCategoryConst;
 import ru.technews.entity.post.PostEntity;
 import ru.technews.payload.ActionCompleteResponse;
-import ru.technews.payload.NewPostDataRequest;
 import ru.technews.payload.PostDataRequest;
 import ru.technews.security.CurrentUser;
 import ru.technews.security.UserPrincipal;
 import ru.technews.service.post.CommentService;
 import ru.technews.service.post.PostService;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -91,14 +92,18 @@ public class PostController implements PostCategoryConst {
     }
 
     // Создание нового поста
-    @PostMapping(value = "/new-post")
+    @PostMapping(value = "/new-post", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity createNewPost(@CurrentUser UserPrincipal currentUser,
-                                        @RequestBody NewPostDataRequest postRequest,
-                                        @RequestParam MultipartFile photo) {
+                                        @RequestPart("post") @Valid PostEntity post,
+                                        @RequestPart("photo") @Valid MultipartFile photo) throws IOException {
+        post.setAuthor(currentUser.getUsername());
+        post.setAuthorId(currentUser.getId());
+        post.setCommentsCount(0L);
+        post.setDate(LocalDate.now());
+        post.setPhoto(photo.getBytes());
 
-        // method body
-
+        postService.save(post);
 
         return ResponseEntity.ok(new ActionCompleteResponse(true));
     }

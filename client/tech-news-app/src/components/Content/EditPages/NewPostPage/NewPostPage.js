@@ -10,6 +10,7 @@ class NewPostPage extends React.Component {
         super(props);
         this.state = {
             title: '',
+            preDescription: '',
             fullDescription: '',
             category: '',
             photo: ''
@@ -31,8 +32,9 @@ class NewPostPage extends React.Component {
     createNewPost = () => {
         this.props.createNewPost({
             title: this.state.title,
+            preDescription: this.state.preDescription,
             fullDescription: this.state.fullDescription,
-            category: this.state.category
+            categoryId: this.state.category
         }, this.state.photo);
     };
 
@@ -57,6 +59,13 @@ class NewPostPage extends React.Component {
                                 <div className="row p-3 ml-4 mr-4">
                                     <input type="text" name="title" className="input-group-form"
                                            placeholder="Введите заголовок поста"
+                                           onChange={this.onFieldChange} required/>
+                                </div>
+
+                                <h5 className="card-header ml-4 mr-4">Краткое описание</h5>
+                                <div className="row p-3 ml-4 mr-4">
+                                    <textarea name="preDescription" className="form-control text-area"
+                                           placeholder="Введите краткое описание поста" rows="3"
                                            onChange={this.onFieldChange} required/>
                                 </div>
 

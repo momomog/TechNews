@@ -111,7 +111,7 @@ export const createNewPost = (postDataRequest, photoBody) => {
             .then(response => {
             })
             .catch(function (error) {
-                NotificationManager.error('Не удалось обновить данные поста', 'Ошибка');
+                NotificationManager.error('Не удалось создать новый пост', 'Ошибка');
             });
     };
 };

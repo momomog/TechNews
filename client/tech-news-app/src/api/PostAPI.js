@@ -34,8 +34,10 @@ class PostAPI {
 
     onCreateNewPost(postDataRequest, photoBody) {
         const formData = new FormData();
+        formData.append('post', new Blob([JSON.stringify(postDataRequest)], {
+            type: "application/json"
+        }));
         formData.append('photo', photoBody);
-        formData.append('postData', JSON.stringify(postDataRequest));
         const headers = new Headers({});
 
         if (Common.getToken()) {
@@ -44,8 +46,8 @@ class PostAPI {
 
         return request({
             url: API_BASE_URL + '/posts/new-post',
-            headers: headers,
             method: 'POST',
+            headers: headers,
             body: formData
         });
     };

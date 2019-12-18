@@ -4,16 +4,14 @@ import {compose} from "redux";
 import {withRouter} from "react-router-dom";
 import NewPostPage from "./NewPostPage";
 import {createNewPost} from "../../../../redux/PostsReducer";
+import Common from "../../../../common/Common";
+import {getSectionName} from "../../../../common/Const";
 
 class NewPostPageWrapper extends React.Component {
 
     createNewPost = (postDataRequest, photoBody) => {
         this.props.createNewPost(postDataRequest, photoBody);
-
-        // if (photoBody)
-        //     this.props.updatePostPhoto(this.props.match.params.postId, photoBody);
-        // let path = '/posts/' + this.props.match.params.sectionName + '/post/' + this.props.match.params.postId;
-        // Common.changeLocation(path, 700);
+        Common.changeLocation('/posts/' + getSectionName(postDataRequest.categoryId));
     };
 
     render() {
@@ -23,16 +21,12 @@ class NewPostPageWrapper extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        // postData: state.postsData.postData,
-        // sectionId: state.authData.sectionId
     }
 };
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        // getPostData: (sectionId, postId) => dispatch(getPostData(sectionId, postId)),
-        createNewPost: (postDataRequest, photoBody) => dispatch(createNewPost(postDataRequest, photoBody)),
-        // createPostPhoto: (postId, photoBody) => dispatch(createPostPhoto(postId, photoBody)),
+        createNewPost: (postDataRequest, photoBody) => dispatch(createNewPost(postDataRequest, photoBody))
     }
 };
 

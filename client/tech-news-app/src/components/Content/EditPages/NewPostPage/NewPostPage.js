@@ -13,7 +13,7 @@ class NewPostPage extends React.Component {
             title: '',
             preDescription: '',
             fullDescription: '',
-            category: '',
+            categoryId: '',
             photo: ''
         }
     }
@@ -35,7 +35,7 @@ class NewPostPage extends React.Component {
             title: this.state.title,
             preDescription: this.state.preDescription,
             fullDescription: this.state.fullDescription,
-            categoryId: this.state.category
+            categoryId: this.state.categoryId
         }, this.state.photo);
     };
 
@@ -72,7 +72,7 @@ class NewPostPage extends React.Component {
 
                                 <h5 className="card-header ml-4 mr-4">Категория</h5>
                                 <div className="row p-3 ml-4 mr-4">
-                                    <select className="form-control" name="category" onChange={this.onFieldChange} required>
+                                    <select className="form-control" name="categoryId" onChange={this.onFieldChange} required>
                                         <option value="" disabled selected>Выберите тип...</option>
                                         <option value="2">Смартфоны</option>
                                         <option value="3">Ноутбуки</option>

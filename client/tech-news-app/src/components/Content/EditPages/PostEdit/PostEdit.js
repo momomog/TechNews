@@ -4,6 +4,7 @@ import "moment/locale/ru";
 import {NavLink} from "react-router-dom";
 import {Editor} from '@tinymce/tinymce-react';
 import * as BaseRequest from "../../../../api/BaseRequest";
+import Common from "../../../../common/Common";
 
 class PostEdit extends React.Component {
     constructor(props) {
@@ -13,7 +14,23 @@ class PostEdit extends React.Component {
             preDescription: '',
             fullDescription: '',
             category: '',
-            photo: ''
+            photo: '',
+            isSetState: false
+        }
+    }
+
+    blabla() {
+        if (this.props.post.id && !this.state.isSetState){
+            debugger;
+            let post = this.props.post;
+
+            this.setState({
+                title: post.title,
+                preDescription: post.preDescription,
+                fullDescription: post.fullDescription,
+                categoryId: post.categoryId,
+                isSetState: true
+            });
         }
     }
 
@@ -34,11 +51,14 @@ class PostEdit extends React.Component {
             title: this.state.title,
             preDescription: this.state.preDescription,
             fullDescription: this.state.fullDescription,
-            categoryId: this.state.category
+            categoryId: this.state.categoryId
         }, this.state.photo);
     };
 
     render() {
+
+        this.blabla();
+
         return (
             <div className="row">
                 <div className="col-md-11 center-block ">

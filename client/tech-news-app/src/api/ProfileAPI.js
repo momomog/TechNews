@@ -3,7 +3,6 @@ import {API_BASE_URL, request} from "./BaseRequest";
 
 
 class ProfileAPI {
-
     getCurrentUser() {
         if (!Common.getToken()) {
             return Promise.reject("No access token set.");

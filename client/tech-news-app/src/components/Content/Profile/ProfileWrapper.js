@@ -7,14 +7,12 @@ import Profile from "./Profile";
 import Common from "../../../common/Common";
 
 class ProfileWrapper extends React.Component {
-
     isNotCurrentUser() {
         const path = this.props.location.pathname.split('/');
         if ((path[1] === 'profile' && path.length === 2) || (path[1] === 'profile' && this.props.currentUserData.username === path[2]))
             return false;
         return true;
     }
-
 
     componentDidMount() {
         const path = this.props.location.pathname.split('/');

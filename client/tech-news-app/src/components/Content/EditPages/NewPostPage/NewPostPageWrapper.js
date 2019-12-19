@@ -6,12 +6,27 @@ import NewPostPage from "./NewPostPage";
 import {createNewPost} from "../../../../redux/PostsReducer";
 import Common from "../../../../common/Common";
 import {getSectionName} from "../../../../common/Const";
+import {NotificationManager} from "react-notifications";
 
 class NewPostPageWrapper extends React.Component {
 
     createNewPost = (postDataRequest, photoBody) => {
+        let isError = [];
+
+        isError.push(Common.onValidBeforePostSave(postDataRequest.title, 'Заголовок', 50, 200));
+        isError.push(Common.onValidBeforePostSave(postDataRequest.preDescription, 'Краткое описание', 200, 1000));
+        isError.push(Common.onValidBeforePostSave(postDataRequest.fullDescription, 'Описание', 1000, 20000));
+
+        if (!postDataRequest.categoryId) {
+            NotificationManager.error('Необходимо выбрать категорию', 'Категория');
+            return;
+        }
+
+        if (isError.indexOf(false) !== -1)
+            return;
+
         this.props.createNewPost(postDataRequest, photoBody);
-        Common.changeLocation('/posts/' + getSectionName(postDataRequest.categoryId));
+        Common.changeLocation('/posts/' + getSectionName(Number(postDataRequest.categoryId)));
     };
 
     render() {
@@ -20,8 +35,7 @@ class NewPostPageWrapper extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-    return {
-    }
+    return {}
 };
 
 let mapDispatchToProps = (dispatch) => {

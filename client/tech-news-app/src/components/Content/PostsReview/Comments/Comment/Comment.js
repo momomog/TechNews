@@ -52,7 +52,6 @@ class Comment extends React.Component {
         this.setState({commentAnswerText: e.target.value});
     };
 
-
     onClickEditCommentary = () => {
         this.setState({
             isEditMode: true,

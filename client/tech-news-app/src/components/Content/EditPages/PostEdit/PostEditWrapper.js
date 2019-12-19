@@ -5,6 +5,7 @@ import {withRouter} from "react-router-dom";
 import Common from "../../../../common/Common";
 import PostEdit from "./PostEdit";
 import {getPostData, updatePostData, updatePostPhoto} from "../../../../redux/PostsReducer";
+import {NotificationManager} from "react-notifications";
 
 class PostEditWrapper extends React.Component {
 
@@ -13,6 +14,21 @@ class PostEditWrapper extends React.Component {
     }
 
     updatePostData = (postDataRequest, photoBody) => {
+        let isError = [];
+
+        debugger;
+        isError.push(Common.onValidBeforePostSave(postDataRequest.title, 'Заголовок', 50, 200));
+        isError.push(Common.onValidBeforePostSave(postDataRequest.preDescription, 'Краткое описание', 200, 1000));
+        isError.push(Common.onValidBeforePostSave(postDataRequest.fullDescription, 'Описание', 1000, 20000));
+
+        if (!postDataRequest.categoryId) {
+            NotificationManager.error('Необходимо выбрать категорию', 'Категория');
+            return;
+        }
+
+        if (isError.indexOf(false) !== -1)
+            return;
+
         this.props.updatePostData(this.props.match.params.postId, postDataRequest);
 
         if (photoBody)

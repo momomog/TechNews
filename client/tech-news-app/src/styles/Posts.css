@@ -31,7 +31,7 @@
     font-size: 1.1em;
 }
 
-.post-description span, a {
+.post-desc span, a {
     font-size: 1.05em!important;
     background-color: transparent !important;
 }
@@ -168,4 +168,10 @@ select, input[type="file"] {
     margin-left: 4.6rem !important;
 }
 
+.page-item.active .page-link {
+    background-color: #007bff!important;
+}
 
+.pagination>li>a, .pagination>li>span {
+    background-color: #fff!important;
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import jwt_decode from "jwt-decode";
+import {NotificationManager} from "react-notifications";
 
 class Common {
 
@@ -98,6 +99,22 @@ class Common {
             default:
                 return 'Неизвестная ошибка';
         }
+    }
+
+    // Проверка заполненности полей при создании, редактировании поста
+    onValidBeforePostSave(fieldBody, fieldName, minValue, maxValue) {
+        let errorText = !fieldBody
+            ? 'Поле не может быть пустым'
+            : fieldBody.length < minValue
+                ? `Минимальное количество символов (${minValue})`
+                : fieldBody.length > maxValue
+                    ? `Превышено максимальное количество символов (${maxValue})`
+                    : null;
+        if (!errorText)
+            return true;
+
+        NotificationManager.error(errorText, fieldName);
+        return false;
     }
 
     // *

@@ -32,8 +32,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        // getCurrentUserData: userId => dispatch(getCurrentUserData(userId)),
-        updateUserData: userDataRequest => dispatch(updateUserData(userDataRequest)),
+        updateUserData: userDataRequest => dispatch(updateUserData(userDataRequest))
     }
 };
 

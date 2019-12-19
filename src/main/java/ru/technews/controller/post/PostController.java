@@ -96,12 +96,16 @@ public class PostController implements PostCategoryConst {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity createNewPost(@CurrentUser UserPrincipal currentUser,
                                         @RequestPart("post") @Valid PostEntity post,
-                                        @RequestPart("photo") @Valid MultipartFile photo) throws IOException {
+                                        @RequestPart("photo") @Valid MultipartFile photo) throws IOException, InterruptedException {
         post.setAuthor(currentUser.getUsername());
         post.setAuthorId(currentUser.getId());
         post.setCommentsCount(0L);
         post.setDate(LocalDate.now());
-        post.setPhoto(photo.getBytes());
+
+        if (photo.getSize() != 0)
+            post.setPhoto(photo.getBytes());
+
+        Thread.sleep(700);
 
         postService.save(post);
 
@@ -165,7 +169,7 @@ public class PostController implements PostCategoryConst {
 
         // Если у поста нет фото, возвращаем общее фото из папки resources
         if (post == null || post.getPhoto() == null) {
-            InputStream noProfileImageIS = getClass().getClassLoader().getResourceAsStream("/images/empty_post_picture.jpg");
+            InputStream noProfileImageIS = getClass().getClassLoader().getResourceAsStream("/images/empty_post_picture.png");
             if (noProfileImageIS != null) {
                 return IOUtils.toByteArray(noProfileImageIS);
             } else {

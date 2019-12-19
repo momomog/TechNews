@@ -37,7 +37,12 @@ class PostAPI {
         formData.append('post', new Blob([JSON.stringify(postDataRequest)], {
             type: "application/json"
         }));
-        formData.append('photo', photoBody);
+
+        if (photoBody) {
+            formData.append('photo', photoBody);
+        } else {
+            formData.append('photo', new Blob());
+        }
         const headers = new Headers({});
 
         if (Common.getToken()) {

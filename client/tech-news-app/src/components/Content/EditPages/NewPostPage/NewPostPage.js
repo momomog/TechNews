@@ -4,6 +4,7 @@ import "moment/locale/ru";
 import {NavLink} from "react-router-dom";
 import {Editor} from '@tinymce/tinymce-react';
 import * as BaseRequest from "../../../../api/BaseRequest";
+import {NotificationManager} from "react-notifications";
 
 class NewPostPage extends React.Component {
     constructor(props) {

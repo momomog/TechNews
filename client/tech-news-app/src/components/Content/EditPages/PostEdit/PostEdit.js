@@ -10,13 +10,15 @@ class PostEdit extends React.Component {
         super(props);
         this.state = {
             title: '',
+            preDescription: '',
             fullDescription: '',
+            category: '',
             photo: ''
         }
     }
 
-    onTitleChange = (e) => {
-        this.setState({title: e.target.value});
+    onFieldChange = (e) => {
+        this.setState({[e.target.name]: e.target.value});
     };
 
     onDescriptionChange = (e) => {
@@ -30,7 +32,9 @@ class PostEdit extends React.Component {
     updatePostData = () => {
         this.props.updatePostData({
             title: this.state.title,
-            fullDescription: this.state.fullDescription
+            preDescription: this.state.preDescription,
+            fullDescription: this.state.fullDescription,
+            categoryId: this.state.category
         }, this.state.photo);
     };
 
@@ -61,7 +65,27 @@ class PostEdit extends React.Component {
                                     <input type="text" name="title" className="input-group-form"
                                            defaultValue={this.props.post.title}
                                            placeholder="Введите заголовок поста"
-                                           onChange={this.onTitleChange} required/>
+                                           onChange={this.onFieldChange} required/>
+                                </div>
+
+                                <h5 className="card-header ml-4 mr-4">Краткое описание</h5>
+                                <div className="row p-3 ml-4 mr-4">
+                                    <textarea name="preDescription" className="form-control text-area"
+                                              defaultValue={this.props.post.preDescription}
+                                              placeholder="Введите краткое описание поста" rows="3"
+                                              onChange={this.onFieldChange} required/>
+                                </div>
+
+                                <h5 className="card-header ml-4 mr-4">Категория</h5>
+                                <div className="row p-3 ml-4 mr-4">
+                                    <select className="form-control" defaultValue={this.props.post.categoryId}
+                                            name="category" onChange={this.onFieldChange} required>
+                                        <option value="" disabled>Выберите тип...</option>
+                                        <option value="2">Смартфоны</option>
+                                        <option value="3">Ноутбуки</option>
+                                        <option value="4">Компьютерное железо</option>
+                                        <option value="5">Разное</option>
+                                    </select>
                                 </div>
 
                                 <h5 className="card-header ml-4 mr-4 ">Описание</h5>

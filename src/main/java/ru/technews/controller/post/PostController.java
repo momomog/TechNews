@@ -1,5 +1,8 @@
 package ru.technews.controller.post;
 
+import com.google.api.client.http.FileContent;
+import com.google.api.services.drive.Drive;
+import com.google.api.services.drive.model.File;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -8,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.technews.common.PostCategoryConst;
+import ru.technews.config.GoogleDrive;
 import ru.technews.entity.post.PostEntity;
 import ru.technews.payload.ActionCompleteResponse;
 import ru.technews.payload.PostDataRequest;
@@ -19,6 +23,7 @@ import ru.technews.service.post.PostService;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.GeneralSecurityException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -147,16 +152,27 @@ public class PostController implements PostCategoryConst {
     @PostMapping(value = "/post/{id}/load-photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity updateUserPhoto(@PathVariable("id") Long id,
-                                          @RequestParam MultipartFile photo) throws IOException, InterruptedException {
+                                          @RequestParam MultipartFile photo) throws IOException, InterruptedException, GeneralSecurityException {
         PostEntity post = postService.findById(id);
 
-        if (photo.getBytes().length != 0) {
-            post.setPhoto(photo.getBytes());
-        }
+        File fileMetadata = new File();
+        fileMetadata.setName(photo.getName());
+        java.io.File filePath = new java.io.File(System.getProperty("java.io.tmpdir") + "/" + photo.getName());
+        photo.transferTo(filePath);
+        FileContent mediaContent = new FileContent("image/jpeg", filePath);
+        File file = GoogleDrive.getDrive().files().create(fileMetadata, mediaContent)
+                .setFields("id")
+                .execute();
+        System.out.println("File ID: " + file.getId());
 
-        // Искусственная задержка для полной обработки фото перед обновлением
-        Thread.sleep(700);
-        postService.update(post);
+
+//        if (photo.getBytes().length != 0) {
+//            post.setPhoto(photo.getBytes());
+//        }
+//
+//        // Искусственная задержка для полной обработки фото перед обновлением
+//        Thread.sleep(700);
+//        postService.update(post);
 
         return ResponseEntity.ok(new ActionCompleteResponse(true));
     }

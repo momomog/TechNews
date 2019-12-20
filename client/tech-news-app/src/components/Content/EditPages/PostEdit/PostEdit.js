@@ -4,7 +4,6 @@ import "moment/locale/ru";
 import {NavLink} from "react-router-dom";
 import {Editor} from '@tinymce/tinymce-react';
 import * as BaseRequest from "../../../../api/BaseRequest";
-import Common from "../../../../common/Common";
 
 class PostEdit extends React.Component {
     constructor(props) {
@@ -19,9 +18,8 @@ class PostEdit extends React.Component {
         }
     }
 
-    blabla() {
+    initState() {
         if (this.props.post.id && !this.state.isSetState){
-            debugger;
             let post = this.props.post;
 
             this.setState({
@@ -57,7 +55,7 @@ class PostEdit extends React.Component {
 
     render() {
 
-        this.blabla();
+        this.initState();
 
         return (
             <div className="row">

@@ -15,8 +15,8 @@
             <column name="title" type="varchar(1000)">
                 <constraints nullable="false"/>
             </column>
-            <column name="photo" type="LONGVARBINARY">
-                <constraints nullable="false"/>
+            <column name="photo_id" type="varchar(100)">
+                <constraints nullable="true"/>
             </column>
             <column name="author_id" type="bigint">
                 <constraints nullable="false"/>
@@ -173,7 +173,7 @@
             </column>
             <column name="facebook" type="varchar(50)">
             </column>
-            <column name="photo" type="LONGVARBINARY">
+            <column name="photo_id" type="varchar(100)">
             </column>
         </createTable>
     </changeSet>

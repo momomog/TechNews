@@ -69,7 +69,7 @@ class PostEdit extends React.Component {
                                 <div className="row p-3 ml-4 mr-4">
                                     <div className="col-4">
                                         <img className="post-edit-picture" alt="post-photo"
-                                             src={BaseRequest.API_BASE_URL + '/posts/post/photo?id=' + this.props.post.id}/>
+                                             src={'https://drive.google.com/uc?export=view&id=' + this.props.post.photoId}/>
                                         <span className="ml-lg-5 text-secondary">текущее изображение</span>
                                     </div>
                                     <div className="col-8">

@@ -84,10 +84,18 @@ input.hidden {
 }
 
 .navbar-inner {
-    padding-right: 0!important;
+    padding-right: 0 !important;
 }
 
 .admin-post-input {
     width: 60%;
     height: 30px !important;
+}
+
+.btn-info {
+    background-color: #5bc0de !important;
+}
+
+.btn-success {
+    background-color: #5cb85c !important;
 }

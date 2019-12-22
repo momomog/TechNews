@@ -19,7 +19,7 @@ function Post(props) {
             <div className="media">
                 <NavLink to={createPostLink()} className="pull-left">
                     <img className="media-object post-picture" alt="post picture"
-                         src={BaseRequest.API_BASE_URL + '/posts/post/photo?id=' + props.post.id} onClick={setPostId}/>
+                         src={'https://drive.google.com/uc?export=view&id=' + props.post.photoId} onClick={setPostId}/>
                 </NavLink>
                 <div className="media-body">
                     <h4 className="media-heading" onClick={setPostId}>

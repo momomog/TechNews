@@ -28,7 +28,7 @@ function PostReview(props) {
                         <hr/>
                         <div className="col-lg-12 mb-2">
                             <img className="card-img-top post-review-pic center-block"
-                                 src={BaseRequest.API_BASE_URL + '/posts/post/photo?id=' + props.post.id}
+                                 src={'https://drive.google.com/uc?export=view&id=' + props.post.photoId}
                                  alt="Card image"/>
                             <hr/>
                         </div>

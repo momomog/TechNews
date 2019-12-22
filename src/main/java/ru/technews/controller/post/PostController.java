@@ -1,9 +1,5 @@
 package ru.technews.controller.post;
 
-import com.google.api.client.http.FileContent;
-import com.google.api.services.drive.Drive;
-import com.google.api.services.drive.model.File;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +18,14 @@ import ru.technews.service.post.PostService;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.io.InputStream;
 import java.security.GeneralSecurityException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static ru.technews.config.GoogleDrive.postPhotoFolderId;
 
 @RestController
 @RequestMapping(value = "/api/posts")
@@ -39,6 +36,9 @@ public class PostController implements PostCategoryConst {
 
     @Autowired
     CommentService commentService;
+
+    @Autowired
+    GoogleDrive googleDrive;
 
     private static Map<String, Object> response = new HashMap<>();
 
@@ -101,14 +101,17 @@ public class PostController implements PostCategoryConst {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity createNewPost(@CurrentUser UserPrincipal currentUser,
                                         @RequestPart("post") @Valid PostEntity post,
-                                        @RequestPart("photo") @Valid MultipartFile photo) throws IOException, InterruptedException {
+                                        @RequestPart("photo") @Valid MultipartFile photo) throws IOException, InterruptedException, GeneralSecurityException {
         post.setAuthor(currentUser.getUsername());
         post.setAuthorId(currentUser.getId());
         post.setCommentsCount(0L);
         post.setDate(LocalDate.now());
 
-        if (photo.getSize() != 0)
-            post.setPhoto(photo.getBytes());
+        if (photo.getSize() != 0) {
+            String photoId = googleDrive.uploadPhoto(photo, postPhotoFolderId, "new", false);
+            if (photoId != null)
+                post.setPhotoId(photoId);
+        }
 
         Thread.sleep(700);
 
@@ -155,47 +158,16 @@ public class PostController implements PostCategoryConst {
                                           @RequestParam MultipartFile photo) throws IOException, InterruptedException, GeneralSecurityException {
         PostEntity post = postService.findById(id);
 
-        File fileMetadata = new File();
-        fileMetadata.setName(photo.getName());
-        java.io.File filePath = new java.io.File(System.getProperty("java.io.tmpdir") + "/" + photo.getName());
-        photo.transferTo(filePath);
-        FileContent mediaContent = new FileContent("image/jpeg", filePath);
-        File file = GoogleDrive.getDrive().files().create(fileMetadata, mediaContent)
-                .setFields("id")
-                .execute();
-        System.out.println("File ID: " + file.getId());
+        if (photo.getSize() != 0) {
+            String photoId = googleDrive.uploadPhoto(photo, postPhotoFolderId, post.getPhotoId(), true);
+            if (photoId != null)
+                post.setPhotoId(photoId);
+        }
 
-
-//        if (photo.getBytes().length != 0) {
-//            post.setPhoto(photo.getBytes());
-//        }
-//
-//        // Искусственная задержка для полной обработки фото перед обновлением
-//        Thread.sleep(700);
-//        postService.update(post);
+        // Искусственная задержка для полной обработки фото перед обновлением
+        Thread.sleep(1200);
+        postService.update(post);
 
         return ResponseEntity.ok(new ActionCompleteResponse(true));
     }
-
-    // получение фото поста
-    @GetMapping(value = "/post/photo", params = "id", produces = MediaType.IMAGE_JPEG_VALUE)
-//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public byte[] getPostPhoto(@RequestParam(name = "id") Long id) throws IOException {
-        PostEntity post = postService.findById(id);
-
-        // Если у поста нет фото, возвращаем общее фото из папки resources
-        if (post == null || post.getPhoto() == null) {
-            InputStream noProfileImageIS = getClass().getClassLoader().getResourceAsStream("/images/empty_post_picture.png");
-            if (noProfileImageIS != null) {
-                return IOUtils.toByteArray(noProfileImageIS);
-            } else {
-                return null;
-            }
-        }
-
-        return post.getPhoto();
-    }
-
 }
-
-

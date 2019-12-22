@@ -16,7 +16,6 @@ class PostEditWrapper extends React.Component {
     updatePostData = (postDataRequest, photoBody) => {
         let isError = [];
 
-        debugger;
         isError.push(Common.onValidBeforePostSave(postDataRequest.title, 'Заголовок', 50, 200));
         isError.push(Common.onValidBeforePostSave(postDataRequest.preDescription, 'Краткое описание', 200, 1000));
         isError.push(Common.onValidBeforePostSave(postDataRequest.fullDescription, 'Описание', 1000, 20000));
@@ -34,7 +33,7 @@ class PostEditWrapper extends React.Component {
         if (photoBody)
             this.props.updatePostPhoto(this.props.match.params.postId, photoBody);
         let path = '/posts/' + this.props.match.params.sectionName + '/post/' + this.props.match.params.postId;
-        Common.changeLocation(path, 700);
+        Common.changeLocation(path, 1000);
     };
 
     render() {

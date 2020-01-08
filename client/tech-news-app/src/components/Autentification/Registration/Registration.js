@@ -18,8 +18,10 @@ class Registration extends React.Component {
 
     onRegistrationClick = (e) => {
         e.preventDefault();
-        if (this.state.password !== this.state.repeatPassword)
+        if (this.state.password !== this.state.repeatPassword) {
             this.setState({'isSamePasswords': false});
+            return;
+        }
 
             this.props.signup({
                 firstName: this.state.firstName,

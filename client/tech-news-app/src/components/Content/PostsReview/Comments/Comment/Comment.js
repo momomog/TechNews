@@ -41,7 +41,11 @@ class Comment extends React.Component {
             parentCommentId: this.state.commentAnswerParentId,
             parentCommentAuthorName: this.state.commentAnswerParentAuthorName
         });
-        this.setState({isAnswerMode: false})
+
+        this.setState({
+            isAnswerMode: false,
+            commentAnswerText: ''
+        })
     };
 
     changeInputCommentText = (e) => {
@@ -72,15 +76,16 @@ class Comment extends React.Component {
 
     render() {
         const {
-            id, authorName, authorId, date, commentText, likes, parentCommentAuthorName,
-            isDeleted, replyComments} = this.props.comment;
+            id, authorName, authorId, authorPhotoId, date, commentText, likes, parentCommentAuthorName,
+            isDeleted, replyComments
+        } = this.props.comment;
 
         return (
             <div>
                 <div className="media card-body">
                     <NavLink to={'/profile/' + authorName}>
                         <img className="d-flex mr-3 rounded-circle comment-author-photo"
-                             src={API_BASE_URL + `/user/photo?id=${authorId}`} alt=""/>
+                             src={`https://drive.google.com/uc?export=view&id=${authorPhotoId}`} alt=""/>
                     </NavLink>
                     <div className="media-body">
                         <div className="row">

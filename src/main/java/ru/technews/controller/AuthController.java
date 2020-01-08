@@ -25,6 +25,8 @@ import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.Collections;
 
+import static ru.technews.config.GoogleDrive.defaultProfilePhotoId;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -74,8 +76,11 @@ public class AuthController {
                     HttpStatus.BAD_REQUEST);
         }
 
+        UserProfileData profileData = new UserProfileData();
+        profileData.setPhotoId(defaultProfilePhotoId);
+
         User user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getUsername(),
-                signUpRequest.getEmail(), signUpRequest.getPassword(), new UserProfileData());
+                signUpRequest.getEmail(), signUpRequest.getPassword(), profileData);
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setCreatedAt(LocalDateTime.now());

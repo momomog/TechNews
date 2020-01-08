@@ -1,13 +1,12 @@
 import React from "react";
 import Common from "../../../common/Common";
-import {API_BASE_URL} from "../../../api/BaseRequest";
 
 function Profile(props) {
     let user = props.isNotCurrentUser ? props.user : props.currentUser;
 
     function onLoadPhoto(e) {
         props.onLoadPhoto(e.target.files[0]);
-        Common.changeLocation('/profile', 400);
+        Common.changeLocation('/profile', 3000);
     }
 
     if (user.profileData) {
@@ -24,7 +23,7 @@ function Profile(props) {
                                         <div className="col-sm-4">
                                             <div align="center">
                                                 <img alt="User Pic" className="img-circle profile-photo mt-3"
-                                                     src={API_BASE_URL + `/user/photo?id=${user.id}`}/>
+                                                     src={`https://drive.google.com/uc?export=view&id=${user.profileData.photoId}`}/>
                                                 {
                                                     props.isNotCurrentUser
                                                         ? ''

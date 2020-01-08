@@ -9,6 +9,8 @@ import ru.technews.entity.post.PostEntity;
 import ru.technews.payload.ActionCompleteResponse;
 import ru.technews.payload.CommentUpdateRequest;
 import ru.technews.payload.LikeRequest;
+import ru.technews.security.CurrentUser;
+import ru.technews.security.UserPrincipal;
 import ru.technews.service.post.CommentService;
 import ru.technews.service.post.PostService;
 
@@ -38,8 +40,12 @@ public class CommentController {
     // добавить новый комментарий
     @PostMapping(value = "/post/{postId}/new_comment")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<?> addNewComment(@PathVariable("postId") Long postId,
+    public ResponseEntity<?> addNewComment(@CurrentUser UserPrincipal currentUser,
+                                           @PathVariable("postId") Long postId,
                                            @RequestBody CommentEntity comment) {
+        comment.setAuthorId(currentUser.getId());
+        comment.setAuthorName(currentUser.getUsername());
+        comment.setAuthorPhotoId(currentUser.getProfileData().getPhotoId());
         comment.setDate(LocalDateTime.now());
         comment.setLikes(new Integer[]{});
         comment.setIsDeleted(false);

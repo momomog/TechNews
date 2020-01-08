@@ -27,9 +27,13 @@ public class CommentEntity extends BaseEntity {
     @Column(name = "author_id")
     private Long authorId;
 
-    // Имя автор комментария
+    // Имя автора комментария
     @Column(name = "author_name")
     private String authorName;
+
+    // ID фото автора комментария
+    @Column(name = "author_photo_id")
+    private String authorPhotoId;
 
     // Дата комментария
     @Column(name = "date", columnDefinition = "TIMESTAMP WITH TIME ZONE")

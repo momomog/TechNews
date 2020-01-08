@@ -1,12 +1,12 @@
 package ru.technews.controller;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ru.technews.config.GoogleDrive;
 import ru.technews.entity.profile.UserProfileData;
 import ru.technews.entity.security.User;
 import ru.technews.exception.ResourceNotFoundException;
@@ -19,7 +19,9 @@ import ru.technews.security.UserPrincipal;
 import ru.technews.service.profile.UserProfileDataService;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.security.GeneralSecurityException;
+
+import static ru.technews.config.GoogleDrive.userPhotoFolderId;
 
 @RestController
 @RequestMapping("/api")
@@ -31,10 +33,16 @@ public class UserController {
     @Autowired
     UserProfileDataService userProfileDataService;
 
+    @Autowired
+    GoogleDrive googleDrive;
+
     // данные текущего авторизованного пользователя
     @GetMapping("/user/me")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
+        System.out.println("ffffffffffffffffffffff");
+        System.out.println("ffffffffffffffffffffff");
+        System.out.println(currentUser.getProfileData().getPhotoId());
         return new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getFirstName(),
                 currentUser.getLastName(), currentUser.getEmail(), currentUser.getProfileData(), currentUser.getCreateAt());
     }
@@ -54,35 +62,20 @@ public class UserController {
     @PostMapping(value = "/user/me/load-photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity updateUserPhoto(@CurrentUser UserPrincipal currentUser,
-                                          @RequestParam MultipartFile photo) throws IOException {
+                                          @RequestParam MultipartFile photo) throws IOException, GeneralSecurityException, InterruptedException {
         UserProfileData profile = currentUser.getProfileData();
 
-        if (photo.getBytes().length != 0) {
-            profile.setPhoto(photo.getBytes());
+        if (photo.getSize() != 0) {
+            String photoId = googleDrive.uploadPhoto(photo, userPhotoFolderId, profile.getPhotoId(), true);
+            if (photoId != null)
+                profile.setPhotoId(photoId);
         }
+
+//        Thread.sleep(3000);
 
         userProfileDataService.update(profile);
 
         return ResponseEntity.ok(new ActionCompleteResponse(true));
-    }
-
-    // получение фото пользователя
-    @GetMapping(value = "/user/photo", params = "id", produces = MediaType.IMAGE_JPEG_VALUE)
-//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public byte[] getProfilePhoto(@RequestParam(name = "id") Long id) throws IOException {
-        UserProfileData profile = userProfileDataService.findById(id);
-
-        // Если у пользователя нет фото профиля, возвращаем общее фото профиля из папки resources
-        if (profile == null || profile.getPhoto() == null) {
-            InputStream noProfileImageIS = getClass().getClassLoader().getResourceAsStream("/images/empty_profile_photo.jpg");
-            if (noProfileImageIS != null) {
-                return IOUtils.toByteArray(noProfileImageIS);
-            } else {
-                return null;
-            }
-        }
-
-        return profile.getPhoto();
     }
 
     // обновление данных профиля

@@ -8,6 +8,7 @@ import lombok.Setter;
 import ru.technews.entity.BaseEntity;
 import ru.technews.entity.security.User;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -35,8 +36,8 @@ public class UserProfileData extends BaseEntity {
 
     private String facebook;
 
-    @JsonIgnore
-    private byte[] photo;
+    @Column(name = "photo_id")
+    private String photoId;
 
     @JsonIgnore
     @OneToOne(mappedBy = "profileData")

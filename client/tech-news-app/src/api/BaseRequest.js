@@ -11,7 +11,10 @@ export const request = (options) => {
         headers.append('Authorization', 'Bearer ' + Common.getToken())
     }
 
-    const defaults = {headers: headers};
+    const defaults = {
+        headers: headers
+    };
+
     options = Object.assign({}, defaults, options);
 
     return fetch(options.url, options)

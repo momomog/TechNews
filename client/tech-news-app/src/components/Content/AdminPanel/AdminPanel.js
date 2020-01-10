@@ -125,8 +125,6 @@ class AdminPanel extends React.Component {
             </div>
         )
     }
-
-
 }
 
 export default AdminPanel;

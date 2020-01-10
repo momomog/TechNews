@@ -88,7 +88,12 @@ function Profile(props) {
                                         </div>
                                         <div className="col-sm-1"/>
                                         <div className="clearfix mb-2"/>
-                                        <hr className="mt-1 mb-1"/>
+
+
+                                        <div className="col-sm-4"/>
+                                        <div className="col-sm-5 col-xs-6 tital section-title mt-2 ml-5">Основная информация</div>
+                                        <div className="col-sm-3"/>
+                                        <div className="clearfix section mb-1"/>
 
 
                                         <div className="col-sm-3"/>
@@ -141,6 +146,33 @@ function Profile(props) {
                                                 user.profileData.city
                                                     ? user.profileData.city
                                                     : <i>не указано</i>
+                                            }
+                                        </div>
+                                        <div className="col-sm-3"/>
+                                        <div className="clearfix mb-4"/>
+
+                                        <div className="col-sm-4"/>
+                                        <div className="col-sm-5 col-xs-6 tital section-title mt-2 ml-5">Статистика пользователя</div>
+                                        <div className="col-sm-3"/>
+                                        <div className="clearfix section mb-1"/>
+
+
+                                        <div className="col-sm-3"/>
+                                        <div className="col-sm-3 col-xs-6 tital">Репутация:</div>
+                                        <div className="col-sm-3">
+                                            {
+                                                12
+                                            }
+                                        </div>
+                                        <div className="col-sm-3"/>
+                                        <div className="clearfix"/>
+                                        <div className="bot-border"/>
+
+                                        <div className="col-sm-3"/>
+                                        <div className="col-sm-3 col-xs-6 tital">Количество комментариев:</div>
+                                        <div className="col-sm-3">
+                                            {
+                                                54
                                             }
                                         </div>
                                         <div className="col-sm-3"/>

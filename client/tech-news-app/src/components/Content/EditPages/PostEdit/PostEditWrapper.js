@@ -54,7 +54,7 @@ let mapDispatchToProps = (dispatch) => {
     return {
         getPostData: (sectionId, postId) => dispatch(getPostData(sectionId, postId)),
         updatePostData: (postId, postDataRequest) => dispatch(updatePostData(postId, postDataRequest)),
-        updatePostPhoto: (postId, photoBody) => dispatch(updatePostPhoto(postId, photoBody)),
+        updatePostPhoto: (postId, photoBody) => dispatch(updatePostPhoto(postId, photoBody))
     }
 };
 

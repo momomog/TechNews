@@ -42,11 +42,11 @@ public class GoogleDrive {
     public static final String defaultProfilePhotoId = "1F4ksE_jqSPTdl075o85mL6F-ZZakD8fz";
 
     private Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
-        InputStream in = GoogleDrive.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
-        if (in == null) {
+        InputStream inputStream = GoogleDrive.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+        if (inputStream == null) {
             throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
         }
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(inputStream));
 
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
                 HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)

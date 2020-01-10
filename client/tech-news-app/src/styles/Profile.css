@@ -85,3 +85,13 @@
 .MuiTypography-subtitle1 {
     font-size: 1.4rem !important;
 }
+
+.section {
+    background-color: #f3f3f3;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.section-title {
+    font-size: 1.3em;
+}

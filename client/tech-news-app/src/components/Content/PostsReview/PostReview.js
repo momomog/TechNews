@@ -4,6 +4,7 @@ import Common from "../../../common/Common";
 import CommentsWrapper from "./Comments/CommentsWrapper";
 import PostAdminPanelWrapper from "../AdminPanel/PostAdminPanel/PostAdminPanelWrapper";
 import * as BaseRequest from "../../../api/BaseRequest";
+import {NavLink} from "react-router-dom";
 
 function PostReview(props) {
 
@@ -19,7 +20,10 @@ function PostReview(props) {
                         <h2 className="mt-4">{props.post.title}</h2>
                         <div className="row">
                             <span className="col-lg-8 post-author">
-                                {props.post.author}
+                                <NavLink to={'/profile/' + props.post.author} className="comment-author-link" style={{color: "black"}}>
+                                @{props.post.author}
+                            </NavLink>
+
                             </span>
                             <span className="col-lg-4 text-right text-secondary">
                                 Опубликовано: {Common.dateParser(props.post.date)}

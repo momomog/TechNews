@@ -54,7 +54,6 @@ class PostEdit extends React.Component {
     };
 
     render() {
-
         this.initState();
 
         return (

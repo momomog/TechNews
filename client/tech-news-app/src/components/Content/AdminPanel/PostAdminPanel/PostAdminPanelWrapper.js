@@ -21,8 +21,6 @@ class PostAdminPanelWrapper extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        // postData: state.postsData.postData,
-        // sectionId: state.authData.sectionId,
     }
 };
 

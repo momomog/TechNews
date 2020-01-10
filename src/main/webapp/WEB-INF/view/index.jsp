@@ -4,10 +4,10 @@
 
 <!doctype html>
 <html>
-    <head>
-        <title>Код скомпилировался</title>
-    </head>
-    <body>
-        <h1>Код скомпилировался</h1>
-    </body>
+<head>
+    <title>Код скомпилировался</title>
+</head>
+<body>
+    <h1>Код скомпилировался</h1>
+</body>
 </html>

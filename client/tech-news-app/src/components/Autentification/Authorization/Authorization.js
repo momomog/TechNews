@@ -47,8 +47,7 @@ class Authorization extends React.Component {
                                         </span>
                                         <input id="login-username" type="text" className="input-group-form"
                                                name="usernameOrEmail" onChange={this.onLoginFieldsChange}
-                                               placeholder="имя пользователя или почта"
-                                               required/>
+                                               placeholder="имя пользователя или почта" required/>
                                     </div>
                                     <div className="input-group mb-2">
                                         <span className="input-group-addon">
@@ -78,7 +77,8 @@ class Authorization extends React.Component {
                                         <div className="col-md-12 control">
                                             <div className="border-top pt-3">
                                                 Не имеете аккаунт?
-                                                <NavLink to="/registration" className="navlink reg"> Зарегистрироваться
+                                                <NavLink to="/registration" className="navlink reg">
+                                                    Зарегистрироваться
                                                 </NavLink>
                                             </div>
                                         </div>

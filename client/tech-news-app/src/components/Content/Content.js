@@ -14,8 +14,9 @@ import NewPostPageWrapper from "./EditPages/NewPostPage/NewPostPageWrapper";
 function Content() {
     return (
         <div className="container main-content">
-            {/*Страницы с постом*/}
-            <Route exact path={['/', '/posts/:sectionName', '/posts/:sectionName/:page']} render={() => <PostsListWrapper/>}/>
+            <Route exact path={['/',
+                '/posts/:sectionName',
+                '/posts/:sectionName/:page']} render={() => <PostsListWrapper/>}/>
             <Route exact path='/posts/:sectionName/post/:postId' render={() => <PostReviewWrapper/>}/>
             <Route exact path={['/profile', '/profile/:username']} render={() => <ProfileWrapper/>}/>
             <Route exact path='/new-post' render={() => <NewPostPageWrapper/>}/>
@@ -25,7 +26,7 @@ function Content() {
             <Route exact path='/authorization' render={() => <AuthorizationWrapper/>}/>
             <Route exact path='/admin-panel' render={() => <AdminPanelWrapper/>}/>
 
-             {/*Страницы-редакторы*/}
+
             <Route exact path='/profile/me/edit' render={() => <ProfileEditWrapper/>}/>
             <Route exact path='/posts/:sectionName/post/:postId/edit' render={() => <PostEditWrapper/>}/>
         </div>

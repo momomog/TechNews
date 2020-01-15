@@ -5,8 +5,8 @@ import Authorization from "./Authorization";
 
 class AuthorizationWrapper extends React.Component {
 
-    onLogin = (loginRequest) => {
-        this.props.login(loginRequest);
+    onLogin = (request) => {
+        this.props.login(request);
     };
 
     render() {
@@ -27,7 +27,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        login: loginRequest => dispatch(login(loginRequest))
+        login: request => dispatch(login(request))
     }
 };
 

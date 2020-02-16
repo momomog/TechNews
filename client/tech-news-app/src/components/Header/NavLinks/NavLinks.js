@@ -18,7 +18,7 @@ function NavLinks(props) {
     }
 
     return (
-        <div className="navbar navbar-body">
+        <div className="navbar navbar-body container">
             <div className="navbar-inner w-100">
                 <div className="container">
                     <ul className="nav">

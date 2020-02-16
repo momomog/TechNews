@@ -21,9 +21,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static ru.technews.config.GoogleDrive.postPhotoFolderId;
 
@@ -106,6 +104,7 @@ public class PostController implements PostCategoryConst {
         post.setAuthorId(currentUser.getId());
         post.setCommentsCount(0L);
         post.setDate(LocalDate.now());
+        post.setRates(new Integer[]{});
 
         if (photo.getSize() != 0) {
             String photoId = googleDrive.uploadPhoto(photo, postPhotoFolderId, "new", false);
@@ -130,6 +129,21 @@ public class PostController implements PostCategoryConst {
         return ResponseEntity.ok(new ActionCompleteResponse(true));
     }
 
+    // Оценка поста
+    @PostMapping(value = "/rate-post", params = "id")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity ratePost(@RequestParam(name = "id") Long id,
+                                   @RequestBody PostDataRequest postRequest,
+                                   @CurrentUser UserPrincipal currentUser) {
+        PostEntity post = postService.findById(id);
+        List<Integer> authorsList = new ArrayList<>(Arrays.asList(post.getRates()));
+            authorsList.add(currentUser.getId().intValue());
+        post.setRates(authorsList.toArray(new Integer[authorsList.size()]));
+        postService.update(post);
+
+        return ResponseEntity.ok(new ActionCompleteResponse(true));
+    }
+
     // Изменений данных поста
     @PostMapping(value = "/post/update", params = "id")
     @PreAuthorize("hasRole('ADMIN')")
@@ -140,8 +154,12 @@ public class PostController implements PostCategoryConst {
         if (post != null) {
             if (postRequest.getTitle() != null && !postRequest.getTitle().equals(""))
                 post.setTitle(postRequest.getTitle());
+            if (postRequest.getPreDescription() != null && !postRequest.getPreDescription().equals(""))
+                post.setPreDescription(postRequest.getPreDescription());
             if (postRequest.getFullDescription() != null && !postRequest.getFullDescription().equals(""))
                 post.setFullDescription(postRequest.getFullDescription());
+            if (postRequest.getCategoryId() != null)
+                post.setCategoryId(postRequest.getCategoryId());
             post.setEditDate(LocalDateTime.now());
             post.setEditAuthorId(currentUser.getId());
             post.setEditAuthor(currentUser.getUsername());
@@ -164,8 +182,6 @@ public class PostController implements PostCategoryConst {
                 post.setPhotoId(photoId);
         }
 
-        // Искусственная задержка для полной обработки фото перед обновлением
-        Thread.sleep(1200);
         postService.update(post);
 
         return ResponseEntity.ok(new ActionCompleteResponse(true));

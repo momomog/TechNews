@@ -2,6 +2,7 @@ package ru.technews.entity.post;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 import ru.technews.entity.BaseEntity;
 
 import javax.persistence.Column;
@@ -40,11 +41,11 @@ public class PostEntity extends BaseEntity {
     @Column(name = "date", columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private LocalDate date;
 
-    //изображение
+    // изображение
     @Column(name = "photo_id")
     private String photoId;
 
-    //категория новостей
+    // категория новостей
     @Column(name = "category_id")
     private Long categoryId;
 
@@ -63,4 +64,12 @@ public class PostEntity extends BaseEntity {
     // количество комментариев
     @Column(name = "comments_count")
     private Long commentsCount;
+
+    // Массив ID авторов, которые оценили пост
+    @Type(type = "ru.technews.payload.IntArrayUserType")
+    @Column(
+            name = "rates",
+            columnDefinition = "integer[]"
+    )
+    private Integer[] rates;
 }

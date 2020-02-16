@@ -1,12 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import Common from "../../../common/Common";
+import Spinner from "../../common/Spinner";
 
 function Profile(props) {
     let user = props.isNotCurrentUser ? props.user : props.currentUser;
+    const [isLoading, setIsLoading] = useState(false);
 
     function onLoadPhoto(e) {
+        setIsLoading(true);
         props.onLoadPhoto(e.target.files[0]);
-        Common.changeLocation('/profile', 3000);
+        setTimeout(() => {
+            window.location = '/profile';
+            setIsLoading(false);
+        }, 5000);
     }
 
     if (user.profileData) {
@@ -22,12 +28,16 @@ function Profile(props) {
                                         <div className="col-sm-2"/>
                                         <div className="col-sm-4">
                                             <div align="center">
-                                                <img alt="User Pic" className="img-circle profile-photo mt-3"
-                                                     src={`https://drive.google.com/uc?export=view&id=${user.profileData.photoId}`}/>
+                                                {
+                                                    isLoading
+                                                    ? <Spinner/>
+                                                    : <img alt="User Pic" className="img-circle profile-photo mt-3"
+                                                          src={`https://drive.google.com/uc?export=view&id=${user.profileData.photoId}`}/>
+                                                }
                                                 {
                                                     props.isNotCurrentUser
                                                         ? ''
-                                                        : <label
+                                                        : <label hidden={isLoading}
                                                             className="btn btn-primary-outline mt-1 p-0 text-secondary">
                                                             загрузить фото
                                                             <input type="file" onChange={onLoadPhoto} name="photo"
@@ -172,7 +182,7 @@ function Profile(props) {
                                         <div className="col-sm-3 col-xs-6 tital">Количество комментариев:</div>
                                         <div className="col-sm-3">
                                             {
-                                                54
+                                                user.commentsCount
                                             }
                                         </div>
                                         <div className="col-sm-3"/>

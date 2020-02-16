@@ -3,7 +3,6 @@ import React from 'react';
 import "moment/locale/ru";
 import {NavLink} from "react-router-dom";
 import {Editor} from '@tinymce/tinymce-react';
-import * as BaseRequest from "../../../../api/BaseRequest";
 
 class PostEdit extends React.Component {
     constructor(props) {
@@ -12,7 +11,7 @@ class PostEdit extends React.Component {
             title: '',
             preDescription: '',
             fullDescription: '',
-            category: '',
+            categoryId: '',
             photo: '',
             isSetState: false
         }
@@ -69,7 +68,7 @@ class PostEdit extends React.Component {
                                     <div className="col-4">
                                         <img className="post-edit-picture" alt="post-photo"
                                              src={'https://drive.google.com/uc?export=view&id=' + this.props.post.photoId}/>
-                                        <span className="ml-lg-5 text-secondary">текущее изображение</span>
+                                        <span className=" text-secondary" style={{marginLeft: '26%'}}>текущее изображение</span>
                                     </div>
                                     <div className="col-8">
                                         <input className="post-edit-pic-input" type="file" onChange={this.onPhotoChange}
@@ -96,7 +95,7 @@ class PostEdit extends React.Component {
                                 <h5 className="card-header ml-4 mr-4">Категория</h5>
                                 <div className="row p-3 ml-4 mr-4">
                                     <select className="form-control" defaultValue={this.props.post.categoryId}
-                                            name="category" onChange={this.onFieldChange} required>
+                                            name="categoryId" onChange={this.onFieldChange} required>
                                         <option value="" disabled>Выберите тип...</option>
                                         <option value="2">Смартфоны</option>
                                         <option value="3">Ноутбуки</option>

@@ -9,5 +9,9 @@ public class PostDataRequest {
 
     private String title;
 
+    private Long categoryId;
+
+    private String preDescription;
+
     private String fullDescription;
 }

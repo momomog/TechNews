@@ -16,6 +16,7 @@ import ru.technews.payload.UserSummary;
 import ru.technews.repository.UserRepository;
 import ru.technews.security.CurrentUser;
 import ru.technews.security.UserPrincipal;
+import ru.technews.service.post.CommentService;
 import ru.technews.service.profile.UserProfileDataService;
 
 import java.io.IOException;
@@ -34,17 +35,28 @@ public class UserController {
     UserProfileDataService userProfileDataService;
 
     @Autowired
+    CommentService commentService;
+
+    @Autowired
     GoogleDrive googleDrive;
 
     // данные текущего авторизованного пользователя
     @GetMapping("/user/me")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
-        System.out.println("ffffffffffffffffffffff");
-        System.out.println("ffffffffffffffffffffff");
-        System.out.println(currentUser.getProfileData().getPhotoId());
-        return new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getFirstName(),
-                currentUser.getLastName(), currentUser.getEmail(), currentUser.getProfileData(), currentUser.getCreateAt());
+
+       int userCommentsCount = commentService.getCommentsCountByUserId(currentUser.getId());
+
+        return new UserSummary(
+                currentUser.getId(),
+                currentUser.getUsername(),
+                currentUser.getFirstName(),
+                currentUser.getLastName(),
+                currentUser.getEmail(),
+                currentUser.getProfileData(),
+                currentUser.getCreateAt(),
+                userCommentsCount
+        );
     }
 
     // данные пользователя по юзернейму
@@ -54,8 +66,18 @@ public class UserController {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
-        return new UserSummary(user.getId(), user.getUsername(), user.getFirstName(),
-                user.getLastName(), user.getEmail(), user.getProfileData(), user.getCreatedAt());
+        int userCommentsCount = commentService.getCommentsCountByUserId(user.getId());
+
+        return new UserSummary(
+                user.getId(),
+                user.getUsername(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getProfileData(),
+                user.getCreatedAt(),
+                userCommentsCount
+        );
     }
 
     // Обновление фото профиля

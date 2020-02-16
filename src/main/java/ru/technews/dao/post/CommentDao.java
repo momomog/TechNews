@@ -74,7 +74,7 @@ public class CommentDao extends BaseDao<CommentEntity> {
             return;
         }
 
-        // Иначе удаление комментария
+        // иначе удаление комментария
         query = getCurrentSession().createQuery("delete FROM CommentEntity  WHERE id=:commentId");
         query.setParameter("commentId", commentId);
         query.executeUpdate();
@@ -85,5 +85,12 @@ public class CommentDao extends BaseDao<CommentEntity> {
         Query query = getCurrentSession().createQuery("delete FROM CommentEntity  WHERE postId=:postId");
         query.setParameter("postId", postId);
         query.executeUpdate();
+    }
+
+    // Количество комментариев пользователя (для профиля)
+    public int getCommentsCountByUserId(Long userId) {
+        Query query = getCurrentSession().createQuery("from CommentEntity where authorId=:userId");
+        query.setParameter("userId", userId);
+        return query.getResultList().size();
     }
 }

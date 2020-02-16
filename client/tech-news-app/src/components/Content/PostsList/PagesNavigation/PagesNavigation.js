@@ -12,6 +12,10 @@ function PagesNavigation(props) {
         props.setPosts(props.sectionId, page);
     }
 
+    function upToHeader() {
+        window.scroll(0,0);
+    }
+
     return (
         <div className="col-lg-4 center-block mb-3">
             <nav aria-label="Page navigation example">
@@ -19,7 +23,7 @@ function PagesNavigation(props) {
                     <li className={getPreviousButtonClass()} onClick={() => {
                         setPrevNextPostPage(props.postPage - 1)
                     }}>
-                        <NavLink className="page-link"
+                        <NavLink className="page-link" onClick={upToHeader}
                                  to={"/posts/" + getSectionName(props.sectionId) + '/' + (props.postPage - 1)}
                                  tabIndex="-1">Назад</NavLink>
                     </li>
@@ -28,7 +32,7 @@ function PagesNavigation(props) {
                         initPagesArray().map((page) => {
                             return <li className={getNavigationButtonClass(page)} onClick={setPostPage} key={page}>
                                 <NavLink to={"/posts/" + getSectionName(props.sectionId) + '/' + page}
-                                         className="page-link">{page}</NavLink>
+                                         className="page-link" onClick={upToHeader}>{page}</NavLink>
                             </li>
                         })
                     }
@@ -37,7 +41,7 @@ function PagesNavigation(props) {
                         setPrevNextPostPage(props.postPage + 1)
                     }}>
                         <NavLink to={"/posts/" + getSectionName(props.sectionId) + '/' + (props.postPage + 1)}
-                                 className="page-link">Вперед</NavLink>
+                                 className="page-link" onClick={upToHeader}>Вперед</NavLink>
                     </li>
                 </ul>
             </nav>

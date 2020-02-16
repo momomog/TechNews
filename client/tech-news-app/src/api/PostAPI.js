@@ -32,6 +32,17 @@ class PostAPI {
         });
     };
 
+
+    ratePost(postId, rate) {
+        return request({
+            url: API_BASE_URL + '/posts/delete-post?id=' + postId,
+            method: 'POST',
+            body: JSON.stringify({
+                rate: rate
+            })
+        });
+    };
+
     onCreateNewPost(postDataRequest, photoBody) {
         const formData = new FormData();
         formData.append('post', new Blob([JSON.stringify(postDataRequest)], {

@@ -14,6 +14,7 @@ class PostEditWrapper extends React.Component {
     }
 
     updatePostData = (postDataRequest, photoBody) => {
+        debugger
         let isError = [];
 
         isError.push(Common.onValidBeforePostSave(postDataRequest.title, 'Заголовок', 50, 200));

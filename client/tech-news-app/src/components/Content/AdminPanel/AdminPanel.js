@@ -66,7 +66,7 @@ class AdminPanel extends React.Component {
                                         </div>
                                         <div className="col-2 mt-2">
                                             <input type="number" className="admin-post-input ml-3 pull-right"
-                                                   name="delPostNum"
+                                                   name="delPostNum" min="0"
                                                    placeholder="ID поста" onChange={this.onFieldsChange}/>
                                         </div>
                                         <div className="col-9 mt-1">

@@ -2,12 +2,12 @@ import React from 'react';
 import {NavLink} from "react-router-dom";
 import {getSectionName} from "../../../../common/Const";
 import Common from "../../../../common/Common";
-import * as BaseRequest from "../../../../api/BaseRequest";
 
 function Post(props) {
 
     function setPostId() {
-        props.setPostId(props.post.id)
+        props.setPostId(props.post.id);
+        window.scroll(0,0);
     }
 
     function createPostLink() {
@@ -28,7 +28,7 @@ function Post(props) {
                         </NavLink>
                     </h4>
                     <p className="text-right">
-                        {props.post.author}
+                        by @{props.post.author}
                     </p>
                     <p>
                         {props.post.preDescription}
@@ -47,11 +47,11 @@ function Post(props) {
                         </span>
                         <li>|</li>
                         <li>
-                            <span className="glyphicon glyphicon-star"></span>
-                            <span className="glyphicon glyphicon-star"></span>
-                            <span className="glyphicon glyphicon-star"></span>
-                            <span className="glyphicon glyphicon-star"></span>
-                            <span className="glyphicon glyphicon-star-empty"></span>
+                            <span className="glyphicon glyphicon-star"/>
+                            <span className="glyphicon glyphicon-star"/>
+                            <span className="glyphicon glyphicon-star"/>
+                            <span className="glyphicon glyphicon-star"/>
+                            <span className="glyphicon glyphicon-star-empty"/>
                         </li>
                     </ul>
                 </div>

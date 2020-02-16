@@ -6,82 +6,124 @@ import PostAdminPanelWrapper from "../AdminPanel/PostAdminPanel/PostAdminPanelWr
 import * as BaseRequest from "../../../api/BaseRequest";
 import {NavLink} from "react-router-dom";
 
-function PostReview(props) {
+class PostReview extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isRating: false,
+            rating: null
+        }
+    }
 
-    return (
-        <div>
-            {
-                Common.isUserAdmin() ? <PostAdminPanelWrapper postId={props.post.id}/> : ''
-            }
+    onRating = (e) => {
+        // send request to server
+        this.setState({
+            isRating: true,
+            rating: e.target.value
+        })
+    };
 
-            <div className="container">
-                <div className="row">
-                    <div className="col-lg-10 center-block">
-                        <h2 className="mt-4">{props.post.title}</h2>
-                        <div className="row">
+    render() {
+        let post = this.props.post;
+        let userRating = Array.from({
+            length: 5
+        });
+
+        return (
+            <div>
+                {
+                    Common.isUserAdmin() ? <PostAdminPanelWrapper postId={post.id}/> : ''
+                }
+
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-10 center-block">
+                            <h2 className="mt-4">{post.title}</h2>
+                            <div className="row">
                             <span className="col-lg-8 post-author">
-                                <NavLink to={'/profile/' + props.post.author} className="comment-author-link" style={{color: "black"}}>
-                                @{props.post.author}
+                                <NavLink to={'/profile/' + post.author} className="comment-author-link"
+                                         style={{color: "black"}}>
+                                @{post.author}
                             </NavLink>
 
                             </span>
-                            <span className="col-lg-4 text-right text-secondary">
-                                Опубликовано: {Common.dateParser(props.post.date)}
+                                <span className="col-lg-4 text-right text-secondary">
+                                Опубликовано: {Common.dateParser(post.date)}
                             </span>
-                        </div>
-                        <hr/>
-                        <div className="col-lg-12 mb-2">
-                            <img className="card-img-top post-review-pic center-block"
-                                 src={'https://drive.google.com/uc?export=view&id=' + props.post.photoId}
-                                 alt="Card image"/>
+                            </div>
                             <hr/>
-                        </div>
+                            <div className="col-lg-12 mb-2">
+                                <img className="card-img-top post-review-pic center-block"
+                                     src={'https://drive.google.com/uc?export=view&id=' + post.photoId}
+                                     alt="Card image"/>
+                                <hr/>
+                            </div>
 
-                        <div className="post-desc">
+                            <div className="post-desc">
+                                {
+                                    post.fullDescription ? Parser(post.fullDescription) : ''
+                                }
+                            </div>
+
+                            <hr className="mb-2"/>
                             {
-                                props.post.fullDescription ? Parser(props.post.fullDescription) : ''
+                                post.editDate
+                                    ? <div className="text-secondary mb-4">
+                                        {
+                                            'Редактировано пользователем @' + post.editAuthor + ' ' +
+                                            Common.dateTimeParser(post.editDate)
+                                        }
+                                    </div>
+                                    : ''
                             }
-                        </div>
 
-                        <hr className="mb-2"/>
-                        {
-                            props.post.editDate
-                                ? <div className="text-secondary mb-4">
+                            <div className="row disabled">
+                                <div className="ml-4">
                                     {
-                                        'Редактировано пользователем @' + props.post.editAuthor + ' ' +
-                                        Common.dateTimeParser(props.post.editDate)
+                                        this.state.isRating
+                                            ? <span className="post-author-comment">Спасибо! Ваша оценка данного поста: {
+                                                userRating.map( (item, index) => {
+                                                    if (index + 1 <= this.state.rating)
+                                                        return <span className="post-star">★</span>;
+                                                    return <span className="post-star-empty">★</span>
+                                                })
+                                            } </span>
+                                            : <div className="rating">
+                                                <span className="mr-2 post-author-comment"> Оцените пост!</span>
+                                                <input type="radio" id="star5" name="rating" value="5"
+                                                       onClick={this.onRating}/>
+                                                <label htmlFor="star5" title="Отлично">5 stars</label>
+
+                                                <input type="radio" id="star4" name="rating" value="4"
+                                                       onClick={this.onRating}/>
+                                                <label htmlFor="star4" title="Хорошо">4 stars</label>
+
+                                                <input type="radio" id="star3" name="rating" value="3"
+                                                       onClick={this.onRating}/>
+                                                <label htmlFor="star3" title="Средне">3 stars</label>
+
+                                                <input type="radio" id="star2" name="rating" value="2"
+                                                       onClick={this.onRating}/>
+                                                <label htmlFor="star2" title="Плохо">2 stars</label>
+
+                                                <input type="radio" id="star1" name="rating" value="1"
+                                                       onClick={this.onRating}/>
+                                                <label htmlFor="star1" title="Ужасно">1 star</label>
+                                            </div>
                                     }
                                 </div>
-                                : ''
-                        }
-
-                        <div className="row disabled">
-                            <div className="rating ml-4">
-                                <span className="mr-2 post-author-comment"> Оцените пост!</span>
-                                <input type="radio" id="star5" name="rating" value="5"/>
-                                <label htmlFor="star5" title="Отлично">5 stars</label>
-
-                                <input type="radio" id="star4" name="rating" value="4"/>
-                                <label htmlFor="star4" title="Хорошо">4 stars</label>
-
-                                <input type="radio" id="star3" name="rating" value="3"/>
-                                <label htmlFor="star3" title="Средне">3 stars</label>
-
-                                <input type="radio" id="star2" name="rating" value="2"/>
-                                <label htmlFor="star2" title="Плохо">2 stars</label>
-
-                                <input type="radio" id="star1" name="rating" value="1"/>
-                                <label htmlFor="star1" title="Ужасно">1 star</label>
                             </div>
+
+                            <CommentsWrapper/>
+
                         </div>
-
-                        <CommentsWrapper/>
-
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
+
+
 }
 
 export default PostReview;

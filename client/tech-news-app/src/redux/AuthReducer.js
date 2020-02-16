@@ -55,7 +55,7 @@ export const login = (loginRequest) => {
     return (dispatch) => {
         AuthAPI.login(loginRequest)
             .then(response => {
-                NotificationManager.success('Вы успешно авторизовались в системе', 'Добро пожаловать');
+                NotificationManager.success('Вы успешно авторизовались в системе', 'Добро пожаловать!');
                 Common.setToken(response.accessToken);
                 dispatch(setIsAuthAction(true));
             })

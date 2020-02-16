@@ -16,9 +16,10 @@ public class UserSummary {
     private String email;
     private UserProfileData profileData;
     private LocalDateTime createAt;
+    private Integer commentsCount;
 
     public UserSummary(Long id, String username, String firstName, String lastName, String email,
-                       UserProfileData profileData, LocalDateTime createAt) {
+                       UserProfileData profileData, LocalDateTime createAt, Integer commentsCount) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -26,6 +27,7 @@ public class UserSummary {
         this.email = email;
         this.profileData = profileData;
         this.createAt = createAt;
+        this.commentsCount = commentsCount;
     }
 
 }

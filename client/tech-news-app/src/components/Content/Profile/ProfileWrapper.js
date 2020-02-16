@@ -18,6 +18,7 @@ class ProfileWrapper extends React.Component {
         const path = this.props.location.pathname.split('/');
         if (this.isNotCurrentUser()) {
             this.props.getUserData(path[2]);
+            return;
         }
 
         let user = Common.decodeJWTToken();

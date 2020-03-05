@@ -84,7 +84,9 @@ class NewPostPage extends React.Component {
                                     <Editor
                                         apiKey="API_KEY"
                                         onEditorChange={this.onDescriptionChange}
-                                        init={{plugins: ['link table', 'code']}}
+                                        init={{
+                                            plugins: ['link table', 'code', 'image', 'emoticons']
+                                        }}
                                     />
                                 </div>
 

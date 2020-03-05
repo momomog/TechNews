@@ -1,6 +1,5 @@
 package ru.technews.controller.post;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,21 +28,22 @@ import static ru.technews.config.GoogleDrive.postPhotoFolderId;
 @RequestMapping(value = "/api/posts")
 public class PostController implements PostCategoryConst {
 
-    @Autowired
     PostService postService;
-
-    @Autowired
     CommentService commentService;
-
-    @Autowired
     GoogleDrive googleDrive;
 
     private static Map<String, Object> response = new HashMap<>();
 
+    public PostController(PostService postService, CommentService commentService, GoogleDrive googleDrive) {
+        this.postService = postService;
+        this.commentService = commentService;
+        this.googleDrive = googleDrive;
+    }
+
     // список постов по секциям
     @GetMapping(value = "/{section}/{page}")
-    public Map getAllPosts(@PathVariable("section") String section,
-                           @PathVariable("page") Integer page) {
+    public Map<String, Object> getAllPosts(@PathVariable("section") String section,
+                                           @PathVariable("page") Integer page) {
         List posts = null;
 
         switch (section) {

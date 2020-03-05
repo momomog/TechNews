@@ -30,7 +30,6 @@ class AuthAPI {
             method: 'GET'
         });
     }
-
 }
 
 export default new AuthAPI();

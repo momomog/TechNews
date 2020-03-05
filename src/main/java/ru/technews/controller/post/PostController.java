@@ -104,7 +104,8 @@ public class PostController implements PostCategoryConst {
         post.setAuthorId(currentUser.getId());
         post.setCommentsCount(0L);
         post.setDate(LocalDate.now());
-        post.setRates(new Integer[]{});
+        post.setRates(new Integer[]{5});
+        post.setRatedUsers(new Integer[]{});
 
         if (photo.getSize() != 0) {
             String photoId = googleDrive.uploadPhoto(photo, postPhotoFolderId, "new", false);
@@ -113,7 +114,6 @@ public class PostController implements PostCategoryConst {
         }
 
         Thread.sleep(700);
-
         postService.save(post);
 
         return ResponseEntity.ok(new ActionCompleteResponse(true));
@@ -136,9 +136,15 @@ public class PostController implements PostCategoryConst {
                                    @RequestBody PostDataRequest postRequest,
                                    @CurrentUser UserPrincipal currentUser) {
         PostEntity post = postService.findById(id);
-        List<Integer> authorsList = new ArrayList<>(Arrays.asList(post.getRates()));
-            authorsList.add(currentUser.getId().intValue());
-        post.setRates(authorsList.toArray(new Integer[authorsList.size()]));
+
+        List<Integer> ratesList = new ArrayList<>(Arrays.asList(post.getRates()));
+        ratesList.add(postRequest.getRate());
+        post.setRates(ratesList.toArray(new Integer[ratesList.size()]));
+
+        List<Integer> authorsList = new ArrayList<>(Arrays.asList(post.getRatedUsers()));
+        authorsList.add(currentUser.getId().intValue());
+        post.setRatedUsers(authorsList.toArray(new Integer[authorsList.size()]));
+
         postService.update(post);
 
         return ResponseEntity.ok(new ActionCompleteResponse(true));
@@ -173,7 +179,7 @@ public class PostController implements PostCategoryConst {
     @PostMapping(value = "/post/{id}/load-photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity updateUserPhoto(@PathVariable("id") Long id,
-                                          @RequestParam MultipartFile photo) throws IOException, InterruptedException, GeneralSecurityException {
+                                          @RequestParam MultipartFile photo) throws IOException, GeneralSecurityException {
         PostEntity post = postService.findById(id);
 
         if (photo.getSize() != 0) {

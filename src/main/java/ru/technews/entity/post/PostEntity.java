@@ -68,6 +68,14 @@ public class PostEntity extends BaseEntity {
     // Массив ID авторов, которые оценили пост
     @Type(type = "ru.technews.payload.IntArrayUserType")
     @Column(
+            name = "rated_users",
+            columnDefinition = "integer[]"
+    )
+    private Integer[] ratedUsers;
+
+    // Массив оценок поста
+    @Type(type = "ru.technews.payload.IntArrayUserType")
+    @Column(
             name = "rates",
             columnDefinition = "integer[]"
     )

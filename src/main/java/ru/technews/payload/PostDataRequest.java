@@ -11,6 +11,8 @@ public class PostDataRequest {
 
     private Long categoryId;
 
+    private Integer rate;
+
     private String preDescription;
 
     private String fullDescription;

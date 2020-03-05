@@ -1,5 +1,4 @@
 import PostAPI from "../api/PostAPI";
-import {NotificationManager} from "react-notifications";
 
 const SET_POST_ID = 'SET-POST-ID';
 const SET_POSTS_COUNT = 'SET-POSTS-COUNT';
@@ -77,52 +76,6 @@ export const getPostData = (sectionId, postId) => {
         PostAPI.getPostData(sectionId, postId)
             .then(data => {
                 dispatch(setPostDataAction(data));
-            });
-    };
-};
-
-export const deletePostById = (postId) => {
-    return (dispatch) => {
-        PostAPI.deletePostById(postId)
-            .then(response => {
-                NotificationManager.success(`Пост номер ${postId} успешно удален`, 'Успешно');
-            })
-            .catch(function (error) {
-                NotificationManager.error(`Не удалось удалить пост номер ${postId}`, 'Ошибка');
-            });
-    };
-};
-
-export const updatePostData = (postId, postDataRequest) => {
-    return (dispatch) => {
-        PostAPI.onUpdatePostData(postId, postDataRequest)
-            .then(response => {
-                NotificationManager.success('Данные поста успешно обновлены', 'Успешно');
-            })
-            .catch(function (error) {
-                NotificationManager.error('Не удалось обновить данные поста', 'Ошибка');
-            });
-    };
-};
-
-export const createNewPost = (postDataRequest, photoBody) => {
-    return (dispatch) => {
-        PostAPI.onCreateNewPost(postDataRequest, photoBody)
-            .then(response => {
-            })
-            .catch(function (error) {
-                NotificationManager.error('Не удалось создать новый пост', 'Ошибка');
-            });
-    };
-};
-
-export const updatePostPhoto = (postId, photoBody) => {
-    return (dispatch) => {
-        PostAPI.onUpdatePostPhoto(postId, photoBody)
-            .then(response => {
-            })
-            .catch(function (error) {
-                NotificationManager.error('Не удалось обновить данные поста', 'Ошибка');
             });
     };
 };

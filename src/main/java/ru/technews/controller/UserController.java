@@ -1,6 +1,5 @@
 package ru.technews.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,17 +27,18 @@ import static ru.technews.config.GoogleDrive.userPhotoFolderId;
 @RequestMapping("/api")
 public class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
+    UserRepository userRepository;
     UserProfileDataService userProfileDataService;
-
-    @Autowired
     CommentService commentService;
-
-    @Autowired
     GoogleDrive googleDrive;
+
+    public UserController(UserRepository userRepository, UserProfileDataService userProfileDataService,
+                          CommentService commentService, GoogleDrive googleDrive) {
+        this.userRepository = userRepository;
+        this.userProfileDataService = userProfileDataService;
+        this.commentService = commentService;
+        this.googleDrive = googleDrive;
+    }
 
     // данные текущего авторизованного пользователя
     @GetMapping("/user/me")

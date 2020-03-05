@@ -3,12 +3,19 @@ import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 import AdminPanel from "./AdminPanel";
-import {deletePostById} from "../../../redux/PostsReducer";
+import PostAPI from "../../../api/PostAPI";
+import {NotificationManager} from "react-notifications";
 
 class AdminPanelWrapper extends React.Component {
 
     deletePostById = (postId) => {
-        this.props.deletePostById(postId);
+        PostAPI.deletePostById(postId)
+            .then(response => {
+                NotificationManager.success(`Пост номер ${postId} успешно удален`, 'Успешно');
+            })
+            .catch(function (error) {
+                NotificationManager.error(`Не удалось удалить пост номер ${postId}`, 'Ошибка');
+            });
     };
 
     render() {
@@ -17,16 +24,11 @@ class AdminPanelWrapper extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-    return {
-        // postData: state.postsData.postData,
-        // sectionId: state.authData.sectionId,
-    }
+    return {}
 };
 
 let mapDispatchToProps = (dispatch) => {
-    return {
-        deletePostById: (postId) => dispatch(deletePostById(postId))
-    }
+    return {}
 };
 
 export default compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(AdminPanelWrapper);

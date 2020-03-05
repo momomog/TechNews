@@ -68,7 +68,7 @@ class Common {
     }
 
     // проверка является ли пользователь администратором
-    isUserAdmin() {
+    isAdmin() {
         let user = this.decodeJWTToken();
         let isAdmin = false;
 

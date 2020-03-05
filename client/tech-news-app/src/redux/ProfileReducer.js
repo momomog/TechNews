@@ -1,5 +1,4 @@
 import ProfileAPI from "../api/ProfileAPI";
-import {NotificationManager} from "react-notifications";
 
 const SET_CURRENT_USER_DATA = 'SET-CURRENT-USER-DATA';
 const SET_USER_DATA = 'SET-USER-DATA';
@@ -27,23 +26,10 @@ export const profileReducer = (state = initialState, action) => {
         default:
             return state;
     }
-};
+}
 
 export const setCurrentUserDataAction = (userData) => ({type: SET_CURRENT_USER_DATA, currentUserData: userData});
 export const setUserDataAction = (userData) => ({type: SET_USER_DATA, userData: userData});
-
-
-export const updateUserData = (userDataRequest) => {
-    return (dispatch) => {
-        ProfileAPI.onUpdateUserData(userDataRequest)
-            .then(response => {
-                NotificationManager.success('Ваши данные успешно обновлены', 'Успешно');
-            })
-            .catch(function (error) {
-                NotificationManager.error('Не удалось обновить данные профиля', 'Ошибка');
-            });
-    };
-};
 
 export const getCurrentUserData = (userId) => {
     return (dispatch) => {
@@ -52,7 +38,7 @@ export const getCurrentUserData = (userId) => {
                 dispatch(setCurrentUserDataAction(response));
             })
     };
-};
+}
 
 export const getUserData = (username) => {
     return (dispatch) => {
@@ -61,12 +47,4 @@ export const getUserData = (username) => {
                 dispatch(setUserDataAction(response));
             })
     };
-};
-
-export const onLoadPhoto = (photoBody) => {
-    return (dispatch) => {
-        ProfileAPI.onLoadPhoto(photoBody)
-            .then(response => {
-            })
-    };
-};
+}

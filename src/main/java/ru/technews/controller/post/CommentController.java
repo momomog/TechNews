@@ -61,15 +61,17 @@ public class CommentController {
     // лайк/дизлайк комментария
     @PostMapping(value = "/post/{postId}/like_comment")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<?> likeComment(@PathVariable("postId") Long postId,
+    public ResponseEntity<?> likeComment(@CurrentUser UserPrincipal currentUser,
+                                         @PathVariable("postId") Long postId,
                                          @RequestBody LikeRequest like) {
         CommentEntity comment = commentService.findById(like.getCommentId());
         List<Integer> authorsList = new ArrayList<>(Arrays.asList(comment.getLikes()));
 
-        if (!authorsList.contains(like.getUserId())) {
-            authorsList.add(like.getUserId());
+        Integer userId = currentUser.getId().intValue();
+        if (!authorsList.contains(userId)) {
+            authorsList.add(userId);
         } else {
-            authorsList.remove(like.getUserId());
+            authorsList.remove(userId);
         }
 
         comment.setLikes(authorsList.toArray(new Integer[authorsList.size()]));

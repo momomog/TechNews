@@ -3,10 +3,10 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
 import NewPostPage from "./NewPostPage";
-import {createNewPost} from "../../../../redux/PostsReducer";
 import Common from "../../../../common/Common";
 import {getSectionName} from "../../../../common/Const";
 import {NotificationManager} from "react-notifications";
+import PostAPI from "../../../../api/PostAPI";
 
 class NewPostPageWrapper extends React.Component {
 
@@ -25,7 +25,11 @@ class NewPostPageWrapper extends React.Component {
         if (isError.indexOf(false) !== -1)
             return;
 
-        this.props.createNewPost(postDataRequest, photoBody);
+        PostAPI.onCreateNewPost(postDataRequest, photoBody)
+            .catch(function (error) {
+                NotificationManager.error('Не удалось создать новый пост', 'Ошибка');
+            });
+
         Common.changeLocation('/posts/' + getSectionName(Number(postDataRequest.categoryId)));
     };
 
@@ -39,9 +43,7 @@ let mapStateToProps = (state) => {
 };
 
 let mapDispatchToProps = (dispatch) => {
-    return {
-        createNewPost: (postDataRequest, photoBody) => dispatch(createNewPost(postDataRequest, photoBody))
-    }
+    return {}
 };
 
 export default compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(NewPostPageWrapper);

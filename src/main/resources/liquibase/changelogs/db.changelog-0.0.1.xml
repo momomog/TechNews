@@ -49,6 +49,9 @@
             <column name="rates" type="integer []" defaultValueComputed="'{None}'::integer[]">
                 <constraints nullable="false"/>
             </column>
+            <column name="rated_users" type="integer []" defaultValueComputed="'{None}'::integer[]">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 

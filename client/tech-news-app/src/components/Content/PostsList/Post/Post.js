@@ -4,14 +4,27 @@ import {getSectionName} from "../../../../common/Const";
 import Common from "../../../../common/Common";
 
 function Post(props) {
+    const post = props.post;
 
     function setPostId() {
         props.setPostId(props.post.id);
-        window.scroll(0,0);
+        window.scroll(0, 0);
     }
 
     function createPostLink() {
-        return '/posts/' + getSectionName(props.sectionId) + '/post/' + props.post.id;
+        return '/posts/' + getSectionName(props.sectionId) + '/post/' + post.id;
+    }
+
+    function postRate() {
+        let rating = 0;
+
+        if (post.rates && post.rates.length > 0) {
+            post.rates.map(rate => rating += rate);
+
+            return rating/post.rates.length;
+        }
+
+        return rating;
     }
 
     return (
@@ -19,39 +32,44 @@ function Post(props) {
             <div className="media">
                 <NavLink to={createPostLink()} className="pull-left">
                     <img className="media-object post-picture" alt="post picture"
-                         src={'https://drive.google.com/uc?export=view&id=' + props.post.photoId} onClick={setPostId}/>
+                         src={'https://drive.google.com/uc?export=view&id=' + post.photoId} onClick={setPostId}/>
                 </NavLink>
                 <div className="media-body">
                     <h4 className="media-heading" onClick={setPostId}>
                         <NavLink to={createPostLink()} className="post-title">
-                            {props.post.title}
+                            {post.title}
                         </NavLink>
                     </h4>
                     <p className="text-right">
-                        by @{props.post.author}
+                        by @{post.author}
                     </p>
                     <p>
-                        {props.post.preDescription}
+                        {post.preDescription}
                     </p>
                     <ul className="list-inline list-unstyled">
                         <li>
                             <span>
                                 <i className="glyphicon glyphicon-calendar">&ensp;</i>
-                                {Common.dateParser(props.post.date)}
+                                {Common.dateParser(post.date)}
                             </span>
                         </li>
                         <li>|</li>
                         <span>
                             <i className="glyphicon glyphicon-comment">&ensp;</i>
-                            {props.post.commentsCount}
+                            {post.commentsCount}
                         </span>
                         <li>|</li>
                         <li>
-                            <span className="glyphicon glyphicon-star"/>
-                            <span className="glyphicon glyphicon-star"/>
-                            <span className="glyphicon glyphicon-star"/>
-                            <span className="glyphicon glyphicon-star"/>
-                            <span className="glyphicon glyphicon-star-empty"/>
+
+                            {
+                                Array.from({length: 5}).map( (rate, index) => {
+                                    if (index < postRate())
+                                        return <span className="glyphicon glyphicon-star" key={index}/>
+                                    else
+                                        return <span className="glyphicon glyphicon-star-empty" key={index}/>
+                                })
+                            }
+
                         </li>
                     </ul>
                 </div>

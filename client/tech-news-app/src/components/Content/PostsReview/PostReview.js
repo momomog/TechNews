@@ -3,7 +3,6 @@ import Parser from 'html-react-parser';
 import Common from "../../../common/Common";
 import CommentsWrapper from "./Comments/CommentsWrapper";
 import PostAdminPanelWrapper from "../AdminPanel/PostAdminPanel/PostAdminPanelWrapper";
-import * as BaseRequest from "../../../api/BaseRequest";
 import {NavLink} from "react-router-dom";
 
 class PostReview extends React.Component {
@@ -16,23 +15,37 @@ class PostReview extends React.Component {
     }
 
     onRating = (e) => {
-        // send request to server
         this.setState({
             isRating: true,
             rating: e.target.value
         })
+
+        this.props.postRating(e.target.value)
     };
 
+    isRatedByUser = () => {
+        if (this.props.post.ratedUsers) {
+            const ratedUsers = this.props.post.ratedUsers;
+            let isRated = false;
+
+            if (ratedUsers.length > 0) {
+                ratedUsers.map( rate => {
+                    if (rate === this.props.user.id)
+                        isRated = true;
+                })
+            }
+
+            return isRated;
+        }
+    }
+
     render() {
-        let post = this.props.post;
-        let userRating = Array.from({
-            length: 5
-        });
+        const post = this.props.post;
 
         return (
             <div>
                 {
-                    Common.isUserAdmin() ? <PostAdminPanelWrapper postId={post.id}/> : ''
+                    Common.isAdmin() ? <PostAdminPanelWrapper postId={post.id}/> : ''
                 }
 
                 <div className="container">
@@ -82,34 +95,36 @@ class PostReview extends React.Component {
                                     {
                                         this.state.isRating
                                             ? <span className="post-author-comment">Спасибо! Ваша оценка данного поста: {
-                                                userRating.map( (item, index) => {
+                                                Array.from({length: 5}).map( (item, index) => {
                                                     if (index + 1 <= this.state.rating)
                                                         return <span className="post-star">★</span>;
                                                     return <span className="post-star-empty">★</span>
                                                 })
                                             } </span>
-                                            : <div className="rating">
-                                                <span className="mr-2 post-author-comment"> Оцените пост!</span>
-                                                <input type="radio" id="star5" name="rating" value="5"
-                                                       onClick={this.onRating}/>
-                                                <label htmlFor="star5" title="Отлично">5 stars</label>
+                                            : this.isRatedByUser()
+                                                ? <div className="text-secondary">Вы уже оценили данный пост</div>
+                                                : <div className="rating">
+                                                    <span className="mr-2 post-author-comment"> Оцените пост!</span>
+                                                    <input type="radio" id="star5" name="rating" value="5"
+                                                           onClick={this.onRating}/>
+                                                    <label htmlFor="star5" title="Отлично">5 stars</label>
 
-                                                <input type="radio" id="star4" name="rating" value="4"
-                                                       onClick={this.onRating}/>
-                                                <label htmlFor="star4" title="Хорошо">4 stars</label>
+                                                    <input type="radio" id="star4" name="rating" value="4"
+                                                           onClick={this.onRating}/>
+                                                    <label htmlFor="star4" title="Хорошо">4 stars</label>
 
-                                                <input type="radio" id="star3" name="rating" value="3"
-                                                       onClick={this.onRating}/>
-                                                <label htmlFor="star3" title="Средне">3 stars</label>
+                                                    <input type="radio" id="star3" name="rating" value="3"
+                                                           onClick={this.onRating}/>
+                                                    <label htmlFor="star3" title="Средне">3 stars</label>
 
-                                                <input type="radio" id="star2" name="rating" value="2"
-                                                       onClick={this.onRating}/>
-                                                <label htmlFor="star2" title="Плохо">2 stars</label>
+                                                    <input type="radio" id="star2" name="rating" value="2"
+                                                           onClick={this.onRating}/>
+                                                    <label htmlFor="star2" title="Плохо">2 stars</label>
 
-                                                <input type="radio" id="star1" name="rating" value="1"
-                                                       onClick={this.onRating}/>
-                                                <label htmlFor="star1" title="Ужасно">1 star</label>
-                                            </div>
+                                                    <input type="radio" id="star1" name="rating" value="1"
+                                                           onClick={this.onRating}/>
+                                                    <label htmlFor="star1" title="Ужасно">1 star</label>
+                                                </div>
                                     }
                                 </div>
                             </div>

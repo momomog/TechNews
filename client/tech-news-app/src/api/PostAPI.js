@@ -35,7 +35,7 @@ class PostAPI {
 
     ratePost(postId, rate) {
         return request({
-            url: API_BASE_URL + '/posts/delete-post?id=' + postId,
+            url: API_BASE_URL + '/posts/rate-post?id=' + postId,
             method: 'POST',
             body: JSON.stringify({
                 rate: rate

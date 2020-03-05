@@ -20,7 +20,7 @@ function Login(props) {
                         <NavLink to="/posts/all" className="site-logo">Tech-news</NavLink>
                     </h1>
                 </div>
-                <div className="span3 auth-button">
+                <div className=" auth-button">
 
                     {
                         props.isAuth

@@ -6,8 +6,6 @@ export const SECTION_OTHER = 5;
 
 export function getSectionName(sectionId) {
     switch (sectionId) {
-        case SECTION_ALL_POSTS:
-            return 'all';
         case SECTION_MOBILE:
             return 'mobile';
         case SECTION_NOTEBOOKS:
@@ -16,5 +14,8 @@ export function getSectionName(sectionId) {
             return 'hardware';
         case SECTION_OTHER:
             return 'other';
+        case SECTION_ALL_POSTS:
+        default:
+            return 'all';
     }
 }

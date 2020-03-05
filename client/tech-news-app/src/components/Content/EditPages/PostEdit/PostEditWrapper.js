@@ -4,8 +4,9 @@ import {compose} from "redux";
 import {withRouter} from "react-router-dom";
 import Common from "../../../../common/Common";
 import PostEdit from "./PostEdit";
-import {getPostData, updatePostData, updatePostPhoto} from "../../../../redux/PostsReducer";
+import {getPostData} from "../../../../redux/PostsReducer";
 import {NotificationManager} from "react-notifications";
+import PostAPI from "../../../../api/PostAPI";
 
 class PostEditWrapper extends React.Component {
 
@@ -14,7 +15,6 @@ class PostEditWrapper extends React.Component {
     }
 
     updatePostData = (postDataRequest, photoBody) => {
-        debugger
         let isError = [];
 
         isError.push(Common.onValidBeforePostSave(postDataRequest.title, 'Заголовок', 50, 200));
@@ -29,10 +29,21 @@ class PostEditWrapper extends React.Component {
         if (isError.indexOf(false) !== -1)
             return;
 
-        this.props.updatePostData(this.props.match.params.postId, postDataRequest);
+        PostAPI.onUpdatePostData(this.props.match.params.postId, postDataRequest)
+            .then(response => {
+                NotificationManager.success('Данные поста успешно обновлены', 'Успешно');
+            })
+            .catch(function (error) {
+                NotificationManager.error('Не удалось обновить данные поста', 'Ошибка');
+            });
 
-        if (photoBody)
-            this.props.updatePostPhoto(this.props.match.params.postId, photoBody);
+        if (photoBody) {
+            PostAPI.onUpdatePostPhoto(this.props.match.params.postId, photoBody)
+                .catch(function (error) {
+                    NotificationManager.error('Не удалось обновить данные поста', 'Ошибка');
+                });
+        }
+
         let path = '/posts/' + this.props.match.params.sectionName + '/post/' + this.props.match.params.postId;
         Common.changeLocation(path, 1000);
     };
@@ -53,9 +64,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        getPostData: (sectionId, postId) => dispatch(getPostData(sectionId, postId)),
-        updatePostData: (postId, postDataRequest) => dispatch(updatePostData(postId, postDataRequest)),
-        updatePostPhoto: (postId, photoBody) => dispatch(updatePostPhoto(postId, photoBody))
+        getPostData: (sectionId, postId) => dispatch(getPostData(sectionId, postId))
     }
 };
 

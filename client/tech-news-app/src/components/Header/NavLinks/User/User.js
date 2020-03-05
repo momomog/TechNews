@@ -3,10 +3,6 @@ import {NavLink} from "react-router-dom";
 import Common from "../../../../common/Common";
 
 class User extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
 
     onLogout = () => {
         Common.removeToken();
@@ -29,7 +25,7 @@ class User extends React.Component {
                                 <NavLink className="dropdown-item" to="/profile/me/edit">Редактировать</NavLink>
                                 <div className="dropdown-divider"/>
                                 {
-                                    Common.isUserAdmin()
+                                    Common.isAdmin()
                                         ? <span>
                                             <NavLink className="dropdown-item" to="/admin-panel">Панель администрирования</NavLink>
                                             <div className="dropdown-divider"/>

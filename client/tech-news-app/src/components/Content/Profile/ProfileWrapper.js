@@ -2,9 +2,10 @@ import React from 'react';
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {Redirect, withRouter} from "react-router-dom";
-import {getCurrentUserData, getUserData, onLoadPhoto} from "../../../redux/ProfileReducer";
+import {getCurrentUserData, getUserData} from "../../../redux/ProfileReducer";
 import Profile from "./Profile";
 import Common from "../../../common/Common";
+import ProfileAPI from "../../../api/ProfileAPI";
 
 class ProfileWrapper extends React.Component {
     isNotCurrentUser() {
@@ -12,6 +13,12 @@ class ProfileWrapper extends React.Component {
         if ((path[1] === 'profile' && path.length === 2) || (path[1] === 'profile' && this.props.currentUserData.username === path[2]))
             return false;
         return true;
+    }
+
+    updateUserPhoto(body) {
+        ProfileAPI.onLoadPhoto(body)
+            .then(response => {
+            })
     }
 
     componentDidMount() {
@@ -31,7 +38,7 @@ class ProfileWrapper extends React.Component {
             return <Profile currentUser={this.props.currentUserData}
                             user={this.props.userData}
                             isNotCurrentUser={this.isNotCurrentUser()}
-                            onLoadPhoto={this.props.onLoadPhoto}/>
+                            onLoadPhoto={this.updateUserPhoto}/>
         }
 
         return <Redirect to="/authorization"/>
@@ -48,7 +55,6 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        onLoadPhoto: photoBody => dispatch(onLoadPhoto(photoBody)),
         getCurrentUserData: userId => dispatch(getCurrentUserData(userId)),
         getUserData: username => dispatch(getUserData(username))
     }

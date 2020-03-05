@@ -2,7 +2,6 @@ import React from "react";
 
 import Common from "../../../../../common/Common";
 import {NavLink} from "react-router-dom";
-import {API_BASE_URL} from "../../../../../api/BaseRequest";
 import Popup from "reactjs-popup";
 
 class Comment extends React.Component {
@@ -149,7 +148,7 @@ class Comment extends React.Component {
                                             }
 
                                             {
-                                                (this.props.isAuth && authorId === this.props.currentUserData.id  || Common.isUserAdmin()) && !isDeleted
+                                                (this.props.isAuth && authorId === this.props.currentUserData.id  || Common.isAdmin()) && !isDeleted
                                                     ? <span className="ml-3">
                                                          <a onClick={this.onClickEditCommentary} className="text-secondary reg">Редактировать</a>
                                                       </span>
@@ -157,7 +156,7 @@ class Comment extends React.Component {
                                             }
 
                                             {
-                                                (this.props.isAuth && authorId === this.props.currentUserData.id  || Common.isUserAdmin()) && !isDeleted
+                                                (this.props.isAuth && authorId === this.props.currentUserData.id  || Common.isAdmin()) && !isDeleted
                                                     ? <span className="ml-3">
                                                           <Popup trigger={<a className="text-secondary reg">Удалить</a>}
                                                                  position="top center"
@@ -226,15 +225,14 @@ class Comment extends React.Component {
                 {
                     replyComments && replyComments.length > 0
                         ? replyComments.map((comment) => {
-                            return <div className="ml-5">
+                            return <div className="ml-5" key={comment.id}>
                                        <Comment comment={comment}
                                                 isAuth={this.props.isAuth}
                                                 currentUserData={this.props.currentUserData}
                                                 likeCommentary={this.props.likeCommentary}
                                                 updateCommentary={this.props.updateCommentary}
                                                 addCommentary={this.props.addCommentary}
-                                                deleteCommentary={this.props.deleteCommentary}
-                                                key={comment.id}/>
+                                                deleteCommentary={this.props.deleteCommentary}/>
                                   </div>
                         })
                         : ''

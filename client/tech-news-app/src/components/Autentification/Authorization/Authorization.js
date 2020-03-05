@@ -76,7 +76,7 @@ class Authorization extends React.Component {
                                     <div className="form-group">
                                         <div className="col-md-12 control">
                                             <div className="border-top pt-3">
-                                                Не имеете аккаунт?
+                                                Не имеете аккаунт?&nbsp;
                                                 <NavLink to="/registration" className="navlink reg">
                                                     Зарегистрироваться
                                                 </NavLink>
@@ -90,7 +90,6 @@ class Authorization extends React.Component {
                 </div>
         )
     }
-
 }
 
 export default Authorization;

@@ -12,7 +12,4 @@ public class LikeRequest {
 
     @NotBlank
     Long commentId;
-
-    @NotBlank
-    Integer userId;
 }

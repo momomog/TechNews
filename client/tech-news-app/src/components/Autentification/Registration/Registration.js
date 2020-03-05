@@ -1,5 +1,5 @@
 import React from "react";
-import {NavLink, Redirect} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 
 class Registration extends React.Component {
     constructor(props) {

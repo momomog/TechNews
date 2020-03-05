@@ -4,12 +4,20 @@ import {compose} from "redux";
 import {Redirect, withRouter} from "react-router-dom";
 import ProfileEdit from "./ProfileEdit";
 import Common from "../../../../common/Common";
-import {updateUserData} from "../../../../redux/ProfileReducer";
+import ProfileAPI from "../../../../api/ProfileAPI";
+import {NotificationManager} from "react-notifications";
 
 class ProfileEditWrapper extends React.Component {
 
     updateUserData = (userDataRequest) => {
-        this.props.updateUserData(userDataRequest);
+        ProfileAPI.onUpdateUserData(userDataRequest)
+            .then(response => {
+                NotificationManager.success('Ваши данные успешно обновлены', 'Успешно');
+            })
+            .catch(function (error) {
+                NotificationManager.error('Не удалось обновить данные профиля', 'Ошибка');
+            });
+
         Common.changeLocation('/profile', 400);
     };
 
@@ -31,9 +39,7 @@ let mapStateToProps = (state) => {
 };
 
 let mapDispatchToProps = (dispatch) => {
-    return {
-        updateUserData: userDataRequest => dispatch(updateUserData(userDataRequest))
-    }
+    return {}
 };
 
 export default compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(ProfileEditWrapper);

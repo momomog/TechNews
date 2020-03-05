@@ -1,5 +1,6 @@
 .auth-button {
     margin-top: 2%;
+    margin-right: 33px;
 }
 /*.mm {*/
 /*    background-image: url("../static/technology.jpg");*/
@@ -104,4 +105,8 @@ input.hidden {
 
 .btn-success {
     background-color: #5cb85c !important;
+}
+
+.dropdown-item:active {
+    color: #0069d9;
 }

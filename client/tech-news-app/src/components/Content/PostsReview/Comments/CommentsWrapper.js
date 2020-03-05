@@ -2,12 +2,9 @@ import React from 'react';
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import Comments from "./Comments";
-import {
-    changeCommentTextAction, deleteComment,
-    getPostComments,
-    likeComment,
-    sendNewPostComment, updateComment
-} from "../../../../redux/CommentsReducer";
+import {changeCommentTextAction, getPostComments} from "../../../../redux/CommentsReducer";
+import CommentAPI from "../../../../api/CommentAPI";
+import {NotificationManager} from "react-notifications";
 
 class CommentsWrapper extends React.Component {
 
@@ -20,30 +17,48 @@ class CommentsWrapper extends React.Component {
     };
 
     likeCommentary = (commentId) => {
-        if (this.props.currentUserData && this.props.currentUserData.id)
-            this.props.likeComment(this.props.match.params.postId, commentId, this.props.currentUserData.id);
+        if (this.props.currentUserData && this.props.currentUserData.id) {
+            CommentAPI.likeComment(this.props.match.params.postId, commentId, this.props.currentUserData.id)
+                .catch(function (error) {
+                    NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось оценить комментарий');
+                });
+        }
+
         this.props.getPostComments(this.props.sectionId, this.props.match.params.postId);
     };
 
     deleteCommentary = (commentId) => {
-        if (this.props.currentUserData && this.props.currentUserData.id)
-            this.props.deleteComment(this.props.match.params.postId, commentId);
+        if (this.props.currentUserData && this.props.currentUserData.id) {
+            CommentAPI.deleteComment(this.props.match.params.postId, commentId)
+                .catch(function (error) {
+                    NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось удалить комментарий');
+                });
+        }
+
         this.props.getPostComments(this.props.sectionId, this.props.match.params.postId);
     };
 
     updateCommentary = (commentId, commentText) => {
-        if (this.props.currentUserData && this.props.currentUserData.id)
-            this.props.updateComment(this.props.match.params.postId, commentId, commentText);
+        if (this.props.currentUserData && this.props.currentUserData.id) {
+            CommentAPI.updateComment(this.props.match.params.postId, commentId, commentText)
+                .catch(function (error) {
+                    NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось обновить комментарий');
+                });
+        }
+
         this.props.getPostComments(this.props.sectionId, this.props.match.params.postId);
     };
 
     addNewCommentary = (request) => {
-        this.props.addNewComment({
+        CommentAPI.sendNewPostComment({
             postId: this.props.match.params.postId,
             commentText: request ? request.commentText : this.props.commentText,
             parentCommentId: request ? request.parentCommentId : null,
             parentCommentAuthorName: request ? request.parentCommentAuthorName : null
+        }).catch(function (error) {
+            NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось добавить комментарий');
         });
+
         this.props.changeCommentText('');
         this.props.getPostComments(this.props.sectionId, this.props.match.params.postId);
     };
@@ -77,11 +92,7 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
     return {
         changeCommentText: (text) => dispatch(changeCommentTextAction(text)),
-        getPostComments: (sectionId, postId) => dispatch(getPostComments(sectionId, postId)),
-        addNewComment: (commentRequest) => dispatch(sendNewPostComment(commentRequest)),
-        likeComment: (postId, commentId, userId) => dispatch(likeComment(postId, commentId, userId)),
-        deleteComment: (postId, commentId) => dispatch(deleteComment(postId, commentId)),
-        updateComment: (postId, commentId, commentText) => dispatch(updateComment(postId, commentId, commentText))
+        getPostComments: (sectionId, postId) => dispatch(getPostComments(sectionId, postId))
     }
 };
 

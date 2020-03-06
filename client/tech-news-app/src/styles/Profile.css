@@ -1,4 +1,5 @@
 .reg-label {
+    margin-left: -13px!important;
     font-size: 1.05em;
     font-weight: normal;
 }

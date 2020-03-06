@@ -42,10 +42,6 @@ class Registration extends React.Component {
         this.props.checkEmailAvailability(this.state.email);
     };
 
-    onPasswordFieldClear = () => {
-        this.setState({'isSamePasswords': true});
-    };
-
     render() {
         return (
             this.props.isAuth

@@ -1,153 +1,81 @@
 import React from "react";
 import {Field, reduxForm} from "redux-form";
-import {usernameAvailabilityValidate} from "../../../../common/Validators";
+import {email, minLength3, minLength6, required, usernameAvailabilityValidate} from "../../../../common/Validators";
+import {Input} from "../../../../common/FormControls/Input";
 
 export const RegistrationReduxForm = reduxForm({
-    form: 'registration',
-    usernameAvailabilityValidate,
-    asyncBlurFields: ['userName']
+    form: 'registration'
 })(RegistrationForm)
 
 function RegistrationForm(props) {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit} className="p-4">
 
-            <div className="row">
-                <div className="col-12">
-                    <label
-                        className="col-sm-3 control-label required-field reg-label required-field">
-                        Имя
-                    </label>
-                </div>
-                <div className="col-12">
-                    <div className="col-sm-12 mw-100">
-                        <Field name="firstName"
-                               component={'input'}
-                               className="form-control input-group-form"
-                               placeholder="Имя" required/>
-                    </div>
+            <div className="row mb-3">
+                <div className="col-sm-12 mw-100">
+                    <Field name="firstName"
+                           component={Input}
+                           validate={required}
+                           className="form-control input-group-form"
+                           placeholder="Имя"/>
                 </div>
             </div>
 
-            <div className="row">
-                <div className="col-12">
-                    <label className="col-sm-3 control-label required-field reg-label required-field">
-                        Фамилия
-                    </label>
-                </div>
-                <div className="col-12">
-                    <div className="col-sm-12 mw-100">
-                        <Field name="lastName" placeholder="Фамилия"
-                               component={'input'}
-                               className="form-control input-group-form" required/>
-                    </div>
+            <div className="row mb-3">
+                <div className="col-sm-12 mw-100">
+                    <Field name="lastName"
+                           placeholder="Фамилия"
+                           component={Input}
+                           validate={required}
+                           className="form-control input-group-form"/>
                 </div>
             </div>
 
-            <div className="row">
-                <div className="col-12">
-                    <label className="col-sm-3 control-label required-field reg-label required-field">
-                        Никнейм
-                    </label>
-                </div>
-                <div className="col-12">
-                    <div className="col-sm-12 mw-100">
-                        <Field name="userName" placeholder="Никнейм" minLength="3"
-                               component={'input'}
-                            // onBlur={this.validateUsernameAvailability}
-                               className="form-control input-group-form" required/>
-                    </div>
-                </div>
-
-                {
-                    !props.isUsernameAvailability
-                        ? <div className="col-12">
-                            <div className="col-sm-12">
-                                <div className="text-danger text-center">
-                                    Данный никнейм уже зарегистрирован
-                                </div>
-                            </div>
-                        </div>
-                        : ''
-                }
-
-            </div>
-
-            <div className="row">
-                <div className="col-12">
-                    <label
-                        className="col-sm-3 control-label required-field reg-label required-field">
-                        Почта
-                    </label>
-                </div>
-                <div className="col-12">
-                    <div className="col-sm-12 mw-100">
-                        <Field type="email" name="email" placeholder="Почта"
-                               component={'input'}
-                            // onBlur={this.validateEmailAvailability}
-                               className="form-control input-group-form" required/>
-                    </div>
-                </div>
-
-                {
-                    !props.isEmailAvailability
-                        ? <div className="col-12">
-                            <div className="col-sm-12">
-                                <div className="text-danger text-center">
-                                    Данный почтовый адрес уже зарегистрирован
-                                </div>
-                            </div>
-                        </div>
-                        : ''
-                }
-
-            </div>
-
-            <div className="row">
-                <div className="col-12">
-                    <label className="col-sm-3 control-label reg-label required-field">
-                        Пароль
-                    </label>
-                </div>
-                <div className="col-12">
-                    <div className="col-sm-12 mw-100">
-                        <Field type="password" name="password" placeholder="Пароль" minLength="6"
-                               component={'input'}
-                            // onClick={this.onPasswordFieldClear}
-                               className="form-control input-group-form" required/>
-                    </div>
+            <div className="row mb-3">
+                <div className="col-sm-12 mw-100">
+                    <Field name="userName"
+                           component={Input}
+                           placeholder="Никнейм"
+                           validate={[required, minLength3, usernameAvailabilityValidate]}
+                        // onBlur={this.validateUsernameAvailability}
+                           className="form-control input-group-form"/>
                 </div>
             </div>
 
-            <div className="row">
-                <div className="col-12">
-                    <label className="col-sm-6 control-label reg-label required-field">
-                        Повторите пароль
-                    </label>
+            <div className="row mb-3">
+                <div className="col-sm-12 mw-100">
+                    <Field type="email"
+                           component={Input}
+                           name="email"
+                           placeholder="Почта"
+                           validate={[required, email]}
+                        // onBlur={this.validateEmailAvailability}
+                           className="form-control input-group-form"/>
                 </div>
-                <div className="col-12">
-                    <div className="col-sm-12 mw-100">
-                        <Field type="password" name="repeatPassword" placeholder="Повторите пароль"
-                               component={'input'}
-                               minLength="6"
-                            // onClick={this.onPasswordFieldClear}
-                               className="form-control input-group-form"
-                               required/>
-                    </div>
+            </div>
+
+            <div className="row mb-3">
+                <div className="col-sm-12 mw-100">
+                    <Field type="password"
+                           name="password"
+                           placeholder="Пароль"
+                           component={Input}
+                        // onClick={this.onPasswordFieldClear}
+                           validate={[required, minLength6]}
+                           className="form-control input-group-form"/>
                 </div>
+            </div>
 
-                {/*{*/}
-                {/*    !this.state.isSamePasswords*/}
-                {/*        ? <div className="col-12">*/}
-                {/*            <div className="col-sm-12">*/}
-                {/*                <div className="text-danger text-center">*/}
-                {/*                    Введенные пароли не совпадают*/}
-                {/*                </div>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*        : ''*/}
-                {/*}*/}
-
+            <div className="row mb-3">
+                <div className="col-sm-12 ">
+                    <Field type="password"
+                           name="repeatPassword"
+                           placeholder="Повторите пароль"
+                           component={Input}
+                        // onClick={this.onPasswordFieldClear}
+                           validate={[required, minLength6]}
+                           className="form-control input-group-form"/>
+                </div>
             </div>
 
             <div className="form-group mt-3">

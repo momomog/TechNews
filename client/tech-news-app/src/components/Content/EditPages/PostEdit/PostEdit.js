@@ -67,7 +67,10 @@ class PostEdit extends React.Component {
                                 <div className="row p-3 ml-4 mr-4">
                                     <div className="col-4">
                                         <img className="post-edit-picture" alt="post-photo"
-                                             src={'https://drive.google.com/uc?export=view&id=' + this.props.post.photoId}/>
+                                             src={this.props.post.photoId
+                                                 ? 'https://drive.google.com/uc?export=view&id=' + this.props.post.photoId
+                                                 : ''
+                                             }/>
                                         <span className=" text-secondary" style={{marginLeft: '26%'}}>текущее изображение</span>
                                     </div>
                                     <div className="col-8">

@@ -19,9 +19,8 @@ function Profile(props) {
 
     if (user.profileData) {
         return (
-            <div>
                 <div className="row">
-                    <div className="col-md-11 center-block ">
+                    <div className="row col-md-11 center-block ">
                         <div className="panel panel-default">
                             <div className="panel-heading"><h4>Профиль пользователя</h4></div>
                             <div className="panel-body">
@@ -33,8 +32,12 @@ function Profile(props) {
                                                 {
                                                     isLoading
                                                         ? <Spinner/>
-                                                        : <img alt="User Pic" className="img-circle profile-photo mt-3"
-                                                               src={`https://drive.google.com/uc?export=view&id=${user.profileData.photoId}`}/>
+                                                        : <img alt="User Pic"
+                                                               className="img-circle profile-photo mt-3"
+                                                               src={user.profileData.photoId
+                                                                   ? `https://drive.google.com/uc?export=view&id=${user.profileData.photoId}`
+                                                                   : ''
+                                                               }/>
                                                 }
                                                 {
                                                     props.isNotCurrentUser
@@ -52,19 +55,15 @@ function Profile(props) {
                                         </div>
                                         <div className="col-sm-5">
                                             <h2 style={{color: "#00b1b1"}}>
-                                                {
-                                                    user.firstName + ' ' + user.lastName
-                                                }
+                                                {user.firstName + ' ' + user.lastName}
                                             </h2>
                                             <span>
                                             <p>
-                                                 @{
-                                                    user.username
-                                                  }
+                                                 @{user.username}
                                             </p>
                                         </span>
 
-                                        <SocialIcons user={user}/>
+                                            <SocialIcons user={user}/>
 
                                         </div>
 
@@ -76,10 +75,7 @@ function Profile(props) {
                         </div>
                     </div>
                 </div>
-            </div>
         )
-    } else {
-        return <div>Empty profile data</div>
     }
 }
 

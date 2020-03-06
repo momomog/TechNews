@@ -21,7 +21,7 @@ function Post(props) {
         if (post.rates && post.rates.length > 0) {
             post.rates.map(rate => rating += rate);
 
-            return rating/post.rates.length;
+            return rating / post.rates.length;
         }
 
         return rating;
@@ -32,7 +32,11 @@ function Post(props) {
             <div className="media">
                 <NavLink to={createPostLink()} className="pull-left">
                     <img className="media-object post-picture" alt="post picture"
-                         src={'https://drive.google.com/uc?export=view&id=' + post.photoId} onClick={setPostId}/>
+                         src={post.photoId
+                             ? 'https://drive.google.com/uc?export=view&id=' + post.photoId
+                             : ''
+                         }
+                         onClick={setPostId}/>
                 </NavLink>
                 <div className="media-body">
                     <h4 className="media-heading" onClick={setPostId}>
@@ -62,7 +66,7 @@ function Post(props) {
                         <li>
 
                             {
-                                Array.from({length: 5}).map( (rate, index) => {
+                                Array.from({length: 5}).map((rate, index) => {
                                     if (index < postRate())
                                         return <span className="glyphicon glyphicon-star" key={index}/>
                                     else

@@ -67,7 +67,10 @@ class PostReview extends React.Component {
                             <hr/>
                             <div className="col-lg-12 mb-2">
                                 <img className="card-img-top post-review-pic center-block"
-                                     src={'https://drive.google.com/uc?export=view&id=' + post.photoId}
+                                     src={post.photoId
+                                         ? 'https://drive.google.com/uc?export=view&id=' + post.photoId
+                                         : ''
+                                     }
                                      alt="Card image"/>
                                 <hr/>
                             </div>

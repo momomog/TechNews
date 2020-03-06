@@ -84,7 +84,11 @@ class Comment extends React.Component {
                 <div className="media card-body">
                     <NavLink to={'/profile/' + authorName}>
                         <img className="d-flex mr-3 rounded-circle comment-author-photo"
-                             src={`https://drive.google.com/uc?export=view&id=${authorPhotoId}`} alt=""/>
+                             src={authorPhotoId
+                                 ? `https://drive.google.com/uc?export=view&id=${authorPhotoId}`
+                                 : ''
+                             }
+                        />
                     </NavLink>
                     <div className="media-body">
                         <div className="row">

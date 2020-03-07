@@ -9,6 +9,7 @@ function PostsList(props) {
             <div className="row">
                 <PagesNavigationWrapper/>
             </div>
+
             {
                 props.posts.map((post) => {
                     return <Post post={post}
@@ -17,6 +18,7 @@ function PostsList(props) {
                                  key={post.id}/>
                 })
             }
+
             <div className="row">
                 <PagesNavigationWrapper/>
             </div>

@@ -1,18 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import AppWrapper from "./components/AppWrapper";
 import {Provider} from "react-redux";
+
 import store from "./redux/ReduxStore";
 
 import * as serviceWorker from './serviceWorker';
-
 import './styles/Index.css';
 import './styles/Posts.css';
 import './styles/Header.css';
 import './styles/Footer.css';
 import './styles/Profile.css';
 import 'react-notifications/lib/notifications.css';
-import AppWrapper from "./components/AppWrapper";
 
 ReactDOM.render(
     <Provider store={store}>

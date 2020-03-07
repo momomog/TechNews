@@ -1,5 +1,6 @@
 import PostAPI from "../api/PostAPI";
 
+const CHANGE_SECTION = 'CHANGE-SECTION';
 const SET_POST_ID = 'SET-POST-ID';
 const SET_POSTS_COUNT = 'SET-POSTS-COUNT';
 const SET_POST_PAGE = 'SET-POST-PAGE';
@@ -8,6 +9,7 @@ const SET_POSTS = 'SET-POSTS';
 
 
 let initialState = {
+    sectionId: 1,
     postList: [],
     postData: {},
     postId: '',
@@ -17,6 +19,12 @@ let initialState = {
 
 export const postsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case CHANGE_SECTION: {
+            return {
+                ...state,
+                sectionId: action.sectionId
+            };
+        }
         case SET_POSTS: {
             return {
                 ...state,
@@ -80,6 +88,7 @@ export const getPostData = (sectionId, postId) => {
     };
 };
 
+export const chooseSectionAction = (sectionId) => ({type: CHANGE_SECTION, sectionId: sectionId});
 export const setPostsAction = (posts) => ({type: SET_POSTS, posts: posts});
 export const setPostsCountAction = (count) => ({type: SET_POSTS_COUNT, postsCount: count});
 export const setPostPageAction = (postPageNumber) => ({type: SET_POST_PAGE, postPage: postPageNumber});

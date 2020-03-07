@@ -4,7 +4,7 @@ import {NotificationManager} from "react-notifications";
 import AuthService from "../common/AuthService";
 import ProfileAPI from "../api/ProfileAPI";
 
-const CHANGE_SECTION = 'CHANGE-SECTION';
+
 const SET_IS_AUTH = 'SET-IS-AUTH';
 const SET_USERNAME_AVAILABILITY = 'SET-USERNAME-AVAILABILITY';
 const SET_EMAIL_AVAILABILITY = 'SET-EMAIL-AVAILABILITY';
@@ -14,7 +14,6 @@ const SET_USER_DATA = 'SET-USER-DATA';
 
 
 let initialState = {
-    sectionId: 1,
     isAuth: AuthService.getToken(),
     isUsernameAvailability: true,
     isEmailAvailability: true,
@@ -24,12 +23,6 @@ let initialState = {
 
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        case CHANGE_SECTION: {
-            return {
-                ...state,
-                sectionId: action.sectionId
-            };
-        }
         case SET_IS_AUTH: {
             return {
                 ...state,
@@ -65,7 +58,6 @@ export const userReducer = (state = initialState, action) => {
     }
 };
 
-export const chooseSectionAction = (sectionId) => ({type: CHANGE_SECTION, sectionId: sectionId});
 export const setIsAuthAction = (isAuth) => ({type: SET_IS_AUTH, isAuth: isAuth});
 export const setUsernameAvailabilityAction = (isAvailable) => ({type: SET_USERNAME_AVAILABILITY, isAvailable: isAvailable});
 export const setEmailAvailabilityAction = (isAvailable) => ({type: SET_EMAIL_AVAILABILITY, isAvailable: isAvailable});

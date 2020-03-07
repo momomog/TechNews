@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {getAllPosts, setPostPageAction} from "../../redux/PostsReducer";
+import {chooseSectionAction, getAllPosts, setPostPageAction} from "../../redux/PostsReducer";
 import Header from "./Header";
-import {chooseSectionAction, setCurrentUserDataAction, setIsAuthAction} from "../../redux/UserReducer";
+import {setCurrentUserDataAction, setIsAuthAction} from "../../redux/UserReducer";
 
 class HeaderWrapper extends React.Component {
 
@@ -23,7 +23,7 @@ class HeaderWrapper extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        sectionId: state.userData.sectionId,
+        sectionId: state.postsData.sectionId,
         isAuth: state.userData.isAuth,
         currentUserData: state.userData.currentUserData
     }

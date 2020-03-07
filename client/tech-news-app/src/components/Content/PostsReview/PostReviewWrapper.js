@@ -27,7 +27,7 @@ class PostReviewWrapper extends React.Component {
 let mapStateToProps = (state) => {
     return {
         postData: state.postsData.postData,
-        sectionId: state.userData.sectionId,
+        sectionId: state.postsData.sectionId,
         currentUserData: state.userData.currentUserData
     }
 };

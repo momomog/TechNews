@@ -12,7 +12,7 @@ function Post(props) {
     }
 
     function createPostLink() {
-        return '/posts/' + getSectionName(props.sectionId) + '/post/' + post.id;
+        return `/posts/${getSectionName(props.sectionId)}/post/${post.id}`;
     }
 
     function postRate() {

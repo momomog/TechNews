@@ -1,21 +1,28 @@
 import AuthAPI from "../api/AuthAPI";
 import Common from "../common/Common";
 import {NotificationManager} from "react-notifications";
+import AuthService from "../common/AuthService";
+import ProfileAPI from "../api/ProfileAPI";
 
 const CHANGE_SECTION = 'CHANGE-SECTION';
 const SET_IS_AUTH = 'SET-IS-AUTH';
 const SET_USERNAME_AVAILABILITY = 'SET-USERNAME-AVAILABILITY';
 const SET_EMAIL_AVAILABILITY = 'SET-EMAIL-AVAILABILITY';
 
+const SET_CURRENT_USER_DATA = 'SET-CURRENT-USER-DATA';
+const SET_USER_DATA = 'SET-USER-DATA';
+
 
 let initialState = {
     sectionId: 1,
-    isAuth: Common.getToken(),
+    isAuth: AuthService.getToken(),
     isUsernameAvailability: true,
-    isEmailAvailability: true
+    isEmailAvailability: true,
+    currentUserData: '',
+    userData: ''
 };
 
-export const authReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case CHANGE_SECTION: {
             return {
@@ -41,6 +48,18 @@ export const authReducer = (state = initialState, action) => {
                 isEmailAvailability: action.isAvailable
             };
         }
+        case SET_CURRENT_USER_DATA: {
+            return {
+                ...state,
+                currentUserData: action.currentUserData
+            };
+        }
+        case SET_USER_DATA: {
+            return {
+                ...state,
+                userData: action.userData
+            };
+        }
         default:
             return state;
     }
@@ -51,12 +70,12 @@ export const setIsAuthAction = (isAuth) => ({type: SET_IS_AUTH, isAuth: isAuth})
 export const setUsernameAvailabilityAction = (isAvailable) => ({type: SET_USERNAME_AVAILABILITY, isAvailable: isAvailable});
 export const setEmailAvailabilityAction = (isAvailable) => ({type: SET_EMAIL_AVAILABILITY, isAvailable: isAvailable});
 
-export const login = (loginRequest) => {
+export const login = (loginRequest, remember) => {
     return (dispatch) => {
         AuthAPI.login(loginRequest)
             .then(response => {
                 NotificationManager.success('Вы успешно авторизовались в системе', 'Добро пожаловать!');
-                Common.setToken(response.accessToken);
+                AuthService.setToken(response.accessToken, remember);
                 dispatch(setIsAuthAction(true));
             })
             .catch(function (error) {
@@ -96,3 +115,24 @@ export const checkEmailAvailability = (email) => {
             })
     };
 };
+
+export const setCurrentUserDataAction = (userData) => ({type: SET_CURRENT_USER_DATA, currentUserData: userData});
+export const setUserDataAction = (userData) => ({type: SET_USER_DATA, userData: userData});
+
+export const getCurrentUserData = (userId) => {
+    return (dispatch) => {
+        ProfileAPI.getCurrentUser(userId)
+            .then(response => {
+                dispatch(setCurrentUserDataAction(response));
+            })
+    };
+}
+
+export const getUserData = (username) => {
+    return (dispatch) => {
+        ProfileAPI.getUserProfile(username)
+            .then(response => {
+                dispatch(setUserDataAction(response));
+            })
+    };
+}

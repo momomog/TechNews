@@ -1,5 +1,4 @@
 import React from "react";
-import jwt_decode from "jwt-decode";
 import {NotificationManager} from "react-notifications";
 
 class Common {
@@ -45,42 +44,6 @@ class Common {
         }
         return 'комментариев';
     }
-
-    // Сет токена авторизации
-    setToken(token) {
-        localStorage.setItem('accessToken', token);
-    }
-
-    // Гет токена авторизации
-    getToken() {
-        return localStorage.getItem('accessToken');
-    }
-
-    // Удаление токена авторизации
-    removeToken() {
-        localStorage.removeItem('accessToken');
-    }
-
-    // Раскодирование JWT-токена
-    decodeJWTToken() {
-        if (this.getToken())
-            return jwt_decode(this.getToken());
-    }
-
-    // проверка является ли пользователь администратором
-    isAdmin() {
-        let user = this.decodeJWTToken();
-        let isAdmin = false;
-
-        if (user && user.roles) {
-            user.roles.forEach(role => {
-                if (role.authority === 'ROLE_ADMIN')
-                    isAdmin = true;
-            });
-        }
-
-        return isAdmin;
-    };
 
     // Смена локации
     changeLocation(path = 'posts/all', timeout = 400) {

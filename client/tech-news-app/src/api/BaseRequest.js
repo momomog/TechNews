@@ -1,4 +1,5 @@
 import Common from "../common/Common";
+import AuthService from "../common/AuthService";
 
 export const API_BASE_URL = 'http://localhost:8080/api';
 
@@ -7,8 +8,8 @@ export const request = (options) => {
         'Content-Type': 'application/json',
     });
 
-    if (Common.getToken()) {
-        headers.append('Authorization', 'Bearer ' + Common.getToken())
+    if (AuthService.getToken()) {
+        headers.append('Authorization', 'Bearer ' + AuthService.getToken())
     }
 
     const defaults = {

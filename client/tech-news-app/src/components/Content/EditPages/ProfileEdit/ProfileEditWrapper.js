@@ -33,8 +33,8 @@ class ProfileEditWrapper extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        isAuth: state.authData.isAuth,
-        currentUserData: state.profileData.currentUserData,
+        isAuth: state.userData.isAuth,
+        currentUserData: state.userData.currentUserData,
     }
 };
 

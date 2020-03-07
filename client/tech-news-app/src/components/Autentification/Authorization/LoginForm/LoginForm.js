@@ -35,10 +35,9 @@ function LoginForm(props) {
             <div className="input-group">
                 <div className="checkbox input-group-checkbox mt-2">
                     <label>
-                        <input id="login-remember"
+                        <Field component={'input'}
                                type="checkbox"
-                               name="remember"
-                               value="1"/>
+                               name="remember"/>
                         Запомнить
                     </label>
                 </div>

@@ -4,6 +4,7 @@ import Common from "../../../common/Common";
 import CommentsWrapper from "./Comments/CommentsWrapper";
 import PostAdminPanelWrapper from "../AdminPanel/PostAdminPanel/PostAdminPanelWrapper";
 import {NavLink} from "react-router-dom";
+import AuthService from "../../../common/AuthService";
 
 class PostReview extends React.Component {
     constructor(props) {
@@ -45,7 +46,7 @@ class PostReview extends React.Component {
         return (
             <div>
                 {
-                    Common.isAdmin() ? <PostAdminPanelWrapper postId={post.id}/> : ''
+                    AuthService.isAdmin() ? <PostAdminPanelWrapper postId={post.id}/> : ''
                 }
 
                 <div className="container">

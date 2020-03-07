@@ -1,6 +1,7 @@
 import {getSectionName} from "../common/Const";
 import {API_BASE_URL, request} from "./BaseRequest";
 import Common from "../common/Common";
+import AuthService from "../common/AuthService";
 
 class PostAPI {
     getAllPosts(sectionId, postPage) {
@@ -56,8 +57,8 @@ class PostAPI {
         }
         const headers = new Headers({});
 
-        if (Common.getToken()) {
-            headers.append('Authorization', 'Bearer ' + Common.getToken());
+        if (AuthService.getToken()) {
+            headers.append('Authorization', 'Bearer ' + AuthService.getToken());
         }
 
         return request({
@@ -73,8 +74,8 @@ class PostAPI {
         formData.append('photo', photoBody);
         const headers = new Headers({});
 
-        if (Common.getToken()) {
-            headers.append('Authorization', 'Bearer ' + Common.getToken());
+        if (AuthService.getToken()) {
+            headers.append('Authorization', 'Bearer ' + AuthService.getToken());
         }
 
         return request({

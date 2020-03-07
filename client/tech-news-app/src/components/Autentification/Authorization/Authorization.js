@@ -6,10 +6,11 @@ import LoginReduxForm from "./LoginForm/LoginForm";
 class Authorization extends React.Component {
 
     onLoginClick = (formData) => {
+        debugger
         this.props.onLogin({
             usernameOrEmail: formData.usernameOrEmail,
             password: formData.password
-        });
+        }, formData.remember);
     };
 
     render() {

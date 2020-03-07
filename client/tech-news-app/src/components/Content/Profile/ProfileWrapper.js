@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {Redirect, withRouter} from "react-router-dom";
-import {getCurrentUserData, getUserData} from "../../../redux/ProfileReducer";
 import Profile from "./Profile";
-import Common from "../../../common/Common";
 import ProfileAPI from "../../../api/ProfileAPI";
+import AuthService from "../../../common/AuthService";
+import {getCurrentUserData, getUserData} from "../../../redux/UserReducer";
 
 class ProfileWrapper extends React.Component {
     isNotCurrentUser() {
@@ -28,7 +28,7 @@ class ProfileWrapper extends React.Component {
             return;
         }
 
-        let user = Common.decodeJWTToken();
+        let user = AuthService.decodeJWTToken();
         if (user && user.sub)
             this.props.getCurrentUserData(user.sub);
     }
@@ -47,9 +47,9 @@ class ProfileWrapper extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        isAuth: state.authData.isAuth,
-        currentUserData: state.profileData.currentUserData,
-        userData: state.profileData.userData
+        isAuth: state.userData.isAuth,
+        currentUserData: state.userData.currentUserData,
+        userData: state.userData.userData
     }
 };
 

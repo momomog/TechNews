@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Registration from "./Registration";
-import {checkEmailAvailability, checkUsernameAvailability, signup} from "../../../redux/AuthReducer";
+import {checkEmailAvailability, checkUsernameAvailability, signup} from "../../../redux/UserReducer";
 
 class RegistrationWrapper extends React.Component {
 
@@ -22,8 +22,8 @@ class RegistrationWrapper extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        isUsernameAvailability: state.authData.isUsernameAvailability,
-        isEmailAvailability: state.authData.isEmailAvailability,
+        isUsernameAvailability: state.userData.isUsernameAvailability,
+        isEmailAvailability: state.userData.isEmailAvailability,
     }
 };
 

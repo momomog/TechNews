@@ -1,11 +1,12 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 import Common from "../../../../common/Common";
+import AuthService from "../../../../common/AuthService";
 
 class User extends React.Component {
 
     onLogout = () => {
-        Common.removeToken();
+        AuthService.removeToken();
         this.props.setIsAuth(false);
         this.props.setCurrentUserData('');
     };
@@ -25,7 +26,7 @@ class User extends React.Component {
                                 <NavLink className="dropdown-item" to="/profile/me/edit">Редактировать</NavLink>
                                 <div className="dropdown-divider"/>
                                 {
-                                    Common.isAdmin()
+                                    AuthService.isAdmin()
                                         ? <span>
                                             <NavLink className="dropdown-item" to="/admin-panel">Панель администрирования</NavLink>
                                             <div className="dropdown-divider"/>

@@ -12,10 +12,11 @@ import './styles/Header.css';
 import './styles/Footer.css';
 import './styles/Profile.css';
 import 'react-notifications/lib/notifications.css';
+import AppWrapper from "./components/AppWrapper";
 
 ReactDOM.render(
     <Provider store={store}>
-        <App/>
+        <AppWrapper/>
     </Provider>, document.getElementById('root'));
 
 

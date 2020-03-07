@@ -3,6 +3,7 @@ import React from "react";
 import Common from "../../../../../common/Common";
 import {NavLink} from "react-router-dom";
 import Popup from "reactjs-popup";
+import AuthService from "../../../../../common/AuthService";
 
 class Comment extends React.Component {
     constructor(props) {
@@ -152,7 +153,7 @@ class Comment extends React.Component {
                                             }
 
                                             {
-                                                (this.props.isAuth && authorId === this.props.currentUserData.id  || Common.isAdmin()) && !isDeleted
+                                                (this.props.isAuth && authorId === this.props.currentUserData.id  || AuthService.isAdmin()) && !isDeleted
                                                     ? <span className="ml-3">
                                                          <a onClick={this.onClickEditCommentary} className="text-secondary reg">Редактировать</a>
                                                       </span>
@@ -160,7 +161,7 @@ class Comment extends React.Component {
                                             }
 
                                             {
-                                                (this.props.isAuth && authorId === this.props.currentUserData.id  || Common.isAdmin()) && !isDeleted
+                                                (this.props.isAuth && authorId === this.props.currentUserData.id  || AuthService.isAdmin()) && !isDeleted
                                                     ? <span className="ml-3">
                                                           <Popup trigger={<a className="text-secondary reg">Удалить</a>}
                                                                  position="top center"

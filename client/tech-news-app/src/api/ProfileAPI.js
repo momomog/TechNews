@@ -1,10 +1,11 @@
 import Common from "../common/Common";
 import {API_BASE_URL, request} from "./BaseRequest";
+import AuthService from "../common/AuthService";
 
 
 class ProfileAPI {
     getCurrentUser() {
-        if (!Common.getToken()) {
+        if (!AuthService.getToken()) {
             return Promise.reject("No access token set.");
         }
 
@@ -26,8 +27,8 @@ class ProfileAPI {
         formData.append('photo', photoBody);
         const headers = new Headers({});
 
-        if (Common.getToken()) {
-            headers.append('Authorization', 'Bearer ' + Common.getToken());
+        if (AuthService.getToken()) {
+            headers.append('Authorization', 'Bearer ' + AuthService.getToken());
         }
 
         return request({

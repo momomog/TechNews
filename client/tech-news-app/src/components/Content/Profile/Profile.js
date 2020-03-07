@@ -76,7 +76,8 @@ function Profile(props) {
                     </div>
                 </div>
         )
-    }
+    } else
+        return <div>emptu</div>
 }
 
 export default Profile;

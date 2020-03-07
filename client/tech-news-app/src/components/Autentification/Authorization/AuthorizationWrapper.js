@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {login} from "../../../redux/AuthReducer";
+import {login} from "../../../redux/UserReducer";
 import Authorization from "./Authorization";
 
 class AuthorizationWrapper extends React.Component {
 
-    onLogin = (request) => {
-        this.props.login(request);
+    onLogin = (request, remember) => {
+        this.props.login(request, remember);
     };
 
     render() {
@@ -20,14 +20,14 @@ class AuthorizationWrapper extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        isAuth: state.authData.isAuth,
-        currentUserData: state.profileData.currentUserData
+        isAuth: state.userData.isAuth,
+        currentUserData: state.userData.currentUserData
     }
 };
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        login: request => dispatch(login(request))
+        login: (request, remember) => dispatch(login(request, remember))
     }
 };
 

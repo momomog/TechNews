@@ -23,7 +23,7 @@ let mapStateToProps = (state) => {
     return {
         postPage: state.postsData.postPage,
         postsCount: state.postsData.postsCount,
-        sectionId: state.authData.sectionId
+        sectionId: state.userData.sectionId
     }
 };
 

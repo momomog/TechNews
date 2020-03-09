@@ -4,9 +4,22 @@
 }
 
 .post-title {
+    font-size: 1.6rem;
+}
+
+.post-title a {
     text-decoration: none !important;
-    font-size: 1.3em;
-    color: grey;
+    font-size: 1.3rem;
+    color: #337ab7;
+}
+.mh-50{
+    overflow: hidden;
+    height:97px!important;
+    max-height:97px!important;
+}
+
+.post-title a:hover {
+    color: #4d4d4d;
 }
 
 .post {

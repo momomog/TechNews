@@ -1,7 +1,5 @@
 import AuthAPI from "../api/AuthAPI";
 
-const minLength = min => value =>
-    value && value.length < min ? `Минимальная длина этого поля: ${min} символов` : undefined
 
 // Validators
 export const email = value =>
@@ -11,16 +9,45 @@ export const email = value =>
 
 export const required = value => (value && value.trim() ? undefined : 'Необходимо заполнить это поле')
 
+export const isSamePasswords = (value, values) => {
+    return values.password && values.password.trim() === values.repeatPassword.trim() ? undefined : 'Введенные пароли не совпадают'
+}
+
+
+const minLength = min => value =>
+    value && value.length < min ? `Минимальная длина этого поля: ${min} символов` : undefined
 export const minLength3 = minLength(3)
 export const minLength6 = minLength(6)
 
-export const usernameAvailabilityValidate = (userName) => {
-    debugger
-    AuthAPI.checkUsernameAvailability(userName)
-        .then(response => {
-            debugger
-            if (response.available)
-                return undefined
-            else return 'username is taken'
-        })
+
+export const usernameEmailValidate = async (values, dispatch, props, field) => {
+    let asyncErrors = {
+        ...props.asyncErrors
+    }
+
+    if (field === 'username') {
+        return AuthAPI.checkUsernameAvailability(values.username)
+            .then(response => {
+                if (!response.available)
+                    throw {
+                        ...asyncErrors,
+                        username: 'Пользователь с данным никнеймом уже зарегистрирован!'
+                    }
+                else
+                    throw asyncErrors
+            })
+    }
+
+    if (field === 'email') {
+        return AuthAPI.checkEmailAvailability(values.email)
+            .then(response => {
+                if (!response.available)
+                    throw {
+                        ...asyncErrors,
+                        email: 'Данный почтовый адрес уже зарегистрирован!'
+                    }
+                else
+                    throw asyncErrors
+            })
+    }
 }

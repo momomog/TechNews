@@ -53,6 +53,7 @@ class PostReview extends React.Component {
                     <div className="row">
                         <div className="col-lg-10 center-block">
                             <h2 className="mt-4">{post.title}</h2>
+
                             <div className="row">
                             <span className="col-lg-8 post-author">
                                 <NavLink to={'/profile/' + post.author} className="comment-author-link"
@@ -68,10 +69,7 @@ class PostReview extends React.Component {
                             <hr/>
                             <div className="col-lg-12 mb-2">
                                 <img className="card-img-top post-review-pic center-block"
-                                     src={post.photoId
-                                         ? 'https://drive.google.com/uc?export=view&id=' + post.photoId
-                                         : ''
-                                     }
+                                     src={post.photoId && `https://drive.google.com/uc?export=view&id=${post.photoId}`}
                                      alt="Card image"/>
                                 <hr/>
                             </div>

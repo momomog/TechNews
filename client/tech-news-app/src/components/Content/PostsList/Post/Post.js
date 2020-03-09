@@ -11,10 +11,6 @@ function Post(props) {
         window.scroll(0, 0);
     }
 
-    function createPostLink() {
-        return `/posts/${getSectionName(props.sectionId)}/post/${post.id}`;
-    }
-
     function postRate() {
         let rating = 0;
 
@@ -28,54 +24,59 @@ function Post(props) {
     }
 
     return (
-        <div className="well post center-block ">
-            <div className="media">
-                <NavLink to={createPostLink()} className="pull-left">
-                    <img className="media-object post-picture" alt="post picture"
-                         src={post.photoId
-                             ? 'https://drive.google.com/uc?export=view&id=' + post.photoId
-                             : ''
-                         }
-                         onClick={setPostId}/>
+        <div className="row well post center-block">
+
+            <div className="col-sm-3">
+                <NavLink to={`/posts/${getSectionName(props.sectionId)}/post/${post.id}`}>
+                    <img alt="post picture"
+                         onClick={setPostId}
+                         src={post.photoId && `https://drive.google.com/uc?export=view&id=${post.photoId}`}/>
                 </NavLink>
+            </div>
+
+            <div className="col-sm-9">
                 <div className="media-body">
-                    <h4 className="media-heading" onClick={setPostId}>
-                        <NavLink to={createPostLink()} className="post-title">
+                    <div className="post-title" onClick={setPostId}>
+                        <NavLink to={`/posts/${getSectionName(props.sectionId)}/post/${post.id}`}>
                             {post.title}
                         </NavLink>
-                    </h4>
+                    </div>
                     <p className="text-right">
                         by @{post.author}
                     </p>
-                    <p>
+                    <p className="mh-50">
                         {post.preDescription}
                     </p>
-                    <ul className="list-inline list-unstyled">
-                        <li>
+
+                    <div>
+                        <ul className="list-inline list-unstyled">
+                            <li>
                             <span>
                                 <i className="glyphicon glyphicon-calendar">&ensp;</i>
                                 {Common.dateParser(post.date)}
                             </span>
-                        </li>
-                        <li>|</li>
-                        <span>
+                            </li>
+                            <li>|</li>
+                            <span>
                             <i className="glyphicon glyphicon-comment">&ensp;</i>
-                            {post.commentsCount}
+                                {post.commentsCount}
                         </span>
-                        <li>|</li>
-                        <li>
+                            <li>|</li>
+                            <li>
 
-                            {
-                                Array.from({length: 5}).map((rate, index) => {
-                                    if (index < postRate())
-                                        return <span className="glyphicon glyphicon-star" key={index}/>
-                                    else
-                                        return <span className="glyphicon glyphicon-star-empty" key={index}/>
-                                })
-                            }
+                                {
+                                    Array.from({length: 5}).map((rate, index) => {
+                                        if (index < postRate())
+                                            return <span className="glyphicon glyphicon-star" key={index}/>
+                                        else
+                                            return <span className="glyphicon glyphicon-star-empty" key={index}/>
+                                    })
+                                }
 
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </div>

@@ -4,8 +4,7 @@ import {compose} from "redux";
 import {Redirect, withRouter} from "react-router-dom";
 import Profile from "./Profile";
 import ProfileAPI from "../../../api/ProfileAPI";
-import AuthService from "../../../common/AuthService";
-import {getCurrentUserData, getUserData} from "../../../redux/UserReducer";
+import {getUserData} from "../../../redux/UserReducer";
 
 class ProfileWrapper extends React.Component {
     isNotCurrentUser() {
@@ -17,20 +16,13 @@ class ProfileWrapper extends React.Component {
 
     updateUserPhoto(body) {
         ProfileAPI.onLoadPhoto(body)
-            .then(response => {
-            })
     }
 
     componentDidMount() {
-        const path = this.props.location.pathname.split('/');
         if (this.isNotCurrentUser()) {
+            const path = this.props.location.pathname.split('/');
             this.props.getUserData(path[2]);
-            return;
         }
-
-        let user = AuthService.decodeJWTToken();
-        if (user && user.sub)
-            this.props.getCurrentUserData(user.sub);
     }
 
     render() {
@@ -55,7 +47,6 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        getCurrentUserData: userId => dispatch(getCurrentUserData(userId)),
         getUserData: username => dispatch(getUserData(username))
     }
 };

@@ -3,43 +3,14 @@ import {Redirect} from "react-router-dom";
 import RegistrationReduxForm from "./RegistrationForm/RegistrationForm";
 
 class Registration extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            firstName: '',
-            lastName: '',
-            userName: '',
-            email: '',
-            password: '',
-            repeatPassword: '',
-            isSamePasswords: true,
-        }
-    }
-
-
     onRegistrationClick = (formData) => {
-        debugger
-        // e.preventDefault();
-        if (this.state.password !== this.state.repeatPassword) {
-            this.setState({'isSamePasswords': false});
-            return;
-        }
-
-            // this.props.signup({
-            //     firstName: this.state.firstName,
-            //     lastName: this.state.lastName,
-            //     username: this.state.userName,
-            //     email: this.state.email,
-            //     password: this.state.password
-            // });
-    };
-
-    validateUsernameAvailability = () => {
-        this.props.checkUsernameAvailability(this.state.userName);
-    };
-
-    validateEmailAvailability = () => {
-        this.props.checkEmailAvailability(this.state.email);
+        this.props.signup({
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            username: formData.username,
+            email: formData.email,
+            password: formData.password
+        });
     };
 
     render() {
@@ -53,7 +24,7 @@ class Registration extends React.Component {
                                 <div className="panel-title">Регистрация</div>
                             </div>
 
-                            <div className="panel-body pt-5">
+                            <div className="panel-body pt-2">
                                 <RegistrationReduxForm onSubmit={this.onRegistrationClick}/>
                             </div>
                         </div>

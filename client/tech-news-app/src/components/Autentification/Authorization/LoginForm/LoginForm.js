@@ -1,6 +1,8 @@
 import {NavLink} from "react-router-dom";
 import React from "react";
 import {Field, reduxForm} from "redux-form";
+import {Input} from "../../../../common/FormControls/Input";
+import {required} from "../../../../common/Validators";
 
 export const LoginReduxForm = reduxForm({
     form: 'login'
@@ -15,21 +17,25 @@ function LoginForm(props) {
                 <span className="input-group-addon">
                      <i className="glyphicon glyphicon-user"/>
                 </span>
-                <Field component={'input'}
+                <Field component={Input}
+                       validate={required}
                        className="input-group-form"
-                       name="usernameOrEmail"
-                       placeholder="имя пользователя или почта" required/>
+                       showLabel={true}
+                       placeholder="Имя пользователя или почтовый адрес"
+                       name="usernameOrEmail"/>
             </div>
 
             <div className="input-group mb-2">
                 <span className="input-group-addon">
                      <i className="glyphicon glyphicon-lock"/>
                 </span>
-                <Field component={'input'}
+                <Field component={Input}
+                       validate={required}
                        type="password"
                        className="input-group-form"
                        name="password"
-                       placeholder="пароль" required/>
+                       showLabel={true}
+                       placeholder="пароль"/>
             </div>
 
             <div className="input-group">
@@ -45,7 +51,10 @@ function LoginForm(props) {
 
             <div className="form-group mt-2">
                 <div className="col-sm-12">
-                    <button className="btn btn-success">Войти</button>
+                    <button className="btn btn-success"
+                            disabled={props.invalid || props.submitting}>
+                        Войти
+                    </button>
                 </div>
             </div>
 

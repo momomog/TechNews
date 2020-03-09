@@ -1,5 +1,5 @@
 .reg-label {
-    margin-left: -13px!important;
+    margin-left: -13px !important;
     font-size: 1.05em;
     font-weight: normal;
 }
@@ -31,6 +31,11 @@
     font-size: 1.1em;
 }
 
+.soc-date-name {
+    margin-top: 2rem !important;
+    font-size: 1.1em;
+}
+
 .soc-input {
     margin-top: -1% !important;
 }
@@ -48,11 +53,19 @@
 }
 
 .date-picker {
-    margin-left: 5.3rem !important
+    margin-left: 2.6rem !important
 }
 
 .MuiSvgIcon-root {
     font-size: 2rem !important;
+}
+
+.MuiIconButton-root {
+    padding: 0 !important;
+}
+
+.MuiInputBase-input {
+    width: 40% !important;
 }
 
 .dropdown-item.active {
@@ -95,4 +108,8 @@
 
 .section-title {
     font-size: 1.3em;
+}
+
+.validate-text {
+    font-size: 1rem;
 }

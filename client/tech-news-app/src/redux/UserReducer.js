@@ -6,17 +6,12 @@ import ProfileAPI from "../api/ProfileAPI";
 
 
 const SET_IS_AUTH = 'SET-IS-AUTH';
-const SET_USERNAME_AVAILABILITY = 'SET-USERNAME-AVAILABILITY';
-const SET_EMAIL_AVAILABILITY = 'SET-EMAIL-AVAILABILITY';
-
 const SET_CURRENT_USER_DATA = 'SET-CURRENT-USER-DATA';
 const SET_USER_DATA = 'SET-USER-DATA';
 
 
 let initialState = {
     isAuth: AuthService.getToken(),
-    isUsernameAvailability: true,
-    isEmailAvailability: true,
     currentUserData: '',
     userData: ''
 };
@@ -27,18 +22,6 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isAuth: action.isAuth,
-            };
-        }
-        case SET_USERNAME_AVAILABILITY: {
-            return {
-                ...state,
-                isUsernameAvailability: action.isAvailable
-            };
-        }
-        case SET_EMAIL_AVAILABILITY: {
-            return {
-                ...state,
-                isEmailAvailability: action.isAvailable
             };
         }
         case SET_CURRENT_USER_DATA: {
@@ -59,8 +42,8 @@ export const userReducer = (state = initialState, action) => {
 };
 
 export const setIsAuthAction = (isAuth) => ({type: SET_IS_AUTH, isAuth: isAuth});
-export const setUsernameAvailabilityAction = (isAvailable) => ({type: SET_USERNAME_AVAILABILITY, isAvailable: isAvailable});
-export const setEmailAvailabilityAction = (isAvailable) => ({type: SET_EMAIL_AVAILABILITY, isAvailable: isAvailable});
+export const setCurrentUserDataAction = (userData) => ({type: SET_CURRENT_USER_DATA, currentUserData: userData});
+export const setUserDataAction = (userData) => ({type: SET_USER_DATA, userData: userData});
 
 export const login = (loginRequest, remember) => {
     return (dispatch) => {
@@ -89,27 +72,6 @@ export const signup = (signupRequest) => {
             });
     };
 };
-
-export const checkUsernameAvailability = (userName) => {
-    return (dispatch) => {
-        AuthAPI.checkUsernameAvailability(userName)
-            .then(response => {
-                dispatch(setUsernameAvailabilityAction(response.available));
-            })
-    };
-};
-
-export const checkEmailAvailability = (email) => {
-    return (dispatch) => {
-        AuthAPI.checkEmailAvailability(email)
-            .then(response => {
-                dispatch(setEmailAvailabilityAction(response.available));
-            })
-    };
-};
-
-export const setCurrentUserDataAction = (userData) => ({type: SET_CURRENT_USER_DATA, currentUserData: userData});
-export const setUserDataAction = (userData) => ({type: SET_USER_DATA, userData: userData});
 
 export const getCurrentUserData = (userId) => {
     return (dispatch) => {

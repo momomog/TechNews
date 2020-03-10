@@ -6,12 +6,9 @@ import {setCurrentUserDataAction, setIsAuthAction} from "../../redux/UserReducer
 
 class HeaderWrapper extends React.Component {
 
-    setPosts = (sectionId) => {
+    setPosts = sectionId => {
         this.props.getAllPosts(sectionId, 1);
     };
-
-    componentDidMount() {
-    }
 
     render() {
         return (

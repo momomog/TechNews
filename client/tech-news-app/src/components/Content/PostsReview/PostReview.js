@@ -46,7 +46,7 @@ class PostReview extends React.Component {
         return (
             <div>
                 {
-                    AuthService.isAdmin() ? <PostAdminPanelWrapper postId={post.id}/> : ''
+                    AuthService.isAdmin() && <PostAdminPanelWrapper postId={post.id}/>
                 }
 
                 <div className="container">
@@ -76,20 +76,19 @@ class PostReview extends React.Component {
 
                             <div className="post-desc">
                                 {
-                                    post.fullDescription ? Parser(post.fullDescription) : ''
+                                    post.fullDescription && Parser(post.fullDescription)
                                 }
                             </div>
 
                             <hr className="mb-2"/>
                             {
                                 post.editDate
-                                    ? <div className="text-secondary mb-4">
+                                    && <div className="text-secondary mb-4">
                                         {
                                             'Редактировано пользователем @' + post.editAuthor + ' ' +
                                             Common.dateTimeParser(post.editDate)
                                         }
                                     </div>
-                                    : ''
                             }
 
                             <div className="row disabled">

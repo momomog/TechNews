@@ -6,7 +6,8 @@ export const email = value =>
         ? 'Введите корректный почтовый адрес'
         : undefined
 
-export const required = value => value && value.toString().trim() ? undefined : 'Необходимо заполнить это поле'
+export const required = value => {
+    console.log(value); return  value && value.toString().trim() ? undefined : 'Необходимо заполнить это поле'}
 export const requiredFile = value => value && value.name ? undefined : 'Необходимо загрузить изображение'
 
 export const isSamePasswords = (value, values) => {

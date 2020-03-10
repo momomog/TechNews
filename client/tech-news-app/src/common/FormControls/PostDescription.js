@@ -15,9 +15,11 @@ export const PostDescription = ({input, meta, ...props}) => {
                     initialValue={props.initValue}
                     onEditorChange={(val) => {
                         setValue(val)
+                        // console.log(val)
                         meta.dispatch(change(meta.form, input.name, val));
                     }}
-                    onBlur={() => meta.dispatch(change(meta.form, input.name, value))}
+                    onBlur={() => {
+                        console.log(value); meta.dispatch(change(meta.form, input.name, value))}}
                     init={{
                         plugins: [
                             'advlist autolink lists link image charmap print preview anchor',

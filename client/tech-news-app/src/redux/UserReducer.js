@@ -11,10 +11,10 @@ const SET_USER_DATA = 'SET-USER-DATA';
 
 
 let initialState = {
-    isAuth: AuthService.getToken(),
+    isAuth: AuthService.isAuth(),
     currentUserData: '',
     userData: ''
-};
+}
 
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -22,31 +22,31 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isAuth: action.isAuth,
-            };
+            }
         }
         case SET_CURRENT_USER_DATA: {
             return {
                 ...state,
                 currentUserData: action.currentUserData
-            };
+            }
         }
         case SET_USER_DATA: {
             return {
                 ...state,
                 userData: action.userData
-            };
+            }
         }
         default:
-            return state;
+            return state
     }
-};
+}
 
 export const setIsAuthAction = (isAuth) => ({type: SET_IS_AUTH, isAuth: isAuth});
 export const setCurrentUserDataAction = (userData) => ({type: SET_CURRENT_USER_DATA, currentUserData: userData});
 export const setUserDataAction = (userData) => ({type: SET_USER_DATA, userData: userData});
 
 export const login = (loginRequest, remember) => {
-    return (dispatch) => {
+    return dispatch => {
         AuthAPI.login(loginRequest)
             .then(response => {
                 NotificationManager.success('Вы успешно авторизовались в системе', 'Добро пожаловать!');
@@ -56,12 +56,12 @@ export const login = (loginRequest, remember) => {
             .catch(function (error) {
                 let errorMessage = Common.showErrorText(error.code);
                 NotificationManager.error(errorMessage, 'Не удалось войти');
-            });
-    };
-};
+            })
+    }
+}
 
-export const signup = (signupRequest) => {
-    return (dispatch) => {
+export const signup = signupRequest => {
+    return dispatch => {
         AuthAPI.signup(signupRequest)
             .then(response => {
                 NotificationManager.success('Для продолжения работы войдите на сайт', 'Вы успешно зарегистрировались');
@@ -69,24 +69,24 @@ export const signup = (signupRequest) => {
             })
             .catch(function (error) {
                 NotificationManager.error('При попытке регистрации произошла неизвестная ошибка', 'Ошибка');
-            });
-    };
-};
+            })
+    }
+}
 
-export const getCurrentUserData = (userId) => {
-    return (dispatch) => {
+export const getCurrentUserData = userId => {
+    return dispatch => {
         ProfileAPI.getCurrentUser(userId)
             .then(response => {
                 dispatch(setCurrentUserDataAction(response));
             })
-    };
+    }
 }
 
-export const getUserData = (username) => {
-    return (dispatch) => {
+export const getUserData = username => {
+    return dispatch => {
         ProfileAPI.getUserProfile(username)
             .then(response => {
                 dispatch(setUserDataAction(response));
             })
-    };
+    }
 }

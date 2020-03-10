@@ -77,24 +77,6 @@ class AdminPanel extends React.Component {
                                         </div>
                                     </div>
 
-                                    {/*<div className="row">*/}
-                                    {/*    <div className="col-1 mt-3">*/}
-                                    {/*        <span className="pl-4">Редактировать</span>*/}
-                                    {/*    </div>*/}
-                                    {/*    <div className="col-2 mt-2">*/}
-                                    {/*        <input type="number" className="admin-post-input ml-3 pull-right"*/}
-                                    {/*               name="editPostNum"*/}
-                                    {/*               placeholder="ID поста" onChange={this.onFieldsChange}/>*/}
-                                    {/*    </div>*/}
-                                    {/*    <div className="col-9 mt-1">*/}
-                                    {/*        <NavLink to={'/edit'}>*/}
-                                    {/*            <button type="button" className="btn btn-primary">*/}
-                                    {/*                Редактировать*/}
-                                    {/*            </button>*/}
-                                    {/*        </NavLink>*/}
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
-
                                     <Dialog
                                         open={this.state.openModal}
                                         onClose={this.handleCloseModal}

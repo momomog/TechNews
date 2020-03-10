@@ -9,8 +9,7 @@ import {
     minLength1000,
     minLength200,
     minLength50,
-    required,
-    requiredFile
+    required
 } from "../../../../common/Validators";
 import {TextArea} from "../../../../common/FormControls/TextArea";
 import {Select} from "../../../../common/FormControls/Select";
@@ -54,8 +53,7 @@ class PostEditForm extends React.Component {
                     <div className="col-4">
                         <img className="post-edit-picture" alt="post-photo"
                              src={this.props.post.photoId
-                                 ? 'https://drive.google.com/uc?export=view&id=' + this.props.post.photoId
-                                 : ''
+                             && 'https://drive.google.com/uc?export=view&id=' + this.props.post.photoId
                              }/>
                         <span className=" text-secondary" style={{marginLeft: '22%'}}>текущее изображение</span>
                     </div>

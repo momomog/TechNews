@@ -6,12 +6,10 @@ function PostsList(props) {
 
     return (
         <div>
-            <div className="row">
-                <PagesNavigationWrapper/>
-            </div>
+            <PagesNavigationWrapper/>
 
             {
-                props.posts.map((post) => {
+                props.posts.map(post => {
                     return <Post post={post}
                                  setPostId={props.setPostId}
                                  sectionId={props.sectionId}
@@ -19,9 +17,7 @@ function PostsList(props) {
                 })
             }
 
-            <div className="row">
-                <PagesNavigationWrapper/>
-            </div>
+            <PagesNavigationWrapper/>
         </div>
     )
 }

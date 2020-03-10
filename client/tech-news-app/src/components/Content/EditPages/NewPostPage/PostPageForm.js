@@ -20,6 +20,7 @@ export const PostPageReduxForm = reduxForm({
 })(PostPageForm)
 
 function PostPageForm(props) {
+    console.log(props)
     return (
         <form onSubmit={props.handleSubmit}>
 
@@ -94,7 +95,7 @@ function PostPageForm(props) {
                     </NavLink>
                     <button type="submit"
                             className="btn btn-success"
-                            disabled={props.invalid || props.submitting}>
+                            disabled={props.invalid}>
                         Создать
                     </button>
                 </div>

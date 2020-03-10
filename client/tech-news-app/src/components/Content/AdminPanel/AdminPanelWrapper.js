@@ -8,7 +8,7 @@ import {NotificationManager} from "react-notifications";
 
 class AdminPanelWrapper extends React.Component {
 
-    deletePostById = (postId) => {
+    deletePostById = postId => {
         PostAPI.deletePostById(postId)
             .then(response => {
                 NotificationManager.success(`Пост номер ${postId} успешно удален`, 'Успешно');

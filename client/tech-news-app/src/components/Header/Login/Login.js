@@ -13,19 +13,21 @@ function Login(props) {
     }
 
     return (
-        <div className="row-fluid container ">
+        <div className="row-fluid container">
             <div className="span12">
                 <div className="span9">
-                    <h1 className="muted mt" onClick={clickLogo}>
-                        <NavLink to="/posts/all" className="site-logo">Tech-news</NavLink>
+                    <h1 className="muted mt"
+                        onClick={clickLogo}>
+                        <NavLink to="/posts/all"
+                                 className="site-logo">
+                            Tech-news
+                        </NavLink>
                     </h1>
                 </div>
-                <div className=" auth-button">
+                <div className="auth-button">
 
                     {
-                        props.isAuth
-                            ? ''
-                            : <AuthButton/>
+                        !props.isAuth && <AuthButton/>
                     }
 
                 </div>

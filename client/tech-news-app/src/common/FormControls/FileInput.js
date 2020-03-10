@@ -5,7 +5,6 @@ import {change} from "redux-form";
 import errorIcon from "../../static/error-icon.png";
 
 export const FileInput = ({input, meta, ...props}) => {
-    debugger
     const [value, setValue] = useState(undefined);
     const isError = meta.touched && meta.error && !value;
 

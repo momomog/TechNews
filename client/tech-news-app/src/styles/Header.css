@@ -30,7 +30,7 @@
 }
 
 .reg {
-    font-size: 1em;
+    font-size: 0.94em!important;
     text-decoration: none !important;
     cursor: pointer;
 }

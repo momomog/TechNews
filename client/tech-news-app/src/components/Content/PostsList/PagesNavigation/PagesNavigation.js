@@ -13,40 +13,42 @@ function PagesNavigation(props) {
     }
 
     return (
-        <div className="col-lg-4 center-block mb-3">
-            <nav aria-label="Page navigation example">
-                <ul className="pagination justify-content-center pagin-links">
-                    <li className={getPreviousButtonClass()}
-                        onClick={() => setPrevNextPostPage(props.postPage - 1)}>
-                        <NavLink className="page-link"
-                                 to={`/posts/${getSectionName(props.sectionId)}/${props.postPage - 1}`}
-                                 onClick={() => window.scroll(0, 0)}>
-                            Назад
-                        </NavLink>
-                    </li>
+        <div className="row">
+            <div className="col-lg-4 center-block mb-3">
+                <nav aria-label="Page navigation example">
+                    <ul className="pagination justify-content-center pagin-links">
+                        <li className={getPreviousButtonClass()}
+                            onClick={() => setPrevNextPostPage(props.postPage - 1)}>
+                            <NavLink className="page-link"
+                                     to={`/posts/${getSectionName(props.sectionId)}/${props.postPage - 1}`}
+                                     onClick={() => window.scroll(0, 0)}>
+                                Назад
+                            </NavLink>
+                        </li>
 
-                    {
-                        initPagesArray().map((page) => {
-                            return <li className={getNavigationButtonClass(page)} onClick={setPostPage} key={page}>
-                                <NavLink to={`/posts/${getSectionName(props.sectionId)}/${page}`}
-                                         className="page-link"
-                                         onClick={() => window.scroll(0, 0)}>
-                                    {page}
-                                </NavLink>
-                            </li>
-                        })
-                    }
+                        {
+                            initPagesArray().map((page) => {
+                                return <li className={getNavigationButtonClass(page)} onClick={setPostPage} key={page}>
+                                    <NavLink to={`/posts/${getSectionName(props.sectionId)}/${page}`}
+                                             className="page-link"
+                                             onClick={() => window.scroll(0, 0)}>
+                                        {page}
+                                    </NavLink>
+                                </li>
+                            })
+                        }
 
-                    <li className={getNextButtonClass()}
-                        onClick={() => setPrevNextPostPage(props.postPage + 1)}>
-                        <NavLink to={`/posts/${getSectionName(props.sectionId)}/${props.postPage + 1}`}
-                                 className="page-link"
-                                 onClick={() => window.scroll(0, 0)}>
-                            Вперед
-                        </NavLink>
-                    </li>
-                </ul>
-            </nav>
+                        <li className={getNextButtonClass()}
+                            onClick={() => setPrevNextPostPage(props.postPage + 1)}>
+                            <NavLink to={`/posts/${getSectionName(props.sectionId)}/${props.postPage + 1}`}
+                                     className="page-link"
+                                     onClick={() => window.scroll(0, 0)}>
+                                Вперед
+                            </NavLink>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     );
 

@@ -4,7 +4,8 @@ import spinner from '../../static/Spinner.svg'
 
 function Spinner() {
     return (
-        <img src={spinner} alt="loading..."/>
+        <img src={spinner}
+             alt="loading..."/>
     )
 }
 

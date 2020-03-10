@@ -13,7 +13,7 @@ class PostsListWrapper extends React.Component {
         : this.props.getAllPosts(SECTION_ALL_POSTS, 1);
     }
 
-    setPostId = (postNumber) => {
+    setPostId = postNumber => {
         this.props.setPostId(postNumber);
     };
 

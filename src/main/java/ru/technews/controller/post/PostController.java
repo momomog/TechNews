@@ -119,6 +119,35 @@ public class PostController implements PostCategoryConst {
         return ResponseEntity.ok(new ActionCompleteResponse(true));
     }
 
+    // Изменений данных поста
+    @PostMapping(value = "/post/update", params = "id", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity updatePostById(@RequestParam(name = "id") Long id,
+                                         @CurrentUser UserPrincipal currentUser,
+                                         @RequestPart("post") @Valid PostDataRequest postRequest,
+                                         @RequestPart("photo") @Valid MultipartFile photo) throws IOException, GeneralSecurityException {
+        PostEntity post = postService.findById(id);
+        if (post != null) {
+            post.setTitle(postRequest.getTitle());
+            post.setPreDescription(postRequest.getPreDescription());
+            post.setFullDescription(postRequest.getFullDescription());
+            post.setCategoryId(postRequest.getCategoryId());
+            post.setEditDate(LocalDateTime.now());
+            post.setEditAuthorId(currentUser.getId());
+            post.setEditAuthor(currentUser.getUsername());
+
+            if (photo.getSize() != 0) {
+                String photoId = googleDrive.uploadPhoto(photo, postPhotoFolderId, post.getPhotoId(), true);
+                if (photoId != null)
+                    post.setPhotoId(photoId);
+            }
+
+            postService.update(post);
+        }
+
+        return ResponseEntity.ok(new ActionCompleteResponse(true));
+    }
+
     // Удаление поста
     @GetMapping(value = "/delete-post", params = "id")
     @PreAuthorize("hasRole('ADMIN')")
@@ -144,49 +173,6 @@ public class PostController implements PostCategoryConst {
         List<Integer> authorsList = new ArrayList<>(Arrays.asList(post.getRatedUsers()));
         authorsList.add(currentUser.getId().intValue());
         post.setRatedUsers(authorsList.toArray(new Integer[authorsList.size()]));
-
-        postService.update(post);
-
-        return ResponseEntity.ok(new ActionCompleteResponse(true));
-    }
-
-    // Изменений данных поста
-    @PostMapping(value = "/post/update", params = "id")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity updatePostById(@RequestParam(name = "id") Long id,
-                                         @CurrentUser UserPrincipal currentUser,
-                                         @RequestBody PostDataRequest postRequest) {
-        PostEntity post = postService.findById(id);
-        if (post != null) {
-            if (postRequest.getTitle() != null && !postRequest.getTitle().equals(""))
-                post.setTitle(postRequest.getTitle());
-            if (postRequest.getPreDescription() != null && !postRequest.getPreDescription().equals(""))
-                post.setPreDescription(postRequest.getPreDescription());
-            if (postRequest.getFullDescription() != null && !postRequest.getFullDescription().equals(""))
-                post.setFullDescription(postRequest.getFullDescription());
-            if (postRequest.getCategoryId() != null)
-                post.setCategoryId(postRequest.getCategoryId());
-            post.setEditDate(LocalDateTime.now());
-            post.setEditAuthorId(currentUser.getId());
-            post.setEditAuthor(currentUser.getUsername());
-            postService.update(post);
-        }
-
-        return ResponseEntity.ok(new ActionCompleteResponse(true));
-    }
-
-    // Обновление фото поста
-    @PostMapping(value = "/post/{id}/load-photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity updateUserPhoto(@PathVariable("id") Long id,
-                                          @RequestParam MultipartFile photo) throws IOException, GeneralSecurityException {
-        PostEntity post = postService.findById(id);
-
-        if (photo.getSize() != 0) {
-            String photoId = googleDrive.uploadPhoto(photo, postPhotoFolderId, post.getPhotoId(), true);
-            if (photoId != null)
-                post.setPhotoId(photoId);
-        }
 
         postService.update(post);
 

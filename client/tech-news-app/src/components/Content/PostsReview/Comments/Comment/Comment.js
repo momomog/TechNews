@@ -48,11 +48,11 @@ class Comment extends React.Component {
         })
     };
 
-    changeInputCommentText = (e) => {
+    changeInputCommentText = e => {
         this.setState({commentEditText: e.target.value});
     };
 
-    changeAnswerCommentText = (e) => {
+    changeAnswerCommentText = e => {
         this.setState({commentAnswerText: e.target.value});
     };
 
@@ -105,7 +105,7 @@ class Comment extends React.Component {
 
                         {
                             this.state.isEditMode && this.state.commentId === id
-                            ? <div>
+                                ? <div>
                                     <textarea className="form-control text-area mt-2" rows="3"
                                               onChange={this.changeInputCommentText}
                                               value={this.state.commentEditText}
@@ -121,23 +121,29 @@ class Comment extends React.Component {
                                               }}
                                     />
                                     <span>
-                                        <a className="text-secondary reg" onClick={this.updateCommentary}>Сохранить</a>
-                                        <a className="text-secondary reg ml-4" onClick={() => {this.setState({isEditMode: false})}}>Отменить</a>
+                                        <a className="text-secondary reg" onClick={this.updateCommentary}>
+                                            Сохранить
+                                        </a>
+                                        <a className="text-secondary reg ml-4" onClick={() => {
+                                            this.setState({isEditMode: false})
+                                        }}>
+                                            Отменить
+                                        </a>
                                     </span>
-                              </div>
-                            : <div>
-                                  <div className="mt-1 mb-3" align="justify">
-                                      {
-                                          isDeleted
-                                          ? <i>{commentText}</i>
-                                          : parentCommentAuthorName
-                                              ? <div>
-                                                  <span className="font-weight-bold ml-1">{parentCommentAuthorName}</span>
-                                                  <span>, {commentText}</span>
+                                </div>
+                                : <div>
+                                    <div className="mt-1 mb-3" align="justify">
+                                        {
+                                            isDeleted
+                                                ? <i>{commentText}</i>
+                                                : parentCommentAuthorName
+                                                ? <div>
+                                                    <span className="font-weight-bold ml-1">{parentCommentAuthorName}</span>
+                                                    <span>, {commentText}</span>
                                                 </div>
-                                              : commentText
-                                      }
-                                  </div>
+                                                : commentText
+                                        }
+                                    </div>
                                     <div className="row">
                                         <span className="col-lg-12">
                                         <i id='like' className="fa fa-heart comment-icon mr-2 ml-1"
@@ -145,24 +151,24 @@ class Comment extends React.Component {
                                         <span className="comment-count">{likes.length}</span>
 
                                             {
-                                                this.props.isAuth
-                                                    ? <span>
-                                                         <a onClick={this.onClickAnswerCommentary} className="text-secondary reg ml-4">Ответить</a>
+                                                this.props.isAuth &&
+                                                <span>
+                                                         <a onClick={this.onClickAnswerCommentary}
+                                                            className="text-secondary reg ml-4">Ответить</a>
                                                       </span>
-                                                    : ''
                                             }
 
                                             {
-                                                (this.props.isAuth && authorId === this.props.currentUserData.id  || AuthService.isAdmin()) && !isDeleted
-                                                    ? <span className="ml-3">
-                                                         <a onClick={this.onClickEditCommentary} className="text-secondary reg">Редактировать</a>
+                                                (this.props.isAuth && authorId === this.props.currentUserData.id || AuthService.isAdmin()) && !isDeleted
+                                                && <span className="ml-3">
+                                                         <a onClick={this.onClickEditCommentary}
+                                                            className="text-secondary reg">Редактировать</a>
                                                       </span>
-                                                    : ''
                                             }
 
                                             {
-                                                (this.props.isAuth && authorId === this.props.currentUserData.id  || AuthService.isAdmin()) && !isDeleted
-                                                    ? <span className="ml-3">
+                                                (this.props.isAuth && authorId === this.props.currentUserData.id || AuthService.isAdmin()) && !isDeleted
+                                                && <span className="ml-3">
                                                           <Popup trigger={<a className="text-secondary reg">Удалить</a>}
                                                                  position="top center"
                                                                  open={this.state.isOpenPopup}
@@ -188,13 +194,13 @@ class Comment extends React.Component {
                                                           </div>
                                                           </Popup>
                                                       </span>
-                                                    : ''
                                             }
 
                                             {
                                                 this.state.isAnswerMode && this.state.commentAnswerParentId === id
-                                                ? <div className="mb-3">
-                                                       <textarea className="form-control text-area mt-2 answer-area" rows="3"
+                                                && <div className="mb-3">
+                                                       <textarea className="form-control text-area mt-2 answer-area"
+                                                                 rows="3"
                                                                  onChange={this.changeAnswerCommentText}
                                                                  value={this.state.commentAnswerText}
                                                                  defaultValue={this.state.commentAnswerText}
@@ -203,16 +209,18 @@ class Comment extends React.Component {
                                                                      e.target.style.height = (20 + e.target.scrollHeight) + "px";
                                                                  }}
                                                        />
-                                                       <div className="mt-2">
+                                                    <div className="mt-2">
                                                           <span>
-                                                              <a onClick={this.addCommentary} className="text-secondary reg ml-4 answer-area">Отправить</a>
+                                                              <a onClick={this.addCommentary}
+                                                                 className="text-secondary reg ml-4 answer-area">Отправить</a>
                                                           </span>
-                                                          <span>
-                                                              <a onClick={() => {this.setState({isAnswerMode: false})}} className="text-secondary reg ml-4">Отменить</a>
+                                                        <span>
+                                                              <a onClick={() => {
+                                                                  this.setState({isAnswerMode: false})
+                                                              }} className="text-secondary reg ml-4">Отменить</a>
                                                           </span>
-                                                       </div>
-                                                  </div>
-                                                : ''
+                                                    </div>
+                                                </div>
                                             }
 
                                         </span>
@@ -224,23 +232,22 @@ class Comment extends React.Component {
                 </div>
 
                 {
-                    id === this.props.lastCommentId ? '' : <div className="border-bottom"/>
+                    !(id === this.props.lastCommentId) && <div className="border-bottom"/>
                 }
 
                 {
                     replyComments && replyComments.length > 0
-                        ? replyComments.map((comment) => {
-                            return <div className="ml-5" key={comment.id}>
-                                       <Comment comment={comment}
-                                                isAuth={this.props.isAuth}
-                                                currentUserData={this.props.currentUserData}
-                                                likeCommentary={this.props.likeCommentary}
-                                                updateCommentary={this.props.updateCommentary}
-                                                addCommentary={this.props.addCommentary}
-                                                deleteCommentary={this.props.deleteCommentary}/>
-                                  </div>
-                        })
-                        : ''
+                    && replyComments.map((comment) => {
+                        return <div className="ml-5" key={comment.id}>
+                            <Comment comment={comment}
+                                     isAuth={this.props.isAuth}
+                                     currentUserData={this.props.currentUserData}
+                                     likeCommentary={this.props.likeCommentary}
+                                     updateCommentary={this.props.updateCommentary}
+                                     addCommentary={this.props.addCommentary}
+                                     deleteCommentary={this.props.deleteCommentary}/>
+                        </div>
+                    })
                 }
 
             </div>

@@ -7,8 +7,8 @@ import {
     minLength6,
     required,
     usernameEmailValidate,
-} from "../../../../common/Validators";
-import {Input} from "../../../../common/FormControls/Input";
+} from "../../../common/Validators";
+import {Input} from "../../../common/FormControls/Input";
 
 export const RegistrationReduxForm = reduxForm({
     form: 'registration',
@@ -25,7 +25,7 @@ function RegistrationForm(props) {
                     <Field name="firstName"
                            type="text"
                            component={Input}
-                           validate={required}
+                           validate={[required, minLength3]}
                            className="form-control input-group-form"
                            placeholder="Имя"/>
                 </div>
@@ -36,7 +36,7 @@ function RegistrationForm(props) {
                     <Field name="lastName"
                            placeholder="Фамилия"
                            component={Input}
-                           validate={required}
+                           validate={[required, minLength3]}
                            className="form-control input-group-form"/>
                 </div>
             </div>

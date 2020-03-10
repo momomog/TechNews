@@ -1,6 +1,6 @@
 import React from "react";
 import {Redirect} from "react-router-dom";
-import LoginReduxForm from "./LoginForm/LoginForm";
+import LoginReduxForm from "./LoginForm";
 
 
 class Authorization extends React.Component {

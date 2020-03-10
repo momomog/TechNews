@@ -3,7 +3,7 @@ import React from "react";
 import okIcon from '../../static/dialog-ok-apply-icon.png'
 import errorIcon from '../../static/error-icon.png'
 
-export const Input = ({input, meta, ...props}) => {
+export const TextArea = ({input, meta, ...props}) => {
     const isError = meta.touched && meta.error;
     return (
         <div style={{width: '100%'}}>
@@ -15,7 +15,7 @@ export const Input = ({input, meta, ...props}) => {
             }
 
             <div>
-                <input {...input}
+                <textarea {...input}
                        {...props}
                        style={{
                            border: isError ? '1px solid red' : meta.touched ? '1px solid green' : '',

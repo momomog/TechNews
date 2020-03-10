@@ -1,6 +1,5 @@
 import {getSectionName} from "../common/Const";
 import {API_BASE_URL, request} from "./BaseRequest";
-import Common from "../common/Common";
 import AuthService from "../common/AuthService";
 
 class PostAPI {
@@ -8,31 +7,22 @@ class PostAPI {
         return request({
             url: API_BASE_URL + '/posts/' + getSectionName(sectionId) + '/' + postPage,
             method: 'GET'
-        });
-    };
+        })
+    }
 
     getPostData(sectionId, postId) {
         return request({
             url: API_BASE_URL + '/posts/' + getSectionName(sectionId) + '/post/' + postId,
             method: 'GET'
-        });
-    };
+        })
+    }
 
     deletePostById(postId) {
         return request({
             url: API_BASE_URL + '/posts/delete-post?id=' + postId,
             method: 'GET'
-        });
-    };
-
-    onUpdatePostData(postId, postDataRequest) {
-        return request({
-            url: API_BASE_URL + '/posts/post/update?id=' + postId,
-            method: 'POST',
-            body: JSON.stringify(postDataRequest)
-        });
-    };
-
+        })
+    }
 
     ratePost(postId, rate) {
         return request({
@@ -41,8 +31,8 @@ class PostAPI {
             body: JSON.stringify({
                 rate: rate
             })
-        });
-    };
+        })
+    }
 
     onCreateNewPost(postDataRequest, photoBody) {
         const formData = new FormData();
@@ -66,12 +56,20 @@ class PostAPI {
             method: 'POST',
             headers: headers,
             body: formData
-        });
-    };
+        })
+    }
 
-    onUpdatePostPhoto(postId, photoBody) {
+    onUpdatePostData(postId, postDataRequest, photoBody) {
         const formData = new FormData();
-        formData.append('photo', photoBody);
+        formData.append('post', new Blob([JSON.stringify(postDataRequest)], {
+            type: "application/json"
+        }));
+
+        if (photoBody) {
+            formData.append('photo', photoBody);
+        } else {
+            formData.append('photo', new Blob());
+        }
         const headers = new Headers({});
 
         if (AuthService.getToken()) {
@@ -79,12 +77,12 @@ class PostAPI {
         }
 
         return request({
-            url: API_BASE_URL + '/posts/post/' + postId + '/load-photo',
-            headers: headers,
+            url: API_BASE_URL + '/posts/post/update?id=' + postId,
             method: 'POST',
+            headers: headers,
             body: formData
-        });
-    };
+        })
+    }
 }
 
 export default new PostAPI();

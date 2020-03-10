@@ -14,35 +14,22 @@ class PostEditWrapper extends React.Component {
         this.props.getPostData(this.props.sectionId, this.props.match.params.postId);
     }
 
-    updatePostData = (postDataRequest, photoBody) => {
-        let isError = [];
+    updatePostData = (formData) => {
+        const request = {
+                title: formData.title,
+                preDescription: formData.preDescription,
+                fullDescription: formData.fullDescription,
+                categoryId: formData.categoryId
+            },
+            photo = formData.photo && formData.photo[0] ? formData.photo[0] : null
 
-        isError.push(Common.onValidBeforePostSave(postDataRequest.title, 'Заголовок', 50, 200));
-        isError.push(Common.onValidBeforePostSave(postDataRequest.preDescription, 'Краткое описание', 200, 1000));
-        isError.push(Common.onValidBeforePostSave(postDataRequest.fullDescription, 'Описание', 1000, 20000));
-
-        if (!postDataRequest.categoryId) {
-            NotificationManager.error('Необходимо выбрать категорию', 'Категория');
-            return;
-        }
-
-        if (isError.indexOf(false) !== -1)
-            return;
-
-        PostAPI.onUpdatePostData(this.props.match.params.postId, postDataRequest)
+        PostAPI.onUpdatePostData(this.props.match.params.postId, request, photo)
             .then(response => {
                 NotificationManager.success('Данные поста успешно обновлены', 'Успешно');
             })
             .catch(function (error) {
                 NotificationManager.error('Не удалось обновить данные поста', 'Ошибка');
             });
-
-        if (photoBody) {
-            PostAPI.onUpdatePostPhoto(this.props.match.params.postId, photoBody)
-                .catch(function (error) {
-                    NotificationManager.error('Не удалось обновить данные поста', 'Ошибка');
-                });
-        }
 
         let path = '/posts/' + this.props.match.params.sectionName + '/post/' + this.props.match.params.postId;
         Common.changeLocation(path, 1000);

@@ -1,4 +1,3 @@
-import Common from "../common/Common";
 import {API_BASE_URL, request} from "./BaseRequest";
 import AuthService from "../common/AuthService";
 
@@ -12,14 +11,14 @@ class ProfileAPI {
         return request({
             url: API_BASE_URL + "/user/me",
             method: 'GET',
-        });
+        })
     }
 
     getUserProfile(username) {
         return request({
             url: API_BASE_URL + "/users/" + username,
             method: 'GET'
-        });
+        })
     }
 
     onLoadPhoto(photoBody) {
@@ -36,16 +35,16 @@ class ProfileAPI {
             headers: headers,
             method: 'POST',
             body: formData
-        });
-    };
+        })
+    }
 
     onUpdateUserData(userDataRequest) {
         return request({
             url: API_BASE_URL + '/user/me/update',
             method: 'POST',
             body: JSON.stringify(userDataRequest)
-        });
-    };
+        })
+    }
 }
 
 export default new ProfileAPI();

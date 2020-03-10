@@ -1,5 +1,4 @@
 import React from "react";
-import {NotificationManager} from "react-notifications";
 
 class Common {
 
@@ -28,8 +27,11 @@ class Common {
             let difference = new Date() - birthDate;
             let age = Math.floor((difference / (1000 * 60 * 60 * 24) / 365));
 
-            if (age.toString().endsWith('1') && age !== 11) return age + ' год';
-            else if (['2', '3', '4'].indexOf(age.toString()) !== -1) return age + ' года';
+            if (age.toString().endsWith('1') && age !== 11)
+                return age + ' год';
+            else if (['2', '3', '4'].indexOf(age.toString()) !== -1)
+                return age + ' года';
+
             return age + ' лет';
         }
     }
@@ -43,6 +45,17 @@ class Common {
                 || (['2', '3', '4'].indexOf(num[0]) !== -1)) return 'комментария';
         }
         return 'комментариев';
+    }
+
+    // Окончание количества символов в зависимости от значения
+    getSymbolsCountText(number) {
+        if (number) {
+            let num = number.toString();
+            if (num.endsWith('1') && number !== 11) return 'символ';
+            else if (['2', '3', '4'].indexOf(num[num.length - 1]) !== -1
+                || (['2', '3', '4'].indexOf(num[0]) !== -1)) return 'символа';
+        }
+        return 'символов';
     }
 
     // Смена локации
@@ -62,22 +75,6 @@ class Common {
             default:
                 return 'Неизвестная ошибка';
         }
-    }
-
-    // Проверка заполненности полей при создании, редактировании поста
-    onValidBeforePostSave(fieldBody, fieldName, minValue, maxValue) {
-        let errorText = !fieldBody
-            ? 'Поле не может быть пустым'
-            : fieldBody.length < minValue
-                ? `Минимальное количество символов (${minValue})`
-                : fieldBody.length > maxValue
-                    ? `Превышено максимальное количество символов (${maxValue})`
-                    : null;
-        if (!errorText)
-            return true;
-
-        NotificationManager.error(errorText, fieldName);
-        return false;
     }
 
     // *

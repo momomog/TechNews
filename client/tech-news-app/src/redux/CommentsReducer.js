@@ -1,6 +1,5 @@
 import CommentAPI from "../api/CommentAPI";
 
-const CHANGE_COMMENT_TEXT = 'CHANGE-COMMENT-TEXT';
 const SET_POST_COMMENTS = 'SET-POST-COMMENTS';
 
 
@@ -19,12 +18,6 @@ export const commentsReducer = (state = initialState, action) => {
                 commentsCount: action.commentsCount
             };
         }
-        case CHANGE_COMMENT_TEXT: {
-            return {
-                ...state,
-                commentText: action.commentText
-            };
-        }
         default:
             return state;
     }
@@ -33,9 +26,8 @@ export const commentsReducer = (state = initialState, action) => {
 export const setPostCommentsAction = (comments, commentsCount) => ({
     type: SET_POST_COMMENTS,
     postComments: comments,
-    commentsCount: commentsCount
+    commentsCount
 });
-export const changeCommentTextAction = (text) => ({type: CHANGE_COMMENT_TEXT, commentText: text});
 
 export const getPostComments = (sectionId, postId) => {
     return (dispatch) => {

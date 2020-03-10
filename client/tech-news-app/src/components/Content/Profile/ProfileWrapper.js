@@ -4,7 +4,8 @@ import {compose} from "redux";
 import {Redirect, withRouter} from "react-router-dom";
 import Profile from "./Profile";
 import ProfileAPI from "../../../api/ProfileAPI";
-import {getUserData} from "../../../redux/UserReducer";
+import {getCurrentUserData, getUserData} from "../../../redux/UserReducer";
+import AuthService from "../../../common/AuthService";
 
 class ProfileWrapper extends React.Component {
     isNotCurrentUser() {
@@ -22,7 +23,8 @@ class ProfileWrapper extends React.Component {
         if (this.isNotCurrentUser()) {
             const path = this.props.location.pathname.split('/');
             this.props.getUserData(path[2]);
-        }
+        } else if (AuthService.isAuth())
+            this.props.getCurrentUserData(AuthService.getUserId())
     }
 
     render() {
@@ -47,6 +49,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
+        getCurrentUserData: userId => dispatch(getCurrentUserData(userId)),
         getUserData: username => dispatch(getUserData(username))
     }
 };

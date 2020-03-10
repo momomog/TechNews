@@ -1,6 +1,6 @@
 import React from "react";
 import {Redirect} from "react-router-dom";
-import RegistrationReduxForm from "./RegistrationForm/RegistrationForm";
+import RegistrationReduxForm from "./RegistrationForm";
 
 class Registration extends React.Component {
     onRegistrationClick = (formData) => {

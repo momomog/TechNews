@@ -9,28 +9,18 @@ import {NotificationManager} from "react-notifications";
 import PostAPI from "../../../../api/PostAPI";
 
 class NewPostPageWrapper extends React.Component {
-
-    createNewPost = (postDataRequest, photoBody) => {
-        let isError = [];
-
-        isError.push(Common.onValidBeforePostSave(postDataRequest.title, 'Заголовок', 50, 200));
-        isError.push(Common.onValidBeforePostSave(postDataRequest.preDescription, 'Краткое описание', 200, 1000));
-        isError.push(Common.onValidBeforePostSave(postDataRequest.fullDescription, 'Описание', 1000, 20000));
-
-        if (!postDataRequest.categoryId) {
-            NotificationManager.error('Необходимо выбрать категорию', 'Категория');
-            return;
-        }
-
-        if (isError.indexOf(false) !== -1)
-            return;
-
-        PostAPI.onCreateNewPost(postDataRequest, photoBody)
+    createNewPost = (formData) => {
+        PostAPI.onCreateNewPost({
+            title: formData.title,
+            preDescription: formData.preDescription,
+            fullDescription: formData.fullDescription,
+            categoryId: formData.categoryId
+        }, formData.photo[0])
             .catch(function (error) {
                 NotificationManager.error('Не удалось создать новый пост', 'Ошибка');
             });
 
-        Common.changeLocation('/posts/' + getSectionName(Number(postDataRequest.categoryId)));
+        Common.changeLocation('/posts/' + getSectionName(Number(formData.categoryId)));
     };
 
     render() {

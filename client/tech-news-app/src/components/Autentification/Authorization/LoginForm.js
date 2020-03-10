@@ -1,8 +1,8 @@
 import {NavLink} from "react-router-dom";
 import React from "react";
 import {Field, reduxForm} from "redux-form";
-import {Input} from "../../../../common/FormControls/Input";
-import {required} from "../../../../common/Validators";
+import {Input} from "../../../common/FormControls/Input";
+import {required} from "../../../common/Validators";
 
 export const LoginReduxForm = reduxForm({
     form: 'login'
@@ -20,7 +20,7 @@ function LoginForm(props) {
                 <Field component={Input}
                        validate={required}
                        className="input-group-form"
-                       showLabel={true}
+                       showlabel={'true'}
                        placeholder="Имя пользователя или почтовый адрес"
                        name="usernameOrEmail"/>
             </div>
@@ -34,7 +34,7 @@ function LoginForm(props) {
                        type="password"
                        className="input-group-form"
                        name="password"
-                       showLabel={true}
+                       showlabel={'true'}
                        placeholder="пароль"/>
             </div>
 

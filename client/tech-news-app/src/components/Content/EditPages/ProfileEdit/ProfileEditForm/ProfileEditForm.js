@@ -4,7 +4,7 @@ import {Field, reduxForm} from "redux-form";
 import {required} from "../../../../../common/Validators";
 import ProfileField from "./ProfileField";
 import Common from "../../../../../common/Common";
-import {DateField} from "../../../../../common/FormControls/DateField";
+import {DatePicker} from "../../../../../common/FormControls/DatePicker";
 
 
 class ProfileEditForm extends React.Component {
@@ -79,7 +79,7 @@ class ProfileEditForm extends React.Component {
                         <div className='col-xs-1'/>
                         <div className="col-xs-5 date-picker d-flex justify-content-end">
                             <span className="mr-2 soc-date-name">Дата рождения</span>
-                            <Field component={DateField}
+                            <Field component={DatePicker}
                                    initValue={Common.intArrayToDate(this.props.user.profileData.birthDate)}
                                    className="soc-input w-100"
                                    label={'Дата рождения'}

@@ -1,4 +1,3 @@
-import Common from "../common/Common";
 import AuthService from "../common/AuthService";
 
 export const API_BASE_URL = 'http://localhost:8080/api';
@@ -6,7 +5,7 @@ export const API_BASE_URL = 'http://localhost:8080/api';
 export const request = (options) => {
     const headers = new Headers({
         'Content-Type': 'application/json',
-    });
+    })
 
     if (AuthService.getToken()) {
         headers.append('Authorization', 'Bearer ' + AuthService.getToken())
@@ -14,7 +13,7 @@ export const request = (options) => {
 
     const defaults = {
         headers: headers
-    };
+    }
 
     options = Object.assign({}, defaults, options);
 
@@ -26,5 +25,5 @@ export const request = (options) => {
                 }
                 return json;
             })
-        );
+        )
 };

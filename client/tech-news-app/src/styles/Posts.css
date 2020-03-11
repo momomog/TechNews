@@ -201,12 +201,6 @@ select, input[type="file"] {
     background-color: #fff !important;
 }
 
-.coms-wrapper {
-    background-color: #f4f4f4;
-    border: 1px solid white;
-    border-radius: 6px;
-}
-
 .border-bottom {
     border-bottom: 1px solid #dee2e6 !important;
     margin-right: 15px;

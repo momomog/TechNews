@@ -49,7 +49,6 @@ function Comments(props) {
                 {`${props.commentsCount} ${Common.getCommentaryCountText(props.commentsCount)}`}
             </h5>
 
-            <div className="coms-wrapper">
                 {
                     props.comments.length > 0
                         ? props.comments.map(comment => {
@@ -65,7 +64,7 @@ function Comments(props) {
                         })
                         : <div className="ml-4">Ваш комментарий будет первым...</div>
                 }
-            </div>
+
         </div>
     )
 }

@@ -3,7 +3,6 @@ import Comment from "./Comment/Comment";
 import Common from "../../../../common/Common";
 
 function Comments(props) {
-
     const [commentText, setCommentText] = useState('');
 
     function addNewCommentary() {
@@ -21,8 +20,7 @@ function Comments(props) {
                     ? <div className="my-4">
                         <h5 className="card-header">Оставьте свой комментарий:</h5>
                         <div className="comment-input">
-                            <form>
-                                <div className="form-group">
+                            <div className="form-group">
                                     <textarea className="form-control text-area" rows="3"
                                               placeholder="Введите текст комментария..."
                                               onChange={e => setCommentText(e.target.value)}
@@ -33,13 +31,12 @@ function Comments(props) {
                                                       addNewCommentary();
                                                   }
                                               }}/>
-                                </div>
-                                <button className="btn btn-primary"
-                                        disabled={!commentText}
-                                        onClick={addNewCommentary}>
-                                    Отправить
-                                </button>
-                            </form>
+                            </div>
+                            <button className="btn btn-primary"
+                                    disabled={!commentText.trim()}
+                                    onClick={addNewCommentary}>
+                                Отправить
+                            </button>
                         </div>
                     </div>
 

@@ -29,7 +29,7 @@ export const DatePicker = ({input, meta, ...props}) => {
             </MuiPickersUtilsProvider>
 
             {
-                isError && <div className="col-12">
+                isError && <div className="col-xs-12">
                     <div className="text-danger text-center validate-text">
                         {meta.error}
                     </div>

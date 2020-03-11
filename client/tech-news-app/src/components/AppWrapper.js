@@ -7,9 +7,7 @@ import AuthService from "../common/AuthService";
 class AppWrapper extends React.Component {
 
     componentDidMount() {
-        const isAuth = AuthService.isAuth();
-
-        if (isAuth) {
+        if (AuthService.isAuth()) {
             this.props.setIsAuth(true)
             const userId = AuthService.getUserId()
 

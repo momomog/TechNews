@@ -9,7 +9,7 @@ import PostAPI from "../../../api/PostAPI";
 class PostReviewWrapper extends React.Component {
 
     componentDidMount() {
-        this.props.getPostData(this.props.sectionId, this.props.match.params.postId);
+        this.props.getPostData(this.props.sectionId, this.props.match.params.postId)
     }
 
     postRating(rate) {
@@ -38,4 +38,4 @@ let mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(PostReviewWrapper);
+export default compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(PostReviewWrapper)

@@ -29,6 +29,7 @@ function Profile(props) {
                                     <div className="col-sm-2"/>
                                     <div className="col-sm-4">
                                         <div align="center">
+
                                             {
                                                 isLoading
                                                     ? <Spinner/>
@@ -52,15 +53,13 @@ function Profile(props) {
                                     </div>
                                     <div className="col-sm-5">
                                         <h2 style={{color: "#00b1b1"}}>
-                                            {user.firstName + ' ' + user.lastName}
+                                            {`${user.firstName} ${user.lastName}`}
                                         </h2>
                                         <span>
-                                            <p>
-                                                 @{user.username}
-                                            </p>
+                                            <p>@{user.username}</p>
                                         </span>
 
-                                        <SocialIcons user={user}/>
+                                        <SocialIcons profileData={user.profileData}/>
 
                                     </div>
 
@@ -77,4 +76,4 @@ function Profile(props) {
         return <div>empty</div>
 }
 
-export default Profile;
+export default Profile

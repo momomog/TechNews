@@ -12,7 +12,7 @@ function App() {
             <Content/>
             <Footer/>
         </BrowserRouter>
-    );
+    )
 }
 
 export default App;

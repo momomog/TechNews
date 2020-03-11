@@ -203,7 +203,7 @@ class Comment extends React.Component {
                                                                  onChange={this.changeAnswerCommentText}
                                                                  value={this.state.commentAnswerText}
                                                                  defaultValue={this.state.commentAnswerText}
-                                                                 onKeyUp={(e) => {
+                                                                 onKeyUp={e => {
                                                                      e.target.style.height = "1px";
                                                                      e.target.style.height = (20 + e.target.scrollHeight) + "px";
                                                                  }}

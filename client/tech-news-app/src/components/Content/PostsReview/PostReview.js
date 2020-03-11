@@ -15,14 +15,14 @@ class PostReview extends React.Component {
         }
     }
 
-    onRating = (e) => {
+    onRating = e => {
         this.setState({
             isRating: true,
             rating: e.target.value
         })
 
         this.props.postRating(e.target.value)
-    };
+    }
 
     isRatedByUser = () => {
         if (this.props.post.ratedUsers) {
@@ -137,8 +137,6 @@ class PostReview extends React.Component {
             </div>
         );
     }
-
-
 }
 
-export default PostReview;
+export default PostReview

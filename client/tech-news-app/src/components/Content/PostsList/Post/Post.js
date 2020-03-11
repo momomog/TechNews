@@ -28,7 +28,7 @@ function Post(props) {
 
             <div className="col-sm-3">
                 <NavLink to={`/posts/${getSectionName(props.sectionId)}/post/${post.id}`}>
-                    <img alt="post picture"
+                    <img alt="post"
                          onClick={setPostId}
                          src={post.photoId && `https://drive.google.com/uc?export=view&id=${post.photoId}`}/>
                 </NavLink>

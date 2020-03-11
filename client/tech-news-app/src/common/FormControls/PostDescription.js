@@ -13,13 +13,14 @@ export const PostDescription = ({input, meta, ...props}) => {
                     apiKey="API_KEY"
                     value={value}
                     initialValue={props.initValue}
-                    onEditorChange={(val) => {
-                        setValue(val)
-                        // console.log(val)
-                        meta.dispatch(change(meta.form, input.name, val));
+                    onChange={() => {
                     }}
-                    onBlur={() => {
-                        console.log(value); meta.dispatch(change(meta.form, input.name, value))}}
+                    onEditorChange={val => {
+                        if (val) {
+                            setValue(val)
+                            meta.dispatch(change(meta.form, input.name, val));
+                        }
+                    }}
                     init={{
                         plugins: [
                             'advlist autolink lists link image charmap print preview anchor',

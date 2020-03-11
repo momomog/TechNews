@@ -18,7 +18,7 @@ function Footer() {
                         <i id="social-em" className="fa fa-envelope-square fa-3x social"/>
                     </a>
                 </div>
-                <div className="footer-copyright text-center py-3 copyright">© 2019 Copyright:
+                <div className="footer-copyright text-center py-3 copyright">© 2019-2020 Copyright:
                     <a href="https://mdbootstrap.com/education/bootstrap/"> tech-news.ru</a>
                 </div>
             </div>

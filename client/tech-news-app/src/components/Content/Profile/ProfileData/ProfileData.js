@@ -22,7 +22,7 @@ export function ProfileData(props) {
                           value={user.email}/>
 
             <UserInfoLine name={'Дата рождения'}
-                          value={user.profileData.birthDate && Common.dateParser(user.profileData.birthDate) + ', ' + Common.getUserAge(user.profileData.birthDate)}/>
+                          value={user.profileData.birthDate && `${Common.dateParser(user.profileData.birthDate)}, ${Common.getUserAge(user.profileData.birthDate)}`}/>
 
             <UserInfoLine name={'Страна'}
                           value={user.profileData.country && user.profileData.country}/>
@@ -36,7 +36,7 @@ export function ProfileData(props) {
             <div className="clearfix section mb-1"/>
 
             <UserInfoLine name={'Репутация'}
-                          value={12}/>
+                          value={'**не реализовано**'}/>
 
             <UserInfoLine name={'Количество комментариев'}
                           value={user.commentsCount.toString()}/>

@@ -20,7 +20,7 @@ function Comments(props) {
                 props.isAuth
                     ? <div className="my-4">
                         <h5 className="card-header">Оставьте свой комментарий:</h5>
-                        <div className="card-body comment-input">
+                        <div className="comment-input">
                             <form>
                                 <div className="form-group">
                                     <textarea className="form-control text-area" rows="3"
@@ -52,21 +52,23 @@ function Comments(props) {
                 {`${props.commentsCount} ${Common.getCommentaryCountText(props.commentsCount)}`}
             </h5>
 
-            {
-                props.comments.length > 0
-                    ? props.comments.map(comment => {
-                        return <Comment comment={comment}
-                                        lastCommentId={props.comments[props.comments.length - 1].id}
-                                        isAuth={props.isAuth}
-                                        currentUserData={props.currentUserData}
-                                        likeCommentary={props.likeCommentary}
-                                        updateCommentary={props.updateCommentary}
-                                        addCommentary={props.addNewCommentary}
-                                        deleteCommentary={props.deleteCommentary}
-                                        key={comment.id}/>
-                    })
-                    : <div className="ml-4">Ваш комментарий будет первым...</div>
-            }
+            <div className="coms-wrapper">
+                {
+                    props.comments.length > 0
+                        ? props.comments.map(comment => {
+                            return <Comment comment={comment}
+                                            lastCommentId={props.comments[props.comments.length - 1].id}
+                                            isAuth={props.isAuth}
+                                            currentUserData={props.currentUserData}
+                                            likeCommentary={props.likeCommentary}
+                                            updateCommentary={props.updateCommentary}
+                                            addCommentary={props.addNewCommentary}
+                                            deleteCommentary={props.deleteCommentary}
+                                            key={comment.id}/>
+                        })
+                        : <div className="ml-4">Ваш комментарий будет первым...</div>
+                }
+            </div>
         </div>
     )
 }

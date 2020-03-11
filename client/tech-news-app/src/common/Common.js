@@ -1,5 +1,3 @@
-import React from "react";
-
 class Common {
 
     // Парсинг даты в вид ДД.ММ.ГГГГ

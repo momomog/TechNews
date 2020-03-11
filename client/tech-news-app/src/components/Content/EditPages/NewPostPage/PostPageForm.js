@@ -20,7 +20,6 @@ export const PostPageReduxForm = reduxForm({
 })(PostPageForm)
 
 function PostPageForm(props) {
-    console.log(props)
     return (
         <form onSubmit={props.handleSubmit}>
 

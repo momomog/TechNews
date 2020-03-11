@@ -162,7 +162,7 @@ class Comment extends React.Component {
                                                 && <span className="ml-3">
                                                          <a onClick={this.onClickEditCommentary}
                                                             className="text-secondary reg">Редактировать</a>
-                                                      </span>
+                                                   </span>
                                             }
 
                                             {
@@ -236,7 +236,7 @@ class Comment extends React.Component {
 
                 {
                     replyComments && replyComments.length > 0
-                    && replyComments.map((comment) => {
+                    && replyComments.map(comment => {
                         return <div className="ml-5" key={comment.id}>
                             <Comment comment={comment}
                                      isAuth={this.props.isAuth}

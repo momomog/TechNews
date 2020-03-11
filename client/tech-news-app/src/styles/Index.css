@@ -1,14 +1,13 @@
 body {
     font-family: 'Roboto', sans-serif;
     /*background: radial-gradient(40% 50%, #05464d, #324b4d);*/
-    background: #ADA996;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  /* Chrome 10-25, Safari 5.1-6 */
+    background: #ADA996; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
     /*background: #BBD2C5;  !* fallback for old browsers *!*/
     /*background: -webkit-linear-gradient(to right, #536976, #BBD2C5);  !* Chrome 10-25, Safari 5.1-6 *!*/
     /*background: linear-gradient(to right, #536976, #BBD2C5); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
-
 
 
     margin: 0;
@@ -23,4 +22,29 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.error-template {
+    padding: 40px 15px;
+    text-align: center;
+    margin-top: 5%;
+}
+
+.error-template h1 {
+    font-size: 4.7rem;
+    margin-bottom: -10px;
+}
+
+.error-template p {
+    margin-top: 20px;
+}
+
+.error-actions {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.error-actions .btn {
+    margin-right: 10px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .05);
 }

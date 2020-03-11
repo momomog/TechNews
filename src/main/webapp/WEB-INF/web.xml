@@ -7,16 +7,6 @@
 
   <display-name>tech-news</display-name>
 
-<!--    <session-config>-->
-<!--        <session-timeout>10000</session-timeout>-->
-<!--        <cookie-config>-->
-<!--            <name>cook</name>-->
-<!--            <http-only>true</http-only>-->
-<!--            <max-age>10000</max-age>-->
-<!--        </cookie-config>-->
-<!--        <tracking-mode>COOKIE</tracking-mode>-->
-<!--    </session-config>-->
-
     <error-page>
         <error-code>401</error-code>
         <location>/errors/unauthorised</location>

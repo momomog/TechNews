@@ -12,10 +12,11 @@
     font-size: 1.3rem;
     color: #337ab7;
 }
-.mh-50{
+
+.mh-50 {
     overflow: hidden;
-    height:97px!important;
-    max-height:97px!important;
+    height: 97px !important;
+    max-height: 97px !important;
 }
 
 .post-title a:hover {
@@ -199,4 +200,16 @@ select, input[type="file"] {
 
 .pagination > li > a, .pagination > li > span {
     background-color: #fff !important;
+}
+
+.coms-wrapper {
+    background-color: #f4f4f4;
+    border: 1px solid white;
+    border-radius: 6px;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #dee2e6 !important;
+    margin-right: 15px;
+    margin-left: 15px;
 }

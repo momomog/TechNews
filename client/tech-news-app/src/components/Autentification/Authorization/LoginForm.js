@@ -52,7 +52,7 @@ function LoginForm(props) {
             <div className="form-group mt-2">
                 <div className="col-sm-12">
                     <button className="btn btn-success"
-                            disabled={props.invalid || props.submitting}>
+                            disabled={props.invalid}>
                         Войти
                     </button>
                 </div>

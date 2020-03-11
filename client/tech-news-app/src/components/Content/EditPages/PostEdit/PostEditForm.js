@@ -51,7 +51,7 @@ class PostEditForm extends React.Component {
                 <h5 className="card-header ml-4 mr-4">Фотография</h5>
                 <div className="row p-3 ml-4 mr-4">
                     <div className="col-4">
-                        <img className="post-edit-picture" alt="post-photo"
+                        <img className="post-edit-picture" alt="post"
                              src={this.props.post.photoId
                              && 'https://drive.google.com/uc?export=view&id=' + this.props.post.photoId
                              }/>
@@ -126,8 +126,8 @@ class PostEditForm extends React.Component {
                         </NavLink>
                         <button type="submit"
                                 className="btn btn-success"
-                                disabled={this.props.errors || this.props.submitting}>
-                            Создать
+                                disabled={this.props.invalid}>
+                            Сохранить
                         </button>
                     </div>
                 </div>

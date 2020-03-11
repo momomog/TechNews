@@ -30,7 +30,7 @@ class PostReview extends React.Component {
             let isRated = false;
 
             if (ratedUsers.length > 0) {
-                ratedUsers.map( rate => {
+                ratedUsers.map(rate => {
                     if (rate === this.props.user.id)
                         isRated = true;
                 })
@@ -68,9 +68,8 @@ class PostReview extends React.Component {
                             </div>
                             <hr/>
                             <div className="col-lg-12 mb-2">
-                                <img className="card-img-top post-review-pic center-block"
-                                     src={post.photoId && `https://drive.google.com/uc?export=view&id=${post.photoId}`}
-                                     alt="Card image"/>
+                                <img className="card-img-top post-review-pic center-block" alt="Card"
+                                     src={post.photoId && `https://drive.google.com/uc?export=view&id=${post.photoId}`}/>
                                 <hr/>
                             </div>
 

@@ -16,7 +16,11 @@ class ProfileWrapper extends React.Component {
     }
 
     updateUserPhoto(body) {
-        ProfileAPI.onLoadPhoto(body)
+        const me = this;
+
+        ProfileAPI.onLoadPhoto(body).then( () => {
+            me.getCurrentUserData(AuthService.getUserId())
+        })
     }
 
     componentDidMount() {
@@ -30,6 +34,7 @@ class ProfileWrapper extends React.Component {
     render() {
         if (this.props.isAuth) {
             return <Profile currentUser={this.props.currentUserData}
+                            getCurrentUserData={this.props.getCurrentUserData}
                             user={this.props.userData}
                             isNotCurrentUser={this.isNotCurrentUser()}
                             onLoadPhoto={this.updateUserPhoto}/>

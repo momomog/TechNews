@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Spinner from "../../common/Spinner";
 import {ProfileData} from "./ProfileData/ProfileData";
 import {SocialIcons} from "./ProfileData/SocialIcons";
-import ProfilePictureModal from "./ProfilePictureModal";
+import ProfilePictureModal from "./ProfileData/ProfilePictureModal";
 
 function Profile(props) {
     let user = props.isNotCurrentUser ? props.user : props.currentUser;
@@ -10,24 +10,29 @@ function Profile(props) {
         [isOpenModal, setIsOpenModal] = useState(false),
         [picture, setPicture] = useState(undefined);
 
-    function onLoadPhoto(e) {
-        // setIsLoading(true);
-        // props.onLoadPhoto(e.target.files[0]);
-// debugger
+    function changePhoto(e) {
         setPicture(e.target.files[0])
-        setIsOpenModal(!isOpenModal)
-
-        // setTimeout(() => {
-        //     window.location = '/profile';
-        //     setIsLoading(false);
-        // }, 5000);
+        setIsOpenModal(true)
     }
 
-    function triggerModal(value) {
-        setIsOpenModal(value)
+    const onLoadPhoto = (file) => {
+        setIsLoading(true);
+        props.onLoadPhoto(file);
+
+        setTimeout(() => {
+            // window.location = '/profile';
+            setIsLoading(false);
+        }, 5000)
+    }
+
+    function triggerModal() {
+        setIsOpenModal(false)
     }
 
     if (user.profileData) {
+        console.log('------------')
+        console.log(user.profileData.photoId)
+        console.log('------------')
         return (
             <div className="row">
                 <div className="row col-md-11 center-block ">
@@ -54,12 +59,13 @@ function Profile(props) {
                                                     загрузить фото
                                                     {
                                                         isOpenModal && <ProfilePictureModal isOpenModal={isOpenModal}
+                                                                                            onLoadPhoto={onLoadPhoto}
                                                                                             triggerModal={triggerModal}
                                                                                             picture={picture}/>
                                                     }
 
                                                     <input type="file"
-                                                           onChange={onLoadPhoto}
+                                                           onChange={changePhoto}
                                                            name="photo" accept="image/*" hidden/>
                                                 </label>
                                             }

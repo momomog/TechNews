@@ -115,5 +115,10 @@
 }
 
 .MuiDialog-paperWidthSm {
-    width:100%!important;
+    width: 100% !important;
+}
+
+.MuiTypography-overline {
+    font-size: 1.1rem !important;
+    margin-right: 5% !important;
 }

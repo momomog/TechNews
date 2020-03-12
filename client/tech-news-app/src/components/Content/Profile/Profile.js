@@ -1,20 +1,30 @@
 import React, {useState} from "react";
 import Spinner from "../../common/Spinner";
 import {ProfileData} from "./ProfileData/ProfileData";
-import {SocialIcons} from "./SocialIcons/SocialIcons";
+import {SocialIcons} from "./ProfileData/SocialIcons";
+import ProfilePictureModal from "./ProfilePictureModal";
 
 function Profile(props) {
     let user = props.isNotCurrentUser ? props.user : props.currentUser;
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false),
+        [isOpenModal, setIsOpenModal] = useState(false),
+        [picture, setPicture] = useState(undefined);
 
     function onLoadPhoto(e) {
-        setIsLoading(true);
-        props.onLoadPhoto(e.target.files[0]);
+        // setIsLoading(true);
+        // props.onLoadPhoto(e.target.files[0]);
+// debugger
+        setPicture(e.target.files[0])
+        setIsOpenModal(!isOpenModal)
 
-        setTimeout(() => {
-            window.location = '/profile';
-            setIsLoading(false);
-        }, 5000);
+        // setTimeout(() => {
+        //     window.location = '/profile';
+        //     setIsLoading(false);
+        // }, 5000);
+    }
+
+    function triggerModal(value) {
+        setIsOpenModal(value)
     }
 
     if (user.profileData) {
@@ -42,6 +52,12 @@ function Profile(props) {
                                                 <label hidden={isLoading}
                                                        className="btn btn-primary-outline mt-1 p-0 text-secondary">
                                                     загрузить фото
+                                                    {
+                                                        isOpenModal && <ProfilePictureModal isOpenModal={isOpenModal}
+                                                                                            triggerModal={triggerModal}
+                                                                                            picture={picture}/>
+                                                    }
+
                                                     <input type="file"
                                                            onChange={onLoadPhoto}
                                                            name="photo" accept="image/*" hidden/>

@@ -22,6 +22,7 @@ function Content() {
                 <Route exact path='/new-post' render={() => <NewPostPageWrapper/>}/>
 
 
+                {/*<Route exact path='/registration' render={() => <RegistrationWrapper/>}/>*/}
                 <Route exact path='/registration' render={() => <RegistrationWrapper/>}/>
                 <Route exact path='/authorization' render={() => <AuthorizationWrapper/>}/>
                 <Route exact path='/admin-panel' render={() => <AdminPanelWrapper/>}/>

@@ -94,7 +94,7 @@ class AdminPanel extends React.Component {
                                             <Button onClick={this.handleCloseModal} color="primary">
                                                 Отмена
                                             </Button>
-                                            <Button onClick={this.onDeletePost} color="primary" autoFocus>
+                                            <Button onClick={this.onDeletePost} color="primary">
                                                 Удалить
                                             </Button>
                                         </DialogActions>

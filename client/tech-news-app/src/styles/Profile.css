@@ -113,3 +113,7 @@
 .validate-text {
     font-size: 1rem;
 }
+
+.MuiDialog-paperWidthSm {
+    width:100%!important;
+}

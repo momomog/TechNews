@@ -93,8 +93,6 @@ public class UserController {
                 profile.setPhotoId(photoId);
         }
 
-//        Thread.sleep(3000);
-
         userProfileDataService.update(profile);
 
         return ResponseEntity.ok(new ActionCompleteResponse(true));

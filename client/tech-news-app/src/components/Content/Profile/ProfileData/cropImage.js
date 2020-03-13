@@ -41,10 +41,12 @@ export default async function getCroppedImg(imageSrc, pixelCrop, fileName) {
     )
 
     return new Promise(resolve => {
-        canvas.toBlob(file => {
-            file.name = fileName;
+        canvas.toBlob(blob => {
+            blob.lastModifiedDate = new Date();
+            const file = new File([blob], fileName);
+
             resolve(file)
-        }, 'image/jpeg')
+        }, 'image/jpeg', )
     })
 }
 
@@ -55,12 +57,12 @@ export const imageCropStyles = theme => ({
         height: 200,
         background: '#333',
         [theme.breakpoints.up('sm')]: {
-            height: 400,
-        },
+            height: 400
+        }
     },
     cropButton: {
         flexShrink: 0,
-        marginLeft: 16,
+        marginLeft: 16
     },
     controls: {
         padding: 16,
@@ -69,18 +71,18 @@ export const imageCropStyles = theme => ({
         alignItems: 'stretch',
         [theme.breakpoints.up('sm')]: {
             flexDirection: 'row',
-            alignItems: 'center',
-        },
+            alignItems: 'center'
+        }
     },
     sliderContainer: {
         display: 'flex',
         flex: '1',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     sliderLabel: {
         [theme.breakpoints.down('xs')]: {
-            minWidth: 65,
-        },
+            minWidth: 65
+        }
     },
     slider: {
         padding: '22px 0px',
@@ -88,7 +90,7 @@ export const imageCropStyles = theme => ({
         [theme.breakpoints.up('sm')]: {
             flexDirection: 'row',
             alignItems: 'center',
-            margin: '0 16px',
-        },
-    },
+            margin: '0 16px'
+        }
+    }
 })

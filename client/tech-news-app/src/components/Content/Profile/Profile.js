@@ -19,20 +19,14 @@ function Profile(props) {
         setIsLoading(true);
         props.onLoadPhoto(file);
 
-        setTimeout(() => {
-            // window.location = '/profile';
-            setIsLoading(false);
-        }, 5000)
+        setTimeout(() => setIsLoading(false), 5000)
     }
 
     function triggerModal() {
         setIsOpenModal(false)
     }
 
-    if (user.profileData) {
-        console.log('------------')
-        console.log(user.profileData.photoId)
-        console.log('------------')
+    if (user) {
         return (
             <div className="row">
                 <div className="row col-md-11 center-block ">

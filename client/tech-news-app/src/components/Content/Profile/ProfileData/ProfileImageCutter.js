@@ -51,7 +51,6 @@ const Cutter = (props) => {
                             max={3}
                             step={0.1}
                             aria-labelledby="Масштаб"
-                            classes={{container: classes.slider}}
                             onChange={(e, zoom) => setZoom(zoom)}/>
                 </div>
 

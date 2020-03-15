@@ -23,13 +23,13 @@ class AppWrapper extends React.Component {
 
 let mapStateToProps = (state) => {
     return {}
-};
+}
 
 let mapDispatchToProps = (dispatch) => {
     return {
         setIsAuth: isAuth => dispatch(setIsAuthAction(isAuth)),
         getUserData: userId => dispatch(getCurrentUserData(userId))
     }
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppWrapper);
+export default connect(mapStateToProps, mapDispatchToProps)(AppWrapper)

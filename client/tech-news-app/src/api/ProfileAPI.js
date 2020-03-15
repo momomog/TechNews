@@ -9,14 +9,14 @@ class ProfileAPI {
         }
 
         return request({
-            url: API_BASE_URL + "/user/me",
+            url: `${API_BASE_URL}/user/me`,
             method: 'GET',
         })
     }
 
     getUserProfile(username) {
         return request({
-            url: API_BASE_URL + "/users/" + username,
+            url: `${API_BASE_URL}/users/${username}`,
             method: 'GET'
         })
     }
@@ -26,12 +26,11 @@ class ProfileAPI {
         formData.append('photo', photoBody);
         const headers = new Headers({});
 
-        if (AuthService.getToken()) {
-            headers.append('Authorization', 'Bearer ' + AuthService.getToken());
-        }
+        if (AuthService.getToken())
+            headers.append('Authorization', 'Bearer ' + AuthService.getToken())
 
         return request({
-            url: API_BASE_URL + '/user/me/load-photo',
+            url: `${API_BASE_URL}/user/me/load-photo`,
             headers: headers,
             method: 'POST',
             body: formData
@@ -40,11 +39,11 @@ class ProfileAPI {
 
     onUpdateUserData(userDataRequest) {
         return request({
-            url: API_BASE_URL + '/user/me/update',
+            url: `${API_BASE_URL}/user/me/update`,
             method: 'POST',
             body: JSON.stringify(userDataRequest)
         })
     }
 }
 
-export default new ProfileAPI();
+export default new ProfileAPI()

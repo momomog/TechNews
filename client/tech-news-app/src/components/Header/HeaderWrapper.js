@@ -7,8 +7,8 @@ import {setCurrentUserDataAction, setIsAuthAction} from "../../redux/UserReducer
 class HeaderWrapper extends React.Component {
 
     setPosts = sectionId => {
-        this.props.getAllPosts(sectionId, 1);
-    };
+        this.props.getAllPosts(sectionId)
+    }
 
     render() {
         return (
@@ -24,7 +24,7 @@ let mapStateToProps = (state) => {
         isAuth: state.userData.isAuth,
         currentUserData: state.userData.currentUserData
     }
-};
+}
 
 let mapDispatchToProps = (dispatch) => {
     return {
@@ -32,8 +32,8 @@ let mapDispatchToProps = (dispatch) => {
         setPostPage: pageNumber => dispatch(setPostPageAction(pageNumber)),
         setCurrentUserData: userData => dispatch(setCurrentUserDataAction(userData)),
         setIsAuth: isAuth => dispatch(setIsAuthAction(isAuth)),
-        getAllPosts: (sectionId, postPage) => dispatch(getAllPosts(sectionId, postPage))
+        getAllPosts: sectionId => dispatch(getAllPosts(sectionId))
     }
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderWrapper);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderWrapper)

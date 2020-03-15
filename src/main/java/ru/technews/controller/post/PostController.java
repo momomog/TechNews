@@ -32,8 +32,6 @@ public class PostController implements PostCategoryConst {
     CommentService commentService;
     GoogleDrive googleDrive;
 
-    private static Map<String, Object> response = new HashMap<>();
-
     public PostController(PostService postService, CommentService commentService, GoogleDrive googleDrive) {
         this.postService = postService;
         this.commentService = commentService;
@@ -44,62 +42,40 @@ public class PostController implements PostCategoryConst {
     @GetMapping(value = "/{section}/{page}")
     public Map<String, Object> getAllPosts(@PathVariable("section") String section,
                                            @PathVariable("page") Integer page) {
-        List posts = null;
-
         switch (section) {
-            case ALL_POSTS:
-                posts = postService.findAll();
-                break;
             case MOBILE:
-                posts = postService.findAllCategoryPosts(CATEGORY_MOBILE);
-                break;
+                return postService.findCategoryPostsByPage(CATEGORY_MOBILE, page);
             case NOTEBOOKS:
-                posts = postService.findAllCategoryPosts(CATEGORY_NOTEBOOKS);
-                break;
+                return postService.findCategoryPostsByPage(CATEGORY_NOTEBOOKS, page);
             case HARDWARE:
-                posts = postService.findAllCategoryPosts(CATEGORY_HARDWARE);
-                break;
+                return postService.findCategoryPostsByPage(CATEGORY_HARDWARE, page);
             case OTHER:
-                posts = postService.findAllCategoryPosts(CATEGORY_OTHER);
-                break;
-        }
-        response.put("postsCount", posts.size());
-
-        switch (section) {
+                return postService.findCategoryPostsByPage(CATEGORY_OTHER, page);
             case ALL_POSTS:
-                posts = postService.findAllPostsByPage(page);
-                break;
-            case MOBILE:
-                posts = postService.findCategoryPostsByPage(CATEGORY_MOBILE, page);
-                break;
-            case NOTEBOOKS:
-                posts = postService.findCategoryPostsByPage(CATEGORY_NOTEBOOKS, page);
-                break;
-            case HARDWARE:
-                posts = postService.findCategoryPostsByPage(CATEGORY_HARDWARE, page);
-                break;
-            case OTHER:
-                posts = postService.findCategoryPostsByPage(CATEGORY_OTHER, page);
-                break;
+            default:
+                return postService.findCategoryPostsByPage(null, page);
         }
-        response.put("posts", posts);
+    }
 
-        return response;
+    // рекомендуемые посты
+    @GetMapping(value = "/{categoryId}/recommended", params = "id")
+    public List<PostEntity> getRecommendedPosts(@PathVariable("categoryId") Long categoryId,
+                                                @RequestParam(name = "id") Long id) {
+        return postService.findRecommendedPostsByCategory(categoryId, id);
     }
 
     // данные конкретного поста
-    @GetMapping(value = "/{section}/post/{id}")
-    public PostEntity getPostDataById(@PathVariable("section") String section,
-                                      @PathVariable("id") Long id) {
+    @GetMapping(value = "/post/{id}")
+    public PostEntity getPostDataById(@PathVariable("id") Long id) {
         return postService.findById(id);
     }
 
     // Создание нового поста
     @PostMapping(value = "/new-post", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity createNewPost(@CurrentUser UserPrincipal currentUser,
-                                        @RequestPart("post") @Valid PostEntity post,
-                                        @RequestPart("photo") @Valid MultipartFile photo) throws IOException, InterruptedException, GeneralSecurityException {
+    public ResponseEntity<ActionCompleteResponse> createNewPost(@CurrentUser UserPrincipal currentUser,
+                                                                @RequestPart("post") @Valid PostEntity post,
+                                                                @RequestPart("photo") @Valid MultipartFile photo) throws IOException, InterruptedException, GeneralSecurityException {
         post.setAuthor(currentUser.getUsername());
         post.setAuthorId(currentUser.getId());
         post.setCommentsCount(0L);
@@ -122,10 +98,10 @@ public class PostController implements PostCategoryConst {
     // Изменений данных поста
     @PostMapping(value = "/post/update", params = "id", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity updatePostById(@RequestParam(name = "id") Long id,
-                                         @CurrentUser UserPrincipal currentUser,
-                                         @RequestPart("post") @Valid PostDataRequest postRequest,
-                                         @RequestPart("photo") @Valid MultipartFile photo) throws IOException, GeneralSecurityException {
+    public ResponseEntity<ActionCompleteResponse> updatePostById(@RequestParam(name = "id") Long id,
+                                                                 @CurrentUser UserPrincipal currentUser,
+                                                                 @RequestPart("post") @Valid PostDataRequest postRequest,
+                                                                 @RequestPart("photo") @Valid MultipartFile photo) throws IOException, GeneralSecurityException {
         PostEntity post = postService.findById(id);
         if (post != null) {
             post.setTitle(postRequest.getTitle());
@@ -151,7 +127,7 @@ public class PostController implements PostCategoryConst {
     // Удаление поста
     @GetMapping(value = "/delete-post", params = "id")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity deletePostById(@RequestParam(name = "id") Long id) {
+    public ResponseEntity<ActionCompleteResponse> deletePostById(@RequestParam(name = "id") Long id) {
         commentService.deleteCommentsByPostId(id);
         postService.deleteById(id);
 
@@ -161,9 +137,9 @@ public class PostController implements PostCategoryConst {
     // Оценка поста
     @PostMapping(value = "/rate-post", params = "id")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity ratePost(@RequestParam(name = "id") Long id,
-                                   @RequestBody PostDataRequest postRequest,
-                                   @CurrentUser UserPrincipal currentUser) {
+    public ResponseEntity<ActionCompleteResponse> ratePost(@RequestParam(name = "id") Long id,
+                                                           @RequestBody PostDataRequest postRequest,
+                                                           @CurrentUser UserPrincipal currentUser) {
         PostEntity post = postService.findById(id);
 
         List<Integer> ratesList = new ArrayList<>(Arrays.asList(post.getRates()));

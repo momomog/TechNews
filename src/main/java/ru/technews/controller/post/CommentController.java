@@ -1,6 +1,5 @@
 package ru.technews.controller.post;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +7,6 @@ import ru.technews.entity.post.CommentEntity;
 import ru.technews.entity.post.PostEntity;
 import ru.technews.payload.ActionCompleteResponse;
 import ru.technews.payload.CommentUpdateRequest;
-import ru.technews.payload.LikeRequest;
 import ru.technews.security.CurrentUser;
 import ru.technews.security.UserPrincipal;
 import ru.technews.service.post.CommentService;
@@ -24,11 +22,13 @@ import java.util.Map;
 @RequestMapping(value = "/api/posts")
 public class CommentController {
 
-    @Autowired
     PostService postService;
-
-    @Autowired
     CommentService commentService;
+
+    public CommentController(PostService postService, CommentService commentService) {
+        this.postService = postService;
+        this.commentService = commentService;
+    }
 
     //комментарии поста
     @GetMapping(value = "/{section}/post/{id}/comments")
@@ -38,11 +38,11 @@ public class CommentController {
     }
 
     // добавить новый комментарий
-    @PostMapping(value = "/post/{postId}/new_comment")
+    @PostMapping(value = "/post/{postId}/new-comment")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<?> addNewComment(@CurrentUser UserPrincipal currentUser,
-                                           @PathVariable("postId") Long postId,
-                                           @RequestBody CommentEntity comment) {
+    public ResponseEntity<ActionCompleteResponse> addNewComment(@CurrentUser UserPrincipal currentUser,
+                                                                @PathVariable("postId") Long postId,
+                                                                @RequestBody CommentEntity comment) {
         comment.setAuthorId(currentUser.getId());
         comment.setAuthorName(currentUser.getUsername());
         comment.setAuthorPhotoId(currentUser.getProfileData().getPhotoId());
@@ -59,12 +59,12 @@ public class CommentController {
     }
 
     // лайк/дизлайк комментария
-    @PostMapping(value = "/post/{postId}/like_comment")
+    @GetMapping(value = "/post/{postId}/like-comment", params = "id")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<?> likeComment(@CurrentUser UserPrincipal currentUser,
-                                         @PathVariable("postId") Long postId,
-                                         @RequestBody LikeRequest like) {
-        CommentEntity comment = commentService.findById(like.getCommentId());
+    public ResponseEntity<ActionCompleteResponse> likeComment(@CurrentUser UserPrincipal currentUser,
+                                                              @RequestParam(name = "id") Long id,
+                                                              @PathVariable("postId") Long postId) {
+        CommentEntity comment = commentService.findById(id);
         List<Integer> authorsList = new ArrayList<>(Arrays.asList(comment.getLikes()));
 
         Integer userId = currentUser.getId().intValue();
@@ -81,10 +81,10 @@ public class CommentController {
     }
 
     // удаление комментария
-    @GetMapping(value = "/post/{postId}/delete_comment", params = "id")
+    @GetMapping(value = "/post/{postId}/delete-comment", params = "id")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<?> deleteComment(@PathVariable("postId") Long postId,
-                                           @RequestParam(name = "id") Long id) {
+    public ResponseEntity<ActionCompleteResponse> deleteComment(@PathVariable("postId") Long postId,
+                                                                @RequestParam(name = "id") Long id) {
         commentService.deleteComment(id);
 
         PostEntity post = postService.findById(postId);
@@ -97,15 +97,13 @@ public class CommentController {
     // обновление комментария
     @PostMapping(value = "/post/{postId}/update_comment", params = "id")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<?> updateComment(@PathVariable("postId") Long postId,
-                                           @RequestParam(name = "id") Long id,
-                                           @RequestBody CommentUpdateRequest commentRequest) {
-
+    public ResponseEntity<ActionCompleteResponse> updateComment(@PathVariable("postId") Long postId,
+                                                                @RequestParam(name = "id") Long id,
+                                                                @RequestBody CommentUpdateRequest commentRequest) {
         CommentEntity comment = commentService.findById(id);
         comment.setCommentText(commentRequest.getCommentText());
         commentService.update(comment);
 
         return ResponseEntity.ok(new ActionCompleteResponse(true));
     }
-
 }

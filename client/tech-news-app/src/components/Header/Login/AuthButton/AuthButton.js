@@ -4,11 +4,11 @@ import {NavLink} from "react-router-dom";
 function AuthButton() {
     return (
         <div>
-            <NavLink className="btn btn-info pull-right sing-in-button"
+            <NavLink className="btn btn-info pull-right ml-3"
                      to="/authorization">
                 Войти
             </NavLink>
-            <NavLink className="btn btn-info pull-right"
+            <NavLink className="btn btn-info pull-right ml-5"
                      to="/registration">
                 Регистрация
             </NavLink>
@@ -16,4 +16,4 @@ function AuthButton() {
     )
 }
 
-export default AuthButton;
+export default AuthButton

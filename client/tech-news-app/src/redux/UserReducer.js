@@ -54,21 +54,7 @@ export const login = (loginRequest, remember) => {
                 dispatch(setIsAuthAction(true));
             })
             .catch(function (error) {
-                let errorMessage = Common.showErrorText(error.code);
-                NotificationManager.error(errorMessage, 'Не удалось войти');
-            })
-    }
-}
-
-export const signup = signupRequest => {
-    return dispatch => {
-        AuthAPI.signup(signupRequest)
-            .then(response => {
-                NotificationManager.success('Для продолжения работы войдите на сайт', 'Вы успешно зарегистрировались');
-                Common.changeLocation('/authorization', 400);
-            })
-            .catch(function (error) {
-                NotificationManager.error('При попытке регистрации произошла неизвестная ошибка', 'Ошибка');
+                NotificationManager.error(Common.showErrorText(error.code), 'Не удалось войти');
             })
     }
 }

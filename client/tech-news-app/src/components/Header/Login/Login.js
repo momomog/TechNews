@@ -1,30 +1,27 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
 import {SECTION_ALL_POSTS} from "../../../common/Const";
 import AuthButton from "./AuthButton/AuthButton";
+import logo from '../../../static/logo.png'
+import {NavLink} from "react-router-dom";
 
 function Login(props) {
 
     //изменяет секцию на "все новости", ставит активную первую страницу пагинации
-    function clickLogo() {
+    function onLogoClick() {
         props.setPosts(SECTION_ALL_POSTS);
         props.setPostPage(1);
         props.changeSection(SECTION_ALL_POSTS);
     }
 
     return (
-        <div className="row-fluid container">
-            <div className="span12">
-                <div className="span9">
-                    <h1 className="muted mt"
-                        onClick={clickLogo}>
-                        <NavLink to="/posts/all"
-                                 className="site-logo">
-                            Tech-news
-                        </NavLink>
-                    </h1>
+        <div className="container">
+            <div className="row">
+                <div className="col-sm-9 d-flex align-content-center">
+                    <NavLink to="/posts/all">
+                        <img src={logo} alt="" width="60%" height="50%" onClick={onLogoClick}/>
+                    </NavLink>
                 </div>
-                <div className="auth-button">
+                <div className="col-sm-3 d-flex align-items-end">
 
                     {
                         !props.isAuth && <AuthButton/>
@@ -36,4 +33,4 @@ function Login(props) {
     )
 }
 
-export default Login;
+export default Login

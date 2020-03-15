@@ -60,7 +60,7 @@ export const postsReducer = (state = initialState, action) => {
     }
 }
 
-export const getAllPosts = (sectionId, postPage) => {
+export const getAllPosts = (sectionId, postPage = 1) => {
     return (dispatch) => {
         PostAPI.getAllPosts(sectionId, postPage).then(data => {
             dispatch(setPostsAction(data.posts));
@@ -83,15 +83,15 @@ export const getPostData = (sectionId, postId) => {
     return (dispatch) => {
         PostAPI.getPostData(sectionId, postId)
             .then(data => {
-                dispatch(setPostDataAction(data))
+                dispatch(setPostData(data))
             })
     }
 }
 
-export const chooseSectionAction = (sectionId) => ({type: CHANGE_SECTION, sectionId: sectionId});
-export const setPostsAction = (posts) => ({type: SET_POSTS, posts: posts});
-export const setPostsCountAction = (count) => ({type: SET_POSTS_COUNT, postsCount: count});
-export const setPostPageAction = (postPageNumber) => ({type: SET_POST_PAGE, postPage: postPageNumber});
-export const setPostIdAction = (id) => ({type: SET_POST_ID, postId: id});
-export const setPostDataAction = (data) => ({type: SET_POST_DATA, postData: data});
+export const chooseSectionAction = sectionId => ({type: CHANGE_SECTION, sectionId: sectionId});
+export const setPostsAction = posts => ({type: SET_POSTS, posts: posts});
+export const setPostsCountAction = count => ({type: SET_POSTS_COUNT, postsCount: count});
+export const setPostPageAction = (postPageNumber = 1) => ({type: SET_POST_PAGE, postPage: postPageNumber});
+export const setPostIdAction = id => ({type: SET_POST_ID, postId: id});
+export const setPostData = data => ({type: SET_POST_DATA, postData: data});
 

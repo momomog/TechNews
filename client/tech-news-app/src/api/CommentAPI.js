@@ -4,14 +4,14 @@ import {API_BASE_URL, request} from "./BaseRequest";
 class CommentAPI {
     getPostComments(sectionId, postId) {
         return request({
-            url: API_BASE_URL + '/posts/' + getSectionName(sectionId) + '/post/' + postId + '/comments',
+            url: `${API_BASE_URL}/posts/${getSectionName(sectionId)}/post/${postId}/comments`,
             method: 'GET'
         })
     }
 
     sendNewPostComment(commentRequest) {
         return request({
-            url: API_BASE_URL + '/posts/post/' + commentRequest.postId + '/new_comment',
+            url: `${API_BASE_URL}/posts/post/${commentRequest.postId}/new-comment`,
             method: 'POST',
             body: JSON.stringify(commentRequest)
         })
@@ -19,24 +19,21 @@ class CommentAPI {
 
     likeComment(postId, commentId) {
         return request({
-            url: API_BASE_URL + '/posts/post/' + postId + '/like_comment',
-            method: 'POST',
-            body: JSON.stringify({
-                commentId: commentId
-            })
+            url: `${API_BASE_URL}/posts/post/${postId}/like-comment?id=${commentId}`,
+            method: 'GET'
         })
     }
 
     deleteComment(postId, commentId) {
         return request({
-            url: API_BASE_URL + '/posts/post/' + postId + '/delete_comment?id=' + commentId,
+            url: `${API_BASE_URL}/posts/post/${postId}/delete-comment?id=${commentId}`,
             method: 'GET'
         })
     }
 
     updateComment(postId, commentId, commentText) {
         return request({
-            url: API_BASE_URL + '/posts/post/' + postId + '/update_comment?id=' + commentId,
+            url: `${API_BASE_URL}/posts/post/${postId}/update-comment?id=${commentId}`,
             method: 'POST',
             body: JSON.stringify({
                 commentText: commentText
@@ -45,4 +42,4 @@ class CommentAPI {
     }
 }
 
-export default new CommentAPI();
+export default new CommentAPI()

@@ -23,6 +23,9 @@ export const minLength1000 = minLength(1000)
 
 const maxLength = max => value =>
     value && value.length > max ? `Максимальная длина этого поля: ${max} ${Common.getSymbolsCountText(max)}` : undefined
+export const maxLength15 = maxLength(15)
+export const maxLength30 = maxLength(30)
+export const maxLength40 = maxLength(40)
 export const maxLength200 = maxLength(200)
 export const maxLength1000 = maxLength(1000)
 export const maxLength20000 = maxLength(20000)

@@ -1,6 +1,5 @@
 package ru.technews.service.post;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.technews.dao.BaseDao;
 import ru.technews.dao.post.PostDao;
@@ -8,23 +7,22 @@ import ru.technews.entity.post.PostEntity;
 import ru.technews.service.BaseService;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PostService extends BaseService<PostEntity> {
-
-    @Autowired
     PostDao postDao;
 
-    public List findAllPostsByPage(Integer page) {
-        return postDao.findAllPostsByPage(page);
+    public PostService(PostDao postDao) {
+        this.postDao = postDao;
     }
 
-    public List findAllCategoryPosts(Long section) {
-        return postDao.findAllCategoryPosts(section);
-    }
-
-    public List findCategoryPostsByPage(Long category, Integer page) {
+    public Map<String, Object> findCategoryPostsByPage(Long category, Integer page) {
         return postDao.findCategoryPostsByPage(category, page);
+    }
+
+    public List<PostEntity> findRecommendedPostsByCategory(Long category, Long postId) {
+        return postDao.findRecommendedPostsByCategory(category, postId);
     }
 
     @Override

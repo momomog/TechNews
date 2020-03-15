@@ -17,7 +17,7 @@ public abstract class BaseService<E extends BaseEntity> {
         return this.getBaseDao().findById(id);
     }
 
-    public List findAll() {
+    public List<E> findAll() {
         return this.getBaseDao().findAll();
     }
 

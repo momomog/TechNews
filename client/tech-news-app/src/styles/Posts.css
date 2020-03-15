@@ -1,10 +1,18 @@
 .post-picture {
-    width: 170px !important;
-    height: 150px !important;
+    width: 200px !important;
+    height: 165px !important;
 }
 
 .post-title {
     font-size: 1.6rem;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    width: 100%;
+}
+
+.well {
+    padding-bottom: 2px!important;
 }
 
 .post-title a {
@@ -14,6 +22,9 @@
 }
 
 .mh-50 {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
     overflow: hidden;
     height: 97px !important;
     max-height: 97px !important;
@@ -64,7 +75,7 @@
 }
 
 .comment-count {
-    font-size: 1.4rem!important;
+    font-size: 1.4rem !important;
 }
 
 .comment-icon:hover {
@@ -205,4 +216,31 @@ select, input[type="file"] {
     border-bottom: 1px solid #dee2e6 !important;
     margin-right: 15px;
     margin-left: 15px;
+}
+
+.post-rec {
+    height: 150px !important;
+}
+
+.recommend-post {
+    width: 100% !important;
+    height: 70% !important;
+}
+
+.recommend-post a {
+    text-decoration: none !important;
+    color: #337ab7;
+}
+
+.recommend-post a:hover {
+    color: #4d4d4d;
+}
+
+.recommend-post img {
+    width: 220px !important;
+    height: 150px !important;
+}
+
+.mb-7 {
+    margin-bottom: 4.5rem !important
 }

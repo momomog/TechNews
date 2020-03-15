@@ -45,7 +45,7 @@ public class UserController {
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
 
-       int userCommentsCount = commentService.getCommentsCountByUserId(currentUser.getId());
+        int userCommentsCount = commentService.getCommentsCountByUserId(currentUser.getId());
 
         return new UserSummary(
                 currentUser.getId(),
@@ -83,8 +83,8 @@ public class UserController {
     // Обновление фото профиля
     @PostMapping(value = "/user/me/load-photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity updateUserPhoto(@CurrentUser UserPrincipal currentUser,
-                                          @RequestParam MultipartFile photo) throws IOException, GeneralSecurityException, InterruptedException {
+    public ResponseEntity<ActionCompleteResponse> updateUserPhoto(@CurrentUser UserPrincipal currentUser,
+                                                                  @RequestParam MultipartFile photo) throws IOException, GeneralSecurityException, InterruptedException {
         UserProfileData profile = currentUser.getProfileData();
 
         if (photo.getSize() != 0) {
@@ -101,8 +101,8 @@ public class UserController {
     // обновление данных профиля
     @PostMapping(value = "/user/me/update")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<?> likeComment(@CurrentUser UserPrincipal currentUser,
-                                         @RequestBody UserProfileDataRequest profileRequest) {
+    public ResponseEntity<ActionCompleteResponse> likeComment(@CurrentUser UserPrincipal currentUser,
+                                                              @RequestBody UserProfileDataRequest profileRequest) {
 
         User user = userRepository.findUserByEmail(currentUser.getEmail());
         user.setFirstName(profileRequest.getFirstName());

@@ -3,19 +3,19 @@ class Common {
     // Парсинг даты в вид ДД.ММ.ГГГГ
     dateParser(date) {
         if (date)
-            return Common.pad(date[2]) + '.' + Common.pad(date[1]) + '.' + date[0];
+            return Common.pad(date[2]) + '.' + Common.pad(date[1]) + '.' + date[0]
     }
 
     // Парсинг даты в вид ДД.ММ.ГГГГ ЧЧ:ММ
     dateTimeParser(date) {
         if (date)
-            return Common.pad(date[2]) + '.' + Common.pad(date[1]) + '.' + date[0] + ' ' + Common.pad(date[3]) + ':' + Common.pad(date[4]);
+            return Common.pad(date[2]) + '.' + Common.pad(date[1]) + '.' + date[0] + ' ' + Common.pad(date[3]) + ':' + Common.pad(date[4])
     }
 
     // Парсинг массива даты в объект Date
     intArrayToDate(date) {
         if (date)
-            return new Date(date[0], date[1] - 1, date[2]);
+            return new Date(date[0], date[1] - 1, date[2])
     }
 
     // Возраст
@@ -53,14 +53,7 @@ class Common {
             else if (['2', '3', '4'].indexOf(num[num.length - 1]) !== -1
                 || (['2', '3', '4'].indexOf(num[0]) !== -1)) return 'символа';
         }
-        return 'символов';
-    }
-
-    // Смена локации
-    changeLocation(path = 'posts/all', timeout = 400) {
-        setTimeout(function () {
-            window.location = path;
-        }, timeout);
+        return 'символов'
     }
 
     // Текст ошибки в зависимости от ответа сервера
@@ -80,8 +73,8 @@ class Common {
     // *
     // Прибавление 0 к дате, если число даты меньше 10
     static pad(number) {
-        return (number < 10 ? '0' : '') + number;
+        return (number < 10 ? '0' : '') + number
     }
 }
 
-export default new Common();
+export default new Common()

@@ -9,20 +9,20 @@ const SET_IS_AUTH = 'SET-IS-AUTH';
 const SET_CURRENT_USER_DATA = 'SET-CURRENT-USER-DATA';
 const SET_USER_DATA = 'SET-USER-DATA';
 
-type UserAction = {
+interface UserAction {
     type: 'SET-IS-AUTH' | 'SET-CURRENT-USER-DATA' | 'SET-USER-DATA',
     isAuth?: boolean,
     currentUserData?: any,
     userData?: any
 }
 
-type UserState = {
+export interface UserState {
     isAuth: boolean | undefined,
     currentUserData: any,
     userData: any
 }
 
-let initialState: UserState = {
+const initialState: UserState = {
     isAuth: false,
     currentUserData: '',
     userData: ''
@@ -53,9 +53,9 @@ export const userReducer = (state: UserState = initialState, action: UserAction)
     }
 }
 
-export const setIsAuthAction = isAuth => ({type: SET_IS_AUTH, isAuth: isAuth});
-export const setCurrentUserDataAction = userData => ({type: SET_CURRENT_USER_DATA, currentUserData: userData});
-export const setUserDataAction = userData => ({type: SET_USER_DATA, userData: userData});
+export const setIsAuthAction = (isAuth: boolean): UserAction => ({type: SET_IS_AUTH, isAuth: isAuth});
+export const setCurrentUserDataAction = (userData):UserAction => ({type: SET_CURRENT_USER_DATA, currentUserData: userData});
+export const setUserDataAction = (userData):UserAction => ({type: SET_USER_DATA, userData: userData});
 
 export const login = (loginRequest, remember) => {
     return dispatch => {
@@ -71,7 +71,7 @@ export const login = (loginRequest, remember) => {
     }
 }
 
-export const getCurrentUserData = userId => {
+export const getCurrentUserData = () => {
     return dispatch => {
         ProfileAPI.getCurrentUser()
             .then(response => {

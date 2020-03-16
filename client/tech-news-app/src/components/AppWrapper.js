@@ -28,7 +28,7 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
     return {
         setIsAuth: isAuth => dispatch(setIsAuthAction(isAuth)),
-        getUserData: userId => dispatch(getCurrentUserData(userId))
+        getUserData: () => dispatch(getCurrentUserData())
     }
 }
 

@@ -19,7 +19,7 @@ class ProfileWrapper extends React.Component {
         const me = this;
 
         ProfileAPI.onLoadPhoto(body).then( () => {
-            me.getCurrentUserData(AuthService.getUserId())
+            me.getCurrentUserData()
         })
     }
 
@@ -28,7 +28,7 @@ class ProfileWrapper extends React.Component {
             const path = this.props.location.pathname.split('/');
             this.props.getUserData(path[2]);
         } else if (AuthService.isAuth())
-            this.props.getCurrentUserData(AuthService.getUserId())
+            this.props.getCurrentUserData()
     }
 
     render() {
@@ -44,7 +44,7 @@ class ProfileWrapper extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = state => {
     return {
         isAuth: state.userData.isAuth,
         currentUserData: state.userData.currentUserData,
@@ -52,9 +52,9 @@ let mapStateToProps = (state) => {
     }
 };
 
-let mapDispatchToProps = (dispatch) => {
+let mapDispatchToProps = dispatch => {
     return {
-        getCurrentUserData: userId => dispatch(getCurrentUserData(userId)),
+        getCurrentUserData: () => dispatch(getCurrentUserData()),
         getUserData: username => dispatch(getUserData(username))
     }
 };

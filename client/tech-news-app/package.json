@@ -8,6 +8,11 @@
     "@material-ui/lab": "^4.0.0-alpha.45",
     "@material-ui/pickers": "^3.2.8",
     "@tinymce/tinymce-react": "^3.3.2",
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.1",
+    "@types/react": "^16.9.23",
+    "@types/react-dom": "^16.9.5",
+    "@types/react-redux": "^7.1.7",
     "antd": "^3.25.2",
     "axios": "^0.19.0",
     "bootstrap": "^4.4.1",
@@ -32,7 +37,8 @@
     "reactjs-popup": "^1.5.0",
     "redux": "^4.0.4",
     "redux-form": "latest",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "typescript": "^3.8.3"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,0 +1,40 @@
+import React from 'react';
+import NavLinks from "./NavLinks/NavLinks";
+import Login from "./Login/Login";
+import {NotificationContainer} from "react-notifications";
+import {ChangeSectionAction, SetPostPageAction} from "../../models/PostModel";
+import {SetIsAuthAction, User} from "../../models/UserModel";
+
+interface Props {
+    isAuth: boolean,
+    sectionId: number,
+    currentUserData: User,
+    setPosts: (sectionId: number) => void,
+    changeSection: (sectionId: number) => ChangeSectionAction,
+    setPostPage: (pageNumber: number) => SetPostPageAction,
+    setCurrentUserData: (userData: User) => any,
+    setIsAuth: (isAuth: boolean) => SetIsAuthAction
+}
+
+const Header: React.FC<Props> = props => {
+    return (
+        <div className="header-wrapper">
+
+            <NotificationContainer/>
+
+            <Login changeSection={props.changeSection}
+                   currentUserData={props.currentUserData}
+                   setPosts={props.setPosts}
+                   setPostPage={props.setPostPage}
+                   setIsAuth={props.setIsAuth}
+                   setCurrentUserData={props.setCurrentUserData}
+                   isAuth={props.isAuth}/>
+            <NavLinks changeSection={props.changeSection}
+                      setPosts={props.setPosts}
+                      setPostPage={props.setPostPage}
+                      sectionId={props.sectionId}/>
+        </div>
+    )
+}
+
+export default Header

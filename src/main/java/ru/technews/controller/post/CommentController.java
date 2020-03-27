@@ -44,8 +44,6 @@ public class CommentController {
                                                                 @PathVariable("postId") Long postId,
                                                                 @RequestBody CommentEntity comment) {
         comment.setAuthorId(currentUser.getId());
-        comment.setAuthorName(currentUser.getUsername());
-        comment.setAuthorPhotoId(currentUser.getProfileData().getPhotoId());
         comment.setDate(LocalDateTime.now());
         comment.setLikes(new Integer[]{});
         comment.setIsDeleted(false);
@@ -95,7 +93,7 @@ public class CommentController {
     }
 
     // обновление комментария
-    @PostMapping(value = "/post/{postId}/update_comment", params = "id")
+    @PostMapping(value = "/post/{postId}/update-comment", params = "id")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<ActionCompleteResponse> updateComment(@PathVariable("postId") Long postId,
                                                                 @RequestParam(name = "id") Long id,

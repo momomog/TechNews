@@ -2,6 +2,7 @@ package ru.technews.dao.post;
 
 import org.springframework.stereotype.Repository;
 import ru.technews.common.PostCategoryConst;
+import ru.technews.common.Utils;
 import ru.technews.dao.BaseDao;
 import ru.technews.entity.post.PostEntity;
 
@@ -58,5 +59,22 @@ public class PostDao extends BaseDao<PostEntity> implements PostCategoryConst {
         }
 
         return result;
+    }
+
+
+    public List<PostEntity> searchPostsByQuery(String searchText) {
+        Query query = getCurrentSession().createQuery("from PostEntity order by id desc");
+        List<PostEntity> list = query.getResultList();
+        List<PostEntity> resultList = new ArrayList<>();
+        String[] splittedValue = searchText.trim().replaceAll("\u00AD", "").split("\\s+");
+
+        for (PostEntity post : list) {
+            if (Utils.stringContainsItemFromList(post.getTitle(), splittedValue)
+                    || Utils.stringContainsItemFromList(post.getFullDescription(), splittedValue)
+                    || Utils.stringContainsItemFromList(post.getPreDescription(), splittedValue))
+                resultList.add(post);
+        }
+
+        return resultList;
     }
 }

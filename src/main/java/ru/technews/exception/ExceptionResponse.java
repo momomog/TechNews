@@ -2,11 +2,11 @@ package ru.technews.exception;
 
 
 public class ExceptionResponse {
-    public String message;
     public int code;
+    public String message;
 
-    public ExceptionResponse(String message, int ex) {
+    public ExceptionResponse(int code, String message) {
+        this.code = code;
         this.message = message;
-        this.code = ex;
     }
 }

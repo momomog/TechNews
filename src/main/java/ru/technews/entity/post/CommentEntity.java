@@ -2,13 +2,11 @@ package ru.technews.entity.post;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Type;
 import ru.technews.entity.BaseEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +26,11 @@ public class CommentEntity extends BaseEntity {
     private Long authorId;
 
     // Имя автора комментария
-    @Column(name = "author_name")
+    @Formula("(select u.username from users u where u.id = author_id)")
     private String authorName;
 
     // ID фото автора комментария
-    @Column(name = "author_photo_id")
+    @Formula("(select u.photo_id from users_data u where u.id = author_id)")
     private String authorPhotoId;
 
     // Дата комментария
@@ -55,7 +53,7 @@ public class CommentEntity extends BaseEntity {
     @Column(name = "parent_comment_id")
     private Long parentCommentId;
 
-    // ИД комментария, к которому принадлежит данный комментарий
+    // Автор комментария, к которому принадлежит данный комментарий
     @Column(name = "parent_comment_author_name")
     private String parentCommentAuthorName;
 

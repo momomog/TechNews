@@ -25,6 +25,10 @@ public class PostService extends BaseService<PostEntity> {
         return postDao.findRecommendedPostsByCategory(category, postId);
     }
 
+    public List<PostEntity> searchPostsByQuery(String searchText) {
+        return postDao.searchPostsByQuery(searchText);
+    }
+
     @Override
     public BaseDao<PostEntity> getBaseDao() {
         return postDao;

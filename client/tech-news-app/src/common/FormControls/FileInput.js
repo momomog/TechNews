@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-import okIcon from '../../static/dialog-ok-apply-icon.png'
+import okIcon from '../../static/ok-icon.png'
 import {change} from "redux-form";
 import errorIcon from "../../static/error-icon.png";
 

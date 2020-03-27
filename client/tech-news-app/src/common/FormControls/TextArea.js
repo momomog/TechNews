@@ -1,6 +1,6 @@
 import React from "react";
 
-import okIcon from '../../static/dialog-ok-apply-icon.png'
+import okIcon from '../../static/ok-icon.png'
 import errorIcon from '../../static/error-icon.png'
 
 export const TextArea = ({input, meta, ...props}) => {

@@ -1,0 +1,52 @@
+.reg-label {
+    margin-left: -13px !important;
+    font-size: 1.05em;
+    font-weight: normal;
+}
+
+.required-field:after {
+    content: "*";
+    color: red;
+}
+
+.profile-photo {
+    width: 220px !important;
+    height: 220px !important;
+}
+
+.main-content {
+    min-height: 70vh !important;
+}
+
+.profile-edit-icon {
+    font-size: 1.5em;
+}
+
+.soc-name {
+    margin-top: 1.5rem !important;
+    font-size: 1.1em;
+}
+
+.soc-date-name {
+    margin-top: 2rem !important;
+    font-size: 1.1em;
+}
+
+.soc-input {
+    margin-top: -1% !important;
+}
+
+.section {
+    background-color: #f3f3f3;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.section-title {
+    font-size: 1.3em;
+    width: 100% !important;
+}
+
+.validate-text {
+    font-size: 1rem;
+}

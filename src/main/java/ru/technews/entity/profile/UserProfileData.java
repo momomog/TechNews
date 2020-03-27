@@ -8,10 +8,7 @@ import lombok.Setter;
 import ru.technews.entity.BaseEntity;
 import ru.technews.entity.security.User;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Table(name = "users_data")
@@ -21,6 +18,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserProfileData extends BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
+    private Long id;
 
     private LocalDateTime birthDate;
 

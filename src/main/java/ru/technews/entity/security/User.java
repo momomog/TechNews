@@ -64,7 +64,6 @@ public class User extends DateAudit {
     private UserProfileData profileData;
 
     public User() {
-
     }
 
     public User(String firstName, String lastName, String username, String email, String password, UserProfileData profileData) {

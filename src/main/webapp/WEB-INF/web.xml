@@ -8,12 +8,7 @@
   <display-name>tech-news</display-name>
 
     <error-page>
-        <error-code>401</error-code>
-        <location>/errors/unauthorised</location>
-    </error-page>
-    <error-page>
-        <error-code>500</error-code>
-        <location>/errors/int_server_error</location>
+        <location>/error-handler</location>
     </error-page>
 
     <filter>

@@ -1,0 +1,122 @@
+.user-action-button {
+    width: max-content;
+}
+
+.user-action-button img {
+    width: 35px;
+    height: 35px;
+    border-radius: 20px;
+}
+
+.user-action-button {
+    color: white !important;
+    padding-right: 3px !important;
+    padding-bottom: 2px!important;
+    padding-top: 2px!important;
+}
+
+.user-action-button:hover {
+    background-color: #434343 !important;
+}
+
+.user-action-button:focus {
+    background-color: #434343 !important;
+}
+
+.navbar-body {
+    width: 91.6% !important;
+    max-width: 94% !important;
+    margin-bottom: 10px !important;
+}
+
+.header-wrapper {
+    background-color: #2f2f2f;
+    margin-bottom: 20px;
+}
+
+.logo-body {
+    max-width: 94.3% !important;
+}
+
+.navlink {
+    font-size: 1.15em;
+    color: grey;
+    text-decoration: none !important;
+}
+
+.reg {
+    font-size: 1em !important;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+.comment-action {
+    font-size: 0.9em !important;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+.search {
+    margin-top: 0.5rem !important;
+    margin-bottom: 1px !important;
+    width: 120% !important;
+    padding-right: 30px !important;
+}
+
+input.hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.bot-border {
+    border-bottom: 1px #f8f8f8 solid;
+    margin: 5px 0 5px 0
+}
+
+.btn-primary-outline {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.navbar .nav {
+    margin: 0 50px 0 0 !important;
+}
+
+.navbar .nav > li > a {
+    padding: 10px 10px 10px !important;
+}
+
+.navbar-inner {
+    padding-right: 0 !important;
+}
+
+.admin-post-input {
+    width: 100% !important;
+    height: 30px !important;
+}
+
+.btn-info, .btn-info:active, .btn-info:focus {
+    background-color: #5b5b5b !important;
+    border-color: transparent!important;
+    box-shadow: none!important;
+}
+
+.btn-info:hover {
+    background-color: #818181 !important;
+    border-color: transparent!important;
+    box-shadow: none!important;
+}
+
+.btn-success {
+    background-color: #5cb85c !important;
+}
+
+.nav-active {
+    color: #152a44;
+}

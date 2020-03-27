@@ -1,27 +1,23 @@
 package ru.technews.controller;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import ru.technews.common.Common;
 import ru.technews.exception.ExceptionResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/errors")
 public class ExceptionHandlerController {
 
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @RequestMapping("unauthorised")
-    public ExceptionResponse unAuthorised(HttpServletRequest request, HttpServletResponse httpServletResponse) {
-        return new ExceptionResponse("Bad credentials", 401);
-    }
-
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @RequestMapping("int_server_error")
-    public ExceptionResponse internalServerError(HttpServletRequest request, HttpServletResponse httpServletResponse) {
-        return new ExceptionResponse("Internal Server Error", 500);
+    @RequestMapping(value = "error-handler")
+    public ExceptionResponse internalServerError(HttpServletRequest request,
+                                                 HttpServletResponse response,
+                                                 @RequestParam(required = false) Map<String,String> allParams) {
+        int errorCode = response.getStatus();
+        return new ExceptionResponse(errorCode, Common.getErrorMessage(errorCode));
     }
 }

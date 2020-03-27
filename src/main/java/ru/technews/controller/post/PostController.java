@@ -1,10 +1,12 @@
 package ru.technews.controller.post;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 import ru.technews.common.PostCategoryConst;
 import ru.technews.config.GoogleDrive;
 import ru.technews.entity.post.PostEntity;
@@ -20,7 +22,10 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 import static ru.technews.config.GoogleDrive.postPhotoFolderId;
 
@@ -52,9 +57,17 @@ public class PostController implements PostCategoryConst {
             case OTHER:
                 return postService.findCategoryPostsByPage(CATEGORY_OTHER, page);
             case ALL_POSTS:
-            default:
                 return postService.findCategoryPostsByPage(null, page);
+            default:
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+    }
+
+    // поиск постов по названию
+    @GetMapping(value = "/search", params = "search_query")
+    public List<PostEntity> getSearchedPosts(@RequestParam(name = "search_query") String searchText) {
+
+        return postService.searchPostsByQuery(searchText);
     }
 
     // рекомендуемые посты
@@ -66,8 +79,13 @@ public class PostController implements PostCategoryConst {
 
     // данные конкретного поста
     @GetMapping(value = "/post/{id}")
-    public PostEntity getPostDataById(@PathVariable("id") Long id) {
-        return postService.findById(id);
+    public ResponseEntity<PostEntity> getPostDataById(@PathVariable("id") Long id) {
+        PostEntity post = postService.findById(id);
+
+        if (post == null)
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        return ResponseEntity.ok(post);
     }
 
     // Создание нового поста

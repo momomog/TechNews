@@ -45,7 +45,6 @@ class PostAPI {
     }
 
     searchPosts(search_query: string): Promise<Array<Post>> {
-        debugger
         return request({
             url: `${API_BASE_URL}/posts/search?search_query=${search_query}`,
             method: 'GET'

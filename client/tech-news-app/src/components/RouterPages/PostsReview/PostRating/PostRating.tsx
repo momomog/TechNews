@@ -9,6 +9,13 @@ interface Props {
     postRating: (postId: number, rate: number) => void
 }
 
+/**
+ *
+ * @param post
+ * @param postRating
+ * @param user
+ * Оценка поста
+ */
 const PostRating: React.FC<Props> = ({post, postRating, user}) => {
     const [isRating, setIsRating] = useState(false)
     const [rating, setRating] = useState(0)

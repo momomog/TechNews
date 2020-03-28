@@ -14,6 +14,12 @@ import './styles/profile.css';
 import './styles/libraries-overload.css';
 import 'react-notifications/lib/notifications.css';
 
+// import './static/libraries/bootstrap.min.4.1.1.css'
+// import './static/libraries/bootstrap.min.3.3.5.css'
+// import './static/libraries/bootstrap-combined.min.css'
+// import './static/libraries/font-awesome.min.css'
+// import './static/libraries/google-Roboto.css'
+
 ReactDOM.render(
     <Provider store={store}>
         <AppWrapper/>

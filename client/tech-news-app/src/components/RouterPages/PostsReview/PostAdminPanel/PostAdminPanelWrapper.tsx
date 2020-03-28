@@ -16,11 +16,19 @@ interface Props {
     setPostPageAndGetPosts: (sectionId, postPage) => void
 }
 
+/**
+ *
+ * @param setPostPageAndGetPosts
+ * @param sectionId
+ * @param postId
+ * @param history
+ * Оболочка Панель управления постом
+ */
 const PostAdminPanelWrapper: React.FC<RouteComponentProps<any> & Props> = ({setPostPageAndGetPosts, sectionId, postId, history}) => {
 
     const deletePostById = () => {
         PostAPI.deletePostById(postId)
-            .then(response => {
+            .then(() => {
                 setPostPageAndGetPosts(sectionId, 1)
 
                 setTimeout(() => {
@@ -29,14 +37,11 @@ const PostAdminPanelWrapper: React.FC<RouteComponentProps<any> & Props> = ({setP
                     NotificationManager.success(`Пост номер ${postId} успешно удален`, 'Успешно')
                 }, 2000)
             })
-            .catch(function (error) {
-                NotificationManager.error(`Не удалось удалить пост номер ${postId}`, 'Ошибка')
-            })
+            .catch(() => NotificationManager.error(`Не удалось удалить пост номер ${postId}`, 'Ошибка'))
     }
 
     return <PostAdminPanel postId={postId}
                            onDeletePost={deletePostById}/>
-
 }
 
 let mapStateToProps = (state: RootState) => {

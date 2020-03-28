@@ -8,6 +8,11 @@ interface Props {
     createNewPost: (request: PostRequest) => void
 }
 
+/**
+ *
+ * @param createNewPost
+ * Новый пост
+ */
 const NewPostPage: React.FC<Props> = ({createNewPost}) => {
     const categories = [
         {id: 2, title: 'Смартфоны'},
@@ -22,11 +27,16 @@ const NewPostPage: React.FC<Props> = ({createNewPost}) => {
         <div className="row">
             <div className="col-md-11 center-block ">
                 <div className="panel panel-default">
-                    <div className="panel-heading"><h4>Редактирование поста</h4></div>
+
+                    <div className="panel-heading">
+                        <h4>Редактирование поста</h4>
+                    </div>
+
                     <div className="panel-body">
                         <PostPageReduxForm onSubmit={createPost}
                                            categories={categories}/>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from "react-redux";
 import PostsList from "./PostsList";
 import {getPosts, setPostIdAction} from "../../../redux/PostsReducer";
@@ -18,26 +18,34 @@ interface Props {
     getPosts: (sectionId: number, postPage?: number) => void
 }
 
-class PostsListWrapper extends React.Component<RouteComponentProps<any> & Props> {
+/**
+ *
+ * @param postPage
+ * @param postList
+ * @param setPostId
+ * @param getPosts
+ * @param match
+ * Список постов. Оболочка
+ */
+const PostsListWrapper: React.FC<RouteComponentProps<any> & Props> = ({postPage, postList, setPostId, getPosts, match}) => {
 
-    componentDidMount() {
-
-        const sectionName = this.props.match.params.sectionName
+    useEffect(() => {
+        const sectionName = match.params.sectionName
 
         if (!sectionName)
-            this.props.getPosts(SECTION_ALL_POSTS)
-        else if (sectionName && this.props.postList.length === 0)
-            this.props.getPosts(getSectionId(sectionName), this.props.postPage)
-    }
+            getPosts(SECTION_ALL_POSTS)
+        else if (sectionName && postList.length === 0)
+            getPosts(getSectionId(sectionName), postPage)
+    }, [])
 
-    setPostId = (postNumber: number) => this.props.setPostId(postNumber)
 
-    render() {
-        return this.props.postList.length > 0
-            ? <PostsList posts={this.props.postList}
-                         setPostId={this.setPostId}/>
-            : <Spinner/>
-    }
+    const onSetPostId = (postNumber: number) => setPostId(postNumber)
+
+    return postList.length > 0
+        ? <PostsList posts={postList}
+                     setPostId={onSetPostId}/>
+        : <Spinner/>
+
 }
 
 let mapStateToProps = (state: RootState) => {

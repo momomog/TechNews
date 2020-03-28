@@ -3,8 +3,16 @@ import React from "react";
 import okIcon from '../../static/ok-icon.png'
 import errorIcon from '../../static/error-icon.png'
 
-export const TextArea = ({input, meta, ...props}) => {
-    const isError = meta.touched && meta.error;
+/**
+ *
+ * @param input
+ * @param meta
+ * @param props
+ * Контроль формы. Input type="text"
+ */
+export const Input = ({input, meta, ...props}) => {
+    const isError = meta.touched && meta.error
+
     return (
         <div style={{width: '100%'}}>
             {
@@ -15,7 +23,7 @@ export const TextArea = ({input, meta, ...props}) => {
             }
 
             <div>
-                <textarea {...input}
+                <input {...input}
                        {...props}
                        style={{
                            border: isError ? '1px solid red' : meta.touched ? '1px solid green' : '',

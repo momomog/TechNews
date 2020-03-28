@@ -4,11 +4,18 @@ import RegistrationReduxForm from "./RegistrationForm";
 import {SignUpRequest} from "../../../../models/RequestsModel";
 
 interface Props {
-    isAuth: boolean,
-    signup: (request: SignUpRequest) => any
+    isAuth: boolean
+    signup: (request: SignUpRequest) => void
 }
 
+/**
+ *
+ * @param isAuth
+ * @param signup
+ * Регистрация
+ */
 const Registration: React.FC<Props> = ({isAuth, signup}) => {
+
     const onRegistrationClick = (formData: SignUpRequest) => {
         signup({
             firstName: formData.firstName,
@@ -36,7 +43,6 @@ const Registration: React.FC<Props> = ({isAuth, signup}) => {
                 </div>
             </div>
     )
-
 }
 
-export default Registration;
+export default Registration

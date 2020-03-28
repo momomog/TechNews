@@ -2,4 +2,7 @@ import { createBrowserHistory } from "history";
 
 const history = createBrowserHistory()
 
-export default history;
+/**
+ * Глобальный объект history приложения
+ */
+export default history

@@ -3,6 +3,13 @@ import React from "react";
 import okIcon from '../../static/ok-icon.png'
 import errorIcon from '../../static/error-icon.png'
 
+/**
+ *
+ * @param input
+ * @param meta
+ * @param props
+ * Контроль формы. Select
+ */
 export const Select = ({input, meta, ...props}) => {
     const isError = meta.touched && meta.error;
     return (
@@ -24,7 +31,7 @@ export const Select = ({input, meta, ...props}) => {
                               backgroundRepeat: `no-repeat`,
                               marginBottom: `0px`
                           }}>
-                    <option value="" disabled defaultValue>Выберите тип...</option>
+                    <option value="" disabled defaultValue={"true"}>Выберите тип...</option>
                     {
                         props.options.map( option => <option value={option.id} key={option.id}>{option.title}</option>)
                     }

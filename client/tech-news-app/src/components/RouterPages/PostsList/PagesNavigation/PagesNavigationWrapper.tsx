@@ -13,6 +13,14 @@ interface Props {
     setPostPageAndGetPosts: (sectionId: number, postPage: number) => void
 }
 
+/**
+ *
+ * @param postPage
+ * @param postsCount
+ * @param sectionId
+ * @param setPostPageAndGetPosts
+ * Пагинатор. Оболочка
+ */
 const PagesNavigationWrapper: React.FC<Props> = ({postPage, postsCount, sectionId, setPostPageAndGetPosts}) => {
     const setPosts = (sectionId: number, postPage: number) => setPostPageAndGetPosts(sectionId, postPage)
 

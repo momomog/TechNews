@@ -8,6 +8,12 @@ interface Props {
     setPostId: (id: number) => void
 }
 
+/**
+ *
+ * @param posts
+ * @param setPostId
+ * Список постов
+ */
 const PostsList: React.FC<Props> = ({posts, setPostId}) => {
 
     return (

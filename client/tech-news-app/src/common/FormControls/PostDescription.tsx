@@ -2,6 +2,13 @@ import React, {useState} from "react";
 import {Editor} from "@tinymce/tinymce-react";
 import {change} from "redux-form";
 
+/**
+ *
+ * @param input
+ * @param meta
+ * @param props
+ * Контроль формы. PostDescription - tinymce editor
+ */
 export const PostDescription = ({input, meta, ...props}) => {
     const isError = meta.visited && meta.error;
     let [value, setValue] = useState(props.initValue)

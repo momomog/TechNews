@@ -7,9 +7,14 @@ interface Props {
     user: User
 }
 
+/**
+ *
+ * @param user
+ * Профиль. Компонент отображения данных
+ */
 const ProfileData: React.FC<Props> = ({user}) => {
 
-    return user ? (
+    return (
         <div>
             <div className="col-sm-1"/>
             <div className="clearfix mb-2"/>
@@ -45,7 +50,7 @@ const ProfileData: React.FC<Props> = ({user}) => {
             <UserInfoLine name={'Количество комментариев'}
                           value={user.commentsCount.toString()}/>
         </div>
-    ) : <div/>
+    )
 }
 
 export default ProfileData

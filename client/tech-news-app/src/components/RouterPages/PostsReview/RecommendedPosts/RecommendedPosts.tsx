@@ -7,10 +7,14 @@ interface RecPost {
     post: Post
 }
 
+/**
+ *
+ * @param post
+ * Рекомендуемый пост
+ */
 const PostItem: React.FC<RecPost> = ({post}) => {
-    if (!post) return <div/>
 
-    function linkPropInit() {
+    const linkPropInit = () => {
         return {pathname: `/redirect-to/post`, redirectUrl: `/posts/post/${post && post.id}`}
     }
 
@@ -31,10 +35,16 @@ const PostItem: React.FC<RecPost> = ({post}) => {
     )
 }
 
+
 interface RecPosts {
     posts: Array<Post>
 }
 
+/**
+ *
+ * @param posts
+ * Рекомендуемые посты
+ */
 const RecommendedPosts: React.FC<RecPosts> = ({posts}) => {
     return (
         <div>
@@ -45,9 +55,9 @@ const RecommendedPosts: React.FC<RecPosts> = ({posts}) => {
                 posts
                     ? <div>
                         <div className="row">
-                            <PostItem post={posts[0]}/>
-                            <PostItem post={posts[1]}/>
-                            <PostItem post={posts[2]}/>
+                            {
+                                posts.map(post => <PostItem post={post}/>)
+                            }
                         </div>
                     </div>
                     : <Spinner/>

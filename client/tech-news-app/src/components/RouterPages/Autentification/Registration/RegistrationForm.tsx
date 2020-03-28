@@ -14,7 +14,13 @@ import {
 import {Input} from "../../../../common/FormControls/Input";
 import {SignUpRequest} from "../../../../models/RequestsModel";
 
-
+/**
+ *
+ * @param handleSubmit
+ * @param invalid
+ * @param submitting
+ * Форма регистрации
+ */
 const RegistrationForm: React.FC<InjectedFormProps<SignUpRequest>> = ({handleSubmit, invalid, submitting}) => {
     return (
         <form onSubmit={handleSubmit} className="p-4">

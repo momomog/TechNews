@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import PostReview from "./PostReview";
 import {withRouter} from "react-router-dom";
@@ -18,23 +18,28 @@ interface Props {
     getPostData: (sectionId: number, postId: number) => void
 }
 
-class PostReviewWrapper extends React.Component<RouteComponentProps<any> & Props> {
+/**
+ *
+ * @param postData
+ * @param sectionId
+ * @param currentUserData
+ * @param getPostData
+ * @param match
+ * Просмотр содержимого поста. Оболочка
+ */
+const PostReviewWrapper: React.FC<RouteComponentProps<any> & Props> = ({postData, sectionId, currentUserData, getPostData, match}) => {
 
-    componentDidMount() {
-        this.props.getPostData(this.props.sectionId, this.props.match.params.postId)
-    }
+    useEffect(() => {
+        getPostData(sectionId, match.params.postId)
+    }, [])
 
-    postRating = (postId: number, rate: number) => {
-        PostAPI.ratePost(postId, rate)
-    }
+    const postRating = (postId: number, rate: number) => PostAPI.ratePost(postId, rate)
 
-    render() {
-        return this.props.postData.id
-            ? <PostReview post={this.props.postData}
-                          user={this.props.currentUserData}
-                          postRating={this.postRating}/>
+        return postData.id
+            ? <PostReview post={postData}
+                          user={currentUserData}
+                          postRating={postRating}/>
             : <Spinner/>
-    }
 }
 
 let mapStateToProps = (state: RootState) => {

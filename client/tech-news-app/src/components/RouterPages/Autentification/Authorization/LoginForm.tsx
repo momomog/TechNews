@@ -5,11 +5,17 @@ import {Input} from "../../../../common/FormControls/Input";
 import {required} from "../../../../common/Validators";
 import {SignInRequest} from "../../../../models/RequestsModel";
 
-const LoginForm: React.FC<InjectedFormProps<SignInRequest>> = props => {
+/**
+ *
+ * @param handleSubmit
+ * @param invalid
+ * Форма авторизации
+ */
+const LoginForm: React.FC<InjectedFormProps<SignInRequest>> = ({handleSubmit, invalid}) => {
 
     return (
         <form className="form-horizontal"
-              onSubmit={props.handleSubmit}>
+              onSubmit={handleSubmit}>
 
             <div className="input-group mb-3">
                 <span className="input-group-addon">
@@ -50,7 +56,7 @@ const LoginForm: React.FC<InjectedFormProps<SignInRequest>> = props => {
             <div className="form-group mt-2">
                 <div className="col-sm-12">
                     <button className="btn btn-success"
-                            disabled={props.invalid}>
+                            disabled={invalid}>
                         Войти
                     </button>
                 </div>

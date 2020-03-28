@@ -15,11 +15,14 @@ const NotFoundComponent: React.FC<RouteComponentProps<any>> = ({match}) => {
             <div className="row">
                 <div className="col-md-12">
                     <div className="error-template">
+
                         <h1>{code}</h1>
                         <h3 className="mb-4">{message}</h3>
+
                         <div className="error-details">
                             <p>Проверьте правильность введенных данных и повторите попытку</p>
                         </div>
+
                         <div className="error-actions">
                             <NavLink to="/" className="btn btn-default btn-lg">
                                 <span className="glyphicon glyphicon-home"/>
@@ -30,6 +33,7 @@ const NotFoundComponent: React.FC<RouteComponentProps<any>> = ({match}) => {
                                 &nbsp;Написать нам
                             </a>
                         </div>
+
                     </div>
                 </div>
             </div>

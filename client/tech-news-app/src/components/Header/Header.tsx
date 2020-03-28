@@ -16,6 +16,11 @@ interface Props {
     setIsAuth: (isAuth: boolean) => SetIsAuthAction
 }
 
+/**
+ *
+ * @param props
+ * шапка сайта
+ */
 const Header: React.FC<Props> = props => {
     return (
         <div className="header-wrapper">

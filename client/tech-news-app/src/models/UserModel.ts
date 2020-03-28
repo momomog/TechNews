@@ -1,19 +1,19 @@
 export interface User {
-    id: number,
-    username: string,
-    firstName: string,
-    lastName: string,
-    email: string,
+    id: number
+    username: string
+    firstName: string
+    lastName: string
+    email: string
     createAt: Array<number>
     commentsCount: number
     profileData: {
-        country: string,
-        city: string,
-        vk: string,
-        instagram: string,
-        twitter: string,
-        facebook: string,
-        photoId: string,
+        country: string
+        city: string
+        vk: string
+        instagram: string
+        twitter: string
+        facebook: string
+        photoId: string
         birthDate: Array<number>
     }
 }
@@ -21,10 +21,9 @@ export interface User {
 export interface UserState {
     isAuth: boolean
     currentUserData: User
-    userData: User
 }
 
-export type UserAction = SetIsAuthAction | SetCurrentUserDataAction | SetUserDataAction
+export type UserAction = SetIsAuthAction | SetCurrentUserDataAction
 
 export interface SetIsAuthAction {
     type: 'SET-IS-AUTH'
@@ -34,11 +33,6 @@ export interface SetIsAuthAction {
 export interface SetCurrentUserDataAction {
     type: 'SET-CURRENT-USER-DATA'
     currentUserData: User
-}
-
-export interface SetUserDataAction {
-    type: 'SET-USER-DATA'
-    userData: User
 }
 
 export const UserInitial: User = {

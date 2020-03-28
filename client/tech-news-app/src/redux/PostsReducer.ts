@@ -13,6 +13,7 @@ import {
 } from "../models/PostModel";
 import {ErrorResponse} from "../models/ResponseModel";
 import history from "../history";
+import {Dispatch} from "redux";
 
 const CHANGE_SECTION = 'CHANGE-SECTION'
 const SET_POST_ID = 'SET-POST-ID'
@@ -22,7 +23,7 @@ const SET_POST_DATA = 'SET-POST-DATA'
 const SET_POSTS = 'SET-POSTS'
 
 
-let initialState: PostState = {
+const initialState: PostState = {
     sectionId: 1,
     postsCount: 0,
     postPage: 1,
@@ -75,38 +76,34 @@ export const postsReducer = (state: PostState = initialState, action: PostAction
 }
 
 export const getPosts = (sectionId: number, postPage: number = 1): any => {
-    return (dispatch) => {
+    return (dispatch: Dispatch) => {
         PostAPI.getPosts(sectionId, postPage)
             .then(data => {
-                dispatch(setPostsAction(data.posts));
-                dispatch(setPostsCountAction(data.postsCount));
+                dispatch(setPostsAction(data.posts))
+                dispatch(setPostsCountAction(data.postsCount))
             })
-            .catch((error: ErrorResponse) => {
-                history.push(`/error/${error.code}`)
-            })
+            .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))
     }
 }
 
 export const setPostPageAndGetPosts = (sectionId: number, postPage: number): any => {
-    return (dispatch) => {
+    return (dispatch: Dispatch) => {
         dispatch(setPostPageAction(postPage))
 
-        PostAPI.getPosts(sectionId, postPage).then(data => {
-            dispatch(setPostsAction(data.posts))
-            dispatch(setPostsCountAction(data.postsCount))
-        })
+        PostAPI.getPosts(sectionId, postPage)
+            .then(data => {
+                dispatch(setPostsAction(data.posts))
+                dispatch(setPostsCountAction(data.postsCount))
+            })
+            .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))
     }
 }
 
 export const getPostData = (sectionId: number, postId: number): any => {
-    return (dispatch) => {
+    return (dispatch: Dispatch) => {
         PostAPI.getPostData(sectionId, postId)
-            .then(data => {
-                dispatch(setPostData(data))
-            })
-            .catch((error: ErrorResponse) => {
-                history.push(`/error/${error.code}`)
-            })
+            .then((data: Post) => dispatch(setPostData(data)))
+            .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))
     }
 }
 

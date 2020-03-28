@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -11,77 +11,57 @@ interface Props {
     triggerModal: () => void
 }
 
-interface State {
-    isOpen: boolean,
-    picture: File,
-    base64picture: any,
-    fileName: string
-}
+const ProfilePictureModal: React.FC<Props> = ({isOpenModal, picture, onLoadPhoto, triggerModal}) => {
+    const [isOpen, setIsOpen] = useState<boolean>(isOpenModal)
+    const [base64picture, setBase64picture] = useState<string>('')
+    const [fileName, setFileName] = useState<string>('')
 
-class ProfilePictureModal extends React.Component<Props, State> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isOpen: props.isOpenModal,
-            picture: props.picture,
-            base64picture: undefined,
-            fileName: ''
-        }
+    if (picture)
+        toBase64(picture)
 
-        if (props.picture)
-            this.toBase64(props.picture)
-    }
-
-    onCloseModal = () => {
-        this.setState({isOpen: false})
-        this.props.triggerModal()
+    const onCloseModal = () => {
+        setIsOpen(false)
+        triggerModal()
     }
 
 
-    toBase64 = (file: File) => {
-        const me = this,
-            reader = new FileReader();
+    function toBase64(file: File) {
+        const reader = new FileReader()
+        reader.readAsBinaryString(file)
 
-        reader.readAsBinaryString(file);
-
-        reader.onload = function () {
-            if (me.props.picture)
-                me.setState({fileName: me.props.picture.name})
-            if (typeof reader.result === "string") {
-                me.setState({base64picture: `data:image/gif;base64,${btoa(reader.result)}`})
+        reader.onload = () => {
+            if (picture)
+                setFileName(picture.name)
+            if (typeof reader.result === 'string') {
+                setBase64picture(`data:image/gif;base64,${btoa(reader.result)}`)
             }
         }
-        reader.onerror = function () {
-            console.log('there are some problems')
-        }
-
+        reader.onerror = () => console.log('there are some problems')
     }
 
-    getCroppedPicture = value => {
-        this.props.onLoadPhoto(value)
-        this.onCloseModal()
+    const getCroppedPicture = value => {
+        onLoadPhoto(value)
+        onCloseModal()
     }
 
-    render() {
-        return (
-            <Dialog open={this.state.isOpen}
-                    className="MuiDialog-paperWidth"
-                    onClose={this.onCloseModal}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description">
-                <DialogTitle id="alert-dialog-title">
-                    Загрузка фотографии профиля
-                </DialogTitle>
+    return (
+        <Dialog open={isOpen}
+                className="MuiDialog-paperWidth"
+                onClose={onCloseModal}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description">
+            <DialogTitle id="alert-dialog-title">
+                Загрузка фотографии профиля
+            </DialogTitle>
 
-                <DialogContent>
-                    <ProfileImageCutter picture={this.state.base64picture}
-                                        fileName={this.state.fileName}
-                                        onClose={this.onCloseModal}
-                                        getCrop={this.getCroppedPicture}/>
-                </DialogContent>
-            </Dialog>
-        )
-    }
+            <DialogContent>
+                <ProfileImageCutter picture={base64picture}
+                                    fileName={fileName}
+                                    onClose={onCloseModal}
+                                    getCrop={getCroppedPicture}/>
+            </DialogContent>
+        </Dialog>
+    )
 }
 
 export default ProfilePictureModal

@@ -1,12 +1,23 @@
-import React from "react";
+import React, {ChangeEvent, useState} from "react";
 
 import okIcon from '../../static/ok-icon.png'
-import errorIcon from '../../static/error-icon.png'
+import {change} from "redux-form";
+import errorIcon from "../../static/error-icon.png";
 
-export const Input = ({input, meta, ...props}) => {
-    const isError = meta.touched && meta.error;
+/**
+ *
+ * @param input
+ * @param meta
+ * @param props
+ * Контроль формы. Input type="file"
+ */
+export const FileInput = ({input, meta, ...props}) => {
+    const [value, setValue] = useState(undefined);
+    const isError = meta.touched && meta.error && !value;
+
     return (
         <div style={{width: '100%'}}>
+
             {
                 props.placeholder && !props.showlabel &&
                 <label className="col-sm-5 control-label required-field reg-label">
@@ -17,10 +28,14 @@ export const Input = ({input, meta, ...props}) => {
             <div>
                 <input {...input}
                        {...props}
+                       onChange={(e: any) => {
+                           setValue(e.target.files[0])
+                           meta.dispatch(change(meta.form, input.name, e.target.files[0]));
+                       }}
+                       value={undefined}
                        style={{
-                           border: isError ? '1px solid red' : meta.touched ? '1px solid green' : '',
                            backgroundImage: isError ? `url(${errorIcon})` : meta.touched ? `url(${okIcon})` : '',
-                           backgroundPosition: `96% 50%`,
+                           backgroundPosition: `100% -10%`,
                            backgroundRepeat: `no-repeat`,
                            marginBottom: `0px`
                        }}
@@ -29,12 +44,13 @@ export const Input = ({input, meta, ...props}) => {
 
             {
                 isError &&
-                <div className="col-12">
+                <div className="mr-5">
                     <div className="text-danger text-center validate-text">
                         {meta.error}
                     </div>
                 </div>
             }
+
         </div>
     )
 }

@@ -5,56 +5,57 @@ interface Props {
     user: User
 }
 
+/**
+ *
+ * @param user
+ * Профиль. Социальные иконки
+ */
 const SocialIcons: React.FC<Props> = ({user}) => {
+    const profileData = user.profileData
 
-    if (user) {
-        const profileData = user.profileData
+    return (
+        <div>
+            {
+                profileData.facebook
+                    ? <a href={'https://www.facebook.com/' + profileData.facebook}
+                         target="_blank" rel="noopener noreferrer">
+                        <i id="social-fb"
+                           className="fa fa-facebook-square fa-2x active-soc mr-2"/>
+                    </a>
+                    : <i className="fa fa-facebook-square fa-2x social mr-2"/>
+            }
 
-        return (
-            <div>
-                {
-                    profileData.facebook
-                        ? <a href={'https://www.facebook.com/' + profileData.facebook}
-                             target="_blank" rel="noopener noreferrer">
-                            <i id="social-fb"
-                               className="fa fa-facebook-square fa-2x active-soc mr-2"/>
-                        </a>
-                        : <i className="fa fa-facebook-square fa-2x social mr-2"/>
-                }
+            {
+                profileData.instagram
+                    ? <a href={'https://www.instagram.com/' + profileData.instagram}
+                         target="_blank" rel="noopener noreferrer">
+                        <i id="social-gp"
+                           className="fa fa-instagram fa-2x active-soc mr-2"/>
+                    </a>
+                    : <i className="fa fa-instagram fa-2x social mr-2"/>
+            }
 
-                {
-                    profileData.instagram
-                        ? <a href={'https://www.instagram.com/' + profileData.instagram}
-                             target="_blank" rel="noopener noreferrer">
-                            <i id="social-gp"
-                               className="fa fa-instagram fa-2x active-soc mr-2"/>
-                        </a>
-                        : <i className="fa fa-instagram fa-2x social mr-2"/>
-                }
+            {
+                profileData.vk
+                    ? <a href={'https://www.vk.com/' + profileData.vk}
+                         target="_blank" rel="noopener noreferrer">
+                        <i id="social-fb" className="fa fa-vk fa-2x active-soc mr-2"/>
+                    </a>
+                    : <i className="fa fa-vk fa-2x social mr-2"/>
+            }
 
-                {
-                    profileData.vk
-                        ? <a href={'https://www.vk.com/' + profileData.vk}
-                             target="_blank" rel="noopener noreferrer">
-                            <i id="social-fb" className="fa fa-vk fa-2x active-soc mr-2"/>
-                        </a>
-                        : <i className="fa fa-vk fa-2x social mr-2"/>
-                }
+            {
+                profileData.twitter
+                    ? <a href={'https://www.twitter.com/' + profileData.twitter}
+                         target="_blank" rel="noopener noreferrer">
+                        <i id="social-tw"
+                           className="fa fa-twitter-square fa-2x active-soc mr-2м"/>
+                    </a>
+                    : <i className="fa fa-twitter-square fa-2x social mr-2м"/>
+            }
 
-                {
-                    profileData.twitter
-                        ? <a href={'https://www.twitter.com/' + profileData.twitter}
-                             target="_blank" rel="noopener noreferrer">
-                            <i id="social-tw"
-                               className="fa fa-twitter-square fa-2x active-soc mr-2м"/>
-                        </a>
-                        : <i className="fa fa-twitter-square fa-2x social mr-2м"/>
-                }
-
-            </div>
-        )
-    } else
-        return <div/>
+        </div>
+    )
 }
 
 export default SocialIcons

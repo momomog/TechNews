@@ -7,10 +7,16 @@ import {Dispatch} from "redux";
 import {SignInRequest} from "../../../../models/RequestsModel";
 
 interface Props {
-    isAuth: boolean,
-    login: (request: SignInRequest, remember?: boolean) => any
+    isAuth: boolean
+    login: (request: SignInRequest, remember?: boolean) => void
 }
 
+/**
+ *
+ * @param isAuth
+ * @param login
+ * Оболочка Авторизация
+ */
 const AuthorizationWrapper: React.FC<Props> = ({isAuth, login}) => {
 
     const onLogin = (request: SignInRequest, remember?: boolean) => login(request, remember)

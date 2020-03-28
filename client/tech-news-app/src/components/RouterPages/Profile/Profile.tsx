@@ -6,17 +6,22 @@ import ProfileData from "./ProfileData/ProfileData";
 import SocialIcons from "./ProfileData/SocialIcons";
 
 interface Props {
-    currentUser: User
-    notCurrentUser: User
-    isNotCurrentUser: boolean
+    user: User
+    isCurrentUser: boolean
     onLoadPhoto: (photo: File) => void
 }
 
-const Profile: React.FC<Props> = ({currentUser, notCurrentUser, isNotCurrentUser, onLoadPhoto}) => {
-    const user = isNotCurrentUser ? notCurrentUser : currentUser;
-    const [isLoading, setIsLoading] = useState(false),
-        [isOpenModal, setIsOpenModal] = useState(false),
-        [picture, setPicture] = useState(undefined);
+/**
+ *
+ * @param user
+ * @param isCurrentUser
+ * @param onLoadPhoto
+ * Профиль
+ */
+const Profile: React.FC<Props> = ({user, isCurrentUser, onLoadPhoto}) => {
+    const [isLoading, setIsLoading] = useState(false)
+    const [isOpenModal, setIsOpenModal] = useState(false)
+    const [picture, setPicture] = useState(undefined)
 
     const changePhoto = (e) => {
         setPicture(e.target.files[0])
@@ -53,7 +58,7 @@ const Profile: React.FC<Props> = ({currentUser, notCurrentUser, isNotCurrentUser
                                                 </div>
                                         }
                                         {
-                                            !isNotCurrentUser &&
+                                            isCurrentUser &&
                                             <label hidden={isLoading}
                                                    className="btn btn-primary-outline mt-1 p-0 text-secondary">
                                                 загрузить фото

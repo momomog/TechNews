@@ -2,22 +2,22 @@ import {Comment} from "./CommentModel";
 import {Post} from "./PostModel";
 
 export interface PostCommentsResponse {
-    comments: Array<Comment>,
+    comments: Array<Comment>
     commentsCount: number
 }
 
 export interface PostsResponse {
-    posts: Array<Post>,
+    posts: Array<Post>
     postsCount: number
 }
 
 export interface SignInResponse {
-    accessToken: string,
+    accessToken: string
     tokenType: string
 }
 
 export interface SignUpResponse {
-    success: boolean;
+    success: boolean
     message: string
 }
 

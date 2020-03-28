@@ -1,9 +1,8 @@
 import React, {useState} from "react";
-import {Comment} from "../../../../models/CommentModel";
+import {Comment, CommentRequest} from "../../../../models/CommentModel";
 import Common from "../../../../common/Common";
 import {User} from "../../../../models/UserModel";
 import CommentItem from "./Comment";
-import {CommentRequest} from "./CommentsWrapper";
 
 interface Props {
     comments: Array<Comment>
@@ -19,7 +18,7 @@ interface Props {
 /**
  *
  * @param props
- * компонент Список комментариев
+ * Список комментариев
  */
 const Comments: React.FC<Props> = (props) => {
     const [commentText, setCommentText] = useState('')

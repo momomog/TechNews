@@ -4,27 +4,35 @@ import ProfileEditReduxForm from "./ProfileEditForm/ProfileEditForm";
 import {User} from "../../../../models/UserModel";
 
 interface Props {
-    currentUser: User,
+    user: User,
     updateUserData: (request: ProfileRequest) => void
 }
 
-const ProfileEdit: React.FC<Props> = ({currentUser, updateUserData}) => {
+/**
+ *
+ * @param user
+ * @param updateUserData
+ * Редактор профиля
+ */
+const ProfileEdit: React.FC<Props> = ({user, updateUserData}) => {
 
     const updateProfileData = (formData: ProfileRequest) => updateUserData(formData)
 
-    return currentUser
-        ? <div className="row">
+    return (
+        <div className="row">
             <div className="col-md-11 center-block ">
                 <div className="panel panel-default">
-                    <div className="panel-heading"><h4>Редактирование профиля</h4></div>
+                    <div className="panel-heading">
+                        <h4>Редактирование профиля</h4>
+                    </div>
 
-                    <ProfileEditReduxForm user={currentUser}
+                    <ProfileEditReduxForm user={user}
                                           onSubmit={updateProfileData}/>
 
                 </div>
             </div>
         </div>
-        : <div/>
+    )
 }
 
 export default ProfileEdit

@@ -9,6 +9,14 @@ interface Props {
     validators?: any
 }
 
+/**
+ *
+ * @param isSocial
+ * @param name
+ * @param label
+ * @param validators
+ * Редактор профиля. Компонент формы
+ */
 const ProfileField: React.FC<Props> = ({isSocial, name, label, validators}) => {
     return (
         <div className="col-sm-5 mt-4 d-flex justify-content-end">

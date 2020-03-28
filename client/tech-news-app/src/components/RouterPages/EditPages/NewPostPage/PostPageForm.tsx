@@ -4,23 +4,33 @@ import React from "react";
 import {Input} from "../../../../common/FormControls/Input";
 import {
     maxLength1000,
-    maxLength200, maxLength20000,
+    maxLength200,
+    maxLength20000,
     minLength1000,
     minLength200,
     minLength50,
-    required, requiredFile
+    required,
+    requiredFile
 } from "../../../../common/Validators";
 import {TextArea} from "../../../../common/FormControls/TextArea";
 import {Select} from "../../../../common/FormControls/Select";
 import {FileInput} from "../../../../common/FormControls/FileInput";
 import {PostDescription} from "../../../../common/FormControls/PostDescription";
-import {PostRequest, SignInRequest} from "../../../../models/RequestsModel";
+import {PostRequest} from "../../../../models/RequestsModel";
 
 interface OwnProps {
-    categories: Array<{id: number, title: string}>
+    categories: Array<{ id: number, title: string }>
 }
 
-const PostPageForm:React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps> =({categories, handleSubmit, invalid, submitSucceeded}) => {
+/**
+ *
+ * @param categories
+ * @param handleSubmit
+ * @param invalid
+ * @param submitSucceeded
+ * Новый пост. Форма
+ */
+const PostPageForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps> = ({categories, handleSubmit, invalid, submitSucceeded}) => {
     return (
         <form onSubmit={handleSubmit}>
 

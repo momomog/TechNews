@@ -5,8 +5,7 @@ import {NavLink} from "react-router-dom";
 import Popup from "reactjs-popup";
 import AuthService from "../../../../common/AuthService";
 import {User} from "../../../../models/UserModel";
-import {Comment} from "../../../../models/CommentModel";
-import {CommentRequest} from "./CommentsWrapper";
+import {Comment, CommentRequest} from "../../../../models/CommentModel";
 
 interface Props {
     comment: Comment
@@ -29,7 +28,7 @@ interface Props {
  * @param deleteCommentary
  * @param updateCommentary
  * @param addCommentary
- * компонент Комментарий
+ * Комментарий
  */
 const CommentItem: React.FC<Props> = ({
                                           comment, firstCommentId, isAuth, currentUserData,
@@ -86,7 +85,6 @@ const CommentItem: React.FC<Props> = ({
         setCommentAnswerParentAuthorName(comment.authorName)
     }
 
-
     return (
         <div>
             {
@@ -97,8 +95,7 @@ const CommentItem: React.FC<Props> = ({
                 <NavLink to={'/profile/' + comment.authorName}>
                     <img className="d-flex mr-3 rounded-circle comment-author-photo"
                          src={comment.authorPhotoId
-                         && `https://drive.google.com/uc?export=view&id=${comment.authorPhotoId}`}
-                    />
+                         && `https://drive.google.com/uc?export=view&id=${comment.authorPhotoId}`}/>
                 </NavLink>
                 <div className="media-body">
                     <div className="row">
@@ -182,7 +179,8 @@ const CommentItem: React.FC<Props> = ({
                                             {
                                                 (isAuth && comment.authorId === (currentUserData && currentUserData.id) || AuthService.isAdmin()) && !comment.isDeleted
                                                 && <span className="ml-3">
-                                                          <Popup trigger={<a className="text-secondary comment-action">Удалить</a>}
+                                                          <Popup trigger={<a
+                                                              className="text-secondary comment-action">Удалить</a>}
                                                                  position="top center"
                                                                  open={isOpenPopup}
                                                                  onOpen={() => setIsOpenPopup(true)}

@@ -4,11 +4,16 @@ import LoginReduxForm from "./LoginForm";
 import {SignInRequest} from "../../../../models/RequestsModel";
 
 interface Props {
-    isAuth: boolean,
-    onLogin: (request: SignInRequest, remember?: boolean) => any
+    isAuth: boolean
+    onLogin: (request: SignInRequest, remember?: boolean) => void
 }
 
-
+/**
+ *
+ * @param isAuth
+ * @param onLogin
+ * Авторизация
+ */
 const Authorization: React.FC<Props> = ({isAuth, onLogin}) => {
 
     const onLoginClick = (formData: SignInRequest) => {
@@ -17,7 +22,6 @@ const Authorization: React.FC<Props> = ({isAuth, onLogin}) => {
             password: formData.password
         }, formData.remember)
     }
-
 
     return (
         isAuth

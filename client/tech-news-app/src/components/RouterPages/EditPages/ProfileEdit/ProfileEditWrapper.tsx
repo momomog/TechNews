@@ -14,23 +14,28 @@ interface Props {
     currentUserData: User
 }
 
+/**
+ *
+ * @param isAuth
+ * @param currentUserData
+ * @param history
+ * Оболочка Редактор профиля
+ */
 const ProfileEditWrapper: React.FC<RouteComponentProps<any> & Props> = ({isAuth, currentUserData, history}) => {
 
     const updateUserData = (userDataRequest: ProfileRequest) => {
         ProfileAPI.onUpdateUserData(userDataRequest)
-            .then(response => {
+            .then(() => {
                 history.push('/profile')
-                NotificationManager.success('Ваши данные успешно обновлены', 'Успешно');
+                NotificationManager.success('Ваши данные успешно обновлены', 'Успешно')
             })
-            .catch(function (error) {
-                NotificationManager.error('Не удалось обновить данные профиля', 'Ошибка');
-            })
+            .catch(() => NotificationManager.error('Не удалось обновить данные профиля', 'Ошибка'))
     }
 
-    if (isAuth) {
-        return <ProfileEdit currentUser={currentUserData}
+    if (isAuth)
+        return <ProfileEdit user={currentUserData}
                             updateUserData={updateUserData}/>
-    } else
+    else
         return <Redirect to="/authorization"/>
 
 }
@@ -38,7 +43,7 @@ const ProfileEditWrapper: React.FC<RouteComponentProps<any> & Props> = ({isAuth,
 let mapStateToProps = (state: RootState) => {
     return {
         isAuth: state.userData.isAuth,
-        currentUserData: state.userData.currentUserData,
+        currentUserData: state.userData.currentUserData
     }
 }
 

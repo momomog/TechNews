@@ -8,6 +8,12 @@ interface Props {
     updatePostData: (formData: PostRequest) => void
 }
 
+/**
+ *
+ * @param post
+ * @param updatePostData
+ * Редактор поста
+ */
 const PostEdit: React.FC<Props> = ({post, updatePostData}) => {
     const categories = [
         {id: 2, title: 'Смартфоны'},
@@ -22,14 +28,16 @@ const PostEdit: React.FC<Props> = ({post, updatePostData}) => {
         <div className="row">
             <div className="col-md-11 center-block ">
                 <div className="panel panel-default">
-                    <div className="panel-heading"><h4>Редактирование поста</h4></div>
-                    <div className="panel-body">
+                    <div className="panel-heading">
+                        <h4>Редактирование поста</h4>
+                    </div>
 
+                    <div className="panel-body">
                         <PostEditReduxForm post={post}
                                            categories={categories}
                                            onSubmit={updatePost}/>
-
                     </div>
+
                 </div>
             </div>
         </div>

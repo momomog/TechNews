@@ -23,3 +23,10 @@ export interface CommentState {
     postComments: Array<Comment>
     commentsCount: number
 }
+
+export interface CommentRequest {
+    postId?: number
+    commentText: string
+    parentCommentId?: number
+    parentCommentAuthorName?: string
+}

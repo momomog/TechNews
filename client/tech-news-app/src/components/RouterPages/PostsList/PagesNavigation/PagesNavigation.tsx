@@ -9,11 +9,19 @@ interface Props {
     setPosts: (sectionId: number, postPage: number) => void
 }
 
+/**
+ *
+ * @param postPage
+ * @param postsCount
+ * @param setPosts
+ * @param sectionId
+ * Пагинатор
+ */
 const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, sectionId}) => {
 
     const onePagePostsCount = 8;
     const maxPagesCount = 7;
-    const setPostPage = (e) => setPosts(sectionId, Number(e.target.textContent))
+    const setPostPage = e => setPosts(sectionId, Number(e.target.textContent))
     const setPrevNextPostPage = (page: number) => setPosts(sectionId, page)
 
     return (
@@ -68,8 +76,7 @@ const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, secti
             for (let i = 1; i <= pagesCount; i++) {
                 pagesArray.push(i);
             }
-        }
-        else if (4 >= page) {
+        } else if (4 >= page) {
             for (let i = 1; i <= maxPagesCount; i++) {
                 pagesArray.push(i)
             }

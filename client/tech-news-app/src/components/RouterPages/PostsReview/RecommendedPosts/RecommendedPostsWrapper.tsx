@@ -9,13 +9,19 @@ interface Props {
     isVisible?: boolean
 }
 
+/**
+ *
+ * @param categoryId
+ * @param postId
+ * @param isVisible
+ * Оболочка Рекомендуемые посты
+ */
 const RecommendedPostsWrapper: React.FC<Props> = ({categoryId, postId, isVisible}) => {
     const [posts, setPosts] = useState<Array<Post>>([])
 
     if (categoryId && isVisible && !posts.length) {
-        PostAPI.getRecommendedPosts(categoryId, postId).then((response: Array<Post>) => {
-            setPosts(response)
-        })
+        PostAPI.getRecommendedPosts(categoryId, postId)
+            .then((response: Array<Post>) => setPosts(response))
     }
 
     return isVisible ? <RecommendedPosts posts={posts}/> : <div/>

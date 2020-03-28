@@ -5,7 +5,6 @@ import {Post} from "../../../models/PostModel";
 import Spinner from "../../core/Spinner";
 import PostSearch from "./PostSearch";
 import {connect} from "react-redux";
-import {RootState} from "../../../redux/ReduxStore";
 import {Dispatch} from "redux";
 import {setPostIdAction} from "../../../redux/PostsReducer";
 
@@ -15,29 +14,29 @@ interface Props {
 
 /**
  * @param setPostId
- * Оболочка для компонента Поиск по сайту
+ * Оболочка Поиск по сайту
  */
 const PostSearchWrapper: React.FC<Props> = ({setPostId}) => {
     const [searchText, setSearchText] = useState<string>('')
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [posts, setSearchPosts] = useState<Array<Post>>([]);
+    const [posts, setSearchPosts] = useState<Array<Post>>([])
 
     const query = new URLSearchParams(useLocation().search)
-    const search_query = query.get('search_query');
+    const search_query = query.get('search_query')
+
+    if (search_query && search_query !== searchText)
+        setSearchText(search_query)
 
     useEffect(() => {
-        if (search_query && !searchText || search_query && searchText && search_query !== searchText) {
-            setSearchText(search_query)
             setIsLoading(true)
 
-            PostAPI.searchPosts(search_query)
+            PostAPI.searchPosts(searchText)
                 .then((response: Array<Post>) => {
                     setSearchPosts(response)
                     setIsLoading(false)
                 })
-                .catch(error => setIsLoading(false))
-        }
-    })
+                .catch(() => setIsLoading(false))
+    }, [searchText])
 
     return (
         <div>
@@ -55,7 +54,7 @@ const PostSearchWrapper: React.FC<Props> = ({setPostId}) => {
     )
 }
 
-const mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state) => {
     return {}
 }
 

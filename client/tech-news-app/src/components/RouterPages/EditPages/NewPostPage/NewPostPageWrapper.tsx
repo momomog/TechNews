@@ -8,16 +8,23 @@ import {NotificationManager} from "react-notifications";
 import PostAPI from "../../../../api/PostAPI";
 import {chooseSectionAction, getPosts, setPostPageAction} from "../../../../redux/PostsReducer";
 import {ChangeSectionAction} from "../../../../models/PostModel";
-import {RootState} from "../../../../redux/ReduxStore";
 import {RouteComponentProps} from "react-router";
 import {PostRequest} from "../../../../models/RequestsModel";
 
 interface Props {
-    changeSection: (sectionId: number) => ChangeSectionAction,
-    setPostPage: () => void,
+    changeSection: (sectionId: number) => ChangeSectionAction
+    setPostPage: () => void
     getPosts: (sectionId: number) => void
 }
 
+/**
+ *
+ * @param changeSection
+ * @param setPostPage
+ * @param getPosts
+ * @param history
+ * Оболочка Новый пост
+ */
 const NewPostPageWrapper: React.FC<RouteComponentProps<any> & Props> = ({changeSection, setPostPage, getPosts, history}) => {
 
     const createNewPost = (formData: PostRequest) => {
@@ -28,20 +35,18 @@ const NewPostPageWrapper: React.FC<RouteComponentProps<any> & Props> = ({changeS
             categoryId: formData.categoryId
         }, formData.photo && formData.photo[0])
             .then(() => {
-                changeSection(formData.categoryId);
-                setPostPage();
-                getPosts(formData.categoryId);
+                changeSection(formData.categoryId)
+                setPostPage()
+                getPosts(formData.categoryId)
                 history.push(`/posts/${getSectionName(formData.categoryId)}`)
             })
-            .catch(error => {
-                NotificationManager.error('Не удалось создать новый пост', 'Ошибка');
-            })
+            .catch(() => NotificationManager.error('Не удалось создать новый пост', 'Ошибка'))
     }
 
     return <NewPostPage createNewPost={createNewPost}/>
 }
 
-let mapStateToProps = (state: RootState) => {
+let mapStateToProps = (state) => {
     return {}
 }
 

@@ -14,6 +14,10 @@ import RegistrationWrapper from "./Autentification/Registration/RegistrationWrap
 import ProfileWrapper from "./Profile/ProfileWrapper";
 import PostSearchWrapper from "./PostSearch/PostSearchWrapper";
 
+/**
+ *
+ * Главный роутер приложения
+ */
 const SwitchRouter = () => {
     return (
         <div className="container main-content">

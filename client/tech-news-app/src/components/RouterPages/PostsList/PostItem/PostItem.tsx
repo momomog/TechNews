@@ -10,6 +10,12 @@ interface Props {
     setPostId: (id: number) => void
 }
 
+/**
+ *
+ * @param post
+ * @param setPostId
+ * Пост
+ */
 const PostItem: React.FC<Props> = ({post, setPostId}) => {
 
     const onSetPostId = () => {
@@ -20,7 +26,7 @@ const PostItem: React.FC<Props> = ({post, setPostId}) => {
     const postRate = () => {
         let rating = 0;
 
-        if (post.rates && post.rates.length > 0) {
+        if (post.rates.length > 0) {
             post.rates.map(rate => rating += rate)
 
             return rating / post.rates.length

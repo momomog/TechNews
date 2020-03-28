@@ -19,15 +19,20 @@ interface Props {
     postRating: (postId: number, rate: number) => void
 }
 
+/**
+ *
+ * @param post
+ * @param postRating
+ * @param user
+ * Просмотр содержимого поста
+ */
 const PostReview: React.FC<Props> = ({post, postRating, user}) => {
-
-
 
     return (
         <div>
-            {/*{*/}
-            {/*    AuthService.isAdmin() && <PostAdminPanelWrapper postId={post.id}/>*/}
-            {/*}*/}
+            {
+                AuthService.isAdmin() && <PostAdminPanelWrapper postId={post.id}/>
+            }
 
             <div >
                 <div className="row">
@@ -98,7 +103,6 @@ const PostReview: React.FC<Props> = ({post, postRating, user}) => {
             </div>
         </div>
     )
-
 }
 
 export default PostReview

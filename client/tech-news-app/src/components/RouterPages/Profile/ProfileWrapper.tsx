@@ -1,75 +1,73 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {Redirect, withRouter} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import Profile from "./Profile";
 import ProfileAPI from "../../../api/ProfileAPI";
-import {getCurrentUserData, getUserData} from "../../../redux/UserReducer";
-import AuthService from "../../../common/AuthService";
-import {User} from "../../../models/UserModel";
-import {RouteComponentProps} from "react-router";
+import {getCurrentUserData} from "../../../redux/UserReducer";
+import {User, UserInitial} from "../../../models/UserModel";
 import {RootState} from "../../../redux/ReduxStore";
 import Spinner from "../../core/Spinner";
+import {ErrorResponse} from "../../../models/ResponseModel";
+import {NotificationManager} from "react-notifications";
+import history from "../../../history";
 
 interface Props {
-    isAuth: boolean
     currentUserData: User
-    userData: User
     getCurrentUserData: () => void
-    getUserData: (username: string) => void
 }
 
-class ProfileWrapper extends React.Component<RouteComponentProps<any> & Props> {
+/**
+ *
+ * @param currentUserData
+ * @param getCurrentUserData
+ * Профиль. Оболочка
+ */
+const ProfileWrapper: React.FC<Props> = ({currentUserData, getCurrentUserData}) => {
+    const [user, setUser] = useState<User>(UserInitial)
+    const location = useLocation()
+    const path = location.pathname.split('/')
 
-    isNotCurrentUser() {
-        const path = this.props.location.pathname.split('/');
-        return !((path[1] === 'profile' && path.length === 2)
-            || (path[1] === 'profile' && this.props.currentUserData && this.props.currentUserData.username === path[2]))
-
-    }
-
-    updateUserPhoto = (body) => {
-        ProfileAPI.onLoadPhoto(body).then(() => {
-            this.props.getCurrentUserData()
-        })
-    }
-
-    componentDidMount() {
-        if (this.isNotCurrentUser()) {
-            const path = this.props.location.pathname.split('/');
-            this.props.getUserData(path[2])
-        } else if (AuthService.isAuth())
-            this.props.getCurrentUserData()
-    }
-
-    render() {
-        if (this.props.isAuth) {
-            if (this.props.currentUserData.id || this.props.userData.id)
-                return <Profile currentUser={this.props.currentUserData}
-                                notCurrentUser={this.props.userData}
-                                isNotCurrentUser={this.isNotCurrentUser()}
-                                onLoadPhoto={this.updateUserPhoto}/>
-            else
-                return <Spinner/>
-
+    useEffect(() => {
+        if (isCurrentUser()) {
+            if (!currentUserData.id)
+                getCurrentUserData()
+        } else if (!user.id) {
+            ProfileAPI.getUserProfile(path[2])
+                .then((response: User) => setUser(response))
+                .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))
         }
+    }, [path])
 
-        return <Redirect to="/authorization"/>
+    const isCurrentUser = (): boolean => {
+        return ((path[1] === 'profile' && path.length === 2)
+            || (path[1] === 'profile' && currentUserData && currentUserData.username === path[2]))
     }
+
+    const updateUserPhoto = (body) => {
+        ProfileAPI.onLoadPhoto(body)
+            .then(() => getCurrentUserData())
+            .catch(() => NotificationManager.error('Не удалось обновить фото профиля', 'Ошибка'))
+    }
+
+    const profileUser = isCurrentUser() ? currentUserData : user
+
+    return profileUser.id
+        ? <Profile user={profileUser}
+                   isCurrentUser={isCurrentUser()}
+                   onLoadPhoto={updateUserPhoto}/>
+        : <Spinner/>
 }
 
 let mapStateToProps = (state: RootState) => {
     return {
-        isAuth: state.userData.isAuth,
-        currentUserData: state.userData.currentUserData,
-        userData: state.userData.userData
+        currentUserData: state.userData.currentUserData
     }
 }
 
 let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        getCurrentUserData: () => dispatch(getCurrentUserData()),
-        getUserData: username => dispatch(getUserData(username))
+        getCurrentUserData: () => dispatch(getCurrentUserData())
     }
 }
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfileWrapper))
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileWrapper)

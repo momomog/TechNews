@@ -1,23 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import Comments from "./Comments";
 import {getPostComments} from "../../../../redux/CommentsReducer";
 import CommentAPI from "../../../../api/CommentAPI";
 import {NotificationManager} from "react-notifications";
-import {Comment} from "../../../../models/CommentModel";
+import {Comment, CommentRequest} from "../../../../models/CommentModel";
 import {User} from "../../../../models/UserModel";
 import {RouteComponentProps} from "react-router";
 import {RootState} from "../../../../redux/ReduxStore";
 import {Dispatch} from "redux";
-import Spinner from "../../../core/Spinner";
-
-export interface CommentRequest {
-    postId?: number
-    commentText: string
-    parentCommentId?: number
-    parentCommentAuthorName?: string
-}
 
 interface Props {
     sectionId: number
@@ -29,67 +21,60 @@ interface Props {
 }
 
 /**
- * компонент Оболочка комментариев
+ *
+ * @param sectionId
+ * @param postComments
+ * @param commentsCount
+ * @param isAuth
+ * @param currentUserData
+ * @param getPostComments
+ * @param match
+ * Список комментариев. Оболочка
  */
-class CommentsWrapper extends React.Component<RouteComponentProps<any> & Props> {
+const CommentsWrapper: React.FC<RouteComponentProps<any> & Props> = ({sectionId, postComments, commentsCount, isAuth, currentUserData, getPostComments, match}) => {
+    const postId = match.params.postId;
 
-    componentDidMount() {
-        this.props.getPostComments(this.props.sectionId, this.props.match.params.postId)
+    useEffect(() => {
+        getPostComments(sectionId, postId)
+    }, [])
+
+    const likeCommentary = (commentId: number) => {
+        CommentAPI.likeComment(postId, commentId)
+            .then(() => getPostComments(sectionId, postId))
+            .catch(() => NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось оценить комментарий'))
     }
 
-    likeCommentary = (commentId: number) => {
-        CommentAPI.likeComment(this.props.match.params.postId, commentId)
-            .catch(function (error) {
-                NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось оценить комментарий')
-            })
-
-        this.props.getPostComments(this.props.sectionId, this.props.match.params.postId)
+    const deleteCommentary = (commentId: number) => {
+        CommentAPI.deleteComment(postId, commentId)
+            .then(() => getPostComments(sectionId, postId))
+            .catch(() => NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось удалить комментарий'))
     }
 
-    deleteCommentary = (commentId: number) => {
-        CommentAPI.deleteComment(this.props.match.params.postId, commentId)
-            .catch(function (error) {
-                NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось удалить комментарий')
-            })
-
-        this.props.getPostComments(this.props.sectionId, this.props.match.params.postId);
+    const updateCommentary = (commentId: number, commentText: string) => {
+        CommentAPI.updateComment(postId, commentId, commentText)
+            .then(() => getPostComments(sectionId, postId))
+            .catch(() => NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось обновить комментарий'))
     }
 
-    updateCommentary = (commentId: number, commentText: string) => {
-        CommentAPI.updateComment(this.props.match.params.postId, commentId, commentText)
-            .catch(function (error) {
-                NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось обновить комментарий');
-            })
-
-        this.props.getPostComments(this.props.sectionId, this.props.match.params.postId);
-    }
-
-    addNewCommentary = (request: CommentRequest) => {
+    const addNewCommentary = (request: CommentRequest) => {
         CommentAPI.sendNewPostComment({
-            postId: this.props.match.params.postId,
+            postId: postId,
             commentText: request && request.commentText,
             parentCommentId: request && request.parentCommentId,
             parentCommentAuthorName: request && request.parentCommentAuthorName
-        }).catch(function (error) {
-            NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось добавить комментарий');
         })
-
-        this.props.getPostComments(this.props.sectionId, this.props.match.params.postId)
+            .then(() => getPostComments(sectionId, postId))
+            .catch(() => NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось добавить комментарий'))
     }
 
-    render() {
-        return this.props.postComments
-            ? <Comments comments={this.props.postComments}
-                        commentsCount={this.props.commentsCount}
-                        isAuth={this.props.isAuth}
-                        currentUserData={this.props.currentUserData}
-                        addNewCommentary={this.addNewCommentary}
-                        likeCommentary={this.likeCommentary}
-                        updateCommentary={this.updateCommentary}
-                        deleteCommentary={this.deleteCommentary}/>
-            : <Spinner/>
-    }
-
+    return <Comments comments={postComments}
+                     commentsCount={commentsCount}
+                     isAuth={isAuth}
+                     currentUserData={currentUserData}
+                     addNewCommentary={addNewCommentary}
+                     likeCommentary={likeCommentary}
+                     updateCommentary={updateCommentary}
+                     deleteCommentary={deleteCommentary}/>
 }
 
 let mapStateToProps = (state: RootState) => {
@@ -100,7 +85,7 @@ let mapStateToProps = (state: RootState) => {
         isAuth: state.userData.isAuth,
         currentUserData: state.userData.currentUserData
     }
-};
+}
 
 let mapDispatchToProps = (dispatch: Dispatch) => {
     return {

@@ -5,6 +5,12 @@ interface Props {
     value: any
 }
 
+/**
+ *
+ * @param name
+ * @param value
+ * Профиль. Компонент отображения данных
+ */
 const UserInfoLine: React.FC<Props> = ({name, value}) => {
     return (
         <div>

@@ -17,6 +17,17 @@ interface Props {
     setPosts: (sectionId: number) => void
 }
 
+/**
+ *
+ * @param isAuth
+ * @param setPosts
+ * @param changeSection
+ * @param setPostPage
+ * @param setCurrentUserData
+ * @param setIsAuth
+ * @param currentUserData
+ * Верхний компонент шапки. Содержит лого и информацию об авторизованном юзере
+ */
 const Login: React.FC<Props> = ({isAuth, setPosts, changeSection, setPostPage, setCurrentUserData, setIsAuth, currentUserData}) => {
     const onLogoClick = () => {
         setPosts(SECTION_ALL_POSTS)

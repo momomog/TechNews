@@ -4,6 +4,13 @@ import * as moment from "moment";
 import DateFnsUtils from "@date-io/date-fns";
 import {change} from "redux-form";
 
+/**
+ *
+ * @param input
+ * @param meta
+ * @param props
+ * Контроль формы. DatePicker
+ */
 export const DatePicker = ({input, meta, ...props}) => {
     const isError = meta.touched && meta.error,
         [initValue, setInitValue] = useState(props.initValue);

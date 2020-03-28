@@ -1,16 +1,19 @@
-import React, {useState} from "react";
+import React from "react";
 
 import okIcon from '../../static/ok-icon.png'
-import {change} from "redux-form";
-import errorIcon from "../../static/error-icon.png";
+import errorIcon from '../../static/error-icon.png'
 
-export const FileInput = ({input, meta, ...props}) => {
-    const [value, setValue] = useState(undefined);
-    const isError = meta.touched && meta.error && !value;
-
+/**
+ *
+ * @param input
+ * @param meta
+ * @param props
+ * Контроль формы. TextArea
+ */
+export const TextArea = ({input, meta, ...props}) => {
+    const isError = meta.touched && meta.error;
     return (
         <div style={{width: '100%'}}>
-
             {
                 props.placeholder && !props.showlabel &&
                 <label className="col-sm-5 control-label required-field reg-label">
@@ -19,16 +22,12 @@ export const FileInput = ({input, meta, ...props}) => {
             }
 
             <div>
-                <input {...input}
+                <textarea {...input}
                        {...props}
-                       onChange={(e) => {
-                           setValue(e.target.files[0])
-                           meta.dispatch(change(meta.form, input.name, e.target.files[0]));
-                       }}
-                       value={undefined}
                        style={{
+                           border: isError ? '1px solid red' : meta.touched ? '1px solid green' : '',
                            backgroundImage: isError ? `url(${errorIcon})` : meta.touched ? `url(${okIcon})` : '',
-                           backgroundPosition: `100% -10%`,
+                           backgroundPosition: `96% 50%`,
                            backgroundRepeat: `no-repeat`,
                            marginBottom: `0px`
                        }}
@@ -37,13 +36,12 @@ export const FileInput = ({input, meta, ...props}) => {
 
             {
                 isError &&
-                <div className="mr-5">
+                <div className="col-12">
                     <div className="text-danger text-center validate-text">
                         {meta.error}
                     </div>
                 </div>
             }
-
         </div>
     )
 }

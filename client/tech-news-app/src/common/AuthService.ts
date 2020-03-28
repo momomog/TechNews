@@ -10,7 +10,7 @@ interface JwtUserData {
 class AuthService {
 
     isAuth(): boolean {
-        let isAuth = false;
+        let isAuth = false
 
         if (this.getToken()) {
             const user: JwtUserData = this.decodeJWTToken()
@@ -30,7 +30,7 @@ class AuthService {
     }
 
     // Сет токена авторизации
-    setToken(token: string, remember?: boolean): void {
+    setToken(token: string, remember?: boolean) {
         if (remember)
             localStorage.setItem('accessToken', token)
         else
@@ -41,26 +41,26 @@ class AuthService {
     getToken(): string | null {
         if (sessionStorage.getItem('accessToken'))
             return sessionStorage.getItem('accessToken')
-        return localStorage.getItem('accessToken');
+        return localStorage.getItem('accessToken')
     }
 
     // Удаление токена авторизации
-    removeToken(): void {
-        sessionStorage.removeItem('accessToken');
-        localStorage.removeItem('accessToken');
+    removeToken() {
+        sessionStorage.removeItem('accessToken')
+        localStorage.removeItem('accessToken')
     }
 
 
     // проверка является ли пользователь администратором
     isAdmin(): boolean {
         let user: JwtUserData = this.decodeJWTToken(),
-            isAdmin = false;
+            isAdmin = false
 
         if (user && user.roles) {
             user.roles.forEach(role => {
                 if (role.authority === 'ROLE_ADMIN')
                     isAdmin = true;
-            });
+            })
         }
 
         return isAdmin;

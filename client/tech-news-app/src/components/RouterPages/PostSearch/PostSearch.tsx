@@ -15,7 +15,7 @@ interface Props {
  * @param posts
  * @param searchText
  * @param setPostId
- * Компонент Поиск по сайту
+ * Поиск по сайту
  */
 const PostSearch: React.FC<Props> = ({posts, searchText, setPostId}) => {
     const oneTimePostShowCount = 15
@@ -67,7 +67,7 @@ const PostSearch: React.FC<Props> = ({posts, searchText, setPostId}) => {
         }
     }
 
-    function showMorePosts(): void {
+    function showMorePosts() {
         const nextPostsCount = showPostsCount + oneTimePostShowCount < posts.length ? showPostsCount + oneTimePostShowCount : posts.length
         setShowPostsCount(nextPostsCount)
         const initPosts = [...posts]

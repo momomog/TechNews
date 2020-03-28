@@ -6,10 +6,18 @@ import {SetIsAuthAction, User, UserInitial} from "../../../../models/UserModel";
 interface Props {
     isAuth: boolean
     currentUserData: User
-    setCurrentUserData: (userData: User) => any
+    setCurrentUserData: (userData: User) => void
     setIsAuth: (isAuth: boolean) => SetIsAuthAction
 }
 
+/**
+ *
+ * @param isAuth
+ * @param currentUserData
+ * @param setIsAuth
+ * @param setCurrentUserData
+ * Авторизованный пользователь
+ */
 const AuthUser: React.FC<Props> = ({isAuth, currentUserData, setIsAuth, setCurrentUserData}) => {
 
     const onLogout = () => {
@@ -27,9 +35,9 @@ const AuthUser: React.FC<Props> = ({isAuth, currentUserData, setIsAuth, setCurre
                             data-toggle="dropdown"
                             aria-haspopup="true"
                             aria-expanded="false">
-                        {currentUserData.firstName} <img
-                        src={currentUserData.profileData.photoId && `https://drive.google.com/uc?export=view&id=${currentUserData.profileData.photoId}`}
-                        alt=""/>
+                        {currentUserData.firstName}&nbsp;
+                        <img src={currentUserData.profileData.photoId
+                        && `https://drive.google.com/uc?export=view&id=${currentUserData.profileData.photoId}`}/>
                     </button>
                     <div className="dropdown-menu">
                         <NavLink className="dropdown-item" to="/profile">Профиль</NavLink>
@@ -48,8 +56,7 @@ const AuthUser: React.FC<Props> = ({isAuth, currentUserData, setIsAuth, setCurre
                         }
 
                         <span onClick={onLogout}>
-                                <NavLink className="dropdown-item"
-                                         to="/posts/all">
+                                <NavLink className="dropdown-item" to="/posts/all">
                                     Выйти
                                 </NavLink>
                             </span>

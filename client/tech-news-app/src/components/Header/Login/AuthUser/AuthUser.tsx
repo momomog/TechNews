@@ -5,7 +5,7 @@ import {SetIsAuthAction, User, UserInitial} from "../../../../models/UserModel";
 
 interface Props {
     isAuth: boolean
-    currentUserData: User
+    userData: User
     setCurrentUserData: (userData: User) => void
     setIsAuth: (isAuth: boolean) => SetIsAuthAction
 }
@@ -13,12 +13,12 @@ interface Props {
 /**
  *
  * @param isAuth
- * @param currentUserData
+ * @param userData
  * @param setIsAuth
  * @param setCurrentUserData
  * Авторизованный пользователь
  */
-const AuthUser: React.FC<Props> = ({isAuth, currentUserData, setIsAuth, setCurrentUserData}) => {
+const AuthUser: React.FC<Props> = ({isAuth, userData, setIsAuth, setCurrentUserData}) => {
 
     const onLogout = () => {
         AuthService.removeToken()
@@ -35,9 +35,9 @@ const AuthUser: React.FC<Props> = ({isAuth, currentUserData, setIsAuth, setCurre
                             data-toggle="dropdown"
                             aria-haspopup="true"
                             aria-expanded="false">
-                        {currentUserData.firstName}&nbsp;
-                        <img src={currentUserData.profileData.photoId
-                        && `https://drive.google.com/uc?export=view&id=${currentUserData.profileData.photoId}`}/>
+                        {userData.firstName}&nbsp;
+                        <img src={userData.profileData.photoId
+                        && `https://drive.google.com/uc?export=view&id=${userData.profileData.photoId}`}/>
                     </button>
                     <div className="dropdown-menu">
                         <NavLink className="dropdown-item" to="/profile">Профиль</NavLink>

@@ -14,7 +14,7 @@ import Spinner from "../../core/Spinner";
 interface Props {
     postData: Post
     sectionId: number
-    currentUserData: User
+    userData: User
     getPostData: (sectionId: number, postId: number) => void
 }
 
@@ -22,12 +22,12 @@ interface Props {
  *
  * @param postData
  * @param sectionId
- * @param currentUserData
+ * @param userData
  * @param getPostData
  * @param match
  * Просмотр содержимого поста. Оболочка
  */
-const PostReviewWrapper: React.FC<RouteComponentProps<any> & Props> = ({postData, sectionId, currentUserData, getPostData, match}) => {
+const PostReviewWrapper: React.FC<RouteComponentProps<any> & Props> = ({postData, sectionId, userData, getPostData, match}) => {
 
     useEffect(() => {
         getPostData(sectionId, match.params.postId)
@@ -37,7 +37,7 @@ const PostReviewWrapper: React.FC<RouteComponentProps<any> & Props> = ({postData
 
         return postData.id
             ? <PostReview post={postData}
-                          user={currentUserData}
+                          user={userData}
                           postRating={postRating}/>
             : <Spinner/>
 }
@@ -46,7 +46,7 @@ let mapStateToProps = (state: RootState) => {
     return {
         postData: state.postsData.postData,
         sectionId: state.postsData.sectionId,
-        currentUserData: state.userData.currentUserData
+        userData: state.userData.userData
     }
 }
 

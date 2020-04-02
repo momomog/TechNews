@@ -20,19 +20,19 @@ export interface User {
 
 export interface UserState {
     isAuth: boolean
-    currentUserData: User
+    userData: User
 }
 
-export type UserAction = SetIsAuthAction | SetCurrentUserDataAction
+export type UserAction = SetIsAuthAction | SetUserDataAction
 
 export interface SetIsAuthAction {
     type: 'SET-IS-AUTH'
     isAuth: boolean
 }
 
-export interface SetCurrentUserDataAction {
-    type: 'SET-CURRENT-USER-DATA'
-    currentUserData: User
+export interface SetUserDataAction {
+    type: 'SET-USER-DATA'
+    userData: User
 }
 
 export const UserInitial: User = {

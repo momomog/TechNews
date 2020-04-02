@@ -8,7 +8,7 @@ interface Props {
     comments: Array<Comment>
     commentsCount: number
     isAuth: boolean
-    currentUserData: User
+    userData: User
     likeCommentary: (commentId: number) => void
     deleteCommentary: (commentId: number) => void
     updateCommentary: (commentId: number, commentText: string) => void
@@ -72,7 +72,7 @@ const Comments: React.FC<Props> = (props) => {
                         return <CommentItem comment={comment}
                                             firstCommentId={props.comments[0].id}
                                             isAuth={props.isAuth}
-                                            currentUserData={props.currentUserData}
+                                            userData={props.userData}
                                             likeCommentary={props.likeCommentary}
                                             updateCommentary={props.updateCommentary}
                                             addCommentary={props.addNewCommentary}

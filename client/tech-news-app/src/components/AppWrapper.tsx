@@ -8,7 +8,7 @@ import {getCurrentUserData, setIsAuthAction} from "../redux/UserReducer";
 
 interface Props {
     setIsAuth: (isAuth: boolean) => UserAction,
-    getUserData: () => any
+    getUserData: () => void
 }
 
 /**

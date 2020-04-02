@@ -54,7 +54,7 @@ public class PostDao extends BaseDao<PostEntity> implements PostCategoryConst {
 
         while (result.size() < 3) {
             PostEntity post = list.get((int) (Math.random() * recommended));
-            if (post.getId() != postId && !result.contains(post))
+            if (!post.getId().equals(postId) && !result.contains(post))
                 result.add(post);
         }
 

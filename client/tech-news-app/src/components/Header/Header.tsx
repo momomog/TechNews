@@ -8,16 +8,15 @@ import {SetIsAuthAction, User} from "../../models/UserModel";
 interface Props {
     isAuth: boolean,
     sectionId: number,
-    currentUserData: User,
+    userData: User,
     setPosts: (sectionId: number) => void,
     changeSection: (sectionId: number) => ChangeSectionAction,
     setPostPage: (pageNumber: number) => SetPostPageAction,
-    setCurrentUserData: (userData: User) => any,
+    setCurrentUserData: (userData: User) => void,
     setIsAuth: (isAuth: boolean) => SetIsAuthAction
 }
 
 /**
- *
  * @param props
  * шапка сайта
  */
@@ -28,7 +27,7 @@ const Header: React.FC<Props> = props => {
             <NotificationContainer/>
 
             <Login changeSection={props.changeSection}
-                   currentUserData={props.currentUserData}
+                   userData={props.userData}
                    setPosts={props.setPosts}
                    setPostPage={props.setPostPage}
                    setIsAuth={props.setIsAuth}

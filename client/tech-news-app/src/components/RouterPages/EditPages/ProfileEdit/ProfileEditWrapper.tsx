@@ -11,17 +11,17 @@ import {ProfileRequest} from "../../../../models/RequestsModel";
 
 interface Props {
     isAuth: boolean
-    currentUserData: User
+    userData: User
 }
 
 /**
  *
  * @param isAuth
- * @param currentUserData
+ * @param userData
  * @param history
  * Оболочка Редактор профиля
  */
-const ProfileEditWrapper: React.FC<RouteComponentProps<any> & Props> = ({isAuth, currentUserData, history}) => {
+const ProfileEditWrapper: React.FC<RouteComponentProps<any> & Props> = ({isAuth, userData, history}) => {
 
     const updateUserData = (userDataRequest: ProfileRequest) => {
         ProfileAPI.onUpdateUserData(userDataRequest)
@@ -33,7 +33,7 @@ const ProfileEditWrapper: React.FC<RouteComponentProps<any> & Props> = ({isAuth,
     }
 
     if (isAuth)
-        return <ProfileEdit user={currentUserData}
+        return <ProfileEdit user={userData}
                             updateUserData={updateUserData}/>
     else
         return <Redirect to="/authorization"/>
@@ -43,7 +43,7 @@ const ProfileEditWrapper: React.FC<RouteComponentProps<any> & Props> = ({isAuth,
 let mapStateToProps = (state: RootState) => {
     return {
         isAuth: state.userData.isAuth,
-        currentUserData: state.userData.currentUserData
+        userData: state.userData.userData
     }
 }
 

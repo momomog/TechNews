@@ -4,7 +4,7 @@ import history from "../history";
 import AuthService from "../common/AuthService";
 import ProfileAPI from "../api/ProfileAPI";
 import {
-    SetCurrentUserDataAction,
+    SetUserDataAction,
     SetIsAuthAction,
     User,
     UserAction,
@@ -16,12 +16,12 @@ import {Dispatch} from "redux";
 import {SignInRequest} from "../models/RequestsModel";
 
 const SET_IS_AUTH = 'SET-IS-AUTH';
-const SET_CURRENT_USER_DATA = 'SET-CURRENT-USER-DATA';
+const SET_USER_DATA = 'SET-USER-DATA';
 
 
 const initialState: UserState = {
     isAuth: false,
-    currentUserData: UserInitial
+    userData: UserInitial
 }
 
 export const userReducer = (state: UserState = initialState, action: UserAction): UserState => {
@@ -32,10 +32,10 @@ export const userReducer = (state: UserState = initialState, action: UserAction)
                 isAuth: action.isAuth,
             }
         }
-        case SET_CURRENT_USER_DATA: {
+        case SET_USER_DATA: {
             return {
                 ...state,
-                currentUserData: action.currentUserData
+                userData: action.userData
             }
         }
         default:
@@ -44,9 +44,9 @@ export const userReducer = (state: UserState = initialState, action: UserAction)
 }
 
 export const setIsAuthAction = (isAuth: boolean): SetIsAuthAction => ({type: SET_IS_AUTH, isAuth: isAuth});
-export const setCurrentUserDataAction = (userData: User): SetCurrentUserDataAction => ({
-    type: SET_CURRENT_USER_DATA,
-    currentUserData: userData
+export const setUserDataAction = (userData: User): SetUserDataAction => ({
+    type: SET_USER_DATA,
+    userData: userData
 })
 
 export const login = (loginRequest: SignInRequest, remember?: boolean): any => {
@@ -64,7 +64,7 @@ export const login = (loginRequest: SignInRequest, remember?: boolean): any => {
 export const getCurrentUserData = (): any => {
     return (dispatch: Dispatch) => {
         ProfileAPI.getCurrentUser()
-            .then((response: User) => dispatch(setCurrentUserDataAction(response)))
+            .then((response: User) => dispatch(setUserDataAction(response)))
             .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))
     }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {chooseSectionAction, getPosts, setPostPageAction} from "../../redux/PostsReducer";
 import Header from "./Header";
-import {setCurrentUserDataAction, setIsAuthAction} from "../../redux/UserReducer";
+import {setUserDataAction, setIsAuthAction} from "../../redux/UserReducer";
 import {RootState} from "../../redux/ReduxStore";
 import {SetIsAuthAction, User} from "../../models/UserModel";
 import {Dispatch} from "redux";
@@ -11,16 +11,15 @@ import {ChangeSectionAction, SetPostPageAction} from "../../models/PostModel";
 interface Props {
     sectionId: number,
     isAuth: boolean,
-    currentUserData: User,
+    userData: User,
     changeSection: (sectionId: number) => ChangeSectionAction,
     setPostPage: (pageNumber: number) => SetPostPageAction,
     setIsAuth: (isAuth: boolean) => SetIsAuthAction,
-    setCurrentUserData: (userData: User) => any,
-    getPosts: (sectionId: number) => any
+    setCurrentUserData: (userData: User) => void,
+    getPosts: (sectionId: number) => void
 }
 
 /**
- *
  * @param props
  * Оболочка шапки сайта
  */
@@ -36,7 +35,7 @@ let mapStateToProps = (state: RootState) => {
     return {
         sectionId: state.postsData.sectionId,
         isAuth: state.userData.isAuth,
-        currentUserData: state.userData.currentUserData
+        userData: state.userData.userData
     }
 }
 
@@ -44,7 +43,7 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         changeSection: (sectionId: number) => dispatch(chooseSectionAction(sectionId)),
         setPostPage: (pageNumber: number) => dispatch(setPostPageAction(pageNumber)),
-        setCurrentUserData: (userData: User) => dispatch(setCurrentUserDataAction(userData)),
+        setCurrentUserData: (userData: User) => dispatch(setUserDataAction(userData)),
         setIsAuth: (isAuth: boolean) => dispatch(setIsAuthAction(isAuth)),
         getPosts: (sectionId: number) => dispatch(getPosts(sectionId))
     }

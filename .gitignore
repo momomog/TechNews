@@ -5,7 +5,9 @@
 
 .idea
 target
+client/dist
 */reactapp/node_modules*
+*/reactapp/dist*
 hs_err_pid*
 .idea/*
 *.iml
@@ -29,4 +31,3 @@ target/
 *.zip
 *.tar.gz
 *.rar
-src/main/resources/public/

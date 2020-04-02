@@ -11,7 +11,7 @@ interface Props {
     comment: Comment
     firstCommentId?: number
     isAuth: boolean
-    currentUserData: User
+    userData: User
     likeCommentary: (commentId: number) => void
     deleteCommentary: (commentId: number) => void
     updateCommentary: (commentId: number, commentText: string) => void
@@ -19,21 +19,18 @@ interface Props {
 }
 
 /**
- *
  * @param comment
  * @param firstCommentId
  * @param isAuth
- * @param currentUserData
+ * @param userData
  * @param likeCommentary
  * @param deleteCommentary
  * @param updateCommentary
  * @param addCommentary
  * Комментарий
  */
-const CommentItem: React.FC<Props> = ({
-                                          comment, firstCommentId, isAuth, currentUserData,
-                                          likeCommentary, deleteCommentary, updateCommentary, addCommentary
-                                      }) => {
+const CommentItem: React.FC<Props> = ({comment, firstCommentId, isAuth, userData,
+                                          likeCommentary, deleteCommentary, updateCommentary, addCommentary}) => {
     const [isEditMode, setIsEditMode] = useState<boolean>(false)
     const [isAnswerMode, setIsAnswerMode] = useState<boolean>(false)
     const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false)
@@ -167,7 +164,7 @@ const CommentItem: React.FC<Props> = ({
                                             }
 
                                             {
-                                                (isAuth && comment.authorId === (currentUserData && currentUserData.id) || AuthService.isAdmin()) && !comment.isDeleted
+                                                (isAuth && comment.authorId === (userData && userData.id) || AuthService.isAdmin()) && !comment.isDeleted
                                                 && <span className="ml-3">
                                                          <a onClick={onClickEditCommentary}
                                                             className="text-secondary comment-action">
@@ -177,7 +174,7 @@ const CommentItem: React.FC<Props> = ({
                                             }
 
                                             {
-                                                (isAuth && comment.authorId === (currentUserData && currentUserData.id) || AuthService.isAdmin()) && !comment.isDeleted
+                                                (isAuth && comment.authorId === (userData && userData.id) || AuthService.isAdmin()) && !comment.isDeleted
                                                 && <span className="ml-3">
                                                           <Popup trigger={<a
                                                               className="text-secondary comment-action">Удалить</a>}
@@ -250,7 +247,7 @@ const CommentItem: React.FC<Props> = ({
                     return <div className="ml-5" key={commentItem.id}>
                         <CommentItem comment={commentItem}
                                      isAuth={isAuth}
-                                     currentUserData={currentUserData}
+                                     userData={userData}
                                      likeCommentary={likeCommentary}
                                      updateCommentary={updateCommentary}
                                      addCommentary={addCommentary}

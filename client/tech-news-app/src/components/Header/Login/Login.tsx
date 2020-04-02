@@ -9,7 +9,7 @@ import {SetIsAuthAction, User} from "../../../models/UserModel";
 
 interface Props {
     isAuth: boolean
-    currentUserData: User
+    userData: User
     setCurrentUserData: (userData: User) => void
     setIsAuth: (isAuth: boolean) => SetIsAuthAction
     changeSection: (sectionId: number) => ChangeSectionAction
@@ -25,10 +25,10 @@ interface Props {
  * @param setPostPage
  * @param setCurrentUserData
  * @param setIsAuth
- * @param currentUserData
+ * @param userData
  * Верхний компонент шапки. Содержит лого и информацию об авторизованном юзере
  */
-const Login: React.FC<Props> = ({isAuth, setPosts, changeSection, setPostPage, setCurrentUserData, setIsAuth, currentUserData}) => {
+const Login: React.FC<Props> = ({isAuth, setPosts, changeSection, setPostPage, setCurrentUserData, setIsAuth, userData}) => {
     const onLogoClick = () => {
         setPosts(SECTION_ALL_POSTS)
         setPostPage(1)
@@ -48,9 +48,9 @@ const Login: React.FC<Props> = ({isAuth, setPosts, changeSection, setPostPage, s
                         !isAuth && <AuthButton/>
                     }
                     {
-                        isAuth && currentUserData.id &&
+                        isAuth && userData.id &&
                         <AuthUser isAuth={isAuth}
-                                  currentUserData={currentUserData}
+                                  userData={userData}
                                   setCurrentUserData={setCurrentUserData}
                                   setIsAuth={setIsAuth}/>
                     }

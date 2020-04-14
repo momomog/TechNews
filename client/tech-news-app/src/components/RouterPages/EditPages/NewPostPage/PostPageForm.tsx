@@ -1,6 +1,6 @@
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {NavLink} from "react-router-dom";
-import React from "react";
+import React, {useState} from "react";
 import {Input} from "../../../../common/FormControls/Input";
 import {
     maxLength1000,
@@ -23,25 +23,41 @@ interface OwnProps {
 }
 
 /**
- *
+ * Новый пост. Форма
  * @param categories
  * @param handleSubmit
  * @param invalid
  * @param submitSucceeded
- * Новый пост. Форма
  */
 const PostPageForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps> = ({categories, handleSubmit, invalid, submitSucceeded}) => {
+    const [photo, setPhoto] = useState('')
+
+    const onLoadPhoto = (file: File) => {
+        const reader = new FileReader()
+        reader.readAsBinaryString(file)
+
+        reader.onload = () => {
+            if (typeof reader.result === 'string') {
+                setPhoto(`data:image/gif;base64,${btoa(reader.result)}`)
+            }
+        }
+    }
+
     return (
         <form onSubmit={handleSubmit}>
 
             <h5 className="card-header ml-4 mr-4">Фотография</h5>
-            <div className="row p-3 ml-1 mr-4">
-                <div className="col-8">
+            <div className="row p-3 ml-1 mr-4 d-flex align-items-center">
+                <div className="col-md-4">
                     <Field component={FileInput}
                            type="file"
                            validate={requiredFile}
+                           onPreviewRender={onLoadPhoto}
                            accept="image/*"
                            name="photo"/>
+                </div>
+                <div className="col-md-5">
+                    <img src={photo} width={'100px'} height={'100px'}/>
                 </div>
             </div>
 

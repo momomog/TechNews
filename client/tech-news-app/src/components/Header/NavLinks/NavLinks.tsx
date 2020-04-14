@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {NavLink, useHistory} from "react-router-dom";
 import {
-    SECTION_ALL_POSTS,
+    SECTION_ALL_POSTS, SECTION_GAMES,
     SECTION_HARDWARE,
     SECTION_MOBILE,
     SECTION_NOTEBOOKS,
@@ -72,6 +72,12 @@ const NavLinks: React.FC<Props> = ({setPosts, sectionId, setPostPage, changeSect
                             </NavLink>
                         </li>
 
+                        <li onClick={() => setPostsAndChangeSection(SECTION_GAMES)}>
+                            <NavLink to="/posts/games" activeStyle={{color: '#13263e'}} className="navlink">
+                                Игры
+                            </NavLink>
+                        </li>
+
                         <li onClick={() => setPostsAndChangeSection(SECTION_OTHER)}>
                             <NavLink to="/posts/other" activeStyle={{color: '#13263e'}} className="navlink">
                                 Разное
@@ -102,7 +108,6 @@ const NavLinks: React.FC<Props> = ({setPosts, sectionId, setPostPage, changeSect
                     </ul>
                 </div>
             </div>
-
         </div>
     )
 }

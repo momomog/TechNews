@@ -15,12 +15,11 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: [  {
+                use: [{
                     loader: 'awesome-typescript-loader'
-                    }
+                }
                 ]
-            },
-            {
+            }, {
                 test: /\.css$/,
                 include: [
                     path.resolve(__dirname, "not_exist_path")

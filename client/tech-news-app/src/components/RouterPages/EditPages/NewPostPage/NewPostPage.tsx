@@ -3,23 +3,17 @@ import React from 'react';
 import "moment/locale/ru";
 import PostPageReduxForm from "./PostPageForm";
 import {PostRequest} from "../../../../models/RequestsModel";
+import {categories} from "../../../../common/Const";
 
 interface Props {
     createNewPost: (request: PostRequest) => void
 }
 
 /**
- *
- * @param createNewPost
  * Новый пост
+ * @param createNewPost
  */
 const NewPostPage: React.FC<Props> = ({createNewPost}) => {
-    const categories = [
-        {id: 2, title: 'Смартфоны'},
-        {id: 3, title: 'Ноутбуки'},
-        {id: 4, title: 'Компьютерное железо'},
-        {id: 5, title: 'Разное'}
-    ]
 
     const createPost = (formData: PostRequest) => createNewPost(formData)
 

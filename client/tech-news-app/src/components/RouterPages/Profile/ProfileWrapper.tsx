@@ -18,10 +18,9 @@ interface Props {
 }
 
 /**
- *
+ * Профиль. Оболочка
  * @param userData
  * @param getCurrentUserData
- * Профиль. Оболочка
  */
 const ProfileWrapper: React.FC<Props> = ({userData, getCurrentUserData}) => {
     const [user, setUser] = useState<User>(UserInitial)

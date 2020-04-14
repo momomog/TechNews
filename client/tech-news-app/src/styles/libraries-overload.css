@@ -106,12 +106,12 @@
 }
 
 .btn {
-    text-shadow: none!important;
+    text-shadow: none !important;
 }
 
 .page-link:focus, .page-link:active {
     outline: none !important;
-    box-shadow: none!important;
+    box-shadow: none !important;
 }
 
 .page-link:hover {
@@ -120,14 +120,17 @@
 
 .btn:focus, .btn:active {
     outline: none !important;
-    box-shadow: none!important;
+    box-shadow: none !important;
 }
 
 .pagination {
-    margin: 0!important;
+    margin: 0 !important;
 }
-
 
 .ml-6 {
-    margin-left:5rem!important
+    margin-left: 5rem !important
 }
+
+/*.MuiDialog-paperWidthSm {*/
+/*    max-width: 320px !important;*/
+/*}*/

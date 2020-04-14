@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Spinner from "../../core/Spinner";
 import ProfilePictureModal from "./ProfileData/ProfilePictureModal";
+import {NotificationManager} from "react-notifications";
 import {User} from "../../../models/UserModel";
 import ProfileData from "./ProfileData/ProfileData";
 import SocialIcons from "./ProfileData/SocialIcons";
@@ -12,11 +13,10 @@ interface Props {
 }
 
 /**
- *
+ * Профиль
  * @param user
  * @param isCurrentUser
  * @param onLoadPhoto
- * Профиль
  */
 const Profile: React.FC<Props> = ({user, isCurrentUser, onLoadPhoto}) => {
     const [isLoading, setIsLoading] = useState(false)
@@ -24,8 +24,11 @@ const Profile: React.FC<Props> = ({user, isCurrentUser, onLoadPhoto}) => {
     const [picture, setPicture] = useState(undefined)
 
     const changePhoto = (e) => {
-        setPicture(e.target.files[0])
-        setIsOpenModal(true)
+        if (e.target.files[0].type.includes('image')) {
+            setPicture(e.target.files[0])
+            setIsOpenModal(true)
+        } else
+            NotificationManager.error('Загружаемый файл должен быть изображением', 'Ошибка загрузки')
     }
 
     const LoadPhoto = (file: File) => {
@@ -86,8 +89,6 @@ const Profile: React.FC<Props> = ({user, isCurrentUser, onLoadPhoto}) => {
                                     <span>
                                         @{user.username}
                                     </span>
-
-
                                 </div>
 
                             </div>

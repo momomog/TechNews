@@ -8,24 +8,28 @@ import {User} from "../../../../models/UserModel";
 import {RootState} from "../../../../redux/ReduxStore";
 import {RouteComponentProps} from "react-router";
 import {ProfileRequest} from "../../../../models/RequestsModel";
+import {getCurrentUserData} from "../../../../redux/UserReducer";
+import {Dispatch} from "redux";
 
 interface Props {
     isAuth: boolean
     userData: User
+    getCurrentUserData: () => void
 }
 
 /**
- *
+ * Редактор профиля. Оболочка
  * @param isAuth
  * @param userData
+ * @param getCurrentUserData
  * @param history
- * Оболочка Редактор профиля
  */
-const ProfileEditWrapper: React.FC<RouteComponentProps<any> & Props> = ({isAuth, userData, history}) => {
+const ProfileEditWrapper: React.FC<RouteComponentProps<any> & Props> = ({isAuth, userData, getCurrentUserData, history}) => {
 
     const updateUserData = (userDataRequest: ProfileRequest) => {
         ProfileAPI.onUpdateUserData(userDataRequest)
             .then(() => {
+                getCurrentUserData()
                 history.push('/profile')
                 NotificationManager.success('Ваши данные успешно обновлены', 'Успешно')
             })
@@ -47,8 +51,10 @@ let mapStateToProps = (state: RootState) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {}
+let mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+        getCurrentUserData: () => dispatch(getCurrentUserData())
+    }
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfileEditWrapper))

@@ -56,6 +56,8 @@ public class PostController implements PostCategoryConst {
                 return postService.findCategoryPostsByPage(CATEGORY_HARDWARE, page);
             case OTHER:
                 return postService.findCategoryPostsByPage(CATEGORY_OTHER, page);
+            case GAMES:
+                return postService.findCategoryPostsByPage(CATEGORY_GAMES, page);
             case ALL_POSTS:
                 return postService.findCategoryPostsByPage(null, page);
             default:
@@ -98,7 +100,7 @@ public class PostController implements PostCategoryConst {
         post.setAuthorId(currentUser.getId());
         post.setCommentsCount(0L);
         post.setDate(LocalDate.now());
-        post.setRates(new Integer[]{5});
+        post.setRates(new Integer[]{});
         post.setRatedUsers(new Integer[]{});
 
         if (photo.getSize() != 0) {

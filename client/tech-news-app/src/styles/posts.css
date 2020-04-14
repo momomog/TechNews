@@ -34,6 +34,11 @@
     font-size: 1.6rem;
 }
 
+.post-desc h2 {
+    font-weight: bold;
+    font-size: 18px;
+}
+
 .post-desc iframe {
     width: 55%!important;
     min-width: 310px!important;
@@ -42,6 +47,11 @@
 
 .post-desc img {
     margin-bottom: 20px;
+}
+
+.post-desc span, a {
+    font-size: 1.05em !important;
+    background-color: transparent !important;
 }
 
 .post-review-pic {
@@ -55,11 +65,6 @@
 
 .post-author-comment {
     font-size: 1.1em;
-}
-
-.post-desc span, a {
-    font-size: 1.05em !important;
-    background-color: transparent !important;
 }
 
 .comment-author-link {

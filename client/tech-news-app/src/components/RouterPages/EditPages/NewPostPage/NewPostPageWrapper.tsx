@@ -39,6 +39,7 @@ const NewPostPageWrapper: React.FC<RouteComponentProps<any> & Props> = ({changeS
                 setPostPage()
                 getPosts(formData.categoryId)
                 history.push(`/posts/${getSectionName(formData.categoryId)}`)
+                window.scroll(0,0)
             })
             .catch(() => NotificationManager.error('Не удалось создать новый пост', 'Ошибка'))
     }

@@ -29,8 +29,12 @@ export const FileInput = ({input, meta, ...props}) => {
                 <input {...input}
                        {...props}
                        onChange={(e: any) => {
-                           setValue(e.target.files[0])
-                           meta.dispatch(change(meta.form, input.name, e.target.files[0]));
+                           const file = e.target.files[0]
+                           setValue(file)
+                           meta.dispatch(change(meta.form, input.name, file))
+
+                           if (typeof props.onPreviewRender === 'function')
+                               props.onPreviewRender(file)
                        }}
                        value={undefined}
                        style={{

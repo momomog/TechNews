@@ -5,7 +5,7 @@
 
 .idea
 target
-client/dist
+client/tech-news-app/node_modules
 */reactapp/node_modules*
 */reactapp/dist*
 hs_err_pid*

@@ -1,13 +1,13 @@
 import React from "react";
-import {NavLink, RouteComponentProps, withRouter} from "react-router-dom";
-import {compose} from "redux";
+import {NavLink, useRouteMatch} from "react-router-dom";
 import Common from "../../common/Common";
 
-const NotFoundComponent: React.FC<RouteComponentProps<any>> = ({match}) => {
+export const NotFoundComponent: React.FC<{}> = () => {
+    const {params}: any = useRouteMatch()
 
     // const code = match.params.code || 404
     // const message = Common.getErrorMessage(+code) || Common.getErrorMessage(404)
-    const code = match.params.code
+    const code = params.code
     const message = Common.getErrorMessage(+code)
 
     return (
@@ -40,5 +40,3 @@ const NotFoundComponent: React.FC<RouteComponentProps<any>> = ({match}) => {
         </div>
     )
 }
-
-export const NotFoundComponentWrapper = compose(withRouter)(NotFoundComponent)

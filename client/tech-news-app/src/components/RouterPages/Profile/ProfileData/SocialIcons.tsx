@@ -6,18 +6,17 @@ interface Props {
 }
 
 /**
- *
- * @param user
  * Профиль. Социальные иконки
+ * @param user
  */
 const SocialIcons: React.FC<Props> = ({user}) => {
-    const profileData = user.profileData
+    const {profileData} = user
 
     return (
         <div>
             {
                 profileData.facebook
-                    ? <a href={'https://www.facebook.com/' + profileData.facebook}
+                    ? <a href={`https://www.facebook.com/${profileData.facebook}`}
                          target="_blank" rel="noopener noreferrer">
                         <i id="social-fb"
                            className="fa fa-facebook-square fa-2x active-soc mr-2"/>
@@ -27,7 +26,7 @@ const SocialIcons: React.FC<Props> = ({user}) => {
 
             {
                 profileData.instagram
-                    ? <a href={'https://www.instagram.com/' + profileData.instagram}
+                    ? <a href={`https://www.instagram.com/${profileData.instagram}`}
                          target="_blank" rel="noopener noreferrer">
                         <i id="social-gp"
                            className="fa fa-instagram fa-2x active-soc mr-2"/>
@@ -37,7 +36,7 @@ const SocialIcons: React.FC<Props> = ({user}) => {
 
             {
                 profileData.vk
-                    ? <a href={'https://www.vk.com/' + profileData.vk}
+                    ? <a href={`https://www.vk.com/${profileData.vk}`}
                          target="_blank" rel="noopener noreferrer">
                         <i id="social-fb" className="fa fa-vk fa-2x active-soc mr-2"/>
                     </a>
@@ -46,7 +45,7 @@ const SocialIcons: React.FC<Props> = ({user}) => {
 
             {
                 profileData.twitter
-                    ? <a href={'https://www.twitter.com/' + profileData.twitter}
+                    ? <a href={`https://www.twitter.com/${profileData.twitter}`}
                          target="_blank" rel="noopener noreferrer">
                         <i id="social-tw"
                            className="fa fa-twitter-square fa-2x active-soc mr-2м"/>

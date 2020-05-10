@@ -8,7 +8,7 @@ import ProfileEditWrapper from "./EditPages/ProfileEdit/ProfileEditWrapper";
 import PostEditWrapper from "./EditPages/PostEdit/PostEditWrapper";
 import AdminPanelWrapper from "./AdminPanel/AdminPanelWrapper";
 import NewPostPageWrapper from "./EditPages/NewPostPage/NewPostPageWrapper";
-import {NotFoundComponentWrapper} from "../core/NotFoundComponent";
+import {NotFoundComponent} from "../core/NotFoundComponent";
 import {RedirectComponentWrapper} from "../core/RedirectComponent";
 import RegistrationWrapper from "./Autentification/Registration/RegistrationWrapper";
 import ProfileWrapper from "./Profile/ProfileWrapper";
@@ -40,7 +40,7 @@ const SwitchRouter = () => {
 
 
                 <Route exact path='/redirect-to/:pageName' render={() => <RedirectComponentWrapper/>}/>
-                <Route path={['/error/:code', '*']} render={() => <NotFoundComponentWrapper/>}/>
+                <Route path={['/error/:code', '*']} render={() => <NotFoundComponent/>}/>
             </Switch>
         </div>
     )

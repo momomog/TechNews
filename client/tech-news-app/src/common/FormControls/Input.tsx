@@ -4,11 +4,10 @@ import okIcon from '../../static/ok-icon.png'
 import errorIcon from '../../static/error-icon.png'
 
 /**
- *
+ * Контроль формы. Input type="text"
  * @param input
  * @param meta
  * @param props
- * Контроль формы. Input type="text"
  */
 export const Input = ({input, meta, ...props}) => {
     const isError = meta.touched && meta.error

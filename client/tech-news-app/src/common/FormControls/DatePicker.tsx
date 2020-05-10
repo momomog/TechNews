@@ -5,11 +5,10 @@ import DateFnsUtils from "@date-io/date-fns";
 import {change} from "redux-form";
 
 /**
- *
+ * Контроль формы. DatePicker
  * @param input
  * @param meta
  * @param props
- * Контроль формы. DatePicker
  */
 export const DatePicker = ({input, meta, ...props}) => {
     const isError = meta.touched && meta.error,
@@ -27,7 +26,7 @@ export const DatePicker = ({input, meta, ...props}) => {
                     value={initValue}
                     onChange={(value) => {
                         setInitValue(value)
-                        meta.dispatch(change('profile', 'birthDate', value));
+                        meta.dispatch(change('profile', 'birthDate', value))
                     }}
                     KeyboardButtonProps={{
                         'aria-label': 'change date',

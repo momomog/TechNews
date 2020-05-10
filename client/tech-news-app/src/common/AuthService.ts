@@ -8,8 +8,7 @@ interface JwtUserData {
 }
 
 class AuthService {
-
-    isAuth(): boolean {
+    isAuth = (): boolean => {
         let isAuth = false
 
         if (this.getToken()) {
@@ -20,17 +19,11 @@ class AuthService {
             else
                 this.removeToken()
         }
-
         return isAuth
     }
 
-    getUserId(): number | void {
-        if (this.getToken())
-            return this.decodeJWTToken().sub
-    }
-
     // Сет токена авторизации
-    setToken(token: string, remember?: boolean) {
+    setToken = (token: string, remember?: boolean) => {
         if (remember)
             localStorage.setItem('accessToken', token)
         else
@@ -38,36 +31,35 @@ class AuthService {
     }
 
     // Гет токена авторизации
-    getToken(): string | null {
+    getToken = (): string | null => {
         if (sessionStorage.getItem('accessToken'))
             return sessionStorage.getItem('accessToken')
         return localStorage.getItem('accessToken')
     }
 
     // Удаление токена авторизации
-    removeToken() {
+    removeToken = () => {
         sessionStorage.removeItem('accessToken')
         localStorage.removeItem('accessToken')
     }
 
 
     // проверка является ли пользователь администратором
-    isAdmin(): boolean {
-        let user: JwtUserData = this.decodeJWTToken(),
-            isAdmin = false
+    isAdmin = (): boolean => {
+        const user: JwtUserData = this.decodeJWTToken()
+        let isAdmin = false
 
         if (user && user.roles) {
             user.roles.forEach(role => {
                 if (role.authority === 'ROLE_ADMIN')
-                    isAdmin = true;
+                    isAdmin = true
             })
         }
-
         return isAdmin;
     }
 
     // Раскодирование JWT-токена
-    decodeJWTToken() {
+    decodeJWTToken = () => {
         if (this.getToken())
             return jwt_decode(this.getToken())
     }

@@ -3,15 +3,14 @@ import {Editor} from "@tinymce/tinymce-react";
 import {change} from "redux-form";
 
 /**
- *
+ * Контроль формы. PostDescription - tinymce editor
  * @param input
  * @param meta
  * @param props
- * Контроль формы. PostDescription - tinymce editor
  */
 export const PostDescription = ({input, meta, ...props}) => {
-    const isError = meta.visited && meta.error;
-    let [value, setValue] = useState(props.initValue)
+    const isError = meta.visited && meta.error
+    const [value, setValue] = useState(props.initValue)
 
     return (
         <div style={{width: '100%'}}>

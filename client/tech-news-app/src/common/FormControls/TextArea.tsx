@@ -4,14 +4,14 @@ import okIcon from '../../static/ok-icon.png'
 import errorIcon from '../../static/error-icon.png'
 
 /**
- *
+ * Контроль формы. TextArea
  * @param input
  * @param meta
  * @param props
- * Контроль формы. TextArea
  */
 export const TextArea = ({input, meta, ...props}) => {
-    const isError = meta.touched && meta.error;
+    const isError = meta.touched && meta.error
+
     return (
         <div style={{width: '100%'}}>
             {
@@ -23,14 +23,14 @@ export const TextArea = ({input, meta, ...props}) => {
 
             <div>
                 <textarea {...input}
-                       {...props}
-                       style={{
-                           border: isError ? '1px solid red' : meta.touched ? '1px solid green' : '',
-                           backgroundImage: isError ? `url(${errorIcon})` : meta.touched ? `url(${okIcon})` : '',
-                           backgroundPosition: `96% 50%`,
-                           backgroundRepeat: `no-repeat`,
-                           marginBottom: `0px`
-                       }}
+                          {...props}
+                          style={{
+                              border: isError ? '1px solid red' : meta.touched ? '1px solid green' : '',
+                              backgroundImage: isError ? `url(${errorIcon})` : meta.touched ? `url(${okIcon})` : '',
+                              backgroundPosition: `96% 50%`,
+                              backgroundRepeat: `no-repeat`,
+                              marginBottom: `0px`
+                          }}
                 />
             </div>
 

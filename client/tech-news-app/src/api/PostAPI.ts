@@ -1,58 +1,40 @@
 import {getSectionName} from "../common/Const";
-import {API_BASE_URL, request} from "./BaseRequest";
-import AuthService from "../common/AuthService";
+import {request} from "./BaseRequest";
 import {PostRequest} from "../models/RequestsModel";
 import {Post} from "../models/PostModel";
 import {PostsResponse} from "../models/ResponseModel";
 
 class PostAPI {
-    getPosts(sectionId: number, postPage: number): Promise<PostsResponse> {
-        return request({
-            url: `${API_BASE_URL}/posts/${getSectionName(sectionId)}/${postPage}`,
-            method: 'GET'
-        })
-    }
+    getPosts = (sectionId: number, postPage: number): Promise<PostsResponse> => request({
+        url: `posts/${getSectionName(sectionId)}/${postPage}`
+    })
 
-    getRecommendedPosts(categoryId: number, postId: number): Promise<Array<Post>> {
-        return request({
-            url: `${API_BASE_URL}/posts/${categoryId}/recommended?id=${postId}`,
-            method: 'GET'
-        })
-    }
+    getRecommendedPosts = (categoryId: number, postId: number): Promise<Array<Post>> => request({
+        url: `posts/${categoryId}/recommended?id=${postId}`
+    })
 
-    getPostData(sectionId: number, postId: number): Promise<Post> {
-        return request({
-            url: `${API_BASE_URL}/posts/post/${postId}`,
-            method: 'GET'
-        })
-    }
+    getPostData = (sectionId: number, postId: number): Promise<Post> => request({
+        url: `posts/post/${postId}`
+    })
 
-    deletePostById(postId: number): Promise<boolean> {
-        return request({
-            url: `${API_BASE_URL}/posts/delete-post?id=${postId}`,
-            method: 'GET'
-        })
-    }
+    deletePostById = (postId: number): Promise<boolean> => request({
+        url: `posts/delete-post?id=${postId}`
+    })
 
-    ratePost(postId: number, rate: number): Promise<boolean> {
-        return request({
-            url: `${API_BASE_URL}/posts/rate-post?id=${postId}`,
-            method: 'POST',
-            body: JSON.stringify({
-                rate: rate
-            })
+    ratePost = (postId: number, rate: number): Promise<boolean> => request({
+        url: `posts/rate-post?id=${postId}`,
+        method: 'POST',
+        body: JSON.stringify({
+            rate: rate
         })
-    }
+    })
 
-    searchPosts(search_query: string): Promise<Array<Post>> {
-        return request({
-            url: `${API_BASE_URL}/posts/search?search_query=${search_query}`,
-            method: 'GET'
-        })
-    }
+    searchPosts = (search_query: string): Promise<Array<Post>> => request({
+        url: `posts/search?search_query=${search_query}`
+    })
 
-    onCreateNewPost(postDataRequest: PostRequest, photoBody: File): Promise<boolean> {
-        const formData = new FormData();
+    onCreateNewPost = (postDataRequest: PostRequest, photoBody: File): Promise<boolean> => {
+        const formData = new FormData()
 
         formData.append('post', new Blob([JSON.stringify(postDataRequest)], {
             type: "application/json"
@@ -63,21 +45,16 @@ class PostAPI {
         else
             formData.append('photo', new Blob())
 
-        const headers = new Headers({});
-
-        if (AuthService.getToken())
-            headers.append('Authorization', 'Bearer ' + AuthService.getToken())
-
         return request({
-            url: `${API_BASE_URL}/posts/new-post`,
+            url: `posts/new-post`,
             method: 'POST',
-            headers: headers,
+            headers: new Headers({}),
             body: formData
         })
     }
 
-    onUpdatePostData(postId: number, postDataRequest: PostRequest, photoBody: File): Promise<boolean> {
-        const formData = new FormData();
+    onUpdatePostData = (postId: number, postDataRequest: PostRequest, photoBody: File): Promise<boolean> => {
+        const formData = new FormData()
         formData.append('post', new Blob([JSON.stringify(postDataRequest)], {
             type: "application/json"
         }))
@@ -87,15 +64,10 @@ class PostAPI {
         else
             formData.append('photo', new Blob())
 
-        const headers = new Headers({});
-
-        if (AuthService.getToken())
-            headers.append('Authorization', 'Bearer ' + AuthService.getToken())
-
         return request({
-            url: `${API_BASE_URL}/posts/post/update?id=${postId}`,
+            url: `posts/post/update?id=${postId}`,
             method: 'POST',
-            headers: headers,
+            headers: new Headers({}),
             body: formData
         })
     }

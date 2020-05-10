@@ -35,11 +35,11 @@ const PostReviewWrapper: React.FC<RouteComponentProps<any> & Props> = ({postData
 
     const postRating = (postId: number, rate: number) => PostAPI.ratePost(postId, rate)
 
-        return postData.id
-            ? <PostReview post={postData}
-                          user={userData}
-                          postRating={postRating}/>
-            : <Spinner/>
+    return postData.id
+        ? <PostReview post={postData}
+                      user={userData}
+                      postRating={postRating}/>
+        : <Spinner/>
 }
 
 let mapStateToProps = (state: RootState) => {

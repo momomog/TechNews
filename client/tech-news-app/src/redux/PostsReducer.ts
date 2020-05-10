@@ -101,6 +101,8 @@ export const setPostPageAndGetPosts = (sectionId: number, postPage: number): any
 
 export const getPostData = (sectionId: number, postId: number): any => {
     return (dispatch: Dispatch) => {
+        dispatch(setPostData(PostInitial))
+
         PostAPI.getPostData(sectionId, postId)
             .then((data: Post) => dispatch(setPostData(data)))
             .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))

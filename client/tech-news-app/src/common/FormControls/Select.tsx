@@ -4,14 +4,14 @@ import okIcon from '../../static/ok-icon.png'
 import errorIcon from '../../static/error-icon.png'
 
 /**
- *
+ * Контроль формы. Select
  * @param input
  * @param meta
  * @param props
- * Контроль формы. Select
  */
 export const Select = ({input, meta, ...props}) => {
-    const isError = meta.touched && meta.error;
+    const isError = meta.touched && meta.error
+
     return (
         <div style={{width: '100%'}}>
             {
@@ -23,17 +23,17 @@ export const Select = ({input, meta, ...props}) => {
 
             <div>
                 <select {...input}
-                          {...props}
-                          style={{
-                              border: isError ? '1px solid red' : meta.touched ? '1px solid green' : '',
-                              backgroundImage: isError ? `url(${errorIcon})` : meta.touched ? `url(${okIcon})` : '',
-                              backgroundPosition: `96% 50%`,
-                              backgroundRepeat: `no-repeat`,
-                              marginBottom: `0px`
-                          }}>
+                        {...props}
+                        style={{
+                            border: isError ? '1px solid red' : meta.touched ? '1px solid green' : '',
+                            backgroundImage: isError ? `url(${errorIcon})` : meta.touched ? `url(${okIcon})` : '',
+                            backgroundPosition: `96% 50%`,
+                            backgroundRepeat: `no-repeat`,
+                            marginBottom: `0px`
+                        }}>
                     <option value="" disabled defaultValue={"true"}>Выберите тип...</option>
                     {
-                        props.options.map( option => <option value={option.id} key={option.id}>{option.title}</option>)
+                        props.options.map(option => <option value={option.id} key={option.id}>{option.title}</option>)
                     }
                 </select>
             </div>

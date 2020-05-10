@@ -1,29 +1,30 @@
-import AuthService from "../common/AuthService";
+import AuthService from "../common/AuthService"
 
-export const API_BASE_URL = 'http://localhost:8080/api';
+export const API_BASE_URL = 'http://localhost:8080/api'
 
 export const request = (options): Promise<any> => {
-    const headers = new Headers({
-        'Content-Type': 'application/json'
-    })
+    const headers = options.headers
+        ? options.headers
+        : new Headers({
+            'Content-Type': 'application/json'
+        })
 
     if (AuthService.getToken())
         headers.append('Authorization', 'Bearer ' + AuthService.getToken())
 
     const defaults = {
-        headers: headers
+        headers,
+        method: 'GET'
     }
 
-    options = Object.assign({}, defaults, options);
+    options = Object.assign({}, defaults, options)
+    const url = `${API_BASE_URL}/${options.url}`
 
-    return fetch(options.url, options)
+    return fetch(url, options)
         .then(response =>
             response.json()
-                .then(json => {
-                    if (!response.ok) {
-                        return Promise.reject(json)
-                    }
-                    return json
-                })
+                .then(json => response.ok
+                    ? json
+                    : Promise.reject(json))
         )
 }

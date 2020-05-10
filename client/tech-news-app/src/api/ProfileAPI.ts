@@ -1,51 +1,43 @@
-import {API_BASE_URL, request} from "./BaseRequest";
+import {request} from "./BaseRequest";
 import AuthService from "../common/AuthService";
 import {ProfileRequest} from "../models/RequestsModel";
 import {User} from "../models/UserModel";
 
-
 class ProfileAPI {
-    getCurrentUser(): Promise<User> {
-        if (!AuthService.getToken()) {
-            return Promise.reject("No access token set.");
-        }
+    getCurrentUser = (): Promise<User> => {
+        if (!AuthService.getToken())
+            return Promise.reject({
+                    code: 401,
+                    message: 'Требуется наличие авторизации'
+                }
+            )
 
         return request({
-            url: `${API_BASE_URL}/user/me`,
-            method: 'GET',
+            url: `user/me`
         })
     }
 
-    getUserProfile(username: string): Promise<User> {
-        return request({
-            url: `${API_BASE_URL}/users/${username}`,
-            method: 'GET'
-        })
-    }
+    getUserProfile = (username: string): Promise<User> => request({
+        url: `users/${username}`
+    })
 
-    onLoadPhoto(photoBody: File): Promise<boolean> {
-        const formData = new FormData();
-        formData.append('photo', photoBody);
-        const headers = new Headers({});
-
-        if (AuthService.getToken())
-            headers.append('Authorization', 'Bearer ' + AuthService.getToken())
+    onLoadPhoto = (photoBody: File): Promise<boolean> => {
+        const formData = new FormData()
+        formData.append('photo', photoBody)
 
         return request({
-            url: `${API_BASE_URL}/user/me/load-photo`,
-            headers: headers,
+            url: `user/me/load-photo`,
+            headers: new Headers({}),
             method: 'POST',
             body: formData
         })
     }
 
-    onUpdateUserData(userDataRequest: ProfileRequest): Promise<boolean> {
-        return request({
-            url: `${API_BASE_URL}/user/me/update`,
-            method: 'POST',
-            body: JSON.stringify(userDataRequest)
-        })
-    }
+    onUpdateUserData = (userDataRequest: ProfileRequest): Promise<boolean> => request({
+        url: `user/me/update`,
+        method: 'POST',
+        body: JSON.stringify(userDataRequest)
+    })
 }
 
 export default new ProfileAPI()

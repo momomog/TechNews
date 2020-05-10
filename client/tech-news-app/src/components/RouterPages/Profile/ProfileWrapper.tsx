@@ -24,8 +24,8 @@ interface Props {
  */
 const ProfileWrapper: React.FC<Props> = ({userData, getCurrentUserData}) => {
     const [user, setUser] = useState<User>(UserInitial)
-    const location = useLocation()
-    const path = location.pathname.split('/')
+    const {pathname} = useLocation()
+    const path = pathname.split('/')
 
     useEffect(() => {
         if (isCurrentUser()) {

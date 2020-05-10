@@ -1,19 +1,18 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {useState} from "react";
 
 import okIcon from '../../static/ok-icon.png'
 import {change} from "redux-form";
 import errorIcon from "../../static/error-icon.png";
 
 /**
- *
+ * Контроль формы. Input type="file"
  * @param input
  * @param meta
  * @param props
- * Контроль формы. Input type="file"
  */
 export const FileInput = ({input, meta, ...props}) => {
-    const [value, setValue] = useState(undefined);
-    const isError = meta.touched && meta.error && !value;
+    const [value, setValue] = useState(undefined)
+    const isError = meta.touched && meta.error && !value
 
     return (
         <div style={{width: '100%'}}>

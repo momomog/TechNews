@@ -12,10 +12,9 @@ interface Props {
 }
 
 /**
- *
+ * Оболочка для корневого компонента
  * @param setIsAuth
  * @param getUserData
- * Оболочка для корневого компонента
  */
 const AppWrapper: React.FC<Props> = ({setIsAuth, getUserData}) => {
     useEffect(() => {
@@ -23,7 +22,7 @@ const AppWrapper: React.FC<Props> = ({setIsAuth, getUserData}) => {
             setIsAuth(true)
             getUserData()
         }
-    }, [])
+    }, [setIsAuth, getUserData])
 
     return <App/>
 }

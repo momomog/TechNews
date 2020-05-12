@@ -1,11 +1,10 @@
-import React from 'react';
-import AdminPanel from "./AdminPanel";
-import PostAPI from "../../../api/PostAPI";
-import {NotificationManager} from "react-notifications";
+import React from 'react'
+import AdminPanel from './AdminPanel'
+import PostAPI from '../../../api/PostAPI'
+import {NotificationManager} from 'react-notifications'
 
 /**
- *
- * Оболочка Панель администратора
+ * Панель администратора. Оболочка
  */
 const AdminPanelWrapper: React.FC = () => {
 
@@ -17,6 +16,5 @@ const AdminPanelWrapper: React.FC = () => {
 
     return <AdminPanel deletePostById={deletePostById}/>
 }
-
 
 export default AdminPanelWrapper

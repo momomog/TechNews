@@ -18,7 +18,7 @@ interface Props {
 }
 
 /**
- *
+ * Верхний компонент шапки. Содержит лого и информацию об авторизованном юзере
  * @param isAuth
  * @param setPosts
  * @param changeSection
@@ -26,7 +26,6 @@ interface Props {
  * @param setCurrentUserData
  * @param setIsAuth
  * @param userData
- * Верхний компонент шапки. Содержит лого и информацию об авторизованном юзере
  */
 const Login: React.FC<Props> = ({isAuth, setPosts, changeSection, setPostPage, setCurrentUserData, setIsAuth, userData}) => {
     const onLogoClick = () => {
@@ -38,9 +37,9 @@ const Login: React.FC<Props> = ({isAuth, setPosts, changeSection, setPostPage, s
     return (
         <div className="container w-100">
             <div className="row logo-body ml-5">
-                <div className="col-sm-6 d-flex align-content-center mt-2">
+                <div className="col-sm-6 d-flex align-content-end mt-2">
                     <NavLink to="/posts/all">
-                        <img src={logo} alt="" width="60%" height="40%" onClick={onLogoClick}/>
+                        <img src={logo} alt="" width="60%" height="100%" onClick={onLogoClick}/>
                     </NavLink>
                 </div>
                 <div className="col-sm-6 d-flex align-items-end justify-content-end">

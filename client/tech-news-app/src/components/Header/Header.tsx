@@ -6,19 +6,18 @@ import {ChangeSectionAction, SetPostPageAction} from "../../models/PostModel";
 import {SetIsAuthAction, User} from "../../models/UserModel";
 
 interface Props {
-    isAuth: boolean,
-    sectionId: number,
-    userData: User,
-    setPosts: (sectionId: number) => void,
-    changeSection: (sectionId: number) => ChangeSectionAction,
-    setPostPage: (pageNumber: number) => SetPostPageAction,
-    setCurrentUserData: (userData: User) => void,
+    isAuth: boolean
+    userData: User
+    setPosts: (sectionId: number) => void
+    changeSection: (sectionId: number) => ChangeSectionAction
+    setPostPage: (pageNumber: number) => SetPostPageAction
+    setCurrentUserData: (userData: User) => void
     setIsAuth: (isAuth: boolean) => SetIsAuthAction
 }
 
 /**
+ * Шапка сайта
  * @param props
- * шапка сайта
  */
 const Header: React.FC<Props> = props => {
     return (
@@ -35,8 +34,7 @@ const Header: React.FC<Props> = props => {
                    isAuth={props.isAuth}/>
             <NavLinks changeSection={props.changeSection}
                       setPosts={props.setPosts}
-                      setPostPage={props.setPostPage}
-                      sectionId={props.sectionId}/>
+                      setPostPage={props.setPostPage}/>
         </div>
     )
 }

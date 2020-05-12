@@ -3,9 +3,8 @@ import {connect} from "react-redux";
 import PostsList from "./PostsList";
 import {getPosts, setPostIdAction} from "../../../redux/PostsReducer";
 import {getSectionId, SECTION_ALL_POSTS} from "../../../common/Const";
-import {withRouter} from "react-router-dom";
+import {useRouteMatch} from "react-router-dom";
 import {Post, SetPostIdAction} from "../../../models/PostModel";
-import {RouteComponentProps} from "react-router";
 import {Dispatch} from "redux";
 import {RootState} from "../../../redux/ReduxStore";
 import Spinner from "../../core/Spinner";
@@ -19,29 +18,28 @@ interface Props {
 }
 
 /**
- *
+ * Список постов. Оболочка
  * @param postPage
  * @param postList
  * @param setPostId
  * @param getPosts
- * @param match
- * Список постов. Оболочка
  */
-const PostsListWrapper: React.FC<RouteComponentProps<any> & Props> = ({postPage, postList, setPostId, getPosts, match}) => {
+const PostsListWrapper: React.FC<Props> = ({postPage, postList, setPostId, getPosts}) => {
+    const {params}: any = useRouteMatch()
 
     useEffect(() => {
-        const sectionName = match.params.sectionName
+        const sectionName = params.sectionName
 
         if (!sectionName)
             getPosts(SECTION_ALL_POSTS)
-        else if (sectionName && postList.length === 0)
+        else if (sectionName && !postList.length)
             getPosts(getSectionId(sectionName), postPage)
-    }, [])
+    }, [params, getPosts, postPage, postList])
 
 
     const onSetPostId = (postNumber: number) => setPostId(postNumber)
 
-    return postList.length > 0
+    return postList.length
         ? <PostsList posts={postList}
                      setPostId={onSetPostId}/>
         : <Spinner/>
@@ -63,4 +61,4 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostsListWrapper))
+export default connect(mapStateToProps, mapDispatchToProps)(PostsListWrapper)

@@ -11,12 +11,11 @@ interface Props {
 }
 
 /**
- *
+ * Авторизованный пользователь
  * @param isAuth
  * @param userData
  * @param setIsAuth
  * @param setCurrentUserData
- * Авторизованный пользователь
  */
 const AuthUser: React.FC<Props> = ({isAuth, userData, setIsAuth, setCurrentUserData}) => {
 
@@ -36,12 +35,12 @@ const AuthUser: React.FC<Props> = ({isAuth, userData, setIsAuth, setCurrentUserD
                             aria-haspopup="true"
                             aria-expanded="false">
                         {userData.firstName}&nbsp;
-                        <img src={userData.profileData.photoId
+                        <img alt="user_pic" src={userData.profileData.photoId
                         && `https://drive.google.com/uc?export=view&id=${userData.profileData.photoId}`}/>
                     </button>
                     <div className="dropdown-menu">
-                        <NavLink className="dropdown-item" to="/profile">Профиль</NavLink>
-                        <NavLink className="dropdown-item" to="/profile/me/edit">Редактировать</NavLink>
+                        <NavLink className="dropdown-item" to="/profile" exact={true}>Профиль</NavLink>
+                        <NavLink className="dropdown-item" to="/profile/me/edit" exact={true}>Редактировать</NavLink>
                         <div className="dropdown-divider"/>
 
                         {

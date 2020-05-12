@@ -16,7 +16,7 @@ export const NotFoundComponent: React.FC<{}> = () => {
                 <div className="col-md-12">
                     <div className="error-template">
 
-                        <h1>{code}</h1>
+                        <h1 style={{fontSize: '5em', marginBottom: '7px'}}>{code}</h1>
                         <h3 className="mb-4">{message}</h3>
 
                         <div className="error-details">

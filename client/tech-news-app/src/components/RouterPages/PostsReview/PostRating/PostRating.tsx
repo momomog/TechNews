@@ -10,11 +10,10 @@ interface Props {
 }
 
 /**
- *
+ * Оценка поста
  * @param post
  * @param postRating
  * @param user
- * Оценка поста
  */
 const PostRating: React.FC<Props> = ({post, postRating, user}) => {
     const [isRating, setIsRating] = useState(false)
@@ -31,14 +30,14 @@ const PostRating: React.FC<Props> = ({post, postRating, user}) => {
         const ratedUsers = post.ratedUsers;
         let isRated = false;
 
-        if (ratedUsers.length > 0) {
-            ratedUsers.map(rate => {
+        if (ratedUsers.length) {
+            ratedUsers.forEach(rate => {
                 if (rate === user.id)
                     isRated = true;
             })
         }
 
-        return isRated;
+        return isRated
     }
 
     return (

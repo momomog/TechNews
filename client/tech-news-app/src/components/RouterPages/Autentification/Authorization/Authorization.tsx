@@ -9,10 +9,9 @@ interface Props {
 }
 
 /**
- *
+ * Авторизация
  * @param isAuth
  * @param onLogin
- * Авторизация
  */
 const Authorization: React.FC<Props> = ({isAuth, onLogin}) => {
 

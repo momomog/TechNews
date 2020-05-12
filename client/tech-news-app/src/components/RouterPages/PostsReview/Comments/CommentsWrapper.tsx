@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react';
 import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import {useRouteMatch} from "react-router-dom";
 import Comments from "./Comments";
 import {getPostComments} from "../../../../redux/CommentsReducer";
 import CommentAPI from "../../../../api/CommentAPI";
 import {NotificationManager} from "react-notifications";
 import {Comment, CommentRequest} from "../../../../models/CommentModel";
 import {User} from "../../../../models/UserModel";
-import {RouteComponentProps} from "react-router";
 import {RootState} from "../../../../redux/ReduxStore";
 import {Dispatch} from "redux";
 
@@ -21,22 +20,21 @@ interface Props {
 }
 
 /**
- *
+ * Список комментариев. Оболочка
  * @param sectionId
  * @param postComments
  * @param commentsCount
  * @param isAuth
  * @param userData
  * @param getPostComments
- * @param match
- * Список комментариев. Оболочка
  */
-const CommentsWrapper: React.FC<RouteComponentProps<any> & Props> = ({sectionId, postComments, commentsCount, isAuth, userData, getPostComments, match}) => {
-    const postId = match.params.postId;
+const CommentsWrapper: React.FC<Props> = ({sectionId, postComments, commentsCount, isAuth, userData, getPostComments}) => {
+    const {params}: any = useRouteMatch()
+    const postId = params.postId
 
     useEffect(() => {
         getPostComments(sectionId, postId)
-    }, [])
+    }, [postId, getPostComments, sectionId])
 
     const likeCommentary = (commentId: number) => {
         CommentAPI.likeComment(postId, commentId)
@@ -93,4 +91,4 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CommentsWrapper))
+export default connect(mapStateToProps, mapDispatchToProps)(CommentsWrapper)

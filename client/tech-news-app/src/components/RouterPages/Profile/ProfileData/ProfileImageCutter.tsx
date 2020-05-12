@@ -24,7 +24,7 @@ const Cutter = (props) => {
         } catch (e) {
             console.error(e)
         }
-    }, [croppedAreaPixels])
+    }, [croppedAreaPixels, props])
 
     return (
         <div>

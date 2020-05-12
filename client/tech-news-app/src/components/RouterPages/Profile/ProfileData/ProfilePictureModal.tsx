@@ -46,7 +46,8 @@ const ProfilePictureModal: React.FC<Props> = ({isOpenModal, picture, onLoadPhoto
 
     return (
         <Dialog open={isOpen}
-                className="MuiDialog-paperWidth"
+                fullWidth={true}
+                className="MuiDialog-paperFullWidth"
                 onClose={onCloseModal}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description">

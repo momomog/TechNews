@@ -1,13 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {Dispatch} from "redux";
 import PostAdminPanel from "./PostAdminPanel";
 import PostAPI from "../../../../api/PostAPI";
 import {NotificationManager} from "react-notifications";
 import {setPostPageAndGetPosts} from "../../../../redux/PostsReducer";
 import {getSectionName} from "../../../../common/Const";
-import {RouteComponentProps} from "react-router";
 import {RootState} from "../../../../redux/ReduxStore";
 
 interface Props {
@@ -17,14 +16,13 @@ interface Props {
 }
 
 /**
- *
+ * Оболочка Панель управления постом
  * @param setPostPageAndGetPosts
  * @param sectionId
  * @param postId
- * @param history
- * Оболочка Панель управления постом
  */
-const PostAdminPanelWrapper: React.FC<RouteComponentProps<any> & Props> = ({setPostPageAndGetPosts, sectionId, postId, history}) => {
+const PostAdminPanelWrapper: React.FC<Props> = ({setPostPageAndGetPosts, sectionId, postId}) => {
+    const history = useHistory()
 
     const deletePostById = () => {
         PostAPI.deletePostById(postId)
@@ -56,4 +54,4 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostAdminPanelWrapper))
+export default connect(mapStateToProps, mapDispatchToProps)(PostAdminPanelWrapper)

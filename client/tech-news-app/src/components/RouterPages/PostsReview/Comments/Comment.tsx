@@ -19,6 +19,7 @@ interface Props {
 }
 
 /**
+ * Комментарий
  * @param comment
  * @param firstCommentId
  * @param isAuth
@@ -27,7 +28,6 @@ interface Props {
  * @param deleteCommentary
  * @param updateCommentary
  * @param addCommentary
- * Комментарий
  */
 const CommentItem: React.FC<Props> = ({comment, firstCommentId, isAuth, userData,
                                           likeCommentary, deleteCommentary, updateCommentary, addCommentary}) => {
@@ -89,15 +89,15 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, isAuth, userData
             }
 
             <div className="media card-body mt-0">
-                <NavLink to={'/profile/' + comment.authorName}>
-                    <img className="d-flex mr-3 rounded-circle comment-author-photo"
+                <NavLink to={`/profile/${comment.authorName}`}>
+                    <img className="d-flex mr-3 rounded-circle comment-author-photo" alt="user_pic"
                          src={comment.authorPhotoId
                          && `https://drive.google.com/uc?export=view&id=${comment.authorPhotoId}`}/>
                 </NavLink>
                 <div className="media-body">
                     <div className="row">
                         <span className="col-lg-8 post-author-comment font-italic">
-                            <NavLink to={'/profile/' + comment.authorName} className="comment-author-link">
+                            <NavLink to={`/profile/${comment.authorName}`} className="comment-author-link">
                                 @{comment.authorName}
                             </NavLink>
                         </span>
@@ -126,13 +126,13 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, isAuth, userData
                                               }}
                                     />
                                 <span>
-                                        <a className="text-secondary comment-action" onClick={onUpdateCommentary}>
+                                        <span className="text-secondary comment-action" onClick={onUpdateCommentary}>
                                             Сохранить
-                                        </a>
-                                        <a className="text-secondary comment-action ml-4"
+                                        </span>
+                                        <span className="text-secondary comment-action ml-4"
                                            onClick={() => setIsEditMode(false)}>
                                             Отменить
-                                        </a>
+                                        </span>
                                     </span>
                             </div>
                             : <div>
@@ -156,28 +156,28 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, isAuth, userData
 
                                             {
                                                 isAuth && <span>
-                                                         <a onClick={onClickAnswerCommentary}
+                                                         <span onClick={onClickAnswerCommentary}
                                                             className="text-secondary comment-action ml-4">
                                                              Ответить
-                                                         </a>
+                                                         </span>
                                                       </span>
                                             }
 
                                             {
                                                 (isAuth && comment.authorId === (userData && userData.id) || AuthService.isAdmin()) && !comment.isDeleted
                                                 && <span className="ml-3">
-                                                         <a onClick={onClickEditCommentary}
+                                                         <span onClick={onClickEditCommentary}
                                                             className="text-secondary comment-action">
                                                              Редактировать
-                                                         </a>
+                                                         </span>
                                                    </span>
                                             }
 
                                             {
                                                 (isAuth && comment.authorId === (userData && userData.id) || AuthService.isAdmin()) && !comment.isDeleted
                                                 && <span className="ml-3">
-                                                          <Popup trigger={<a
-                                                              className="text-secondary comment-action">Удалить</a>}
+                                                          <Popup trigger={<span
+                                                              className="text-secondary comment-action">Удалить</span>}
                                                                  position="top center"
                                                                  open={isOpenPopup}
                                                                  onOpen={() => setIsOpenPopup(true)}
@@ -192,12 +192,12 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, isAuth, userData
                                                                  }}>
                                                           <div>
                                                               <div className="text-center text-dark">Вы уверены?</div>
-                                                              <a onClick={onDeleteCommentary}
-                                                                 className="text-secondary comment-action ml-5">Удалить</a>
-                                                              <a onClick={() => setIsOpenPopup(false)}
+                                                              <span onClick={onDeleteCommentary}
+                                                                 className="text-secondary comment-action ml-5">Удалить</span>
+                                                              <span onClick={() => setIsOpenPopup(false)}
                                                                  className="text-secondary comment-action ml-4">
                                                                   Отменить
-                                                              </a>
+                                                              </span>
                                                           </div>
                                                           </Popup>
                                                       </span>
@@ -220,14 +220,14 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, isAuth, userData
                                                        />
                                                     <div className="mt-2">
                                                           <span>
-                                                              <a onClick={onAddCommentary}
-                                                                 className="text-secondary comment-action ml-4 answer-area">Отправить</a>
+                                                              <span onClick={onAddCommentary}
+                                                                 className="text-secondary comment-action ml-4 answer-area">Отправить</span>
                                                           </span>
                                                         <span>
-                                                              <a onClick={() => setIsAnswerMode(false)}
+                                                              <span onClick={() => setIsAnswerMode(false)}
                                                                  className="text-secondary comment-action ml-4">
                                                                   Отменить
-                                                              </a>
+                                                              </span>
                                                           </span>
                                                     </div>
                                                 </div>

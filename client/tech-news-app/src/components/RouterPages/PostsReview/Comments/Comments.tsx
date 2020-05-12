@@ -35,7 +35,7 @@ const Comments: React.FC<Props> = (props) => {
             {
                 props.isAuth
                     ? <div className="my-4">
-                        <h5 className="card-header">Оставьте свой комментарий:</h5>
+                        <h4 className="card-header">Оставьте свой комментарий:</h4>
                         <div className="comment-input">
                             <div className="form-group">
                                     <textarea className="form-control text-area" rows={3}

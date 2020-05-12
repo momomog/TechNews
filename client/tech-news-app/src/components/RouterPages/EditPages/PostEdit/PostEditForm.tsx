@@ -24,14 +24,13 @@ interface OwnProps {
 }
 
 /**
- *
+ * Редактор поста. Форма
  * @param categories
  * @param post
  * @param initialize
  * @param submitSucceeded
  * @param invalid
  * @param handleSubmit
- * Редактор поста. Форма
  */
 const PostEditForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps> = ({categories, post, initialize, submitSucceeded, invalid, handleSubmit}) => {
 
@@ -42,7 +41,7 @@ const PostEditForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps
             fullDescription: post.fullDescription,
             categoryId: post.categoryId
         })
-    }, [])
+    }, [post, initialize])
 
 
     return (

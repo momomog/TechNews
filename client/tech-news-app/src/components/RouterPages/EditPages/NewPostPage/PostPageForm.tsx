@@ -57,7 +57,7 @@ const PostPageForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps
                            name="photo"/>
                 </div>
                 <div className="col-md-5">
-                    <img src={photo} width={'100px'} height={'100px'}/>
+                    <img src={photo} alt="post_pic" width={'100px'} height={'100px'}/>
                 </div>
             </div>
 

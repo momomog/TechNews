@@ -36,9 +36,9 @@ const ProfileWrapper: React.FC<Props> = ({userData, getCurrentUserData}) => {
                 .then((response: User) => setUser(response))
                 .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))
         }
-    }, [path])
+    }, [path, getCurrentUserData, userData.id, user.id ])
 
-    const isCurrentUser = (): boolean => {
+    function isCurrentUser (): boolean {
         return ((path[1] === 'profile' && path.length === 2)
             || (path[1] === 'profile' && userData && userData.username === path[2]))
     }

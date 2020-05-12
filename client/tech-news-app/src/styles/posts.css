@@ -65,6 +65,7 @@
 
 .post-author-comment {
     font-size: 1.1em;
+    padding-left: 0!important;
 }
 
 .comment-author-link {

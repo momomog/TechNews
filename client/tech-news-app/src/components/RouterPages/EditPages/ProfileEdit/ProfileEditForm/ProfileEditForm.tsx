@@ -13,13 +13,12 @@ interface OwnProps {
 }
 
 /**
- *
+ * Редактор профиля. Форма
  * @param user
  * @param initialize
  * @param handleSubmit
  * @param invalid
  * @param submitSucceeded
- * Редактор профиля. Форма
  */
 const ProfileEditForm: React.FC<InjectedFormProps<ProfileRequest, OwnProps> & OwnProps> = ({user, initialize, handleSubmit, invalid, submitSucceeded}) => {
 
@@ -35,7 +34,7 @@ const ProfileEditForm: React.FC<InjectedFormProps<ProfileRequest, OwnProps> & Ow
             firstName: user.firstName,
             birthDate: Common.intArrayToDate(user.profileData.birthDate)
         })
-    }, [])
+    }, [user, initialize])
 
     return (
         <form onSubmit={handleSubmit}>

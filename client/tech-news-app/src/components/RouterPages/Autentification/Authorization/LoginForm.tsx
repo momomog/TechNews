@@ -1,15 +1,14 @@
-import {NavLink} from "react-router-dom";
-import React from "react";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Input} from "../../../../common/FormControls/Input";
-import {required} from "../../../../common/Validators";
-import {SignInRequest} from "../../../../models/RequestsModel";
+import {NavLink} from 'react-router-dom';
+import React from 'react';
+import {Field, InjectedFormProps, reduxForm} from 'redux-form';
+import {Input} from '../../../../common/FormControls/Input';
+import {required} from '../../../../common/Validators';
+import {SignInRequest} from '../../../../models/RequestsModel';
 
 /**
- *
+ * Форма авторизации
  * @param handleSubmit
  * @param invalid
- * Форма авторизации
  */
 const LoginForm: React.FC<InjectedFormProps<SignInRequest>> = ({handleSubmit, invalid}) => {
 
@@ -19,27 +18,32 @@ const LoginForm: React.FC<InjectedFormProps<SignInRequest>> = ({handleSubmit, in
 
             <div className="input-group mb-3">
                 <span className="input-group-addon">
-                     <i className="glyphicon glyphicon-user"/>
+                     <i className="glyphicon glyphicon-user" style={{marginLeft: '-5px'}}/>
                 </span>
+                <span style={{width: '93%'}}>
                 <Field component={Input}
                        validate={required}
                        className="input-group-form"
                        showlabel={'true'}
                        placeholder="Имя пользователя или почтовый адрес"
                        name="usernameOrEmail"/>
+                </span>
             </div>
 
             <div className="input-group mb-2">
                 <span className="input-group-addon">
-                     <i className="glyphicon glyphicon-lock"/>
+                     <i className="glyphicon glyphicon-lock" style={{marginLeft: '-5px'}}/>
                 </span>
-                <Field component={Input}
-                       validate={required}
-                       type="password"
-                       className="input-group-form"
-                       name="password"
-                       showlabel={'true'}
-                       placeholder="пароль"/>
+                <span style={{width: '93%'}}>
+                     <Field component={Input}
+                            validate={required}
+                            type="password"
+                            className="input-group-form"
+                            name="password"
+                            showlabel={'true'}
+                            placeholder="пароль"/>
+                </span>
+
             </div>
 
             <div className="input-group">

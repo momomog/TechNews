@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import PostReview from "./PostReview";
-import {withRouter} from "react-router-dom";
+import {useRouteMatch} from "react-router-dom";
 import {Dispatch} from "redux";
 import {getPostData} from "../../../redux/PostsReducer";
 import PostAPI from "../../../api/PostAPI";
 import {Post} from "../../../models/PostModel";
 import {User} from "../../../models/UserModel";
-import {RouteComponentProps} from "react-router";
 import {RootState} from "../../../redux/ReduxStore";
 import Spinner from "../../core/Spinner";
 
@@ -19,19 +18,18 @@ interface Props {
 }
 
 /**
- *
+ * Просмотр содержимого поста. Оболочка
  * @param postData
  * @param sectionId
  * @param userData
  * @param getPostData
- * @param match
- * Просмотр содержимого поста. Оболочка
  */
-const PostReviewWrapper: React.FC<RouteComponentProps<any> & Props> = ({postData, sectionId, userData, getPostData, match}) => {
+const PostReviewWrapper: React.FC<Props> = ({postData, sectionId, userData, getPostData}) => {
+    const {params}: any = useRouteMatch()
 
     useEffect(() => {
-        getPostData(sectionId, match.params.postId)
-    }, [])
+        getPostData(sectionId, params.postId)
+    }, [params, getPostData, sectionId])
 
     const postRating = (postId: number, rate: number) => PostAPI.ratePost(postId, rate)
 
@@ -56,4 +54,4 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostReviewWrapper))
+export default connect(mapStateToProps, mapDispatchToProps)(PostReviewWrapper)

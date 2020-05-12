@@ -10,10 +10,9 @@ interface Props {
 }
 
 /**
- *
+ * Редактор поста
  * @param post
  * @param updatePostData
- * Редактор поста
  */
 const PostEdit: React.FC<Props> = ({post, updatePostData}) => {
 

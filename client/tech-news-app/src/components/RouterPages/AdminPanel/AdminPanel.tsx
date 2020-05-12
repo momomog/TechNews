@@ -1,20 +1,19 @@
-import React, {useState} from "react";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogActions from "@material-ui/core/DialogActions";
-import Button from "@material-ui/core/Button";
-import {NavLink} from "react-router-dom";
+import React, {useState} from 'react';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogActions from '@material-ui/core/DialogActions';
+import Button from '@material-ui/core/Button';
+import {NavLink} from 'react-router-dom';
 
 interface Props {
     deletePostById: (postId: number) => void
 }
 
 /**
- *
- * @param deletePostById
  * Панель администратора
+ * @param deletePostById
  */
 const AdminPanel: React.FC<Props> = ({deletePostById}) => {
     const [delPostId, setDelPostId] = useState<number>(0)
@@ -83,7 +82,7 @@ const AdminPanel: React.FC<Props> = ({deletePostById}) => {
                                         aria-describedby="alert-dialog-description">
 
                                     <DialogTitle id="alert-dialog-title">
-                                        Удалить пост {delPostId}
+                                        Удалить пост №{delPostId}
                                     </DialogTitle>
 
                                     <DialogContent>

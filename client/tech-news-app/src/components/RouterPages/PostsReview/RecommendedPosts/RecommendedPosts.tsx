@@ -3,16 +3,12 @@ import Spinner from "../../../core/Spinner";
 import {NavLink} from "react-router-dom";
 import {Post} from "../../../../models/PostModel";
 
-interface RecPost {
-    post: Post
-}
 
 /**
- *
- * @param post
  * Рекомендуемый пост
+ * @param post
  */
-const PostItem: React.FC<RecPost> = ({post}) => {
+const PostItem: React.FC<{ post: Post }> = ({post}) => {
 
     const linkPropInit = () => {
         return {pathname: `/redirect-to/post`, redirectUrl: `/posts/post/${post && post.id}`}
@@ -36,29 +32,23 @@ const PostItem: React.FC<RecPost> = ({post}) => {
 }
 
 
-interface RecPosts {
-    posts: Array<Post>
-}
-
 /**
- *
- * @param posts
  * Рекомендуемые посты
+ * @param posts
  */
-const RecommendedPosts: React.FC<RecPosts> = ({posts}) => {
+const RecommendedPosts: React.FC<{ posts: Array<Post> }> = ({posts}) => {
     return (
         <div>
             <hr className="mt-3"/>
             <h2 className="mb-5">Вам может быть интересно</h2>
 
             {
-                posts
-                    ? <div>
-                        <div className="row">
-                            {
-                                posts.map(post => <PostItem post={post}/>)
-                            }
-                        </div>
+                posts.length
+                    ? <div className="row">
+                        {
+                            posts.map(post => <PostItem key={post.id}
+                                                        post={post}/>)
+                        }
                     </div>
                     : <Spinner/>
             }

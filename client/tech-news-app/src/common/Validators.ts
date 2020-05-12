@@ -13,7 +13,7 @@ export const required = (value: string): string | undefined =>
 
 // Необходимость загрузки файла
 export const requiredFile = (value: File) =>
-    value && value.name || value && value[0] && value[0].name ? undefined : 'Необходимо загрузить изображение'
+    (value && value.name) || (value && value[0] && value[0].name) ? undefined : 'Необходимо загрузить изображение'
 
 // Проверка на одинаковые пароли
 export const isSamePasswords = (value: string, values: any): string | undefined =>

@@ -12,10 +12,9 @@ interface Props {
 }
 
 /**
- *
+ * Авторизация. Оболочка
  * @param isAuth
  * @param login
- * Оболочка Авторизация
  */
 const AuthorizationWrapper: React.FC<Props> = ({isAuth, login}) => {
 

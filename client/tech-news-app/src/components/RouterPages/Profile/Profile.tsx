@@ -43,7 +43,7 @@ const Profile: React.FC<Props> = ({user, isCurrentUser, onLoadPhoto}) => {
         <div className="row">
             <div className="col-md-11 center-block">
                 <div className="panel panel-default">
-                    <div className="panel-heading"><h4>Профиль пользователя</h4></div>
+                    <div className="panel-heading"><h3>Профиль пользователя</h3></div>
                     <div className="panel-body">
                         <div className="box box-info">
                             <div className="row">
@@ -83,9 +83,9 @@ const Profile: React.FC<Props> = ({user, isCurrentUser, onLoadPhoto}) => {
                                 </div>
 
                                 <div className="col-sm-5">
-                                    <h2 style={{color: "#00b1b1"}}>
+                                    <h1 style={{color: "#00b1b1"}}>
                                         {`${user.firstName} ${user.lastName}`}
-                                    </h2>
+                                    </h1>
                                     <span>
                                         @{user.username}
                                     </span>

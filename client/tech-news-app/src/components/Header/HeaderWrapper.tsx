@@ -2,14 +2,13 @@ import React from 'react';
 import {connect} from "react-redux";
 import {chooseSectionAction, getPosts, setPostPageAction} from "../../redux/PostsReducer";
 import Header from "./Header";
-import {setUserDataAction, setIsAuthAction} from "../../redux/UserReducer";
+import {setIsAuthAction, setUserDataAction} from "../../redux/UserReducer";
 import {RootState} from "../../redux/ReduxStore";
 import {SetIsAuthAction, User} from "../../models/UserModel";
 import {Dispatch} from "redux";
 import {ChangeSectionAction, SetPostPageAction} from "../../models/PostModel";
 
 interface Props {
-    sectionId: number,
     isAuth: boolean,
     userData: User,
     changeSection: (sectionId: number) => ChangeSectionAction,
@@ -20,8 +19,8 @@ interface Props {
 }
 
 /**
+ * Шапка сайта.Оболочка
  * @param props
- * Оболочка шапки сайта
  */
 const HeaderWrapper: React.FC<Props> = (props) => {
 
@@ -33,7 +32,6 @@ const HeaderWrapper: React.FC<Props> = (props) => {
 
 let mapStateToProps = (state: RootState) => {
     return {
-        sectionId: state.postsData.sectionId,
         isAuth: state.userData.isAuth,
         userData: state.userData.userData
     }

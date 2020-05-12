@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react';
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {withRouter} from "react-router-dom";
+import {useHistory, useRouteMatch} from "react-router-dom";
 import PostEdit from "./PostEdit";
 import {getPostData} from "../../../../redux/PostsReducer";
 import {NotificationManager} from "react-notifications";
 import PostAPI from "../../../../api/PostAPI";
 import {Post} from "../../../../models/PostModel";
-import {RouteComponentProps} from "react-router";
 import {PostRequest} from "../../../../models/RequestsModel";
 import {RootState} from "../../../../redux/ReduxStore";
 
@@ -18,19 +17,18 @@ interface Props {
 }
 
 /**
- *
+ * Оболочка Редактор поста
  * @param sectionId
  * @param postData
  * @param getPostData
- * @param match
- * @param history
- * Оболочка Редактор поста
  */
-const PostEditWrapper: React.FC<RouteComponentProps<any> & Props> = ({sectionId, postData, getPostData, match, history}) => {
+const PostEditWrapper: React.FC<Props> = ({sectionId, postData, getPostData}) => {
+    const {params}: any = useRouteMatch()
+    const history = useHistory()
 
     useEffect(() => {
-        getPostData(sectionId, match.params.postId)
-    }, [])
+        getPostData(sectionId, params.postId)
+    }, [params, getPostData, sectionId])
 
     const updatePostData = (formData: PostRequest) => {
         const request = {
@@ -41,7 +39,7 @@ const PostEditWrapper: React.FC<RouteComponentProps<any> & Props> = ({sectionId,
         }
         const photo = formData.photo && formData.photo[0]
 
-        PostAPI.onUpdatePostData(match.params.postId, request, photo)
+        PostAPI.onUpdatePostData(params.postId, request, photo)
             .then(() => {
                 NotificationManager.success('Данные поста успешно обновлены', 'Успешно')
                 history.goBack()
@@ -68,4 +66,4 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostEditWrapper))
+export default connect(mapStateToProps, mapDispatchToProps)(PostEditWrapper)

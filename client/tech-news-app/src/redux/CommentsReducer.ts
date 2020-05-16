@@ -1,6 +1,7 @@
 import CommentAPI from "../api/CommentAPI";
 import {Comment, CommentAction, CommentState} from '../models/CommentModel'
 import {Dispatch} from "redux";
+import {getSectionName} from '../common/Const'
 
 
 const SET_POST_COMMENTS = 'SET-POST-COMMENTS';
@@ -32,7 +33,7 @@ export const setPostCommentsAction = (comments: Array<Comment>, commentsCount: n
 
 export const getPostComments = (sectionId: number, postId: number): any => {
     return (dispatch: Dispatch) => {
-        CommentAPI.getPostComments(sectionId, postId)
+        CommentAPI.getPostComments(getSectionName(sectionId), postId)
             .then(data => dispatch(setPostCommentsAction(data.comments, data.commentsCount)))
     }
 }

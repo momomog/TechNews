@@ -1,11 +1,10 @@
-import {getSectionName} from "../common/Const";
 import {request} from "./BaseRequest";
 import {NewCommentRequest} from "../models/RequestsModel";
 import {PostCommentsResponse} from "../models/ResponseModel";
 
 class CommentAPI {
-    getPostComments = (sectionId: number, postId: number): Promise<PostCommentsResponse> => request({
-        url: `posts/${getSectionName(sectionId)}/post/${postId}/comments`
+    getPostComments = (sectionName: string, postId: number): Promise<PostCommentsResponse> => request({
+        url: `posts/${sectionName}/post/${postId}/comments`
     })
 
     sendNewPostComment = (commentRequest: NewCommentRequest): Promise<boolean> => request({

@@ -20,11 +20,10 @@ interface Props {
 }
 
 /**
- *
+ * Просмотр содержимого поста
  * @param post
  * @param postRating
  * @param user
- * Просмотр содержимого поста
  */
 const PostReview: React.FC<Props> = ({post, postRating, user}) => {
 

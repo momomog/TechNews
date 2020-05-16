@@ -35,8 +35,7 @@ class Common {
     }
 
     // Окончание количества комментариев в зависимости от значения
-    getCommentaryCountText = (count: number): string | undefined => {
-        if (count) {
+    getCommentaryCountText = (count: number): string => {
             const num = count.toString()
 
             if (num.endsWith('1') && count !== 11)
@@ -45,12 +44,10 @@ class Common {
                 return 'комментария'
             else
                 return 'комментариев'
-        }
     }
 
     // Количество записей поиска в зависимости от значения
-    getFindPostsResultText = (count: number): string | undefined => {
-        if (count) {
+    getFindPostsResultText = (count: number): string => {
             const num = count.toString()
 
             if (num.endsWith('1') && count !== 11)
@@ -59,12 +56,10 @@ class Common {
                 return `найдены ${count} записи`
             else
                 return `найдено ${count} записей`
-        }
     }
 
     // Окончание количества символов в зависимости от значения
-    getSymbolsCountText = (count: number): string | undefined => {
-        if (count) {
+    getSymbolsCountText = (count: number): string => {
             const num = count.toString()
 
             if (num.endsWith('1') && count !== 11)
@@ -73,7 +68,6 @@ class Common {
                 return 'символа'
             else
                 return 'символов'
-        }
     }
 
     // Текст ошибки в зависимости от ответа сервера

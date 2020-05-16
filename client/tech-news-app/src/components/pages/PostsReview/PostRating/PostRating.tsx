@@ -42,7 +42,7 @@ const PostRating: React.FC<Props> = ({post, postRating, user}) => {
 
     return (
         <div className="row disabled">
-            <div className="ml-4">
+            <div>
                 {
                     isRating
                         ? <span className="post-author-comment">Спасибо! Ваша оценка данного поста: {
@@ -55,29 +55,31 @@ const PostRating: React.FC<Props> = ({post, postRating, user}) => {
                         : isRatedByUser()
                         ? <div className="text-secondary">Вы уже оценили данный пост</div>
                         : AuthService.isAuth()
-                            ? <div className="rating">
-                                <span className="mr-2 post-author-comment"> Оцените пост!</span>
-                                <input type="radio" id="star5" name="rating" value="5"
-                                       onClick={onRating}/>
-                                <label htmlFor="star5" title="Отлично">5 stars</label>
+                            ? <>
+                                <span className="mr-2 mt-5 post-star-text">Оцените пост!</span>
+                                <span className="rating">
+                                    <input type="radio" id="star5" name="rating" value="5"
+                                           onClick={onRating}/>
+                                    <label htmlFor="star5" title="Отлично">5 stars</label>
 
-                                <input type="radio" id="star4" name="rating" value="4"
-                                       onClick={onRating}/>
-                                <label htmlFor="star4" title="Хорошо">4 stars</label>
+                                    <input type="radio" id="star4" name="rating" value="4"
+                                           onClick={onRating}/>
+                                    <label htmlFor="star4" title="Хорошо">4 stars</label>
 
-                                <input type="radio" id="star3" name="rating" value="3"
-                                       onClick={onRating}/>
-                                <label htmlFor="star3" title="Средне">3 stars</label>
+                                    <input type="radio" id="star3" name="rating" value="3"
+                                           onClick={onRating}/>
+                                    <label htmlFor="star3" title="Средне">3 stars</label>
 
-                                <input type="radio" id="star2" name="rating" value="2"
-                                       onClick={onRating}/>
-                                <label htmlFor="star2" title="Плохо">2 stars</label>
+                                    <input type="radio" id="star2" name="rating" value="2"
+                                           onClick={onRating}/>
+                                    <label htmlFor="star2" title="Плохо">2 stars</label>
 
-                                <input type="radio" id="star1" name="rating" value="1"
-                                       onClick={onRating}/>
-                                <label htmlFor="star1" title="Ужасно">1 star</label>
-                            </div>
-                            : <div/>
+                                    <input type="radio" id="star1" name="rating" value="1"
+                                           onClick={onRating}/>
+                                    <label htmlFor="star1" title="Ужасно">1 star</label>
+                                </span>
+                            </>
+                            : null
                 }
             </div>
         </div>

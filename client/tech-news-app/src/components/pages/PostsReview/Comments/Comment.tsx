@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import React, {useState} from 'react'
 
-import Common from "../../../../common/Common";
-import {NavLink} from "react-router-dom";
-import Popup from "reactjs-popup";
-import AuthService from "../../../../common/AuthService";
-import {User} from "../../../../models/UserModel";
-import {Comment, CommentRequest} from "../../../../models/CommentModel";
+import Common from '../../../../common/Common'
+import {NavLink} from 'react-router-dom'
+import Popup from 'reactjs-popup'
+import AuthService from '../../../../common/AuthService'
+import {User} from '../../../../models/UserModel'
+import {Comment, CommentRequest} from '../../../../models/CommentModel'
 
 interface Props {
     comment: Comment
@@ -29,8 +29,10 @@ interface Props {
  * @param updateCommentary
  * @param addCommentary
  */
-const CommentItem: React.FC<Props> = ({comment, firstCommentId, isAuth, userData,
-                                          likeCommentary, deleteCommentary, updateCommentary, addCommentary}) => {
+const CommentItem: React.FC<Props> = ({
+                                          comment, firstCommentId, isAuth, userData,
+                                          likeCommentary, deleteCommentary, updateCommentary, addCommentary
+                                      }) => {
     const [isEditMode, setIsEditMode] = useState<boolean>(false)
     const [isAnswerMode, setIsAnswerMode] = useState<boolean>(false)
     const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false)
@@ -112,16 +114,10 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, isAuth, userData
                                     <textarea className="form-control text-area mt-2" rows={3}
                                               onChange={e => setCommentEditText(e.target.value)}
                                               value={commentEditText}
-                                              onKeyUp={(e) => {
-                                                  // @ts-ignore
-                                                  e.target.style.height = "1px";
-                                                  // @ts-ignore
-                                                  e.target.style.height = (20 + e.target.scrollHeight) + "px";
-                                              }}
                                               onKeyPress={event => {
                                                   if (event.key === 'Enter') {
-                                                      event.preventDefault();
-                                                      onUpdateCommentary();
+                                                      event.preventDefault()
+                                                      onUpdateCommentary()
                                                   }
                                               }}
                                     />
@@ -130,7 +126,7 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, isAuth, userData
                                             Сохранить
                                         </span>
                                         <span className="text-secondary comment-action ml-4"
-                                           onClick={() => setIsEditMode(false)}>
+                                              onClick={() => setIsEditMode(false)}>
                                             Отменить
                                         </span>
                                     </span>
@@ -157,7 +153,7 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, isAuth, userData
                                             {
                                                 isAuth && <span>
                                                          <span onClick={onClickAnswerCommentary}
-                                                            className="text-secondary comment-action ml-4">
+                                                               className="text-secondary comment-action ml-4">
                                                              Ответить
                                                          </span>
                                                       </span>
@@ -167,7 +163,7 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, isAuth, userData
                                                 (isAuth && comment.authorId === (userData && userData.id) || AuthService.isAdmin()) && !comment.isDeleted
                                                 && <span className="ml-3">
                                                          <span onClick={onClickEditCommentary}
-                                                            className="text-secondary comment-action">
+                                                               className="text-secondary comment-action">
                                                              Редактировать
                                                          </span>
                                                    </span>
@@ -182,20 +178,20 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, isAuth, userData
                                                                  open={isOpenPopup}
                                                                  onOpen={() => setIsOpenPopup(true)}
                                                                  arrowStyle={{
-                                                                     backgroundColor: "transparent",
-                                                                     border: "none"
+                                                                     backgroundColor: 'transparent',
+                                                                     border: 'none'
                                                                  }}
                                                                  contentStyle={{
-                                                                     backgroundColor: "#f4f4f4",
-                                                                     border: "none",
-                                                                     borderRadius: "5px"
+                                                                     backgroundColor: '#f4f4f4',
+                                                                     border: 'none',
+                                                                     borderRadius: '5px'
                                                                  }}>
                                                           <div>
                                                               <div className="text-center text-dark">Вы уверены?</div>
                                                               <span onClick={onDeleteCommentary}
-                                                                 className="text-secondary comment-action ml-5">Удалить</span>
+                                                                    className="text-secondary comment-action ml-5">Удалить</span>
                                                               <span onClick={() => setIsOpenPopup(false)}
-                                                                 className="text-secondary comment-action ml-4">
+                                                                    className="text-secondary comment-action ml-4">
                                                                   Отменить
                                                               </span>
                                                           </div>
@@ -211,21 +207,15 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, isAuth, userData
                                                                  onChange={e => setCommentAnswerText(e.target.value)}
                                                                  value={commentAnswerText}
                                                                  defaultValue={commentAnswerText}
-                                                                 onKeyUp={e => {
-                                                                     // @ts-ignore
-                                                                     e.target.style.height = "1px";
-                                                                     // @ts-ignore
-                                                                     e.target.style.height = (20 + e.target.scrollHeight) + "px";
-                                                                 }}
                                                        />
                                                     <div className="mt-2">
                                                           <span>
                                                               <span onClick={onAddCommentary}
-                                                                 className="text-secondary comment-action ml-4 answer-area">Отправить</span>
+                                                                    className="text-secondary comment-action ml-4 answer-area">Отправить</span>
                                                           </span>
                                                         <span>
                                                               <span onClick={() => setIsAnswerMode(false)}
-                                                                 className="text-secondary comment-action ml-4">
+                                                                    className="text-secondary comment-action ml-4">
                                                                   Отменить
                                                               </span>
                                                           </span>
@@ -243,8 +233,8 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, isAuth, userData
 
             {
                 comment.replyComments.length > 0
-                && comment.replyComments.map(commentItem => {
-                    return <div className="ml-5" key={commentItem.id}>
+                && comment.replyComments.map(commentItem => (
+                    <div className="ml-5" key={commentItem.id}>
                         <CommentItem comment={commentItem}
                                      isAuth={isAuth}
                                      userData={userData}
@@ -253,7 +243,7 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, isAuth, userData
                                      addCommentary={addCommentary}
                                      deleteCommentary={deleteCommentary}/>
                     </div>
-                })
+                ))
             }
 
         </div>

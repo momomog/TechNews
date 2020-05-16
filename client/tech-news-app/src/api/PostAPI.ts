@@ -1,12 +1,11 @@
-import {getSectionName} from "../common/Const";
 import {request} from "./BaseRequest";
 import {PostRequest} from "../models/RequestsModel";
 import {Post} from "../models/PostModel";
 import {PostsResponse} from "../models/ResponseModel";
 
 class PostAPI {
-    getPosts = (sectionId: number, postPage: number): Promise<PostsResponse> => request({
-        url: `posts/${getSectionName(sectionId)}/${postPage}`
+    getPosts = (sectionName: string, postPage: number): Promise<PostsResponse> => request({
+        url: `posts/${sectionName}/${postPage}`
     })
 
     getRecommendedPosts = (categoryId: number, postId: number): Promise<Array<Post>> => request({

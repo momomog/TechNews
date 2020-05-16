@@ -68,6 +68,12 @@
     padding-left: 0!important;
 }
 
+.post-star-text {
+    font-size: 1.1em;
+    position: relative;
+    top: 10px;
+}
+
 .comment-author-link {
     text-decoration: none !important;
 }

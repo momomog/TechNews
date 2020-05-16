@@ -10,7 +10,7 @@ export const request = (options): Promise<any> => {
         })
 
     if (AuthService.getToken())
-        headers.append('Authorization', 'Bearer ' + AuthService.getToken())
+        headers.append('Authorization', `Bearer ${AuthService.getToken()}`)
 
     const defaults = {
         headers,

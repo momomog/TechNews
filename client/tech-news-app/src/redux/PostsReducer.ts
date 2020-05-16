@@ -14,6 +14,7 @@ import {
 import {ErrorResponse} from "../models/ResponseModel";
 import history from "../history";
 import {Dispatch} from "redux";
+import {getSectionName} from '../common/Const'
 
 const CHANGE_SECTION = 'CHANGE-SECTION'
 const SET_POST_ID = 'SET-POST-ID'
@@ -77,7 +78,7 @@ export const postsReducer = (state: PostState = initialState, action: PostAction
 
 export const getPosts = (sectionId: number, postPage: number = 1): any => {
     return (dispatch: Dispatch) => {
-        PostAPI.getPosts(sectionId, postPage)
+        PostAPI.getPosts(getSectionName(sectionId), postPage)
             .then(data => {
                 dispatch(setPostsAction(data.posts))
                 dispatch(setPostsCountAction(data.postsCount))
@@ -90,7 +91,7 @@ export const setPostPageAndGetPosts = (sectionId: number, postPage: number): any
     return (dispatch: Dispatch) => {
         dispatch(setPostPageAction(postPage))
 
-        PostAPI.getPosts(sectionId, postPage)
+        PostAPI.getPosts(getSectionName(sectionId), postPage)
             .then(data => {
                 dispatch(setPostsAction(data.posts))
                 dispatch(setPostsCountAction(data.postsCount))

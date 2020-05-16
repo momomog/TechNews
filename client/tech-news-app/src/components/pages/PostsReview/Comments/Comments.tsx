@@ -62,9 +62,9 @@ const Comments: React.FC<Props> = (props) => {
                     </div>
             }
 
-            <h5 className="card-header mb-2">
+            <h4 className="card-header mb-2">
                 {`${props.commentsCount} ${Common.getCommentaryCountText(props.commentsCount)}`}
-            </h5>
+            </h4>
 
             {
                 props.comments.length > 0

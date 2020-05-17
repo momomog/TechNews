@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, {useState} from 'react'
 
 import okIcon from '../../static/ok-icon.png'
-import {change} from "redux-form";
-import errorIcon from "../../static/error-icon.png";
+import {change} from 'redux-form'
+import errorIcon from '../../static/error-icon.png'
 
 /**
  * Контроль формы. Input type="file"

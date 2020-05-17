@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 import okIcon from '../../static/ok-icon.png'
 import errorIcon from '../../static/error-icon.png'
@@ -31,7 +31,7 @@ export const Select = ({input, meta, ...props}) => {
                             backgroundRepeat: `no-repeat`,
                             marginBottom: `0px`
                         }}>
-                    <option value="" disabled defaultValue={"true"}>Выберите тип...</option>
+                    <option value="" disabled defaultValue={'true'}>Выберите тип...</option>
                     {
                         props.options.map(option => <option value={option.id} key={option.id}>{option.title}</option>)
                     }

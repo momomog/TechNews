@@ -1,10 +1,10 @@
-import React from 'react';
-import {connect} from "react-redux";
+import React from 'react'
+import {connect} from 'react-redux'
 
-import PagesNavigation from "./PagesNavigation";
-import {setPostPageAndGetPosts} from "../../../../redux/PostsReducer";
-import {RootState} from "../../../../redux/ReduxStore";
-import {Dispatch} from "redux";
+import PagesNavigation from './PagesNavigation'
+import {setPostPageAndGetPosts} from '../../../../redux/PostsReducer'
+import {RootState} from '../../../../redux/ReduxStore'
+import {Dispatch} from 'redux'
 
 interface Props {
     postPage: number

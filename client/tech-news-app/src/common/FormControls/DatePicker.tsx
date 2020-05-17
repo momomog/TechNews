@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import {KeyboardDatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
-import * as moment from "moment";
-import DateFnsUtils from "@date-io/date-fns";
-import {change} from "redux-form";
+import React, {useState} from 'react'
+import {KeyboardDatePicker, MuiPickersUtilsProvider} from '@material-ui/pickers'
+import * as moment from 'moment'
+import DateFnsUtils from '@date-io/date-fns'
+import {change} from 'redux-form'
 
 /**
  * Контроль формы. DatePicker
@@ -12,7 +12,7 @@ import {change} from "redux-form";
  */
 export const DatePicker = ({input, meta, ...props}) => {
     const isError = meta.touched && meta.error,
-        [initValue, setInitValue] = useState(props.initValue);
+        [initValue, setInitValue] = useState(props.initValue)
 
     return (
         <div>
@@ -29,7 +29,7 @@ export const DatePicker = ({input, meta, ...props}) => {
                         meta.dispatch(change('profile', 'birthDate', value))
                     }}
                     KeyboardButtonProps={{
-                        'aria-label': 'change date',
+                        'aria-label': 'change date'
                     }}
                 />
             </MuiPickersUtilsProvider>

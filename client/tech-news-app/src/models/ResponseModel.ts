@@ -1,5 +1,5 @@
-import {Comment} from "./CommentModel";
-import {Post} from "./PostModel";
+import {Comment} from './CommentModel'
+import {Post} from './PostModel'
 
 export interface PostCommentsResponse {
     comments: Array<Comment>

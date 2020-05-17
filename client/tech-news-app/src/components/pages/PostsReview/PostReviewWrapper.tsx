@@ -1,14 +1,14 @@
-import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
-import PostReview from "./PostReview";
-import {useRouteMatch} from "react-router-dom";
-import {Dispatch} from "redux";
-import {getPostData} from "../../../redux/PostsReducer";
-import PostAPI from "../../../api/PostAPI";
-import {Post} from "../../../models/PostModel";
-import {User} from "../../../models/UserModel";
-import {RootState} from "../../../redux/ReduxStore";
-import Spinner from "../../core/Spinner";
+import React, {useEffect} from 'react'
+import {connect} from 'react-redux'
+import PostReview from './PostReview'
+import {useRouteMatch} from 'react-router-dom'
+import {Dispatch} from 'redux'
+import {getPostData} from '../../../redux/PostsReducer'
+import PostAPI from '../../../api/PostAPI'
+import {Post} from '../../../models/PostModel'
+import {User} from '../../../models/UserModel'
+import {RootState} from '../../../redux/ReduxStore'
+import Spinner from '../../core/Spinner'
 
 interface Props {
     postData: Post

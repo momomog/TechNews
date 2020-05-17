@@ -1,7 +1,7 @@
-import React from 'react';
-import {NavLink} from "react-router-dom";
-import AuthService from "../../../../common/AuthService";
-import {SetIsAuthAction, User, UserInitial} from "../../../../models/UserModel";
+import React from 'react'
+import {NavLink} from 'react-router-dom'
+import AuthService from '../../../../common/AuthService'
+import {SetIsAuthAction, User, UserInitial} from '../../../../models/UserModel'
 
 interface Props {
     isAuth: boolean
@@ -29,7 +29,7 @@ const AuthUser: React.FC<Props> = ({isAuth, userData, setIsAuth, setCurrentUserD
         <div className="dropdown">
             {
                 isAuth
-                && <div>
+                && <>
                     <button className="btn btn-primary-outline dropdown-toggle user-action-button"
                             data-toggle="dropdown"
                             aria-haspopup="true"
@@ -39,28 +39,27 @@ const AuthUser: React.FC<Props> = ({isAuth, userData, setIsAuth, setCurrentUserD
                         && `https://drive.google.com/uc?export=view&id=${userData.profileData.photoId}`}/>
                     </button>
                     <div className="dropdown-menu">
-                        <NavLink className="dropdown-item" to="/profile" exact={true}>Профиль</NavLink>
-                        <NavLink className="dropdown-item" to="/profile/me/edit" exact={true}>Редактировать</NavLink>
+                        <NavLink className="dropdown-item" to="/profile" exact>Профиль</NavLink>
+                        <NavLink className="dropdown-item" to="/profile/me/edit" exact>Редактировать</NavLink>
                         <div className="dropdown-divider"/>
 
                         {
                             AuthService.isAdmin()
-                            && <span>
-                                  <NavLink className="dropdown-item"
-                                           to="/admin-panel">
-                                      Панель администрирования
-                                  </NavLink>
-                                  <div className="dropdown-divider"/>
-                                </span>
+                            && <>
+                                <NavLink className="dropdown-item" to="/admin-panel" exact>
+                                    Панель администрирования
+                                </NavLink>
+                                <div className="dropdown-divider"/>
+                            </>
                         }
 
                         <span onClick={onLogout}>
-                                <NavLink className="dropdown-item" to="/posts/all">
-                                    Выйти
-                                </NavLink>
-                            </span>
+                            <NavLink className="dropdown-item" to="/" exact>
+                                Выйти
+                            </NavLink>
+                        </span>
                     </div>
-                </div>
+                </>
             }
         </div>
     )

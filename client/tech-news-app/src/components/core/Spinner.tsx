@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 import spinner from '../../static/spinner.svg'
 

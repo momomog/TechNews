@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import Common from "../../../common/Common";
-import PostItem from "../PostsList/PostItem/PostItem";
-import {Post} from "../../../models/PostModel";
-import ScrollUpButton from "react-scroll-up-button";
+import React, {useState} from 'react'
+import Common from '../../../common/Common'
+import PostItem from '../PostsList/PostItem/PostItem'
+import {Post} from '../../../models/PostModel'
+import ScrollUpButton from 'react-scroll-up-button'
 
 interface Props {
     posts: Array<Post>
@@ -23,7 +23,7 @@ const PostSearch: React.FC<Props> = ({posts, searchText, setPostId}) => {
     const [showPostsCount, setShowPostsCount] = useState<number>(oneTimePostShowCount)
 
     return (
-        <div>
+        <>
             <div className="row">
                 <div className="col-sm-12">
                     <h3 className="ml-6 mt-0">По вашему запросу
@@ -54,7 +54,7 @@ const PostSearch: React.FC<Props> = ({posts, searchText, setPostId}) => {
                                     EasingType="easeInOutQuad"/>
                 </div>
             </div>
-        </div>
+        </>
     )
 
     function postsInit(): Array<Post> {

@@ -1,9 +1,9 @@
-import 'date-fns';
-import React from 'react';
-import "moment/locale/ru";
-import PostPageReduxForm from "./PostPageForm";
-import {PostRequest} from "../../../../models/RequestsModel";
-import {categories} from "../../../../common/Const";
+import 'date-fns'
+import React from 'react'
+import 'moment/locale/ru'
+import PostPageReduxForm from './PostPageForm'
+import {PostRequest} from '../../../../models/RequestsModel'
+import {categories} from '../../../../common/Const'
 
 interface Props {
     createNewPost: (request: PostRequest) => void

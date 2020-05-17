@@ -36,38 +36,38 @@ class Common {
 
     // Окончание количества комментариев в зависимости от значения
     getCommentaryCountText = (count: number): string => {
-            const num = count.toString()
+        const num = count.toString()
 
-            if (num.endsWith('1') && count !== 11)
-                return 'комментарий';
-            else if (['2', '3', '4'].indexOf(num[num.length - 1]) !== -1 || (['2', '3', '4'].indexOf(num[0]) !== -1))
-                return 'комментария'
-            else
-                return 'комментариев'
+        if (num.endsWith('1') && count !== 11)
+            return 'комментарий'
+        else if (['2', '3', '4'].indexOf(num[num.length - 1]) !== -1 || (['2', '3', '4'].indexOf(num[0]) !== -1))
+            return 'комментария'
+        else
+            return 'комментариев'
     }
 
     // Количество записей поиска в зависимости от значения
     getFindPostsResultText = (count: number): string => {
-            const num = count.toString()
+        const num = count.toString()
 
-            if (num.endsWith('1') && count !== 11)
-                return `найдена ${count} запись`
-            else if (['2', '3', '4'].indexOf(num[num.length - 1]) !== -1 || (['2', '3', '4'].indexOf(num[0]) !== -1))
-                return `найдены ${count} записи`
-            else
-                return `найдено ${count} записей`
+        if (num.endsWith('1') && count !== 11)
+            return `найдена ${count} запись`
+        else if (['2', '3', '4'].indexOf(num[num.length - 1]) !== -1 || (['2', '3', '4'].indexOf(num[0]) !== -1))
+            return `найдены ${count} записи`
+        else
+            return `найдено ${count} записей`
     }
 
     // Окончание количества символов в зависимости от значения
     getSymbolsCountText = (count: number): string => {
-            const num = count.toString()
+        const num = count.toString()
 
-            if (num.endsWith('1') && count !== 11)
-                return 'символ'
-            else if (['2', '3', '4'].indexOf(num[num.length - 1]) !== -1 || (['2', '3', '4'].indexOf(num[0]) !== -1))
-                return 'символа'
-            else
-                return 'символов'
+        if (num.endsWith('1') && count !== 11)
+            return 'символ'
+        else if (['2', '3', '4'].indexOf(num[num.length - 1]) !== -1 || (['2', '3', '4'].indexOf(num[0]) !== -1))
+            return 'символа'
+        else
+            return 'символов'
     }
 
     // Текст ошибки в зависимости от ответа сервера

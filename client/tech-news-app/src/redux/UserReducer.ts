@@ -1,22 +1,15 @@
-import AuthAPI from "../api/AuthAPI";
-import {NotificationManager} from "react-notifications";
-import history from "../history";
-import AuthService from "../common/AuthService";
-import ProfileAPI from "../api/ProfileAPI";
-import {
-    SetUserDataAction,
-    SetIsAuthAction,
-    User,
-    UserAction,
-    UserInitial,
-    UserState
-} from "../models/UserModel";
-import {ErrorResponse} from "../models/ResponseModel";
-import {Dispatch} from "redux";
-import {SignInRequest} from "../models/RequestsModel";
+import AuthAPI from '../api/AuthAPI'
+import {NotificationManager} from 'react-notifications'
+import history from '../history'
+import AuthService from '../common/AuthService'
+import ProfileAPI from '../api/ProfileAPI'
+import {SetIsAuthAction, SetUserDataAction, User, UserAction, UserInitial, UserState} from '../models/UserModel'
+import {ErrorResponse} from '../models/ResponseModel'
+import {Dispatch} from 'redux'
+import {SignInRequest} from '../models/RequestsModel'
 
-const SET_IS_AUTH = 'SET-IS-AUTH';
-const SET_USER_DATA = 'SET-USER-DATA';
+const SET_IS_AUTH = 'SET-IS-AUTH'
+const SET_USER_DATA = 'SET-USER-DATA'
 
 
 const initialState: UserState = {
@@ -29,7 +22,7 @@ export const userReducer = (state: UserState = initialState, action: UserAction)
         case SET_IS_AUTH: {
             return {
                 ...state,
-                isAuth: action.isAuth,
+                isAuth: action.isAuth
             }
         }
         case SET_USER_DATA: {
@@ -43,7 +36,7 @@ export const userReducer = (state: UserState = initialState, action: UserAction)
     }
 }
 
-export const setIsAuthAction = (isAuth: boolean): SetIsAuthAction => ({type: SET_IS_AUTH, isAuth: isAuth});
+export const setIsAuthAction = (isAuth: boolean): SetIsAuthAction => ({type: SET_IS_AUTH, isAuth: isAuth})
 export const setUserDataAction = (userData: User): SetUserDataAction => ({
     type: SET_USER_DATA,
     userData: userData

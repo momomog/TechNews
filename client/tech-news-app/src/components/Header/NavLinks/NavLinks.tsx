@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {NavLink, useHistory} from "react-router-dom";
+import React, {useState} from 'react'
+import {NavLink, useHistory} from 'react-router-dom'
 import {
     SECTION_ALL_POSTS,
     SECTION_GAMES,
@@ -7,9 +7,9 @@ import {
     SECTION_MOBILE,
     SECTION_NOTEBOOKS,
     SECTION_OTHER
-} from "../../../common/Const";
-import {ChangeSectionAction, SetPostPageAction} from "../../../models/PostModel";
-import searchIcon from "../../../static/search-icon.png";
+} from '../../../common/Const'
+import {ChangeSectionAction, SetPostPageAction} from '../../../models/PostModel'
+import searchIcon from '../../../static/search-icon.png'
 
 interface Props {
     setPosts: (sectionId: number) => void

@@ -1,7 +1,7 @@
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {NavLink} from "react-router-dom";
-import React, {useState} from "react";
-import {Input} from "../../../../common/FormControls/Input";
+import {Field, InjectedFormProps, reduxForm} from 'redux-form'
+import {NavLink} from 'react-router-dom'
+import React, {useState} from 'react'
+import {Input} from '../../../../common/FormControls/Input'
 import {
     maxLength1000,
     maxLength200,
@@ -11,12 +11,12 @@ import {
     minLength50,
     required,
     requiredFile
-} from "../../../../common/Validators";
-import {TextArea} from "../../../../common/FormControls/TextArea";
-import {Select} from "../../../../common/FormControls/Select";
-import {FileInput} from "../../../../common/FormControls/FileInput";
-import {PostDescription} from "../../../../common/FormControls/PostDescription";
-import {PostRequest} from "../../../../models/RequestsModel";
+} from '../../../../common/Validators'
+import {TextArea} from '../../../../common/FormControls/TextArea'
+import {Select} from '../../../../common/FormControls/Select'
+import {FileInput} from '../../../../common/FormControls/FileInput'
+import {PostDescription} from '../../../../common/FormControls/PostDescription'
+import {PostRequest} from '../../../../models/RequestsModel'
 
 interface OwnProps {
     categories: Array<{ id: number, title: string }>

@@ -1,11 +1,11 @@
-import React, {useState} from "react";
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import {NavLink} from "react-router-dom";
+import React, {useState} from 'react'
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import {NavLink} from 'react-router-dom'
 
 interface Props {
     postId: number
@@ -13,10 +13,9 @@ interface Props {
 }
 
 /**
- *
+ * Панель управления постом
  * @param postId
  * @param onDeletePost
- * Панель управления постом
  */
 const PostAdminPanel: React.FC<Props> = ({postId, onDeletePost}) => {
     const [openModal, setOpenModal] = useState(false)
@@ -36,11 +35,11 @@ const PostAdminPanel: React.FC<Props> = ({postId, onDeletePost}) => {
                         <span className="post-author-comment">Панель управления постом</span>
 
                         <NavLink to={postId + '/edit'}>
-                            <button type="button" className="btn btn-primary ml-3">
+                            <button className="btn btn-primary ml-3">
                                 Редактировать
                             </button>
                         </NavLink>
-                        <button type="button" className="btn btn-danger ml-2" onClick={triggerModal}>
+                        <button className="btn btn-danger ml-2" onClick={triggerModal}>
                             Удалить
                         </button>
 
@@ -49,7 +48,7 @@ const PostAdminPanel: React.FC<Props> = ({postId, onDeletePost}) => {
                             onClose={triggerModal}
                             aria-labelledby="alert-dialog-title"
                             aria-describedby="alert-dialog-description">
-                            <DialogTitle id="alert-dialog-title">{"Удалить пост"}</DialogTitle>
+                            <DialogTitle id="alert-dialog-title">{'Удалить пост'}</DialogTitle>
                             <DialogContent>
                                 <DialogContentText id="alert-dialog-description">
                                     Вы уверены? Это действие невозможно будет отменить

@@ -1,5 +1,5 @@
-import AuthAPI from "../api/AuthAPI";
-import Common from "./Common";
+import AuthAPI from '../api/AuthAPI'
+import Common from './Common'
 
 // Корректность введенного почтового адреса
 export const email = (value: string): string | undefined =>

@@ -1,14 +1,14 @@
-import React, {useEffect} from 'react';
-import {connect} from "react-redux";
-import {Dispatch} from "redux";
-import {useHistory, useRouteMatch} from "react-router-dom";
-import PostEdit from "./PostEdit";
-import {getPostData} from "../../../../redux/PostsReducer";
-import {NotificationManager} from "react-notifications";
-import PostAPI from "../../../../api/PostAPI";
-import {Post} from "../../../../models/PostModel";
-import {PostRequest} from "../../../../models/RequestsModel";
-import {RootState} from "../../../../redux/ReduxStore";
+import React, {useEffect} from 'react'
+import {connect} from 'react-redux'
+import {Dispatch} from 'redux'
+import {useHistory, useRouteMatch} from 'react-router-dom'
+import PostEdit from './PostEdit'
+import {getPostData} from '../../../../redux/PostsReducer'
+import {NotificationManager} from 'react-notifications'
+import PostAPI from '../../../../api/PostAPI'
+import {Post} from '../../../../models/PostModel'
+import {PostRequest} from '../../../../models/RequestsModel'
+import {RootState} from '../../../../redux/ReduxStore'
 
 interface Props {
     postData: Post

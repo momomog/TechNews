@@ -1,12 +1,12 @@
-import {NavLink} from "react-router-dom";
-import React, {useEffect} from "react";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {required} from "../../../../../common/Validators";
-import ProfileField from "./ProfileField";
-import Common from "../../../../../common/Common";
-import {DatePicker} from "../../../../../common/FormControls/DatePicker";
-import {ProfileRequest} from "../../../../../models/RequestsModel";
-import {User} from "../../../../../models/UserModel";
+import {NavLink} from 'react-router-dom'
+import React, {useEffect} from 'react'
+import {Field, InjectedFormProps, reduxForm} from 'redux-form'
+import {required} from '../../../../../common/Validators'
+import ProfileField from './ProfileField'
+import Common from '../../../../../common/Common'
+import {DatePicker} from '../../../../../common/FormControls/DatePicker'
+import {ProfileRequest} from '../../../../../models/RequestsModel'
+import {User} from '../../../../../models/UserModel'
 
 interface OwnProps {
     user: User

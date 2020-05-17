@@ -1,7 +1,10 @@
-import AuthService from "../common/AuthService"
+import AuthService from '../common/AuthService'
 
 export const API_BASE_URL = 'http://localhost:8080/api'
 
+/**
+ * Базовый запрос приложения
+ */
 export const request = (options): Promise<any> => {
     const headers = options.headers
         ? options.headers

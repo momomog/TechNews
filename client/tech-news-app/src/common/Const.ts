@@ -1,4 +1,4 @@
-export const IS_NOT_CORRECTLY_SECTION = -1
+export const NOT_CORRECTLY_SECTION = -1
 export const SECTION_ALL_POSTS = 1
 export const SECTION_MOBILE = 2
 export const SECTION_NOTEBOOKS = 3
@@ -48,6 +48,6 @@ export function getSectionId(sectionName: string): number {
         case 'games':
             return SECTION_GAMES
         default:
-            return IS_NOT_CORRECTLY_SECTION
+            return NOT_CORRECTLY_SECTION
     }
 }

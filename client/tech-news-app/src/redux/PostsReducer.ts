@@ -1,4 +1,4 @@
-import PostAPI from "../api/PostAPI";
+import PostAPI from '../api/PostAPI'
 import {
     ChangeSectionAction,
     Post,
@@ -10,10 +10,10 @@ import {
     SetPostIdAction,
     SetPostPageAction,
     SetPostsAction
-} from "../models/PostModel";
-import {ErrorResponse} from "../models/ResponseModel";
-import history from "../history";
-import {Dispatch} from "redux";
+} from '../models/PostModel'
+import {ErrorResponse} from '../models/ResponseModel'
+import history from '../history'
+import {Dispatch} from 'redux'
 import {getSectionName} from '../common/Const'
 
 const CHANGE_SECTION = 'CHANGE-SECTION'
@@ -113,13 +113,13 @@ export const getPostData = (sectionId: number, postId: number): any => {
 export const chooseSectionAction = (sectionId: number): ChangeSectionAction => ({
     type: CHANGE_SECTION,
     sectionId: sectionId
-});
-export const setPostsAction = (posts: Array<Post>): SetPostsAction => ({type: SET_POSTS, posts: posts});
-export const setPostsCountAction = (count: number): SetPostCountAction => ({type: SET_POSTS_COUNT, postsCount: count});
+})
+export const setPostsAction = (posts: Array<Post>): SetPostsAction => ({type: SET_POSTS, posts: posts})
+export const setPostsCountAction = (count: number): SetPostCountAction => ({type: SET_POSTS_COUNT, postsCount: count})
 export const setPostPageAction = (postPageNumber: number = 1): SetPostPageAction => ({
     type: SET_POST_PAGE,
     postPage: postPageNumber
-});
-export const setPostIdAction = (id: number): SetPostIdAction => ({type: SET_POST_ID, postId: id});
-export const setPostData = (data: Post): SetPostDataAction => ({type: SET_POST_DATA, postData: data});
+})
+export const setPostIdAction = (id: number): SetPostIdAction => ({type: SET_POST_ID, postId: id})
+export const setPostData = (data: Post): SetPostDataAction => ({type: SET_POST_DATA, postData: data})
 

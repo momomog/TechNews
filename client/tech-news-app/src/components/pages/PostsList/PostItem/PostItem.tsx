@@ -1,9 +1,9 @@
-import React from 'react';
-import {NavLink} from "react-router-dom";
-import Hyphenated from 'react-hyphen';
-import ru from 'hyphenated-ru';
-import Common from "../../../../common/Common";
-import {Post} from "../../../../models/PostModel";
+import React from 'react'
+import {NavLink} from 'react-router-dom'
+import Hyphenated from 'react-hyphen'
+import ru from 'hyphenated-ru'
+import Common from '../../../../common/Common'
+import {Post} from '../../../../models/PostModel'
 
 interface Props {
     post: Post
@@ -24,7 +24,7 @@ const PostItem: React.FC<Props> = ({post, setPostId}) => {
     }
 
     const postRate = () => {
-        let rating = 0;
+        let rating = 0
 
         if (post.rates.length > 0) {
             post.rates.map(rate => rating += rate)

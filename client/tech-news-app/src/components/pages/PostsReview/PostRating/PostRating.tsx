@@ -1,7 +1,7 @@
-import React, {useState} from "react";
-import AuthService from "../../../../common/AuthService";
-import {Post} from "../../../../models/PostModel";
-import {User} from "../../../../models/UserModel";
+import React, {useState} from 'react'
+import AuthService from '../../../../common/AuthService'
+import {Post} from '../../../../models/PostModel'
+import {User} from '../../../../models/UserModel'
 
 interface Props {
     post: Post
@@ -27,13 +27,13 @@ const PostRating: React.FC<Props> = ({post, postRating, user}) => {
     }
 
     const isRatedByUser = () => {
-        const ratedUsers = post.ratedUsers;
-        let isRated = false;
+        const ratedUsers = post.ratedUsers
+        let isRated = false
 
         if (ratedUsers.length) {
             ratedUsers.forEach(rate => {
                 if (rate === user.id)
-                    isRated = true;
+                    isRated = true
             })
         }
 
@@ -48,7 +48,7 @@ const PostRating: React.FC<Props> = ({post, postRating, user}) => {
                         ? <span className="post-author-comment">Спасибо! Ваша оценка данного поста: {
                             Array.from({length: 5}).map((item, index) => {
                                 if (index + 1 <= rating)
-                                    return <span className="post-star">★</span>;
+                                    return <span className="post-star">★</span>
                                 return <span className="post-star-empty">★</span>
                             })
                         } </span>

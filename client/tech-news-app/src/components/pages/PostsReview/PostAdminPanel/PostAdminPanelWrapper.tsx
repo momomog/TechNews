@@ -1,13 +1,13 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {useHistory} from "react-router-dom";
-import {Dispatch} from "redux";
-import PostAdminPanel from "./PostAdminPanel";
-import PostAPI from "../../../../api/PostAPI";
-import {NotificationManager} from "react-notifications";
-import {setPostPageAndGetPosts} from "../../../../redux/PostsReducer";
-import {getSectionName} from "../../../../common/Const";
-import {RootState} from "../../../../redux/ReduxStore";
+import React from 'react'
+import {connect} from 'react-redux'
+import {useHistory} from 'react-router-dom'
+import {Dispatch} from 'redux'
+import PostAdminPanel from './PostAdminPanel'
+import PostAPI from '../../../../api/PostAPI'
+import {NotificationManager} from 'react-notifications'
+import {setPostPageAndGetPosts} from '../../../../redux/PostsReducer'
+import {getSectionName} from '../../../../common/Const'
+import {RootState} from '../../../../redux/ReduxStore'
 
 interface Props {
     sectionId: number

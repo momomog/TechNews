@@ -1,12 +1,12 @@
-import React from 'react';
-import {connect} from "react-redux";
-import {chooseSectionAction, getPosts, setPostPageAction} from "../../redux/PostsReducer";
-import Header from "./Header";
-import {setIsAuthAction, setUserDataAction} from "../../redux/UserReducer";
-import {RootState} from "../../redux/ReduxStore";
-import {SetIsAuthAction, User} from "../../models/UserModel";
-import {Dispatch} from "redux";
-import {ChangeSectionAction, SetPostPageAction} from "../../models/PostModel";
+import React from 'react'
+import {connect} from 'react-redux'
+import {chooseSectionAction, getPosts, setPostPageAction} from '../../redux/PostsReducer'
+import Header from './Header'
+import {setIsAuthAction, setUserDataAction} from '../../redux/UserReducer'
+import {RootState} from '../../redux/ReduxStore'
+import {SetIsAuthAction, User} from '../../models/UserModel'
+import {Dispatch} from 'redux'
+import {ChangeSectionAction, SetPostPageAction} from '../../models/PostModel'
 
 interface Props {
     isAuth: boolean,

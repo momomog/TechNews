@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import {Comment, CommentRequest} from "../../../../models/CommentModel";
-import Common from "../../../../common/Common";
-import {User} from "../../../../models/UserModel";
-import CommentItem from "./Comment";
+import React, {useState} from 'react'
+import {Comment, CommentRequest} from '../../../../models/CommentModel'
+import Common from '../../../../common/Common'
+import {User} from '../../../../models/UserModel'
+import CommentItem from './Comment'
 
 interface Props {
     comments: Array<Comment>
@@ -44,8 +44,8 @@ const Comments: React.FC<Props> = (props) => {
                                               value={commentText}
                                               onKeyPress={e => {
                                                   if (e.key === 'Enter') {
-                                                      e.preventDefault();
-                                                      addNewCommentary();
+                                                      e.preventDefault()
+                                                      addNewCommentary()
                                                   }
                                               }}/>
                             </div>

@@ -1,7 +1,7 @@
-import React from 'react';
-import Spinner from "../../../core/Spinner";
-import {NavLink} from "react-router-dom";
-import {Post} from "../../../../models/PostModel";
+import React from 'react'
+import Spinner from '../../../core/Spinner'
+import {NavLink} from 'react-router-dom'
+import {Post} from '../../../../models/PostModel'
 
 
 /**

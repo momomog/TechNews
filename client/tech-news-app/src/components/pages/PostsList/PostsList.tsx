@@ -1,7 +1,7 @@
-import React from 'react';
-import PostItem from "./PostItem/PostItem";
-import PagesNavigationWrapper from "./PagesNavigation/PagesNavigationWrapper";
-import {Post} from "../../../models/PostModel";
+import React from 'react'
+import PostItem from './PostItem/PostItem'
+import PagesNavigationWrapper from './PagesNavigation/PagesNavigationWrapper'
+import {Post} from '../../../models/PostModel'
 
 interface Props {
     posts: Array<Post>

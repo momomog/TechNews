@@ -1,5 +1,5 @@
-import React from "react";
-import {User} from "../../../../models/UserModel";
+import React from 'react'
+import {User} from '../../../../models/UserModel'
 
 interface Props {
     user: User

@@ -1,15 +1,15 @@
-import React from 'react';
-import {connect} from "react-redux";
-import {Redirect, withRouter} from "react-router-dom";
-import ProfileEdit from "./ProfileEdit";
-import ProfileAPI from "../../../../api/ProfileAPI";
-import {NotificationManager} from "react-notifications";
-import {User} from "../../../../models/UserModel";
-import {RootState} from "../../../../redux/ReduxStore";
-import {RouteComponentProps} from "react-router";
-import {ProfileRequest} from "../../../../models/RequestsModel";
-import {getCurrentUserData} from "../../../../redux/UserReducer";
-import {Dispatch} from "redux";
+import React from 'react'
+import {connect} from 'react-redux'
+import {Redirect, withRouter} from 'react-router-dom'
+import ProfileEdit from './ProfileEdit'
+import ProfileAPI from '../../../../api/ProfileAPI'
+import {NotificationManager} from 'react-notifications'
+import {User} from '../../../../models/UserModel'
+import {RootState} from '../../../../redux/ReduxStore'
+import {RouteComponentProps} from 'react-router'
+import {ProfileRequest} from '../../../../models/RequestsModel'
+import {getCurrentUserData} from '../../../../redux/UserReducer'
+import {Dispatch} from 'redux'
 
 interface Props {
     isAuth: boolean

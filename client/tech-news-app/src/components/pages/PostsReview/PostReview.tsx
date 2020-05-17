@@ -1,17 +1,17 @@
-import React from 'react';
-import Parser from 'html-react-parser';
-import Common from "../../../common/Common";
-import CommentsWrapper from "./Comments/CommentsWrapper";
-import PostAdminPanelWrapper from "./PostAdminPanel/PostAdminPanelWrapper";
-import {NavLink} from "react-router-dom";
-import AuthService from "../../../common/AuthService";
-import TrackVisibility from "react-on-screen";
-import RecommendedPostsWrapper from "./RecommendedPosts/RecommendedPostsWrapper";
-import ru from "hyphenated-ru";
-import Hyphenated from "react-hyphen";
-import {Post} from "../../../models/PostModel";
-import {User} from "../../../models/UserModel";
-import PostRating from "./PostRating/PostRating";
+import React from 'react'
+import Parser from 'html-react-parser'
+import Common from '../../../common/Common'
+import CommentsWrapper from './Comments/CommentsWrapper'
+import PostAdminPanelWrapper from './PostAdminPanel/PostAdminPanelWrapper'
+import {NavLink} from 'react-router-dom'
+import AuthService from '../../../common/AuthService'
+import TrackVisibility from 'react-on-screen'
+import RecommendedPostsWrapper from './RecommendedPosts/RecommendedPostsWrapper'
+import ru from 'hyphenated-ru'
+import Hyphenated from 'react-hyphen'
+import {Post} from '../../../models/PostModel'
+import {User} from '../../../models/UserModel'
+import PostRating from './PostRating/PostRating'
 
 interface Props {
     post: Post
@@ -33,7 +33,7 @@ const PostReview: React.FC<Props> = ({post, postRating, user}) => {
                 AuthService.isAdmin() && <PostAdminPanelWrapper postId={post.id}/>
             }
 
-            <div >
+            <div>
                 <div className="row">
                     <div className="center-block post-review-wrapper">
 
@@ -46,7 +46,7 @@ const PostReview: React.FC<Props> = ({post, postRating, user}) => {
                         <div className="row">
                             <span className="col-lg-8 post-author">
                                 <NavLink to={`/profile/${post.author}`} className="comment-author-link"
-                                         style={{color: "black"}}>
+                                         style={{color: 'black'}}>
                                 @{post.author}
                             </NavLink>
 

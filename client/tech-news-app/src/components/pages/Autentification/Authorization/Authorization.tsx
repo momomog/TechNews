@@ -1,7 +1,7 @@
-import React from "react";
-import {Redirect} from "react-router-dom";
-import LoginReduxForm from "./LoginForm";
-import {SignInRequest} from "../../../../models/RequestsModel";
+import React from 'react'
+import {Redirect} from 'react-router-dom'
+import LoginReduxForm from './LoginForm'
+import {SignInRequest} from '../../../../models/RequestsModel'
 
 interface Props {
     isAuth: boolean

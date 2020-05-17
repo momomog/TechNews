@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import {connect} from "react-redux";
-import {Dispatch} from "redux";
-import {useLocation} from "react-router-dom";
-import Profile from "./Profile";
-import ProfileAPI from "../../../api/ProfileAPI";
-import {getCurrentUserData} from "../../../redux/UserReducer";
-import {User, UserInitial} from "../../../models/UserModel";
-import {RootState} from "../../../redux/ReduxStore";
-import Spinner from "../../core/Spinner";
-import {ErrorResponse} from "../../../models/ResponseModel";
-import {NotificationManager} from "react-notifications";
-import history from "../../../history";
+import React, {useEffect, useState} from 'react'
+import {connect} from 'react-redux'
+import {Dispatch} from 'redux'
+import {useLocation} from 'react-router-dom'
+import Profile from './Profile'
+import ProfileAPI from '../../../api/ProfileAPI'
+import {getCurrentUserData} from '../../../redux/UserReducer'
+import {User, UserInitial} from '../../../models/UserModel'
+import {RootState} from '../../../redux/ReduxStore'
+import Spinner from '../../core/Spinner'
+import {ErrorResponse} from '../../../models/ResponseModel'
+import {NotificationManager} from 'react-notifications'
+import history from '../../../history'
 
 interface Props {
     userData: User
@@ -36,9 +36,9 @@ const ProfileWrapper: React.FC<Props> = ({userData, getCurrentUserData}) => {
                 .then((response: User) => setUser(response))
                 .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))
         }
-    }, [path, getCurrentUserData, userData.id, user.id ])
+    }, [path, getCurrentUserData, userData.id, user.id])
 
-    function isCurrentUser (): boolean {
+    function isCurrentUser(): boolean {
         return ((path[1] === 'profile' && path.length === 2)
             || (path[1] === 'profile' && userData && userData.username === path[2]))
     }

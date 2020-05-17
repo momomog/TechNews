@@ -1,6 +1,6 @@
-import React from "react";
-import {Input} from "../../../../../common/FormControls/Input";
-import {Field} from "redux-form";
+import React from 'react'
+import {Input} from '../../../../../common/FormControls/Input'
+import {Field} from 'redux-form'
 
 interface Props {
     isSocial?: boolean

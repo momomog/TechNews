@@ -1,7 +1,7 @@
-import Common from "../../../../common/Common";
-import React from "react";
-import UserInfoLine from "./UserInfoLine";
-import {User} from "../../../../models/UserModel";
+import Common from '../../../../common/Common'
+import React from 'react'
+import UserInfoLine from './UserInfoLine'
+import {User} from '../../../../models/UserModel'
 
 interface Props {
     user: User

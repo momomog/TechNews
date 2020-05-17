@@ -1,5 +1,5 @@
-import React from "react";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import React from 'react'
+import {Field, InjectedFormProps, reduxForm} from 'redux-form'
 import {
     email,
     isSamePasswords,
@@ -9,10 +9,10 @@ import {
     minLength3,
     minLength6,
     required,
-    usernameEmailValidate,
-} from "../../../../common/Validators";
-import {Input} from "../../../../common/FormControls/Input";
-import {SignUpRequest} from "../../../../models/RequestsModel";
+    usernameEmailValidate
+} from '../../../../common/Validators'
+import {Input} from '../../../../common/FormControls/Input'
+import {SignUpRequest} from '../../../../models/RequestsModel'
 
 /**
  *

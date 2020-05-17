@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import RecommendedPosts from "./RecommendedPosts";
-import PostAPI from "../../../../api/PostAPI";
-import {Post} from "../../../../models/PostModel";
+import React, {useState} from 'react'
+import RecommendedPosts from './RecommendedPosts'
+import PostAPI from '../../../../api/PostAPI'
+import {Post} from '../../../../models/PostModel'
 
 interface Props {
     categoryId: number

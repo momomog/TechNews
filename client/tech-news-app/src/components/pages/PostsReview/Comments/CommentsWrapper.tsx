@@ -1,14 +1,14 @@
-import React, {useEffect} from 'react';
-import {connect} from "react-redux";
-import {useRouteMatch} from "react-router-dom";
-import Comments from "./Comments";
-import {getPostComments} from "../../../../redux/CommentsReducer";
-import CommentAPI from "../../../../api/CommentAPI";
-import {NotificationManager} from "react-notifications";
-import {Comment, CommentRequest} from "../../../../models/CommentModel";
-import {User} from "../../../../models/UserModel";
-import {RootState} from "../../../../redux/ReduxStore";
-import {Dispatch} from "redux";
+import React, {useEffect} from 'react'
+import {connect} from 'react-redux'
+import {useRouteMatch} from 'react-router-dom'
+import Comments from './Comments'
+import {getPostComments} from '../../../../redux/CommentsReducer'
+import CommentAPI from '../../../../api/CommentAPI'
+import {NotificationManager} from 'react-notifications'
+import {Comment, CommentRequest} from '../../../../models/CommentModel'
+import {User} from '../../../../models/UserModel'
+import {RootState} from '../../../../redux/ReduxStore'
+import {Dispatch} from 'redux'
 
 interface Props {
     sectionId: number

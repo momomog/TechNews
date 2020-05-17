@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 import okIcon from '../../static/ok-icon.png'
 import errorIcon from '../../static/error-icon.png'

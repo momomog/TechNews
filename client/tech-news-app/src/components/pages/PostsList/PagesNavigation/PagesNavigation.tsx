@@ -1,6 +1,6 @@
-import React from 'react';
-import {NavLink} from "react-router-dom";
-import {getSectionName,} from "../../../../common/Const";
+import React from 'react'
+import {NavLink} from 'react-router-dom'
+import {getSectionName} from '../../../../common/Const'
 
 interface Props {
     postPage: number
@@ -19,8 +19,8 @@ interface Props {
  */
 const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, sectionId}) => {
 
-    const onePagePostsCount = 8;
-    const maxPagesCount = 7;
+    const onePagePostsCount = 8
+    const maxPagesCount = 7
     const setPostPage = e => setPosts(sectionId, Number(e.target.textContent))
     const setPrevNextPostPage = (page: number) => setPosts(sectionId, page)
 
@@ -70,11 +70,11 @@ const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, secti
     function initPagesArray() {
         const page = postPage,
             pagesArray: Array<number> = [],
-            pagesCount = Math.ceil(postsCount / onePagePostsCount);
+            pagesCount = Math.ceil(postsCount / onePagePostsCount)
 
         if (pagesCount <= maxPagesCount) {
             for (let i = 1; i <= pagesCount; i++) {
-                pagesArray.push(i);
+                pagesArray.push(i)
             }
         } else if (4 >= page) {
             for (let i = 1; i <= maxPagesCount; i++) {
@@ -90,7 +90,7 @@ const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, secti
             }
         }
 
-        return pagesArray;
+        return pagesArray
     }
 
     // блокировка кнопки "назад", если номер страницы-пагинации 1

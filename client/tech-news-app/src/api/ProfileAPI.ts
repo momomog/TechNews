@@ -1,9 +1,12 @@
-import {request} from "./BaseRequest";
-import AuthService from "../common/AuthService";
-import {ProfileRequest} from "../models/RequestsModel";
-import {User} from "../models/UserModel";
+import {request} from './BaseRequest'
+import AuthService from '../common/AuthService'
+import {ProfileRequest} from '../models/RequestsModel'
+import {User} from '../models/UserModel'
 
 class ProfileAPI {
+    /**
+     * Данные текущего пользователя
+     */
     getCurrentUser = (): Promise<User> => {
         if (!AuthService.getToken())
             return Promise.reject({
@@ -17,10 +20,18 @@ class ProfileAPI {
         })
     }
 
+    /**
+     * Данные пользователя по юзернейму
+     * @param username
+     */
     getUserProfile = (username: string): Promise<User> => request({
         url: `users/${username}`
     })
 
+    /**
+     * Загрузка фото пользователя
+     * @param photoBody
+     */
     onLoadPhoto = (photoBody: File): Promise<boolean> => {
         const formData = new FormData()
         formData.append('photo', photoBody)
@@ -33,6 +44,10 @@ class ProfileAPI {
         })
     }
 
+    /**
+     * Обновление данных пользователя
+     * @param userDataRequest
+     */
     onUpdateUserData = (userDataRequest: ProfileRequest): Promise<boolean> => request({
         url: `user/me/update`,
         method: 'POST',

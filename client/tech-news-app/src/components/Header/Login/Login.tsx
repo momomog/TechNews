@@ -1,11 +1,11 @@
-import React from 'react';
-import {SECTION_ALL_POSTS} from "../../../common/Const";
-import AuthButton from "./AuthButton/AuthButton";
+import React from 'react'
+import {SECTION_ALL_POSTS} from '../../../common/Const'
+import AuthButton from './AuthButton/AuthButton'
 import logo from '../../../static/logo.png'
-import {NavLink} from "react-router-dom";
-import {ChangeSectionAction, SetPostPageAction} from "../../../models/PostModel";
-import AuthUser from "./AuthUser/AuthUser";
-import {SetIsAuthAction, User} from "../../../models/UserModel";
+import {NavLink} from 'react-router-dom'
+import {ChangeSectionAction, SetPostPageAction} from '../../../models/PostModel'
+import AuthUser from './AuthUser/AuthUser'
+import {SetIsAuthAction, User} from '../../../models/UserModel'
 
 interface Props {
     isAuth: boolean

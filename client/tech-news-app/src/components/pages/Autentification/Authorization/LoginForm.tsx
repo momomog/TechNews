@@ -1,9 +1,9 @@
-import {NavLink} from 'react-router-dom';
-import React from 'react';
-import {Field, InjectedFormProps, reduxForm} from 'redux-form';
-import {Input} from '../../../../common/FormControls/Input';
-import {required} from '../../../../common/Validators';
-import {SignInRequest} from '../../../../models/RequestsModel';
+import {NavLink} from 'react-router-dom'
+import React from 'react'
+import {Field, InjectedFormProps, reduxForm} from 'redux-form'
+import {Input} from '../../../../common/FormControls/Input'
+import {required} from '../../../../common/Validators'
+import {SignInRequest} from '../../../../models/RequestsModel'
 
 /**
  * Форма авторизации

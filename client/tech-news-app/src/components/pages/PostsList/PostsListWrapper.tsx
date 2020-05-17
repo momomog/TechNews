@@ -1,13 +1,13 @@
-import React, {useEffect} from 'react';
-import {connect} from "react-redux";
-import PostsList from "./PostsList";
-import {getPosts, setPostIdAction} from "../../../redux/PostsReducer";
-import {getSectionId, SECTION_ALL_POSTS} from "../../../common/Const";
-import {useRouteMatch} from "react-router-dom";
-import {Post, SetPostIdAction} from "../../../models/PostModel";
-import {Dispatch} from "redux";
-import {RootState} from "../../../redux/ReduxStore";
-import Spinner from "../../core/Spinner";
+import React, {useEffect} from 'react'
+import {connect} from 'react-redux'
+import PostsList from './PostsList'
+import {getPosts, setPostIdAction} from '../../../redux/PostsReducer'
+import {getSectionId, SECTION_ALL_POSTS} from '../../../common/Const'
+import {useRouteMatch} from 'react-router-dom'
+import {Post, SetPostIdAction} from '../../../models/PostModel'
+import {Dispatch} from 'redux'
+import {RootState} from '../../../redux/ReduxStore'
+import Spinner from '../../core/Spinner'
 
 interface Props {
     postList: Array<Post>

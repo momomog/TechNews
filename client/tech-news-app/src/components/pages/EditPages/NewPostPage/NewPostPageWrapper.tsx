@@ -1,15 +1,15 @@
-import React from 'react';
-import {connect} from "react-redux";
-import {Dispatch} from "redux";
-import {withRouter} from "react-router-dom";
-import NewPostPage from "./NewPostPage";
-import {getSectionName} from "../../../../common/Const";
-import {NotificationManager} from "react-notifications";
-import PostAPI from "../../../../api/PostAPI";
-import {chooseSectionAction, getPosts, setPostPageAction} from "../../../../redux/PostsReducer";
-import {ChangeSectionAction} from "../../../../models/PostModel";
-import {RouteComponentProps} from "react-router";
-import {PostRequest} from "../../../../models/RequestsModel";
+import React from 'react'
+import {connect} from 'react-redux'
+import {Dispatch} from 'redux'
+import {withRouter} from 'react-router-dom'
+import NewPostPage from './NewPostPage'
+import {getSectionName} from '../../../../common/Const'
+import {NotificationManager} from 'react-notifications'
+import PostAPI from '../../../../api/PostAPI'
+import {chooseSectionAction, getPosts, setPostPageAction} from '../../../../redux/PostsReducer'
+import {ChangeSectionAction} from '../../../../models/PostModel'
+import {RouteComponentProps} from 'react-router'
+import {PostRequest} from '../../../../models/RequestsModel'
 
 interface Props {
     changeSection: (sectionId: number) => ChangeSectionAction
@@ -39,7 +39,7 @@ const NewPostPageWrapper: React.FC<RouteComponentProps<any> & Props> = ({changeS
                 setPostPage()
                 getPosts(formData.categoryId)
                 history.push(`/posts/${getSectionName(formData.categoryId)}`)
-                window.scroll(0,0)
+                window.scroll(0, 0)
             })
             .catch(() => NotificationManager.error('Не удалось создать новый пост', 'Ошибка'))
     }

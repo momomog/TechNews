@@ -1,13 +1,13 @@
-import {applyMiddleware, combineReducers, createStore, Reducer, Store} from "redux";
+import {applyMiddleware, combineReducers, createStore, Reducer, Store} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
-import {postsReducer} from './PostsReducer';
-import {userReducer} from './UserReducer';
-import {commentsReducer} from "./CommentsReducer";
+import {postsReducer} from './PostsReducer'
+import {userReducer} from './UserReducer'
+import {commentsReducer} from './CommentsReducer'
 import {reducer as formReducer} from 'redux-form'
-import {PostState} from "../models/PostModel";
-import {CommentState} from "../models/CommentModel";
-import {UserState} from "../models/UserModel";
+import {PostState} from '../models/PostModel'
+import {CommentState} from '../models/CommentModel'
+import {UserState} from '../models/UserModel'
 
 export interface RootState {
     postsData: PostState

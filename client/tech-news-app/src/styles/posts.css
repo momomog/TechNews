@@ -40,8 +40,8 @@
 }
 
 .post-desc iframe {
-    width: 55%!important;
-    min-width: 310px!important;
+    width: 55% !important;
+    min-width: 310px !important;
     height: 310px !important;
 }
 
@@ -65,7 +65,7 @@
 
 .post-author-comment {
     font-size: 1.1em;
-    padding-left: 0!important;
+    padding-left: 0 !important;
 }
 
 .post-star-text {

@@ -1,10 +1,10 @@
-import React from 'react';
-import {connect} from "react-redux";
-import {login} from "../../../../redux/UserReducer";
-import Authorization from "./Authorization";
-import {RootState} from "../../../../redux/ReduxStore";
-import {Dispatch} from "redux";
-import {SignInRequest} from "../../../../models/RequestsModel";
+import React from 'react'
+import {connect} from 'react-redux'
+import {login} from '../../../../redux/UserReducer'
+import Authorization from './Authorization'
+import {RootState} from '../../../../redux/ReduxStore'
+import {Dispatch} from 'redux'
+import {SignInRequest} from '../../../../models/RequestsModel'
 
 interface Props {
     isAuth: boolean

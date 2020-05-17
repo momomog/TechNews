@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {Editor} from "@tinymce/tinymce-react";
-import {change} from "redux-form";
+import React, {useState} from 'react'
+import {Editor} from '@tinymce/tinymce-react'
+import {change} from 'redux-form'
 
 /**
  * Контроль формы. PostDescription - tinymce editor
@@ -24,7 +24,7 @@ export const PostDescription = ({input, meta, ...props}) => {
                     onEditorChange={val => {
                         if (val) {
                             setValue(val)
-                            meta.dispatch(change(meta.form, input.name, val));
+                            meta.dispatch(change(meta.form, input.name, val))
                         }
                     }}
                     init={{

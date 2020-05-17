@@ -1,6 +1,6 @@
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
-import {compose} from "redux";
-import React from "react";
+import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom'
+import {compose} from 'redux'
+import React from 'react'
 
 interface Props {
     location: {

@@ -1,7 +1,7 @@
-import React from 'react';
-import {ProfileRequest} from "../../../../models/RequestsModel";
-import ProfileEditReduxForm from "./ProfileEditForm/ProfileEditForm";
-import {User} from "../../../../models/UserModel";
+import React from 'react'
+import {ProfileRequest} from '../../../../models/RequestsModel'
+import ProfileEditReduxForm from './ProfileEditForm/ProfileEditForm'
+import {User} from '../../../../models/UserModel'
 
 interface Props {
     user: User,

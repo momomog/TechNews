@@ -1,6 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
-    font-size: 1.5em!important;
+    font-size: 1.5em !important;
     /*background: radial-gradient(40% 50%, #05464d, #324b4d);*/
 
 
@@ -33,6 +33,7 @@ code {
     text-align: center;
     margin-top: 10%;
 }
+
 .error-details {
     font-size: 1.6rem;
 }

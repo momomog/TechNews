@@ -3,8 +3,8 @@ import Cropper from 'react-easy-crop'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import {withStyles} from '@material-ui/core/styles'
-import Slider from "@material-ui/core/Slider";
-import DialogActions from "@material-ui/core/DialogActions";
+import Slider from '@material-ui/core/Slider'
+import DialogActions from '@material-ui/core/DialogActions'
 
 const Cutter = (props) => {
     const classes = props.classes

@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react';
-import {connect} from "react-redux";
-import App from "./App";
-import AuthService from "../common/AuthService";
-import {Dispatch} from "redux";
-import {UserAction} from "../models/UserModel";
-import {getCurrentUserData, setIsAuthAction} from "../redux/UserReducer";
+import React, {useEffect} from 'react'
+import {connect} from 'react-redux'
+import App from './App'
+import AuthService from '../common/AuthService'
+import {Dispatch} from 'redux'
+import {UserAction} from '../models/UserModel'
+import {getCurrentUserData, setIsAuthAction} from '../redux/UserReducer'
 
 interface Props {
     setIsAuth: (isAuth: boolean) => UserAction,

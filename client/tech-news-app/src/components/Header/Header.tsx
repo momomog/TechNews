@@ -1,9 +1,9 @@
-import React from 'react';
-import NavLinks from "./NavLinks/NavLinks";
-import Login from "./Login/Login";
-import {NotificationContainer} from "react-notifications";
-import {ChangeSectionAction, SetPostPageAction} from "../../models/PostModel";
-import {SetIsAuthAction, User} from "../../models/UserModel";
+import React from 'react'
+import NavLinks from './NavLinks/NavLinks'
+import Login from './Login/Login'
+import {NotificationContainer} from 'react-notifications'
+import {ChangeSectionAction, SetPostPageAction} from '../../models/PostModel'
+import {SetIsAuthAction, User} from '../../models/UserModel'
 
 interface Props {
     isAuth: boolean

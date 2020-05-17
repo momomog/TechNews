@@ -1,8 +1,8 @@
-import React from 'react';
-import PostEditReduxForm from "./PostEditForm";
-import {Post} from "../../../../models/PostModel";
-import {PostRequest} from "../../../../models/RequestsModel";
-import {categories} from "../../../../common/Const";
+import React from 'react'
+import PostEditReduxForm from './PostEditForm'
+import {Post} from '../../../../models/PostModel'
+import {PostRequest} from '../../../../models/RequestsModel'
+import {categories} from '../../../../common/Const'
 
 interface Props {
     post: Post

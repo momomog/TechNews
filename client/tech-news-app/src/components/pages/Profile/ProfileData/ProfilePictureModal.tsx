@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import {ProfileImageCutter} from "./ProfileImageCutter";
+import React, {useState} from 'react'
+import Dialog from '@material-ui/core/Dialog'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import DialogContent from '@material-ui/core/DialogContent'
+import {ProfileImageCutter} from './ProfileImageCutter'
 
 interface Props {
     isOpenModal: boolean

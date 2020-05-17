@@ -1,7 +1,7 @@
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {NavLink} from "react-router-dom";
-import React, {useEffect} from "react";
-import {Input} from "../../../../common/FormControls/Input";
+import {Field, InjectedFormProps, reduxForm} from 'redux-form'
+import {useHistory} from 'react-router-dom'
+import React, {useEffect} from 'react'
+import {Input} from '../../../../common/FormControls/Input'
 import {
     maxLength1000,
     maxLength200,
@@ -10,13 +10,13 @@ import {
     minLength200,
     minLength50,
     required
-} from "../../../../common/Validators";
-import {TextArea} from "../../../../common/FormControls/TextArea";
-import {Select} from "../../../../common/FormControls/Select";
-import {FileInput} from "../../../../common/FormControls/FileInput";
-import {PostDescription} from "../../../../common/FormControls/PostDescription";
-import {PostRequest} from "../../../../models/RequestsModel";
-import {Post} from "../../../../models/PostModel";
+} from '../../../../common/Validators'
+import {TextArea} from '../../../../common/FormControls/TextArea'
+import {Select} from '../../../../common/FormControls/Select'
+import {FileInput} from '../../../../common/FormControls/FileInput'
+import {PostDescription} from '../../../../common/FormControls/PostDescription'
+import {PostRequest} from '../../../../models/RequestsModel'
+import {Post} from '../../../../models/PostModel'
 
 interface OwnProps {
     categories: Array<{ id: number, title: string }>
@@ -33,6 +33,7 @@ interface OwnProps {
  * @param handleSubmit
  */
 const PostEditForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps> = ({categories, post, initialize, submitSucceeded, invalid, handleSubmit}) => {
+    const history = useHistory()
 
     useEffect(() => {
         initialize({
@@ -114,13 +115,12 @@ const PostEditForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps
 
             <div className="row p-2 ml-4 mr-1">
                 <div className="col-12 mt-5 d-flex justify-content-end">
-                    <NavLink to="/admin-panel">
-                        <button type="button"
-                                className="btn btn-light mr-3"
-                                disabled={submitSucceeded}>
-                            Вернуться назад
-                        </button>
-                    </NavLink>
+                    <button type="button"
+                            className="btn btn-light mr-3"
+                            onClick={() => history.goBack()}
+                            disabled={submitSucceeded}>
+                        Вернуться назад
+                    </button>
                     <button type="submit"
                             className="btn btn-success"
                             disabled={invalid || submitSucceeded}>

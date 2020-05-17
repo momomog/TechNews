@@ -1,4 +1,4 @@
-import jwt_decode from "jwt-decode";
+import jwt_decode from 'jwt-decode'
 
 interface JwtUserData {
     sub: string
@@ -55,7 +55,7 @@ class AuthService {
                     isAdmin = true
             })
         }
-        return isAdmin;
+        return isAdmin
     }
 
     // Раскодирование JWT-токена

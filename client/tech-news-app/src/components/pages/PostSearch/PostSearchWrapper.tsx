@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
-import PostAPI from "../../../api/PostAPI";
-import {Post} from "../../../models/PostModel";
-import Spinner from "../../core/Spinner";
-import PostSearch from "./PostSearch";
-import {connect} from "react-redux";
-import {Dispatch} from "redux";
-import {setPostIdAction} from "../../../redux/PostsReducer";
+import React, {useEffect, useState} from 'react'
+import {useLocation} from 'react-router-dom'
+import PostAPI from '../../../api/PostAPI'
+import {Post} from '../../../models/PostModel'
+import Spinner from '../../core/Spinner'
+import PostSearch from './PostSearch'
+import {connect} from 'react-redux'
+import {Dispatch} from 'redux'
+import {setPostIdAction} from '../../../redux/PostsReducer'
 
 interface Props {
     setPostId: (id: number) => void
@@ -28,18 +28,18 @@ const PostSearchWrapper: React.FC<Props> = ({setPostId}) => {
         setSearchText(search_query)
 
     useEffect(() => {
-            setIsLoading(true)
+        setIsLoading(true)
 
-            PostAPI.searchPosts(searchText)
-                .then((response: Array<Post>) => {
-                    setSearchPosts(response)
-                    setIsLoading(false)
-                })
-                .catch(() => setIsLoading(false))
+        PostAPI.searchPosts(searchText)
+            .then((response: Array<Post>) => {
+                setSearchPosts(response)
+                setIsLoading(false)
+            })
+            .catch(() => setIsLoading(false))
     }, [searchText])
 
     return (
-        <div>
+        <>
             {
                 isLoading
                     ? <Spinner/>
@@ -49,7 +49,7 @@ const PostSearchWrapper: React.FC<Props> = ({setPostId}) => {
                                   searchText={searchText}/>
                     : <h4 className="text-center mt-5">Не найдено записей, удовлетворящих запросу "{searchText}"</h4>
             }
-        </div>
+        </>
 
     )
 }

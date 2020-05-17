@@ -1,10 +1,10 @@
-import React, {useState} from "react";
-import Spinner from "../../core/Spinner";
-import ProfilePictureModal from "./ProfileData/ProfilePictureModal";
-import {NotificationManager} from "react-notifications";
-import {User} from "../../../models/UserModel";
-import ProfileData from "./ProfileData/ProfileData";
-import SocialIcons from "./ProfileData/SocialIcons";
+import React, {useState} from 'react'
+import Spinner from '../../core/Spinner'
+import ProfilePictureModal from './ProfileData/ProfilePictureModal'
+import {NotificationManager} from 'react-notifications'
+import {User} from '../../../models/UserModel'
+import ProfileData from './ProfileData/ProfileData'
+import SocialIcons from './ProfileData/SocialIcons'
 
 interface Props {
     user: User
@@ -83,7 +83,7 @@ const Profile: React.FC<Props> = ({user, isCurrentUser, onLoadPhoto}) => {
                                 </div>
 
                                 <div className="col-sm-5">
-                                    <h1 style={{color: "#00b1b1"}}>
+                                    <h1 style={{color: '#00b1b1'}}>
                                         {`${user.firstName} ${user.lastName}`}
                                     </h1>
                                     <span>

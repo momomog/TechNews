@@ -37,20 +37,20 @@ export interface SetUserDataAction {
 
 export const UserInitial: User = {
     id: 0,
-    username: 'INITIAL',
-    firstName: 'INITIAL',
-    lastName: 'INITIAL',
-    email: 'INITIAL',
+    username: '',
+    firstName: '',
+    lastName: '',
+    email: '',
     createAt: [0, 0, 0],
     commentsCount: 0,
     profileData: {
-        country: 'INITIAL',
-        city: 'INITIAL',
-        vk: 'INITIAL',
-        instagram: 'INITIAL',
-        twitter: 'INITIAL',
-        facebook: 'INITIAL',
-        photoId: 'INITIAL',
+        country: '',
+        city: '',
+        vk: '',
+        instagram: '',
+        twitter: '',
+        facebook: '',
+        photoId: '',
         birthDate: [0, 0, 0]
     }
 }

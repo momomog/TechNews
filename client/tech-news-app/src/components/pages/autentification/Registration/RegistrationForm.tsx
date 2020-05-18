@@ -15,11 +15,10 @@ import {Input} from '../../../../common/FormControls/Input'
 import {SignUpRequest} from '../../../../models/RequestsModel'
 
 /**
- *
+ * Форма регистрации
  * @param handleSubmit
  * @param invalid
  * @param submitting
- * Форма регистрации
  */
 const RegistrationForm: React.FC<InjectedFormProps<SignUpRequest>> = ({handleSubmit, invalid, submitting}) => {
     return (
@@ -32,6 +31,8 @@ const RegistrationForm: React.FC<InjectedFormProps<SignUpRequest>> = ({handleSub
                            type="text"
                            className="form-control input-group-form"
                            placeholder="Имя"
+                           label="Имя"
+                           showlabel="true"
                            validate={[
                                required,
                                minLength3,
@@ -46,6 +47,8 @@ const RegistrationForm: React.FC<InjectedFormProps<SignUpRequest>> = ({handleSub
                            component={Input}
                            placeholder="Фамилия"
                            className="form-control input-group-form"
+                           label="Фамилия"
+                           showlabel="true"
                            validate={[
                                required,
                                minLength3,
@@ -58,8 +61,10 @@ const RegistrationForm: React.FC<InjectedFormProps<SignUpRequest>> = ({handleSub
                 <div className="col-sm-12 mw-100">
                     <Field name="username"
                            component={Input}
-                           placeholder="Никнейм"
+                           placeholder="Ваш уникальный никнейм"
                            className="form-control input-group-form"
+                           label="Никнейм"
+                           showlabel="true"
                            validate={[
                                required,
                                minLength3,
@@ -75,6 +80,8 @@ const RegistrationForm: React.FC<InjectedFormProps<SignUpRequest>> = ({handleSub
                            name="email"
                            placeholder="Почта"
                            className="form-control input-group-form"
+                           label="Почта"
+                           showlabel="true"
                            validate={[
                                required,
                                email,
@@ -88,8 +95,10 @@ const RegistrationForm: React.FC<InjectedFormProps<SignUpRequest>> = ({handleSub
                     <Field type="password"
                            component={Input}
                            name="password"
-                           placeholder="Пароль"
+                           placeholder="Минимальная длина 6 символов"
                            className="form-control input-group-form"
+                           label="Пароль"
+                           showlabel="true"
                            validate={[
                                required,
                                minLength6,
@@ -105,6 +114,8 @@ const RegistrationForm: React.FC<InjectedFormProps<SignUpRequest>> = ({handleSub
                            name="repeatPassword"
                            placeholder="Повторите пароль"
                            className="form-control input-group-form"
+                           label="Повторите пароль"
+                           showlabel="true"
                            validate={[
                                required,
                                minLength6,
@@ -116,7 +127,7 @@ const RegistrationForm: React.FC<InjectedFormProps<SignUpRequest>> = ({handleSub
 
             <div className="form-group mt-3">
                 <div className="col-sm-12 pl-0">
-                    <button className="btn btn-success btn-block w-auto"
+                    <button className="btn btn-success btn-block w-auto ml-4"
                             disabled={invalid || submitting}
                             value="Зарегистрировать">
                         Зарегистрироваться

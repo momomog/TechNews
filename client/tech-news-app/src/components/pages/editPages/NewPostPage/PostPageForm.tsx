@@ -1,6 +1,6 @@
 import {Field, InjectedFormProps, reduxForm} from 'redux-form'
-import {useHistory} from 'react-router-dom'
-import React, {useEffect} from 'react'
+import {NavLink} from 'react-router-dom'
+import React, {useState} from 'react'
 import {Input} from '../../../../common/FormControls/Input'
 import {
     maxLength1000,
@@ -9,56 +9,56 @@ import {
     minLength1000,
     minLength200,
     minLength50,
-    required
+    required,
+    requiredFile
 } from '../../../../common/Validators'
 import {TextArea} from '../../../../common/FormControls/TextArea'
 import {Select} from '../../../../common/FormControls/Select'
 import {FileInput} from '../../../../common/FormControls/FileInput'
 import {PostDescription} from '../../../../common/FormControls/PostDescription'
 import {PostRequest} from '../../../../models/RequestsModel'
-import {Post} from '../../../../models/PostModel'
+import nocard from '../../../../static/nocard.jpg'
 
 interface OwnProps {
     categories: Array<{ id: number, title: string }>
-    post: Post
 }
 
 /**
- * Редактор поста. Форма
+ * Новый пост. Форма
  * @param categories
- * @param post
- * @param initialize
- * @param submitSucceeded
- * @param invalid
  * @param handleSubmit
+ * @param invalid
+ * @param submitSucceeded
  */
-const PostEditForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps> = ({categories, post, initialize, submitSucceeded, invalid, handleSubmit}) => {
-    const history = useHistory()
+const PostPageForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps> = ({categories, handleSubmit, invalid, submitSucceeded}) => {
+    const [photo, setPhoto] = useState(nocard)
 
-    useEffect(() => {
-        initialize({
-            title: post.title,
-            preDescription: post.preDescription,
-            fullDescription: post.fullDescription,
-            categoryId: post.categoryId
-        })
-    }, [post, initialize])
+    const onLoadPhoto = (file: File) => {
+        const reader = new FileReader()
+        reader.readAsBinaryString(file)
 
+        reader.onload = () => {
+            if (typeof reader.result === 'string') {
+                setPhoto(`data:image/gif;base64,${btoa(reader.result)}`)
+            }
+        }
+    }
 
     return (
         <form onSubmit={handleSubmit}>
 
             <h5 className="card-header ml-4 mr-4">Фотография</h5>
-            <div className="row p-3 ml-4 mr-4">
-                <div className="col-4">
-                    <img className="post-edit-picture" alt="post"
-                         src={post.photoId && `https://drive.google.com/uc?export=view&id=${post.photoId}`}/>
-                </div>
-                <div className="col-sm-8 d-flex align-items-end">
+            <div className="row p-3 ml-1 mr-4 d-flex align-items-center">
+                <div className="col-md-4">
                     <Field component={FileInput}
                            type="file"
+                           validate={requiredFile}
+                           onPreviewRender={onLoadPhoto}
                            accept="image/*"
                            name="photo"/>
+                </div>
+                <div className="col-md-5">
+                    <img src={photo} alt="post_pic" style={{borderRadius: 10}} width={'100px'} height={'100px'}/>
                 </div>
             </div>
 
@@ -66,30 +66,28 @@ const PostEditForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps
             <div className="row p-3 ml-4 mr-4">
                 <Field component={Input}
                        type="text"
+                       className="input-group-form"
+                       placeholder="Введите заголовок поста"
+                       name="title"
                        validate={[
                            required,
                            minLength50,
                            maxLength200
-                       ]}
-                       className="input-group-form"
-                       showlabel={'true'}
-                       placeholder="Введите заголовок поста"
-                       name="title"/>
+                       ]}/>
             </div>
 
             <h5 className="card-header ml-4 mr-4">Краткое описание</h5>
             <div className="row p-3 ml-4 mr-4">
                 <Field component={TextArea}
                        className="form-control text-area"
+                       rows="3"
+                       placeholder="Введите краткое описание поста"
+                       name="preDescription"
                        validate={[
                            required,
                            minLength200,
                            maxLength1000
-                       ]}
-                       rows="3"
-                       showlabel={'true'}
-                       placeholder="Введите краткое описание поста"
-                       name="preDescription"/>
+                       ]}/>
             </div>
 
             <h5 className="card-header ml-4 mr-4">Категория</h5>
@@ -105,7 +103,6 @@ const PostEditForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps
             <div className="p-3 ml-4 mr-4">
                 <Field component={PostDescription}
                        name="fullDescription"
-                       initValue={post.fullDescription}
                        validate={[
                            required,
                            minLength1000,
@@ -115,16 +112,17 @@ const PostEditForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps
 
             <div className="row p-2 ml-4 mr-1">
                 <div className="col-12 mt-5 d-flex justify-content-end">
-                    <button type="button"
-                            className="btn btn-light mr-3"
-                            onClick={() => history.goBack()}
-                            disabled={submitSucceeded}>
-                        Вернуться назад
-                    </button>
+                    <NavLink to="/admin-panel">
+                        <button type="button"
+                                className="btn btn-light mr-3"
+                                disabled={submitSucceeded}>
+                            Вернуться назад
+                        </button>
+                    </NavLink>
                     <button type="submit"
                             className="btn btn-success"
                             disabled={invalid || submitSucceeded}>
-                        {submitSucceeded ? 'Сохранение...' : 'Сохранить'}
+                        {submitSucceeded ? 'Сохранение...' : 'Создать'}
                     </button>
                 </div>
             </div>
@@ -133,5 +131,5 @@ const PostEditForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps
 }
 
 export default reduxForm<PostRequest, OwnProps>({
-    form: 'editPost'
-})(PostEditForm)
+    form: 'post'
+})(PostPageForm)

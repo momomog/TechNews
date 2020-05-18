@@ -21,12 +21,11 @@ const LoginForm: React.FC<InjectedFormProps<SignInRequest>> = ({handleSubmit, in
                      <i className="glyphicon glyphicon-user" style={{marginLeft: '-5px'}}/>
                 </span>
                 <span style={{width: '93%'}}>
-                <Field component={Input}
-                       validate={required}
-                       className="input-group-form"
-                       showlabel={'true'}
-                       placeholder="Имя пользователя или почтовый адрес"
-                       name="usernameOrEmail"/>
+                    <Field component={Input}
+                           validate={required}
+                           className="input-group-form"
+                           placeholder="Имя пользователя или почтовый адрес"
+                           name="usernameOrEmail"/>
                 </span>
             </div>
 
@@ -40,7 +39,6 @@ const LoginForm: React.FC<InjectedFormProps<SignInRequest>> = ({handleSubmit, in
                             type="password"
                             className="input-group-form"
                             name="password"
-                            showlabel={'true'}
                             placeholder="пароль"/>
                 </span>
 
@@ -48,12 +46,10 @@ const LoginForm: React.FC<InjectedFormProps<SignInRequest>> = ({handleSubmit, in
 
             <div className="input-group">
                 <div className="checkbox input-group-checkbox mt-2">
-                    <label>
-                        <Field component={'input'}
-                               type="checkbox"
-                               name="remember"/>
-                        Запомнить
-                    </label>
+                    <Field component={'input'}
+                           type="checkbox"
+                           name="remember"/>
+                    Запомнить
                 </div>
             </div>
 

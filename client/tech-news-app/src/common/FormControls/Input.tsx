@@ -15,9 +15,9 @@ export const Input = ({input, meta, ...props}) => {
     return (
         <div style={{width: '100%'}}>
             {
-                props.placeholder && !props.showlabel &&
-                <label className="col-sm-5 control-label required-field reg-label">
-                    {props.placeholder}
+                props.label && props.showlabel &&
+                <label className="col-sm-12 control-label required-field reg-label">
+                    {props.label}
                 </label>
             }
 

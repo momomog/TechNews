@@ -15,9 +15,9 @@ export const TextArea = ({input, meta, ...props}) => {
     return (
         <div style={{width: '100%'}}>
             {
-                props.placeholder && !props.showlabel &&
+                props.label && !props.showlabel &&
                 <label className="col-sm-5 control-label required-field reg-label">
-                    {props.placeholder}
+                    {props.label}
                 </label>
             }
 

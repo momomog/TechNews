@@ -5,11 +5,11 @@ import ProfileEdit from './ProfileEdit'
 import ProfileAPI from '../../../../api/ProfileAPI'
 import {NotificationManager} from 'react-notifications'
 import {User} from '../../../../models/UserModel'
-import {RootState} from '../../../../redux/ReduxStore'
+import {RootState} from '../../../../redux/reduxStore'
 import {RouteComponentProps} from 'react-router'
 import {ProfileRequest} from '../../../../models/RequestsModel'
-import {getCurrentUserData} from '../../../../redux/UserReducer'
 import {Dispatch} from 'redux'
+import {getCurrentUserData} from '../../../../redux/actions/userActions'
 
 interface Props {
     isAuth: boolean
@@ -44,14 +44,14 @@ const ProfileEditWrapper: React.FC<RouteComponentProps<any> & Props> = ({isAuth,
 
 }
 
-let mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: RootState) => {
     return {
         isAuth: state.userData.isAuth,
         userData: state.userData.userData
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         getCurrentUserData: () => dispatch(getCurrentUserData())
     }

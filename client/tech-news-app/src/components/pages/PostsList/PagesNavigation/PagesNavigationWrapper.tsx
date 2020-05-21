@@ -2,9 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 import PagesNavigation from './PagesNavigation'
-import {setPostPageAndGetPosts} from '../../../../redux/PostsReducer'
-import {RootState} from '../../../../redux/ReduxStore'
+import {RootState} from '../../../../redux/reduxStore'
 import {Dispatch} from 'redux'
+import {setPostPageAndGetPosts} from '../../../../redux/actions/postActions'
 
 interface Props {
     postPage: number
@@ -14,12 +14,11 @@ interface Props {
 }
 
 /**
- *
+ * Пагинатор. Оболочка
  * @param postPage
  * @param postsCount
  * @param sectionId
  * @param setPostPageAndGetPosts
- * Пагинатор. Оболочка
  */
 const PagesNavigationWrapper: React.FC<Props> = ({postPage, postsCount, sectionId, setPostPageAndGetPosts}) => {
     const setPosts = (sectionId: number, postPage: number) => setPostPageAndGetPosts(sectionId, postPage)

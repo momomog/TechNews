@@ -6,10 +6,10 @@ import NewPostPage from './NewPostPage'
 import {getSectionName} from '../../../../common/Const'
 import {NotificationManager} from 'react-notifications'
 import PostAPI from '../../../../api/PostAPI'
-import {chooseSectionAction, getPosts, setPostPageAction} from '../../../../redux/PostsReducer'
 import {ChangeSectionAction} from '../../../../models/PostModel'
 import {RouteComponentProps} from 'react-router'
 import {PostRequest} from '../../../../models/RequestsModel'
+import {changeSection, getPosts, setPostPageAction} from '../../../../redux/actions/postActions'
 
 interface Props {
     changeSection: (sectionId: number) => ChangeSectionAction
@@ -47,16 +47,12 @@ const NewPostPageWrapper: React.FC<RouteComponentProps<any> & Props> = ({changeS
     return <NewPostPage createNewPost={createNewPost}/>
 }
 
-let mapStateToProps = (state) => {
-    return {}
-}
-
-let mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        changeSection: sectionId => dispatch(chooseSectionAction(sectionId)),
+        changeSection: sectionId => dispatch(changeSection(sectionId)),
         setPostPage: () => dispatch(setPostPageAction()),
         getPosts: sectionId => dispatch(getPosts(sectionId))
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewPostPageWrapper))
+export default withRouter(connect(null, mapDispatchToProps)(NewPostPageWrapper))

@@ -10,7 +10,7 @@ interface Props {
 }
 
 /**
- * Оболочка Рекомендуемые посты
+ * Рекомендуемые посты. Оболочка
  * @param categoryId
  * @param postId
  * @param isVisible

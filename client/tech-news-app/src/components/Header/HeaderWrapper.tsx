@@ -1,12 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {chooseSectionAction, getPosts, setPostPageAction} from '../../redux/PostsReducer'
 import Header from './Header'
-import {setIsAuthAction, setUserDataAction} from '../../redux/UserReducer'
-import {RootState} from '../../redux/ReduxStore'
+import {RootState} from '../../redux/reduxStore'
 import {SetIsAuthAction, User} from '../../models/UserModel'
 import {Dispatch} from 'redux'
 import {ChangeSectionAction, SetPostPageAction} from '../../models/PostModel'
+import {changeSection, getPosts, setPostPageAction} from '../../redux/actions/postActions'
+import {setIsAuthAction, setUserDataAction} from '../../redux/actions/userActions'
 
 interface Props {
     isAuth: boolean,
@@ -30,16 +30,16 @@ const HeaderWrapper: React.FC<Props> = (props) => {
                    {...props}/>
 }
 
-let mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: RootState) => {
     return {
         isAuth: state.userData.isAuth,
         userData: state.userData.userData
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        changeSection: (sectionId: number) => dispatch(chooseSectionAction(sectionId)),
+        changeSection: (sectionId: number) => dispatch(changeSection(sectionId)),
         setPostPage: (pageNumber: number) => dispatch(setPostPageAction(pageNumber)),
         setCurrentUserData: (userData: User) => dispatch(setUserDataAction(userData)),
         setIsAuth: (isAuth: boolean) => dispatch(setIsAuthAction(isAuth)),

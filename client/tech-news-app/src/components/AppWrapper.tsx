@@ -4,7 +4,7 @@ import App from './App'
 import AuthService from '../common/AuthService'
 import {Dispatch} from 'redux'
 import {UserAction} from '../models/UserModel'
-import {getCurrentUserData, setIsAuthAction} from '../redux/UserReducer'
+import {getCurrentUserData, setIsAuthAction} from '../redux/actions/userActions'
 
 interface Props {
     setIsAuth: (isAuth: boolean) => UserAction,
@@ -27,15 +27,12 @@ const AppWrapper: React.FC<Props> = ({setIsAuth, getUserData}) => {
     return <App/>
 }
 
-let mapStateToProps = (state) => {
-    return {}
-}
 
-let mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         setIsAuth: (isAuth: boolean) => dispatch(setIsAuthAction(isAuth)),
         getUserData: () => dispatch(getCurrentUserData())
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppWrapper)
+export default connect(null, mapDispatchToProps)(AppWrapper)

@@ -15,11 +15,11 @@ interface Props {
  */
 const Authorization: React.FC<Props> = ({isAuth, onLogin}) => {
 
-    const onLoginClick = (formData: SignInRequest) => {
+    const onLoginClick = ({usernameOrEmail, password, remember}: SignInRequest) => {
         onLogin({
-            usernameOrEmail: formData.usernameOrEmail,
-            password: formData.password
-        }, formData.remember)
+            usernameOrEmail,
+            password
+        }, remember)
     }
 
     return (

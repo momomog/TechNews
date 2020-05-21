@@ -2,13 +2,13 @@ import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {useRouteMatch} from 'react-router-dom'
 import Comments from './Comments'
-import {getPostComments} from '../../../../redux/CommentsReducer'
 import CommentAPI from '../../../../api/CommentAPI'
 import {NotificationManager} from 'react-notifications'
 import {Comment, CommentRequest} from '../../../../models/CommentModel'
 import {User} from '../../../../models/UserModel'
-import {RootState} from '../../../../redux/ReduxStore'
+import {RootState} from '../../../../redux/reduxStore'
 import {Dispatch} from 'redux'
+import {getPostComments} from '../../../../redux/actions/commentActions'
 
 interface Props {
     sectionId: number
@@ -75,7 +75,7 @@ const CommentsWrapper: React.FC<Props> = ({sectionId, postComments, commentsCoun
                      deleteCommentary={deleteCommentary}/>
 }
 
-let mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: RootState) => {
     return {
         sectionId: state.postsData.sectionId,
         postComments: state.commentsData.postComments,
@@ -85,7 +85,7 @@ let mapStateToProps = (state: RootState) => {
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         getPostComments: (sectionId: number, postId: number) => dispatch(getPostComments(sectionId, postId))
     }

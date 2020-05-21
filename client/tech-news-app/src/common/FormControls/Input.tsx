@@ -4,7 +4,7 @@ import okIcon from '../../static/ok-icon.png'
 import errorIcon from '../../static/error-icon.png'
 
 /**
- * Контроль формы. Input type="text"
+ * Контроль формы. Для type="file" используется компонент FileInput
  * @param input
  * @param meta
  * @param props
@@ -13,7 +13,7 @@ export const Input = ({input, meta, ...props}) => {
     const isError = meta.touched && meta.error
 
     return (
-        <div style={{width: '100%'}}>
+        <div className="w-100">
             {
                 props.label && props.showlabel &&
                 <label className="col-sm-12 control-label required-field reg-label">
@@ -21,7 +21,7 @@ export const Input = ({input, meta, ...props}) => {
                 </label>
             }
 
-            <div>
+            <>
                 <input {...input}
                        {...props}
                        style={{
@@ -32,7 +32,7 @@ export const Input = ({input, meta, ...props}) => {
                            marginBottom: `0px`
                        }}
                 />
-            </div>
+            </>
 
             {
                 isError &&

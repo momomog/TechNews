@@ -3,12 +3,12 @@ import {connect} from 'react-redux'
 import PostReview from './PostReview'
 import {useRouteMatch} from 'react-router-dom'
 import {Dispatch} from 'redux'
-import {getPostData} from '../../../redux/PostsReducer'
 import PostAPI from '../../../api/PostAPI'
 import {Post} from '../../../models/PostModel'
 import {User} from '../../../models/UserModel'
-import {RootState} from '../../../redux/ReduxStore'
+import {RootState} from '../../../redux/reduxStore'
 import Spinner from '../../core/Spinner'
+import {getPostData} from '../../../redux/actions/postActions'
 
 interface Props {
     postData: Post
@@ -40,7 +40,7 @@ const PostReviewWrapper: React.FC<Props> = ({postData, sectionId, userData, getP
         : <Spinner/>
 }
 
-let mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: RootState) => {
     return {
         postData: state.postsData.postData,
         sectionId: state.postsData.sectionId,
@@ -48,7 +48,7 @@ let mapStateToProps = (state: RootState) => {
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         getPostData: (sectionId: number, postId: number) => dispatch(getPostData(sectionId, postId))
     }

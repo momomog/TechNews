@@ -5,9 +5,9 @@ import {Dispatch} from 'redux'
 import PostAdminPanel from './PostAdminPanel'
 import PostAPI from '../../../../api/PostAPI'
 import {NotificationManager} from 'react-notifications'
-import {setPostPageAndGetPosts} from '../../../../redux/PostsReducer'
 import {getSectionName} from '../../../../common/Const'
-import {RootState} from '../../../../redux/ReduxStore'
+import {RootState} from '../../../../redux/reduxStore'
+import {setPostPageAndGetPosts} from '../../../../redux/actions/postActions'
 
 interface Props {
     sectionId: number
@@ -16,7 +16,7 @@ interface Props {
 }
 
 /**
- * Оболочка Панель управления постом
+ * Панель управления постом. Оболочка
  * @param setPostPageAndGetPosts
  * @param sectionId
  * @param postId
@@ -42,13 +42,13 @@ const PostAdminPanelWrapper: React.FC<Props> = ({setPostPageAndGetPosts, section
                            onDeletePost={deletePostById}/>
 }
 
-let mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: RootState) => {
     return {
         sectionId: state.postsData.sectionId
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         setPostPageAndGetPosts: (sectionId: number, postPage: number) => dispatch(setPostPageAndGetPosts(sectionId, postPage))
     }

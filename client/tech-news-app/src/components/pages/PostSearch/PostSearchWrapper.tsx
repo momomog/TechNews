@@ -6,7 +6,7 @@ import Spinner from '../../core/Spinner'
 import PostSearch from './PostSearch'
 import {connect} from 'react-redux'
 import {Dispatch} from 'redux'
-import {setPostIdAction} from '../../../redux/PostsReducer'
+import {setPostIdAction} from '../../../redux/actions/postActions'
 
 interface Props {
     setPostId: (id: number) => void
@@ -54,14 +54,10 @@ const PostSearchWrapper: React.FC<Props> = ({setPostId}) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {}
-}
-
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         setPostId: (id: number) => dispatch(setPostIdAction(id))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostSearchWrapper)
+export default connect(null, mapDispatchToProps)(PostSearchWrapper)

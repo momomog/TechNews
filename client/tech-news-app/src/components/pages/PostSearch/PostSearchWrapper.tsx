@@ -4,19 +4,11 @@ import PostAPI from '../../../api/PostAPI'
 import {Post} from '../../../models/PostModel'
 import Spinner from '../../core/Spinner'
 import PostSearch from './PostSearch'
-import {connect} from 'react-redux'
-import {Dispatch} from 'redux'
-import {setPostIdAction} from '../../../redux/actions/postActions'
-
-interface Props {
-    setPostId: (id: number) => void
-}
 
 /**
- * @param setPostId
  * Оболочка Поиск по сайту
  */
-const PostSearchWrapper: React.FC<Props> = ({setPostId}) => {
+const PostSearchWrapper: React.FC = () => {
     const [searchText, setSearchText] = useState<string>('')
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [posts, setSearchPosts] = useState<Array<Post>>([])
@@ -45,19 +37,11 @@ const PostSearchWrapper: React.FC<Props> = ({setPostId}) => {
                     ? <Spinner/>
                     : posts.length
                     ? <PostSearch posts={posts}
-                                  setPostId={setPostId}
                                   searchText={searchText}/>
                     : <h4 className="text-center mt-5">Не найдено записей, удовлетворящих запросу "{searchText}"</h4>
             }
         </>
-
     )
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        setPostId: (id: number) => dispatch(setPostIdAction(id))
-    }
-}
-
-export default connect(null, mapDispatchToProps)(PostSearchWrapper)
+export default PostSearchWrapper

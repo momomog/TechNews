@@ -6,34 +6,34 @@ import PostAdminPanel from './PostAdminPanel'
 import PostAPI from '../../../../api/PostAPI'
 import {NotificationManager} from 'react-notifications'
 import {getSectionName} from '../../../../common/Const'
-import {RootState} from '../../../../redux/reduxStore'
-import {setPostPageAndGetPosts} from '../../../../redux/actions/postActions'
+import {getPosts} from '../../../../redux/actions/postActions'
+import {RootState} from '../../../../redux/reducers/rootReducer'
 
 interface Props {
     sectionId: number
     postId: number
-    setPostPageAndGetPosts: (sectionId, postPage) => void
+    getPosts: (sectionId) => void
 }
 
 /**
  * Панель управления постом. Оболочка
- * @param setPostPageAndGetPosts
+ * @param getPosts
  * @param sectionId
  * @param postId
  */
-const PostAdminPanelWrapper: React.FC<Props> = ({setPostPageAndGetPosts, sectionId, postId}) => {
+const PostAdminPanelWrapper: React.FC<Props> = ({getPosts, sectionId, postId}) => {
     const history = useHistory()
 
     const deletePostById = () => {
         PostAPI.deletePostById(postId)
             .then(() => {
-                setPostPageAndGetPosts(sectionId, 1)
+                getPosts(sectionId)
 
                 setTimeout(() => {
                     window.scroll(0, 0)
                     history.push(`/posts/${getSectionName(sectionId)}`)
                     NotificationManager.success(`Пост номер ${postId} успешно удален`, 'Успешно')
-                }, 2000)
+                }, 1000)
             })
             .catch(() => NotificationManager.error(`Не удалось удалить пост номер ${postId}`, 'Ошибка'))
     }
@@ -50,7 +50,7 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        setPostPageAndGetPosts: (sectionId: number, postPage: number) => dispatch(setPostPageAndGetPosts(sectionId, postPage))
+        getPosts: (sectionId: number) => dispatch(getPosts(sectionId))
     }
 }
 

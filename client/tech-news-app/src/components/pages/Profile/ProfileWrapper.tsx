@@ -5,12 +5,12 @@ import {useLocation} from 'react-router-dom'
 import Profile from './Profile'
 import ProfileAPI from '../../../api/ProfileAPI'
 import {User, UserInitial} from '../../../models/UserModel'
-import {RootState} from '../../../redux/reduxStore'
 import Spinner from '../../core/Spinner'
 import {ErrorResponse} from '../../../models/ResponseModel'
 import {NotificationManager} from 'react-notifications'
 import history from '../../../history'
 import {getCurrentUserData} from '../../../redux/actions/userActions'
+import {RootState} from '../../../redux/reducers/rootReducer'
 
 interface Props {
     userData: User

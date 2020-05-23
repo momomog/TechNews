@@ -6,15 +6,15 @@ import {Dispatch} from 'redux'
 import PostAPI from '../../../api/PostAPI'
 import {Post} from '../../../models/PostModel'
 import {User} from '../../../models/UserModel'
-import {RootState} from '../../../redux/reduxStore'
 import Spinner from '../../core/Spinner'
-import {getPostData} from '../../../redux/actions/postActions'
+import {getPostById} from '../../../redux/actions/postActions'
+import {RootState} from '../../../redux/reducers/rootReducer'
 
 interface Props {
     postData: Post
     sectionId: number
     userData: User
-    getPostData: (sectionId: number, postId: number) => void
+    getPostById: (sectionId: number, postId: number) => void
 }
 
 /**
@@ -22,14 +22,14 @@ interface Props {
  * @param postData
  * @param sectionId
  * @param userData
- * @param getPostData
+ * @param getPostById
  */
-const PostReviewWrapper: React.FC<Props> = ({postData, sectionId, userData, getPostData}) => {
+const PostReviewWrapper: React.FC<Props> = ({postData, sectionId, userData, getPostById}) => {
     const {params}: any = useRouteMatch()
 
     useEffect(() => {
-        getPostData(sectionId, params.postId)
-    }, [params, getPostData, sectionId])
+        getPostById(sectionId, params.postId)
+    }, [params, getPostById, sectionId])
 
     const postRating = (postId: number, rate: number) => PostAPI.ratePost(postId, rate)
 
@@ -50,7 +50,7 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        getPostData: (sectionId: number, postId: number) => dispatch(getPostData(sectionId, postId))
+        getPostById: (sectionId: number, postId: number) => dispatch(getPostById(sectionId, postId))
     }
 }
 

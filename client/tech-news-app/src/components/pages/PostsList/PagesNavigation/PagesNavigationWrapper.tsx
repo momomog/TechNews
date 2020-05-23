@@ -2,15 +2,15 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 import PagesNavigation from './PagesNavigation'
-import {RootState} from '../../../../redux/reduxStore'
 import {Dispatch} from 'redux'
-import {setPostPageAndGetPosts} from '../../../../redux/actions/postActions'
+import {getPosts} from '../../../../redux/actions/postActions'
+import {RootState} from '../../../../redux/reducers/rootReducer'
 
 interface Props {
     postPage: number
     postsCount: number
     sectionId: number
-    setPostPageAndGetPosts: (sectionId: number, postPage: number) => void
+    getPosts: (sectionId: number, postPage: number, setPage: boolean) => void
 }
 
 /**
@@ -18,10 +18,10 @@ interface Props {
  * @param postPage
  * @param postsCount
  * @param sectionId
- * @param setPostPageAndGetPosts
+ * @param getPosts
  */
-const PagesNavigationWrapper: React.FC<Props> = ({postPage, postsCount, sectionId, setPostPageAndGetPosts}) => {
-    const setPosts = (sectionId: number, postPage: number) => setPostPageAndGetPosts(sectionId, postPage)
+const PagesNavigationWrapper: React.FC<Props> = ({postPage, postsCount, sectionId, getPosts}) => {
+    const setPosts = (sectionId: number, postPage: number) => getPosts(sectionId, postPage, true)
 
     return <PagesNavigation setPosts={setPosts}
                             postPage={postPage}
@@ -39,7 +39,7 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        setPostPageAndGetPosts: (sectionId, postPage) => dispatch(setPostPageAndGetPosts(sectionId, postPage))
+        getPosts: (sectionId, postPage, setPage) => dispatch(getPosts(sectionId, postPage, setPage))
     }
 }
 

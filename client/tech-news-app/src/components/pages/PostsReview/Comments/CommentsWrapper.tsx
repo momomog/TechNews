@@ -6,9 +6,9 @@ import CommentAPI from '../../../../api/CommentAPI'
 import {NotificationManager} from 'react-notifications'
 import {Comment, CommentRequest} from '../../../../models/CommentModel'
 import {User} from '../../../../models/UserModel'
-import {RootState} from '../../../../redux/reduxStore'
 import {Dispatch} from 'redux'
 import {getPostComments} from '../../../../redux/actions/commentActions'
+import {RootState} from '../../../../redux/reducers/rootReducer'
 
 interface Props {
     sectionId: number

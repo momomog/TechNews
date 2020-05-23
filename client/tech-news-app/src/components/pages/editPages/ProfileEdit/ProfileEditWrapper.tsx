@@ -5,11 +5,11 @@ import ProfileEdit from './ProfileEdit'
 import ProfileAPI from '../../../../api/ProfileAPI'
 import {NotificationManager} from 'react-notifications'
 import {User} from '../../../../models/UserModel'
-import {RootState} from '../../../../redux/reduxStore'
 import {RouteComponentProps} from 'react-router'
 import {ProfileRequest} from '../../../../models/RequestsModel'
 import {Dispatch} from 'redux'
 import {getCurrentUserData} from '../../../../redux/actions/userActions'
+import {RootState} from '../../../../redux/reducers/rootReducer'
 
 interface Props {
     isAuth: boolean

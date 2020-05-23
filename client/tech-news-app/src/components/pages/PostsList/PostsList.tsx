@@ -5,29 +5,22 @@ import {Post} from '../../../models/PostModel'
 
 interface Props {
     posts: Array<Post>
-    setPostId: (id: number) => void
 }
 
 /**
- *
- * @param posts
- * @param setPostId
  * Список постов
+ * @param posts
  */
-const PostsList: React.FC<Props> = ({posts, setPostId}) => {
-
+const PostsList: React.FC<Props> = ({posts}) => {
     return (
         <div>
             <PagesNavigationWrapper/>
-
             {
                 posts.map(post => {
                     return <PostItem post={post}
-                                     setPostId={setPostId}
                                      key={post.id}/>
                 })
             }
-
             <PagesNavigationWrapper/>
         </div>
     )

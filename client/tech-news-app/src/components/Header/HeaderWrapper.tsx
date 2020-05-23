@@ -1,12 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Header from './Header'
-import {RootState} from '../../redux/reduxStore'
 import {SetIsAuthAction, User} from '../../models/UserModel'
 import {Dispatch} from 'redux'
 import {ChangeSectionAction, SetPostPageAction} from '../../models/PostModel'
 import {changeSection, getPosts, setPostPageAction} from '../../redux/actions/postActions'
 import {setIsAuthAction, setUserDataAction} from '../../redux/actions/userActions'
+import {RootState} from '../../redux/reducers/rootReducer'
 
 interface Props {
     isAuth: boolean,

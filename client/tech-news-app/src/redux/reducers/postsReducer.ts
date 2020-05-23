@@ -2,7 +2,6 @@ import {PostAction, PostInitial, PostState} from '../../models/PostModel'
 import {
     CHANGE_SECTION,
     SET_POST_DATA,
-    SET_POST_ID,
     SET_POST_PAGE,
     SET_POSTS,
     SET_POSTS_COUNT
@@ -14,7 +13,6 @@ const initialState: PostState = {
     postsCount: 0,
     postPage: 1,
     postData: PostInitial,
-    postId: 0,
     postList: []
 }
 
@@ -48,12 +46,6 @@ export const postsReducer = (state: PostState = initialState, action: PostAction
             return {
                 ...state,
                 postData: action.postData
-            }
-        }
-        case SET_POST_ID: {
-            return {
-                ...state,
-                postId: action.postId
             }
         }
         default:

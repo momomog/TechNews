@@ -7,21 +7,13 @@ import {Post} from '../../../../models/PostModel'
 
 interface Props {
     post: Post
-    setPostId: (id: number) => void
 }
 
 /**
- *
- * @param post
- * @param setPostId
  * Пост
+ * @param post
  */
-const PostItem: React.FC<Props> = ({post, setPostId}) => {
-
-    const onSetPostId = () => {
-        setPostId(post.id)
-        window.scroll(0, 0)
-    }
+const PostItem: React.FC<Props> = ({post}) => {
 
     const postRate = () => {
         let rating = 0
@@ -42,7 +34,6 @@ const PostItem: React.FC<Props> = ({post, setPostId}) => {
                 <NavLink to={`/posts/post/${post.id}`}>
                     <img alt="post"
                          className="post-picture"
-                         onClick={onSetPostId}
                          src={post.photoId && `https://drive.google.com/uc?export=view&id=${post.photoId}`}/>
                 </NavLink>
             </div>
@@ -50,7 +41,7 @@ const PostItem: React.FC<Props> = ({post, setPostId}) => {
             <div className="col-sm-9">
                 <div className="media-body">
                     <Hyphenated language={ru}>
-                        <div className="post-title" onClick={onSetPostId}>
+                        <div className="post-title">
                             <NavLink to={`/posts/post/${post.id}`}>
                                 <p className="text-justify">
                                     {post.title}

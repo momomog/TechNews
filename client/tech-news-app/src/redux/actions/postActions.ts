@@ -5,7 +5,6 @@ import {
     PostInitial,
     SetPostCountAction,
     SetPostDataAction,
-    SetPostIdAction,
     SetPostPageAction,
     SetPostsAction
 } from '../../models/PostModel'
@@ -15,24 +14,15 @@ import {Dispatch} from 'redux'
 import {getSectionName} from '../../common/Const'
 
 export const CHANGE_SECTION = 'CHANGE-SECTION'
-export const SET_POST_ID = 'SET-POST-ID'
 export const SET_POSTS_COUNT = 'SET-POSTS-COUNT'
 export const SET_POST_PAGE = 'SET-POST-PAGE'
 export const SET_POST_DATA = 'SET-POST-DATA'
 export const SET_POSTS = 'SET-POSTS'
 
 
-export const getPosts = (sectionId: number, postPage: number = 1): any => (dispatch: Dispatch) => {
-    PostAPI.getPosts(getSectionName(sectionId), postPage)
-        .then(data => {
-            dispatch(setPostsAction(data.posts))
-            dispatch(setPostsCountAction(data.postsCount))
-        })
-        .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))
-}
-
-export const setPostPageAndGetPosts = (sectionId: number, postPage: number): any => (dispatch: Dispatch) => {
-    dispatch(setPostPageAction(postPage))
+export const getPosts = (sectionId: number, postPage: number = 1, setPage: boolean = false): any => (dispatch: Dispatch) => {
+    if (setPage)
+        dispatch(setPostPageAction(postPage))
 
     PostAPI.getPosts(getSectionName(sectionId), postPage)
         .then(data => {
@@ -42,10 +32,10 @@ export const setPostPageAndGetPosts = (sectionId: number, postPage: number): any
         .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))
 }
 
-export const getPostData = (sectionId: number, postId: number): any => (dispatch: Dispatch) => {
+export const getPostById = (sectionId: number, postId: number): any => (dispatch: Dispatch) => {
     dispatch(setPostData(PostInitial))
 
-    PostAPI.getPostData(sectionId, postId)
+    PostAPI.getPostById(sectionId, postId)
         .then((data: Post) => dispatch(setPostData(data)))
         .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))
 }
@@ -68,11 +58,6 @@ export const setPostsCountAction = (count: number): SetPostCountAction => ({
 export const setPostPageAction = (postPageNumber: number = 1): SetPostPageAction => ({
     type: SET_POST_PAGE,
     postPage: postPageNumber
-})
-
-export const setPostIdAction = (id: number): SetPostIdAction => ({
-    type: SET_POST_ID,
-    postId: id
 })
 
 export const setPostData = (data: Post): SetPostDataAction => ({

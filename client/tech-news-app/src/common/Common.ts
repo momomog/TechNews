@@ -84,9 +84,6 @@ class Common {
         }
     }
 
-    // *
-    // * private methods
-    // *
     // Прибавление 0 к дате, если число даты меньше 10
     private pad = (num: number): string | void => (num < 10 ? '0' : '') + num
 }

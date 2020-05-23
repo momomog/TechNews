@@ -7,28 +7,28 @@ import {NotificationManager} from 'react-notifications'
 import PostAPI from '../../../../api/PostAPI'
 import {Post} from '../../../../models/PostModel'
 import {PostRequest} from '../../../../models/RequestsModel'
-import {RootState} from '../../../../redux/reduxStore'
-import {getPostData} from '../../../../redux/actions/postActions'
+import {getPostById} from '../../../../redux/actions/postActions'
+import {RootState} from '../../../../redux/reducers/rootReducer'
 
 interface Props {
     postData: Post
     sectionId: number
-    getPostData: (sectionId: number, postId: number) => void
+    getPostById: (sectionId: number, postId: number) => void
 }
 
 /**
  * Оболочка Редактор поста
  * @param sectionId
  * @param postData
- * @param getPostData
+ * @param getPostById
  */
-const PostEditWrapper: React.FC<Props> = ({sectionId, postData, getPostData}) => {
+const PostEditWrapper: React.FC<Props> = ({sectionId, postData, getPostById}) => {
     const {params}: any = useRouteMatch()
     const history = useHistory()
 
     useEffect(() => {
-        getPostData(sectionId, params.postId)
-    }, [params, getPostData, sectionId])
+        getPostById(sectionId, params.postId)
+    }, [params, getPostById, sectionId])
 
     const updatePostData = (formData: PostRequest) => {
         const request = {
@@ -62,7 +62,7 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        getPostData: (sectionId: number, postId: number) => dispatch(getPostData(sectionId, postId))
+        getPostById: (sectionId: number, postId: number) => dispatch(getPostById(sectionId, postId))
     }
 }
 

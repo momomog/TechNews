@@ -7,7 +7,7 @@ export const email = (value: string): string | undefined =>
         ? 'Введите корректный почтовый адрес'
         : undefined
 
-// Необходимочть заполнения поля
+// Необходимость заполнения поля
 export const required = (value: string): string | undefined =>
     value && value.toString().trim() ? undefined : 'Необходимо заполнить это поле'
 

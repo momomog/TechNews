@@ -10,12 +10,11 @@ interface Props {
 }
 
 /**
- *
+ * Пагинатор
  * @param postPage
  * @param postsCount
  * @param setPosts
  * @param sectionId
- * Пагинатор
  */
 const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, sectionId}) => {
 

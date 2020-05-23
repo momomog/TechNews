@@ -7,17 +7,15 @@ import ScrollUpButton from 'react-scroll-up-button'
 interface Props {
     posts: Array<Post>
     searchText: string
-    setPostId: (id: number) => void
 }
 
 /**
- *
+ * Поиск по сайту
  * @param posts
  * @param searchText
  * @param setPostId
- * Поиск по сайту
  */
-const PostSearch: React.FC<Props> = ({posts, searchText, setPostId}) => {
+const PostSearch: React.FC<Props> = ({posts, searchText}) => {
     const oneTimePostShowCount = 15
     const [showPosts, setShowPosts] = useState<Array<Post>>(postsInit())
     const [showPostsCount, setShowPostsCount] = useState<number>(oneTimePostShowCount)
@@ -36,7 +34,6 @@ const PostSearch: React.FC<Props> = ({posts, searchText, setPostId}) => {
                     {
                         showPosts.map(post => {
                             return <PostItem post={post}
-                                             setPostId={setPostId}
                                              key={post.id}/>
                         })
                     }

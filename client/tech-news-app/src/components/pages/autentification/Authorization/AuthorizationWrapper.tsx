@@ -1,10 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Authorization from './Authorization'
-import {RootState} from '../../../../redux/reduxStore'
 import {Dispatch} from 'redux'
 import {SignInRequest} from '../../../../models/RequestsModel'
 import {login} from '../../../../redux/actions/userActions'
+import {RootState} from '../../../../redux/reducers/rootReducer'
 
 interface Props {
     isAuth: boolean

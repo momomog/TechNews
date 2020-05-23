@@ -4,10 +4,10 @@ import Registration from './Registration'
 import AuthAPI from '../../../../api/AuthAPI'
 import {NotificationManager} from 'react-notifications'
 import {SignUpRequest} from '../../../../models/RequestsModel'
-import {RootState} from '../../../../redux/reduxStore'
 import {RouteComponentProps} from 'react-router'
 import {withRouter} from 'react-router-dom'
 import {ErrorResponse} from '../../../../models/ResponseModel'
+import {RootState} from '../../../../redux/reducers/rootReducer'
 
 interface Props {
     isAuth: boolean

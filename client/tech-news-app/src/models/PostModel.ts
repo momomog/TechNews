@@ -21,21 +21,15 @@ export interface PostState {
     postsCount: number
     postPage: number
     postList: Array<Post>
-    postId: number
     postData: Post
 }
 
-export type PostAction = ChangeSectionAction | SetPostIdAction |
-    SetPostCountAction | SetPostPageAction | SetPostDataAction | SetPostsAction
+export type PostAction = ChangeSectionAction | SetPostCountAction |
+    SetPostPageAction | SetPostDataAction | SetPostsAction
 
 export interface ChangeSectionAction {
     type: 'CHANGE-SECTION'
     sectionId: number
-}
-
-export interface SetPostIdAction {
-    type: 'SET-POST-ID'
-    postId: number
 }
 
 export interface SetPostCountAction {

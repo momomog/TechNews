@@ -27,7 +27,7 @@ class PostAPI {
      * @param sectionId
      * @param postId
      */
-    getPostData = (sectionId: number, postId: number): Promise<Post> => request({
+    getPostById = (sectionId: number, postId: number): Promise<Post> => request({
         url: `posts/post/${postId}`
     })
 

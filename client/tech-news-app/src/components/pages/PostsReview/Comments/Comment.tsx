@@ -1,17 +1,15 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 
 import Common from '../../../../common/Common'
 import {NavLink} from 'react-router-dom'
 import Popup from 'reactjs-popup'
 import AuthService from '../../../../common/AuthService'
-import {User} from '../../../../models/UserModel'
 import {Comment, CommentRequest} from '../../../../models/CommentModel'
+import {AuthContext} from '../../../../context/authContext/AuthContext'
 
 interface Props {
     comment: Comment
     firstCommentId?: number
-    isAuth: boolean
-    userData: User
     likeCommentary: (commentId: number) => void
     deleteCommentary: (commentId: number) => void
     updateCommentary: (commentId: number, commentText: string) => void
@@ -22,17 +20,13 @@ interface Props {
  * Комментарий
  * @param comment
  * @param firstCommentId
- * @param isAuth
- * @param userData
  * @param likeCommentary
  * @param deleteCommentary
  * @param updateCommentary
  * @param addCommentary
  */
-const CommentItem: React.FC<Props> = ({
-                                          comment, firstCommentId, isAuth, userData,
-                                          likeCommentary, deleteCommentary, updateCommentary, addCommentary
-                                      }) => {
+const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, deleteCommentary, updateCommentary, addCommentary}) => {
+    const {isAuth, user} = useContext(AuthContext)
     const [isEditMode, setIsEditMode] = useState<boolean>(false)
     const [isAnswerMode, setIsAnswerMode] = useState<boolean>(false)
     const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false)
@@ -85,20 +79,22 @@ const CommentItem: React.FC<Props> = ({
     }
 
     return (
-        <div>
+        <div className="scale-up-center-comment">
             {
-                firstCommentId !== comment.id && !comment.parentCommentId && <div className="border-bottom"/>
+                firstCommentId !== comment.id && !comment.parentCommentId && <div className="border-bottom mb-3"/>
             }
 
-            <div className="media card-body mt-0">
+            <div className="media card-body mt-0 pt-0">
                 <NavLink to={`/profile/${comment.authorName}`}>
                     <img className="d-flex mr-3 rounded-circle comment-author-photo" alt="user_pic"
+                         onClick={() => window.scroll(0,0)}
                          src={comment.authorPhotoId
                          && `https://drive.google.com/uc?export=view&id=${comment.authorPhotoId}`}/>
                 </NavLink>
                 <div className="media-body">
                     <div className="row">
-                        <span className="col-lg-8 post-author-comment font-italic">
+                        <span className="col-lg-8 post-author-comment font-italic"
+                              onClick={() => window.scroll(0,0)}>
                             <NavLink to={`/profile/${comment.authorName}`} className="comment-author-link">
                                 @{comment.authorName}
                             </NavLink>
@@ -160,7 +156,7 @@ const CommentItem: React.FC<Props> = ({
                                             }
 
                                             {
-                                                (isAuth && comment.authorId === (userData && userData.id) || AuthService.isAdmin()) && !comment.isDeleted
+                                                (isAuth && comment.authorId === user.id || AuthService.isAdmin()) && !comment.isDeleted
                                                 && <span className="ml-3">
                                                          <span onClick={onClickEditCommentary}
                                                                className="text-secondary comment-action">
@@ -170,7 +166,7 @@ const CommentItem: React.FC<Props> = ({
                                             }
 
                                             {
-                                                (isAuth && comment.authorId === (userData && userData.id) || AuthService.isAdmin()) && !comment.isDeleted
+                                                (isAuth && comment.authorId === user.id || AuthService.isAdmin()) && !comment.isDeleted
                                                 && <span className="ml-3">
                                                           <Popup trigger={<span
                                                               className="text-secondary comment-action">Удалить</span>}
@@ -205,9 +201,7 @@ const CommentItem: React.FC<Props> = ({
                                                        <textarea className="form-control text-area mt-2 answer-area"
                                                                  rows={3}
                                                                  onChange={e => setCommentAnswerText(e.target.value)}
-                                                                 value={commentAnswerText}
-                                                                 defaultValue={commentAnswerText}
-                                                       />
+                                                                 value={commentAnswerText}/>
                                                     <div className="mt-2">
                                                           <span>
                                                               <span onClick={onAddCommentary}
@@ -236,8 +230,6 @@ const CommentItem: React.FC<Props> = ({
                 && comment.replyComments.map(commentItem => (
                     <div className="ml-5" key={commentItem.id}>
                         <CommentItem comment={commentItem}
-                                     isAuth={isAuth}
-                                     userData={userData}
                                      likeCommentary={likeCommentary}
                                      updateCommentary={updateCommentary}
                                      addCommentary={addCommentary}

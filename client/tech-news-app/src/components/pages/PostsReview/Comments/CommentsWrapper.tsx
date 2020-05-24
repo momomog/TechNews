@@ -14,8 +14,6 @@ interface Props {
     sectionId: number
     postComments: Array<Comment>
     commentsCount: number
-    isAuth: boolean
-    userData: User
     getPostComments: (sectionId: number, postId: number) => void
 }
 
@@ -24,11 +22,9 @@ interface Props {
  * @param sectionId
  * @param postComments
  * @param commentsCount
- * @param isAuth
- * @param userData
  * @param getPostComments
  */
-const CommentsWrapper: React.FC<Props> = ({sectionId, postComments, commentsCount, isAuth, userData, getPostComments}) => {
+const CommentsWrapper: React.FC<Props> = ({sectionId, postComments, commentsCount, getPostComments}) => {
     const {params}: any = useRouteMatch()
     const postId = params.postId
 
@@ -67,8 +63,6 @@ const CommentsWrapper: React.FC<Props> = ({sectionId, postComments, commentsCoun
 
     return <Comments comments={postComments}
                      commentsCount={commentsCount}
-                     isAuth={isAuth}
-                     userData={userData}
                      addNewCommentary={addNewCommentary}
                      likeCommentary={likeCommentary}
                      updateCommentary={updateCommentary}
@@ -79,9 +73,7 @@ const mapStateToProps = (state: RootState) => {
     return {
         sectionId: state.postsData.sectionId,
         postComments: state.commentsData.postComments,
-        commentsCount: state.commentsData.commentsCount,
-        isAuth: state.userData.isAuth,
-        userData: state.userData.userData
+        commentsCount: state.commentsData.commentsCount
     }
 }
 

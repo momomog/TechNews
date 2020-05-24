@@ -1,11 +1,10 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import AuthService from '../../../../common/AuthService'
 import {Post} from '../../../../models/PostModel'
-import {User} from '../../../../models/UserModel'
+import {AuthContext} from '../../../../context/authContext/AuthContext'
 
 interface Props {
     post: Post
-    user: User
     postRating: (postId: number, rate: number) => void
 }
 
@@ -13,9 +12,9 @@ interface Props {
  * Оценка поста
  * @param post
  * @param postRating
- * @param user
  */
-const PostRating: React.FC<Props> = ({post, postRating, user}) => {
+const PostRating: React.FC<Props> = ({post, postRating}) => {
+    const {user} = useContext(AuthContext)
     const [isRating, setIsRating] = useState(false)
     const [rating, setRating] = useState(0)
 

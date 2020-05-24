@@ -18,12 +18,11 @@ interface Props {
 }
 
 /**
- *
+ * Новый пост. Оболочка
  * @param changeSection
  * @param setPostPage
  * @param getPosts
  * @param history
- * Оболочка Новый пост
  */
 const NewPostPageWrapper: React.FC<RouteComponentProps<any> & Props> = ({changeSection, setPostPage, getPosts, history}) => {
 

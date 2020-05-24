@@ -23,14 +23,15 @@ class Common {
         if (date) {
             const birthDate: Date = new Date('' + date[1] + ',' + date[2] + ',' + date[0]),
                 difference = new Date().getTime() - birthDate.getTime(),
-                age = Math.floor((difference / (1000 * 60 * 60 * 24) / 365))
+                age = Math.floor((difference / (1000 * 60 * 60 * 24) / 365)),
+                ageStr = age.toString()
 
-            if (age.toString().endsWith('1') && age !== 11)
-                return age + ' год'
-            else if (['2', '3', '4'].indexOf(age.toString()) !== -1)
-                return age + ' года'
+            if (ageStr.endsWith('1') && !ageStr.endsWith('11'))
+                return `${age} год`
+            else if (['2', '3', '4'].includes(ageStr[ageStr.length - 1]))
+                return `${age} года`
             else
-                return age + ' лет'
+                return `${age} лет`
         }
     }
 
@@ -38,9 +39,9 @@ class Common {
     getCommentaryCountText = (count: number): string => {
         const num = count.toString()
 
-        if (num.endsWith('1') && count !== 11)
+        if (num.endsWith('1') && !num.endsWith('11'))
             return 'комментарий'
-        else if (['2', '3', '4'].indexOf(num[num.length - 1]) !== -1 || (['2', '3', '4'].indexOf(num[0]) !== -1))
+        else if (['2', '3', '4'].includes(num[num.length - 1]))
             return 'комментария'
         else
             return 'комментариев'
@@ -50,9 +51,9 @@ class Common {
     getFindPostsResultText = (count: number): string => {
         const num = count.toString()
 
-        if (num.endsWith('1') && count !== 11)
+        if (num.endsWith('1') && !num.endsWith('11'))
             return `найдена ${count} запись`
-        else if (['2', '3', '4'].indexOf(num[num.length - 1]) !== -1 || (['2', '3', '4'].indexOf(num[0]) !== -1))
+        else if (['2', '3', '4'].includes(num[num.length - 1]))
             return `найдены ${count} записи`
         else
             return `найдено ${count} записей`
@@ -62,9 +63,9 @@ class Common {
     getSymbolsCountText = (count: number): string => {
         const num = count.toString()
 
-        if (num.endsWith('1') && count !== 11)
+        if (num.endsWith('1') && !num.endsWith('11'))
             return 'символ'
-        else if (['2', '3', '4'].indexOf(num[num.length - 1]) !== -1 || (['2', '3', '4'].indexOf(num[0]) !== -1))
+        else if (['2', '3', '4'].includes(num[num.length - 1]))
             return 'символа'
         else
             return 'символов'

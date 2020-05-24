@@ -5,7 +5,6 @@ import {useRouteMatch} from 'react-router-dom'
 import {Dispatch} from 'redux'
 import PostAPI from '../../../api/PostAPI'
 import {Post} from '../../../models/PostModel'
-import {User} from '../../../models/UserModel'
 import Spinner from '../../core/Spinner'
 import {getPostById} from '../../../redux/actions/postActions'
 import {RootState} from '../../../redux/reducers/rootReducer'
@@ -13,7 +12,6 @@ import {RootState} from '../../../redux/reducers/rootReducer'
 interface Props {
     postData: Post
     sectionId: number
-    userData: User
     getPostById: (sectionId: number, postId: number) => void
 }
 
@@ -21,10 +19,9 @@ interface Props {
  * Просмотр содержимого поста. Оболочка
  * @param postData
  * @param sectionId
- * @param userData
  * @param getPostById
  */
-const PostReviewWrapper: React.FC<Props> = ({postData, sectionId, userData, getPostById}) => {
+const PostReviewWrapper: React.FC<Props> = ({postData, sectionId, getPostById}) => {
     const {params}: any = useRouteMatch()
 
     useEffect(() => {
@@ -35,7 +32,6 @@ const PostReviewWrapper: React.FC<Props> = ({postData, sectionId, userData, getP
 
     return postData.id
         ? <PostReview post={postData}
-                      user={userData}
                       postRating={postRating}/>
         : <Spinner/>
 }
@@ -43,8 +39,7 @@ const PostReviewWrapper: React.FC<Props> = ({postData, sectionId, userData, getP
 const mapStateToProps = (state: RootState) => {
     return {
         postData: state.postsData.postData,
-        sectionId: state.postsData.sectionId,
-        userData: state.userData.userData
+        sectionId: state.postsData.sectionId
     }
 }
 

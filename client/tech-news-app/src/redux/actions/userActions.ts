@@ -27,6 +27,7 @@ export const login = (loginRequest: SignInRequest, remember?: boolean): any => (
             NotificationManager.success('Вы успешно авторизовались в системе', 'Добро пожаловать!')
             AuthService.setToken(response.accessToken, remember)
             dispatch(setIsAuthAction(true))
+            history.push(`/profile`)
         })
         .catch(() => NotificationManager.error('Проверьте правильность введенных данных', 'Не удалось войти'))
 }

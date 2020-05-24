@@ -17,7 +17,7 @@ interface Props {
 }
 
 /**
- * Оболочка Редактор поста
+ * Редактор поста. Оболочка
  * @param sectionId
  * @param postData
  * @param getPostById
@@ -50,7 +50,7 @@ const PostEditWrapper: React.FC<Props> = ({sectionId, postData, getPostById}) =>
     return postData
         ? <PostEdit post={postData}
                     updatePostData={updatePostData}/>
-        : <div/>
+        : null
 }
 
 const mapStateToProps = (state: RootState) => {

@@ -10,12 +10,10 @@ import RecommendedPostsWrapper from './RecommendedPosts/RecommendedPostsWrapper'
 import ru from 'hyphenated-ru'
 import Hyphenated from 'react-hyphen'
 import {Post} from '../../../models/PostModel'
-import {User} from '../../../models/UserModel'
 import PostRating from './PostRating/PostRating'
 
 interface Props {
     post: Post
-    user: User
     postRating: (postId: number, rate: number) => void
 }
 
@@ -23,12 +21,10 @@ interface Props {
  * Просмотр содержимого поста
  * @param post
  * @param postRating
- * @param user
  */
-const PostReview: React.FC<Props> = ({post, postRating, user}) => {
-
+const PostReview: React.FC<Props> = ({post, postRating}) => {
     return (
-        <div>
+        <div className="scale-up-center">
             {
                 AuthService.isAdmin() && <PostAdminPanelWrapper postId={post.id}/>
             }
@@ -38,14 +34,14 @@ const PostReview: React.FC<Props> = ({post, postRating, user}) => {
                     <div className="center-block post-review-wrapper">
 
                         <Hyphenated language={ru}>
-                            <h2 className="mt-0 text-justify">
+                            <h1 className="mt-0 text-justify">
                                 {post.title}
-                            </h2>
+                            </h1>
                         </Hyphenated>
 
                         <div className="row">
-                            <span className="col-lg-8 post-author">
-                                <NavLink to={`/profile/${post.author}`} className="comment-author-link"
+                            <span className="col-lg-8 post-author pl-0">
+                                <NavLink to={`/profile/${post.author}`} className="comment-author-link text-secondary"
                                          style={{color: 'black'}}>
                                 @{post.author}
                             </NavLink>
@@ -82,8 +78,7 @@ const PostReview: React.FC<Props> = ({post, postRating, user}) => {
                             </div>
                         }
 
-                        <PostRating user={user}
-                                    post={post}
+                        <PostRating post={post}
                                     postRating={postRating}/>
 
                         <CommentsWrapper/>

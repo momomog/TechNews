@@ -69,17 +69,17 @@
 }
 
 .post-star-text {
-    font-size: 1.1em;
     position: relative;
-    top: 10px;
+    top: 14px;
 }
 
 .comment-author-link {
+    font-size: 17px!important;
     text-decoration: none !important;
 }
 
 .comment-author-link:hover {
-    color: #575464 !important;
+    color: #3300ff !important;
 }
 
 .comment-icon {
@@ -205,6 +205,32 @@ select, input[type="file"] {
     background-color: #337ab7 !important;
     border-color: #337ab7 !important;
     color: white !important;
+}
+
+.scale-up-center {
+    animation: scale-up-center 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes scale-up-center {
+    0% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.scale-up-center-comment {
+    animation: scale-up-center-comment 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes scale-up-center-comment {
+    0% {
+        transform: scale(0.6);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .pagination > li > a, .pagination > li > span {

@@ -7,13 +7,15 @@ import {Post} from '../../../../models/PostModel'
 
 interface Props {
     post: Post
+    clearPostData?: () => void
 }
 
 /**
  * Пост
  * @param post
+ * @param clearPostData
  */
-const PostItem: React.FC<Props> = ({post}) => {
+const PostItem: React.FC<Props> = ({post, clearPostData}) => {
 
     const postRate = () => {
         let rating = 0
@@ -27,12 +29,19 @@ const PostItem: React.FC<Props> = ({post}) => {
         return rating
     }
 
+    const postClick = () => {
+        if (typeof clearPostData === 'function')
+            clearPostData()
+        window.scroll(0,0)
+    }
+
     return (
         <div className="row well post center-block">
 
             <div className="col-sm-3 w-100 d-flex justify-content-center">
                 <NavLink to={`/posts/post/${post.id}`}>
                     <img alt="post"
+                         onClick={postClick}
                          className="post-picture"
                          src={post.photoId && `https://drive.google.com/uc?export=view&id=${post.photoId}`}/>
                 </NavLink>
@@ -43,7 +52,7 @@ const PostItem: React.FC<Props> = ({post}) => {
                     <Hyphenated language={ru}>
                         <div className="post-title">
                             <NavLink to={`/posts/post/${post.id}`}>
-                                <p className="text-justify">
+                                <p className="text-justify" onClick={postClick}>
                                     {post.title}
                                 </p>
                             </NavLink>

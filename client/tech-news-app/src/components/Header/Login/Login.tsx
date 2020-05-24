@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {SECTION_ALL_POSTS} from '../../../common/Const'
 import AuthButton from './AuthButton/AuthButton'
 import logo from '../../../static/logo.png'
@@ -6,10 +6,9 @@ import {NavLink} from 'react-router-dom'
 import {ChangeSectionAction, SetPostPageAction} from '../../../models/PostModel'
 import AuthUser from './AuthUser/AuthUser'
 import {SetIsAuthAction, User} from '../../../models/UserModel'
+import {AuthContext} from '../../../context/authContext/AuthContext'
 
 interface Props {
-    isAuth: boolean
-    userData: User
     setCurrentUserData: (userData: User) => void
     setIsAuth: (isAuth: boolean) => SetIsAuthAction
     changeSection: (sectionId: number) => ChangeSectionAction
@@ -19,15 +18,15 @@ interface Props {
 
 /**
  * Верхний компонент шапки. Содержит лого и информацию об авторизованном юзере
- * @param isAuth
  * @param setPosts
  * @param changeSection
  * @param setPostPage
  * @param setCurrentUserData
  * @param setIsAuth
- * @param userData
  */
-const Login: React.FC<Props> = ({isAuth, setPosts, changeSection, setPostPage, setCurrentUserData, setIsAuth, userData}) => {
+const Login: React.FC<Props> = ({setPosts, changeSection, setPostPage, setCurrentUserData, setIsAuth}) => {
+    const {isAuth, user} = useContext(AuthContext)
+
     const onLogoClick = () => {
         setPosts(SECTION_ALL_POSTS)
         setPostPage(1)
@@ -47,10 +46,8 @@ const Login: React.FC<Props> = ({isAuth, setPosts, changeSection, setPostPage, s
                         !isAuth && <AuthButton/>
                     }
                     {
-                        isAuth && userData.id &&
-                        <AuthUser isAuth={isAuth}
-                                  userData={userData}
-                                  setCurrentUserData={setCurrentUserData}
+                        isAuth && user.id &&
+                        <AuthUser setCurrentUserData={setCurrentUserData}
                                   setIsAuth={setIsAuth}/>
                     }
                 </div>

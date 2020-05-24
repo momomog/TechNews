@@ -1,26 +1,22 @@
 import {NavLink} from 'react-router-dom'
-import React, {useEffect} from 'react'
+import React, {useContext, useEffect} from 'react'
 import {Field, InjectedFormProps, reduxForm} from 'redux-form'
 import {required} from '../../../../../common/Validators'
 import ProfileField from './ProfileField'
 import Common from '../../../../../common/Common'
 import {DatePicker} from '../../../../../common/FormControls/DatePicker'
 import {ProfileRequest} from '../../../../../models/RequestsModel'
-import {User} from '../../../../../models/UserModel'
-
-interface OwnProps {
-    user: User
-}
+import {AuthContext} from '../../../../../context/authContext/AuthContext'
 
 /**
  * Редактор профиля. Форма
- * @param user
  * @param initialize
  * @param handleSubmit
  * @param invalid
  * @param submitSucceeded
  */
-const ProfileEditForm: React.FC<InjectedFormProps<ProfileRequest, OwnProps> & OwnProps> = ({user, initialize, handleSubmit, invalid, submitSucceeded}) => {
+const ProfileEditForm: React.FC<InjectedFormProps<ProfileRequest>> = ({initialize, handleSubmit, invalid, submitSucceeded}) => {
+    const {user} = useContext(AuthContext)
 
     useEffect(() => {
         initialize({
@@ -121,6 +117,6 @@ const ProfileEditForm: React.FC<InjectedFormProps<ProfileRequest, OwnProps> & Ow
     )
 }
 
-export default reduxForm<ProfileRequest, OwnProps>({
+export default reduxForm<ProfileRequest>({
     form: 'profile'
 })(ProfileEditForm)

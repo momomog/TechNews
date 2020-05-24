@@ -4,10 +4,8 @@ import Authorization from './Authorization'
 import {Dispatch} from 'redux'
 import {SignInRequest} from '../../../../models/RequestsModel'
 import {login} from '../../../../redux/actions/userActions'
-import {RootState} from '../../../../redux/reducers/rootReducer'
 
 interface Props {
-    isAuth: boolean
     login: (request: SignInRequest, remember?: boolean) => void
 }
 
@@ -16,18 +14,11 @@ interface Props {
  * @param isAuth
  * @param login
  */
-const AuthorizationWrapper: React.FC<Props> = ({isAuth, login}) => {
+const AuthorizationWrapper: React.FC<Props> = ({login}) => {
 
     const onLogin = (request: SignInRequest, remember?: boolean) => login(request, remember)
 
-    return <Authorization isAuth={isAuth}
-                          onLogin={onLogin}/>
-}
-
-const mapStateToProps = (state: RootState) => {
-    return {
-        isAuth: state.userData.isAuth
-    }
+    return <Authorization onLogin={onLogin}/>
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
@@ -36,4 +27,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthorizationWrapper)
+export default connect(null, mapDispatchToProps)(AuthorizationWrapper)

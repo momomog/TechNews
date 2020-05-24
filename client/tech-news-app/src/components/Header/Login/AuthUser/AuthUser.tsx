@@ -1,23 +1,21 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {NavLink} from 'react-router-dom'
 import AuthService from '../../../../common/AuthService'
 import {SetIsAuthAction, User, UserInitial} from '../../../../models/UserModel'
+import {AuthContext} from '../../../../context/authContext/AuthContext'
 
 interface Props {
-    isAuth: boolean
-    userData: User
     setCurrentUserData: (userData: User) => void
     setIsAuth: (isAuth: boolean) => SetIsAuthAction
 }
 
 /**
  * Авторизованный пользователь
- * @param isAuth
- * @param userData
  * @param setIsAuth
  * @param setCurrentUserData
  */
-const AuthUser: React.FC<Props> = ({isAuth, userData, setIsAuth, setCurrentUserData}) => {
+const AuthUser: React.FC<Props> = ({setIsAuth, setCurrentUserData}) => {
+    const {isAuth, user} = useContext(AuthContext)
 
     const onLogout = () => {
         AuthService.removeToken()
@@ -34,9 +32,9 @@ const AuthUser: React.FC<Props> = ({isAuth, userData, setIsAuth, setCurrentUserD
                             data-toggle="dropdown"
                             aria-haspopup="true"
                             aria-expanded="false">
-                        {userData.firstName}&nbsp;
-                        <img alt="user_pic" src={userData.profileData.photoId
-                        && `https://drive.google.com/uc?export=view&id=${userData.profileData.photoId}`}/>
+                        {user.firstName}&nbsp;
+                        <img alt="user_pic" src={user.profileData.photoId
+                        && `https://drive.google.com/uc?export=view&id=${user.profileData.photoId}`}/>
                     </button>
                     <div className="dropdown-menu">
                         <NavLink className="dropdown-item" to="/profile" exact>Профиль</NavLink>

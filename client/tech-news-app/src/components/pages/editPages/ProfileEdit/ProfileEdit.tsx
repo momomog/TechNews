@@ -1,20 +1,16 @@
 import React from 'react'
 import {ProfileRequest} from '../../../../models/RequestsModel'
 import ProfileEditReduxForm from './ProfileEditForm/ProfileEditForm'
-import {User} from '../../../../models/UserModel'
 
 interface Props {
-    user: User,
     updateUserData: (request: ProfileRequest) => void
 }
 
 /**
- *
- * @param user
- * @param updateUserData
  * Редактор профиля
+ * @param updateUserData
  */
-const ProfileEdit: React.FC<Props> = ({user, updateUserData}) => {
+const ProfileEdit: React.FC<Props> = ({updateUserData}) => {
 
     const updateProfileData = (formData: ProfileRequest) => updateUserData(formData)
 
@@ -26,8 +22,7 @@ const ProfileEdit: React.FC<Props> = ({user, updateUserData}) => {
                         <h4>Редактирование профиля</h4>
                     </div>
 
-                    <ProfileEditReduxForm user={user}
-                                          onSubmit={updateProfileData}/>
+                    <ProfileEditReduxForm onSubmit={updateProfileData}/>
 
                 </div>
             </div>

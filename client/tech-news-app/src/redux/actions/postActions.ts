@@ -33,8 +33,6 @@ export const getPosts = (sectionId: number, postPage: number = 1, setPage: boole
 }
 
 export const getPostById = (sectionId: number, postId: number): any => (dispatch: Dispatch) => {
-    dispatch(setPostData(PostInitial))
-
     PostAPI.getPostById(sectionId, postId)
         .then((data: Post) => dispatch(setPostData(data)))
         .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))

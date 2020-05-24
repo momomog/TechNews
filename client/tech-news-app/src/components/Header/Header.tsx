@@ -6,8 +6,6 @@ import {ChangeSectionAction, SetPostPageAction} from '../../models/PostModel'
 import {SetIsAuthAction, User} from '../../models/UserModel'
 
 interface Props {
-    isAuth: boolean
-    userData: User
     setPosts: (sectionId: number) => void
     changeSection: (sectionId: number) => ChangeSectionAction
     setPostPage: (pageNumber: number) => SetPostPageAction
@@ -26,12 +24,10 @@ const Header: React.FC<Props> = props => {
             <NotificationContainer/>
 
             <Login changeSection={props.changeSection}
-                   userData={props.userData}
                    setPosts={props.setPosts}
                    setPostPage={props.setPostPage}
                    setIsAuth={props.setIsAuth}
-                   setCurrentUserData={props.setCurrentUserData}
-                   isAuth={props.isAuth}/>
+                   setCurrentUserData={props.setCurrentUserData}/>
             <NavLinks changeSection={props.changeSection}
                       setPosts={props.setPosts}
                       setPostPage={props.setPostPage}/>

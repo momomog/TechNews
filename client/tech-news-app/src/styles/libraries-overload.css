@@ -121,7 +121,7 @@
 
 .input-group-checkbox {
     padding: 0 !important;
-    margin-left: 2.3rem!important;
+    margin-left: 2.3rem !important;
 }
 
 .dropdown-item:active {
@@ -131,6 +131,10 @@
 .btn {
     text-shadow: none !important;
     font-size: 1em !important;
+}
+
+.page-link {
+    transition: 0.4s ease !important;
 }
 
 .page-link:focus, .page-link:active {

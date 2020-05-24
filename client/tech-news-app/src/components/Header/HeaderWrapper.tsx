@@ -6,11 +6,8 @@ import {Dispatch} from 'redux'
 import {ChangeSectionAction, SetPostPageAction} from '../../models/PostModel'
 import {changeSection, getPosts, setPostPageAction} from '../../redux/actions/postActions'
 import {setIsAuthAction, setUserDataAction} from '../../redux/actions/userActions'
-import {RootState} from '../../redux/reducers/rootReducer'
 
 interface Props {
-    isAuth: boolean,
-    userData: User,
     changeSection: (sectionId: number) => ChangeSectionAction,
     setPostPage: (pageNumber: number) => SetPostPageAction,
     setIsAuth: (isAuth: boolean) => SetIsAuthAction,
@@ -30,13 +27,6 @@ const HeaderWrapper: React.FC<Props> = (props) => {
                    {...props}/>
 }
 
-const mapStateToProps = (state: RootState) => {
-    return {
-        isAuth: state.userData.isAuth,
-        userData: state.userData.userData
-    }
-}
-
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         changeSection: (sectionId: number) => dispatch(changeSection(sectionId)),
@@ -47,4 +37,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderWrapper)
+export default connect(null, mapDispatchToProps)(HeaderWrapper)

@@ -3,16 +3,17 @@ import {connect} from 'react-redux'
 import PostsList from './PostsList'
 import {getSectionId, SECTION_ALL_POSTS} from '../../../common/Const'
 import {useRouteMatch} from 'react-router-dom'
-import {Post} from '../../../models/PostModel'
+import {Post, PostInitial} from '../../../models/PostModel'
 import {Dispatch} from 'redux'
 import Spinner from '../../core/Spinner'
-import {getPosts} from '../../../redux/actions/postActions'
+import {getPosts, setPostData} from '../../../redux/actions/postActions'
 import {RootState} from '../../../redux/reducers/rootReducer'
 
 interface Props {
     postList: Array<Post>
     postPage: number
     sectionId: number
+    clearPostData: () => void
     getPosts: (sectionId: number, postPage?: number) => void
 }
 
@@ -21,8 +22,9 @@ interface Props {
  * @param postPage
  * @param postList
  * @param getPosts
+ * @param clearPostData
  */
-const PostsListWrapper: React.FC<Props> = ({postPage, postList, getPosts}) => {
+const PostsListWrapper: React.FC<Props> = ({postPage, postList, getPosts, clearPostData}) => {
     const {params}: any = useRouteMatch()
 
     useEffect(() => {
@@ -33,7 +35,8 @@ const PostsListWrapper: React.FC<Props> = ({postPage, postList, getPosts}) => {
     }, [params, getPosts, postPage, postList])
 
     return postList.length
-        ? <PostsList posts={postList}/>
+        ? <PostsList posts={postList}
+                     clearPostData={clearPostData}/>
         : <Spinner/>
 
 }
@@ -48,6 +51,7 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
+        clearPostData: () => {dispatch(setPostData(PostInitial))},
         getPosts: (sectionId: number, postPage?: number) => dispatch(getPosts(sectionId, postPage))
     }
 }

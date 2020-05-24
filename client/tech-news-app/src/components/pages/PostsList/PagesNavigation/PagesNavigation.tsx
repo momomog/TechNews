@@ -40,13 +40,15 @@ const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, secti
 
                         {
                             initPagesArray().map((page) => {
-                                return <li className={getNavigationButtonClass(page)} onClick={setPostPage} key={page}>
-                                    <NavLink to={`/posts/${getSectionName(sectionId)}/${page}`}
-                                             className="page-link"
-                                             onClick={() => window.scroll(0, 0)}>
-                                        {page}
-                                    </NavLink>
-                                </li>
+                                return (
+                                    <li className={getNavigationButtonClass(page)} onClick={setPostPage} key={page}>
+                                        <NavLink to={`/posts/${getSectionName(sectionId)}/${page}`}
+                                                 className="page-link"
+                                                 onClick={() => window.scroll(0, 0)}>
+                                            {page}
+                                        </NavLink>
+                                    </li>
+                                )
                             })
                         }
 

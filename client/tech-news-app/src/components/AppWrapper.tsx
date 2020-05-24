@@ -3,20 +3,26 @@ import {connect} from 'react-redux'
 import App from './App'
 import AuthService from '../common/AuthService'
 import {Dispatch} from 'redux'
-import {UserAction} from '../models/UserModel'
+import {User, UserAction} from '../models/UserModel'
 import {getCurrentUserData, setIsAuthAction} from '../redux/actions/userActions'
+import {RootState} from '../redux/reducers/rootReducer'
+import {AuthContext} from '../context/authContext/AuthContext'
 
 interface Props {
+    isAuth: boolean
+    user: User
     setIsAuth: (isAuth: boolean) => UserAction,
     getUserData: () => void
 }
 
 /**
  * Оболочка для корневого компонента
+ * @param isAuth
+ * @param user
  * @param setIsAuth
  * @param getUserData
  */
-const AppWrapper: React.FC<Props> = ({setIsAuth, getUserData}) => {
+const AppWrapper: React.FC<Props> = ({setIsAuth, getUserData, isAuth, user}) => {
     useEffect(() => {
         if (AuthService.isAuth()) {
             setIsAuth(true)
@@ -24,9 +30,19 @@ const AppWrapper: React.FC<Props> = ({setIsAuth, getUserData}) => {
         }
     }, [setIsAuth, getUserData])
 
-    return <App/>
+    return (
+        <AuthContext.Provider value={{isAuth, user}}>
+            <App/>
+        </AuthContext.Provider>
+    )
 }
 
+const mapStateToProps = (state: RootState) => {
+    return {
+        user: state.userData.userData,
+        isAuth: state.userData.isAuth
+    }
+}
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
@@ -35,4 +51,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(AppWrapper)
+export default connect(mapStateToProps, mapDispatchToProps)(AppWrapper)

@@ -1,14 +1,12 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import {Comment, CommentRequest} from '../../../../models/CommentModel'
 import Common from '../../../../common/Common'
-import {User} from '../../../../models/UserModel'
 import CommentItem from './Comment'
+import {AuthContext} from '../../../../context/authContext/AuthContext'
 
 interface Props {
     comments: Array<Comment>
     commentsCount: number
-    isAuth: boolean
-    userData: User
     likeCommentary: (commentId: number) => void
     deleteCommentary: (commentId: number) => void
     updateCommentary: (commentId: number, commentText: string) => void
@@ -16,11 +14,11 @@ interface Props {
 }
 
 /**
- *
- * @param props
  * Список комментариев
+ * @param props
  */
 const Comments: React.FC<Props> = (props) => {
+    const {isAuth} = useContext(AuthContext)
     const [commentText, setCommentText] = useState('')
 
     const addNewCommentary = () => {
@@ -33,7 +31,7 @@ const Comments: React.FC<Props> = (props) => {
     return (
         <div className="mb-5">
             {
-                props.isAuth
+                isAuth
                     ? <div className="my-4">
                         <h4 className="card-header">Оставьте свой комментарий:</h4>
                         <div className="comment-input">
@@ -62,7 +60,7 @@ const Comments: React.FC<Props> = (props) => {
                     </div>
             }
 
-            <h4 className="card-header mb-2">
+            <h4 className="card-header mb-4">
                 {`${props.commentsCount} ${Common.getCommentaryCountText(props.commentsCount)}`}
             </h4>
 
@@ -71,8 +69,6 @@ const Comments: React.FC<Props> = (props) => {
                     ? props.comments.map(comment => {
                         return <CommentItem comment={comment}
                                             firstCommentId={props.comments[0].id}
-                                            isAuth={props.isAuth}
-                                            userData={props.userData}
                                             likeCommentary={props.likeCommentary}
                                             updateCommentary={props.updateCommentary}
                                             addCommentary={props.addNewCommentary}

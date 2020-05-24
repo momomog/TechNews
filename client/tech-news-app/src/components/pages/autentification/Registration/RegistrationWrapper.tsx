@@ -1,24 +1,17 @@
 import React from 'react'
-import {connect} from 'react-redux'
 import Registration from './Registration'
 import AuthAPI from '../../../../api/AuthAPI'
 import {NotificationManager} from 'react-notifications'
 import {SignUpRequest} from '../../../../models/RequestsModel'
-import {RouteComponentProps} from 'react-router'
-import {withRouter} from 'react-router-dom'
+import {useHistory} from 'react-router'
 import {ErrorResponse} from '../../../../models/ResponseModel'
-import {RootState} from '../../../../redux/reducers/rootReducer'
 
-interface Props {
-    isAuth: boolean
-}
 
 /**
  * Регистрация. Оболочка
- * @param isAuth
- * @param history
  */
-const RegistrationWrapper: React.FC<RouteComponentProps<any> & Props> = ({isAuth, history}) => {
+const RegistrationWrapper: React.FC = () => {
+    const history = useHistory()
 
     const signup = (signupRequest: SignUpRequest) => {
         AuthAPI.signup(signupRequest)
@@ -29,14 +22,7 @@ const RegistrationWrapper: React.FC<RouteComponentProps<any> & Props> = ({isAuth
             .catch((error: ErrorResponse) => NotificationManager.error(error.message, 'Ошибка'))
     }
 
-    return <Registration isAuth={isAuth}
-                         signup={signup}/>
+    return <Registration signup={signup}/>
 }
 
-const mapStateToProps = (state: RootState) => {
-    return {
-        isAuth: state.userData.isAuth
-    }
-}
-
-export default withRouter(connect(mapStateToProps, null)(RegistrationWrapper))
+export default RegistrationWrapper

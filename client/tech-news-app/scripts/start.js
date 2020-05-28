@@ -1,13 +1,14 @@
 'use strict';
 
-// Do this as the first thing so that any code reading it knows the right env.
+const chalk = require('react-dev-utils/chalk');
+
+// Устанавливаем переменные окружения в development
 process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
 
-// Makes the script crash on unhandled rejections instead of silently
-// ignoring them. In the future, promise rejections that are not handled will
-// terminate the Node.js process with a non-zero exit code.
+// Событие на reject промисов
 process.on('unhandledRejection', err => {
+  console.log(chalk.red(err));
   throw err;
 });
 
@@ -16,7 +17,6 @@ require('../config/env');
 
 
 const fs = require('fs');
-const chalk = require('react-dev-utils/chalk');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const clearConsole = require('react-dev-utils/clearConsole');
@@ -35,7 +35,7 @@ const createDevServerConfig = require('../config/webpackDevServer.config');
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;
 
-// Warn and crash if required files are missing
+// Выход, если index.html и index.js/tsx не обнаружены
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
   process.exit(1);
 }
@@ -66,8 +66,7 @@ if (process.env.HOST) {
 const { checkBrowsers } = require('react-dev-utils/browsersHelper');
 checkBrowsers(paths.appPath, isInteractive)
   .then(() => {
-    // We attempt to use the default port but if it is busy, we offer the user to
-    // run on a different port. `choosePort()` Promise resolves to the next free port.
+    // Если дефолтный порт (3000) занят, то предлагаем выбрать другой порт
     return choosePort(HOST, DEFAULT_PORT);
   })
   .then(port => {
@@ -107,7 +106,7 @@ checkBrowsers(paths.appPath, isInteractive)
       urls.lanUrlForConfig
     );
     const devServer = new WebpackDevServer(compiler, serverConfig);
-    // Launch WebpackDevServer.
+    // Запуск дев сервера
     devServer.listen(port, HOST, err => {
       if (err) {
         return console.log(err);
@@ -128,7 +127,7 @@ checkBrowsers(paths.appPath, isInteractive)
         console.log();
       }
 
-      console.log(chalk.cyan('Starting the development server...\n'));
+      console.log(chalk.cyan(`Starting the development server on port ${port}...`));
       openBrowser(urls.localUrlForBrowser);
     });
 

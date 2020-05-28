@@ -17,6 +17,8 @@ import 'font-awesome/css/font-awesome.min.css'
 import './static/libraries/google-Roboto.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+import './web.config';
+
 ReactDOM.render(
     <Provider store={store}>
         <AppWrapper/>

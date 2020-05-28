@@ -1,6 +1,7 @@
 import AuthService from '../common/AuthService'
 
-export const API_BASE_URL = 'http://localhost:8080/api'
+export const API_BASE_URL = 'http://localhost:8081/api'
+// export const API_BASE_URL = 'http://87.76.1.16:9001/api'
 
 /**
  * Базовый запрос приложения

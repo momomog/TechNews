@@ -31,106 +31,103 @@ const postcssNormalize = require('postcss-normalize');
 
 const appPackageJson = require(paths.appPackageJson);
 
-// Source maps are resource heavy and can cause out of memory issue for large source files.
+// Это удалит все файлы .map из папки build/static/js
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
-// Some apps do not need the benefits of saving a web request, so not inlining the chunk
-// makes for a smoother build process.
+
 const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
 
+// Лимит на размер загружаемых изображений
 const imageInlineSizeLimit = parseInt(
     process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
 );
 
-// Check if TypeScript is setup
+// Используется ли typescript
 const useTypeScript = fs.existsSync(paths.appTsConfig);
 
-// style files regexes
+// regex стилей
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
-// This is the production and development configuration.
-// It is focused on developer experience, fast rebuilds, and a minimal bundle.
+
+/**
+ * webpack config
+ * @param webpackEnv - среда выполнения
+ */
 module.exports = function (webpackEnv) {
     const isEnvDevelopment = webpackEnv === 'development';
     const isEnvProduction = webpackEnv === 'production';
 
-    // Variable used for enabling profiling in Production
-    // passed into alias object. Uses a flag if passed into the build command
-    const isEnvProductionProfile =
-        isEnvProduction && process.argv.includes('--profile');
+    // Отображение профилирования сборки:
+    // время сбора метаданных модуля (например, разрешение имени файла)
+    // время сборки модуля (например, загрузчики и разбор)
+    // время для выявления и подключения зависимостей модуля
+    const isEnvProductionProfile = isEnvProduction && process.argv.includes('--profile');
 
-    // Webpack uses `publicPath` to determine where the app is being served from.
-    // It requires a trailing slash, or the file assets will get an incorrect path.
-    // In development, we always serve from the root. This makes config easier.
+    // Базовый путь приложения. Используется "/" для упрощения разработки
     const publicPath = isEnvProduction
         ? paths.servedPath
         : isEnvDevelopment && '/';
-    // Some apps do not use client-side routing with pushState.
-    // For these, "homepage" can be set to "." to enable relative asset paths.
+
     const shouldUseRelativeAssetPaths = publicPath === './';
 
-    // `publicUrl` is just like `publicPath`, but we will provide it to our app
-    // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
-    // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
+    // publicPath без "/" в начале пути
     const publicUrl = isEnvProduction
         ? publicPath.slice(0, -1)
         : isEnvDevelopment && '';
-    // Get environment variables to inject into our app.
+
+    // Взять переменные среды по regex /^REACT_APP_/i
     const env = getClientEnvironment(publicUrl);
 
-    // common function to get style loaders
+    /**
+     * Глобальная функция для стилей, вовзращает список загрузчиков
+     * @param cssOptions
+     * @param preProcessor
+     */
     const getStyleLoaders = (cssOptions, preProcessor) => {
         const loaders = [
+            // Превращает CSS в модули JS, которые внедряют теги <style>
             isEnvDevelopment && require.resolve('style-loader'),
             isEnvProduction && {
                 loader: MiniCssExtractPlugin.loader,
                 options: shouldUseRelativeAssetPaths ? {publicPath: '../../'} : {},
-            },
-            {
+            }, {
                 loader: require.resolve('css-loader'),
                 options: cssOptions,
             },
+            // Применяет автоматический префикс .css к импортируемым файлам
             {
-                // Options for PostCSS as we reference these options twice
-                // Adds vendor prefixing based on your specified browser support in
-                // package.json
                 loader: require.resolve('postcss-loader'),
                 options: {
-                    // Necessary for external CSS imports to work
-                    // https://github.com/facebook/create-react-app/issues/2677
                     ident: 'postcss',
                     plugins: () => [
                         require('postcss-flexbugs-fixes'),
                         require('postcss-preset-env')({
                             autoprefixer: {
-                                flexbox: 'no-2009',
+                                flexbox: 'no-2009'
                             },
-                            stage: 3,
+                            stage: 3
                         }),
-                        // Adds PostCSS Normalize as the reset css with default options,
-                        // so that it honors browserslist config in package.json
-                        // which in turn let's users customize the target behavior as per their needs.
-                        postcssNormalize(),
+                        postcssNormalize()
                     ],
-                    sourceMap: isEnvProduction && shouldUseSourceMap,
-                },
-            },
-        ].filter(Boolean);
+                    sourceMap: isEnvProduction && shouldUseSourceMap
+                }
+            }].filter(Boolean);
+        // Для препроцессоров (scss, sass)
+        // sass-loader??
         if (preProcessor) {
             loaders.push(
                 {
                     loader: require.resolve('resolve-url-loader'),
                     options: {
-                        sourceMap: isEnvProduction && shouldUseSourceMap,
-                    },
-                },
-                {
+                        sourceMap: isEnvProduction && shouldUseSourceMap
+                    }
+                }, {
                     loader: require.resolve(preProcessor),
                     options: {
-                        sourceMap: true,
-                    },
+                        sourceMap: true
+                    }
                 }
             );
         }
@@ -139,54 +136,43 @@ module.exports = function (webpackEnv) {
 
     return {
         mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
-        // Stop compilation early in production
+        // Остановить сборку при возникновении ошибки вместо того, чтобы выводить ее в консоль и проигнорировать
         bail: isEnvProduction,
         devtool: isEnvProduction
             ? shouldUseSourceMap
                 ? 'source-map'
                 : false
             : isEnvDevelopment && 'cheap-module-source-map',
-        // These are the "entry points" to our application.
-        // This means they will be the "root" imports that are included in JS bundle.
         entry: [
-            // Include an alternative client for WebpackDevServer. A client's job is to
-            // connect to WebpackDevServer by a socket and get notified about changes.
-            // When you save a file, the client will either apply hot updates (in case
-            // of CSS changes), or refresh the page (in case of JS changes). When you
-            // make a syntax error, this client will display a syntax error overlay.
-            // Note: instead of the default WebpackDevServer client, we use a custom one
-            // to bring better experience for Create React App users. You can replace
-            // the line below with these two lines if you prefer the stock client:
-            // require.resolve('webpack-dev-server/client') + '?/',
-            // require.resolve('webpack/hot/dev-server'),
+            // Включить альтернативный клиент для WebpackDevServer.
+            // Задача клиента - подключиться к WebpackDevServer через сокет и получать уведомления об изменениях.
+            // Когда вы сохраняете файл, клиент применяет горячие обновления (в случае изменений CSS) или обновляет страницу (в случае изменений JS).
+            // Когда вы делаете синтаксическую ошибку, этот клиент будет отображать наложение синтаксической ошибки.
+            // Примечание: вместо стандартного клиента WebpackDevServer мы используем пользовательский,
+            // чтобы улучшить работу пользователей Create React App. Вы можете заменить строку ниже этими двумя строками,
+            // если предпочитаете стандартный клиент:
+            // require.resolve ('webpack-dev-server / client') + '? /',
+            // require.resolve ('webpack / hot / dev-server'),
             isEnvDevelopment &&
             require.resolve('react-dev-utils/webpackHotDevClient'),
-            // Finally, this is your app's code:
+            // Точка входа в приложение
             paths.appIndexJs,
-            // We include the app code last so that if there is a runtime error during
-            // initialization, it doesn't blow up the WebpackDevServer client, and
-            // changing JS code would still trigger a refresh.
         ].filter(Boolean),
         output: {
-            // The build folder.
+            // Путь к билду
             path: isEnvProduction ? paths.appBuild : undefined,
-            // Add /* filename */ comments to generated require()s in the output.
+            // Добавляет комментарий /* filename */ к require()s
             pathinfo: isEnvDevelopment,
-            // There will be one main bundle, and one file per asynchronous chunk.
-            // In development, it does not produce real files.
             filename: isEnvProduction
                 ? 'static/js/[name].[contenthash:8].js'
                 : isEnvDevelopment && 'static/js/bundle.js',
             // TODO: remove this when upgrading to webpack 5
             futureEmitAssets: true,
-            // There are also additional JS chunk files if you use code splitting.
             chunkFilename: isEnvProduction
                 ? 'static/js/[name].[contenthash:8].chunk.js'
                 : isEnvDevelopment && 'static/js/[name].chunk.js',
-            // We inferred the "public path" (such as / or /my-project) from homepage.
-            // We use "/" in development.
             publicPath: publicPath,
-            // Point sourcemap entries to original disk location (format as URL on Windows)
+            // Оригинальный путь к sourcemap на диске
             devtoolModuleFilenameTemplate: isEnvProduction
                 ? info =>
                     path
@@ -197,14 +183,13 @@ module.exports = function (webpackEnv) {
             // Prevents conflicts when multiple Webpack runtimes (from different apps)
             // are used on the same page.
             jsonpFunction: `webpackJsonp${appPackageJson.name}`,
-            // this defaults to 'window', but by setting it to 'this' then
-            // module chunks which are built will work in web workers as well.
+            //по умолчанию это значение равно «window», но, установив его на «this», chunks будут работать и в web workers.
             globalObject: 'this',
         },
+        // Используется только в production
         optimization: {
             minimize: isEnvProduction,
             minimizer: [
-                // This is only used in production mode
                 new TerserPlugin({
                     terserOptions: {
                         parse: {
@@ -213,24 +198,16 @@ module.exports = function (webpackEnv) {
                             // into invalid ecma 5 code. This is why the 'compress' and 'output'
                             // sections only apply transformations that are ecma 5 safe
                             // https://github.com/facebook/create-react-app/pull/4234
-                            ecma: 8,
+                            ecma: 8
                         },
                         compress: {
                             ecma: 5,
                             warnings: false,
-                            // Disabled because of an issue with Uglify breaking seemingly valid code:
-                            // https://github.com/facebook/create-react-app/issues/2376
-                            // Pending further investigation:
-                            // https://github.com/mishoo/UglifyJS2/issues/2011
                             comparisons: false,
-                            // Disabled because of an issue with Terser breaking valid code:
-                            // https://github.com/facebook/create-react-app/issues/5250
-                            // Pending further investigation:
-                            // https://github.com/terser-js/terser/issues/120
-                            inline: 2,
+                            inline: 2
                         },
                         mangle: {
-                            safari10: true,
+                            safari10: true
                         },
                         // Added for profiling in devtools
                         keep_classnames: isEnvProductionProfile,
@@ -238,47 +215,30 @@ module.exports = function (webpackEnv) {
                         output: {
                             ecma: 5,
                             comments: false,
-                            // Turned on because emoji and regex is not minified properly using default
-                            // https://github.com/facebook/create-react-app/issues/2488
-                            ascii_only: true,
-                        },
+                            ascii_only: true
+                        }
                     },
-                    // Use multi-process parallel running to improve the build speed
-                    // Default number of concurrent runs: os.cpus().length - 1
-                    // Disabled on WSL (Windows Subsystem for Linux) due to an issue with Terser
-                    // https://github.com/webpack-contrib/terser-webpack-plugin/issues/21
                     parallel: !isWsl,
                     // Enable file caching
                     cache: true,
-                    sourceMap: shouldUseSourceMap,
+                    sourceMap: shouldUseSourceMap
                 }),
-                // This is only used in production mode
                 new OptimizeCSSAssetsPlugin({
                     cssProcessorOptions: {
                         parser: safePostCssParser,
                         map: shouldUseSourceMap
                             ? {
-                                // `inline: false` forces the sourcemap to be output into a
-                                // separate file
                                 inline: false,
-                                // `annotation: true` appends the sourceMappingURL to the end of
-                                // the css file, helping the browser find the sourcemap
-                                annotation: true,
+                                annotation: true
                             }
-                            : false,
-                    },
-                }),
+                            : false
+                    }
+                })
             ],
-            // Automatically split vendor and commons
-            // https://twitter.com/wSokra/status/969633336732905474
-            // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
             splitChunks: {
                 chunks: 'all',
-                name: false,
+                name: false
             },
-            // Keep the runtime chunk separated to enable long term caching
-            // https://twitter.com/wSokra/status/969679223278505985
-            // https://github.com/facebook/create-react-app/issues/5358
             runtimeChunk: {
                 name: entrypoint => `runtime-${entrypoint.name}`,
             },
@@ -334,31 +294,29 @@ module.exports = function (webpackEnv) {
             strictExportPresence: true,
             rules: [
                 // Disable require.ensure as it's not a standard language feature.
-                {parser: {requireEnsure: false}},
-
+                {
+                    parser: {
+                        requireEnsure: false
+                    }
+                },
                 // First, run the linter.
                 // It's important to do this before Babel processes the JS.
                 {
                     test: /\.(js|mjs|jsx|ts|tsx)$/,
                     enforce: 'pre',
-                    use: [
-                        {
-                            options: {
-                                cache: true,
-                                formatter: require.resolve('react-dev-utils/eslintFormatter'),
-                                eslintPath: require.resolve('eslint'),
-                                resolvePluginsRelativeTo: __dirname,
-
-                            },
-                            loader: require.resolve('eslint-loader'),
-                        },
-                    ],
-                    include: paths.appSrc,
-                },
-                {
-                    // "oneOf" will traverse all following loaders until one will
-                    // match the requirements. When no loader matches it will fall
-                    // back to the "file" loader at the end of the loader list.
+                    use: [{
+                        loader: require.resolve('eslint-loader'),
+                        options: {
+                            cache: true,
+                            formatter: require.resolve('react-dev-utils/eslintFormatter'),
+                            eslintPath: require.resolve('eslint'),
+                            resolvePluginsRelativeTo: __dirname
+                        }
+                    }],
+                    include: paths.appSrc
+                }, {
+                    // «oneOf» будет проходить по всем следующим загрузчикам, пока один из них не будет соответствовать требованиям.
+                    // Когда ни один загрузчик не совпадает, он возвращается к file-loader в конце списка загрузчиков.
                     oneOf: [
                         // "url" loader works like "file" loader except that it embeds assets
                         // smaller than specified limit in bytes as data URLs to avoid requests.
@@ -368,8 +326,8 @@ module.exports = function (webpackEnv) {
                             loader: require.resolve('url-loader'),
                             options: {
                                 limit: imageInlineSizeLimit,
-                                name: 'static/media/[name].[hash:8].[ext]',
-                            },
+                                name: 'static/media/[name].[hash:8].[ext]'
+                            }
                         },
                         // Process application JS with Babel.
                         // The preset includes JSX, Flow, TypeScript, and some ESnext features.
@@ -381,7 +339,6 @@ module.exports = function (webpackEnv) {
                                 customize: require.resolve(
                                     'babel-preset-react-app/webpack-overrides'
                                 ),
-
                                 plugins: [
                                     [
                                         require.resolve('babel-plugin-named-asset-import'),
@@ -389,11 +346,11 @@ module.exports = function (webpackEnv) {
                                             loaderMap: {
                                                 svg: {
                                                     ReactComponent:
-                                                        '@svgr/webpack?-svgo,+titleProp,+ref![path]',
-                                                },
-                                            },
-                                        },
-                                    ],
+                                                        '@svgr/webpack?-svgo,+titleProp,+ref![path]'
+                                                }
+                                            }
+                                        }
+                                    ]
                                 ],
                                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                                 // It enables caching results in ./node_modules/.cache/babel-loader/
@@ -401,8 +358,16 @@ module.exports = function (webpackEnv) {
                                 cacheDirectory: true,
                                 // See #6846 for context on why cacheCompression is disabled
                                 cacheCompression: false,
-                                compact: isEnvProduction,
-                            },
+                                compact: isEnvProduction
+                            }
+                        },
+                        // Для загрузки файла web.config
+                        {
+                            "test": /\.config$/,
+                            "loader": "file-loader",
+                            "options": {
+                                "name": "[name].[ext]"
+                            }
                         },
                         // Process any JS outside of the app with Babel.
                         // Unlike the application JS, we only compile the standard ES features.
@@ -414,12 +379,10 @@ module.exports = function (webpackEnv) {
                                 babelrc: false,
                                 configFile: false,
                                 compact: false,
-                                presets: [
-                                    [
-                                        require.resolve('babel-preset-react-app/dependencies'),
-                                        {helpers: true},
-                                    ],
-                                ],
+                                presets: [[
+                                    require.resolve('babel-preset-react-app/dependencies'),
+                                    {helpers: true}
+                                ],],
                                 cacheDirectory: true,
                                 // See #6846 for context on why cacheCompression is disabled
                                 cacheCompression: false,
@@ -430,93 +393,63 @@ module.exports = function (webpackEnv) {
                                 // being evaluated would be much more helpful.
                                 sourceMaps: false,
                             },
-                        },
-                        // "postcss" loader applies autoprefixer to our CSS.
-                        // "css" loader resolves paths in CSS and adds assets as dependencies.
-                        // "style" loader turns CSS into JS modules that inject <style> tags.
-                        // In production, we use MiniCSSExtractPlugin to extract that CSS
-                        // to a file, but in development "style" loader enables hot editing
-                        // of CSS.
-                        // By default we support CSS Modules with the extension .module.css
-                        {
-                            test: cssRegex,
-                            exclude: cssModuleRegex,
+                        }, {
+                            test: /\.css$/,
+                            exclude: /\.module\.css$/,
                             use: getStyleLoaders({
                                 importLoaders: 1,
-                                sourceMap: isEnvProduction && shouldUseSourceMap,
+                                sourceMap: isEnvProduction && shouldUseSourceMap
                             }),
-                            // Don't consider CSS imports dead code even if the
-                            // containing package claims to have no side effects.
-                            // Remove this when webpack adds a warning or an error for this.
-                            // See https://github.com/webpack/webpack/issues/6571
-                            sideEffects: true,
+                            sideEffects: true
                         },
-                        // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
-                        // using the extension .module.css
+                        // Поддержка CSS Modules
                         {
-                            test: cssModuleRegex,
+                            test: /\.module\.css$/,
                             use: getStyleLoaders({
                                 importLoaders: 1,
                                 sourceMap: isEnvProduction && shouldUseSourceMap,
                                 modules: true,
-                                getLocalIdent: getCSSModuleLocalIdent,
-                            }),
-                        },
-                        // Opt-in support for SASS (using .scss or .sass extensions).
-                        // By default we support SASS Modules with the
-                        // extensions .module.scss or .module.sass
-                        {
-                            test: sassRegex,
-                            exclude: sassModuleRegex,
+                                getLocalIdent: getCSSModuleLocalIdent
+                            })
+                        }, {
+                            test: /\.(scss|sass)$/,
+                            exclude: /\.module\.(scss|sass)$/,
                             use: getStyleLoaders(
                                 {
                                     importLoaders: 2,
-                                    sourceMap: isEnvProduction && shouldUseSourceMap,
+                                    sourceMap: isEnvProduction && shouldUseSourceMap
                                 },
                                 'sass-loader'
                             ),
-                            // Don't consider CSS imports dead code even if the
-                            // containing package claims to have no side effects.
-                            // Remove this when webpack adds a warning or an error for this.
-                            // See https://github.com/webpack/webpack/issues/6571
-                            sideEffects: true,
-                        },
-                        // Adds support for CSS Modules, but using SASS
-                        // using the extension .module.scss or .module.sass
-                        {
-                            test: sassModuleRegex,
+                            sideEffects: true
+                        }, {
+                            test: /\.module\.(scss|sass)$/,
                             use: getStyleLoaders(
                                 {
                                     importLoaders: 2,
                                     sourceMap: isEnvProduction && shouldUseSourceMap,
                                     modules: true,
-                                    getLocalIdent: getCSSModuleLocalIdent,
+                                    getLocalIdent: getCSSModuleLocalIdent
                                 },
                                 'sass-loader'
-                            ),
+                            )
                         },
-                        // "file" loader makes sure those assets get served by WebpackDevServer.
-                        // When you `import` an asset, you get its (virtual) filename.
-                        // In production, they would get copied to the `build` folder.
-                        // This loader doesn't use a "test" so it will catch all modules
-                        // that fall through the other loaders.
+                        // Используется, если тип файла не подошел под предыдущие загрузчики
+                        // ПРОПИСЫВАЕТСЯ В ПОСЛЕДНЮЮ ОЧЕРЕДЬ
                         {
                             loader: require.resolve('file-loader'),
-                            // Exclude `js` files to keep "css" loader working as it injects
-                            // its runtime that would otherwise be processed through "file" loader.
-                            // Also exclude `html` and `json` extensions so they get processed
-                            // by webpacks internal loaders.
                             exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
                             options: {
-                                name: 'static/media/[name].[hash:8].[ext]',
-                            },
-                        },
-                        // ** STOP ** Are you adding a new loader?
-                        // Make sure to add the new loader(s) before the "file" loader.
-                    ],
-                },
-            ],
+                                name: 'static/media/[name].[hash:8].[ext]'
+                            }
+                        }
+                    ]
+                }
+            ]
         },
+
+
+
         plugins: [
             // Generates an `index.html` file with the <script> injected.
             new HtmlWebpackPlugin(

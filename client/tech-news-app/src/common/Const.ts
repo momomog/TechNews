@@ -1,3 +1,5 @@
+export const GOOGLE_EXPORT_VIEW = 'https://drive.google.com/uc?export=view&id='
+
 export const NOT_CORRECTLY_SECTION = -1
 export const SECTION_ALL_POSTS = 1
 export const SECTION_MOBILE = 2

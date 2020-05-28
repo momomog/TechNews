@@ -6,6 +6,7 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogActions from '@material-ui/core/DialogActions'
 import Button from '@material-ui/core/Button'
 import {NavLink} from 'react-router-dom'
+import needle from 'needle'
 
 interface Props {
     deletePostById: (postId: number) => void
@@ -29,6 +30,17 @@ const AdminPanel: React.FC<Props> = ({deletePostById}) => {
     const onDeletePost = () => {
         deletePostById(delPostId)
         setOpenModal(false)
+    }
+
+    const stealPost = async () => {
+
+        const initialPostNumber = 371752
+
+        const resp = await needle('get', `https://4pda.ru/2020/05/28/${initialPostNumber}`)
+        const html = await document.createRange().createContextualFragment(resp.body)
+        const content = html.querySelector('.content')
+        debugger
+
     }
 
     return (
@@ -71,6 +83,17 @@ const AdminPanel: React.FC<Props> = ({deletePostById}) => {
                                         <button type="button" className="btn btn-danger"
                                                 onClick={handleOpenModal}>
                                             Удалить
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className="row p-3">
+                                    <div className="col-sm-2 mt-3">
+                                        <span>Украсть</span>
+                                    </div>
+                                    <div className="col-sm-10">
+                                        <button type="button" onClick={stealPost} className="btn btn-success mt-2">
+                                            Украсть
                                         </button>
                                     </div>
                                 </div>

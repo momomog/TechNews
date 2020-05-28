@@ -9,6 +9,7 @@ import {User} from '../../../../models/UserModel'
 import {Dispatch} from 'redux'
 import {getPostComments} from '../../../../redux/actions/commentActions'
 import {RootState} from '../../../../redux/reducers/rootReducer'
+import {GET_POST_COMMENTS} from '../../../../redux/actions/commentActions'
 
 interface Props {
     sectionId: number

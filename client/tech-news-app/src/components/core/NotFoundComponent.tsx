@@ -5,10 +5,11 @@ import Common from '../../common/Common'
 export const NotFoundComponent: React.FC<{}> = () => {
     const {params}: any = useRouteMatch()
 
-    // const code = match.params.code || 404
+    const code = params.code !== 'undefined' || 404
     // const message = Common.getErrorMessage(+code) || Common.getErrorMessage(404)
-    const code = params.code
-    const message = Common.getErrorMessage(+code)
+    const message = params.code !== 'undefined' ? Common.getErrorMessage(+code) : Common.getErrorMessage(404)
+    // const code = params.code
+    // const message = Common.getErrorMessage(+code)
 
     return (
         <div className="container">

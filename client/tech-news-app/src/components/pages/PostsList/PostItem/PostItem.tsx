@@ -4,6 +4,7 @@ import Hyphenated from 'react-hyphen'
 import ru from 'hyphenated-ru'
 import Common from '../../../../common/Common'
 import {Post} from '../../../../models/PostModel'
+import {GOOGLE_EXPORT_VIEW} from '../../../../common/Const'
 
 interface Props {
     post: Post
@@ -16,7 +17,6 @@ interface Props {
  * @param clearPostData
  */
 const PostItem: React.FC<Props> = ({post, clearPostData}) => {
-
     const postRate = () => {
         let rating = 0
 
@@ -43,7 +43,7 @@ const PostItem: React.FC<Props> = ({post, clearPostData}) => {
                     <img alt="post"
                          onClick={postClick}
                          className="post-picture"
-                         src={post.photoId && `https://drive.google.com/uc?export=view&id=${post.photoId}`}/>
+                         src={post.photoId && `${GOOGLE_EXPORT_VIEW}${post.photoId}`}/>
                 </NavLink>
             </div>
 

@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import {SECTION_ALL_POSTS} from '../../../common/Const'
-import AuthButton from './AuthButton/AuthButton'
+import AuthButtons from './AuthButtons/AuthButtons'
 import logo from '../../../static/logo.png'
 import {NavLink} from 'react-router-dom'
 import {ChangeSectionAction, SetPostPageAction} from '../../../models/PostModel'
@@ -43,11 +43,10 @@ const Login: React.FC<Props> = ({setPosts, changeSection, setPostPage, setCurren
                 </div>
                 <div className="col-sm-6 d-flex align-items-end justify-content-end">
                     {
-                        !isAuth && <AuthButton/>
+                        !isAuth && <AuthButtons/>
                     }
                     {
-                        isAuth && user.id &&
-                        <AuthUser setCurrentUserData={setCurrentUserData}
+                        isAuth && user.id > 0 && <AuthUser setCurrentUserData={setCurrentUserData}
                                   setIsAuth={setIsAuth}/>
                     }
                 </div>

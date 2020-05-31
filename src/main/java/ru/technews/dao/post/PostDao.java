@@ -66,12 +66,16 @@ public class PostDao extends BaseDao<PostEntity> implements PostCategoryConst {
         Query query = getCurrentSession().createQuery("from PostEntity order by id desc");
         List<PostEntity> list = query.getResultList();
         List<PostEntity> resultList = new ArrayList<>();
-        String[] splittedValue = searchText.trim().replaceAll("\u00AD", "").split("\\s+");
+
+        String[] splittedSearchText = searchText.trim().replaceAll("\u00AD", "").split("\\s+");
+        ArrayList<String> searchWords = new ArrayList();
+        for (String s: splittedSearchText)
+            if (s.length() > 2)
+                searchWords.add(s);
 
         for (PostEntity post : list) {
-            if (Utils.stringContainsItemFromList(post.getTitle(), splittedValue)
-                    || Utils.stringContainsItemFromList(post.getFullDescription(), splittedValue)
-                    || Utils.stringContainsItemFromList(post.getPreDescription(), splittedValue))
+            if (Utils.stringContainsItemFromList(post.getTitle(), searchWords.toArray(new String[searchWords.size()]))
+                    || Utils.stringContainsItemFromList(post.getFullDescription(), searchWords.toArray(new String[searchWords.size()])))
                 resultList.add(post);
         }
 

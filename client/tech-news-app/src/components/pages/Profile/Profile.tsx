@@ -41,7 +41,7 @@ const Profile: React.FC<Props> = ({user, isCurrentUser, onLoadPhoto}) => {
 
     return (
         <div className="row">
-            <div className="col-md-11 center-block">
+            <div className="col-md-11 center-block pl-0 pr-0">
                 <div className="panel panel-default">
                     <div className="panel-heading"><h3>Профиль пользователя</h3></div>
                     <div className="panel-body">

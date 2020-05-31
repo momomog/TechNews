@@ -54,7 +54,8 @@ const PostReview: React.FC<Props> = ({post, postRating}) => {
                         <hr/>
                         <div className="col-lg-12 mb-2">
                             <img className="card-img-top post-review-pic center-block" alt="Card"
-                                 src={post.photoId && `https://drive.google.com/uc?export=view&id=${post.photoId}`}/>
+                                 // src={post.photoId && `https://drive.google.com/uc?export=view&id=${post.photoId}`}/>
+                                 src={post.photoId}/>
                             <hr/>
                         </div>
 

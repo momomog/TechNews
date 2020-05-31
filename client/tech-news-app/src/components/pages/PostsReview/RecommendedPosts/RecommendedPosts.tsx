@@ -19,7 +19,8 @@ const PostItem: React.FC<{ post: Post }> = ({post}) => {
             <div className="recommend-post">
                 <div className="post-rec mb-3">
                     <img className="center-block" alt="Card"
-                         src={`https://drive.google.com/uc?export=view&id=${post.photoId}`}/>
+                         // src={`https://drive.google.com/uc?export=view&id=${post.photoId}`}/>
+                         src={post.photoId}/>
                 </div>
                 <div className="text-center" onClick={() => window.scroll(0, 0)}>
                     <NavLink to={linkPropInit()}>

@@ -16,8 +16,8 @@ const LoginForm: React.FC<InjectedFormProps<SignInRequest>> = ({handleSubmit, in
               onSubmit={handleSubmit}>
 
             <div className="input-group mb-3">
-                <span className="input-group-addon">
-                     <i className="glyphicon glyphicon-user" style={{marginLeft: '-5px'}}/>
+                <span className="input-group-addon login-icon">
+                     <i className="glyphicon glyphicon-user"/>
                 </span>
                 <span style={{width: '93%'}}>
                     <Field component={Input}
@@ -29,8 +29,8 @@ const LoginForm: React.FC<InjectedFormProps<SignInRequest>> = ({handleSubmit, in
             </div>
 
             <div className="input-group mb-2">
-                <span className="input-group-addon">
-                     <i className="glyphicon glyphicon-lock" style={{marginLeft: '-5px'}}/>
+                <span className="input-group-addon login-icon">
+                     <i className="glyphicon glyphicon-lock"/>
                 </span>
                 <span style={{width: '93%'}}>
                      <Field component={Input}
@@ -38,7 +38,7 @@ const LoginForm: React.FC<InjectedFormProps<SignInRequest>> = ({handleSubmit, in
                             type="password"
                             className="input-group-form"
                             name="password"
-                            placeholder="пароль"/>
+                            placeholder="Пароль"/>
                 </span>
 
             </div>

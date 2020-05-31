@@ -13,6 +13,7 @@ interface Props {
     postList: Array<Post>
     postPage: number
     sectionId: number
+    isLoading: boolean
     clearPostData: () => void
     getPosts: (sectionId: number, postPage?: number) => void
 }
@@ -20,11 +21,12 @@ interface Props {
 /**
  * Список постов. Оболочка
  * @param postPage
+ * @param isLoading
  * @param postList
  * @param getPosts
  * @param clearPostData
  */
-const PostsListWrapper: React.FC<Props> = ({postPage, postList, getPosts, clearPostData}) => {
+const PostsListWrapper: React.FC<Props> = ({postPage, isLoading, postList, getPosts, clearPostData}) => {
     const {params}: any = useRouteMatch()
 
     useEffect(() => {
@@ -34,7 +36,7 @@ const PostsListWrapper: React.FC<Props> = ({postPage, postList, getPosts, clearP
             params.sectionName ? getPosts(getSectionId(sectionName), postPage) : getPosts(SECTION_ALL_POSTS)
     }, [params, getPosts, postPage, postList])
 
-    return postList.length
+    return postList.length > 0 && !isLoading
         ? <PostsList posts={postList}
                      clearPostData={clearPostData}/>
         : <Spinner/>
@@ -45,6 +47,7 @@ const mapStateToProps = (state: RootState) => {
     return {
         postList: state.postsData.postList,
         postPage: state.postsData.postPage,
+        isLoading: state.postsData.isLoading,
         sectionId: state.postsData.sectionId
     }
 }

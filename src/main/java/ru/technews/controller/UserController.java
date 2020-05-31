@@ -113,7 +113,7 @@ public class UserController {
         if (profileRequest.getBirthDate() == null) {
             profileData.setBirthDate(null);
         } else {
-            profileData.setBirthDate(profileRequest.getBirthDate().plusDays(1));
+            profileData.setBirthDate(profileRequest.getBirthDate());
         }
         profileData.setVk(profileRequest.getVk());
         profileData.setInstagram(profileRequest.getInstagram());

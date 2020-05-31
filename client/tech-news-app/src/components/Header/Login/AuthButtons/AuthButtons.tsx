@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom'
 /**
  * Кнопки регистрации/авторизации пользователя
  */
-const AuthButton = () => {
+const AuthButtons = () => {
     return (
         <div>
             <span>
@@ -21,4 +21,4 @@ const AuthButton = () => {
     )
 }
 
-export default AuthButton
+export default AuthButtons

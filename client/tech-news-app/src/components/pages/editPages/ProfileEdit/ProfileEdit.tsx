@@ -16,7 +16,7 @@ const ProfileEdit: React.FC<Props> = ({updateUserData}) => {
 
     return (
         <div className="row">
-            <div className="col-md-11 center-block ">
+            <div className="col-md-11 center-block">
                 <div className="panel panel-default">
                     <div className="panel-heading">
                         <h4>Редактирование профиля</h4>

@@ -22,10 +22,11 @@ export interface PostState {
     postPage: number
     postList: Array<Post>
     postData: Post
+    isLoading: boolean
 }
 
 export type PostAction = ChangeSectionAction | SetPostCountAction |
-    SetPostPageAction | SetPostDataAction | SetPostsAction
+    SetPostPageAction | SetPostDataAction | SetPostsAction | SetIsLoadingAction
 
 export interface ChangeSectionAction {
     type: 'CHANGE-SECTION'
@@ -45,6 +46,11 @@ export interface SetPostPageAction {
 export interface SetPostDataAction {
     type: 'SET-POST-DATA'
     postData: Post
+}
+
+export interface SetIsLoadingAction {
+    type: 'SET-IS-LOADING'
+    isLoading: boolean
 }
 
 export interface SetPostsAction {

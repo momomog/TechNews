@@ -23,8 +23,8 @@ const Registration: React.FC<Props> = ({signup}) => {
     }
 
     return (
-        <div className="container">
-            <div className="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 mt-5">
+        <div className="container reg-form">
+            <div className="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
                 <div className="panel panel-info">
                     <div className="panel-heading">
                         <div className="panel-title">Регистрация</div>

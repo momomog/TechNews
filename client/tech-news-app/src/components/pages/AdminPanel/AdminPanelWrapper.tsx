@@ -2,6 +2,7 @@ import React from 'react'
 import AdminPanel from './AdminPanel'
 import PostAPI from '../../../api/PostAPI'
 import {NotificationManager} from 'react-notifications'
+import {postInitProcess} from './postCreator'
 
 /**
  * Панель администратора. Оболочка
@@ -14,7 +15,21 @@ const AdminPanelWrapper: React.FC = () => {
             .catch(() => NotificationManager.error(`Не удалось удалить пост номер ${postId}`, 'Ошибка'))
     }
 
-    return <AdminPanel deletePostById={deletePostById}/>
+    const updatePosts = async (day, month, postNum) => {
+        try {
+            const post = await postInitProcess(day, month, postNum)
+            await PostAPI.onCreateNewPostFromOuterSrc(post)
+            console.log('POST ADDED', post)
+            // @ts-ignore
+            setTimeout(() => updatePosts(day, month, post.postNum), 3000)
+        } catch (e) {
+            console.log('ERROR', e)
+            setTimeout(() => updatePosts(day, month, ++postNum), 3000)
+        }
+    }
+
+    return <AdminPanel updatePosts={updatePosts}
+                       deletePostById={deletePostById}/>
 }
 
 export default AdminPanelWrapper

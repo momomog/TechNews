@@ -6,19 +6,23 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogActions from '@material-ui/core/DialogActions'
 import Button from '@material-ui/core/Button'
 import {NavLink} from 'react-router-dom'
-import needle from 'needle'
 
 interface Props {
     deletePostById: (postId: number) => void
+    updatePosts: (day: string, month: string, postNum: number) => void
 }
 
 /**
  * Панель администратора
  * @param deletePostById
+ * @param updatePosts
  */
-const AdminPanel: React.FC<Props> = ({deletePostById}) => {
+const AdminPanel: React.FC<Props> = ({deletePostById , updatePosts}) => {
     const [delPostId, setDelPostId] = useState<number>(0)
     const [openModal, setOpenModal] = useState<boolean>(false)
+    const [day, setDay] = useState<string>(new Date().getDate().toString())
+    const [month, setMonth] = useState<string>((new Date().getMonth() + 1).toString())
+    const [postNum, setPostNum] = useState<string>('')
 
     const handleOpenModal = () => {
         if (delPostId && !(String(delPostId).indexOf('.') > 0))
@@ -32,15 +36,8 @@ const AdminPanel: React.FC<Props> = ({deletePostById}) => {
         setOpenModal(false)
     }
 
-    const stealPost = async () => {
-
-        const initialPostNumber = 371752
-
-        const resp = await needle('get', `https://4pda.ru/2020/05/28/${initialPostNumber}`)
-        const html = await document.createRange().createContextualFragment(resp.body)
-        const content = html.querySelector('.content')
-        debugger
-
+    const onLoadPostsFromOuterSrc = () => {
+        updatePosts(day, month, +postNum)
     }
 
     return (
@@ -87,14 +84,45 @@ const AdminPanel: React.FC<Props> = ({deletePostById}) => {
                                     </div>
                                 </div>
 
+                                <hr className="mt-1 mb-1"/>
+
                                 <div className="row p-3">
-                                    <div className="col-sm-2 mt-3">
-                                        <span>Украсть</span>
+                                    <div className="col-sm-3 mt-3">
+                                        <span>Обновить список постов</span>
                                     </div>
-                                    <div className="col-sm-10">
-                                        <button type="button" onClick={stealPost} className="btn btn-success mt-2">
-                                            Украсть
+                                    <div className="col-sm-2">
+                                        <input className="admin-post-input mt-2"
+                                               placeholder="День"
+                                               onChange={e => setDay((e.target as HTMLInputElement).value)}
+                                               value={day}
+                                        />
+                                    </div>
+                                    <div className="col-sm-1">
+                                        <input className="admin-post-input mt-2"
+                                               placeholder="Месяц"
+                                               onChange={e => setMonth((e.target as HTMLInputElement).value)}
+                                               value={month}
+                                        />
+                                    </div>
+                                    <div className="col-sm-2">
+                                        <input className="admin-post-input mt-2"
+                                               type="number"
+                                               placeholder="Номер поста"
+                                               onChange={e => setPostNum((e.target as HTMLInputElement).value)}
+                                               value={postNum}
+                                        />
+                                    </div>
+                                    <div className="col-sm-3">
+                                        <button type="button"
+                                                onClick={onLoadPostsFromOuterSrc}
+                                                disabled={!day && !month && !postNum}
+                                                className="btn btn-success mt-1 mr-2">
+                                            Обновить
                                         </button>
+                                        {/*<button type="button"*/}
+                                        {/*        className="btn btn-primary mt-1">*/}
+                                        {/*    Остановить*/}
+                                        {/*</button>*/}
                                     </div>
                                 </div>
 

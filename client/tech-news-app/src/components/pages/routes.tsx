@@ -13,49 +13,6 @@ import AuthorizationWrapper from './autentification/Authorization/AuthorizationW
 import {RedirectComponentWrapper} from '../core/RedirectComponent'
 import {NotFoundComponent} from '../core/NotFoundComponent'
 
-// const baseRoutes = () => <>
-//     <Route exact path='/posts/post/:postId' component={PostReviewWrapper}/>
-//
-//     <Route exact path='/posts/search' component={PostSearchWrapper}/>
-//     <Route exact path={['/', '/posts/:sectionName', '/posts/:sectionName/:page']}
-//            component={PostsListWrapper}/>
-// </>
-//
-// const authRoutes = () => <>
-//     <Route path='/new-post' component={NewPostPageWrapper}/>
-//     <Route path='/admin-panel' component={AdminPanelWrapper}/>
-//     <Route exact path={['/profile', '/profile/:username']} component={ProfileWrapper}/>
-//     <Route exact path='/profile/me/edit' component={ProfileEditWrapper}/>
-//     <Route exact path='/posts/post/:postId/edit' component={PostEditWrapper}/>
-// </>
-//
-// const guestRoutes = () => <>
-//     <Route path='/registration' component={RegistrationWrapper}/>
-//     <Route path='/authorization' component={AuthorizationWrapper}/>
-// </>
-//
-// const postfixRoutes = () => <>
-//     <Route exact path='/redirect-to/:pageName' component={RedirectComponentWrapper}/>
-//     <Route path={['/error/:code', '*']} component={NotFoundComponent}/>
-// </>
-//
-//
-// export const getRoutes = (isAuth: boolean) => {
-//     return (
-//         <>
-//             {
-//                 baseRoutes()
-//             }
-//             {
-//                 isAuth ? authRoutes() : guestRoutes()
-//             }
-//             {
-//                 postfixRoutes()
-//             }
-//         </>
-//     )
-// }
-
 /**
  * Базовые роуты приложения независимо от авторизованности пользователя
  */
@@ -131,9 +88,54 @@ export const getRoutes = (isAuth: boolean) => {
         // @ts-ignore
         : baseRoutes.concat(guestRoutes, postfixRoutes)
 
-    return routes.map(route => <Route key={Math.random() * route.path.length}
+    return routes.map(route => <Route key={route.path.toString()}
                                       path={route.path}
                                       exact={route.exact}
                                       component={route.component}/>
     )
 }
+
+
+
+// const baseRoutes = () => <>
+//     <Route exact path='/posts/post/:postId' component={PostReviewWrapper}/>
+//
+//     <Route exact path='/posts/search' component={PostSearchWrapper}/>
+//     <Route exact path={['/', '/posts/:sectionName', '/posts/:sectionName/:page']}
+//            component={PostsListWrapper}/>
+// </>
+//
+// const authRoutes = () => <>
+//     <Route path='/new-post' component={NewPostPageWrapper}/>
+//     <Route path='/admin-panel' component={AdminPanelWrapper}/>
+//     <Route exact path={['/profile', '/profile/:username']} component={ProfileWrapper}/>
+//     <Route exact path='/profile/me/edit' component={ProfileEditWrapper}/>
+//     <Route exact path='/posts/post/:postId/edit' component={PostEditWrapper}/>
+// </>
+//
+// const guestRoutes = () => <>
+//     <Route path='/registration' component={RegistrationWrapper}/>
+//     <Route path='/authorization' component={AuthorizationWrapper}/>
+// </>
+//
+// const postfixRoutes = () => <>
+//     <Route exact path='/redirect-to/:pageName' component={RedirectComponentWrapper}/>
+//     <Route path={['/error/:code', '*']} component={NotFoundComponent}/>
+// </>
+//
+//
+// export const getRoutes = (isAuth: boolean) => {
+//     return (
+//         <>
+//             {
+//                 baseRoutes()
+//             }
+//             {
+//                 isAuth ? authRoutes() : guestRoutes()
+//             }
+//             {
+//                 postfixRoutes()
+//             }
+//         </>
+//     )
+// }

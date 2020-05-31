@@ -109,6 +109,14 @@ class PostAPI {
             body: formData
         })
     }
+
+    onCreateNewPostFromOuterSrc = (postDataRequest): Promise<boolean> => {
+        return request({
+            url: `posts/new-post-outer-src`,
+            method: 'POST',
+            body: JSON.stringify(postDataRequest)
+        })
+    }
 }
 
 export default new PostAPI()

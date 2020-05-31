@@ -2,7 +2,7 @@ import React from 'react'
 import {Field, InjectedFormProps, reduxForm} from 'redux-form'
 import {
     email,
-    isSamePasswords,
+    isSamePasswords, latinDigital,
     maxLength15,
     maxLength30,
     maxLength40,
@@ -67,6 +67,7 @@ const RegistrationForm: React.FC<InjectedFormProps<SignUpRequest>> = ({handleSub
                            showlabel="true"
                            validate={[
                                required,
+                               latinDigital,
                                minLength3,
                                maxLength15
                            ]}/>

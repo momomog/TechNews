@@ -10,12 +10,11 @@ interface Props {
 }
 
 /**
- *
+ * Редактор профиля. Компонент формы
  * @param isSocial
  * @param name
  * @param label
  * @param validators
- * Редактор профиля. Компонент формы
  */
 const ProfileField: React.FC<Props> = ({isSocial, name, label, validators}) => {
     return (

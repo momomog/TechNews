@@ -46,12 +46,42 @@
 }
 
 .post-desc img {
-    margin-bottom: 20px;
+    margin: 0 auto 0 auto;
+    max-width: 100% !important;
+    max-height: 50% !important;
+    display: flex;
 }
 
-.post-desc span, a {
+.post-desc, a {
     font-size: 1.05em !important;
     background-color: transparent !important;
+}
+
+.post-desc a {
+    font-size: 1em !important;
+    text-decoration: none!important;
+}
+
+.post-desc br {
+    display: none!important;
+}
+
+.post-desc p a.noborder {
+    display: none!important;
+}
+
+.post-desc ul {
+    list-style: none!important;
+}
+
+.post-desc li {
+    margin-bottom: 5px!important;
+}
+
+.wp-caption-dd {
+    margin-top: -40px!important;
+    font-size: 15px !important;
+    color: gray;
 }
 
 .post-review-pic {
@@ -226,7 +256,7 @@ select, input[type="file"] {
 
 @keyframes scale-up-center-comment {
     0% {
-        transform: scale(0.6);
+        transform: scale(0.75);
     }
     100% {
         transform: scale(1);

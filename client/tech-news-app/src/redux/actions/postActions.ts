@@ -1,8 +1,7 @@
 import PostAPI from '../../api/PostAPI'
 import {
     ChangeSectionAction,
-    Post,
-    PostInitial,
+    Post, SetIsLoadingAction,
     SetPostCountAction,
     SetPostDataAction,
     SetPostPageAction,
@@ -18,11 +17,13 @@ export const SET_POSTS_COUNT = 'SET-POSTS-COUNT'
 export const SET_POST_PAGE = 'SET-POST-PAGE'
 export const SET_POST_DATA = 'SET-POST-DATA'
 export const SET_POSTS = 'SET-POSTS'
+export const SET_IS_LOADING = 'SET-IS-LOADING'
 
 
 export const getPosts = (sectionId: number, postPage: number = 1, setPage: boolean = false): any => (dispatch: Dispatch) => {
     if (setPage)
         dispatch(setPostPageAction(postPage))
+    dispatch(setIsLoading(true))
 
     PostAPI.getPosts(getSectionName(sectionId), postPage)
         .then(data => {
@@ -30,6 +31,7 @@ export const getPosts = (sectionId: number, postPage: number = 1, setPage: boole
             dispatch(setPostsCountAction(data.postsCount))
         })
         .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))
+        .finally(() => dispatch(setIsLoading(false)))
 }
 
 export const getPostById = (sectionId: number, postId: number): any => (dispatch: Dispatch) => {
@@ -61,5 +63,10 @@ export const setPostPageAction = (postPageNumber: number = 1): SetPostPageAction
 export const setPostData = (data: Post): SetPostDataAction => ({
     type: SET_POST_DATA,
     postData: data
+})
+
+export const setIsLoading = (isLoading: boolean): SetIsLoadingAction => ({
+    type: SET_IS_LOADING,
+    isLoading
 })
 

@@ -115,6 +115,24 @@ public class PostController implements PostCategoryConst {
         return ResponseEntity.ok(new ActionCompleteResponse(true));
     }
 
+    // Создание нового поста из внешнего источника
+    @PostMapping(value = "/new-post-outer-src")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ActionCompleteResponse> createNewPostFromOuterSrc(
+            @CurrentUser UserPrincipal currentUser,
+            @RequestBody PostEntity post) throws InterruptedException {
+        post.setAuthor(currentUser.getUsername());
+        post.setAuthorId(currentUser.getId());
+        post.setCommentsCount(0L);
+        post.setDate(LocalDate.now());
+        post.setRates(new Integer[]{});
+        post.setRatedUsers(new Integer[]{});
+
+        postService.save(post);
+
+        return ResponseEntity.ok(new ActionCompleteResponse(true));
+    }
+
     // Изменений данных поста
     @PostMapping(value = "/post/update", params = "id", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PreAuthorize("hasRole('ADMIN')")

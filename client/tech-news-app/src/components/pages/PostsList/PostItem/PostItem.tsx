@@ -43,7 +43,8 @@ const PostItem: React.FC<Props> = ({post, clearPostData}) => {
                     <img alt="post"
                          onClick={postClick}
                          className="post-picture"
-                         src={post.photoId && `${GOOGLE_EXPORT_VIEW}${post.photoId}`}/>
+                         // src={post.photoId && `${GOOGLE_EXPORT_VIEW}${post.photoId}`}/>
+                         src={post.photoId}/>
                 </NavLink>
             </div>
 

@@ -20,8 +20,8 @@ const Authorization: React.FC<Props> = ({onLogin}) => {
     }
 
     return (
-        <div className="container">
-            <div className="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 mt-5">
+        <div className="container login-form">
+            <div className="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
                 <div className="panel panel-info">
 
                     <div className="panel-heading">

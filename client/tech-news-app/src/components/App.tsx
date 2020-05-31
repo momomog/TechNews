@@ -4,6 +4,7 @@ import history from '../history'
 import Footer from './Footer/Footer'
 import HeaderWrapper from './Header/HeaderWrapper'
 import SwitchRouter from './pages/SwitchRouter'
+import ErrorBoundary from './core/ErrorBoundary'
 
 /**
  * Корневой компонент
@@ -12,7 +13,9 @@ const App = () =>
     (
         <Router history={history}>
             <HeaderWrapper/>
-            <SwitchRouter/>
+            <ErrorBoundary>
+                <SwitchRouter/>
+            </ErrorBoundary>
             <Footer/>
         </Router>
     )

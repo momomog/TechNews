@@ -7,6 +7,12 @@ export const email = (value: string): string | undefined =>
         ? 'Введите корректный почтовый адрес'
         : undefined
 
+// Корректность введенного юзернейма
+export const latinDigital = (value: string): string | undefined =>
+    value && !/^[A-Za-z0-9!$%^&*-=]+$/.test(value)
+        ? 'Допустимы только символы латинского алфавита, числа и спецсимволы !$%^&*-_='
+        : undefined
+
 // Необходимость заполнения поля
 export const required = (value: string): string | undefined =>
     value && value.toString().trim() ? undefined : 'Необходимо заполнить это поле'

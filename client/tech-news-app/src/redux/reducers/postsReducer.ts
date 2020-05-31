@@ -1,6 +1,6 @@
 import {PostAction, PostInitial, PostState} from '../../models/PostModel'
 import {
-    CHANGE_SECTION,
+    CHANGE_SECTION, SET_IS_LOADING,
     SET_POST_DATA,
     SET_POST_PAGE,
     SET_POSTS,
@@ -9,11 +9,12 @@ import {
 
 
 const initialState: PostState = {
-    sectionId: 1,
-    postsCount: 0,
-    postPage: 1,
-    postData: PostInitial,
-    postList: []
+    sectionId: 1,            // Активная секция новостей
+    postsCount: 0,           // Общее количество постов секции
+    postPage: 1,             // Активная вкладка пагинатора
+    postData: PostInitial,   // Данные просматриваемого поста
+    postList: [],            // Список постов секции
+    isLoading: false         // Флаг загрузки постов
 }
 
 export const postsReducer = (state: PostState = initialState, action: PostAction): PostState => {
@@ -46,6 +47,12 @@ export const postsReducer = (state: PostState = initialState, action: PostAction
             return {
                 ...state,
                 postData: action.postData
+            }
+        }
+        case SET_IS_LOADING: {
+            return {
+                ...state,
+                isLoading: action.isLoading
             }
         }
         default:

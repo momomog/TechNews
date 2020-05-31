@@ -13,8 +13,8 @@ class Common {
     }
 
     // Парсинг массива даты в объект Date
-    intArrayToDate = (date: Array<number> | undefined): Date | undefined => {
-        if (date)
+    intArrayToDate = (date: Array<number>): Date | undefined => {
+        if (date && date[0])
             return new Date(date[0], date[1] - 1, date[2])
     }
 

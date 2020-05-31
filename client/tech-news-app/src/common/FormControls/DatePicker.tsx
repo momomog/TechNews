@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {KeyboardDatePicker, MuiPickersUtilsProvider} from '@material-ui/pickers'
 import * as moment from 'moment'
 import DateFnsUtils from '@date-io/date-fns'
@@ -12,7 +12,9 @@ import {change} from 'redux-form'
  */
 export const DatePicker = ({input, meta, ...props}) => {
     const isError = meta.touched && meta.error,
-        [initValue, setInitValue] = useState(props.initValue)
+        [initValue, setInitValue] = useState<Date | null>(null)
+
+    useEffect(() => setInitValue(props.initValue || null), [props.initValue])
 
     return (
         <div>
@@ -23,10 +25,17 @@ export const DatePicker = ({input, meta, ...props}) => {
                     label=" "
                     name={props.name}
                     format="dd.MM.yyyy"
+                    invalidDateMessage="Введен неверный формат даты"
+                    minDateMessage="Введена слишком ранняя дата"
+                    maxDateMessage="Введена слишком поздняя дата"
                     value={initValue}
-                    onChange={(value) => {
-                        setInitValue(value)
-                        meta.dispatch(change('profile', 'birthDate', value))
+                    onChange={(value: Date | null) => {
+                        let date = value
+                        // Сетаем дате 4 часа, иначе ф-ция JSON.stringify() отнимет у даты 4 часа и получится предыдущее число
+                        if (value)
+                         date = new Date(value.setHours(4))
+                        setInitValue(date)
+                        meta.dispatch(change('profile', 'birthDate', date))
                     }}
                     KeyboardButtonProps={{
                         'aria-label': 'change date'

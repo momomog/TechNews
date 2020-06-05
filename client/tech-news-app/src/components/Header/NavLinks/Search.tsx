@@ -13,8 +13,8 @@ export const Search: React.FC = () => {
     const {isLight} = useContext(ThemeContext)
     const inputClasses = ['input-group-form', 'search', isLight ? 'background-light' : 'navbar-dark-background']
 
-    const onSearch = () => {
-        if (searchText.trim()) {
+    const onSearch = (e) => {
+        if (e.key === 'Enter' && searchText.trim()) {
             history.push(`/posts/search?search_query=${searchText.trim()}`)
             setSearchText('')
         }
@@ -27,12 +27,7 @@ export const Search: React.FC = () => {
                    placeholder="Поиск по сайту"
                    value={searchText}
                    onChange={e => setSearchText(e.target.value)}
-                   onKeyPress={e => {
-                       if (e.key === 'Enter') {
-                           e.preventDefault()
-                           onSearch()
-                       }
-                   }}
+                   onKeyPress={e => onSearch(e)}
             />
             <img src={searchIcon}
                  alt="search"

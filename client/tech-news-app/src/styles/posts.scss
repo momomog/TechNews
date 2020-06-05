@@ -106,24 +106,25 @@
     color: #3300ff !important;
 }
 
-.comment-icon {
-    font-size: 14px !important;
-    color: #d73d4c;
-}
-
 .comment-count {
     font-size: 1.4rem !important;
 }
 
-.comment-icon:hover {
-    -webkit-transform: scale(1.3);
-    -moz-transform: scale(1.3);
-    -o-transform: scale(1.3);
-}
+.comment-icon {
+    font-size: 18px !important;
+    color: #d73d4c;
+    transform: scale(0.8);
+    transition-duration: 0.4s;
 
-.comment-icon:active {
-    color: #8d0f15;
-    box-shadow: grey;
+    &:hover {
+        transform: scale(1.1);
+        transition-duration: 0.4s;
+    }
+
+    &:active {
+        color: #8d0f15;
+        box-shadow: grey;
+    }
 }
 
 .pagin-links {

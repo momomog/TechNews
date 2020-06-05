@@ -18,7 +18,7 @@ public class PostDao extends BaseDao<PostEntity> implements PostCategoryConst {
     private static Map<String, Object> response = new HashMap<>();
 
     // количество постов для пагинации
-    private static Integer count = 8;
+    private static Integer count = 10;
 
     // количество рекомендованных постов для выбора
     private static Integer recommended = 10;
@@ -75,7 +75,7 @@ public class PostDao extends BaseDao<PostEntity> implements PostCategoryConst {
 
         for (PostEntity post : list) {
             if (Utils.stringContainsItemFromList(post.getTitle(), searchWords.toArray(new String[searchWords.size()]))
-                    || Utils.stringContainsItemFromList(post.getFullDescription(), searchWords.toArray(new String[searchWords.size()])))
+                    || Utils.stringContainsItemFromList(post.getPreDescription(), searchWords.toArray(new String[searchWords.size()])))
                 resultList.add(post);
         }
 

@@ -5,7 +5,6 @@ import {Dispatch} from 'redux'
 import PostAdminPanel from './PostAdminPanel'
 import PostAPI from '../../../../api/PostAPI'
 import {NotificationManager} from 'react-notifications'
-import {getSectionName} from '../../../../common/Const'
 import {getPosts} from '../../../../redux/actions/postActions'
 import {RootState} from '../../../../redux/reducers/rootReducer'
 

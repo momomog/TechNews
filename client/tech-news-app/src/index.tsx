@@ -7,7 +7,7 @@ import store from './redux/reduxStore'
 
 import * as serviceWorker from './serviceWorker'
 import './styles/index.css'
-import './styles/posts.css'
+import './styles/posts.scss'
 import './styles/header.scss'
 import './styles/themes.scss'
 import './styles/footer.css'

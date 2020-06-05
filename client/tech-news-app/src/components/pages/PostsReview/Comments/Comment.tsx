@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 
-import Common from '../../../../common/Common'
+import {NotificationManager} from 'react-notifications'
 import {NavLink} from 'react-router-dom'
 import Popup from 'reactjs-popup'
 import AuthService from '../../../../common/AuthService'
@@ -39,6 +39,8 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
     const onLike = () => {
         if (isAuth && !comment.isDeleted)
             likeCommentary(comment.id)
+        else
+            NotificationManager.warning('Необходима авторизация на сайте', 'Ошибка');
     }
 
     const onDeleteCommentary = () => {
@@ -143,7 +145,7 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
                                 </div>
                                 <div className="row">
                                         <span className="col-lg-12">
-                                        <i id='like' className="fa fa-heart comment-icon mr-2 ml-1" onClick={onLike}/>
+                                        <i  className="fa fa-heart comment-icon mr-2" onClick={onLike}/>
                                         <span className="comment-count">{comment.likes.length}</span>
 
                                             {

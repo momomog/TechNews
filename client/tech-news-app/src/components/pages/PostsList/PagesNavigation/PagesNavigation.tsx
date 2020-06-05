@@ -21,7 +21,7 @@ const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, secti
     const {isLight} = useContext(ThemeContext)
     const navItemClasses = ['page-link', isLight ? 'background-pagination-light' : 'background-pagination-dark' ]
 
-    const onePagePostsCount = 8
+    const onePagePostsCount = 10
     const maxPagesCount = 7
     const setPostPage = e => setPosts(sectionId, Number(e.target.textContent))
     const setPrevNextPostPage = (page: number) => setPosts(sectionId, page)

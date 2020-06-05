@@ -61,7 +61,7 @@ public class UserController {
 
     // данные пользователя по юзернейму
     @GetMapping("/users/{username}")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public UserSummary getUserProfile(@PathVariable(value = "username") String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
@@ -110,11 +110,7 @@ public class UserController {
 
         UserProfileData profileData = currentUser.getProfileData();
 
-        if (profileRequest.getBirthDate() == null) {
-            profileData.setBirthDate(null);
-        } else {
-            profileData.setBirthDate(profileRequest.getBirthDate());
-        }
+        profileData.setBirthDate(profileRequest.getBirthDate());
         profileData.setVk(profileRequest.getVk());
         profileData.setInstagram(profileRequest.getInstagram());
         profileData.setTwitter(profileRequest.getTwitter());

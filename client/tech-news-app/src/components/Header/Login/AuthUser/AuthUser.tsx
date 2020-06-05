@@ -1,22 +1,23 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import {NavLink} from 'react-router-dom'
 import AuthService from '../../../../common/AuthService'
 import {SetIsAuthAction, User, UserInitial} from '../../../../models/UserModel'
-import {AuthContext} from '../../../../context/authContext/AuthContext'
 
 interface Props {
     setCurrentUserData: (userData: User) => void
     setIsAuth: (isAuth: boolean) => SetIsAuthAction
+    isAuth: boolean
+    user: User
 }
 
 /**
  * Авторизованный пользователь
+ * @param user
+ * @param isAuth
  * @param setIsAuth
  * @param setCurrentUserData
  */
-const AuthUser: React.FC<Props> = ({setIsAuth, setCurrentUserData}) => {
-    const {isAuth, user} = useContext(AuthContext)
-
+const AuthUser: React.FC<Props> = ({user, isAuth, setIsAuth, setCurrentUserData}) => {
     const onLogout = () => {
         AuthService.removeToken()
         setIsAuth(false)

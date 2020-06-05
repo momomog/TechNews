@@ -5,7 +5,7 @@ import {NavLink} from 'react-router-dom'
 import Popup from 'reactjs-popup'
 import AuthService from '../../../../common/AuthService'
 import {Comment, CommentRequest} from '../../../../models/CommentModel'
-import {AuthContext} from '../../../../context/authContext/AuthContext'
+import {AuthContext} from '../../../../context/AuthContext'
 
 interface Props {
     comment: Comment
@@ -100,7 +100,7 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
                             </NavLink>
                         </span>
                         <span className="col-lg-4 text-right text-secondary">
-                            {Common.dateTimeParser(comment.date)}
+                            {comment.date}
                         </span>
                     </div>
 

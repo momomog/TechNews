@@ -28,6 +28,10 @@ const baseRoutes = [{
     path: ['/', '/posts/:sectionName', '/posts/:sectionName/:page'],
     component: PostsListWrapper,
     exact: true
+}, {
+    path: '/profile/:username',
+    component: ProfileWrapper,
+    exact: true
 }]
 
  /**
@@ -42,10 +46,10 @@ const authRoutes = [{
     component: AdminPanelWrapper,
     exact: false
 }, {
-    path: ['/profile', '/profile/:username'],
-    component: ProfileWrapper,
-    exact: true
-}, {
+     path: '/profile',
+     component: ProfileWrapper,
+     exact: true
+ }, {
     path: '/profile/me/edit',
     component: ProfileEditWrapper,
     exact: true

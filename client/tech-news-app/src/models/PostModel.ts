@@ -5,10 +5,10 @@ export interface Post {
     fullDescription: string
     authorId: number
     author: string
-    date: Array<number>
+    date: string
     photoId: string
     categoryId: number
-    editDate: Array<number>
+    editDate: string
     editAuthor: string
     editAuthorId: number
     commentsCount: number
@@ -65,10 +65,10 @@ export const PostInitial: Post = {
     fullDescription: '',
     authorId: 0,
     author: '',
-    date: [0, 0, 0],
+    date: '',
     photoId: '',
     categoryId: 0,
-    editDate: [0, 0, 0],
+    editDate: '',
     editAuthor: '',
     editAuthorId: 0,
     commentsCount: 0,

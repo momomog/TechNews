@@ -1,27 +1,9 @@
 class Common {
 
-    // Парсинг даты в вид ДД.ММ.ГГГГ
-    dateParser = (date: Array<number>): string | undefined => {
-        if (date)
-            return this.pad(date[2]) + '.' + this.pad(date[1]) + '.' + date[0]
-    }
-
-    // Парсинг даты в вид ДД.ММ.ГГГГ ЧЧ:ММ
-    dateTimeParser = (date: Array<number>): string | undefined => {
-        if (date)
-            return this.pad(date[2]) + '.' + this.pad(date[1]) + '.' + date[0] + ' ' + this.pad(date[3]) + ':' + this.pad(date[4])
-    }
-
-    // Парсинг массива даты в объект Date
-    intArrayToDate = (date: Array<number>): Date | undefined => {
-        if (date && date[0])
-            return new Date(date[0], date[1] - 1, date[2])
-    }
-
     // Возраст
-    getUserAge = (date: Array<number>): string | undefined => {
+    getUserAge = (date: string): string | undefined => {
         if (date) {
-            const birthDate: Date = new Date('' + date[1] + ',' + date[2] + ',' + date[0]),
+            const birthDate: Date = new Date(date.replace(/\./g, ':')),
                 difference = new Date().getTime() - birthDate.getTime(),
                 age = Math.floor((difference / (1000 * 60 * 60 * 24) / 365)),
                 ageStr = age.toString()

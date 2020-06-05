@@ -1,10 +1,9 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {NavLink} from 'react-router-dom'
 import Hyphenated from 'react-hyphen'
 import ru from 'hyphenated-ru'
-import Common from '../../../../common/Common'
 import {Post} from '../../../../models/PostModel'
-import {GOOGLE_EXPORT_VIEW} from '../../../../common/Const'
+import {ThemeContext} from '../../../../context/ThemeContext'
 
 interface Props {
     post: Post
@@ -17,33 +16,24 @@ interface Props {
  * @param clearPostData
  */
 const PostItem: React.FC<Props> = ({post, clearPostData}) => {
-    const postRate = () => {
-        let rating = 0
-
-        if (post.rates.length > 0) {
-            post.rates.map(rate => rating += rate)
-
-            return rating / post.rates.length
-        }
-
-        return rating
-    }
+    const {isLight} = useContext(ThemeContext)
+    const cardClasses = ['row', 'well', 'post', 'center-block', isLight ? 'background-light' : 'background-dark']
 
     const postClick = () => {
         if (typeof clearPostData === 'function')
             clearPostData()
-        window.scroll(0,0)
+        window.scroll(0, 0)
     }
 
     return (
-        <div className="row well post center-block">
+        <div className={cardClasses.join(' ')}>
 
             <div className="col-sm-3 w-100 d-flex justify-content-center">
                 <NavLink to={`/posts/post/${post.id}`}>
                     <img alt="post"
                          onClick={postClick}
                          className="post-picture"
-                         // src={post.photoId && `${GOOGLE_EXPORT_VIEW}${post.photoId}`}/>
+                        // src={post.photoId && `${GOOGLE_EXPORT_VIEW}${post.photoId}`}/>
                          src={post.photoId}/>
                 </NavLink>
             </div>
@@ -51,7 +41,7 @@ const PostItem: React.FC<Props> = ({post, clearPostData}) => {
             <div className="col-sm-9">
                 <div className="media-body">
                     <Hyphenated language={ru}>
-                        <div className="post-title">
+                        <div className="post-title mb-0">
                             <NavLink to={`/posts/post/${post.id}`}>
                                 <p className="text-justify" onClick={postClick}>
                                     {post.title}
@@ -70,7 +60,7 @@ const PostItem: React.FC<Props> = ({post, clearPostData}) => {
                             <li>
                             <span>
                                 <i className="glyphicon glyphicon-calendar">&ensp;</i>
-                                {Common.dateParser(post.date)}
+                                {post.date}
                             </span>
                             </li>
                             <li>|</li>
@@ -83,7 +73,7 @@ const PostItem: React.FC<Props> = ({post, clearPostData}) => {
 
                                 {
                                     Array.from({length: 5}).map((rate, index) => {
-                                        if (index < postRate())
+                                        if (index < postRate(post))
                                             return <span className="glyphicon glyphicon-star" key={index}/>
                                         else
                                             return <span className="glyphicon glyphicon-star-empty" key={index}/>
@@ -101,3 +91,17 @@ const PostItem: React.FC<Props> = ({post, clearPostData}) => {
 }
 
 export default PostItem
+
+
+// Оценен ли пост текущим пользователем
+function postRate(post) {
+    let rating = 0
+
+    if (post.rates.length > 0) {
+        post.rates.map(rate => rating += rate)
+
+        return rating / post.rates.length
+    }
+
+    return rating
+}

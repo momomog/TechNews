@@ -6,7 +6,9 @@ import {Dispatch} from 'redux'
 import {User, UserAction} from '../models/UserModel'
 import {getCurrentUserData, setIsAuthAction} from '../redux/actions/userActions'
 import {RootState} from '../redux/reducers/rootReducer'
-import {AuthContext} from '../context/authContext/AuthContext'
+import {AuthContext} from '../context/AuthContext'
+import {useTheme} from '../hooks/useTheme'
+import {ThemeContext} from '../context/ThemeContext'
 
 interface Props {
     isAuth: boolean
@@ -23,6 +25,8 @@ interface Props {
  * @param getUserData
  */
 const AppWrapper: React.FC<Props> = ({setIsAuth, getUserData, isAuth, user}) => {
+    const theme = useTheme()
+
     useEffect(() => {
         if (AuthService.isAuth()) {
             setIsAuth(true)
@@ -32,7 +36,9 @@ const AppWrapper: React.FC<Props> = ({setIsAuth, getUserData, isAuth, user}) => 
 
     return (
         <AuthContext.Provider value={{isAuth, user}}>
-            <App/>
+            <ThemeContext.Provider value={theme}>
+                <App/>
+            </ThemeContext.Provider>
         </AuthContext.Provider>
     )
 }

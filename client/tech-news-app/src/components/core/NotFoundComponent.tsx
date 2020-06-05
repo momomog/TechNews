@@ -2,7 +2,7 @@ import React from 'react'
 import {NavLink, useRouteMatch} from 'react-router-dom'
 import Common from '../../common/Common'
 
-export const NotFoundComponent: React.FC<{}> = () => {
+export const NotFoundComponent: React.FC = () => {
     const {params}: any = useRouteMatch()
 
     const code = params.code !== 'undefined' || 404

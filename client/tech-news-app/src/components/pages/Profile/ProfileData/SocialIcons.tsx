@@ -19,9 +19,9 @@ const SocialIcons: React.FC<Props> = ({user}) => {
                     ? <a href={`https://www.facebook.com/${profileData.facebook}`}
                          target="_blank" rel="noopener noreferrer">
                         <i id="social-fb"
-                           className="fa fa-facebook-square fa-2x active-soc mr-2"/>
+                           className="facebook-icon active-soc"/>
                     </a>
-                    : <i className="fa fa-facebook-square fa-2x social mr-2"/>
+                    : <i className="facebook-icon social"/>
             }
 
             {
@@ -29,18 +29,18 @@ const SocialIcons: React.FC<Props> = ({user}) => {
                     ? <a href={`https://www.instagram.com/${profileData.instagram}`}
                          target="_blank" rel="noopener noreferrer">
                         <i id="social-gp"
-                           className="fa fa-instagram fa-2x active-soc mr-2"/>
+                           className="instagram-icon active-soc"/>
                     </a>
-                    : <i className="fa fa-instagram fa-2x social mr-2"/>
+                    : <i className="instagram-icon social"/>
             }
 
             {
                 profileData.vk
                     ? <a href={`https://www.vk.com/${profileData.vk}`}
                          target="_blank" rel="noopener noreferrer">
-                        <i id="social-fb" className="fa fa-vk fa-2x active-soc mr-2"/>
+                        <i id="social-fb" className="vk-icon active-soc"/>
                     </a>
-                    : <i className="fa fa-vk fa-2x social mr-2"/>
+                    : <i className="vk-icon social"/>
             }
 
             {
@@ -48,9 +48,9 @@ const SocialIcons: React.FC<Props> = ({user}) => {
                     ? <a href={`https://www.twitter.com/${profileData.twitter}`}
                          target="_blank" rel="noopener noreferrer">
                         <i id="social-tw"
-                           className="fa fa-twitter-square fa-2x active-soc mr-2м"/>
+                           className="twitter-icon active-soc"/>
                     </a>
-                    : <i className="fa fa-twitter-square fa-2x social mr-2м"/>
+                    : <i className="twitter-icon social"/>
             }
 
         </div>

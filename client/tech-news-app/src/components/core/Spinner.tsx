@@ -12,7 +12,7 @@ const Spinner: React.FC<Props> = ({size = 220}) => {
             <img src={spinner}
                  width={size}
                  height={size}
-                 alt="loading..."/>
+                 alt="Загрузка..."/>
         </div>
     )
 }

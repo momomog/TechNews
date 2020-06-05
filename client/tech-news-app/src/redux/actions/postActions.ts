@@ -23,7 +23,8 @@ export const SET_IS_LOADING = 'SET-IS-LOADING'
 export const getPosts = (sectionId: number, postPage: number = 1, setPage: boolean = false): any => (dispatch: Dispatch) => {
     if (setPage)
         dispatch(setPostPageAction(postPage))
-    dispatch(setIsLoading(true))
+    else
+        dispatch(setIsLoading(true))
 
     PostAPI.getPosts(getSectionName(sectionId), postPage)
         .then(data => {

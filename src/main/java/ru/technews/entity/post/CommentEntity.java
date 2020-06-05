@@ -1,5 +1,6 @@
 package ru.technews.entity.post;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Formula;
@@ -35,6 +36,7 @@ public class CommentEntity extends BaseEntity {
 
     // Дата комментария
     @Column(name = "date", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
     private LocalDateTime date;
 
     // Пост, к которому относится комментарий

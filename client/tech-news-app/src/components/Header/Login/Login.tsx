@@ -6,7 +6,11 @@ import {NavLink} from 'react-router-dom'
 import {ChangeSectionAction, SetPostPageAction} from '../../../models/PostModel'
 import AuthUser from './AuthUser/AuthUser'
 import {SetIsAuthAction, User} from '../../../models/UserModel'
-import {AuthContext} from '../../../context/authContext/AuthContext'
+import {AuthContext} from '../../../context/AuthContext'
+import {ThemeContext} from '../../../context/ThemeContext'
+
+import lightIcon from '../../../static/day-theme.png'
+import darkIcon from '../../../static/dark-theme.png'
 
 interface Props {
     setCurrentUserData: (userData: User) => void
@@ -26,6 +30,8 @@ interface Props {
  */
 const Login: React.FC<Props> = ({setPosts, changeSection, setPostPage, setCurrentUserData, setIsAuth}) => {
     const {isAuth, user} = useContext(AuthContext)
+    const {isLight, changeTheme} = useContext(ThemeContext)
+    const changeThemeIcon = isLight ? lightIcon : darkIcon
 
     const onLogoClick = () => {
         setPosts(SECTION_ALL_POSTS)
@@ -42,12 +48,18 @@ const Login: React.FC<Props> = ({setPosts, changeSection, setPostPage, setCurren
                     </NavLink>
                 </div>
                 <div className="col-sm-6 d-flex align-items-end justify-content-end">
+                    <img src={changeThemeIcon}
+                         className="change-theme-icon" alt="themeIcon"
+                         onClick={changeTheme}/>
                     {
                         !isAuth && <AuthButtons/>
                     }
                     {
-                        isAuth && user.id > 0 && <AuthUser setCurrentUserData={setCurrentUserData}
-                                  setIsAuth={setIsAuth}/>
+                        isAuth && user.id > 0
+                        && <AuthUser setCurrentUserData={setCurrentUserData}
+                                     setIsAuth={setIsAuth}
+                                     isAuth={isAuth}
+                                     user={user}/>
                     }
                 </div>
             </div>

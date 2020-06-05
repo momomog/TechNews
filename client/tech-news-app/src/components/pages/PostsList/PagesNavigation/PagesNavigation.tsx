@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {NavLink} from 'react-router-dom'
 import {getSectionName} from '../../../../common/Const'
+import {ThemeContext} from '../../../../context/ThemeContext'
 
 interface Props {
     postPage: number
@@ -17,6 +18,8 @@ interface Props {
  * @param sectionId
  */
 const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, sectionId}) => {
+    const {isLight} = useContext(ThemeContext)
+    const navItemClasses = ['page-link', isLight ? 'background-pagination-light' : 'background-pagination-dark' ]
 
     const onePagePostsCount = 8
     const maxPagesCount = 7
@@ -31,7 +34,7 @@ const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, secti
 
                         <li className={getPreviousButtonClass()}
                             onClick={() => setPrevNextPostPage(postPage - 1)}>
-                            <NavLink className="page-link"
+                            <NavLink className={navItemClasses.join(' ')}
                                      to={`/posts/${getSectionName(sectionId)}/${postPage - 1}`}
                                      onClick={() => window.scroll(0, 0)}>
                                 Назад
@@ -43,7 +46,7 @@ const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, secti
                                 return (
                                     <li className={getNavigationButtonClass(page)} onClick={setPostPage} key={page}>
                                         <NavLink to={`/posts/${getSectionName(sectionId)}/${page}`}
-                                                 className="page-link"
+                                                 className={navItemClasses.join(' ')}
                                                  onClick={() => window.scroll(0, 0)}>
                                             {page}
                                         </NavLink>
@@ -55,7 +58,7 @@ const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, secti
                         <li className={getNextButtonClass()}
                             onClick={() => setPrevNextPostPage(postPage + 1)}>
                             <NavLink to={`/posts/${getSectionName(sectionId)}/${postPage + 1}`}
-                                     className="page-link"
+                                     className={navItemClasses.join(' ')}
                                      onClick={() => window.scroll(0, 0)}>
                                 Вперед
                             </NavLink>

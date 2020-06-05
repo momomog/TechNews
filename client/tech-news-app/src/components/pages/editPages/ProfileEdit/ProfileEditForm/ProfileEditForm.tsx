@@ -3,10 +3,9 @@ import React, {useContext, useEffect} from 'react'
 import {Field, InjectedFormProps, reduxForm} from 'redux-form'
 import {required} from '../../../../../common/Validators'
 import ProfileField from './ProfileField'
-import Common from '../../../../../common/Common'
 import {DatePicker} from '../../../../../common/FormControls/DatePicker'
 import {ProfileRequest} from '../../../../../models/RequestsModel'
-import {AuthContext} from '../../../../../context/authContext/AuthContext'
+import {AuthContext} from '../../../../../context/AuthContext'
 
 /**
  * Редактор профиля. Форма
@@ -28,9 +27,9 @@ const ProfileEditForm: React.FC<InjectedFormProps<ProfileRequest>> = ({initializ
             city: user.profileData.city,
             lastName: user.lastName,
             firstName: user.firstName,
-            birthDate: Common.intArrayToDate(user.profileData.birthDate)
+            birthDate: initBirthDateForDatePicker(user.profileData.birthDate)
         })
-    }, [user, initialize])
+    }, [user])
 
     return (
         <form onSubmit={handleSubmit}>
@@ -88,7 +87,7 @@ const ProfileEditForm: React.FC<InjectedFormProps<ProfileRequest>> = ({initializ
                         </div>
                         <div className="w-50">
                             <Field component={DatePicker}
-                                   initValue={Common.intArrayToDate(user.profileData.birthDate)}
+                                   initValue={initBirthDateForDatePicker(user.profileData.birthDate)}
                                    className="soc-input w-100"
                                    label={'Дата рождения'}
                                    name={'birthday'}/>
@@ -120,3 +119,13 @@ const ProfileEditForm: React.FC<InjectedFormProps<ProfileRequest>> = ({initializ
 export default reduxForm<ProfileRequest>({
     form: 'profile'
 })(ProfileEditForm)
+
+
+// Вспомогательная функция преобразования даты в формат мм-дд-гггг для DatePicker
+function initBirthDateForDatePicker(inputDate: string): Date {
+    if (inputDate) {
+        const date = inputDate.replace(/\./g, '-')
+        return new Date(`${date.slice(3, 5)}-${date.slice(0, 2)}${date.slice(5)}`)
+    }
+    return new Date()
+}

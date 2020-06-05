@@ -1,10 +1,20 @@
-.active-soc:hover {
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -o-transform: scale(1.1);
+.facebook-icon {
+    content: url("../static/social-icons/icon-facebook.png");
 }
 
-.active-soc {
+.instagram-icon {
+    content: url("../static/social-icons/icon-instagram.png");
+}
+
+.vk-icon {
+    content: url("../static/social-icons/icon-vk.png");
+}
+
+.twitter-icon {
+    content: url("../static/social-icons/icon-twitter.png");
+}
+
+.social {
     -webkit-transform: scale(0.8);
     -moz-transform: scale(0.8);
     -o-transform: scale(0.8);
@@ -13,7 +23,13 @@
     -o-transition-duration: 0.5s;
 }
 
-.social {
+.active-soc:hover {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+}
+
+.active-soc {
     -webkit-transform: scale(0.8);
     -moz-transform: scale(0.8);
     -o-transform: scale(0.8);

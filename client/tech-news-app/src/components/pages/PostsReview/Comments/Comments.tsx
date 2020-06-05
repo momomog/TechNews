@@ -2,7 +2,8 @@ import React, {useContext, useState} from 'react'
 import {Comment, CommentRequest} from '../../../../models/CommentModel'
 import Common from '../../../../common/Common'
 import CommentItem from './Comment'
-import {AuthContext} from '../../../../context/authContext/AuthContext'
+import {AuthContext} from '../../../../context/AuthContext'
+import {ThemeContext} from '../../../../context/ThemeContext'
 
 interface Props {
     comments: Array<Comment>
@@ -21,6 +22,9 @@ const Comments: React.FC<Props> = (props) => {
     const {isAuth} = useContext(AuthContext)
     const [commentText, setCommentText] = useState('')
 
+    const {isLight} = useContext(ThemeContext)
+    const textAreaClasses = ['form-control', 'text-area', isLight ? 'background-light' : 'navbar-dark-background']
+
     const addNewCommentary = () => {
         if (commentText.trim()) {
             props.addNewCommentary({commentText})
@@ -36,7 +40,7 @@ const Comments: React.FC<Props> = (props) => {
                         <h4 className="card-header">Оставьте свой комментарий:</h4>
                         <div className="comment-input">
                             <div className="form-group">
-                                    <textarea className="form-control text-area" rows={3}
+                                    <textarea className={textAreaClasses.join(' ')} rows={3}
                                               placeholder="Введите текст комментария..."
                                               onChange={e => setCommentText(e.target.value)}
                                               value={commentText}

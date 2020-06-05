@@ -38,7 +38,7 @@ const PostSearchWrapper: React.FC = () => {
                     : posts.length
                     ? <PostSearch posts={posts}
                                   searchText={searchText}/>
-                    : <h4 className="text-center mt-5">Не найдено записей, удовлетворящих запросу "{searchText}"</h4>
+                    : <h3 className="empty-search-res">Не найдено записей, удовлетворящих запросу "{searchText}"</h3>
             }
         </>
     )

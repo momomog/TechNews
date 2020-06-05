@@ -1,0 +1,24 @@
+@import "Const";
+
+//Light-theme styles
+.background-light {
+  background-color: $light-background !important;
+}
+
+.background-pagination-light {
+  background-color: white !important;
+}
+
+
+//Dark-theme styles
+.background-dark {
+  background-color: $dark-background !important;
+}
+
+.background-pagination-dark {
+  background-color: rgba(231, 231, 231, 0.72) !important;
+}
+
+.navbar-dark-background {
+  background-color: $navbar-dark-background !important;
+}

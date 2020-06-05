@@ -6,18 +6,14 @@ import {NavLink} from 'react-router-dom'
  */
 const AuthButtons = () => {
     return (
-        <div>
-            <span>
-               <NavLink className="btn btn-info" to="/registration">
-                    Регистрация
-               </NavLink>
-            </span>
-            <span className="ml-2">
-                <NavLink className="btn btn-info" to="/authorization">
-                    Войти
-               </NavLink>
-            </span>
-        </div>
+        <>
+            <NavLink className="btn btn-info" to="/registration">
+                Регистрация
+            </NavLink>
+            <NavLink className="btn btn-info ml-2" to="/authorization">
+                Войти
+            </NavLink>
+        </>
     )
 }
 

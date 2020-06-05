@@ -4,7 +4,7 @@ export interface User {
     firstName: string
     lastName: string
     email: string
-    createAt: Array<number>
+    createAt: string
     commentsCount: number
     profileData: {
         country: string
@@ -14,7 +14,7 @@ export interface User {
         twitter: string
         facebook: string
         photoId: string
-        birthDate: Array<number>
+        birthDate: string
     }
 }
 
@@ -41,7 +41,7 @@ export const UserInitial: User = {
     firstName: '',
     lastName: '',
     email: '',
-    createAt: [0, 0, 0],
+    createAt: '',
     commentsCount: 0,
     profileData: {
         country: '',
@@ -51,6 +51,6 @@ export const UserInitial: User = {
         twitter: '',
         facebook: '',
         photoId: '',
-        birthDate: [0, 0, 0]
+        birthDate: ''
     }
 }

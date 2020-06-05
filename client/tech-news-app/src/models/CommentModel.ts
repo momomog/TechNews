@@ -4,7 +4,7 @@ export interface Comment {
     authorId: number
     authorName: string
     authorPhotoId: string
-    date: Array<number>
+    date: string
     postId: number
     likes: Array<number>
     parentCommentId?: number

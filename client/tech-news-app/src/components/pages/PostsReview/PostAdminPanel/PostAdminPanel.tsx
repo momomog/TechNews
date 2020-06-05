@@ -29,7 +29,7 @@ const PostAdminPanel: React.FC<Props> = ({postId, onDeletePost}) => {
 
     return (
         <div className="row">
-            <div className="col-md-11 center-block">
+            <div className="col-md-11 center-block w-95">
                 <div className="panel panel-default">
                     <div className="panel-heading border-bottom-0">
                         <span className="post-author-comment">Панель управления постом</span>

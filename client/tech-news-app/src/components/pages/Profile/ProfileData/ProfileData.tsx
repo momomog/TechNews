@@ -24,29 +24,36 @@ const ProfileData: React.FC<Props> = ({user}) => {
             <div className="clearfix section mb-1"/>
 
             <UserInfoLine name={'Дата регистрации'}
-                          value={Common.dateParser(user.createAt)}/>
+                          isNeedBorder
+                          value={user.createAt}/>
 
             <UserInfoLine name={'Email'}
+                          isNeedBorder
                           value={user.email}/>
 
             <UserInfoLine name={'Дата рождения'}
-                          value={user.profileData.birthDate && `${Common.dateParser(user.profileData.birthDate)}, ${Common.getUserAge(user.profileData.birthDate)}`}/>
+                          isNeedBorder
+                          value={`${user.profileData.birthDate}, ${Common.getUserAge(user.profileData.birthDate)}`}/>
 
             <UserInfoLine name={'Страна'}
+                          isNeedBorder
                           value={user.profileData.country && user.profileData.country}/>
 
             <UserInfoLine name={'Город'}
+                          isNeedBorder={false}
                           value={user.profileData.city && user.profileData.city}/>
 
-            <div className="col-sm-4"/>
+            <div className="col-sm-4 mt-1"/>
             <div className="col-sm-5 col-xs-12 section-title mt-2 ml-5">Статистика пользователя</div>
             <div className="col-sm-3"/>
             <div className="clearfix section mb-1"/>
 
             <UserInfoLine name={'Репутация'}
+                          isNeedBorder
                           value={'**не реализовано**'}/>
 
             <UserInfoLine name={'Количество комментариев'}
+                          isNeedBorder={false}
                           value={user.commentsCount.toString()}/>
         </div>
     )

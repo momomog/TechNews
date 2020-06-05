@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {NavLink, useHistory} from 'react-router-dom'
+import React, {useContext} from 'react'
+import {NavLink} from 'react-router-dom'
 import {
     SECTION_ALL_POSTS,
     SECTION_GAMES,
@@ -9,7 +9,8 @@ import {
     SECTION_OTHER
 } from '../../../common/Const'
 import {ChangeSectionAction, SetPostPageAction} from '../../../models/PostModel'
-import searchIcon from '../../../static/search-icon.png'
+import {Search} from './Search'
+import {ThemeContext} from '../../../context/ThemeContext'
 
 interface Props {
     setPosts: (sectionId: number) => void
@@ -24,8 +25,8 @@ interface Props {
  * @param changeSection
  */
 const NavLinks: React.FC<Props> = ({setPosts, setPostPage, changeSection}) => {
-    const [searchText, setSearchText] = useState<string>('')
-    const history = useHistory()
+    const {isLight} = useContext(ThemeContext)
+    const navbarClasses = ['navbar', 'navbar-expand-lg', isLight ? 'background-light' : 'navbar-dark-background']
 
     const setPostsAndChangeSection = (sectionId: number) => {
         setPosts(sectionId)
@@ -33,17 +34,10 @@ const NavLinks: React.FC<Props> = ({setPosts, setPostPage, changeSection}) => {
         changeSection(sectionId)
     }
 
-    const onSearch = () => {
-        if (searchText.trim()) {
-            history.push(`/posts/search?search_query=${searchText.trim()}`)
-            setSearchText('')
-        }
-    }
-
     return (
         <div className="navbar w-100 container">
             <div className="navbar-inner navbar-body">
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <nav className={navbarClasses.join(' ')}>
                     <button className="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -53,59 +47,43 @@ const NavLinks: React.FC<Props> = ({setPosts, setPostPage, changeSection}) => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item" onClick={() => setPostsAndChangeSection(SECTION_ALL_POSTS)}>
-                                <NavLink to="/posts/all" activeStyle={{color: '#13263e'}} className="navlink">
+                                <NavLink to="/posts/all" activeClassName="navlink-active" className="navlink">
                                     Все новости
                                 </NavLink>
                             </li>
                             <li onClick={() => setPostsAndChangeSection(SECTION_MOBILE)}>
-                                <NavLink to="/posts/mobile" activeStyle={{color: '#13263e'}} className="navlink">
+                                <NavLink to="/posts/mobile" activeClassName="navlink-active" className="navlink">
                                     Смартфоны
                                 </NavLink>
                             </li>
 
                             <li onClick={() => setPostsAndChangeSection(SECTION_NOTEBOOKS)}>
-                                <NavLink to="/posts/notebooks" activeStyle={{color: '#13263e'}} className="navlink">
+                                <NavLink to="/posts/notebooks" activeClassName="navlink-active" className="navlink">
                                     Ноутбуки
                                 </NavLink>
                             </li>
 
                             <li onClick={() => setPostsAndChangeSection(SECTION_HARDWARE)}>
-                                <NavLink to="/posts/hardware" activeStyle={{color: '#13263e'}} className="navlink">
+                                <NavLink to="/posts/hardware" activeClassName="navlink-active" className="navlink">
                                     Компьютерное железо
                                 </NavLink>
                             </li>
 
                             <li onClick={() => setPostsAndChangeSection(SECTION_GAMES)}>
-                                <NavLink to="/posts/games" activeStyle={{color: '#13263e'}} className="navlink">
+                                <NavLink to="/posts/games" activeClassName="navlink-active" className="navlink">
                                     Игры
                                 </NavLink>
                             </li>
 
                             <li onClick={() => setPostsAndChangeSection(SECTION_OTHER)}>
-                                <NavLink to="/posts/other" activeStyle={{color: '#13263e'}} className="navlink">
+                                <NavLink to="/posts/other" activeClassName="navlink-active" className="navlink">
                                     Разное
                                 </NavLink>
                             </li>
                         </ul>
                         <ul className="nav navbar-right">
                             <li>
-                                <input type="text"
-                                       className="input-group-form search"
-                                       placeholder="Поиск по сайту"
-                                       value={searchText}
-                                       onChange={e => setSearchText(e.target.value)}
-                                       onKeyPress={e => {
-                                           if (e.key === 'Enter') {
-                                               e.preventDefault()
-                                               onSearch()
-                                           }
-                                       }}
-                                       style={{
-                                           backgroundImage: `url(${searchIcon})`,
-                                           backgroundPosition: `96% 50%`,
-                                           backgroundRepeat: `no-repeat`
-                                       }}
-                                />
+                                <Search/>
                             </li>
                         </ul>
                     </div>

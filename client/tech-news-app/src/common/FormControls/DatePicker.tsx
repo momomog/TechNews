@@ -31,9 +31,9 @@ export const DatePicker = ({input, meta, ...props}) => {
                     value={initValue}
                     onChange={(value: Date | null) => {
                         let date = value
-                        // Сетаем дате 4 часа, иначе ф-ция JSON.stringify() отнимет у даты 4 часа и получится предыдущее число
+                        // Сетаем дате 12 часов, иначе ф-ция JSON.stringify() отнимет у даты 4 часа и получится предыдущее число
                         if (value)
-                         date = new Date(value.setHours(4))
+                         date = new Date(value.setHours(12))
                         setInitValue(date)
                         meta.dispatch(change('profile', 'birthDate', date))
                     }}

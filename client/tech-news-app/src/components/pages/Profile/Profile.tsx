@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import Spinner from '../../core/Spinner'
 import ProfilePictureModal from './ProfileData/ProfilePictureModal'
 import {NotificationManager} from 'react-notifications'
 import {User} from '../../../models/UserModel'
 import ProfileData from './ProfileData/ProfileData'
 import SocialIcons from './ProfileData/SocialIcons'
+import {ThemeContext} from '../../../context/ThemeContext'
 
 interface Props {
     user: User
@@ -22,6 +23,9 @@ const Profile: React.FC<Props> = ({user, isCurrentUser, onLoadPhoto}) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isOpenModal, setIsOpenModal] = useState(false)
     const [picture, setPicture] = useState(undefined)
+
+    const {isLight} = useContext(ThemeContext)
+    const cardClasses = ['panel', 'panel-default', isLight ? 'background-light' : 'background-dark']
 
     const changePhoto = (e) => {
         if (e.target.files[0].type.includes('image')) {
@@ -42,7 +46,7 @@ const Profile: React.FC<Props> = ({user, isCurrentUser, onLoadPhoto}) => {
     return (
         <div className="row">
             <div className="col-md-11 center-block pl-0 pr-0">
-                <div className="panel panel-default">
+                <div className={cardClasses.join(' ')}>
                     <div className="panel-heading"><h3>Профиль пользователя</h3></div>
                     <div className="panel-body">
                         <div className="box box-info">

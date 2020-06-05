@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react'
 import AuthService from '../../../../common/AuthService'
 import {Post} from '../../../../models/PostModel'
-import {AuthContext} from '../../../../context/authContext/AuthContext'
+import {AuthContext} from '../../../../context/AuthContext'
 
 interface Props {
     post: Post

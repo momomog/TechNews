@@ -3,14 +3,16 @@ import React from 'react'
 interface Props {
     name: string
     value: any
+    isNeedBorder: boolean
 }
 
 /**
  * Профиль. Компонент отображения данных
  * @param name
  * @param value
+ * @param isNeedBorder
  */
-const UserInfoLine: React.FC<Props> = ({name, value}) => {
+const UserInfoLine: React.FC<Props> = ({name, value, isNeedBorder}) => {
     return (
         <div>
             <div className="col-sm-3"/>
@@ -24,7 +26,11 @@ const UserInfoLine: React.FC<Props> = ({name, value}) => {
             </div>
             <div className="col-sm-3"/>
             <div className="clearfix"/>
-            <div className="bot-border"/>
+
+            {
+                isNeedBorder && <div className="bot-border"/>
+            }
+
         </div>
     )
 }

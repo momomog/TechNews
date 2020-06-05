@@ -24,7 +24,7 @@ const PostSearch: React.FC<Props> = ({posts, searchText}) => {
         <>
             <div className="row">
                 <div className="col-sm-12">
-                    <h3 className="ml-6 mt-0">По вашему запросу
+                    <h3 className="complete-search-res">По вашему запросу
                         "{searchText}" {Common.getFindPostsResultText(posts.length)}:</h3>
                 </div>
             </div>
@@ -65,7 +65,11 @@ const PostSearch: React.FC<Props> = ({posts, searchText}) => {
     }
 
     function showMorePosts() {
-        const nextPostsCount = showPostsCount + oneTimePostShowCount < posts.length ? showPostsCount + oneTimePostShowCount : posts.length
+        const nextPostsCount =
+            showPostsCount + oneTimePostShowCount < posts.length
+                ? showPostsCount + oneTimePostShowCount
+                : posts.length
+
         setShowPostsCount(nextPostsCount)
         const initPosts = [...posts]
         initPosts.length = nextPostsCount

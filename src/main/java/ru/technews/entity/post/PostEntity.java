@@ -1,5 +1,6 @@
 package ru.technews.entity.post;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
@@ -39,6 +40,7 @@ public class PostEntity extends BaseEntity {
 
     // дата публикации
     @Column(name = "date", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private LocalDate date;
 
     // изображение
@@ -51,6 +53,7 @@ public class PostEntity extends BaseEntity {
 
     // Дата, время редактирования профиля
     @Column(name = "edit_date", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
     private LocalDateTime editDate;
 
     // Имя редактора поста

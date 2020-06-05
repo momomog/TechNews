@@ -7,7 +7,7 @@ export const postInitProcess = async (day, month, postNum) => {
         const resp = await needle('get', `https://4pda.ru/2020/0${month}/${day}/${postNum}`)
         const html = await document.createRange().createContextualFragment(resp.body)
 
-        const photoId = html.querySelector('[itemprop=image]').src
+        const photoId = html.querySelector('.photo').querySelector('[itemprop=image]').src
         const title = html.querySelector('[itemprop=headline]').textContent
         const fullDescription = html.querySelector('[itemprop=articleBody]').innerHTML
         const preDescription = html.querySelector('[itemprop=articleBody]').querySelector('p').innerText

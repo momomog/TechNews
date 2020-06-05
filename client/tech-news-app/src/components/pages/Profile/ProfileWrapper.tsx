@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import {Dispatch} from 'redux'
 import {useLocation} from 'react-router-dom'
@@ -13,35 +13,36 @@ import {getCurrentUserData} from '../../../redux/actions/userActions'
 import {RootState} from '../../../redux/reducers/rootReducer'
 
 interface Props {
-    userData: User
+    currentUser: User
     getCurrentUserData: () => void
 }
 
 /**
  * Профиль. Оболочка
- * @param userData
+ * @param currentUserData
  * @param getCurrentUserData
  */
-const ProfileWrapper: React.FC<Props> = ({userData, getCurrentUserData}) => {
-    const [user, setUser] = useState<User>(UserInitial)
+const ProfileWrapper: React.FC<Props> = ({currentUser, getCurrentUserData}) => {
+    const [someUser, setSomeUser] = useState<User>(UserInitial)
     const {pathname} = useLocation()
     const path = pathname.split('/')
 
+    const isCurrentUser = useCallback(() => {
+            return ((path[1] === 'profile' && path.length === 2)
+                || (path[1] === 'profile' && currentUser && currentUser.username === path[2]))
+        }, [path, currentUser]
+    )
+
     useEffect(() => {
         if (isCurrentUser()) {
-            if (!userData.id)
+            if (!currentUser.id)
                 getCurrentUserData()
-        } else if (!user.id) {
+        } else if (!someUser.id) {
             ProfileAPI.getUserProfile(path[2])
-                .then((response: User) => setUser(response))
+                .then((response: User) => setSomeUser(response))
                 .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))
         }
-    }, [path, getCurrentUserData, userData.id, user.id])
-
-    function isCurrentUser(): boolean {
-        return ((path[1] === 'profile' && path.length === 2)
-            || (path[1] === 'profile' && userData && userData.username === path[2]))
-    }
+    }, [path, getCurrentUserData, currentUser.id, someUser.id, isCurrentUser])
 
     const updateUserPhoto = (body) => {
         ProfileAPI.onLoadPhoto(body)
@@ -49,7 +50,7 @@ const ProfileWrapper: React.FC<Props> = ({userData, getCurrentUserData}) => {
             .catch(() => NotificationManager.error('Не удалось обновить фото профиля', 'Ошибка'))
     }
 
-    const profileUser = isCurrentUser() ? userData : user
+    const profileUser = isCurrentUser() ? currentUser : someUser
 
     return profileUser.id
         ? <Profile user={profileUser}
@@ -60,7 +61,7 @@ const ProfileWrapper: React.FC<Props> = ({userData, getCurrentUserData}) => {
 
 const mapStateToProps = (state: RootState) => {
     return {
-        userData: state.userData.userData
+        currentUser: state.userData.userData
     }
 }
 

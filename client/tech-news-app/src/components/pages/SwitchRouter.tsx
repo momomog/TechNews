@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {Switch} from 'react-router-dom'
-import {AuthContext} from '../../context/authContext/AuthContext'
+import {AuthContext} from '../../context/AuthContext'
 import {getRoutes} from './routes'
 
 /**

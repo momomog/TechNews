@@ -8,8 +8,8 @@
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    height: 97px !important;
-    max-height: 97px !important;
+    height: 106px !important;
+    max-height: 106px !important;
 }
 
 .MuiTypography-h6 {
@@ -155,6 +155,6 @@
     margin: 0 !important;
 }
 
-.ml-6 {
-    margin-left: 5rem !important
+.dropdown-item.active, .dropdown-item:active {
+    background-color: transparent!important;
 }

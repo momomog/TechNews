@@ -59,9 +59,7 @@ const Comments: React.FC<Props> = (props) => {
                         </div>
                     </div>
 
-                    : <div className="my-4 mb-5">
-                        <h4 className="card-header">Войдите на сайт для возможности оставлять комментарии!</h4>
-                    </div>
+                    : <h4 className="card-header mb-1">Войдите на сайт для возможности оставлять комментарии!</h4>
             }
 
             <h4 className="card-header mb-4">

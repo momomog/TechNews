@@ -40,14 +40,15 @@ const Login: React.FC<Props> = ({setPosts, changeSection, setPostPage, setCurren
     }
 
     return (
-        <div className="container w-100">
-            <div className="row logo-body ml-5">
-                <div className="col-sm-6 d-flex align-content-end mt-2">
+        <div className="container">
+            <div className="row logo-body">
+                <div className="col-sm-12 d-flex justify-content-between align-items-end">
                     <NavLink to="/posts/all">
-                        <img src={logo} alt="" width="60%" height="100%" onClick={onLogoClick}/>
+                        <img src={logo}
+                             className="site-logo"
+                             alt="site-logo"
+                             onClick={onLogoClick}/>
                     </NavLink>
-                </div>
-                <div className="col-sm-6 d-flex align-items-end justify-content-end">
                     <img src={changeThemeIcon}
                          className="change-theme-icon" alt="themeIcon"
                          onClick={changeTheme}/>
@@ -68,3 +69,31 @@ const Login: React.FC<Props> = ({setPosts, changeSection, setPostPage, setCurren
 }
 
 export default Login
+
+
+// return (
+//     <div className="container w-100">
+//         <div className="row logo-body ml-5">
+//             <div className="col-sm-6 d-flex align-content-end mt-2">
+//                 <NavLink to="/posts/all">
+//                     <img src={logo} alt="" width="60%" height="100%" onClick={onLogoClick}/>
+//                 </NavLink>
+//             </div>
+//             <div className="col-sm-6 d-flex align-items-end justify-content-end">
+//                 <img src={changeThemeIcon}
+//                      className="change-theme-icon" alt="themeIcon"
+//                      onClick={changeTheme}/>
+//                 {
+//                     !isAuth && <AuthButtons/>
+//                 }
+//                 {
+//                     isAuth && user.id > 0
+//                     && <AuthUser setCurrentUserData={setCurrentUserData}
+//                                  setIsAuth={setIsAuth}
+//                                  isAuth={isAuth}
+//                                  user={user}/>
+//                 }
+//             </div>
+//         </div>
+//     </div>
+// )

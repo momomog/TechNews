@@ -1,5 +1,13 @@
 @import "Const";
 
+.sign-in-icon {
+  content: url("../static/icon-sign-in.png");
+}
+
+.sign-up-icon {
+  content: url("../static/icon-sign-up.png");
+}
+
 .user-action-button {
   width: max-content;
   color: white !important;
@@ -67,9 +75,13 @@
 }
 
 .comment-action {
-  font-size: 0.9em !important;
+  font-size: 0.8em !important;
   text-decoration: none !important;
   cursor: pointer;
+
+  &:hover {
+    color: #494747 !important;
+  }
 }
 
 .search {
@@ -161,6 +173,13 @@ input.hidden {
   }
 }
 
+.site-logo {
+  margin-top: 0.8rem;
+  width: 60%;
+  height: 90%;
+  min-width: 150px;
+}
+
 .empty-search-res {
   font-family: 'Roboto', sans-serif !important;
   text-align: center;
@@ -173,4 +192,10 @@ input.hidden {
   font-family: 'Roboto', sans-serif !important;
   margin: 0 0 1.5rem 5rem !important;
   color: white;
+}
+
+.auth-button {
+  float: right!important;
+  height: 33px;
+  //margin-top: 40px;
 }

@@ -28,7 +28,7 @@ export const NotFoundComponent: React.FC = () => {
                                 <span className="glyphicon glyphicon-home"/>
                                 &nbsp;На главную
                             </NavLink>
-                            <a href="mailto:momomogggq@gmail.com" className="btn btn-default btn-lg">
+                            <a href="mailto:momomogggq@gmail.com" className="btn btn-default active btn-lg">
                                 <span className="glyphicon glyphicon-envelope"/>
                                 &nbsp;Написать нам
                             </a>

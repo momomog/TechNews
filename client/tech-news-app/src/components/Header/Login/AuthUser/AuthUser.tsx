@@ -37,7 +37,7 @@ const AuthUser: React.FC<Props> = ({user, isAuth, setIsAuth, setCurrentUserData}
                         <img alt="user_pic" src={user.profileData.photoId
                         && `https://drive.google.com/uc?export=view&id=${user.profileData.photoId}`}/>
                     </button>
-                    <div className="dropdown-menu">
+                    <div className="dropdown-menu dropdown-menu-right">
                         <NavLink className="dropdown-item" to="/profile" exact>Профиль</NavLink>
                         <NavLink className="dropdown-item" to="/profile/me/edit" exact>Редактировать</NavLink>
                         <div className="dropdown-divider"/>

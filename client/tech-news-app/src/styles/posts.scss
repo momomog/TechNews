@@ -1,5 +1,6 @@
 .post-picture {
-    width: 200px !important;
+    max-width: 250px !important;
+    width: 100%;
     height: 165px !important;
 }
 
@@ -8,6 +9,11 @@
     -webkit-hyphens: auto;
     -ms-hyphens: auto;
     width: 100%;
+
+    p {
+        line-height: 23px;
+        font-size: 16px;
+    }
 }
 
 .well {
@@ -27,49 +33,51 @@
 .post {
     margin-bottom: 10px;
     max-width: 91.4%;
+    padding: 15px 8px!important;
 }
 
 .post-desc {
     font-size: 1.6rem;
-}
 
-.post-desc h2 {
-    font-weight: bold;
-    font-size: 18px;
-}
+    & h2 {
+        font-weight: bold;
+        font-size: 18px;
+    }
 
-.post-desc iframe {
-    width: 55% !important;
-    min-width: 310px !important;
-    height: 310px !important;
-}
+    & iframe {
+        width: 55% !important;
+        min-width: 310px !important;
+        height: 310px !important;
+    }
 
-.post-desc img {
-    margin: 0 auto 0 auto;
-    max-width: 100% !important;
-    max-height: 50% !important;
-    display: flex;
-}
+    & img {
+        margin: 0 auto 0 auto;
+        max-width: 100% !important;
+        //max-height: 50% !important;
+        height: 50% !important;
+        display: flex;
+    }
 
-.post-desc a {
-    font-size: 1em !important;
-    text-decoration: none !important;
-}
+    & a {
+        font-size: 1em !important;
+        text-decoration: none !important;
+    }
 
-.post-desc br {
-    display: none !important;
-}
+    & br {
+        display: none !important;
+    }
 
-.post-desc p a.noborder {
-    display: none !important;
-}
+    & p a.noborder {
+        display: none !important;
+    }
 
-.post-desc ul {
-    list-style: none !important;
-}
+    & ul {
+        list-style: none !important;
+    }
 
-.post-desc li {
-    margin-bottom: 5px !important;
+    & li {
+        margin-bottom: 5px !important;
+    }
 }
 
 .wp-caption-dd {
@@ -79,8 +87,8 @@
 }
 
 .post-review-pic {
-    width: 500px !important;
-    height: 350px !important;
+    max-width: 500px !important;
+    max-height: 350px !important;
 }
 
 .post-author {
@@ -98,16 +106,23 @@
 }
 
 .comment-author-link {
-    font-size: 17px !important;
+    color: #424449 !important;
+    font-size: 15px !important;
     text-decoration: none !important;
 }
 
 .comment-author-link:hover {
-    color: #3300ff !important;
+    color: #2141b6 !important;
 }
 
 .comment-count {
     font-size: 1.4rem !important;
+}
+
+.post-date {
+    color:#424449;
+    float: right;
+    font-size: 15px;
 }
 
 .comment-icon {
@@ -117,7 +132,7 @@
     transition-duration: 0.4s;
 
     &:hover {
-        transform: scale(1.1);
+        transform: scale(1);
         transition-duration: 0.4s;
     }
 
@@ -222,8 +237,8 @@ select, input[type="file"] {
 }
 
 .answer-area {
-    width: 82% !important;
-    margin-left: 4.6rem !important;
+    width: 100% !important;
+    margin-left: 3.5rem !important;
 }
 
 .page-item.active .page-link {
@@ -297,7 +312,7 @@ select, input[type="file"] {
 }
 
 .post-review-wrapper {
-    padding: 2rem 3rem;
+    padding: 2rem 2rem;
     max-width: 91.993333%;
     border-radius: 5px;
 }

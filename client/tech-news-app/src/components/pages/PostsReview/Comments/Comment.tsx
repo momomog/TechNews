@@ -40,7 +40,7 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
         if (isAuth && !comment.isDeleted)
             likeCommentary(comment.id)
         else
-            NotificationManager.warning('Необходима авторизация на сайте', 'Ошибка');
+            NotificationManager.warning('Необходима авторизация на сайте', 'Ошибка')
     }
 
     const onDeleteCommentary = () => {
@@ -89,19 +89,19 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
             <div className="media card-body mt-0 pt-0">
                 <NavLink to={`/profile/${comment.authorName}`}>
                     <img className="d-flex mr-3 rounded-circle comment-author-photo" alt="user_pic"
-                         onClick={() => window.scroll(0,0)}
+                         onClick={() => window.scroll(0, 0)}
                          src={comment.authorPhotoId
                          && `https://drive.google.com/uc?export=view&id=${comment.authorPhotoId}`}/>
                 </NavLink>
                 <div className="media-body">
                     <div className="row">
                         <span className="col-lg-8 post-author-comment font-italic"
-                              onClick={() => window.scroll(0,0)}>
+                              onClick={() => window.scroll(0, 0)}>
                             <NavLink to={`/profile/${comment.authorName}`} className="comment-author-link">
                                 @{comment.authorName}
                             </NavLink>
                         </span>
-                        <span className="col-lg-4 text-right text-secondary">
+                        <span className="col-lg-4 text-right text-secondary" style={{fontSize: 13}}>
                             {comment.date}
                         </span>
                     </div>
@@ -144,14 +144,14 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
                                     }
                                 </div>
                                 <div className="row">
-                                        <span className="col-lg-12">
-                                        <i  className="fa fa-heart comment-icon mr-2" onClick={onLike}/>
+                                        <span className="ml-0 w-100">
+                                        <i className="fa fa-heart comment-icon mr-2" onClick={onLike}/>
                                         <span className="comment-count">{comment.likes.length}</span>
 
                                             {
                                                 isAuth && <span>
                                                          <span onClick={onClickAnswerCommentary}
-                                                               className="text-secondary comment-action ml-4">
+                                                               className="text-secondary comment-action ml-2">
                                                              Ответить
                                                          </span>
                                                       </span>
@@ -159,7 +159,7 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
 
                                             {
                                                 (isAuth && comment.authorId === user.id || AuthService.isAdmin()) && !comment.isDeleted
-                                                && <span className="ml-3">
+                                                && <span className="ml-2">
                                                          <span onClick={onClickEditCommentary}
                                                                className="text-secondary comment-action">
                                                              Редактировать
@@ -169,7 +169,7 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
 
                                             {
                                                 (isAuth && comment.authorId === user.id || AuthService.isAdmin()) && !comment.isDeleted
-                                                && <span className="ml-3">
+                                                && <span className="ml-2">
                                                           <Popup trigger={<span
                                                               className="text-secondary comment-action">Удалить</span>}
                                                                  position="top center"
@@ -199,22 +199,21 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
 
                                             {
                                                 isAnswerMode && commentAnswerParentId === comment.id
-                                                && <div className="mb-3">
-                                                       <textarea className="form-control text-area mt-2 answer-area"
-                                                                 rows={3}
-                                                                 onChange={e => setCommentAnswerText(e.target.value)}
-                                                                 value={commentAnswerText}/>
-                                                    <div className="mt-2">
-                                                          <span>
+                                                && <div className="mb-3 w-75">
+                                                       <textarea
+                                                           className="form-control text-area mt-2 w-100 answer-area"
+                                                           rows={3}
+                                                           onChange={e => setCommentAnswerText(e.target.value)}
+                                                           value={commentAnswerText}/>
+                                                    <div className="mt-2 ml-3">
                                                               <span onClick={onAddCommentary}
-                                                                    className="text-secondary comment-action ml-4 answer-area">Отправить</span>
-                                                          </span>
-                                                        <span>
-                                                              <span onClick={() => setIsAnswerMode(false)}
-                                                                    className="text-secondary comment-action ml-4">
+                                                                    className="text-secondary comment-action ml-5 answer-area">
+                                                                  Отправить
+                                                              </span>
+                                                        <span onClick={() => setIsAnswerMode(false)}
+                                                              className="text-secondary comment-action ml-4">
                                                                   Отменить
                                                               </span>
-                                                          </span>
                                                     </div>
                                                 </div>
                                             }
@@ -230,7 +229,7 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
             {
                 comment.replyComments.length > 0
                 && comment.replyComments.map(commentItem => (
-                    <div className="ml-5" key={commentItem.id}>
+                    <div className="ml-4" key={commentItem.id}>
                         <CommentItem comment={commentItem}
                                      likeCommentary={likeCommentary}
                                      updateCommentary={updateCommentary}

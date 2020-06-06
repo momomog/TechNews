@@ -22,7 +22,7 @@ import {SignUpRequest} from '../../../../models/RequestsModel'
  */
 const RegistrationForm: React.FC<InjectedFormProps<SignUpRequest>> = ({handleSubmit, invalid, submitting}) => {
     return (
-        <form onSubmit={handleSubmit} className="p-4">
+        <form onSubmit={handleSubmit}>
 
             <div className="row mb-3">
                 <div className="col-sm-12 mw-100">

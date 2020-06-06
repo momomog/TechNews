@@ -37,23 +37,20 @@ const PostReview: React.FC<Props> = ({post, postRating}) => {
                 <div className={cardClasses.join(' ')}>
 
                     <Hyphenated language={ru}>
-                        <h1 className="mt-0 text-justify">
+                        <h2 className="mt-0 text-justify">
                             {post.title}
-                        </h1>
+                        </h2>
                     </Hyphenated>
 
-                    <div className="row">
-                            <span className="col-lg-8 post-author pl-0">
-                                <NavLink to={`/profile/${post.author}`} className="comment-author-link text-secondary"
-                                         style={{color: 'black'}}>
-                                @{post.author}
-                            </NavLink>
+                    <NavLink to={`/profile/${post.author}`}
+                             className="comment-author-link"
+                             style={{color: 'black'}}>
+                        @{post.author}
+                    </NavLink>
+                    <span className="post-date">
+                         Дата: {post.date}
+                     </span>
 
-                            </span>
-                        <span className="col-lg-4 text-right text-secondary">
-                                Опубликовано: {post.date}
-                            </span>
-                    </div>
                     <hr/>
                     <div className="col-lg-12 mb-2">
                         <img className="card-img-top post-review-pic center-block" alt="Card"

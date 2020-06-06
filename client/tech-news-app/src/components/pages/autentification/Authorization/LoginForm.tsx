@@ -15,11 +15,11 @@ const LoginForm: React.FC<InjectedFormProps<SignInRequest>> = ({handleSubmit, in
         <form className="form-horizontal"
               onSubmit={handleSubmit}>
 
-            <div className="input-group mb-3">
+            <div className="input-group mb-3 d-flex justify-content-center">
                 <span className="input-group-addon login-icon">
                      <i className="glyphicon glyphicon-user"/>
                 </span>
-                <span style={{width: '93%'}}>
+                <span style={{width: '90%'}}>
                     <Field component={Input}
                            validate={required}
                            className="input-group-form"
@@ -28,11 +28,11 @@ const LoginForm: React.FC<InjectedFormProps<SignInRequest>> = ({handleSubmit, in
                 </span>
             </div>
 
-            <div className="input-group mb-2">
+            <div className="input-group mb-2 d-flex justify-content-center">
                 <span className="input-group-addon login-icon">
                      <i className="glyphicon glyphicon-lock"/>
                 </span>
-                <span style={{width: '93%'}}>
+                <span style={{width: '90%'}}>
                      <Field component={Input}
                             validate={required}
                             type="password"

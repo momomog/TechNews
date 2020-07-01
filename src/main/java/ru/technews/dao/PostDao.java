@@ -1,10 +1,9 @@
-package ru.technews.dao.post;
+package ru.technews.dao;
 
 import org.springframework.stereotype.Repository;
 import ru.technews.common.PostCategoryConst;
 import ru.technews.common.Utils;
-import ru.technews.dao.BaseDao;
-import ru.technews.entity.post.PostEntity;
+import ru.technews.entity.PostEntity;
 
 import javax.persistence.Query;
 import java.util.ArrayList;
@@ -14,16 +13,13 @@ import java.util.Map;
 
 @Repository
 public class PostDao extends BaseDao<PostEntity> implements PostCategoryConst {
-
-    private static Map<String, Object> response = new HashMap<>();
-
     // количество постов для пагинации
     private static Integer count = 10;
-
     // количество рекомендованных постов для выбора
     private static Integer recommended = 10;
 
     public Map<String, Object> findCategoryPostsByPage(Long category, Integer page) {
+        Map<String, Object> response = new HashMap<>();
         Query query;
 
         if (category == null) {

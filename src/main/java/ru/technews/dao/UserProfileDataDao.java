@@ -1,8 +1,7 @@
-package ru.technews.dao.post.profile;
+package ru.technews.dao;
 
 import org.springframework.stereotype.Repository;
-import ru.technews.dao.BaseDao;
-import ru.technews.entity.profile.UserProfileData;
+import ru.technews.entity.UserProfileData;
 
 @Repository
 public class UserProfileDataDao extends BaseDao<UserProfileData> {

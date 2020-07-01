@@ -1,4 +1,4 @@
-package ru.technews.entity.profile;
+package ru.technews.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.technews.entity.BaseEntity;
 import ru.technews.entity.security.User;
 
 import javax.persistence.*;

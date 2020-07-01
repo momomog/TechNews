@@ -63,12 +63,6 @@
             <column name="author_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-<!--            <column name="author_name" type="varchar(100)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="author_photo_id" type="varchar(100)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
             <column name="comment_text" type="varchar(10000)">
                 <constraints nullable="false"/>
             </column>
@@ -181,6 +175,38 @@
             <column name="facebook" type="varchar(50)">
             </column>
             <column name="photo_id" type="varchar(100)">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="008" author="SFokin">
+        <createTable tableName="dialogs">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="one_user_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_one_user_id" references="users(id)"/>
+            </column>
+            <column name="two_user_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_two_user_id" references="users(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="009" author="SFokin">
+        <createTable tableName="messages">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="one_user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="two_user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="TIMESTAMP">
+            </column>
+            <column name="text" type="varchar(10000)">
             </column>
         </createTable>
     </changeSet>

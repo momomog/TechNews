@@ -1,11 +1,10 @@
-package ru.technews.entity.post;
+package ru.technews.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Type;
-import ru.technews.entity.BaseEntity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

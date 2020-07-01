@@ -64,5 +64,4 @@ public class RootConfig implements WebMvcConfigurer {
             }
         };
     }
-
 }

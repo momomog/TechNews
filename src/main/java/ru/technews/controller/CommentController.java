@@ -1,16 +1,16 @@
-package ru.technews.controller.post;
+package ru.technews.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import ru.technews.entity.post.CommentEntity;
-import ru.technews.entity.post.PostEntity;
+import ru.technews.entity.CommentEntity;
+import ru.technews.entity.PostEntity;
 import ru.technews.payload.ActionCompleteResponse;
 import ru.technews.payload.CommentUpdateRequest;
 import ru.technews.security.CurrentUser;
 import ru.technews.security.UserPrincipal;
-import ru.technews.service.post.CommentService;
-import ru.technews.service.post.PostService;
+import ru.technews.service.CommentService;
+import ru.technews.service.PostService;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

@@ -10,7 +10,6 @@ const initialState: CommentState = {
 export const commentsReducer = (state: CommentState = initialState, action: CommentAction): CommentState => {
     switch (action.type) {
         case SET_POST_COMMENTS: {
-            // debugger
             if (!action.postComments)
                 return state
             return {

@@ -1,8 +1,7 @@
-package ru.technews.dao.post;
+package ru.technews.dao;
 
 import org.springframework.stereotype.Repository;
-import ru.technews.dao.BaseDao;
-import ru.technews.entity.post.CommentEntity;
+import ru.technews.entity.CommentEntity;
 
 import javax.persistence.Query;
 import java.util.ArrayList;
@@ -12,7 +11,6 @@ import java.util.Map;
 
 @Repository
 public class CommentDao extends BaseDao<CommentEntity> {
-
     // Взятие комментариев поста
     public Map<String, Object> getPostComments(Long id) {
         // искусственная задержка, тк после добавления комментария не всегда сразу подгружается добавленный комментарий

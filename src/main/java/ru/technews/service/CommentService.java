@@ -1,11 +1,10 @@
-package ru.technews.service.post;
+package ru.technews.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.technews.dao.BaseDao;
-import ru.technews.dao.post.CommentDao;
-import ru.technews.entity.post.CommentEntity;
-import ru.technews.service.BaseService;
+import ru.technews.dao.CommentDao;
+import ru.technews.entity.CommentEntity;
 
 import java.util.Map;
 

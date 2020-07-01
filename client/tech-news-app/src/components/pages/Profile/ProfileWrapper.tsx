@@ -1,20 +1,22 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import {Dispatch} from 'redux'
-import {useLocation} from 'react-router-dom'
+import {useHistory, useLocation} from 'react-router-dom'
 import Profile from './Profile'
 import ProfileAPI from '../../../api/ProfileAPI'
 import {User, UserInitial} from '../../../models/UserModel'
 import Spinner from '../../core/Spinner'
 import {ErrorResponse} from '../../../models/ResponseModel'
 import {NotificationManager} from 'react-notifications'
-import history from '../../../history'
 import {getCurrentUserData} from '../../../redux/actions/userActions'
 import {RootState} from '../../../redux/reducers/rootReducer'
+import MessageAPI from '../../../api/MessageAPI'
+import {getDialogMessages} from '../../../redux/actions/messageActions'
 
 interface Props {
     currentUser: User
     getCurrentUserData: () => void
+    getDialogMessages: (user: User) => void
 }
 
 /**
@@ -22,9 +24,10 @@ interface Props {
  * @param currentUserData
  * @param getCurrentUserData
  */
-const ProfileWrapper: React.FC<Props> = ({currentUser, getCurrentUserData}) => {
+const ProfileWrapper: React.FC<Props> = ({currentUser, getCurrentUserData, getDialogMessages}) => {
     const [someUser, setSomeUser] = useState<User>(UserInitial)
     const {pathname} = useLocation()
+    const history = useHistory()
     const path = pathname.split('/')
 
     const isCurrentUser = useCallback(() => {
@@ -50,10 +53,18 @@ const ProfileWrapper: React.FC<Props> = ({currentUser, getCurrentUserData}) => {
             .catch(() => NotificationManager.error('Не удалось обновить фото профиля', 'Ошибка'))
     }
 
-    const profileUser = isCurrentUser() ? currentUser : someUser
+    const redirectToDialogPage = async () => {
+        const data = await MessageAPI.createDialog(someUser.id)
+        if (data) {
+            getDialogMessages(someUser)
+            history.push('/messages')
+        }
+    }
 
+    const profileUser = isCurrentUser() ? currentUser : someUser
     return profileUser.id
         ? <Profile user={profileUser}
+                   redirectToDialogPage={redirectToDialogPage}
                    isCurrentUser={isCurrentUser()}
                    onLoadPhoto={updateUserPhoto}/>
         : <Spinner/>
@@ -67,7 +78,8 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        getCurrentUserData: () => dispatch(getCurrentUserData())
+        getCurrentUserData: () => dispatch(getCurrentUserData()),
+        getDialogMessages: (dialogUser: User) => dispatch(getDialogMessages(dialogUser)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileWrapper)

@@ -3,7 +3,7 @@ package ru.technews.payload;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
-import ru.technews.entity.profile.UserProfileData;
+import ru.technews.entity.UserProfileData;
 
 import java.time.LocalDateTime;
 

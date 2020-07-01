@@ -1,0 +1,113 @@
+.message-user-photo {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.users-container {
+  padding: 0 !important;
+  border-radius: 5px;
+  height: 70vh;
+  max-height: 70vh;
+}
+
+.messages-container {
+  background-color: #eeeeee;
+  border-radius: 5px;
+  height: 70vh;
+  max-height: 70vh;
+  width: 100%;
+  overflow: hidden !important;
+
+  .messages-list {
+    overflow-y: auto;
+    min-height: 63vh;
+    max-height: 63vh;
+  }
+
+  .messages-list::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+
+  .not-chosen-dialog-center {
+    font-size: 2rem;
+    margin: 0;
+    position: absolute;
+    top: 45%;
+    left: 20%;
+  }
+}
+
+.message-text-area {
+  resize: none;
+  outline-color: black;
+  overflow: hidden;
+  margin-top: 1rem;
+  height: 40px;
+  padding-right: 30px;
+}
+
+.messages-panel-body {
+  padding: 10px;
+  min-height: 70vh;
+}
+
+.user-item {
+  padding: 10px 0;
+
+  &:hover {
+    background-color: #eeeeee;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    cursor: pointer;
+  }
+}
+
+.message-item {
+  padding: 5px 0;
+}
+
+.message-user-data {
+  margin: 0 0 0 0.8rem;
+}
+
+.username {
+  margin: 1.3rem 0 0 0;
+}
+
+.send-msg-icon {
+  margin-top: 1.6rem;
+
+  &:hover {
+    filter: brightness(90%);
+  }
+}
+
+.smile-icon {
+  position: absolute;
+  top: 14px;
+  right: 60px;
+}
+
+.im-chat-input {
+
+  outline: 0;
+  min-height: 36px;
+  width: 100%;
+  resize: none;
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 6px;
+  line-height: 17px;
+  padding: 9px 106px 10px 13px;
+  margin-bottom: 0;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  border: none;
+  border-color: var(--n33f)!important;
+  background-color: #2e6da4;
+  transition: border-bottom-color 0.3s linear;
+}
+
+

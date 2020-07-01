@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import ru.technews.entity.profile.UserProfileData;
+import ru.technews.entity.UserProfileData;
 import ru.technews.entity.security.Role;
 import ru.technews.entity.security.RoleName;
 import ru.technews.entity.security.User;

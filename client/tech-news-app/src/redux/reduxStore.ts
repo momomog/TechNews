@@ -1,9 +1,9 @@
 import {createStore, Store} from 'redux'
 import composeEnhancers, {sagaMiddleware} from './middleware'
 import rootReducer from './reducers/rootReducer'
-import {watchSetComments} from './sagas'
+import rootSaga from './rootSaga'
 
 const store: Store = createStore(rootReducer, composeEnhancers)
-sagaMiddleware.run(watchSetComments)
+sagaMiddleware.run(rootSaga)
 
 export default store

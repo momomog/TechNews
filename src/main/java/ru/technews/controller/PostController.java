@@ -1,4 +1,4 @@
-package ru.technews.controller.post;
+package ru.technews.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -9,13 +9,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import ru.technews.common.PostCategoryConst;
 import ru.technews.config.GoogleDrive;
-import ru.technews.entity.post.PostEntity;
+import ru.technews.entity.PostEntity;
 import ru.technews.payload.ActionCompleteResponse;
 import ru.technews.payload.PostDataRequest;
 import ru.technews.security.CurrentUser;
 import ru.technews.security.UserPrincipal;
-import ru.technews.service.post.CommentService;
-import ru.technews.service.post.PostService;
+import ru.technews.service.CommentService;
+import ru.technews.service.PostService;
 
 import javax.validation.Valid;
 import java.io.IOException;

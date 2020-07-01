@@ -1,11 +1,10 @@
-package ru.technews.service.profile;
+package ru.technews.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.technews.dao.BaseDao;
-import ru.technews.dao.post.profile.UserProfileDataDao;
-import ru.technews.entity.profile.UserProfileData;
-import ru.technews.service.BaseService;
+import ru.technews.dao.UserProfileDataDao;
+import ru.technews.entity.UserProfileData;
 
 @Service
 public class UserProfileDataService extends BaseService<UserProfileData> {

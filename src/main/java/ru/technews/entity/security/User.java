@@ -3,7 +3,7 @@ package ru.technews.entity.security;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
-import ru.technews.entity.profile.UserProfileData;
+import ru.technews.entity.UserProfileData;
 import ru.technews.entity.security.audit.DateAudit;
 
 import javax.persistence.*;

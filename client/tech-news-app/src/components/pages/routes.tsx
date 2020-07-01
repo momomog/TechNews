@@ -12,6 +12,7 @@ import RegistrationWrapper from './autentification/Registration/RegistrationWrap
 import AuthorizationWrapper from './autentification/Authorization/AuthorizationWrapper'
 import {RedirectComponentWrapper} from '../core/RedirectComponent'
 import {NotFoundComponent} from '../core/NotFoundComponent'
+import MessagesWrapper from './Messages/MessagesWrapper'
 
 /**
  * Базовые роуты приложения независимо от авторизованности пользователя
@@ -38,6 +39,10 @@ const baseRoutes = [{
  * Роуты авторизованного пользователя
  */
 const authRoutes = [{
+    path: '/messages',
+    component: MessagesWrapper,
+    exact: false
+}, {
     path: '/new-post',
     component: NewPostPageWrapper,
     exact: false

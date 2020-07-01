@@ -1,9 +1,9 @@
-package ru.technews.service.post;
+package ru.technews.service;
 
 import org.springframework.stereotype.Service;
 import ru.technews.dao.BaseDao;
-import ru.technews.dao.post.PostDao;
-import ru.technews.entity.post.PostEntity;
+import ru.technews.dao.PostDao;
+import ru.technews.entity.PostEntity;
 import ru.technews.service.BaseService;
 
 import java.util.List;

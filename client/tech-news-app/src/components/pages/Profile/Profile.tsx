@@ -11,6 +11,7 @@ interface Props {
     user: User
     isCurrentUser: boolean
     onLoadPhoto: (photo: File) => void
+    redirectToDialogPage: () => void
 }
 
 /**
@@ -19,7 +20,7 @@ interface Props {
  * @param isCurrentUser
  * @param onLoadPhoto
  */
-const Profile: React.FC<Props> = ({user, isCurrentUser, onLoadPhoto}) => {
+const Profile: React.FC<Props> = ({user, isCurrentUser, redirectToDialogPage, onLoadPhoto}) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isOpenModal, setIsOpenModal] = useState(false)
     const [picture, setPicture] = useState(undefined)
@@ -98,7 +99,16 @@ const Profile: React.FC<Props> = ({user, isCurrentUser, onLoadPhoto}) => {
                             </div>
 
                             <div className="row">
-                                <div className="col-sm-7"/>
+                                <div className="col-sm-7 d-flex justify-content-center">
+                                    {
+                                        !isCurrentUser &&
+                                        <button className="btn btn-info send-msg-btn"
+                                                onClick={redirectToDialogPage}>
+                                            Отправить сообщение
+                                        </button>
+                                    }
+
+                                </div>
                                 <div className="col-sm-5">
                                     <SocialIcons user={user}/>
                                 </div>

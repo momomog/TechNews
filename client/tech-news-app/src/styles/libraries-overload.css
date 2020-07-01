@@ -156,14 +156,22 @@
 }
 
 .dropdown-item.active, .dropdown-item:active {
-    background-color: transparent!important;
+    background-color: transparent !important;
 }
 
 .navbar-toggler {
     background-color: rgb(47, 47, 47) !important;
-    outline: none!important;
+    outline: none !important;
 }
 
 .navbar-icon {
     color: white;
+}
+
+.emoji-mart-preview {
+    display: none !important;
+}
+
+.emoji-mart-search-icon {
+    top: 2px !important;
 }

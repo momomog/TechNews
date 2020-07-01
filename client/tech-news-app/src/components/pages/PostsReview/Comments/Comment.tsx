@@ -108,7 +108,7 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
 
                     {
                         isEditMode && commentId === comment.id
-                            ? <div>
+                            ? <>
                                     <textarea className="form-control text-area mt-2" rows={3}
                                               onChange={e => setCommentEditText(e.target.value)}
                                               value={commentEditText}
@@ -128,8 +128,8 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
                                             Отменить
                                         </span>
                                     </span>
-                            </div>
-                            : <div>
+                            </>
+                            : <>
                                 <div className="mt-1 mb-3 text-justify">
                                     {
                                         comment.isDeleted
@@ -184,7 +184,7 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
                                                                      border: 'none',
                                                                      borderRadius: '5px'
                                                                  }}>
-                                                          <div>
+                                                          <>
                                                               <div className="text-center text-dark">Вы уверены?</div>
                                                               <span onClick={onDeleteCommentary}
                                                                     className="text-secondary comment-action ml-5">Удалить</span>
@@ -192,7 +192,7 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
                                                                     className="text-secondary comment-action ml-4">
                                                                   Отменить
                                                               </span>
-                                                          </div>
+                                                          </>
                                                           </Popup>
                                                       </span>
                                             }
@@ -220,7 +220,7 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
 
                                         </span>
                                 </div>
-                            </div>
+                            </>
                     }
 
                 </div>

@@ -12,7 +12,8 @@
 
 .messages-container {
   background-color: #eeeeee;
-  border-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
   height: 70vh;
   max-height: 70vh;
   width: 100%;
@@ -42,7 +43,7 @@
   resize: none;
   outline-color: black;
   overflow: hidden;
-  margin-top: 1rem;
+  margin-top: 1.7rem;
   height: 40px;
   padding-right: 30px;
 }
@@ -54,11 +55,11 @@
 
 .user-item {
   padding: 10px 0;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 
   &:hover {
     background-color: #eeeeee;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
     cursor: pointer;
   }
 }
@@ -71,12 +72,18 @@
   margin: 0 0 0 0.8rem;
 }
 
+.message-date {
+  font-size: 13px;
+  margin: 2px 0 0 0.5rem;
+  color: #6c757d !important;
+}
+
 .username {
   margin: 1.3rem 0 0 0;
 }
 
 .send-msg-icon {
-  margin-top: 1.6rem;
+  margin-top: 2.2rem;
 
   &:hover {
     filter: brightness(90%);
@@ -85,29 +92,29 @@
 
 .smile-icon {
   position: absolute;
-  top: 14px;
+  top: 20px;
   right: 60px;
 }
 
-.im-chat-input {
-
-  outline: 0;
-  min-height: 36px;
-  width: 100%;
-  resize: none;
-  max-height: 200px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  border-radius: 6px;
-  line-height: 17px;
-  padding: 9px 106px 10px 13px;
-  margin-bottom: 0;
-  word-wrap: break-word;
-  box-sizing: border-box;
-  border: none;
-  border-color: var(--n33f)!important;
-  background-color: #2e6da4;
-  transition: border-bottom-color 0.3s linear;
+.scale-up-center-message {
+  animation: scale-up-center-message 0.1s ease-out;
 }
 
+@keyframes scale-up-center-message {
+  0% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.writing-message {
+  position: absolute;
+  left: 35%;
+  bottom: 50px;
+  text-align: center;
+  font-size: 1.3rem;
+  color: #6c757d;
+}
 

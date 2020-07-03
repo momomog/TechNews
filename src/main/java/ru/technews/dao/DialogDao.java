@@ -5,6 +5,7 @@ import ru.technews.entity.DialogsEntity;
 import ru.technews.entity.security.User;
 
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,9 +26,13 @@ public class DialogDao extends BaseDao<DialogsEntity> {
                 userIds.add(dlg.getOneUserId());
         }
 
-        query = getCurrentSession().createQuery("from User where id in (:userIds)");
-        query.setParameter("userIds", userIds);
-        return query.getResultList();
+        List<User> users = new ArrayList<>();
+        if (userIds.size() > 0) {
+            query = getCurrentSession().createQuery("from User where id in (:userIds)");
+            query.setParameter("userIds", userIds);
+            users = query.getResultList();
+        }
+        return users;
     }
 
     // создание даилога

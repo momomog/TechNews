@@ -1,11 +1,18 @@
-import {MessageAction, MessageState} from '../../models/messageModel'
-import {ADD_DIALOG_MESSAGE, SET_DIALOG_MESSAGES, SET_DIALOG_USER, SET_DIALOG_USERS} from '../actions/messageActions'
+import {Message, MessageAction, MessageState} from '../../models/messageModel'
+import {
+    ADD_DIALOG_MESSAGE,
+    SET_DIALOG_MESSAGES,
+    SET_DIALOG_USER,
+    SET_DIALOG_USERS,
+    SET_WRITING_USERS
+} from '../actions/messageActions'
 import {UserInitial} from '../../models/UserModel'
 
 const initialState: MessageState = {
     dialogUser: UserInitial,
     dialogMessages: [],
-    usersList: []
+    usersList: [],
+    writingUsers: []
 }
 
 export const messagesReducer = (state: MessageState = initialState, action: MessageAction) => {
@@ -34,7 +41,23 @@ export const messagesReducer = (state: MessageState = initialState, action: Mess
                 dialogMessages: [...state.dialogMessages, action.message]
             }
         }
+        case SET_WRITING_USERS: {
+            return {
+                ...state,
+                writingUsers: getWritingUsers(state.writingUsers, action.payload)
+            }
+        }
         default:
             return state
     }
+}
+
+function getWritingUsers(storeUsers: Array<number>, payload: Message) {
+    let users = [...storeUsers]
+    if (payload.isWriting && !users.includes(payload.oneUserId)) {
+        users.push(payload.oneUserId)
+    } else if (!payload.isWriting && users.includes(payload.oneUserId)) {
+        users = users.filter(userId => userId !== payload.oneUserId)
+    }
+    return users
 }

@@ -12,15 +12,18 @@ export interface Message {
     twoUserPhotoId: string
     date: string
     text: string
+    new?: boolean
+    isWriting?: boolean
 }
 
 export interface MessageState {
-    dialogUser: User,
-    dialogMessages: Array<Message>,
+    dialogUser: User
+    dialogMessages: Array<Message>
     usersList: Array<User>
+    writingUsers: Array<number>
 }
 
-export type MessageAction = SetDialogUserAction | SetDialogMessagesAction | SetDialogUsersAction | AddDialogMessageAction
+export type MessageAction = SetDialogUserAction | SetDialogMessagesAction | SetDialogUsersAction | AddDialogMessageAction | SetWritingUsersAction
 
 export interface SetDialogUserAction {
     type: 'SET-DIALOG-USER'
@@ -37,4 +40,8 @@ export interface SetDialogUsersAction {
 export interface AddDialogMessageAction {
     type: 'ADD-DIALOG-MESSAGE'
     message: Message
+}
+export interface SetWritingUsersAction {
+    type: 'SET-WRITING-USERS'
+    payload: Message
 }

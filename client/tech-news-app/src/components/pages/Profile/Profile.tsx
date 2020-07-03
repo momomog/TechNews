@@ -9,6 +9,7 @@ import {ThemeContext} from '../../../context/ThemeContext'
 
 interface Props {
     user: User
+    isAuth: boolean
     isCurrentUser: boolean
     onLoadPhoto: (photo: File) => void
     redirectToDialogPage: () => void
@@ -17,10 +18,12 @@ interface Props {
 /**
  * Профиль
  * @param user
+ * @param isAuth
  * @param isCurrentUser
+ * @param redirectToDialogPage
  * @param onLoadPhoto
  */
-const Profile: React.FC<Props> = ({user, isCurrentUser, redirectToDialogPage, onLoadPhoto}) => {
+const Profile: React.FC<Props> = ({user, isAuth, isCurrentUser, redirectToDialogPage, onLoadPhoto}) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isOpenModal, setIsOpenModal] = useState(false)
     const [picture, setPicture] = useState(undefined)
@@ -101,7 +104,7 @@ const Profile: React.FC<Props> = ({user, isCurrentUser, redirectToDialogPage, on
                             <div className="row">
                                 <div className="col-sm-7 d-flex justify-content-center">
                                     {
-                                        !isCurrentUser &&
+                                        isAuth && !isCurrentUser &&
                                         <button className="btn btn-info send-msg-btn"
                                                 onClick={redirectToDialogPage}>
                                             Отправить сообщение

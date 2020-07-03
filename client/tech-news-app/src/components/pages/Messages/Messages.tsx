@@ -11,15 +11,17 @@ import {MessageInput} from './MessageInput'
 interface Props {
     users: Array<User>
     getMessages: (dialogUser: User) => void
+    setWritingUsers: (payload: Message) => void
     addDialogMessage: (message: Message) => void
     messages: Array<Message>
     dialogUser: User
+    writingUsers: Array<number>
 }
 
 /**
  * Профиль
  */
-const Messages: React.FC<Props> = ({users, getMessages, addDialogMessage, messages, dialogUser}) => {
+const Messages: React.FC<Props> = ({users, writingUsers, setWritingUsers, getMessages, addDialogMessage, messages, dialogUser}) => {
     const {isLight} = useContext(ThemeContext)
     const {user} = useContext(AuthContext)
     const cardClasses = ['panel', 'panel-default', isLight ? 'background-light' : 'background-dark']
@@ -27,7 +29,7 @@ const Messages: React.FC<Props> = ({users, getMessages, addDialogMessage, messag
 
     useEffect(() => {
         if (user.username && !getWebService())
-            connect(user.username, addDialogMessage)
+            connect(user.username, addDialogMessage, setWritingUsers)
         scrollToBottomMessage()
     }, [user, messages])
 
@@ -57,8 +59,9 @@ const Messages: React.FC<Props> = ({users, getMessages, addDialogMessage, messag
                                 <div ref={messagesListRef} className="messages-list">
                                     {
                                         dialogUser.id
-                                            ? messages.map(message => <MessageItem key={message.id}
-                                                                                   message={message}/>)
+                                            ? messages.map((message, idx, arr) => <MessageItem key={message.id}
+                                                                                               prevMessage={arr[idx - 1]}
+                                                                                               message={message}/>)
                                             : <div className="not-chosen-dialog-center">Выберите собеседника для начала
                                                 разговора</div>
                                     }
@@ -66,6 +69,7 @@ const Messages: React.FC<Props> = ({users, getMessages, addDialogMessage, messag
                                 {
                                     dialogUser.id
                                         ? <MessageInput user={user}
+                                                        writingUsers={writingUsers}
                                                         dialogUser={dialogUser}
                                                         scrollToBottomMessage={scrollToBottomMessage}/>
                                         : null

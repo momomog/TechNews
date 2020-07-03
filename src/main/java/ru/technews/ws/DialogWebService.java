@@ -12,12 +12,13 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 @Service
 @Controller
-@ServerEndpoint(value = "/api/chat/{username}", decoders = MessageDecoder.class, encoders = MessageEncoder.class)
+@ServerEndpoint(value = "/api/chat/{username}", decoders = PayloadDecoder.class, encoders = PayloadEncoder.class)
 public class DialogWebService {
 
     MessageService messageService = SpringContext.getBean(MessageService.class);
@@ -42,21 +43,23 @@ public class DialogWebService {
     }
 
     @OnMessage
-    public void onMessage(Session session, Message message) {
-        MessagesEntity msg = new MessagesEntity(
-                message.getOneUserId(),
-                message.getOneUserFirstName(),
-                message.getOneUserUsername(),
-                message.getOneUserPhotoId(),
-                message.getTwoUserId(),
-                message.getTwoUserFirstName(),
-                message.getTwoUserUsername(),
-                message.getTwoUserPhotoId(),
-                LocalDateTime.now(),
-                message.getText()
-        );
-        messageService.save(msg);
-        broadcast(message);
+    public void onMessage(Session session, Payload payload) {
+        if (payload.getIsWriting() == null) {
+            MessagesEntity msg = new MessagesEntity(
+                    payload.getOneUserId(),
+                    payload.getOneUserFirstName(),
+                    payload.getOneUserUsername(),
+                    payload.getOneUserPhotoId(),
+                    payload.getTwoUserId(),
+                    payload.getTwoUserFirstName(),
+                    payload.getTwoUserUsername(),
+                    payload.getTwoUserPhotoId(),
+                    LocalDateTime.now(),
+                    payload.getText()
+            );
+            messageService.save(msg);
+        }
+        broadcast(payload);
     }
 
     @OnClose
@@ -69,13 +72,18 @@ public class DialogWebService {
         // Do error handling here
     }
 
-    private static void broadcast(Message message) {
+    private static void broadcast(Payload payload) {
         chatEndpoints.forEach(endpoint -> {
             synchronized (endpoint) {
                 try {
                     String username = endpoint.getSession().getPathParameters().get("username");
-                    if (username.equals(message.getOneUserUsername()) || username.equals(message.getTwoUserUsername()))
-                        endpoint.session.getBasicRemote().sendObject(message);
+                    if (Objects.nonNull(payload.getIsWriting())) {
+                        if (username.equals(payload.getTwoUserUsername()))
+                            endpoint.session.getBasicRemote().sendObject(payload);
+                    } else {
+                        if (username.equals(payload.getOneUserUsername()) || username.equals(payload.getTwoUserUsername()))
+                            endpoint.session.getBasicRemote().sendObject(payload);
+                    }
                 } catch (IOException | EncodeException e) {
                     e.printStackTrace();
                 }

@@ -11,20 +11,23 @@ import {NotificationManager} from 'react-notifications'
 import {getCurrentUserData} from '../../../redux/actions/userActions'
 import {RootState} from '../../../redux/reducers/rootReducer'
 import MessageAPI from '../../../api/MessageAPI'
-import {getDialogMessages} from '../../../redux/actions/messageActions'
+import {getDialogMessages, getDialogUsers} from '../../../redux/actions/messageActions'
 
 interface Props {
     currentUser: User
+    isAuth: boolean
     getCurrentUserData: () => void
+    getDialogUsers: () => void
     getDialogMessages: (user: User) => void
 }
 
 /**
  * Профиль. Оболочка
  * @param currentUserData
+ * @param getDialogUsers
  * @param getCurrentUserData
  */
-const ProfileWrapper: React.FC<Props> = ({currentUser, getCurrentUserData, getDialogMessages}) => {
+const ProfileWrapper: React.FC<Props> = ({currentUser, isAuth, getDialogUsers, getCurrentUserData, getDialogMessages}) => {
     const [someUser, setSomeUser] = useState<User>(UserInitial)
     const {pathname} = useLocation()
     const history = useHistory()
@@ -54,16 +57,16 @@ const ProfileWrapper: React.FC<Props> = ({currentUser, getCurrentUserData, getDi
     }
 
     const redirectToDialogPage = async () => {
-        const data = await MessageAPI.createDialog(someUser.id)
-        if (data) {
-            getDialogMessages(someUser)
-            history.push('/messages')
-        }
+        await MessageAPI.createDialog(someUser.id)
+        await getDialogUsers()
+        await getDialogMessages(someUser)
+        history.push('/messages')
     }
 
     const profileUser = isCurrentUser() ? currentUser : someUser
     return profileUser.id
         ? <Profile user={profileUser}
+                   isAuth={isAuth}
                    redirectToDialogPage={redirectToDialogPage}
                    isCurrentUser={isCurrentUser()}
                    onLoadPhoto={updateUserPhoto}/>
@@ -72,7 +75,8 @@ const ProfileWrapper: React.FC<Props> = ({currentUser, getCurrentUserData, getDi
 
 const mapStateToProps = (state: RootState) => {
     return {
-        currentUser: state.userData.userData
+        currentUser: state.userData.userData,
+        isAuth: state.userData.isAuth
     }
 }
 
@@ -80,6 +84,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         getCurrentUserData: () => dispatch(getCurrentUserData()),
         getDialogMessages: (dialogUser: User) => dispatch(getDialogMessages(dialogUser)),
+        getDialogUsers: () => dispatch(getDialogUsers())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileWrapper)

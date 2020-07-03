@@ -1,5 +1,4 @@
 class Common {
-
     // Возраст
     getUserAge = (date: string): string | undefined => {
         if (date) {
@@ -66,9 +65,6 @@ class Common {
                 return 'Неизвестная ошибка'
         }
     }
-
-    // Прибавление 0 к дате, если число даты меньше 10
-    private pad = (num: number): string | void => (num < 10 ? '0' : '') + num
 }
 
 export default new Common()

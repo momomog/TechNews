@@ -5,7 +5,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class Message {
+public class Payload {
     private Long oneUserId;
     private String oneUserFirstName;
     private String oneUserUsername;
@@ -16,4 +16,5 @@ public class Message {
     private String twoUserPhotoId;
     private LocalDateTime date;
     private String text;
+    private Boolean isWriting;
 }

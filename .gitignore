@@ -22,6 +22,9 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
+./src/main/resources/application.properties
+./src/main/resources/hibernate.properties
+./src/main/resources/mail.properties
 
 # Package Files #
 *.jar

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import ru.technews.common.PostCategoryConst;
-import ru.technews.config.GoogleDrive;
+import ru.technews.config.GoogleDriveConfig;
 import ru.technews.entity.PostEntity;
 import ru.technews.payload.ActionCompleteResponse;
 import ru.technews.payload.PostDataRequest;
@@ -27,7 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static ru.technews.config.GoogleDrive.postPhotoFolderId;
+import static ru.technews.config.GoogleDriveConfig.postPhotoFolderId;
 
 @RestController
 @RequestMapping(value = "/api/posts")
@@ -35,9 +35,9 @@ public class PostController implements PostCategoryConst {
 
     PostService postService;
     CommentService commentService;
-    GoogleDrive googleDrive;
+    GoogleDriveConfig googleDrive;
 
-    public PostController(PostService postService, CommentService commentService, GoogleDrive googleDrive) {
+    public PostController(PostService postService, CommentService commentService, GoogleDriveConfig googleDrive) {
         this.postService = postService;
         this.commentService = commentService;
         this.googleDrive = googleDrive;

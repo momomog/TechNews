@@ -3,27 +3,74 @@ import {NavLink} from 'react-router-dom'
 
 const Footer = () => {
     return (
-        <footer className="page-footer font-small special-color-dark pt-4">
-            <div className="container">
-                <div className="text-center center-block">
-                    <a href="https://www.facebook.com">
-                        <i id="social-fb" className="fa fa-facebook-square fa-3x social"/>
-                    </a>
-                    <a href="https://twitter.com">
-                        <i id="social-tw" className="fa fa-twitter-square fa-3x social"/>
-                    </a>
-                    <a href="https://plus.google.com">
-                        <i id="social-gp" className="fa fa-google-plus-square fa-3x social"/>
-                    </a>
-                    <a href="mailto:momomogggq@gmail.com">
-                        <i id="social-em" className="fa fa-envelope-square fa-3x social"/>
-                    </a>
+        <div className="footer-container">
+            <div className="container footer">
+                <div className="center-block">
+                    <div className="row">
+                        <div className="col-md-3">
+                            <div className="group-name">О сайте</div>
+                            <hr/>
+                            <ul className="about">
+                                <li>
+                                    <NavLink to="/history">
+                                        История создания
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/technologies">
+                                        Используемые технологии
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/project-struct">
+                                        Структура проекта
+                                    </NavLink>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="col-md-3">
+                            <div className="group-name">Контакты</div>
+                            <hr/>
+                            <ul className="about">
+                                <a href="https://www.vk.com/id47945255"
+                                   target="_blank" rel="noopener noreferrer">
+                                    <i id="social-fb" className="vk-icon active-soc"/>
+                                </a>
+                                <a href="https://github.com/momomog"
+                                   target="_blank" rel="noopener noreferrer">
+                                    <i id="social-fb" className="icon-github active-soc"/>
+                                </a>
+                                <a href="https://t.me/Sscre4m"
+                                   target="_blank" rel="noopener noreferrer">
+                                    <i id="social-fb" className="telegram-icon active-soc"/>
+                                </a>
+                                <a href="https://www.instagram.com/sergeyscre4m"
+                                   target="_blank" rel="noopener noreferrer">
+                                    <i id="social-gp"
+                                       className="instagram-icon active-soc"/>
+                                </a>
+                                <a href="https://www.facebook.com/patrickstarn1"
+                                   target="_blank" rel="noopener noreferrer">
+                                    <i id="social-fb"
+                                       className="facebook-icon active-soc"/>
+                                </a>
+                            </ul>
+                        </div>
+                        <div className="col-md-6 mt-5">
+                            <div>По всем вопросам обращайтесь через контакты,</div>
+                            <div>либо по email:</div>
+                            <a href="mailto:momomogggq@gmail.com" target="_blank" rel="noopener noreferrer">
+                                <div className="email-link">momomogggq@gmail.com</div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div className="text-center py-3 copyright">© 2019-2020 Copyright:
-                    <NavLink to="/" onClick={() => window.scroll(0, 0)}> tech-news.ru</NavLink>
+                <div className="text-center py-3 mt-2 copyright">© 2019-2020 Copyright:
+                    <NavLink to="/"> tech-news.ru</NavLink>
                 </div>
             </div>
-        </footer>
+        </div>
+
     )
 }
 

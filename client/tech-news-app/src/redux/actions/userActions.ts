@@ -24,10 +24,14 @@ export const setUserDataAction = (userData: User): SetUserDataAction => ({
 export const login = (loginRequest: SignInRequest, remember?: boolean): any => (dispatch: Dispatch) => {
     AuthAPI.login(loginRequest)
         .then(response => {
-            NotificationManager.success('Вы успешно авторизовались в системе', 'Добро пожаловать!')
-            AuthService.setToken(response.accessToken, remember)
-            dispatch(setIsAuthAction(true))
-            history.push(`/profile`)
+            if (!response.success && response.message) {
+                NotificationManager.error('Необходимо подтвердить свой почтовый адрес', 'Не удалось войти')
+            } else {
+                NotificationManager.success('Вы успешно авторизовались в системе', 'Добро пожаловать!')
+                AuthService.setToken(response.accessToken, remember)
+                dispatch(setIsAuthAction(true))
+                history.push(`/profile`)
+            }
         })
         .catch(() => NotificationManager.error('Проверьте правильность введенных данных', 'Не удалось войти'))
 }

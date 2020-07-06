@@ -7,7 +7,7 @@ import {commentsReducer} from './commentsReducer'
 import {userReducer} from './userReducer'
 import {reducer as formReducer} from 'redux-form'
 import {messagesReducer} from './messagesReducer'
-import {MessageState} from '../../models/messageModel'
+import {MessageState} from '../../models/MessageModel'
 
 export interface RootState {
     postsData: PostState

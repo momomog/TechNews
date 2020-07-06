@@ -16,7 +16,8 @@ const RegistrationWrapper: React.FC = () => {
     const signup = (signupRequest: SignUpRequest) => {
         AuthAPI.signup(signupRequest)
             .then(() => {
-                NotificationManager.success('Для продолжения работы войдите на сайт', 'Вы успешно зарегистрировались')
+                NotificationManager.success('Для активации аккаунта пройдите по ссылке в письме на указанном почтовом адресе',
+                    'Вы успешно зарегистрировались', 7000)
                 history.push('/authorization')
             })
             .catch((error: ErrorResponse) => NotificationManager.error(error.message, 'Ошибка'))

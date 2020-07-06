@@ -1,7 +1,7 @@
 package ru.technews.dao;
 
 import org.springframework.stereotype.Repository;
-import ru.technews.entity.DialogsEntity;
+import ru.technews.entity.DialogEntity;
 import ru.technews.entity.security.User;
 
 import javax.persistence.Query;
@@ -11,19 +11,19 @@ import java.util.List;
 import java.util.Set;
 
 @Repository
-public class DialogDao extends BaseDao<DialogsEntity> {
+public class DialogDao extends BaseDao<DialogEntity> {
     // Список людей, с кем у текущего пользователя есть диалоги
     public List<User> getDialogUsers(Long mainUserId) {
         Query query;
-        query = getCurrentSession().createQuery("from DialogsEntity where oneUserId=:mainUserId or twoUserId=:mainUserId");
+        query = getCurrentSession().createQuery("from DialogEntity where mainUserId=:mainUserId or dialogUserId=:mainUserId");
         query.setParameter("mainUserId", mainUserId);
-        List<DialogsEntity> dialogs = query.getResultList();
+        List<DialogEntity> dialogs = query.getResultList();
         Set<Long> userIds = new HashSet<>();
-        for (DialogsEntity dlg : dialogs) {
-            if (dlg.getOneUserId().equals(mainUserId))
-                userIds.add(dlg.getTwoUserId());
+        for (DialogEntity dlg : dialogs) {
+            if (dlg.getMainUserId().equals(mainUserId))
+                userIds.add(dlg.getDialogUserId());
             else
-                userIds.add(dlg.getOneUserId());
+                userIds.add(dlg.getMainUserId());
         }
 
         List<User> users = new ArrayList<>();
@@ -35,20 +35,20 @@ public class DialogDao extends BaseDao<DialogsEntity> {
         return users;
     }
 
-    // создание даилога
-    public boolean createDialog(Long mainUserId, Long userId) {
+    // создание диалога
+    public boolean createDialog(Long mainUserId, Long dialogUserId) {
         Query query;
-        query = getCurrentSession().createQuery("from DialogsEntity where oneUserId=:mainUserId and twoUserId=:userId or oneUserId=:userId and twoUserId=:mainUserId");
+        query = getCurrentSession().createQuery("from DialogEntity where mainUserId=:mainUserId and dialogUserId=:dialogUserId or mainUserId=:dialogUserId and dialogUserId=:mainUserId");
         query.setParameter("mainUserId", mainUserId);
-        query.setParameter("userId", userId);
-        List<DialogsEntity> dialogs = query.getResultList();
+        query.setParameter("dialogUserId", dialogUserId);
+        List<DialogEntity> dialogs = query.getResultList();
 
         if (dialogs.size() > 0) {
             return false;
         } else {
-            DialogsEntity dialogsEntity = new DialogsEntity();
-            dialogsEntity.setOneUserId(mainUserId);
-            dialogsEntity.setTwoUserId(userId);
+            DialogEntity dialogsEntity = new DialogEntity();
+            dialogsEntity.setMainUserId(mainUserId);
+            dialogsEntity.setDialogUserId(dialogUserId);
             this.save(dialogsEntity);
             return true;
         }

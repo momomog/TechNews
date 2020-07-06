@@ -363,7 +363,7 @@ module.exports = function (webpackEnv) {
                         },
                         // Для загрузки файла web.config
                         {
-                            "test": /\.config$/,
+                            "test": /\.config|mp3$/,
                             "loader": "file-loader",
                             "options": {
                                 "name": "[name].[ext]"

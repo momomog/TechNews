@@ -1,35 +1,35 @@
 import React, {useContext, useEffect} from 'react'
 import {User} from '../../../models/UserModel'
 import {ThemeContext} from '../../../context/ThemeContext'
-import {MessageItem} from './MessageItem'
-import {UserItem} from './UserItem'
-import {Message} from '../../../models/messageModel'
-import {connect, getWebService} from './MessageWebService'
+import {MessageItem} from './messageComponents/MessageItem'
+import {UserItem} from './messageComponents/UserItem'
+import {Message} from '../../../models/MessageModel'
 import {AuthContext} from '../../../context/AuthContext'
-import {MessageInput} from './MessageInput'
+import {MessageInput} from './messageComponents/MessageInput'
 
 interface Props {
     users: Array<User>
     getMessages: (dialogUser: User) => void
-    setWritingUsers: (payload: Message) => void
-    addDialogMessage: (message: Message) => void
     messages: Array<Message>
     dialogUser: User
     writingUsers: Array<number>
 }
 
 /**
- * Профиль
+ * Сообщения
+ * @param users
+ * @param writingUsers
+ * @param getMessages
+ * @param messages
+ * @param dialogUser
  */
-const Messages: React.FC<Props> = ({users, writingUsers, setWritingUsers, getMessages, addDialogMessage, messages, dialogUser}) => {
+const Messages: React.FC<Props> = ({users, writingUsers, getMessages, messages, dialogUser}) => {
     const {isLight} = useContext(ThemeContext)
     const {user} = useContext(AuthContext)
     const cardClasses = ['panel', 'panel-default', isLight ? 'background-light' : 'background-dark']
     const messagesListRef: React.RefObject<HTMLDivElement> = React.createRef()
 
     useEffect(() => {
-        if (user.username && !getWebService())
-            connect(user.username, addDialogMessage, setWritingUsers)
         scrollToBottomMessage()
     }, [user, messages])
 

@@ -89,14 +89,12 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
             <div className="media card-body mt-0 pt-0">
                 <NavLink to={`/profile/${comment.authorName}`}>
                     <img className="d-flex mr-3 rounded-circle comment-author-photo" alt="user_pic"
-                         onClick={() => window.scroll(0, 0)}
                          src={comment.authorPhotoId
                          && `https://drive.google.com/uc?export=view&id=${comment.authorPhotoId}`}/>
                 </NavLink>
                 <div className="media-body">
                     <div className="row">
-                        <span className="col-lg-8 post-author-comment font-italic"
-                              onClick={() => window.scroll(0, 0)}>
+                        <span className="col-lg-8 post-author-comment font-italic">
                             <NavLink to={`/profile/${comment.authorName}`} className="comment-author-link">
                                 @{comment.authorName}
                             </NavLink>

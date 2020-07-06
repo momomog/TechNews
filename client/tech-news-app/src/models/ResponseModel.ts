@@ -14,6 +14,8 @@ export interface PostsResponse {
 export interface SignInResponse {
     accessToken: string
     tokenType: string
+    success: boolean
+    message: string
 }
 
 export interface SignUpResponse {

@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-public class GoogleDrive {
+public class GoogleDriveConfig {
     private static final String APPLICATION_NAME = "Google Drive API Java";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
@@ -42,7 +42,7 @@ public class GoogleDrive {
     public static final String defaultProfilePhotoId = "1F4ksE_jqSPTdl075o85mL6F-ZZakD8fz";
 
     private Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
-        InputStream inputStream = GoogleDrive.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+        InputStream inputStream = GoogleDriveConfig.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
         if (inputStream == null) {
             throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
         }

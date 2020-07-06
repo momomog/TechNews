@@ -6,13 +6,8 @@ import {User} from '../../../models/UserModel'
 import Spinner from '../../core/Spinner'
 import {RootState} from '../../../redux/reducers/rootReducer'
 import {AuthContext} from '../../../context/AuthContext'
-import {
-    addDialogMessage,
-    getDialogMessages,
-    getDialogUsers,
-    setWritingUsers
-} from '../../../redux/actions/messageActions'
-import {Message} from '../../../models/messageModel'
+import {getDialogMessages, getDialogUsers} from '../../../redux/actions/messageActions'
+import {Message} from '../../../models/MessageModel'
 
 interface Props {
     users: Array<User>
@@ -20,15 +15,19 @@ interface Props {
     writingUsers: Array<number>
     messages: Array<Message>
     getDialogMessages: (dialogUser: User) => void
-    addDialogMessage: (message: Message) => void
-    setWritingUsers: (payload: Message) => void
     getDialogUsers: () => void
 }
 
 /**
  * Сообщения. Оболочка
+ * @param users
+ * @param writingUsers
+ * @param getDialogMessages
+ * @param messages
+ * @param getDialogUsers
+ * @param dialogUser
  */
-const MessagesWrapper: React.FC<Props> = ({users, writingUsers, setWritingUsers, getDialogMessages, messages, getDialogUsers, addDialogMessage, dialogUser}) => {
+const MessagesWrapper: React.FC<Props> = ({users, writingUsers, getDialogMessages, messages, getDialogUsers, dialogUser}) => {
     const {isAuth} = useContext(AuthContext)
 
     const getMessages = (dialogUser: User) => getDialogMessages(dialogUser)
@@ -42,8 +41,6 @@ const MessagesWrapper: React.FC<Props> = ({users, writingUsers, setWritingUsers,
                     writingUsers={writingUsers}
                     messages={messages}
                     dialogUser={dialogUser}
-                    setWritingUsers={setWritingUsers}
-                    addDialogMessage={addDialogMessage}
                     getMessages={getMessages}/>
         : <Spinner/>
 }
@@ -60,9 +57,7 @@ const mapStateToProps = (state: RootState) => {
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         getDialogMessages: (dialogUser: User) => dispatch(getDialogMessages(dialogUser)),
-        addDialogMessage: (message: Message) => dispatch(addDialogMessage(message)),
-        getDialogUsers: () => dispatch(getDialogUsers()),
-        setWritingUsers: (payload: Message) => dispatch(setWritingUsers(payload))
+        getDialogUsers: () => dispatch(getDialogUsers())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MessagesWrapper)

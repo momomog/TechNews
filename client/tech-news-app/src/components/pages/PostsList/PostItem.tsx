@@ -2,8 +2,8 @@ import React, {useContext} from 'react'
 import {NavLink} from 'react-router-dom'
 import Hyphenated from 'react-hyphen'
 import ru from 'hyphenated-ru'
-import {Post} from '../../../../models/PostModel'
-import {ThemeContext} from '../../../../context/ThemeContext'
+import {Post} from '../../../models/PostModel'
+import {ThemeContext} from '../../../context/ThemeContext'
 
 interface Props {
     post: Post

@@ -1,0 +1,160 @@
+.facebook-icon {
+  content: url("../static/social-icons/icon-facebook.png");
+}
+
+.instagram-icon {
+  content: url("../static/social-icons/icon-instagram.png");
+}
+
+.vk-icon {
+  content: url("../static/social-icons/icon-vk.png");
+}
+
+.telegram-icon {
+  content: url("../static/social-icons/icon-telegram.png");
+}
+
+.icon-github {
+  content: url("../static/social-icons/icon-github.png");
+}
+
+.twitter-icon {
+  content: url("../static/social-icons/icon-twitter.png");
+}
+
+.social {
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -o-transform: scale(0.8);
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+}
+
+.active-soc:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -o-transform: scale(1.1);
+}
+
+.active-soc {
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -o-transform: scale(0.8);
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+}
+
+#social-fb:hover {
+  color: #3B5998;
+}
+
+#social-tw:hover {
+  color: #4099FF;
+}
+
+#social-gp:hover {
+  color: #d35578;
+}
+
+#social-em:hover {
+  color: #f39c12;
+}
+
+.copyright {
+  font-size: 1em;
+  margin-right: 8em;
+
+  a {
+    text-decoration: none !important;
+    color: #1a4c87;
+  }
+}
+
+.about {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.email-link {
+  font-size: 1.2em;
+  color: #1b6d85;
+
+  &:hover {
+    color: #1f4361;
+  }
+}
+
+.footer-container {
+  padding-top: 1.5rem !important;
+  //background-color: #888b8d;
+  //box-shadow: 0 5px 8px 0 rgba(10, 10, 10, 0.55);
+  margin-left: 17rem !important;
+}
+
+.footer {
+  margin-right: auto !important;
+  margin-left: auto !important;
+
+  hr {
+    margin-top: 0.1rem;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: rgb(33, 37, 41);
+
+    &:hover {
+      color: #265478;
+    }
+  }
+}
+
+.group-name {
+  font-size: 1.7rem;
+  color: rgba(0, 0, 0, 0.78);
+  font-weight: bolder;
+}
+
+.block-name {
+  font-size: 1.7rem;
+  font-weight: bolder;
+  margin-bottom: 0.5rem;
+}
+
+.history-container {
+  p:not(.block-name) {
+    font-size: 1.6rem;
+    margin-left: 0.7rem;
+    text-indent: 20px;
+    text-align: justify;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: rgb(52, 114, 175);
+
+    &:hover {
+      color: #265478;
+    }
+  }
+}
+
+.history-img {
+  max-width: 500px;
+  max-height: 350px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  margin: 0 auto 5px auto;
+
+  &.spring{
+    max-width: 330px;
+    margin: 0 auto 15px auto;
+  }
+}
+
+.mh-75 {
+  min-height: 75vh;
+}

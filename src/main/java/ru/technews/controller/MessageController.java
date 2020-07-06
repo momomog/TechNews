@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.technews.entity.MessagesEntity;
+import ru.technews.entity.MessageEntity;
 import ru.technews.entity.security.User;
 import ru.technews.payload.ActionCompleteResponse;
 import ru.technews.security.CurrentUser;
@@ -28,8 +28,8 @@ public class MessageController {
     // список сообщений
     @GetMapping(value = "/messages/dialog")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public List<MessagesEntity> getDialogMessages(@CurrentUser UserPrincipal currentUser,
-                                                  @RequestParam(name = "userId") Long userId) {
+    public List<MessageEntity> getDialogMessages(@CurrentUser UserPrincipal currentUser,
+                                                 @RequestParam(name = "userId") Long userId) {
         return messageService.getDialogMessages(currentUser.getId(), userId);
     }
 

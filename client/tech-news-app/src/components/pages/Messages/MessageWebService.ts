@@ -1,6 +1,8 @@
 import {User} from '../../../models/UserModel'
-import {Message} from '../../../models/messageModel'
+import {Message} from '../../../models/MessageModel'
 import {WS_BASE_URL} from '../../../api/BaseRequest'
+// @ts-ignore
+import incomingMessageSound from '../../../static/incoming_message.mp3'
 
 let webService: WebSocket
 
@@ -8,45 +10,49 @@ export const getWebService = () => {
     return webService
 }
 
-export const connect = (username: string,
-                        addDialogMessage: (message: Message) => void,
-                        setWritingUsers: (payload: Message) => void) => {
+export const connectToMsgWS = (username: string,
+                               addDialogMessage: (message: Message) => void,
+                               setWritingUsers: (payload: Message) => void) => {
     webService = new WebSocket(`${WS_BASE_URL}/chat/${username}`)
-    webService.onmessage = event => {
-        const msg: Message = JSON.parse(event.data)
-        if (msg.isWriting !== undefined) {
-            setWritingUsers(msg)
-        } else if (msg.text) {
-            msg.id = Math.random()
-            msg.new = true
-            addDialogMessage(msg)
-        }
-    }
+    webService.onmessage = event => onWSMessage(event, addDialogMessage, setWritingUsers)
 }
 
-export const send = (currentUser: User, dialogUser: User, messageText: string, isWriting?: boolean) => {
+export const sendPayloadToMsgWS = (currentUser: User, dialogUser: User, messageText: string, isWriting?: boolean) => {
     let json
-    if (isWriting) {
+    if (isWriting !== undefined) {
         json = JSON.stringify({
-            oneUserId: currentUser.id,
-            oneUserUsername: currentUser.username,
-            twoUserId: dialogUser.id,
-            twoUserUsername: dialogUser.username,
+            mainUserId: currentUser.id,
+            mainUserUsername: currentUser.username,
+            dialogUserId: dialogUser.id,
+            dialogUserUsername: dialogUser.username,
             isWriting: isWriting
         })
     } else {
         json = JSON.stringify({
-            oneUserId: currentUser.id,
-            oneUserFirstName: currentUser.firstName,
-            oneUserUsername: currentUser.username,
-            oneUserPhotoId: currentUser.profileData.photoId,
-            twoUserId: dialogUser.id,
-            twoUserFirstName: dialogUser.firstName,
-            twoUserUsername: dialogUser.username,
-            twoUserPhotoId: dialogUser.profileData.photoId,
-            text: messageText,
-            isWriting
+            mainUserId: currentUser.id,
+            mainUserFirstName: currentUser.firstName,
+            mainUserUsername: currentUser.username,
+            mainUserPhotoId: currentUser.profileData.photoId,
+            dialogUserId: dialogUser.id,
+            dialogUserFirstName: dialogUser.firstName,
+            dialogUserUsername: dialogUser.username,
+            dialogUserPhotoId: dialogUser.profileData.photoId,
+            text: messageText
         })
     }
     webService.send(json)
+}
+
+const onWSMessage = (event, addDialogMessage, setWritingUsers) => {
+    const msg: Message = JSON.parse(event.data)
+    if (msg.isWriting !== undefined) {
+        setWritingUsers(msg)
+    } else if (msg.text) {
+        msg.id = Math.random()
+        msg.new = true
+        addDialogMessage(msg)
+
+        if (window.location.pathname !== '/messages')
+            new Audio(incomingMessageSound).play()
+    }
 }

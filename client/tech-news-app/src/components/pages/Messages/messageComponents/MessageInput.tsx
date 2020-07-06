@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
-import {send} from './MessageWebService'
-import {User} from '../../../models/UserModel'
+import {sendPayloadToMsgWS} from '../MessageWebService'
+import {User} from '../../../../models/UserModel'
 import {Picker} from 'emoji-mart'
-import sendIcon from '../../../static/send-icon.png'
-import smileIcon from '../../../static/smile-icon.png'
+import sendIcon from '../../../../static/send-icon.png'
+import smileIcon from '../../../../static/smile-icon.png'
 
 interface Props {
     user: User
@@ -12,6 +12,7 @@ interface Props {
     scrollToBottomMessage: () => void
 }
 
+// Таймер отправки статуса набора сообщения раз в 2 секунды
 let timeout
 
 export const MessageInput: React.FC<Props> = ({user, writingUsers, dialogUser, scrollToBottomMessage}) => {
@@ -20,8 +21,9 @@ export const MessageInput: React.FC<Props> = ({user, writingUsers, dialogUser, s
 
     const sendMessage = () => {
         if (messageText.trim()) {
-            send(user, dialogUser, messageText)
+            sendPayloadToMsgWS(user, dialogUser, messageText)
             scrollToBottomMessage()
+            sendPayloadToMsgWS(user, dialogUser, '', false)
             setMessageText('')
             setShowPicker(false)
         }
@@ -30,11 +32,11 @@ export const MessageInput: React.FC<Props> = ({user, writingUsers, dialogUser, s
     const writeMessage = e => {
         setMessageText(e.target.value)
         if (!timeout) {
-            send(user, dialogUser, '', true)
+            sendPayloadToMsgWS(user, dialogUser, '', true)
             timeout = setTimeout(() => {
-                send(user, dialogUser, '', false)
+                sendPayloadToMsgWS(user, dialogUser, '', false)
                 timeout = null
-            }, 3000)
+            }, 2000)
         }
     }
 

@@ -29,7 +29,6 @@ const PostAdminPanelWrapper: React.FC<Props> = ({getPosts, sectionId, postId}) =
                 getPosts(sectionId)
 
                 setTimeout(() => {
-                    window.scroll(0, 0)
                     history.goBack()
                     NotificationManager.success(`Пост номер ${postId} успешно удален`, 'Успешно')
                 }, 1000)

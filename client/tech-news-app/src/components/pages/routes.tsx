@@ -8,11 +8,14 @@ import AdminPanelWrapper from './AdminPanel/AdminPanelWrapper'
 import ProfileWrapper from './Profile/ProfileWrapper'
 import ProfileEditWrapper from './editPages/ProfileEdit/ProfileEditWrapper'
 import PostEditWrapper from './editPages/PostEdit/PostEditWrapper'
-import RegistrationWrapper from './autentification/Registration/RegistrationWrapper'
-import AuthorizationWrapper from './autentification/Authorization/AuthorizationWrapper'
 import {RedirectComponentWrapper} from '../core/RedirectComponent'
 import {NotFoundComponent} from '../core/NotFoundComponent'
 import MessagesWrapper from './Messages/MessagesWrapper'
+import History from '../Footer/info/History'
+import Technologies from '../Footer/info/Technologies'
+import ProjectStructure from '../Footer/info/ProjectStructure'
+import RegistrationWrapper from './authentication/Registration/RegistrationWrapper'
+import AuthorizationWrapper from './authentication/Authorization/AuthorizationWrapper'
 
 /**
  * Базовые роуты приложения независимо от авторизованности пользователя
@@ -33,6 +36,18 @@ const baseRoutes = [{
     path: '/profile/:username',
     component: ProfileWrapper,
     exact: true
+}, {
+    path: '/history',
+    component: History,
+    exact: false
+}, {
+    path: '/technologies',
+    component: Technologies,
+    exact: false
+}, {
+    path: '/project-struct',
+    component: ProjectStructure,
+    exact: false
 }]
 
  /**

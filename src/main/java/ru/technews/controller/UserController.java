@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.technews.config.GoogleDrive;
+import ru.technews.config.GoogleDriveConfig;
 import ru.technews.entity.UserProfileData;
 import ru.technews.entity.security.User;
 import ru.technews.exception.ResourceNotFoundException;
@@ -21,7 +21,7 @@ import ru.technews.service.UserProfileDataService;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
-import static ru.technews.config.GoogleDrive.userPhotoFolderId;
+import static ru.technews.config.GoogleDriveConfig.userPhotoFolderId;
 
 @RestController
 @RequestMapping("/api")
@@ -30,10 +30,10 @@ public class UserController {
     UserRepository userRepository;
     UserProfileDataService userProfileDataService;
     CommentService commentService;
-    GoogleDrive googleDrive;
+    GoogleDriveConfig googleDrive;
 
     public UserController(UserRepository userRepository, UserProfileDataService userProfileDataService,
-                          CommentService commentService, GoogleDrive googleDrive) {
+                          CommentService commentService, GoogleDriveConfig googleDrive) {
         this.userRepository = userRepository;
         this.userProfileDataService = userProfileDataService;
         this.commentService = commentService;

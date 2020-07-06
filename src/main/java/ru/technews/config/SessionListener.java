@@ -1,4 +1,4 @@
-package ru.technews.config.security;
+package ru.technews.config;
 
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;

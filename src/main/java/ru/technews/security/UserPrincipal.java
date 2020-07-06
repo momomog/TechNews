@@ -36,10 +36,12 @@ public class UserPrincipal implements UserDetails {
 
     private LocalDateTime createAt;
 
+    private Boolean enabled;
+
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserPrincipal(Long id, String firstName, String lastName, String username,
-                         String email, String password, UserProfileData profileData, LocalDateTime createAt,
+                         String email, String password, UserProfileData profileData, LocalDateTime createAt, Boolean enabled,
                          Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.firstName = firstName;
@@ -49,6 +51,7 @@ public class UserPrincipal implements UserDetails {
         this.password = password;
         this.profileData = profileData;
         this.authorities = authorities;
+        this.enabled = enabled;
         this.createAt = createAt;
     }
 
@@ -66,10 +69,10 @@ public class UserPrincipal implements UserDetails {
                 user.getPassword(),
                 user.getProfileData(),
                 user.getCreatedAt(),
+                user.getEnabled(),
                 authorities
         );
     }
-
 
     @Override
     public String getUsername() {

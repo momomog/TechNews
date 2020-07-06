@@ -1,5 +1,5 @@
 import React from 'react'
-import {User} from '../../../models/UserModel'
+import {User} from '../../../../models/UserModel'
 import {NavLink} from 'react-router-dom'
 
 interface Props {

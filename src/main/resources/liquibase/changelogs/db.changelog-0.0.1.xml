@@ -184,11 +184,11 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="one_user_id" type="bigint">
-                <constraints nullable="false" foreignKeyName="fk_one_user_id" references="users(id)"/>
+            <column name="main_user_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_main_user_id" references="users(id)"/>
             </column>
-            <column name="two_user_id" type="bigint">
-                <constraints nullable="false" foreignKeyName="fk_two_user_id" references="users(id)"/>
+            <column name="dialog_user_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_dialog_user_id" references="users(id)"/>
             </column>
         </createTable>
     </changeSet>
@@ -198,10 +198,10 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="one_user_id" type="bigint">
+            <column name="main_user_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="two_user_id" type="bigint">
+            <column name="dialog_user_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="date" type="TIMESTAMP">

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Common from '../../../common/Common'
-import PostItem from '../PostsList/PostItem/PostItem'
+import PostItem from '../PostsList/PostItem'
 import {Post} from '../../../models/PostModel'
 import ScrollUpButton from 'react-scroll-up-button'
 

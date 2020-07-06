@@ -1,9 +1,7 @@
 package ru.technews.ws;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import ru.technews.config.SpringContext;
-import ru.technews.entity.MessagesEntity;
+import ru.technews.entity.MessageEntity;
 import ru.technews.service.MessageService;
 
 import javax.websocket.*;
@@ -16,8 +14,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-@Service
-@Controller
+//@Service
+//@Controller
 @ServerEndpoint(value = "/api/chat/{username}", decoders = PayloadDecoder.class, encoders = PayloadEncoder.class)
 public class DialogWebService {
 
@@ -45,15 +43,15 @@ public class DialogWebService {
     @OnMessage
     public void onMessage(Session session, Payload payload) {
         if (payload.getIsWriting() == null) {
-            MessagesEntity msg = new MessagesEntity(
-                    payload.getOneUserId(),
-                    payload.getOneUserFirstName(),
-                    payload.getOneUserUsername(),
-                    payload.getOneUserPhotoId(),
-                    payload.getTwoUserId(),
-                    payload.getTwoUserFirstName(),
-                    payload.getTwoUserUsername(),
-                    payload.getTwoUserPhotoId(),
+            MessageEntity msg = new MessageEntity(
+                    payload.getMainUserId(),
+                    payload.getMainUserFirstName(),
+                    payload.getMainUserUsername(),
+                    payload.getMainUserPhotoId(),
+                    payload.getDialogUserId(),
+                    payload.getDialogUserFirstName(),
+                    payload.getDialogUserUsername(),
+                    payload.getDialogUserPhotoId(),
                     LocalDateTime.now(),
                     payload.getText()
             );
@@ -77,11 +75,13 @@ public class DialogWebService {
             synchronized (endpoint) {
                 try {
                     String username = endpoint.getSession().getPathParameters().get("username");
+                    // отправка статуса о наборе текста
                     if (Objects.nonNull(payload.getIsWriting())) {
-                        if (username.equals(payload.getTwoUserUsername()))
+                        if (username.equals(payload.getDialogUserUsername()))
                             endpoint.session.getBasicRemote().sendObject(payload);
                     } else {
-                        if (username.equals(payload.getOneUserUsername()) || username.equals(payload.getTwoUserUsername()))
+                        // отправка сообщения
+                        if (username.equals(payload.getMainUserUsername()) || username.equals(payload.getDialogUserUsername()))
                             endpoint.session.getBasicRemote().sendObject(payload);
                     }
                 } catch (IOException | EncodeException e) {
@@ -92,6 +92,6 @@ public class DialogWebService {
     }
 
     public Session getSession() {
-        return session;
+        return this.session;
     }
 }

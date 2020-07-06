@@ -2,14 +2,14 @@ import {User} from './UserModel'
 
 export interface Message {
     id: number
-    oneUserId: number
-    oneUserFirstName: string
-    oneUserUsername: string
-    oneUserPhotoId: string
-    twoUserId: number
-    twoUserFirstName: string
-    twoUserUsername: string
-    twoUserPhotoId: string
+    mainUserId: number
+    mainUserFirstName: string
+    mainUserUsername: string
+    mainUserPhotoId: string
+    dialogUserId: number
+    dialogUserFirstName: string
+    dialogUserUsername: string
+    dialogUserPhotoId: string
     date: string
     text: string
     new?: boolean

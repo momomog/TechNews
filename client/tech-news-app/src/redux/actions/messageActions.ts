@@ -5,7 +5,7 @@ import {
     SetDialogUserAction,
     SetDialogUsersAction,
     SetWritingUsersAction
-} from '../../models/messageModel'
+} from '../../models/MessageModel'
 import {User} from '../../models/UserModel'
 
 export const SET_DIALOG_USER = 'SET-DIALOG-USER'

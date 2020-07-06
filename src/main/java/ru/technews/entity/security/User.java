@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.Type;
 import ru.technews.entity.UserProfileData;
 import ru.technews.entity.security.audit.DateAudit;
 
@@ -55,6 +56,10 @@ public class User extends DateAudit {
     @JsonIgnore
     private String password;
 
+    @Type(type = "numeric_boolean")
+    @Column(name = "enabled")
+    private Boolean enabled;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -68,12 +73,14 @@ public class User extends DateAudit {
     public User() {
     }
 
-    public User(String firstName, String lastName, String username, String email, String password, UserProfileData profileData) {
+    public User(String firstName, String lastName, String username, String email,
+                String password, UserProfileData profileData, Boolean enabled) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
         this.profileData = profileData;
+        this.enabled = enabled;
     }
 }

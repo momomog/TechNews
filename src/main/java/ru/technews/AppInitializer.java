@@ -5,7 +5,7 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 import ru.technews.config.RootConfig;
-import ru.technews.config.security.SessionListener;
+import ru.technews.config.SessionListener;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;

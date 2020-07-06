@@ -1,4 +1,4 @@
-import {Message} from '../models/messageModel'
+import {Message} from '../models/MessageModel'
 import {request} from './BaseRequest'
 import {User} from '../models/UserModel'
 

@@ -22,7 +22,7 @@ const PostItem: React.FC<{ post: Post }> = ({post}) => {
                          // src={`https://drive.google.com/uc?export=view&id=${post.photoId}`}/>
                          src={post.photoId}/>
                 </div>
-                <div className="text-center" onClick={() => window.scroll(0, 0)}>
+                <div className="text-center">
                     <NavLink to={linkPropInit()}>
                         {post.title}
                     </NavLink>

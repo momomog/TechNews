@@ -9,12 +9,17 @@ import {RootState} from '../redux/reducers/rootReducer'
 import {AuthContext} from '../context/AuthContext'
 import {useTheme} from '../hooks/useTheme'
 import {ThemeContext} from '../context/ThemeContext'
+import {connectToMsgWS, getWebService} from './pages/Messages/MessageWebService'
+import {Message} from '../models/MessageModel'
+import {addDialogMessage, setWritingUsers} from '../redux/actions/messageActions'
 
 interface Props {
     isAuth: boolean
     user: User
     setIsAuth: (isAuth: boolean) => UserAction,
     getUserData: () => void
+    addDialogMessage: (message: Message) => void
+    setWritingUsers: (payload: Message) => void
 }
 
 /**
@@ -23,16 +28,20 @@ interface Props {
  * @param user
  * @param setIsAuth
  * @param getUserData
+ * @param addDialogMessage
+ * @param setWritingUsers
  */
-const AppWrapper: React.FC<Props> = ({setIsAuth, getUserData, isAuth, user}) => {
+const AppWrapper: React.FC<Props> = ({setIsAuth, getUserData, isAuth, user, addDialogMessage, setWritingUsers}) => {
     const theme = useTheme()
 
     useEffect(() => {
-        if (AuthService.isAuth()) {
+        if (AuthService.isAuth() && !isAuth) {
             setIsAuth(true)
             getUserData()
         }
-    }, [setIsAuth, getUserData])
+        if (user.username && !getWebService())
+            connectToMsgWS(user.username, addDialogMessage, setWritingUsers)
+    }, [setIsAuth, getUserData, user.username, isAuth])
 
     return (
         <AuthContext.Provider value={{isAuth, user}}>
@@ -53,7 +62,9 @@ const mapStateToProps = (state: RootState) => {
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         setIsAuth: (isAuth: boolean) => dispatch(setIsAuthAction(isAuth)),
-        getUserData: () => dispatch(getCurrentUserData())
+        getUserData: () => dispatch(getCurrentUserData()),
+        addDialogMessage: (message: Message) => dispatch(addDialogMessage(message)),
+        setWritingUsers: (payload: Message) => dispatch(setWritingUsers(payload))
     }
 }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import PostItem from './PostItem/PostItem'
+import PostItem from './PostItem'
 import PagesNavigationWrapper from './PagesNavigation/PagesNavigationWrapper'
 import {Post} from '../../../models/PostModel'
 

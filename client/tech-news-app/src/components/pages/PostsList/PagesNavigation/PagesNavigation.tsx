@@ -35,8 +35,7 @@ const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, secti
                         <li className={getPreviousButtonClass()}
                             onClick={() => setPrevNextPostPage(postPage - 1)}>
                             <NavLink className={navItemClasses.join(' ')}
-                                     to={`/posts/${getSectionName(sectionId)}/${postPage - 1}`}
-                                     onClick={() => window.scroll(0, 0)}>
+                                     to={`/posts/${getSectionName(sectionId)}/${postPage - 1}`}>
                                 Назад
                             </NavLink>
                         </li>
@@ -46,8 +45,7 @@ const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, secti
                                 return (
                                     <li className={getNavigationButtonClass(page)} onClick={setPostPage} key={page}>
                                         <NavLink to={`/posts/${getSectionName(sectionId)}/${page}`}
-                                                 className={navItemClasses.join(' ')}
-                                                 onClick={() => window.scroll(0, 0)}>
+                                                 className={navItemClasses.join(' ')}>
                                             {page}
                                         </NavLink>
                                     </li>
@@ -58,8 +56,7 @@ const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, secti
                         <li className={getNextButtonClass()}
                             onClick={() => setPrevNextPostPage(postPage + 1)}>
                             <NavLink to={`/posts/${getSectionName(sectionId)}/${postPage + 1}`}
-                                     className={navItemClasses.join(' ')}
-                                     onClick={() => window.scroll(0, 0)}>
+                                     className={navItemClasses.join(' ')}>
                                 Вперед
                             </NavLink>
                         </li>

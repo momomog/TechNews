@@ -14,10 +14,13 @@ export const Search: React.FC = () => {
     const inputClasses = ['input-group-form', 'search', isLight ? 'background-light' : 'navbar-dark-background']
 
     const onSearch = (e) => {
-        if (e.key === 'Enter' && searchText.trim()) {
-            history.push(`/posts/search?search_query=${searchText.trim()}`)
-            setSearchText('')
-        }
+        const text = searchText.trim()
+
+        if (text)
+            if (!e.key || e.key === 'Enter') {
+                history.push(`/posts/search?search_query=${searchText.trim()}`)
+                setSearchText('')
+            }
     }
 
     return (

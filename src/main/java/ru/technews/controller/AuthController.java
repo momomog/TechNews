@@ -134,18 +134,19 @@ public class AuthController {
         return new UserIdentityAvailability(isAvailable);
     }
 
+    // Подтверждение почтового адреса
     @GetMapping("/registrationConfirm")
     public ModelAndView getTokenVerificationPage(@RequestParam(value = "email") String email,
                                                  @RequestParam(value = "token") String token) {
         ModelAndView modelAndView = new ModelAndView("token-verification");
         String message;
 
-        if (email == null && token == null) {
+        if (email == null || token == null) {
             message = "При активации почтового аккаунта произошла ошибка. Проверьте правильность ссылки";
         } else {
             User user = userRepository.findUserByEmail(email);
             if (user == null) {
-                message = "Пользователя с данным почтовым адресом не существует. Проверьте правильность введенных данных";
+                message = "При активации почтового аккаунта произошла ошибка. Пользователя с данным почтовым адресом не существует";
             } else if (user.getEnabled()) {
                 message = "При активации почтового аккаунта произошла ошибка. Данный аккаунт уже активирован";
             } else {

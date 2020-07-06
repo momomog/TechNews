@@ -175,3 +175,7 @@
 .emoji-mart-search-icon {
     top: 2px !important;
 }
+
+.navbar-collapse {
+    padding-right: 0 !important;
+}

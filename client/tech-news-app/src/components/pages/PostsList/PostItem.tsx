@@ -49,7 +49,7 @@ const PostItem: React.FC<Props> = ({post, clearPostData}) => {
                             </NavLink>
                         </div>
                         <p className="text-right text-justify">
-                            by @{post.author}
+                            @{post.author}
                         </p>
                         <p className="mh-50 text-justify">
                             {post.preDescription}

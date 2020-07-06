@@ -56,7 +56,7 @@ const ProjectStructure: React.FC = () => {
                                     <TreeItem nodeId={nodeId()} label="Footer">
                                         <TreeItem nodeId={nodeId()} label="Footer">
                                             <TreeItem nodeId={nodeId()} label="History.tsx"/>
-                                            <TreeItem nodeId={nodeId()} label="ProjectStructure.tsx"/>
+                                            <TreeItem nodeId={nodeId()} label="ProjectStructure.tsx <== вы находитесь здесь"/>
                                             <TreeItem nodeId={nodeId()} label="Technologies.tsx"/>
                                         </TreeItem>
                                         <TreeItem nodeId={nodeId()} label="Footer.tsx"/>
@@ -247,6 +247,7 @@ const ProjectStructure: React.FC = () => {
                                     <TreeItem nodeId={nodeId()} label="SecurityConfig"/>
                                     <TreeItem nodeId={nodeId()} label="SessionListener"/>
                                     <TreeItem nodeId={nodeId()} label="SpringContext"/>
+                                    <TreeItem nodeId={nodeId()} label="MailConfiguration"/>
                                 </TreeItem>
                                 <TreeItem nodeId={nodeId()} label="controller">
                                     <TreeItem nodeId={nodeId()} label="AuthController"/>
@@ -263,6 +264,7 @@ const ProjectStructure: React.FC = () => {
                                     <TreeItem nodeId={nodeId()} label="CRUDDao"/>
                                     <TreeItem nodeId={nodeId()} label="DialogDao"/>
                                     <TreeItem nodeId={nodeId()} label="MessageDao"/>
+                                    <TreeItem nodeId={nodeId()} label="VerificationTokenDao"/>
                                     <TreeItem nodeId={nodeId()} label="PostDao"/>
                                     <TreeItem nodeId={nodeId()} label="UserProfileDataDao"/>
                                 </TreeItem>
@@ -275,6 +277,7 @@ const ProjectStructure: React.FC = () => {
                                         <TreeItem nodeId={nodeId()} label="Role"/>
                                         <TreeItem nodeId={nodeId()} label="RoleName"/>
                                         <TreeItem nodeId={nodeId()} label="User"/>
+                                        <TreeItem nodeId={nodeId()} label="VerificationTokenEntity"/>
                                     </TreeItem>
                                     <TreeItem nodeId={nodeId()} label="BaseEntity"/>
                                     <TreeItem nodeId={nodeId()} label="CommentEntity"/>
@@ -323,6 +326,7 @@ const ProjectStructure: React.FC = () => {
                                     <TreeItem nodeId={nodeId()} label="MessageService"/>
                                     <TreeItem nodeId={nodeId()} label="PostService"/>
                                     <TreeItem nodeId={nodeId()} label="UserProfileDataService"/>
+                                    <TreeItem nodeId={nodeId()} label="VerificationTokenService"/>
                                 </TreeItem>
                                 <TreeItem nodeId={nodeId()} label="ws">
                                     <TreeItem nodeId={nodeId()} label="DialogWebService"/>

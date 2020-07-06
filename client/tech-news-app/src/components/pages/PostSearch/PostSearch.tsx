@@ -28,29 +28,24 @@ const PostSearch: React.FC<Props> = ({posts, searchText}) => {
                         "{searchText}" {Common.getFindPostsResultText(posts.length)}:</h3>
                 </div>
             </div>
+            {
+                showPosts.map(post => {
+                    return <PostItem post={post}
+                                     key={post.id}/>
+                })
+            }
 
-            <div className="row">
-                <div className="col-sm-12">
-                    {
-                        showPosts.map(post => {
-                            return <PostItem post={post}
-                                             key={post.id}/>
-                        })
-                    }
-
-                    {
-                        showPosts.length && showPosts[showPosts.length - 1].id !== posts[posts.length - 1].id &&
-                        <div className="row d-flex justify-content-center">
-                            <button className="btn btn-default mb-4" onClick={showMorePosts}>
-                                Показать еще <i className="glyphicon glyphicon-arrow-down"/>
-                            </button>
-                        </div>
-                    }
-                    <ScrollUpButton style={{outline: 'none', height: '40px', width: '40px'}}
-                                    ShowAtPosition={600}
-                                    EasingType="easeInOutQuad"/>
+            {
+                showPosts.length && showPosts[showPosts.length - 1].id !== posts[posts.length - 1].id &&
+                <div className="row d-flex justify-content-center">
+                    <button className="btn btn-default mb-4" onClick={showMorePosts}>
+                        Показать еще <i className="glyphicon glyphicon-arrow-down"/>
+                    </button>
                 </div>
-            </div>
+            }
+            <ScrollUpButton style={{outline: 'none', height: '40px', width: '40px'}}
+                            ShowAtPosition={600}
+                            EasingType="easeInOutQuad"/>
         </>
     )
 

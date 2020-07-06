@@ -8,6 +8,6 @@
     <title>Подтверждение регистрации</title>
 </head>
 <body>
-<h2>${message}</h2>
+<h3>${message}</h3>
 </body>
 </html>

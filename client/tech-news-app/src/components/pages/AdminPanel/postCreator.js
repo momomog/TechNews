@@ -9,7 +9,7 @@ export const postInitProcess = async (day, month, postNum) => {
 
         const photoId = html.querySelector('.photo').querySelector('[itemprop=image]').src
         const title = html.querySelector('[itemprop=headline]').textContent
-        const fullDescription = html.querySelector('[itemprop=articleBody]').innerHTML
+        const fullDescription = getFullDescription(html.querySelector('[itemprop=articleBody]'))
         const preDescription = html.querySelector('[itemprop=articleBody]').querySelector('p').innerText
         const categoryId = getCategory(fullDescription)
 
@@ -45,4 +45,13 @@ function getCategory(fullDescription) {
         else categoryId = SECTION_OTHER
     }
     return categoryId
+}
+
+function getFullDescription(fullDescNode) {
+    const source = fullDescNode.querySelector('.mb_source')
+    const sourceText = source && source.querySelector('a').innerText
+    if (sourceText === '4pda.ru')
+        fullDescNode.querySelector('.mb_source').innerHTML = ''
+        // fullDescNode.querySelector('.mb_source').setAttribute('hidden', 'true')
+    return fullDescNode.innerHTML
 }

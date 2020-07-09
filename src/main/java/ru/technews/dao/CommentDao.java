@@ -69,13 +69,12 @@ public class CommentDao extends BaseDao<CommentEntity> {
             comment.setCommentText("Данный комментарий был удален автором или администратором");
             comment.setIsDeleted(true);
             getCurrentSession().saveOrUpdate(comment);
-            return;
+        } else {
+            // иначе удаление комментария
+            query = getCurrentSession().createQuery("delete FROM CommentEntity  WHERE id=:commentId");
+            query.setParameter("commentId", commentId);
+            query.executeUpdate();
         }
-
-        // иначе удаление комментария
-        query = getCurrentSession().createQuery("delete FROM CommentEntity  WHERE id=:commentId");
-        query.setParameter("commentId", commentId);
-        query.executeUpdate();
     }
 
     // Удаление всех комментариев поста

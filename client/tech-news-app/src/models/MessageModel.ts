@@ -14,6 +14,7 @@ export interface Message {
     text: string
     new?: boolean
     isWriting?: boolean
+    isRead?: boolean
 }
 
 export interface MessageState {
@@ -43,5 +44,5 @@ export interface AddDialogMessageAction {
 }
 export interface SetWritingUsersAction {
     type: 'SET-WRITING-USERS'
-    payload: Message
+    users: Array<number>
 }

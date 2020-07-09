@@ -17,4 +17,5 @@ public class Payload {
     private LocalDateTime date;
     private String text;
     private Boolean isWriting;
+    private Boolean isRead;
 }

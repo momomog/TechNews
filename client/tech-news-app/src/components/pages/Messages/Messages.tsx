@@ -68,8 +68,7 @@ const Messages: React.FC<Props> = ({users, writingUsers, getMessages, messages, 
                                 </div>
                                 {
                                     dialogUser.id
-                                        ? <MessageInput user={user}
-                                                        writingUsers={writingUsers}
+                                        ? <MessageInput writingUsers={writingUsers}
                                                         dialogUser={dialogUser}
                                                         scrollToBottomMessage={scrollToBottomMessage}/>
                                         : null

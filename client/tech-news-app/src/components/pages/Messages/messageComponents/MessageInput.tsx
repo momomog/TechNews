@@ -6,24 +6,33 @@ import sendIcon from '../../../../static/send-icon.png'
 import smileIcon from '../../../../static/smile-icon.png'
 
 interface Props {
-    user: User
     dialogUser: User
     writingUsers: Array<number>
     scrollToBottomMessage: () => void
 }
 
-// Таймер отправки статуса набора сообщения раз в 2 секунды
+// Таймер отправки статуса набора сообщения (раз в 2 секунды)
 let timeout
 
-export const MessageInput: React.FC<Props> = ({user, writingUsers, dialogUser, scrollToBottomMessage}) => {
+export const MessageInput: React.FC<Props> = ({writingUsers, dialogUser, scrollToBottomMessage}) => {
     const [messageText, setMessageText] = useState<string>('')
     const [showPicker, setShowPicker] = useState<boolean>(false)
 
+    const inputKeyListener = e => {
+        if (e.key === 'Enter') {
+            e.preventDefault()
+            sendMessage()
+        } else if (e.key === 'Tab') {
+            e.preventDefault()
+            setShowPicker(!showPicker)
+        }
+    }
+
     const sendMessage = () => {
         if (messageText.trim()) {
-            sendPayloadToMsgWS(user, dialogUser, messageText)
+            sendPayloadToMsgWS(null, messageText)
             scrollToBottomMessage()
-            sendPayloadToMsgWS(user, dialogUser, '', false)
+            sendPayloadToMsgWS(null, '', false)
             setMessageText('')
             setShowPicker(false)
         }
@@ -32,11 +41,11 @@ export const MessageInput: React.FC<Props> = ({user, writingUsers, dialogUser, s
     const writeMessage = e => {
         setMessageText(e.target.value)
         if (!timeout) {
-            sendPayloadToMsgWS(user, dialogUser, '', true)
+            sendPayloadToMsgWS(null, '', true)
             timeout = setTimeout(() => {
-                sendPayloadToMsgWS(user, dialogUser, '', false)
+                sendPayloadToMsgWS(null, '', false)
                 timeout = null
-            }, 2000)
+            }, 12000)
         }
     }
 
@@ -54,12 +63,7 @@ export const MessageInput: React.FC<Props> = ({user, writingUsers, dialogUser, s
                           onChange={e => writeMessage(e)}
                           placeholder="Введите текст сообщения..."
                           value={messageText}
-                          onKeyPress={event => {
-                              if (event.key === 'Enter') {
-                                  event.preventDefault()
-                                  sendMessage()
-                              }
-                          }}/>
+                          onKeyDown={e => inputKeyListener(e)}/>
                 </div>
                 <div className="col-md-1 pl-3">
                     <img src={sendIcon}

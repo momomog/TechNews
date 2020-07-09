@@ -19,7 +19,7 @@ const ProfileEdit: React.FC<Props> = ({updateUserData}) => {
 
     return (
         <div className="row">
-            <div className="col-md-11 center-block">
+            <div className="col-md-11 center-block profile-edit-wrapper">
                 <div className={cardClasses.join(' ')}>
                     <div className="panel-heading">
                         <h4>Редактирование профиля</h4>

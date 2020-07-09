@@ -14,8 +14,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-//@Service
-//@Controller
 @ServerEndpoint(value = "/api/chat/{username}", decoders = PayloadDecoder.class, encoders = PayloadEncoder.class)
 public class DialogWebService {
 
@@ -43,19 +41,23 @@ public class DialogWebService {
     @OnMessage
     public void onMessage(Session session, Payload payload) {
         if (payload.getIsWriting() == null) {
-            MessageEntity msg = new MessageEntity(
-                    payload.getMainUserId(),
-                    payload.getMainUserFirstName(),
-                    payload.getMainUserUsername(),
-                    payload.getMainUserPhotoId(),
-                    payload.getDialogUserId(),
-                    payload.getDialogUserFirstName(),
-                    payload.getDialogUserUsername(),
-                    payload.getDialogUserPhotoId(),
-                    LocalDateTime.now(),
-                    payload.getText()
-            );
-            messageService.save(msg);
+            if (payload.getIsRead() != null) {
+                MessageEntity msg = new MessageEntity(
+                        payload.getMainUserId(),
+                        payload.getMainUserFirstName(),
+                        payload.getMainUserUsername(),
+                        payload.getMainUserPhotoId(),
+                        payload.getDialogUserId(),
+                        payload.getDialogUserFirstName(),
+                        payload.getDialogUserUsername(),
+                        payload.getDialogUserPhotoId(),
+                        LocalDateTime.now(),
+                        payload.getText(),
+                        payload.getIsRead()
+                );
+                messageService.save(msg);
+                return;
+            }
         }
         broadcast(payload);
     }

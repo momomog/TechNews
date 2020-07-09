@@ -1,4 +1,4 @@
-import {Message, MessageAction, MessageState} from '../../models/MessageModel'
+import {MessageAction, MessageState} from '../../models/MessageModel'
 import {
     ADD_DIALOG_MESSAGE,
     SET_DIALOG_MESSAGES,
@@ -44,20 +44,10 @@ export const messagesReducer = (state: MessageState = initialState, action: Mess
         case SET_WRITING_USERS: {
             return {
                 ...state,
-                writingUsers: getWritingUsers(state.writingUsers, action.payload)
+                writingUsers: action.users
             }
         }
         default:
             return state
     }
-}
-
-function getWritingUsers(storeUsers: Array<number>, payload: Message) {
-    let users = [...storeUsers]
-    if (payload.isWriting && !users.includes(payload.mainUserId)) {
-        users.push(payload.mainUserId)
-    } else if (!payload.isWriting && users.includes(payload.mainUserId)) {
-        users = users.filter(userId => userId !== payload.mainUserId)
-    }
-    return users
 }

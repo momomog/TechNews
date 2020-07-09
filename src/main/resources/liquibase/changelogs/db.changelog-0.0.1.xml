@@ -208,6 +208,8 @@
             </column>
             <column name="text" type="varchar(10000)">
             </column>
+            <column name="is_read" type="int" defaultValueNumeric="0">
+            </column>
         </createTable>
     </changeSet>
 

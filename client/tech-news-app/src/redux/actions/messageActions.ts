@@ -39,10 +39,9 @@ export const setDialogUser = (user: User): SetDialogUserAction => ({
     type: SET_DIALOG_USER,
     user
 })
-
-export const setWritingUsers = (payload: Message): SetWritingUsersAction => ({
+const setWritingUsersData = (users: Array<number>): SetWritingUsersAction => ({
     type: SET_WRITING_USERS,
-    payload
+    users
 })
 
 export const addDialogMessage = (message: Message): AddDialogMessageAction => ({
@@ -50,4 +49,13 @@ export const addDialogMessage = (message: Message): AddDialogMessageAction => ({
     message
 })
 
+export const setWritingUsers = (payload: Message): any => (dispatch, getState) => {
+    let users = [...getState().messagesData.writingUsers]
+    if (payload.isWriting && !users.includes(payload.mainUserId)) {
+        users.push(payload.mainUserId)
+    } else if (!payload.isWriting && users.includes(payload.mainUserId)) {
+        users = users.filter(userId => userId !== payload.mainUserId)
+    }
+    dispatch(setWritingUsersData(users))
+}
 

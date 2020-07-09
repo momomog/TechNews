@@ -21,7 +21,6 @@ const PostRating: React.FC<Props> = ({post, postRating}) => {
     const onRating = e => {
         setIsRating(true)
         setRating(Number(e.target.value))
-
         postRating(post.id, Number(e.target.value))
     }
 
@@ -35,7 +34,6 @@ const PostRating: React.FC<Props> = ({post, postRating}) => {
                     isRated = true
             })
         }
-
         return isRated
     }
 
@@ -47,8 +45,8 @@ const PostRating: React.FC<Props> = ({post, postRating}) => {
                         ? <span className="post-author-comment">Спасибо! Ваша оценка данного поста: {
                             Array.from({length: 5}).map((item, index) => {
                                 if (index + 1 <= rating)
-                                    return <span className="post-star">★</span>
-                                return <span className="post-star-empty">★</span>
+                                    return <span className="post-star" key={index}>★</span>
+                                return <span className="post-star-empty" key={index}>★</span>
                             })
                         } </span>
                         : isRatedByUser()

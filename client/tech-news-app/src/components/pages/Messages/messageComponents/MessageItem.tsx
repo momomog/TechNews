@@ -13,9 +13,14 @@ export const MessageItem: React.FC<Props> = ({message, prevMessage}) => {
     if (message.new)
         msgStyle.push('scale-up-center-message')
 
+    const style = {
+        padding: !showFullInfo ? '3px 0' : '5px 0',
+        backgroundColor: message.isRead ? '' : '#d5d5d5'
+    }
+
     return (
         <div>
-            <div className={msgStyle.join(' ')} style={{padding: !showFullInfo ? '3px 0' : '5px 0'}}>
+            <div className={msgStyle.join(' ')} style={style}>
                 <div className="col-md-1 p-0">
                     {
                         showFullInfo && <NavLink to={`/profile/${message.mainUserUsername}`}>

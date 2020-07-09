@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -58,8 +59,13 @@ public class MessageEntity extends BaseEntity {
     @Column(name = "text")
     private String text;
 
+    // Признак того, что сообщение прочитано собеседником
+    @Type(type = "numeric_boolean")
+    @Column(name = "is_read")
+    private Boolean isRead;
+
     public MessageEntity(Long mainUserId, String mainUserFirstName, String mainUserUsername, String mainUserPhotoId, Long dialogUserId,
-                         String dialogUserUsername, String dialogUserFirstName, String dialogUserPhotoId, LocalDateTime date, String text) {
+                         String dialogUserUsername, String dialogUserFirstName, String dialogUserPhotoId, LocalDateTime date, String text, Boolean isRead) {
         this.mainUserId = mainUserId;
         this.mainUserFirstName = mainUserFirstName;
         this.mainUserUsername = mainUserUsername;
@@ -70,5 +76,6 @@ public class MessageEntity extends BaseEntity {
         this.dialogUserPhotoId = dialogUserPhotoId;
         this.date = date;
         this.text = text;
+        this.isRead = isRead;
     }
 }

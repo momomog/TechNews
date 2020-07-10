@@ -10,6 +10,7 @@ import {MessageInput} from './messageComponents/MessageInput'
 interface Props {
     users: Array<DialogUser>
     getMessages: (dialogUser: User) => void
+    readDialogMessages: (dialogUser: User) => void
     messages: Array<Message>
     dialogUser: User
     writingUsers: Array<number>
@@ -19,11 +20,12 @@ interface Props {
  * Сообщения
  * @param users
  * @param writingUsers
+ * @param readDialogMessages
  * @param getMessages
  * @param messages
  * @param dialogUser
  */
-const Messages: React.FC<Props> = ({users, writingUsers, getMessages, messages, dialogUser}) => {
+const Messages: React.FC<Props> = ({users, writingUsers, readDialogMessages, getMessages, messages, dialogUser}) => {
     const {isLight} = useContext(ThemeContext)
     const {user} = useContext(AuthContext)
     const cardClasses = ['panel', 'panel-default', isLight ? 'background-light' : 'background-dark']
@@ -51,6 +53,7 @@ const Messages: React.FC<Props> = ({users, writingUsers, getMessages, messages, 
                                     users.map(item => <UserItem key={item.user.id}
                                                                 dialogUser={dialogUser}
                                                                 getMessages={getMessages}
+                                                                readDialogMessages={readDialogMessages}
                                                                 unreadMessages={item.messages}
                                                                 user={item.user}/>)
                                 }

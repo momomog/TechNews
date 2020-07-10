@@ -21,4 +21,8 @@ public class MessageService extends BaseService<MessageEntity> {
     public List<MessageEntity> getDialogMessages(Long mainUserId, Long dialogUserId) {
         return messageDao.getDialogMessages(mainUserId, dialogUserId);
     }
+
+    public List<MessageEntity> markMessagesToRead(Long mainUserId, Long dialogUserId) {
+        return messageDao.markMessagesToRead(mainUserId, dialogUserId);
+    }
 }

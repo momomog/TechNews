@@ -6,7 +6,7 @@ import {User} from '../../../models/UserModel'
 import Spinner from '../../core/Spinner'
 import {RootState} from '../../../redux/reducers/rootReducer'
 import {AuthContext} from '../../../context/AuthContext'
-import {getDialogMessages, getDialogUsers} from '../../../redux/actions/messageActions'
+import {getDialogMessages, getDialogUsers, readDialogMessages} from '../../../redux/actions/messageActions'
 import {DialogUser, Message} from '../../../models/MessageModel'
 
 interface Props {
@@ -15,6 +15,7 @@ interface Props {
     writingUsers: Array<number>
     messages: Array<Message>
     getDialogMessages: (dialogUser: User) => void
+    readDialogMessages: (dialogUser: User) => void
     getDialogUsers: () => void
 }
 
@@ -22,12 +23,13 @@ interface Props {
  * Сообщения. Оболочка
  * @param users
  * @param writingUsers
+ * @param readDialogMessages
  * @param getDialogMessages
  * @param messages
  * @param getDialogUsers
  * @param dialogUser
  */
-const MessagesWrapper: React.FC<Props> = ({users, writingUsers, getDialogMessages, messages, getDialogUsers, dialogUser}) => {
+const MessagesWrapper: React.FC<Props> = ({users, writingUsers, readDialogMessages, getDialogMessages, messages, getDialogUsers, dialogUser}) => {
     const {isAuth} = useContext(AuthContext)
 
     const getMessages = (dialogUser: User) => getDialogMessages(dialogUser)
@@ -39,6 +41,7 @@ const MessagesWrapper: React.FC<Props> = ({users, writingUsers, getDialogMessage
     return isAuth
         ? <Messages users={users}
                     writingUsers={writingUsers}
+                    readDialogMessages={readDialogMessages}
                     messages={messages}
                     dialogUser={dialogUser}
                     getMessages={getMessages}/>
@@ -57,6 +60,7 @@ const mapStateToProps = (state: RootState) => {
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         getDialogMessages: (dialogUser: User) => dispatch(getDialogMessages(dialogUser)),
+        readDialogMessages: (dialogUser: User) => dispatch(readDialogMessages(dialogUser)),
         getDialogUsers: () => dispatch(getDialogUsers())
     }
 }

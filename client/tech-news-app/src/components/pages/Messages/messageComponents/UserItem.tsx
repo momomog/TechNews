@@ -8,15 +8,18 @@ interface Props {
     dialogUser: User
     unreadMessages: Array<Message>
     getMessages: (dialogUser: User) => void
+    readDialogMessages: (dialogUser: User) => void
 }
 
-export const UserItem: React.FC<Props> = ({user, unreadMessages, getMessages, dialogUser}) => {
+export const UserItem: React.FC<Props> = ({user, unreadMessages, readDialogMessages, getMessages, dialogUser}) => {
     const unreadMsgsForUser = unreadMessages.filter(msg => user.id !== msg.dialogUserId)
+
+    const openDialog = () => unreadMsgsForUser.length > 0 ? readDialogMessages(user) : getMessages(user)
 
     return (
         <div className="user-item"
              style={{backgroundColor: user.id === dialogUser.id ? '#eeeeee' : ''}}
-             onClick={() => getMessages(user)}>
+             onClick={openDialog}>
             <div className="row">
                 <div className="col-md-2">
                     <NavLink to={`/profile/${user.username}`}>

@@ -12,6 +12,14 @@ class MessageAPI {
     })
 
     /**
+     * Пометка сообщений диалога как прочитанные
+     * @param dialogUserId
+     */
+    markMessagesToRead = (dialogUserId: number): Promise<Array<Message>> => request({
+        url: `messages/dialog/read/?userId=${dialogUserId}`
+    })
+
+    /**
      * Список диалогов
      */
     getDialogUsers = (): Promise<Array<User>> => request({

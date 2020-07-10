@@ -48,7 +48,7 @@ class PostAPI {
         url: `posts/rate-post?id=${postId}`,
         method: 'POST',
         body: JSON.stringify({
-            rate: rate
+            rate
         })
     })
 

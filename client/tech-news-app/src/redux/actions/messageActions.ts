@@ -11,6 +11,7 @@ import {User} from '../../models/UserModel'
 export const SET_DIALOG_USER = 'SET-DIALOG-USER'
 export const SET_DIALOG_MESSAGES = 'SET-DIALOG-MESSAGES'
 export const GET_DIALOG_MESSAGES = 'GET-DIALOG-MESSAGES'
+export const READ_DIALOG_MESSAGES = 'READ-DIALOG-MESSAGES'
 export const SET_DIALOG_USERS = 'SET-DIALOG-USERS'
 export const GET_DIALOG_USERS = 'GET-DIALOG-USERS'
 export const ADD_DIALOG_MESSAGE = 'ADD-DIALOG-MESSAGE'
@@ -23,6 +24,11 @@ export const setDialogMessages = (dialogMessages: Array<Message>): SetDialogMess
 
 export const getDialogMessages = (user: User) => ({
     type: GET_DIALOG_MESSAGES,
+    user
+})
+
+export const readDialogMessages = (user: User) => ({
+    type: READ_DIALOG_MESSAGES,
     user
 })
 

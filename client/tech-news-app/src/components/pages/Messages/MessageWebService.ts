@@ -11,6 +11,7 @@ export const getWebService = () => {
     return webService
 }
 
+// Подключение к WS
 export const connectToMsgWS = (user: User,
                                addDialogMessage: (message: Message) => void,
                                setWritingUsers: (payload: Message) => void,
@@ -20,10 +21,13 @@ export const connectToMsgWS = (user: User,
     webService.onmessage = event => onWSMessage(event, user, addDialogMessage, setWritingUsers, getDialogUsers, setDialogUsersData)
 }
 
+// Отправка данных в WS
 export const sendPayloadToMsgWS = (msgData, messageText: string, isWriting?: boolean, isRead?: boolean) => {
     const currentUser: User = store.getState().userData.userData
     const dialogUser: User = store.getState().messagesData.dialogUser
     let json
+
+    // Отправка статуса о наборе текста
     if (isWriting !== undefined) {
         json = JSON.stringify({
             mainUserId: currentUser.id,
@@ -33,6 +37,8 @@ export const sendPayloadToMsgWS = (msgData, messageText: string, isWriting?: boo
             isWriting: isWriting
         })
     } else {
+        // Отправка сообщения
+        // При наличии msgData отправление с сохранением в БД, иначе послание сообщения с целью понять открыт ли диалог с пользователем
         json = JSON.stringify({
             mainUserId: msgData ? msgData.mainUserId : currentUser.id,
             mainUserFirstName: msgData ? msgData.mainUserFirstName : currentUser.firstName,
@@ -49,6 +55,7 @@ export const sendPayloadToMsgWS = (msgData, messageText: string, isWriting?: boo
     webService.send(json)
 }
 
+// Обработчик события отправки данных
 const onWSMessage = (event,
                      user: User,
                      addDialogMessage: (message: Message) => void,
@@ -57,6 +64,7 @@ const onWSMessage = (event,
                      setDialogUsersData: (payload: Message, userId: number) => void) => {
     const msg: Message = JSON.parse(event.data)
 
+    // сет пользователей, печатающих сообщение текущему пользователю
     if (msg.isWriting !== undefined) {
         setWritingUsers(msg)
     } else if (msg.text) {
@@ -83,6 +91,7 @@ const onWSMessage = (event,
 
 
 // Если сообщение от человека, которого нет в списке диалогов, то обновление списка диалогов
+// Иначе пуш нового сообщения в диалог с пользователем
 const checkMsgUserInUsersList = (usersList: Array<DialogUser>,
                                  message: Message,
                                  dialogUser: User,

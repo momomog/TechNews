@@ -45,7 +45,7 @@ export const MessageInput: React.FC<Props> = ({writingUsers, dialogUser, scrollT
             timeout = setTimeout(() => {
                 sendPayloadToMsgWS(null, '', false)
                 timeout = null
-            }, 12000)
+            }, 2000)
         }
     }
 

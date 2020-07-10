@@ -15,4 +15,19 @@ public class MessageDao extends BaseDao<MessageEntity> {
         query.setParameter("dialogUserId", dialogUserId);
         return query.getResultList();
     }
+
+    // Пометка сообщений как прочитанные
+    public List<MessageEntity> markMessagesToRead(Long mainUserId, Long dialogUserId) {
+        Query query = getCurrentSession().createQuery("from MessageEntity where mainUserId=:mainUserId and dialogUserId=:mainUserId and isRead=false" +
+                " or mainUserId=:dialogUserId and dialogUserId=:mainUserId and isRead=false ");
+        query.setParameter("mainUserId", mainUserId);
+        query.setParameter("dialogUserId", dialogUserId);
+        List<MessageEntity> messages = query.getResultList();
+
+        for (MessageEntity msg : messages) {
+            msg.setIsRead(true);
+            this.save(msg);
+        }
+        return this.getDialogMessages(mainUserId, dialogUserId);
+    }
 }

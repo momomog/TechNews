@@ -1,5 +1,5 @@
 import {User} from '../../../models/UserModel'
-import {Message} from '../../../models/MessageModel'
+import {DialogUser, Message} from '../../../models/MessageModel'
 import {WS_BASE_URL} from '../../../api/BaseRequest'
 // @ts-ignore
 import incomingMessageSound from '../../../static/incoming_message.mp3'
@@ -14,9 +14,10 @@ export const getWebService = () => {
 export const connectToMsgWS = (user: User,
                                addDialogMessage: (message: Message) => void,
                                setWritingUsers: (payload: Message) => void,
-                               getDialogUsers: () => void) => {
+                               getDialogUsers: () => void,
+                               setDialogUsersData: (payload: Message, userId: number) => void) => {
     webService = new WebSocket(`${WS_BASE_URL}/chat/${user.username}`)
-    webService.onmessage = event => onWSMessage(event, user, addDialogMessage, setWritingUsers, getDialogUsers)
+    webService.onmessage = event => onWSMessage(event, user, addDialogMessage, setWritingUsers, getDialogUsers, setDialogUsersData)
 }
 
 export const sendPayloadToMsgWS = (msgData, messageText: string, isWriting?: boolean, isRead?: boolean) => {
@@ -52,16 +53,17 @@ const onWSMessage = (event,
                      user: User,
                      addDialogMessage: (message: Message) => void,
                      setWritingUsers: (payload: Message) => void,
-                     getDialogUsers: () => void) => {
+                     getDialogUsers: () => void,
+                     setDialogUsersData: (payload: Message, userId: number) => void) => {
     const msg: Message = JSON.parse(event.data)
 
     if (msg.isWriting !== undefined) {
         setWritingUsers(msg)
     } else if (msg.text) {
         const dialogUser: User = store.getState().messagesData.dialogUser
-        const usersList: Array<User> = store.getState().messagesData.usersList
+        const usersList: Array<DialogUser> = store.getState().messagesData.usersList
 
-        checkMsgUserInUsersList(usersList, msg, getDialogUsers)
+        checkMsgUserInUsersList(usersList, msg, dialogUser, getDialogUsers, setDialogUsersData)
 
         if (user.id === msg.dialogUserId)
             saveMsgToDB(msg, dialogUser)
@@ -81,13 +83,19 @@ const onWSMessage = (event,
 
 
 // Если сообщение от человека, которого нет в списке диалогов, то обновление списка диалогов
-const checkMsgUserInUsersList = (usersList: Array<User>,
+const checkMsgUserInUsersList = (usersList: Array<DialogUser>,
                                  message: Message,
-                                 getDialogUsers: () => void) => {
+                                 dialogUser: User,
+                                 getDialogUsers: () => void,
+                                 setDialogUsersData: (payload: Message, userId: number) => void) => {
     let isInclude = false
-    usersList.forEach(user => {
-        if (user.id === message.mainUserId)
+    usersList.forEach(item => {
+        if (item.user.id === message.mainUserId) {
             isInclude = true
+            if (item.user.id !== dialogUser.id)
+                setDialogUsersData(message, item.user.id)
+            return
+        }
     })
 
     if (!isInclude)

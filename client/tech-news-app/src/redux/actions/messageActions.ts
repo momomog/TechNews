@@ -1,5 +1,5 @@
 import {
-    AddDialogMessageAction,
+    AddDialogMessageAction, DialogUser,
     Message,
     SetDialogMessagesAction,
     SetDialogUserAction,
@@ -26,7 +26,7 @@ export const getDialogMessages = (user: User) => ({
     user
 })
 
-export const setDialogUsers = (users: Array<User>): SetDialogUsersAction => ({
+export const setDialogUsers = (users: Array<DialogUser>): SetDialogUsersAction => ({
     type: SET_DIALOG_USERS,
     users
 })
@@ -57,5 +57,14 @@ export const setWritingUsers = (payload: Message): any => (dispatch, getState) =
         users = users.filter(userId => userId !== payload.mainUserId)
     }
     dispatch(setWritingUsersData(users))
+}
+
+export const setDialogUsersData = (msg: Message, userId: number): any => (dispatch, getState) => {
+    const dialogUsers: Array<DialogUser> = [...getState().messagesData.usersList]
+    msg.isRead = false
+    msg.id = Math.random()
+
+    dialogUsers.filter(item => item.user.id === userId)[0].messages.push(msg)
+    dispatch(setDialogUsers(dialogUsers))
 }
 

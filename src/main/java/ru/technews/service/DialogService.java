@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import ru.technews.dao.BaseDao;
 import ru.technews.dao.DialogDao;
 import ru.technews.entity.DialogEntity;
-import ru.technews.entity.security.User;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DialogService extends BaseService<DialogEntity> {
@@ -19,7 +19,7 @@ public class DialogService extends BaseService<DialogEntity> {
         return dialogDao;
     }
 
-    public List<User> getDialogUsers(Long mainUserId) {
+    public List<Map> getDialogUsers(Long mainUserId) {
         return dialogDao.getDialogUsers(mainUserId);
     }
 

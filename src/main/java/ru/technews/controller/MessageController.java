@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.technews.entity.MessageEntity;
-import ru.technews.entity.security.User;
 import ru.technews.payload.ActionCompleteResponse;
 import ru.technews.security.CurrentUser;
 import ru.technews.security.UserPrincipal;
@@ -16,6 +15,7 @@ import ru.technews.service.DialogService;
 import ru.technews.service.MessageService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -46,7 +46,7 @@ public class MessageController {
     // список диалогов
     @GetMapping(value = "/dialogs")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public List<User> getDialogUsers(@CurrentUser UserPrincipal currentUser) {
+    public List<Map> getDialogUsers(@CurrentUser UserPrincipal currentUser) {
         return dialogService.getDialogUsers(currentUser.getId());
     }
 }

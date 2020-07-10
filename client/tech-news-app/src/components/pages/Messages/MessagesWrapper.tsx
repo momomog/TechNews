@@ -7,10 +7,10 @@ import Spinner from '../../core/Spinner'
 import {RootState} from '../../../redux/reducers/rootReducer'
 import {AuthContext} from '../../../context/AuthContext'
 import {getDialogMessages, getDialogUsers} from '../../../redux/actions/messageActions'
-import {Message} from '../../../models/MessageModel'
+import {DialogUser, Message} from '../../../models/MessageModel'
 
 interface Props {
-    users: Array<User>
+    users: Array<DialogUser>
     dialogUser: User
     writingUsers: Array<number>
     messages: Array<Message>

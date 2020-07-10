@@ -3,12 +3,12 @@ import {User} from '../../../models/UserModel'
 import {ThemeContext} from '../../../context/ThemeContext'
 import {MessageItem} from './messageComponents/MessageItem'
 import {UserItem} from './messageComponents/UserItem'
-import {Message} from '../../../models/MessageModel'
+import {DialogUser, Message} from '../../../models/MessageModel'
 import {AuthContext} from '../../../context/AuthContext'
 import {MessageInput} from './messageComponents/MessageInput'
 
 interface Props {
-    users: Array<User>
+    users: Array<DialogUser>
     getMessages: (dialogUser: User) => void
     messages: Array<Message>
     dialogUser: User
@@ -48,10 +48,11 @@ const Messages: React.FC<Props> = ({users, writingUsers, getMessages, messages, 
                         <div className="row">
                             <div className="col-md-4 users-container">
                                 {
-                                    users.map(user => <UserItem key={user.id}
+                                    users.map(item => <UserItem key={item.user.id}
                                                                 dialogUser={dialogUser}
                                                                 getMessages={getMessages}
-                                                                user={user}/>)
+                                                                unreadMessages={item.messages}
+                                                                user={item.user}/>)
                                 }
 
                             </div>

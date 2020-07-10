@@ -20,8 +20,13 @@ export interface Message {
 export interface MessageState {
     dialogUser: User
     dialogMessages: Array<Message>
-    usersList: Array<User>
+    usersList: Array<DialogUser>
     writingUsers: Array<number>
+}
+
+export interface DialogUser {
+    user: User
+    messages: Array<Message>
 }
 
 export type MessageAction = SetDialogUserAction | SetDialogMessagesAction | SetDialogUsersAction | AddDialogMessageAction | SetWritingUsersAction
@@ -36,7 +41,7 @@ export interface SetDialogMessagesAction {
 }
 export interface SetDialogUsersAction {
     type: 'SET-DIALOG-USERS'
-    users: Array<User>
+    users: Array<DialogUser>
 }
 export interface AddDialogMessageAction {
     type: 'ADD-DIALOG-MESSAGE'

@@ -7,10 +7,11 @@ import {
     setDialogUsers
 } from '../actions/messageActions'
 import MessageAPI from '../../api/MessageAPI'
+import {DialogUser} from '../../models/MessageModel'
 
 function* workerSetDialogUsers() {
-    const users = yield call(MessageAPI.getDialogUsers)
-    yield put(setDialogUsers(users))
+    const response: Array<DialogUser> = yield call(MessageAPI.getDialogUsers)
+    yield put(setDialogUsers(response))
 }
 
 function* workerSetDialogComments(props) {

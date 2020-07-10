@@ -11,7 +11,7 @@ import {useTheme} from '../hooks/useTheme'
 import {ThemeContext} from '../context/ThemeContext'
 import {connectToMsgWS, getWebService} from './pages/Messages/MessageWebService'
 import {Message} from '../models/MessageModel'
-import {addDialogMessage, getDialogUsers, setWritingUsers} from '../redux/actions/messageActions'
+import {addDialogMessage, getDialogUsers, setDialogUsersData, setWritingUsers} from '../redux/actions/messageActions'
 
 interface Props {
     isAuth: boolean
@@ -20,6 +20,7 @@ interface Props {
     getUserData: () => void
     addDialogMessage: (message: Message) => void
     setWritingUsers: (payload: Message) => void
+    setDialogUsersData: (payload: Message, userId: number) => void
     getDialogUsers: () => void
 }
 
@@ -32,8 +33,9 @@ interface Props {
  * @param getDialogUsers
  * @param addDialogMessage
  * @param setWritingUsers
+ * @param setDialogUsersData
  */
-const AppWrapper: React.FC<Props> = ({setIsAuth, getUserData, isAuth, user, getDialogUsers, addDialogMessage, setWritingUsers}) => {
+const AppWrapper: React.FC<Props> = ({setIsAuth, getUserData, isAuth, user, getDialogUsers, addDialogMessage, setWritingUsers, setDialogUsersData}) => {
     const theme = useTheme()
 
     useEffect(() => {
@@ -42,7 +44,7 @@ const AppWrapper: React.FC<Props> = ({setIsAuth, getUserData, isAuth, user, getD
             getUserData()
         }
         if (user.username && !getWebService())
-            connectToMsgWS(user, addDialogMessage, setWritingUsers, getDialogUsers)
+            connectToMsgWS(user, addDialogMessage, setWritingUsers, getDialogUsers, setDialogUsersData)
     }, [setIsAuth, getUserData, user.username, isAuth])
 
     return (
@@ -67,6 +69,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         getUserData: () => dispatch(getCurrentUserData()),
         addDialogMessage: (message: Message) => dispatch(addDialogMessage(message)),
         setWritingUsers: (payload: Message) => dispatch(setWritingUsers(payload)),
+        setDialogUsersData: (payload: Message, userId: number) => dispatch(setDialogUsersData(payload, userId)),
         getDialogUsers: () => dispatch(getDialogUsers())
     }
 }

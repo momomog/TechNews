@@ -2,18 +2,18 @@ package ru.technews.dao;
 
 import org.springframework.stereotype.Repository;
 import ru.technews.entity.DialogEntity;
+import ru.technews.entity.MessageEntity;
 import ru.technews.entity.security.User;
 
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Repository
 public class DialogDao extends BaseDao<DialogEntity> {
     // Список людей, с кем у текущего пользователя есть диалоги
-    public List<User> getDialogUsers(Long mainUserId) {
+    public List<Map> getDialogUsers(Long mainUserId) {
+
+        List<Map> response = new ArrayList<>();
         Query query;
         query = getCurrentSession().createQuery("from DialogEntity where mainUserId=:mainUserId or dialogUserId=:mainUserId");
         query.setParameter("mainUserId", mainUserId);
@@ -32,7 +32,19 @@ public class DialogDao extends BaseDao<DialogEntity> {
             query.setParameter("userIds", userIds);
             users = query.getResultList();
         }
-        return users;
+
+        for (User u: users) {
+            Map<String, Object> dialogData = new HashMap<>();
+            query = getCurrentSession().createQuery("from MessageEntity where mainUserId=:mainUserId and dialogUserId=:mainUserId and isRead=false" +
+                    " or mainUserId=:dialogUserId and dialogUserId=:mainUserId and isRead=false ");
+            query.setParameter("mainUserId", mainUserId);
+            query.setParameter("dialogUserId", u.getId());
+            List<MessageEntity> messages = query.getResultList();
+            dialogData.put("user", u);
+            dialogData.put("messages", messages);
+            response.add(dialogData);
+        }
+        return response;
     }
 
     // создание диалога

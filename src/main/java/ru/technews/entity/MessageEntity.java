@@ -64,8 +64,9 @@ public class MessageEntity extends BaseEntity {
     @Column(name = "is_read")
     private Boolean isRead;
 
-    public MessageEntity(Long mainUserId, String mainUserFirstName, String mainUserUsername, String mainUserPhotoId, Long dialogUserId,
-                         String dialogUserUsername, String dialogUserFirstName, String dialogUserPhotoId, LocalDateTime date, String text, Boolean isRead) {
+    public MessageEntity(Long mainUserId, String mainUserFirstName, String mainUserUsername, String mainUserPhotoId,
+                         Long dialogUserId, String dialogUserUsername, String dialogUserFirstName,
+                         String dialogUserPhotoId, LocalDateTime date, String text, Boolean isRead) {
         this.mainUserId = mainUserId;
         this.mainUserFirstName = mainUserFirstName;
         this.mainUserUsername = mainUserUsername;

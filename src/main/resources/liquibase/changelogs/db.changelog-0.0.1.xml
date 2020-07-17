@@ -113,6 +113,9 @@
             <column name="updatedat" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
+            <column name="enabled" type="int" defaultValueNumeric="0">
+                <constraints nullable="true"/>
+            </column>
             <column name="user_id" type="bigint">
                 <constraints nullable="false" foreignKeyName="fk_user_id" references="users(id)"/>
             </column>
@@ -209,6 +212,26 @@
             <column name="text" type="varchar(10000)">
             </column>
             <column name="is_read" type="int" defaultValueNumeric="0">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="010" author="SFokin">
+        <createTable tableName="verification_tokens">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="token" type="varchar(10000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expiry_date" type="TIMESTAMP">
+                <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>

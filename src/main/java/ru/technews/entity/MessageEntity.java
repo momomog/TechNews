@@ -2,7 +2,6 @@ package ru.technews.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Type;
@@ -16,7 +15,6 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 public class MessageEntity extends BaseEntity {
     // ИД первого собеседника
     @Column(name = "main_user_id")
@@ -63,6 +61,9 @@ public class MessageEntity extends BaseEntity {
     @Type(type = "numeric_boolean")
     @Column(name = "is_read")
     private Boolean isRead;
+
+    public MessageEntity() {
+    }
 
     public MessageEntity(Long mainUserId, String mainUserFirstName, String mainUserUsername, String mainUserPhotoId,
                          Long dialogUserId, String dialogUserUsername, String dialogUserFirstName,

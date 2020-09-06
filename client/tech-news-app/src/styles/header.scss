@@ -167,9 +167,11 @@ input.hidden {
   bottom: 7px;
   left: 218px;
   cursor: pointer;
+  transition: .5s linear;
 
   &:hover {
     transform: scale(1.1);
+    transition: .5s linear;
   }
 }
 
@@ -190,8 +192,8 @@ input.hidden {
 
 .complete-search-res {
   font-family: 'Roboto', sans-serif !important;
-  margin: 0 0 1.5rem 5rem !important;
-  color: white;
+  margin: 0 0 1.5rem 4rem !important;
+  color: #000000;
 }
 
 .auth-button {

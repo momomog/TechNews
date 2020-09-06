@@ -66,8 +66,7 @@ const Messages: React.FC<Props> = ({users, writingUsers, readDialogMessages, get
                                             ? messages.map((message, idx, arr) => <MessageItem key={message.id}
                                                                                                prevMessage={arr[idx - 1]}
                                                                                                message={message}/>)
-                                            : <div className="not-chosen-dialog-center">Выберите собеседника для начала
-                                                разговора</div>
+                                            : <div className="not-chosen-dialog-center">Выберите собеседника для начала диалога</div>
                                     }
                                 </div>
                                 {

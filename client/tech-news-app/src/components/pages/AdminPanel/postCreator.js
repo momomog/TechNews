@@ -52,6 +52,5 @@ function getFullDescription(fullDescNode) {
     const sourceText = source && source.querySelector('a').innerText
     if (sourceText === '4pda.ru')
         fullDescNode.querySelector('.mb_source').innerHTML = ''
-        // fullDescNode.querySelector('.mb_source').setAttribute('hidden', 'true')
     return fullDescNode.innerHTML
 }

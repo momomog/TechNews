@@ -35,10 +35,10 @@ const PostSearchWrapper: React.FC = () => {
             {
                 isLoading
                     ? <Spinner/>
-                    : posts.length
+                    : posts.length > 0
                     ? <PostSearch posts={posts}
                                   searchText={searchText}/>
-                    : <h3 className="empty-search-res">Не найдено записей, удовлетворящих запросу "{searchText}"</h3>
+                    : <h3 className="empty-search-res">Не найдено записей, удовлетворяющих запросу "{searchText}"</h3>
             }
         </>
     )

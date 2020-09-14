@@ -6,17 +6,13 @@ import {PostsResponse} from '../models/ResponseModel'
 class PostAPI {
     /**
      * Список постов
-     * @param sectionName
-     * @param postPage
      */
     getPosts = (sectionName: string, postPage: number): Promise<PostsResponse> => request({
         url: `posts/${sectionName}/${postPage}`
     })
 
     /**
-     * Список рекомндованных постов
-     * @param categoryId
-     * @param postId
+     * Список рекомендованных постов
      */
     getRecommendedPosts = (categoryId: number, postId: number): Promise<Array<Post>> => request({
         url: `posts/${categoryId}/recommended?id=${postId}`
@@ -24,16 +20,13 @@ class PostAPI {
 
     /**
      * Данные конкретного поста
-     * @param sectionId
-     * @param postId
      */
-    getPostById = (sectionId: number, postId: number): Promise<Post> => request({
+    getPostById = (postId: number): Promise<Post> => request({
         url: `posts/post/${postId}`
     })
 
     /**
      * Удаление поста
-     * @param postId
      */
     deletePostById = (postId: number): Promise<boolean> => request({
         url: `posts/delete-post?id=${postId}`
@@ -41,20 +34,15 @@ class PostAPI {
 
     /**
      * Оценка поста
-     * @param postId
-     * @param rate
      */
     ratePost = (postId: number, rate: number): Promise<boolean> => request({
         url: `posts/rate-post?id=${postId}`,
         method: 'POST',
-        body: JSON.stringify({
-            rate
-        })
+        body: JSON.stringify({rate})
     })
 
     /**
      * Поиск постов по ключевому слову
-     * @param search_query
      */
     searchPosts = (search_query: string): Promise<Array<Post>> => request({
         url: `posts/search?search_query=${search_query}`
@@ -62,10 +50,8 @@ class PostAPI {
 
     /**
      * Создание нового поста
-     * @param postDataRequest
-     * @param photoBody
      */
-    onCreateNewPost = (postDataRequest: PostRequest, photoBody: File): Promise<boolean> => {
+    createNewPost = (postDataRequest: PostRequest, photoBody: File): Promise<boolean> => {
         const formData = new FormData()
 
         formData.append('post', new Blob([JSON.stringify(postDataRequest)], {
@@ -87,11 +73,8 @@ class PostAPI {
 
     /**
      * Обновление содержимого поста
-     * @param postId
-     * @param postDataRequest
-     * @param photoBody
      */
-    onUpdatePostData = (postId: number, postDataRequest: PostRequest, photoBody: File): Promise<boolean> => {
+    updatePostData = (postId: number, postDataRequest: PostRequest, photoBody: File): Promise<boolean> => {
         const formData = new FormData()
         formData.append('post', new Blob([JSON.stringify(postDataRequest)], {
             type: 'application/json'
@@ -110,7 +93,10 @@ class PostAPI {
         })
     }
 
-    onCreateNewPostFromOuterSrc = (postDataRequest): Promise<boolean> => {
+    /**
+     * "Заимствование" постов
+     */
+    createNewPostFromOuterSrc = (postDataRequest): Promise<boolean> => {
         return request({
             url: `posts/new-post-outer-src`,
             method: 'POST',

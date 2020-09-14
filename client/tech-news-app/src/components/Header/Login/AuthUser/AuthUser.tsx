@@ -12,10 +12,6 @@ interface Props {
 
 /**
  * Авторизованный пользователь
- * @param user
- * @param isAuth
- * @param setIsAuth
- * @param setCurrentUserData
  */
 const AuthUser: React.FC<Props> = ({user, isAuth, setIsAuth, setCurrentUserData}) => {
     const onLogout = () => {

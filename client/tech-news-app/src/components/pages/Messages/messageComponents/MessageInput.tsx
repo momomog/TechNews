@@ -50,7 +50,7 @@ export const MessageInput: React.FC<Props> = ({writingUsers, dialogUser, scrollT
     }
 
     return (
-        <div>
+        <>
             {
                 writingUsers.includes(dialogUser.id) &&
                 <div className="writing-message">{`${dialogUser.firstName} печатает сообщение...`}</div>
@@ -83,7 +83,7 @@ export const MessageInput: React.FC<Props> = ({writingUsers, dialogUser, scrollT
 
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

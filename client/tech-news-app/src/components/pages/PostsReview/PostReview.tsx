@@ -19,8 +19,6 @@ interface Props {
 
 /**
  * Просмотр содержимого поста
- * @param post
- * @param postRating
  */
 const PostReview: React.FC<Props> = ({post, postRating}) => {
     const {isLight} = useContext(ThemeContext)

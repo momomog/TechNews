@@ -20,11 +20,6 @@ interface Props {
 
 /**
  * Список постов. Оболочка
- * @param postPage
- * @param isLoading
- * @param postList
- * @param getPosts
- * @param clearPostData
  */
 const PostsListWrapper: React.FC<Props> = ({postPage, isLoading, postList, getPosts, clearPostData}) => {
     const {params}: any = useRouteMatch()
@@ -33,8 +28,8 @@ const PostsListWrapper: React.FC<Props> = ({postPage, isLoading, postList, getPo
         const sectionName = params.sectionName
 
         if (!postList.length)
-            params.sectionName ? getPosts(getSectionId(sectionName), postPage) : getPosts(SECTION_ALL_POSTS)
-    }, [params, getPosts, postPage, postList])
+            sectionName ? getPosts(getSectionId(sectionName), postPage) : getPosts(SECTION_ALL_POSTS)
+    }, [params.sectionName, postPage, postList])
 
     return postList.length > 0 && !isLoading
         ? <PostsList posts={postList}

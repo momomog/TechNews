@@ -12,10 +12,6 @@ interface Props {
 
 /**
  * Пагинатор
- * @param postPage
- * @param postsCount
- * @param setPosts
- * @param sectionId
  */
 const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, sectionId}) => {
     const {isLight} = useContext(ThemeContext)

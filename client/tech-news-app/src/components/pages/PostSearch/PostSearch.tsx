@@ -36,7 +36,7 @@ const PostSearch: React.FC<Props> = ({posts, searchText}) => {
             }
 
             {
-                showPosts.length && showPosts[showPosts.length - 1].id !== posts[posts.length - 1].id &&
+                showPosts.length > 0 && showPosts[showPosts.length - 1].id !== posts[posts.length - 1].id &&
                 <div className="row d-flex justify-content-center">
                     <button className="btn btn-default mb-4" onClick={showMorePosts}>
                         Показать еще <i className="glyphicon glyphicon-arrow-down"/>

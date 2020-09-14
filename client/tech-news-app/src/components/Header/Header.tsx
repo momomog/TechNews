@@ -15,7 +15,6 @@ interface Props {
 
 /**
  * Шапка сайта
- * @param props
  */
 const Header: React.FC<Props> = props => {
     return (

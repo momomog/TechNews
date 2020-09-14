@@ -16,7 +16,6 @@ interface Props {
 
 /**
  * Список комментариев
- * @param props
  */
 const Comments: React.FC<Props> = (props) => {
     const {isAuth} = useContext(AuthContext)

@@ -8,7 +8,6 @@ interface Props {
 
 /**
  * Авторизация
- * @param onLogin
  */
 const Authorization: React.FC<Props> = ({onLogin}) => {
 

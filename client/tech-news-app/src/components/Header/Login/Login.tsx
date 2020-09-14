@@ -22,11 +22,6 @@ interface Props {
 
 /**
  * Верхний компонент шапки. Содержит лого и информацию об авторизованном юзере
- * @param setPosts
- * @param changeSection
- * @param setPostPage
- * @param setCurrentUserData
- * @param setIsAuth
  */
 const Login: React.FC<Props> = ({setPosts, changeSection, setPostPage, setCurrentUserData, setIsAuth}) => {
     const {isAuth, user} = useContext(AuthContext)
@@ -69,31 +64,3 @@ const Login: React.FC<Props> = ({setPosts, changeSection, setPostPage, setCurren
 }
 
 export default Login
-
-
-// return (
-//     <div className="container w-100">
-//         <div className="row logo-body ml-5">
-//             <div className="col-sm-6 d-flex align-content-end mt-2">
-//                 <NavLink to="/posts/all">
-//                     <img src={logo} alt="" width="60%" height="100%" onClick={onLogoClick}/>
-//                 </NavLink>
-//             </div>
-//             <div className="col-sm-6 d-flex align-items-end justify-content-end">
-//                 <img src={changeThemeIcon}
-//                      className="change-theme-icon" alt="themeIcon"
-//                      onClick={changeTheme}/>
-//                 {
-//                     !isAuth && <AuthButtons/>
-//                 }
-//                 {
-//                     isAuth && user.id > 0
-//                     && <AuthUser setCurrentUserData={setCurrentUserData}
-//                                  setIsAuth={setIsAuth}
-//                                  isAuth={isAuth}
-//                                  user={user}/>
-//                 }
-//             </div>
-//         </div>
-//     </div>
-// )

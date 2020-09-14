@@ -22,7 +22,6 @@ class ProfileAPI {
 
     /**
      * Данные пользователя по юзернейму
-     * @param username
      */
     getUserProfile = (username: string): Promise<User> => request({
         url: `users/${username}`
@@ -30,7 +29,6 @@ class ProfileAPI {
 
     /**
      * Загрузка фото пользователя
-     * @param photoBody
      */
     onLoadPhoto = (photoBody: File): Promise<boolean> => {
         const formData = new FormData()
@@ -46,7 +44,6 @@ class ProfileAPI {
 
     /**
      * Обновление данных пользователя
-     * @param userDataRequest
      */
     onUpdateUserData = (userDataRequest: ProfileRequest): Promise<boolean> => request({
         url: `user/me/update`,

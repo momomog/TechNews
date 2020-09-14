@@ -16,12 +16,11 @@ interface Props {
 }
 
 /**
- * Шапка сайта.Оболочка
- * @param props
+ * Шапка сайта. Оболочка
  */
-const HeaderWrapper: React.FC<Props> = (props) => {
+const HeaderWrapper: React.FC<Props> = ({getPosts, ...props}) => {
 
-    const setPosts = (sectionId: number) => props.getPosts(sectionId)
+    const setPosts = (sectionId: number) => getPosts(sectionId)
 
     return <Header setPosts={setPosts}
                    {...props}/>

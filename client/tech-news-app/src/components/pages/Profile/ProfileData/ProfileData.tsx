@@ -14,7 +14,7 @@ interface Props {
 const ProfileData: React.FC<Props> = ({user}) => {
 
     return (
-        <div>
+        <>
             <div className="col-sm-1"/>
             <div className="clearfix mb-2"/>
 
@@ -55,7 +55,7 @@ const ProfileData: React.FC<Props> = ({user}) => {
             <UserInfoLine name={'Количество комментариев'}
                           isNeedBorder={false}
                           value={user.commentsCount.toString()}/>
-        </div>
+        </>
     )
 }
 

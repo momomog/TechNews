@@ -18,12 +18,6 @@ interface Props {
 
 /**
  * Сообщения
- * @param users
- * @param writingUsers
- * @param readDialogMessages
- * @param getMessages
- * @param messages
- * @param dialogUser
  */
 const Messages: React.FC<Props> = ({users, writingUsers, readDialogMessages, getMessages, messages, dialogUser}) => {
     const {isLight} = useContext(ThemeContext)

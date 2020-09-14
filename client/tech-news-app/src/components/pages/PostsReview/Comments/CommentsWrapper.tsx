@@ -18,10 +18,6 @@ interface Props {
 
 /**
  * Список комментариев. Оболочка
- * @param sectionId
- * @param postComments
- * @param commentsCount
- * @param getPostComments
  */
 const CommentsWrapper: React.FC<Props> = ({sectionId, postComments, commentsCount, getPostComments}) => {
     const {params}: any = useRouteMatch()
@@ -29,7 +25,7 @@ const CommentsWrapper: React.FC<Props> = ({sectionId, postComments, commentsCoun
 
     useEffect(() => {
         getPostComments(sectionId, postId)
-    }, [postId, getPostComments, sectionId])
+    }, [postId, sectionId])
 
     const likeCommentary = (commentId: number) => {
         CommentAPI.likeComment(postId, commentId)

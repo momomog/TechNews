@@ -30,8 +30,6 @@ class AuthService {
 
     /**
      * Сет токена авторизации
-     * @param token
-     * @param remember
      */
     setToken = (token: string, remember?: boolean) => {
         if (remember)

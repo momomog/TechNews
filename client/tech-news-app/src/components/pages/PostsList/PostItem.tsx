@@ -12,8 +12,6 @@ interface Props {
 
 /**
  * Пост
- * @param post
- * @param clearPostData
  */
 const PostItem: React.FC<Props> = ({post, clearPostData}) => {
     const {isLight} = useContext(ThemeContext)
@@ -55,7 +53,7 @@ const PostItem: React.FC<Props> = ({post, clearPostData}) => {
                             {post.preDescription}
                         </p>
                     </Hyphenated>
-                    <div>
+                    <>
                         <ul className="list-inline list-unstyled">
                             <li>
                             <span>
@@ -82,7 +80,7 @@ const PostItem: React.FC<Props> = ({post, clearPostData}) => {
 
                             </li>
                         </ul>
-                    </div>
+                    </>
 
                 </div>
             </div>

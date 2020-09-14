@@ -11,11 +11,8 @@ interface Props {
 
 /**
  * Авторизация. Оболочка
- * @param isAuth
- * @param login
  */
 const AuthorizationWrapper: React.FC<Props> = ({login}) => {
-
     const onLogin = (request: SignInRequest, remember?: boolean) => login(request, remember)
 
     return <Authorization onLogin={onLogin}/>

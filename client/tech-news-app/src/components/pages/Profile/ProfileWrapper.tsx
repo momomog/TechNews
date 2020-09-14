@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import {connect} from 'react-redux'
 import {Dispatch} from 'redux'
 import {useHistory, useLocation} from 'react-router-dom'
@@ -23,9 +23,6 @@ interface Props {
 
 /**
  * Профиль. Оболочка
- * @param currentUserData
- * @param getDialogUsers
- * @param getCurrentUserData
  */
 const ProfileWrapper: React.FC<Props> = ({currentUser, isAuth, getDialogUsers, getCurrentUserData, getDialogMessages}) => {
     const [someUser, setSomeUser] = useState<User>(UserInitial)
@@ -33,14 +30,14 @@ const ProfileWrapper: React.FC<Props> = ({currentUser, isAuth, getDialogUsers, g
     const history = useHistory()
     const path = pathname.split('/')
 
-    const isCurrentUser = useCallback(() => {
+    const isCurrentUser = useMemo(() => {
             return ((path[1] === 'profile' && path.length === 2)
                 || (path[1] === 'profile' && currentUser && currentUser.username === path[2]))
         }, [path, currentUser]
     )
 
     useEffect(() => {
-        if (isCurrentUser()) {
+        if (isCurrentUser) {
             if (!currentUser.id)
                 getCurrentUserData()
         } else if (!someUser.id) {
@@ -48,7 +45,7 @@ const ProfileWrapper: React.FC<Props> = ({currentUser, isAuth, getDialogUsers, g
                 .then((response: User) => setSomeUser(response))
                 .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))
         }
-    }, [path, getCurrentUserData, currentUser.id, someUser.id, isCurrentUser])
+    }, [path, currentUser.id, someUser.id, isCurrentUser])
 
     const updateUserPhoto = (body) => {
         ProfileAPI.onLoadPhoto(body)
@@ -63,12 +60,12 @@ const ProfileWrapper: React.FC<Props> = ({currentUser, isAuth, getDialogUsers, g
         history.push('/messages')
     }
 
-    const profileUser = isCurrentUser() ? currentUser : someUser
+    const profileUser = isCurrentUser ? currentUser : someUser
     return profileUser.id
         ? <Profile user={profileUser}
                    isAuth={isAuth}
                    redirectToDialogPage={redirectToDialogPage}
-                   isCurrentUser={isCurrentUser()}
+                   isCurrentUser={isCurrentUser}
                    onLoadPhoto={updateUserPhoto}/>
         : <Spinner/>
 }

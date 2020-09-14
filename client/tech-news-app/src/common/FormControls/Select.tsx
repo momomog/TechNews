@@ -21,7 +21,7 @@ export const Select = ({input, meta, ...props}) => {
                 </label>
             }
 
-            <div>
+            <>
                 <select {...input}
                         {...props}
                         style={{
@@ -36,7 +36,7 @@ export const Select = ({input, meta, ...props}) => {
                         props.options.map(option => <option value={option.id} key={option.id}>{option.title}</option>)
                     }
                 </select>
-            </div>
+            </>
 
             {
                 isError &&

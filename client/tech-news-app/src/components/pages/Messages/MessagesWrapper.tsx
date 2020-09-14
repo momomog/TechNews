@@ -21,13 +21,6 @@ interface Props {
 
 /**
  * Сообщения. Оболочка
- * @param users
- * @param writingUsers
- * @param readDialogMessages
- * @param getDialogMessages
- * @param messages
- * @param getDialogUsers
- * @param dialogUser
  */
 const MessagesWrapper: React.FC<Props> = ({users, writingUsers, readDialogMessages, getDialogMessages, messages, getDialogUsers, dialogUser}) => {
     const {isAuth} = useContext(AuthContext)

@@ -13,22 +13,19 @@ import {RootState} from '../../../../redux/reducers/rootReducer'
 interface Props {
     postData: Post
     sectionId: number
-    getPostById: (sectionId: number, postId: number) => void
+    getPostById: (postId: number) => void
 }
 
 /**
  * Редактор поста. Оболочка
- * @param sectionId
- * @param postData
- * @param getPostById
  */
 const PostEditWrapper: React.FC<Props> = ({sectionId, postData, getPostById}) => {
     const {params}: any = useRouteMatch()
     const history = useHistory()
 
     useEffect(() => {
-        getPostById(sectionId, params.postId)
-    }, [params, getPostById, sectionId])
+        getPostById(params.postId)
+    }, [params.postId, sectionId])
 
     const updatePostData = (formData: PostRequest) => {
         const request = {
@@ -39,7 +36,7 @@ const PostEditWrapper: React.FC<Props> = ({sectionId, postData, getPostById}) =>
         }
         const photo = formData.photo && formData.photo[0]
 
-        PostAPI.onUpdatePostData(params.postId, request, photo)
+        PostAPI.updatePostData(params.postId, request, photo)
             .then(() => {
                 NotificationManager.success('Данные поста успешно обновлены', 'Успешно')
                 history.goBack()
@@ -62,7 +59,7 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        getPostById: (sectionId: number, postId: number) => dispatch(getPostById(sectionId, postId))
+        getPostById: (postId: number) => dispatch(getPostById(postId))
     }
 }
 

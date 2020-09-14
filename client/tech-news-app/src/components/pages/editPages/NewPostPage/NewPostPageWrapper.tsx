@@ -19,15 +19,11 @@ interface Props {
 
 /**
  * Новый пост. Оболочка
- * @param changeSection
- * @param setPostPage
- * @param getPosts
- * @param history
  */
 const NewPostPageWrapper: React.FC<RouteComponentProps<any> & Props> = ({changeSection, setPostPage, getPosts, history}) => {
 
     const createNewPost = (formData: PostRequest) => {
-        PostAPI.onCreateNewPost({
+        PostAPI.createNewPost({
             title: formData.title,
             preDescription: formData.preDescription,
             fullDescription: formData.fullDescription,

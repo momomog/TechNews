@@ -26,14 +26,6 @@ interface Props {
 
 /**
  * Оболочка для корневого компонента
- * @param isAuth
- * @param user
- * @param setIsAuth
- * @param getUserData
- * @param getDialogUsers
- * @param addDialogMessage
- * @param setWritingUsers
- * @param setDialogUsersData
  */
 const AppWrapper: React.FC<Props> = ({setIsAuth, getUserData, isAuth, user, getDialogUsers, addDialogMessage, setWritingUsers, setDialogUsersData}) => {
     const theme = useTheme()
@@ -45,7 +37,7 @@ const AppWrapper: React.FC<Props> = ({setIsAuth, getUserData, isAuth, user, getD
         }
         if (user.username && !getWebService())
             connectToMsgWS(user, addDialogMessage, setWritingUsers, getDialogUsers, setDialogUsersData)
-    }, [setIsAuth, getUserData, user.username, isAuth])
+    }, [user.username, isAuth])
 
     return (
         <AuthContext.Provider value={{isAuth, user}}>

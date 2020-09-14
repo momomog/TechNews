@@ -39,7 +39,7 @@ const PostRating: React.FC<Props> = ({post, postRating}) => {
 
     return (
         <div className="row disabled">
-            <div>
+            <>
                 {
                     isRating
                         ? <span className="post-author-comment">Спасибо! Ваша оценка данного поста: {
@@ -78,7 +78,7 @@ const PostRating: React.FC<Props> = ({post, postRating}) => {
                             </>
                             : null
                 }
-            </div>
+            </>
         </div>
     )
 }

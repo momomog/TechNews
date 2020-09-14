@@ -13,7 +13,7 @@ const SocialIcons: React.FC<Props> = ({user}) => {
     const {profileData} = user
 
     return (
-        <div>
+        <>
             {
                 profileData.facebook
                     ? <a href={`https://www.facebook.com/${profileData.facebook}`}
@@ -53,7 +53,7 @@ const SocialIcons: React.FC<Props> = ({user}) => {
                     : <i className="twitter-icon social"/>
             }
 
-        </div>
+        </>
     )
 }
 

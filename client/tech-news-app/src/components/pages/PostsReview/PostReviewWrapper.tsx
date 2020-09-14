@@ -12,21 +12,18 @@ import {RootState} from '../../../redux/reducers/rootReducer'
 interface Props {
     postData: Post
     sectionId: number
-    getPostById: (sectionId: number, postId: number) => void
+    getPostById: (postId: number) => void
 }
 
 /**
  * Просмотр содержимого поста. Оболочка
- * @param postData
- * @param sectionId
- * @param getPostById
  */
 const PostReviewWrapper: React.FC<Props> = ({postData, sectionId, getPostById}) => {
     const {params}: any = useRouteMatch()
 
     useEffect(() => {
-        getPostById(sectionId, params.postId)
-    }, [params, getPostById, sectionId])
+        getPostById(params.postId)
+    }, [params.postId, sectionId])
 
     const postRating = (postId: number, rate: number) => PostAPI.ratePost(postId, rate)
 
@@ -45,7 +42,7 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        getPostById: (sectionId: number, postId: number) => dispatch(getPostById(sectionId, postId))
+        getPostById: (postId: number) => dispatch(getPostById(postId))
     }
 }
 

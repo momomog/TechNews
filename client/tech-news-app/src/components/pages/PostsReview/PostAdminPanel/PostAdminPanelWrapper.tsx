@@ -16,9 +16,6 @@ interface Props {
 
 /**
  * Панель управления постом. Оболочка
- * @param getPosts
- * @param sectionId
- * @param postId
  */
 const PostAdminPanelWrapper: React.FC<Props> = ({getPosts, sectionId, postId}) => {
     const history = useHistory()

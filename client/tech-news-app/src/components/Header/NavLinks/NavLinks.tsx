@@ -20,9 +20,6 @@ interface Props {
 
 /**
  * Панель навигации по категории постов
- * @param setPosts
- * @param setPostPage
- * @param changeSection
  */
 const NavLinks: React.FC<Props> = ({setPosts, setPostPage, changeSection}) => {
     const {isLight} = useContext(ThemeContext)

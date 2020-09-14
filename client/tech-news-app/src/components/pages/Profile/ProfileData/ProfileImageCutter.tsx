@@ -27,7 +27,7 @@ const Cutter = (props) => {
     }, [croppedAreaPixels, props])
 
     return (
-        <div>
+        <>
             <div className={classes.cropContainer}>
                 <Cropper image={props.picture}
                          crop={crop}
@@ -65,7 +65,7 @@ const Cutter = (props) => {
                 </DialogActions>
 
             </div>
-        </div>
+        </>
     )
 }
 const styles = theme => ({

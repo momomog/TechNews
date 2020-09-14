@@ -21,7 +21,7 @@ export const TextArea = ({input, meta, ...props}) => {
                 </label>
             }
 
-            <div>
+            <>
                 <textarea {...input}
                           {...props}
                           style={{
@@ -32,7 +32,7 @@ export const TextArea = ({input, meta, ...props}) => {
                               marginBottom: `0px`
                           }}
                 />
-            </div>
+            </>
 
             {
                 isError &&

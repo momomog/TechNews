@@ -15,10 +15,6 @@ interface Props {
 
 /**
  * Пагинатор. Оболочка
- * @param postPage
- * @param postsCount
- * @param sectionId
- * @param getPosts
  */
 const PagesNavigationWrapper: React.FC<Props> = ({postPage, postsCount, sectionId, getPosts}) => {
     const setPosts = (sectionId: number, postPage: number) => getPosts(sectionId, postPage, true)

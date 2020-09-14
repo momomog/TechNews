@@ -10,12 +10,10 @@ interface Props {
 
 /**
  * Список постов
- * @param posts
- * @param clearPostData
  */
 const PostsList: React.FC<Props> = ({posts, clearPostData}) => {
     return (
-        <div>
+        <>
             <PagesNavigationWrapper/>
             {
                 posts.map(post => {
@@ -25,7 +23,7 @@ const PostsList: React.FC<Props> = ({posts, clearPostData}) => {
                 })
             }
             <PagesNavigationWrapper/>
-        </div>
+        </>
     )
 }
 

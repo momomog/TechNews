@@ -18,12 +18,6 @@ interface Props {
 
 /**
  * Комментарий
- * @param comment
- * @param firstCommentId
- * @param likeCommentary
- * @param deleteCommentary
- * @param updateCommentary
- * @param addCommentary
  */
 const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, deleteCommentary, updateCommentary, addCommentary}) => {
     const {isAuth, user} = useContext(AuthContext)

@@ -39,12 +39,12 @@ const PostItem: React.FC<{ post: Post }> = ({post}) => {
  */
 const RecommendedPosts: React.FC<{ posts: Array<Post> }> = ({posts}) => {
     return (
-        <div>
+        <>
             <hr className="mt-3"/>
             <h2 className="mb-5">Вам может быть интересно</h2>
 
             {
-                posts.length
+                posts.length > 0
                     ? <div className="row">
                         {
                             posts.map(post => <PostItem key={post.id}
@@ -54,7 +54,7 @@ const RecommendedPosts: React.FC<{ posts: Array<Post> }> = ({posts}) => {
                     : <Spinner/>
             }
 
-        </div>
+        </>
     )
 }
 

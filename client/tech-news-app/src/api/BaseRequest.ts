@@ -11,9 +11,9 @@ export const WS_BASE_URL = process.env.NODE_ENV === 'production'
 /**
  * Базовый запрос приложения
  */
-export const request = (options): Promise<any> => {
-    const headers = options.headers
-        ? options.headers
+export const request = (opts): Promise<any> => {
+    const headers = opts.headers
+        ? opts.headers
         : new Headers({
             'Content-Type': 'application/json'
         })
@@ -26,7 +26,7 @@ export const request = (options): Promise<any> => {
         method: 'GET'
     }
 
-    options = Object.assign({}, defaults, options)
+    const options = Object.assign({}, defaults, opts)
     const url = `${API_BASE_URL}/${options.url}`
 
     return fetch(url, options)

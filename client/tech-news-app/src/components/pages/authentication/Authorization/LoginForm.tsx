@@ -7,8 +7,6 @@ import {SignInRequest} from '../../../../models/RequestsModel'
 
 /**
  * Форма авторизации
- * @param handleSubmit
- * @param invalid
  */
 const LoginForm: React.FC<InjectedFormProps<SignInRequest>> = ({handleSubmit, invalid}) => {
     return (

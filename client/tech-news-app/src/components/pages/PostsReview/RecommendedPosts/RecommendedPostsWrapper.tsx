@@ -11,9 +11,6 @@ interface Props {
 
 /**
  * Рекомендуемые посты. Оболочка
- * @param categoryId
- * @param postId
- * @param isVisible
  */
 const RecommendedPostsWrapper: React.FC<Props> = ({categoryId, postId, isVisible}) => {
     const [posts, setPosts] = useState<Array<Post>>([])

@@ -24,7 +24,7 @@ export const FileInput = ({input, meta, ...props}) => {
                 </label>
             }
 
-            <div>
+            <>
                 <input {...input}
                        {...props}
                        onChange={(e: any) => {
@@ -43,7 +43,7 @@ export const FileInput = ({input, meta, ...props}) => {
                            marginBottom: `0px`
                        }}
                 />
-            </div>
+            </>
 
             {
                 isError &&

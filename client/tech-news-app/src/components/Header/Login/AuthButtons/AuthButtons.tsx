@@ -15,14 +15,14 @@ const AuthButtons = () => {
                 <i className="sign-in-icon" title="Вход"/>
             </NavLink>
         </div>
-        : <div>
+        : <>
             <NavLink className="btn btn-info mt-1 auth-button" to="/registration">
                 Регистрация
             </NavLink>
             <NavLink className="btn btn-info mr-2 mt-1 auth-button" to="/authorization">
                 Войти
             </NavLink>
-        </div>
+        </>
 
 }
 

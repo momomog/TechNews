@@ -19,7 +19,7 @@ export const MessageItem: React.FC<Props> = ({message, prevMessage}) => {
     }
 
     return (
-        <div>
+        <>
             <div className={msgStyle.join(' ')} style={style}>
                 <div className="col-md-1 p-0">
                     {
@@ -40,6 +40,6 @@ export const MessageItem: React.FC<Props> = ({message, prevMessage}) => {
                     <div className="message-user-data">{message.text}</div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }

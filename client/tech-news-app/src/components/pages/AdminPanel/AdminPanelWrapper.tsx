@@ -18,12 +18,10 @@ const AdminPanelWrapper: React.FC = () => {
     const updatePosts = async (day, month, postNum) => {
         try {
             const post = await postInitProcess(day, month, postNum)
-            await PostAPI.onCreateNewPostFromOuterSrc(post)
-            console.log('POST ADDED', post)
+            await PostAPI.createNewPostFromOuterSrc(post)
             // @ts-ignore
             setTimeout(() => updatePosts(day, month, post.postNum), 3000)
         } catch (e) {
-            console.log('ERROR', e)
             setTimeout(() => updatePosts(day, month, ++postNum), 3000)
         }
     }

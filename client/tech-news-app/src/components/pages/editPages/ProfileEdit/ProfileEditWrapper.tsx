@@ -15,7 +15,6 @@ interface Props {
 
 /**
  * Редактор профиля. Оболочка
- * @param getCurrentUserData
  */
 const ProfileEditWrapper: React.FC<RouteComponentProps<any> & Props> = ({getCurrentUserData}) => {
     const history = useHistory()

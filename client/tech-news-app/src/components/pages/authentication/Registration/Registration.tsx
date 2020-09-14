@@ -8,7 +8,6 @@ interface Props {
 
 /**
  * Регистрация
- * @param signup
  */
 const Registration: React.FC<Props> = ({signup}) => {
 

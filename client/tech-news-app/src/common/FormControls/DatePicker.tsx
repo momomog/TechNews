@@ -17,7 +17,7 @@ export const DatePicker = ({input, meta, ...props}) => {
     useEffect(() => setInitValue(props.initValue || null), [props.initValue])
 
     return (
-        <div>
+        <>
             <MuiPickersUtilsProvider libInstance={moment}
                                      utils={DateFnsUtils}>
                 <KeyboardDatePicker
@@ -50,6 +50,6 @@ export const DatePicker = ({input, meta, ...props}) => {
                     </div>
                 </div>
             }
-        </div>
+        </>
     )
 }

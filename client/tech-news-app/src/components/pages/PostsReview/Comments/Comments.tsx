@@ -8,16 +8,18 @@ import {ThemeContext} from '../../../../context/ThemeContext'
 interface Props {
     comments: Array<Comment>
     commentsCount: number
-    likeCommentary: (commentId: number) => void
-    deleteCommentary: (commentId: number) => void
-    updateCommentary: (commentId: number, commentText: string) => void
-    addNewCommentary: (request: CommentRequest) => void
+    commentAction: (action: string,
+                    actionIndefiniteForm: string,
+                    commentId: number,
+                    updateCommentText?: string,
+                    commentText?: CommentRequest,
+                    newCommentBody?: CommentRequest) => void
 }
 
 /**
  * Список комментариев
  */
-const Comments: React.FC<Props> = (props) => {
+const Comments: React.FC<Props> = ({comments, commentsCount, commentAction}) => {
     const {isAuth} = useContext(AuthContext)
     const [commentText, setCommentText] = useState('')
 
@@ -26,7 +28,7 @@ const Comments: React.FC<Props> = (props) => {
 
     const addNewCommentary = () => {
         if (commentText.trim()) {
-            props.addNewCommentary({commentText})
+            commentAction('ADD_NEW', 'добавить', 0, '', {commentText})
             setCommentText('')
         }
     }
@@ -62,18 +64,15 @@ const Comments: React.FC<Props> = (props) => {
             }
 
             <h4 className="card-header mb-4">
-                {`${props.commentsCount} ${Common.getCommentaryCountText(props.commentsCount)}`}
+                {`${commentsCount} ${Common.getCommentaryCountText(commentsCount)}`}
             </h4>
 
             {
-                props.comments.length > 0
-                    ? props.comments.map(comment => {
+                comments.length > 0
+                    ? comments.map(comment => {
                         return <CommentItem comment={comment}
-                                            firstCommentId={props.comments[0].id}
-                                            likeCommentary={props.likeCommentary}
-                                            updateCommentary={props.updateCommentary}
-                                            addCommentary={props.addNewCommentary}
-                                            deleteCommentary={props.deleteCommentary}
+                                            firstCommentId={comments[0].id}
+                                            commentAction={commentAction}
                                             key={comment.id}/>
                     })
                     : <div className="ml-4">Ваш комментарий будет первым...</div>

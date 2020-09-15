@@ -17,11 +17,6 @@ interface Props {
 
 /**
  * Профиль
- * @param user
- * @param isAuth
- * @param isCurrentUser
- * @param redirectToDialogPage
- * @param onLoadPhoto
  */
 const Profile: React.FC<Props> = ({user, isAuth, isCurrentUser, redirectToDialogPage, onLoadPhoto}) => {
     const [isLoading, setIsLoading] = useState(false)

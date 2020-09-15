@@ -13,12 +13,17 @@ interface Props {
  * Рекомендуемые посты. Оболочка
  */
 const RecommendedPostsWrapper: React.FC<Props> = ({categoryId, postId, isVisible}) => {
-    const [posts, setPosts] = useState<Array<Post>>([])
+    const [posts, setPosts] = useState<Array<Post>>([]);
 
-    if (categoryId && isVisible && !posts.length) {
-        PostAPI.getRecommendedPosts(categoryId, postId)
-            .then((response: Array<Post>) => setPosts(response))
-    }
+    (async () => {
+        try {
+            if (categoryId && isVisible && !posts.length) {
+                const posts = await PostAPI.getRecommendedPosts(categoryId, postId)
+                setPosts(posts)
+            }
+        } catch (e) {
+        }
+    })()
 
     return isVisible ? <RecommendedPosts posts={posts}/> : <div/>
 }

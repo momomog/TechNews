@@ -2,24 +2,25 @@ import React, {useContext} from 'react'
 import {NavLink} from 'react-router-dom'
 import Hyphenated from 'react-hyphen'
 import ru from 'hyphenated-ru'
-import {Post} from '../../../models/PostModel'
+import {Post, PostInitial} from '../../../models/PostModel'
 import {ThemeContext} from '../../../context/ThemeContext'
+import {setPostData} from "../../../redux/actions/postActions";
+import {useDispatch} from "react-redux";
 
 interface Props {
     post: Post
-    clearPostData?: () => void
 }
 
 /**
  * Пост
  */
-const PostItem: React.FC<Props> = ({post, clearPostData}) => {
+const PostItem: React.FC<Props> = ({post}) => {
     const {isLight} = useContext(ThemeContext)
     const cardClasses = ['row', 'well', 'post', 'center-block', isLight ? 'background-light' : 'background-dark']
+    const dispatch = useDispatch()
 
     const postClick = () => {
-        if (typeof clearPostData === 'function')
-            clearPostData()
+        dispatch(setPostData(PostInitial))
         window.scroll(0, 0)
     }
 

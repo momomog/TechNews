@@ -1,6 +1,5 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react'
-import {connect} from 'react-redux'
-import {Dispatch} from 'redux'
+import React, {useEffect, useMemo, useState} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import {useHistory, useLocation} from 'react-router-dom'
 import Profile from './Profile'
 import ProfileAPI from '../../../api/ProfileAPI'
@@ -13,22 +12,17 @@ import {RootState} from '../../../redux/reducers/rootReducer'
 import MessageAPI from '../../../api/MessageAPI'
 import {getDialogMessages, getDialogUsers} from '../../../redux/actions/messageActions'
 
-interface Props {
-    currentUser: User
-    isAuth: boolean
-    getCurrentUserData: () => void
-    getDialogUsers: () => void
-    getDialogMessages: (user: User) => void
-}
 
 /**
  * Профиль. Оболочка
  */
-const ProfileWrapper: React.FC<Props> = ({currentUser, isAuth, getDialogUsers, getCurrentUserData, getDialogMessages}) => {
-    const [someUser, setSomeUser] = useState<User>(UserInitial)
-    const {pathname} = useLocation()
-    const history = useHistory()
-    const path = pathname.split('/')
+const ProfileWrapper: React.FC = () => {
+    const [someUser, setSomeUser] = useState<User>(UserInitial),
+        {pathname} = useLocation(),
+        {isAuth, userData: currentUser} = useSelector((state: RootState) => state.userData),
+        history = useHistory(),
+        dispatch = useDispatch(),
+        path = pathname.split('/')
 
     const isCurrentUser = useMemo(() => {
             return ((path[1] === 'profile' && path.length === 2)
@@ -39,7 +33,7 @@ const ProfileWrapper: React.FC<Props> = ({currentUser, isAuth, getDialogUsers, g
     useEffect(() => {
         if (isCurrentUser) {
             if (!currentUser.id)
-                getCurrentUserData()
+                dispatch(getCurrentUserData())
         } else if (!someUser.id) {
             ProfileAPI.getUserProfile(path[2])
                 .then((response: User) => setSomeUser(response))
@@ -47,17 +41,23 @@ const ProfileWrapper: React.FC<Props> = ({currentUser, isAuth, getDialogUsers, g
         }
     }, [path, currentUser.id, someUser.id, isCurrentUser])
 
-    const updateUserPhoto = (body) => {
-        ProfileAPI.onLoadPhoto(body)
-            .then(() => getCurrentUserData())
-            .catch(() => NotificationManager.error('Не удалось обновить фото профиля', 'Ошибка'))
+    const updateUserPhoto = async (body) => {
+        try {
+            await ProfileAPI.onLoadPhoto(body)
+            dispatch(getCurrentUserData())
+        } catch (e) {
+            NotificationManager.error('Не удалось обновить фото профиля', 'Ошибка')
+        }
     }
 
     const redirectToDialogPage = async () => {
-        await MessageAPI.createDialog(someUser.id)
-        await getDialogUsers()
-        await getDialogMessages(someUser)
-        history.push('/messages')
+        try {
+            await MessageAPI.createDialog(someUser.id)
+            dispatch(getDialogUsers())
+            dispatch(getDialogMessages(someUser))
+            history.push('/messages')
+        } catch (e) {
+        }
     }
 
     const profileUser = isCurrentUser ? currentUser : someUser
@@ -70,18 +70,4 @@ const ProfileWrapper: React.FC<Props> = ({currentUser, isAuth, getDialogUsers, g
         : <Spinner/>
 }
 
-const mapStateToProps = (state: RootState) => {
-    return {
-        currentUser: state.userData.userData,
-        isAuth: state.userData.isAuth
-    }
-}
-
-const mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        getCurrentUserData: () => dispatch(getCurrentUserData()),
-        getDialogMessages: (dialogUser: User) => dispatch(getDialogMessages(dialogUser)),
-        getDialogUsers: () => dispatch(getDialogUsers())
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileWrapper)
+export default ProfileWrapper

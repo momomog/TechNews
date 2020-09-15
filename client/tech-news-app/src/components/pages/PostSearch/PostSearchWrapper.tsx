@@ -6,7 +6,7 @@ import Spinner from '../../core/Spinner'
 import PostSearch from './PostSearch'
 
 /**
- * Оболочка Поиск по сайту
+ * Поиск по сайту. Оболочка
  */
 const PostSearchWrapper: React.FC = () => {
     const [searchText, setSearchText] = useState<string>('')

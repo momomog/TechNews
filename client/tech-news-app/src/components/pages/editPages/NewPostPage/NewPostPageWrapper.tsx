@@ -1,52 +1,40 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {Dispatch} from 'redux'
-import {withRouter} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
+import {useHistory} from 'react-router-dom'
 import NewPostPage from './NewPostPage'
 import {getSectionName} from '../../../../common/Const'
 import {NotificationManager} from 'react-notifications'
 import PostAPI from '../../../../api/PostAPI'
-import {ChangeSectionAction} from '../../../../models/PostModel'
-import {RouteComponentProps} from 'react-router'
 import {PostRequest} from '../../../../models/RequestsModel'
 import {changeSection, getPosts, setPostPageAction} from '../../../../redux/actions/postActions'
 
-interface Props {
-    changeSection: (sectionId: number) => ChangeSectionAction
-    setPostPage: () => void
-    getPosts: (sectionId: number) => void
-}
 
 /**
  * Новый пост. Оболочка
  */
-const NewPostPageWrapper: React.FC<RouteComponentProps<any> & Props> = ({changeSection, setPostPage, getPosts, history}) => {
+const NewPostPageWrapper: React.FC = () => {
+    const dispatch = useDispatch(),
+        history = useHistory()
 
-    const createNewPost = (formData: PostRequest) => {
-        PostAPI.createNewPost({
-            title: formData.title,
-            preDescription: formData.preDescription,
-            fullDescription: formData.fullDescription,
-            categoryId: formData.categoryId
-        }, formData.photo && formData.photo[0])
-            .then(() => {
-                changeSection(formData.categoryId)
-                setPostPage()
-                getPosts(formData.categoryId)
-                history.push(`/posts/${getSectionName(formData.categoryId)}`)
-            })
-            .catch(() => NotificationManager.error('Не удалось создать новый пост', 'Ошибка'))
+    const createNewPost = async (formData: PostRequest) => {
+        try {
+            await PostAPI.createNewPost({
+                title: formData.title,
+                preDescription: formData.preDescription,
+                fullDescription: formData.fullDescription,
+                categoryId: formData.categoryId
+            }, formData.photo && formData.photo[0])
+
+            dispatch(changeSection(formData.categoryId))
+            dispatch(setPostPageAction())
+            dispatch(getPosts(formData.categoryId))
+            history.push(`/posts/${getSectionName(formData.categoryId)}`)
+        } catch (e) {
+            NotificationManager.error('Не удалось создать новый пост', 'Ошибка')
+        }
     }
 
     return <NewPostPage createNewPost={createNewPost}/>
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        changeSection: sectionId => dispatch(changeSection(sectionId)),
-        setPostPage: () => dispatch(setPostPageAction()),
-        getPosts: sectionId => dispatch(getPosts(sectionId))
-    }
-}
-
-export default withRouter(connect(null, mapDispatchToProps)(NewPostPageWrapper))
+export default NewPostPageWrapper

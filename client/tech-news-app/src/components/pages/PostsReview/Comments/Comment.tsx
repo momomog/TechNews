@@ -10,16 +10,18 @@ import {AuthContext} from '../../../../context/AuthContext'
 interface Props {
     comment: Comment
     firstCommentId?: number
-    likeCommentary: (commentId: number) => void
-    deleteCommentary: (commentId: number) => void
-    updateCommentary: (commentId: number, commentText: string) => void
-    addCommentary: (request: CommentRequest) => void
+    commentAction: (action: string,
+                    actionIndefiniteForm: string,
+                    commentId: number,
+                    updateCommentText?: string,
+                    commentText?: CommentRequest,
+                    newCommentBody?: CommentRequest) => void
 }
 
 /**
  * Комментарий
  */
-const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, deleteCommentary, updateCommentary, addCommentary}) => {
+const CommentItem: React.FC<Props> = ({comment, commentAction, firstCommentId}) => {
     const {isAuth, user} = useContext(AuthContext)
     const [isEditMode, setIsEditMode] = useState<boolean>(false)
     const [isAnswerMode, setIsAnswerMode] = useState<boolean>(false)
@@ -32,28 +34,29 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
 
     const onLike = () => {
         if (isAuth && !comment.isDeleted)
-            likeCommentary(comment.id)
+            commentAction('LIKE', 'оценить', comment.id)
         else
             NotificationManager.warning('Необходима авторизация на сайте', 'Ошибка')
     }
 
     const onDeleteCommentary = () => {
-        deleteCommentary(comment.id)
+        commentAction('DELETE', 'удалить', comment.id)
         setCommentEditText('')
     }
 
     const onUpdateCommentary = () => {
-        updateCommentary(comment.id, commentEditText)
+        commentAction('UPDATE', 'обновить', comment.id, commentEditText)
         setIsEditMode(false)
     }
 
     const onAddCommentary = () => {
         if (commentAnswerText.trim()) {
-            addCommentary({
-                commentText: commentAnswerText,
-                parentCommentId: commentAnswerParentId,
-                parentCommentAuthorName: commentAnswerParentAuthorName
-            })
+            commentAction('ADD_NEW', 'добавить', 0, '',
+                {
+                    commentText: commentAnswerText,
+                    parentCommentId: commentAnswerParentId,
+                    parentCommentAuthorName: commentAnswerParentAuthorName
+                })
 
             setIsAnswerMode(false)
             setCommentAnswerText('')
@@ -223,10 +226,7 @@ const CommentItem: React.FC<Props> = ({comment, firstCommentId, likeCommentary, 
                 && comment.replyComments.map(commentItem => (
                     <div className="ml-4" key={commentItem.id}>
                         <CommentItem comment={commentItem}
-                                     likeCommentary={likeCommentary}
-                                     updateCommentary={updateCommentary}
-                                     addCommentary={addCommentary}
-                                     deleteCommentary={deleteCommentary}/>
+                                     commentAction={commentAction}/>
                     </div>
                 ))
             }

@@ -7,7 +7,6 @@ interface Props {
 
 /**
  * Профиль. Социальные иконки
- * @param user
  */
 const SocialIcons: React.FC<Props> = ({user}) => {
     const {profileData} = user

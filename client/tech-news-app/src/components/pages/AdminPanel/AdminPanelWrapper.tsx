@@ -9,10 +9,13 @@ import {postInitProcess} from './postCreator'
  */
 const AdminPanelWrapper: React.FC = () => {
 
-    const deletePostById = (postId: number) => {
-        PostAPI.deletePostById(postId)
-            .then(() => NotificationManager.success(`Пост номер ${postId} успешно удален`, 'Успешно'))
-            .catch(() => NotificationManager.error(`Не удалось удалить пост номер ${postId}`, 'Ошибка'))
+    const deletePostById = async (postId: number) => {
+        try {
+            await PostAPI.deletePostById(postId)
+            NotificationManager.success(`Пост номер ${postId} успешно удален`, 'Успешно')
+        } catch (e) {
+            NotificationManager.error(`Не удалось удалить пост номер ${postId}`, 'Ошибка')
+        }
     }
 
     const updatePosts = async (day, month, postNum) => {

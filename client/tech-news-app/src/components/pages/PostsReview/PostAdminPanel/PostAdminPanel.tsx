@@ -14,8 +14,6 @@ interface Props {
 
 /**
  * Панель управления постом
- * @param postId
- * @param onDeletePost
  */
 const PostAdminPanel: React.FC<Props> = ({postId, onDeletePost}) => {
     const [openModal, setOpenModal] = useState(false)

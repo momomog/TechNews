@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useCallback, useMemo, useState} from 'react'
 import Common from '../../../common/Common'
 import PostItem from '../PostsList/PostItem'
 import {Post} from '../../../models/PostModel'
@@ -11,14 +11,15 @@ interface Props {
 
 /**
  * Поиск по сайту
- * @param posts
- * @param searchText
- * @param setPostId
  */
 const PostSearch: React.FC<Props> = ({posts, searchText}) => {
     const oneTimePostShowCount = 15
-    const [showPosts, setShowPosts] = useState<Array<Post>>(postsInit())
+    const initialPosts = useMemo(postsInit, [posts, searchText])
+
+    const [showPosts, setShowPosts] = useState<Array<Post>>(initialPosts)
     const [showPostsCount, setShowPostsCount] = useState<number>(oneTimePostShowCount)
+
+    const showMorePostsHandler = useCallback(showMorePosts, [posts, showPosts])
 
     return (
         <>
@@ -29,16 +30,13 @@ const PostSearch: React.FC<Props> = ({posts, searchText}) => {
                 </div>
             </div>
             {
-                showPosts.map(post => {
-                    return <PostItem post={post}
-                                     key={post.id}/>
-                })
+                showPosts.map(post => <PostItem post={post} key={post.id}/>)
             }
 
             {
                 showPosts.length > 0 && showPosts[showPosts.length - 1].id !== posts[posts.length - 1].id &&
                 <div className="row d-flex justify-content-center">
-                    <button className="btn btn-default mb-4" onClick={showMorePosts}>
+                    <button className="btn btn-default mb-4" onClick={showMorePostsHandler}>
                         Показать еще <i className="glyphicon glyphicon-arrow-down"/>
                     </button>
                 </div>

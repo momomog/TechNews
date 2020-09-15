@@ -6,9 +6,6 @@ import errorIcon from '../../static/error-icon.png'
 
 /**
  * Контроль формы. Input type="file"
- * @param input
- * @param meta
- * @param props
  */
 export const FileInput = ({input, meta, ...props}) => {
     const [value, setValue] = useState(undefined)

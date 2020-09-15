@@ -1,81 +1,58 @@
 import React, {useEffect} from 'react'
-import {connect} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {useRouteMatch} from 'react-router-dom'
 import Comments from './Comments'
 import CommentAPI from '../../../../api/CommentAPI'
 import {NotificationManager} from 'react-notifications'
-import {Comment, CommentRequest} from '../../../../models/CommentModel'
-import {Dispatch} from 'redux'
+import {CommentRequest} from '../../../../models/CommentModel'
 import {getPostComments} from '../../../../redux/actions/commentActions'
 import {RootState} from '../../../../redux/reducers/rootReducer'
 
-interface Props {
-    sectionId: number
-    postComments: Array<Comment>
-    commentsCount: number
-    getPostComments: (sectionId: number, postId: number) => void
-}
 
 /**
  * Список комментариев. Оболочка
  */
-const CommentsWrapper: React.FC<Props> = ({sectionId, postComments, commentsCount, getPostComments}) => {
-    const {params}: any = useRouteMatch()
-    const postId = params.postId
+const CommentsWrapper: React.FC = () => {
+    const {params}: any = useRouteMatch(),
+        dispatch = useDispatch(),
+        {sectionId} = useSelector((state: RootState) => state.postsData),
+        {commentsCount, postComments} = useSelector((state: RootState) => state.commentsData),
+        postId = params.postId
 
     useEffect(() => {
-        getPostComments(sectionId, postId)
+        dispatch(getPostComments(sectionId, postId))
     }, [postId, sectionId])
 
-    const likeCommentary = (commentId: number) => {
-        CommentAPI.likeComment(postId, commentId)
-            .then(() => getPostComments(sectionId, postId))
-            .catch(() => NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось оценить комментарий'))
-    }
+    const commentAction = async (
+        action: string,
+        actionIndefiniteForm: string,
+        commentId?: number,
+        updateCommentText?: string,
+        request?: CommentRequest) => {
+        try {
+            if (action === 'LIKE' && commentId)
+                await CommentAPI.likeComment(postId, commentId)
+            else if (action === 'DELETE' && commentId)
+                await CommentAPI.deleteComment(postId, commentId)
+            else if (action === 'UPDATE' && commentId && updateCommentText)
+                await CommentAPI.updateComment(postId, commentId, updateCommentText)
+            else if (action === 'ADD_NEW' && request)
+                await CommentAPI.sendNewPostComment({
+                    postId: postId,
+                    commentText: request && request.commentText,
+                    parentCommentId: request && request.parentCommentId,
+                    parentCommentAuthorName: request && request.parentCommentAuthorName
+                })
 
-    const deleteCommentary = (commentId: number) => {
-        CommentAPI.deleteComment(postId, commentId)
-            .then(() => getPostComments(sectionId, postId))
-            .catch(() => NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось удалить комментарий'))
-    }
-
-    const updateCommentary = (commentId: number, commentText: string) => {
-        CommentAPI.updateComment(postId, commentId, commentText)
-            .then(() => getPostComments(sectionId, postId))
-            .catch(() => NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось обновить комментарий'))
-    }
-
-    const addNewCommentary = (request: CommentRequest) => {
-        CommentAPI.sendNewPostComment({
-            postId: postId,
-            commentText: request && request.commentText,
-            parentCommentId: request && request.parentCommentId,
-            parentCommentAuthorName: request && request.parentCommentAuthorName
-        })
-            .then(() => getPostComments(sectionId, postId))
-            .catch(() => NotificationManager.error('Произошла неизвестная ошибка', 'Не удалось добавить комментарий'))
+            dispatch(getPostComments(sectionId, postId))
+        } catch (e) {
+            NotificationManager.error('Произошла неизвестная ошибка', `Не удалось ${actionIndefiniteForm} комментарий`)
+        }
     }
 
     return <Comments comments={postComments}
                      commentsCount={commentsCount}
-                     addNewCommentary={addNewCommentary}
-                     likeCommentary={likeCommentary}
-                     updateCommentary={updateCommentary}
-                     deleteCommentary={deleteCommentary}/>
+                     commentAction={commentAction}/>
 }
 
-const mapStateToProps = (state: RootState) => {
-    return {
-        sectionId: state.postsData.sectionId,
-        postComments: state.commentsData.postComments,
-        commentsCount: state.commentsData.commentsCount
-    }
-}
-
-const mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        getPostComments: (sectionId: number, postId: number) => dispatch(getPostComments(sectionId, postId))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CommentsWrapper)
+export default CommentsWrapper

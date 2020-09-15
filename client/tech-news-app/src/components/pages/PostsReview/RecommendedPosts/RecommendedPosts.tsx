@@ -6,7 +6,6 @@ import {Post} from '../../../../models/PostModel'
 
 /**
  * Рекомендуемый пост
- * @param post
  */
 const PostItem: React.FC<{ post: Post }> = ({post}) => {
 
@@ -35,7 +34,6 @@ const PostItem: React.FC<{ post: Post }> = ({post}) => {
 
 /**
  * Рекомендуемые посты
- * @param posts
  */
 const RecommendedPosts: React.FC<{ posts: Array<Post> }> = ({posts}) => {
     return (

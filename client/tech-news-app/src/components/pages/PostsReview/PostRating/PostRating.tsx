@@ -10,8 +10,6 @@ interface Props {
 
 /**
  * Оценка поста
- * @param post
- * @param postRating
  */
 const PostRating: React.FC<Props> = ({post, postRating}) => {
     const {user} = useContext(AuthContext)

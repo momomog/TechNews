@@ -14,8 +14,6 @@ interface Props {
 
 /**
  * Панель администратора
- * @param deletePostById
- * @param updatePosts
  */
 const AdminPanel: React.FC<Props> = ({deletePostById , updatePosts}) => {
     const [delPostId, setDelPostId] = useState<number>(0)

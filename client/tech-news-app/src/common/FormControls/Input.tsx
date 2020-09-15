@@ -5,9 +5,6 @@ import errorIcon from '../../static/error-icon.png'
 
 /**
  * Контроль формы. Для type="file" используется компонент FileInput
- * @param input
- * @param meta
- * @param props
  */
 export const Input = ({input, meta, ...props}) => {
     const isError = meta.touched && meta.error

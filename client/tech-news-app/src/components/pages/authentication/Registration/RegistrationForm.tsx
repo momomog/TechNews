@@ -2,7 +2,8 @@ import React from 'react'
 import {Field, InjectedFormProps, reduxForm} from 'redux-form'
 import {
     email,
-    isSamePasswords, latinDigital,
+    isSamePasswords,
+    latinDigital,
     maxLength15,
     maxLength30,
     maxLength40,

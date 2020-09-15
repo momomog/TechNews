@@ -9,7 +9,6 @@ interface Props {
 
 /**
  * Редактор профиля
- * @param updateUserData
  */
 const ProfileEdit: React.FC<Props> = ({updateUserData}) => {
     const {isLight} = useContext(ThemeContext)

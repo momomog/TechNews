@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useMemo} from 'react'
 import {NavLink} from 'react-router-dom'
 import {getSectionName} from '../../../../common/Const'
 import {ThemeContext} from '../../../../context/ThemeContext'
@@ -22,13 +22,17 @@ const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, secti
     const setPostPage = e => setPosts(sectionId, Number(e.target.textContent))
     const setPrevNextPostPage = (page: number) => setPosts(sectionId, page)
 
+    const prevButtonClassname = useMemo(getPreviousButtonClass, [postPage])
+    const nextButtonClassname = useMemo(getNextButtonClass, [postPage])
+    const pagesCountArray = useMemo(initPagesArray, [postPage, postsCount])
+
     return (
         <div className="row">
             <div className="col-sm-12 d-flex justify-content-center mb-3">
                 <nav aria-label="Page navigation example">
                     <ul className="pagination justify-content-center pagin-links">
 
-                        <li className={getPreviousButtonClass()}
+                        <li className={prevButtonClassname}
                             onClick={() => setPrevNextPostPage(postPage - 1)}>
                             <NavLink className={navItemClasses.join(' ')}
                                      to={`/posts/${getSectionName(sectionId)}/${postPage - 1}`}>
@@ -37,9 +41,9 @@ const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, secti
                         </li>
 
                         {
-                            initPagesArray().map((page) => {
+                            pagesCountArray.map((page) => {
                                 return (
-                                    <li className={getNavigationButtonClass(page)} onClick={setPostPage} key={page}>
+                                    <li className={getActiveButtonClass(page)} onClick={setPostPage} key={page}>
                                         <NavLink to={`/posts/${getSectionName(sectionId)}/${page}`}
                                                  className={navItemClasses.join(' ')}>
                                             {page}
@@ -49,7 +53,7 @@ const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, secti
                             })
                         }
 
-                        <li className={getNextButtonClass()}
+                        <li className={nextButtonClassname}
                             onClick={() => setPrevNextPostPage(postPage + 1)}>
                             <NavLink to={`/posts/${getSectionName(sectionId)}/${postPage + 1}`}
                                      className={navItemClasses.join(' ')}>
@@ -101,7 +105,7 @@ const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, secti
     }
 
     // active для текущей страницы-пагинации
-    function getNavigationButtonClass(pageNumber) {
+    function getActiveButtonClass(pageNumber) {
         return postPage === pageNumber ? 'page-item active' : 'page-item'
     }
 }

@@ -6,9 +6,6 @@ import {change} from 'redux-form'
 
 /**
  * Контроль формы. DatePicker
- * @param input
- * @param meta
- * @param props
  */
 export const DatePicker = ({input, meta, ...props}) => {
     const isError = meta.touched && meta.error,
@@ -31,7 +28,7 @@ export const DatePicker = ({input, meta, ...props}) => {
                     value={initValue}
                     onChange={(value: Date | null) => {
                         let date = value
-                        // Сетаем дате 12 часов, иначе ф-ция JSON.stringify() отнимет у даты 4 часа и получится предыдущее число
+                        // Сетаем дате 12 часов, иначе ф-ция JSON.stringify() отнимет у даты 4 часа и получится предыдущий день
                         if (value)
                          date = new Date(value.setHours(12))
                         setInitValue(date)

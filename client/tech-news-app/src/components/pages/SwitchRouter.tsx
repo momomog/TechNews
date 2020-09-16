@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useMemo} from 'react'
 import {Switch} from 'react-router-dom'
 import {AuthContext} from '../../context/AuthContext'
 import {getRoutes} from './routes'
@@ -7,16 +7,14 @@ import {getRoutes} from './routes'
  * Главный роутер приложения
  */
 const SwitchRouter = () => {
-    const [isUserAuth, setIsUserAuth] = useState(false)
     const {isAuth} = useContext(AuthContext)
-
-    useEffect(() => setIsUserAuth(isAuth), [setIsUserAuth, isAuth])
+    const routes = useMemo(() => getRoutes(isAuth), [isAuth])
 
     return (
         <div className="container main-content">
             <Switch>
                 {
-                    getRoutes(isUserAuth)
+                    routes
                 }
             </Switch>
         </div>

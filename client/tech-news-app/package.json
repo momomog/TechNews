@@ -126,6 +126,7 @@
     "@material-ui/icons": "^4.9.1",
     "awesome-typescript-loader": "^5.2.1",
     "html-webpack-plugin": "^4.0.2",
+    "copy-webpack-plugin": "^6.1.0",
     "react-datepicker": "^2.10.1",
     "source-map-loader": "^0.2.4",
     "ts-loader": "^6.2.2",

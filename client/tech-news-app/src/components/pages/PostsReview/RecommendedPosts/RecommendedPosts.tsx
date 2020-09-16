@@ -9,9 +9,7 @@ import {Post} from '../../../../models/PostModel'
  */
 const PostItem: React.FC<{ post: Post }> = ({post}) => {
 
-    const linkPropInit = () => {
-        return {pathname: `/redirect-to/post`, redirectUrl: `/posts/post/${post && post.id}`}
-    }
+    const linkPropInit = () => ({pathname: `/redirect-to/post`, redirectUrl: `/posts/post/${post.id}`})
 
     return (
         <div className="col-sm-4 mb-3 d-flex justify-content-center">
@@ -40,7 +38,6 @@ const RecommendedPosts: React.FC<{ posts: Array<Post> }> = ({posts}) => {
         <>
             <hr className="mt-3"/>
             <h2 className="mb-5">Вам может быть интересно</h2>
-
             {
                 posts.length > 0
                     ? <div className="row">
@@ -51,7 +48,6 @@ const RecommendedPosts: React.FC<{ posts: Array<Post> }> = ({posts}) => {
                     </div>
                     : <Spinner/>
             }
-
         </>
     )
 }

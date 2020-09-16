@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useMemo} from 'react'
 import {NavLink} from 'react-router-dom'
 import Hyphenated from 'react-hyphen'
 import ru from 'hyphenated-ru'
@@ -23,6 +23,13 @@ const PostItem: React.FC<Props> = ({post}) => {
         dispatch(setPostData(PostInitial))
         window.scroll(0, 0)
     }
+
+    // Средняя оценка поста
+    const averageRate = useMemo(() => {
+        if (post.rates.length)
+            return post.rates.reduce((acc, rate) => acc + rate, 0) / post.rates.length
+        return 0
+    }, [post])
 
     return (
         <div className={cardClasses.join(' ')}>
@@ -72,10 +79,9 @@ const PostItem: React.FC<Props> = ({post}) => {
 
                                 {
                                     Array.from({length: 5}).map((rate, index) => {
-                                        if (index < postRate(post))
-                                            return <span className="glyphicon glyphicon-star" key={index}/>
-                                        else
-                                            return <span className="glyphicon glyphicon-star-empty" key={index}/>
+                                        return index < averageRate
+                                            ? <span className="glyphicon glyphicon-star" key={index}/>
+                                            : <span className="glyphicon glyphicon-star-empty" key={index}/>
                                     })
                                 }
 
@@ -90,17 +96,3 @@ const PostItem: React.FC<Props> = ({post}) => {
 }
 
 export default PostItem
-
-
-// Оценен ли пост текущим пользователем
-function postRate(post) {
-    let rating = 0
-
-    if (post.rates.length > 0) {
-        post.rates.map(rate => rating += rate)
-
-        return rating / post.rates.length
-    }
-
-    return rating
-}

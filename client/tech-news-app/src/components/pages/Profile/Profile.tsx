@@ -57,11 +57,11 @@ const Profile: React.FC<Props> = ({user, isAuth, isCurrentUser, redirectToDialog
                                         {
                                             isLoading
                                                 ? <Spinner/>
-                                                : <>
+                                                : <div>
                                                     <img alt="User Pic"
                                                          className="img-circle profile-photo mt-3"
                                                          src={user.profileData.photoId && `https://drive.google.com/uc?export=view&id=${user.profileData.photoId}`}/>
-                                                </>
+                                                </div>
                                         }
                                         {
                                             isCurrentUser &&

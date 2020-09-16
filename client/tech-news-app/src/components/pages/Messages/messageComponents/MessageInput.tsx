@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {sendPayloadToMsgWS} from '../MessageWebService'
 import {User} from '../../../../models/UserModel'
 import {Picker} from 'emoji-mart'
@@ -17,6 +17,10 @@ let timeout
 export const MessageInput: React.FC<Props> = ({writingUsers, dialogUser, scrollToBottomMessage}) => {
     const [messageText, setMessageText] = useState<string>('')
     const [showPicker, setShowPicker] = useState<boolean>(false)
+
+    useEffect(() => {
+        return () => clearTimeout(timeout)
+    }, [dialogUser])
 
     const inputKeyListener = e => {
         if (e.key === 'Enter') {

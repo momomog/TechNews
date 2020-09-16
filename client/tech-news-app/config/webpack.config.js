@@ -25,6 +25,7 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const eslint = require('eslint');
 
 const postcssNormalize = require('postcss-normalize');
@@ -363,7 +364,7 @@ module.exports = function (webpackEnv) {
                         },
                         // Для загрузки файла web.config
                         {
-                            "test": /\.config|mp3$/,
+                            "test": /\.mp3$/,
                             "loader": "file-loader",
                             "options": {
                                 "name": "[name].[ext]"
@@ -566,6 +567,13 @@ module.exports = function (webpackEnv) {
                     new RegExp('/[^/?]+\\.[^/]+$'),
                 ],
             }),
+            new CopyWebpackPlugin({
+                    patterns: [{
+                        from: path.resolve(__dirname, 'web.config'),
+                        to: path.resolve(__dirname, '../build')
+                    }]
+                }
+            ),
             // TypeScript type checking
             useTypeScript &&
             new ForkTsCheckerWebpackPlugin({

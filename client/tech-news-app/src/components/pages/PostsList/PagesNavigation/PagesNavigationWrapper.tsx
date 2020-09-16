@@ -11,14 +11,14 @@ import {RootState} from '../../../../redux/reducers/rootReducer'
  */
 const PagesNavigationWrapper: React.FC = () => {
     const dispatch = useDispatch()
-    const postData = useSelector((state: RootState) => state.postsData)
+    const {postPage, postsCount, sectionId} = useSelector((state: RootState) => state.postsData)
 
     const setPosts = (sectionId: number, postPage: number) => dispatch(getPosts(sectionId, postPage, true))
 
     return <PagesNavigation setPosts={setPosts}
-                            postPage={postData.postPage}
-                            postsCount={postData.postsCount}
-                            sectionId={postData.sectionId}/>
+                            postPage={postPage}
+                            postsCount={postsCount}
+                            sectionId={sectionId}/>
 }
 
 export default PagesNavigationWrapper

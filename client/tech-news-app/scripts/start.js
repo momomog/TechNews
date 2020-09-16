@@ -6,7 +6,7 @@ const chalk = require('react-dev-utils/chalk');
 process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
 
-// Событие на reject промисов
+// Событие на необработанный reject промисов
 process.on('unhandledRejection', err => {
   console.log(chalk.red(err));
   throw err;

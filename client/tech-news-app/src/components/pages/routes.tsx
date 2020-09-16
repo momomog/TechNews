@@ -50,7 +50,7 @@ const baseRoutes = [{
     exact: false
 }]
 
- /**
+/**
  * Роуты авторизованного пользователя
  */
 const authRoutes = [{
@@ -66,10 +66,10 @@ const authRoutes = [{
     component: AdminPanelWrapper,
     exact: false
 }, {
-     path: '/profile',
-     component: ProfileWrapper,
-     exact: true
- }, {
+    path: '/profile',
+    component: ProfileWrapper,
+    exact: true
+}, {
     path: '/profile/me/edit',
     component: ProfileEditWrapper,
     exact: true
@@ -79,9 +79,9 @@ const authRoutes = [{
     exact: true
 }]
 
- /**
-  * Роуты гостевого пользователя
-  */
+/**
+ * Роуты гостевого пользователя
+ */
 const guestRoutes = [{
     path: '/registration',
     component: RegistrationWrapper,
@@ -92,9 +92,9 @@ const guestRoutes = [{
     exact: false
 }]
 
- /**
-  * Роуты обработки ошибок
-  */
+/**
+ * Роуты обработки ошибок
+ */
 const postfixRoutes = [{
     path: '/redirect-to/:pageName',
     component: RedirectComponentWrapper,
@@ -106,19 +106,15 @@ const postfixRoutes = [{
 }]
 
 export const getRoutes = (isAuth: boolean) => {
-   const routes = isAuth
-        // @ts-ignore
-        ? baseRoutes.concat(authRoutes, postfixRoutes)
-        // @ts-ignore
-        : baseRoutes.concat(guestRoutes, postfixRoutes)
+    // @ts-ignore
+    const routes = baseRoutes.concat(isAuth ? authRoutes : guestRoutes, postfixRoutes)
 
-    return routes.map(route => <Route key={route.path.toString()}
+    return routes.map(route => <Route key={route.path}
                                       path={route.path}
                                       exact={route.exact}
                                       component={route.component}/>
     )
 }
-
 
 
 // const baseRoutes = () => <>
@@ -146,20 +142,3 @@ export const getRoutes = (isAuth: boolean) => {
 //     <Route exact path='/redirect-to/:pageName' component={RedirectComponentWrapper}/>
 //     <Route path={['/error/:code', '*']} component={NotFoundComponent}/>
 // </>
-//
-//
-// export const getRoutes = (isAuth: boolean) => {
-//     return (
-//         <>
-//             {
-//                 baseRoutes()
-//             }
-//             {
-//                 isAuth ? authRoutes() : guestRoutes()
-//             }
-//             {
-//                 postfixRoutes()
-//             }
-//         </>
-//     )
-// }

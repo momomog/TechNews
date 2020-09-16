@@ -1,5 +1,4 @@
 import React, {useContext, useState} from 'react'
-import AuthService from '../../../../common/AuthService'
 import {Post} from '../../../../models/PostModel'
 import {AuthContext} from '../../../../context/AuthContext'
 
@@ -12,14 +11,14 @@ interface Props {
  * Оценка поста
  */
 const PostRating: React.FC<Props> = ({post, postRating}) => {
-    const {user} = useContext(AuthContext)
+    const {user, isAuth} = useContext(AuthContext)
     const [isRating, setIsRating] = useState(false)
     const [rating, setRating] = useState(0)
 
     const onRating = e => {
         setIsRating(true)
         setRating(Number(e.target.value))
-        postRating(post.id, Number(e.target.value))
+        postRating(post.id, +e.target.value)
     }
 
     const isRatedByUser = () => {
@@ -49,8 +48,8 @@ const PostRating: React.FC<Props> = ({post, postRating}) => {
                         } </span>
                         : isRatedByUser()
                         ? <div className="text-secondary">Вы уже оценили данный пост</div>
-                        : AuthService.isAuth()
-                            ? <>
+                        : isAuth && (
+                            <div>
                                 <span className="mr-2 mt-5 post-star-text">Оцените пост!</span>
                                 <span className="rating">
                                     <input type="radio" id="star5" name="rating" value="5"
@@ -73,8 +72,8 @@ const PostRating: React.FC<Props> = ({post, postRating}) => {
                                            onClick={onRating}/>
                                     <label htmlFor="star1" title="Ужасно">1 star</label>
                                 </span>
-                            </>
-                            : null
+                            </div>
+                        )
                 }
             </>
         </div>

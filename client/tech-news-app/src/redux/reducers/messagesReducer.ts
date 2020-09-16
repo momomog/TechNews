@@ -9,10 +9,10 @@ import {
 import {UserInitial} from '../../models/UserModel'
 
 const initialState: MessageState = {
-    dialogUser: UserInitial,
-    dialogMessages: [],
-    usersList: [],
-    writingUsers: []
+    dialogUser: UserInitial,  // юзер, с которым идет переписка
+    dialogMessages: [],       // сообщения диалога
+    usersList: [],            // пользователи, с которыми юзер ведет переписку
+    writingUsers: []          // люди, набирающие текст сообщения
 }
 
 export const messagesReducer = (state: MessageState = initialState, action: MessageAction) => {

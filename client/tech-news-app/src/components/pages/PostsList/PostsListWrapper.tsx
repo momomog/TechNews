@@ -20,7 +20,9 @@ const PostsListWrapper: React.FC = () => {
         const sectionName = params.sectionName
 
         if (!postList.length)
-            dispatch(sectionName ? getPosts(getSectionId(sectionName), postPage) : dispatch(getPosts(SECTION_ALL_POSTS)))
+            dispatch(sectionName
+                ? getPosts(getSectionId(sectionName), postPage)
+                : getPosts(SECTION_ALL_POSTS))
     }, [params.sectionName, postPage, postList])
 
 

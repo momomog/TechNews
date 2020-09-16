@@ -3,8 +3,8 @@ import {SET_IS_AUTH, SET_USER_DATA} from '../actions/userActions'
 
 
 const initialState: UserState = {
-    isAuth: false,
-    userData: UserInitial
+    isAuth: false,         // авторизация
+    userData: UserInitial  // данные авторизованного пользователя
 }
 
 export const userReducer = (state: UserState = initialState, action: UserAction): UserState => {

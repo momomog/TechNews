@@ -13,9 +13,9 @@ const App = () =>
     (
         <Router history={history}>
             <HeaderWrapper/>
-            <ErrorBoundary>
-                <SwitchRouter/>
-            </ErrorBoundary>
+                <ErrorBoundary>
+                    <SwitchRouter/>
+                </ErrorBoundary>
             <Footer/>
         </Router>
     )

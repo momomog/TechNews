@@ -3,8 +3,8 @@ import {SET_POST_COMMENTS} from '../actions/commentActions'
 
 
 const initialState: CommentState = {
-    postComments: [],
-    commentsCount: 0
+    postComments: [], // комментарии поста
+    commentsCount: 0  // количество комментариев
 }
 
 export const commentsReducer = (state: CommentState = initialState, action: CommentAction): CommentState => {

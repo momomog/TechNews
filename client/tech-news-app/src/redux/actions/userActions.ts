@@ -21,23 +21,27 @@ export const setUserDataAction = (userData: User): SetUserDataAction => ({
     userData: userData
 })
 
-export const login = (loginRequest: SignInRequest, remember?: boolean): any => (dispatch: Dispatch) => {
-    AuthAPI.login(loginRequest)
-        .then(response => {
-            if (!response.success && response.message) {
-                NotificationManager.error('Необходимо подтвердить свой почтовый адрес', 'Не удалось войти')
-            } else {
-                NotificationManager.success('Вы успешно авторизовались в системе', 'Добро пожаловать!')
-                AuthService.setToken(response.accessToken, remember)
-                dispatch(setIsAuthAction(true))
-                history.push(`/profile`)
-            }
-        })
-        .catch(() => NotificationManager.error('Проверьте правильность введенных данных', 'Не удалось войти'))
+export const login = (loginRequest: SignInRequest, remember?: boolean): any => async (dispatch: Dispatch) => {
+    try {
+        const response = await AuthAPI.login(loginRequest)
+        if (!response.success && response.message) {
+            NotificationManager.error('Необходимо подтвердить свой почтовый адрес', 'Не удалось войти')
+        } else {
+            NotificationManager.success('Вы успешно авторизовались в системе', 'Добро пожаловать!')
+            AuthService.setToken(response.accessToken, remember)
+            dispatch(setIsAuthAction(true))
+            history.push(`/profile`)
+        }
+    } catch (e) {
+        NotificationManager.error('Проверьте правильность введенных данных', 'Не удалось войти')
+    }
 }
 
-export const getCurrentUserData = (): any => (dispatch: Dispatch) => {
-    ProfileAPI.getCurrentUser()
-        .then((response: User) => dispatch(setUserDataAction(response)))
-        .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))
+export const getCurrentUserData = (): any => async (dispatch: Dispatch) => {
+    try {
+        const user: User = await ProfileAPI.getCurrentUser()
+        dispatch(setUserDataAction(user))
+    } catch (error) {
+        history.push(`/error/${error.code}`)
+    }
 }

@@ -24,14 +24,14 @@ function* workerSetDialogMessages(props) {
 }
 
 function* workerReadDialogMessages(props) {
-    const state: RootState = yield select()
+    const {messagesData}: RootState = yield select()
 
     yield put(setDialogUser(props.user))
     yield put(setDialogMessages([]))
 
     const messages = yield call(MessageAPI.markMessagesToRead, props.user.id)
 
-    const users = state.messagesData.usersList.map(item => {
+    const users = messagesData.usersList.map(item => {
         if (item.user.id === props.user.id)
             item.messages = []
         return item

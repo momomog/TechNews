@@ -7,7 +7,6 @@ import {
     SetPostPageAction,
     SetPostsAction
 } from '../../models/PostModel'
-import {ErrorResponse} from '../../models/ResponseModel'
 import history from '../../history'
 import {Dispatch} from 'redux'
 import {getSectionName} from '../../common/Const'
@@ -20,25 +19,30 @@ export const SET_POSTS = 'SET-POSTS'
 export const SET_IS_LOADING = 'SET-IS-LOADING'
 
 
-export const getPosts = (sectionId: number, postPage: number = 1, setPage: boolean = false): any => (dispatch: Dispatch) => {
-    if (setPage)
-        dispatch(setPostPageAction(postPage))
-    else
-        dispatch(setIsLoading(true))
+export const getPosts = (sectionId: number, postPage: number = 1, setPage: boolean = false): any => async (dispatch: Dispatch) => {
+    try {
+        if (setPage)
+            dispatch(setPostPageAction(postPage))
+        else
+            dispatch(setIsLoading(true))
 
-    PostAPI.getPosts(getSectionName(sectionId), postPage)
-        .then(data => {
-            dispatch(setPostsAction(data.posts))
-            dispatch(setPostsCountAction(data.postsCount))
-        })
-        .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))
-        .finally(() => dispatch(setIsLoading(false)))
+        const resp = await PostAPI.getPosts(getSectionName(sectionId), postPage)
+        dispatch(setPostsAction(resp.posts))
+        dispatch(setPostsCountAction(resp.postsCount))
+    } catch (error) {
+        history.push(`/error/${error.code}`)
+    } finally {
+        dispatch(setIsLoading(false))
+    }
 }
 
-export const getPostById = (postId: number): any => (dispatch: Dispatch) => {
-    PostAPI.getPostById(postId)
-        .then((data: Post) => dispatch(setPostData(data)))
-        .catch((error: ErrorResponse) => history.push(`/error/${error.code}`))
+export const getPostById = (postId: number): any => async (dispatch: Dispatch) => {
+    try {
+        const post = await PostAPI.getPostById(postId)
+        dispatch(setPostData(post))
+    } catch (error) {
+        history.push(`/error/${error.code}`)
+    }
 }
 
 export const changeSection = (sectionId: number): ChangeSectionAction => ({

@@ -51,12 +51,11 @@ const Messages: React.FC<Props> = ({users, writingUsers, readDialogMessages, get
                                                                 unreadMessages={item.messages}
                                                                 user={item.user}/>)
                                 }
-
                             </div>
                             <div className="col-md-8 messages-container">
                                 <div ref={messagesListRef} className="messages-list">
                                     {
-                                        dialogUser.id
+                                        dialogUser.id > 0
                                             ? messages.map((message, idx, arr) => <MessageItem key={message.id}
                                                                                                prevMessage={arr[idx - 1]}
                                                                                                message={message}/>)
@@ -64,11 +63,9 @@ const Messages: React.FC<Props> = ({users, writingUsers, readDialogMessages, get
                                     }
                                 </div>
                                 {
-                                    dialogUser.id
-                                        ? <MessageInput writingUsers={writingUsers}
+                                    dialogUser.id > 0 && <MessageInput writingUsers={writingUsers}
                                                         dialogUser={dialogUser}
                                                         scrollToBottomMessage={scrollToBottomMessage}/>
-                                        : null
                                 }
                             </div>
                         </div>

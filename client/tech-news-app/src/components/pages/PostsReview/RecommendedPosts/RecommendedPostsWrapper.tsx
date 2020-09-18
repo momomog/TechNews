@@ -25,7 +25,7 @@ const RecommendedPostsWrapper: React.FC<Props> = ({categoryId, postId, isVisible
         }
     })()
 
-    return isVisible ? <RecommendedPosts posts={posts}/> : <div/>
+    return isVisible ? <RecommendedPosts posts={posts}/> : null
 }
 
 export default RecommendedPostsWrapper

@@ -5,7 +5,7 @@ import {getSectionId, SECTION_ALL_POSTS} from '../../../common/Const'
 import {useRouteMatch} from 'react-router-dom'
 import Spinner from '../../core/Spinner'
 import {getPosts} from '../../../redux/actions/postActions'
-import {RootState} from '../../../redux/reducers/rootReducer'
+import {postsDataSelector} from "../../../redux/selectors/selectors";
 
 
 /**
@@ -14,7 +14,7 @@ import {RootState} from '../../../redux/reducers/rootReducer'
 const PostsListWrapper: React.FC = () => {
     const {params}: any = useRouteMatch()
     const dispatch = useDispatch()
-    const {postList, isLoading, postPage} = useSelector((state: RootState) => state.postsData)
+    const {postList, isLoading, postPage} = useSelector(postsDataSelector)
 
     useEffect(() => {
         const sectionName = params.sectionName

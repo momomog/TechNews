@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 
 import PagesNavigation from './PagesNavigation'
 import {getPosts} from '../../../../redux/actions/postActions'
-import {RootState} from '../../../../redux/reducers/rootReducer'
+import {postsDataSelector} from "../../../../redux/selectors/selectors";
 
 
 /**
@@ -11,7 +11,7 @@ import {RootState} from '../../../../redux/reducers/rootReducer'
  */
 const PagesNavigationWrapper: React.FC = () => {
     const dispatch = useDispatch()
-    const {postPage, postsCount, sectionId} = useSelector((state: RootState) => state.postsData)
+    const {postPage, postsCount, sectionId} = useSelector(postsDataSelector)
 
     const setPosts = (sectionId: number, postPage: number) => dispatch(getPosts(sectionId, postPage, true))
 

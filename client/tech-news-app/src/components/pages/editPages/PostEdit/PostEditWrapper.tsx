@@ -6,7 +6,7 @@ import {NotificationManager} from 'react-notifications'
 import PostAPI from '../../../../api/PostAPI'
 import {PostRequest} from '../../../../models/RequestsModel'
 import {getPostById} from '../../../../redux/actions/postActions'
-import {RootState} from '../../../../redux/reducers/rootReducer'
+import {postsDataSelector} from "../../../../redux/selectors/selectors";
 
 
 /**
@@ -15,7 +15,7 @@ import {RootState} from '../../../../redux/reducers/rootReducer'
 const PostEditWrapper: React.FC = () => {
     const {params}: any = useRouteMatch(),
         history = useHistory(),
-        {postData, sectionId} = useSelector((state: RootState) => state.postsData),
+        {postData, sectionId} = useSelector(postsDataSelector),
         dispatch = useDispatch()
 
     useEffect(() => {

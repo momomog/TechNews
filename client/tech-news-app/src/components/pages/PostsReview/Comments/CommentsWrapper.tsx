@@ -6,7 +6,7 @@ import CommentAPI from '../../../../api/CommentAPI'
 import {NotificationManager} from 'react-notifications'
 import {CommentRequest} from '../../../../models/CommentModel'
 import {getPostComments} from '../../../../redux/actions/commentActions'
-import {RootState} from '../../../../redux/reducers/rootReducer'
+import {commentsDataSelector, postsDataSelector} from "../../../../redux/selectors/selectors";
 
 
 /**
@@ -15,8 +15,8 @@ import {RootState} from '../../../../redux/reducers/rootReducer'
 const CommentsWrapper: React.FC = () => {
     const {params}: any = useRouteMatch(),
         dispatch = useDispatch(),
-        {sectionId} = useSelector((state: RootState) => state.postsData),
-        {commentsCount, postComments} = useSelector((state: RootState) => state.commentsData),
+        {sectionId} = useSelector(postsDataSelector),
+        {commentsCount, postComments} = useSelector(commentsDataSelector),
         postId = params.postId
 
     useEffect(() => {

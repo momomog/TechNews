@@ -5,7 +5,7 @@ import PostAdminPanel from './PostAdminPanel'
 import PostAPI from '../../../../api/PostAPI'
 import {NotificationManager} from 'react-notifications'
 import {getPosts} from '../../../../redux/actions/postActions'
-import {RootState} from '../../../../redux/reducers/rootReducer'
+import {postsDataSelector} from "../../../../redux/selectors/selectors";
 
 interface Props {
     postId: number
@@ -17,7 +17,7 @@ interface Props {
 const PostAdminPanelWrapper: React.FC<Props> = ({postId}) => {
     const history = useHistory()
     const dispatch = useDispatch()
-    const {sectionId} = useSelector((state: RootState) => state.postsData)
+    const {sectionId} = useSelector(postsDataSelector)
 
     const deletePostById = async () => {
         try {

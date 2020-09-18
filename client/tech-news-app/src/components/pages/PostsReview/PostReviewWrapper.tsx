@@ -5,14 +5,14 @@ import {useRouteMatch} from 'react-router-dom'
 import PostAPI from '../../../api/PostAPI'
 import Spinner from '../../core/Spinner'
 import {getPostById} from '../../../redux/actions/postActions'
-import {RootState} from '../../../redux/reducers/rootReducer'
+import {postsDataSelector} from "../../../redux/selectors/selectors";
 
 /**
  * Просмотр содержимого поста. Оболочка
  */
 const PostReviewWrapper: React.FC = () => {
     const {params}: any = useRouteMatch()
-    const {postData, sectionId} = useSelector((state: RootState) => state.postsData)
+    const {postData, sectionId} = useSelector(postsDataSelector)
     const dispatch = useDispatch()
 
     useEffect(() => {

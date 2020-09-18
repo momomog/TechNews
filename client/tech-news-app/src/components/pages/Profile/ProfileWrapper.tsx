@@ -8,9 +8,9 @@ import Spinner from '../../core/Spinner'
 import {ErrorResponse} from '../../../models/ResponseModel'
 import {NotificationManager} from 'react-notifications'
 import {getCurrentUserData} from '../../../redux/actions/userActions'
-import {RootState} from '../../../redux/reducers/rootReducer'
 import MessageAPI from '../../../api/MessageAPI'
 import {getDialogMessages, getDialogUsers} from '../../../redux/actions/messageActions'
+import {userDataSelector} from "../../../redux/selectors/selectors";
 
 
 /**
@@ -19,7 +19,7 @@ import {getDialogMessages, getDialogUsers} from '../../../redux/actions/messageA
 const ProfileWrapper: React.FC = () => {
     const [someUser, setSomeUser] = useState<User>(UserInitial),
         {pathname} = useLocation(),
-        {isAuth, userData: currentUser} = useSelector((state: RootState) => state.userData),
+        {isAuth, userData: currentUser} = useSelector(userDataSelector),
         history = useHistory(),
         dispatch = useDispatch(),
         path = pathname.split('/')

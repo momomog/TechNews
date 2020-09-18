@@ -3,13 +3,13 @@ import {useDispatch, useSelector} from 'react-redux'
 import App from './App'
 import AuthService from '../common/AuthService'
 import {getCurrentUserData, setIsAuthAction} from '../redux/actions/userActions'
-import {RootState} from '../redux/reducers/rootReducer'
 import {AuthContext} from '../context/AuthContext'
 import {useTheme} from '../hooks/useTheme'
 import {ThemeContext} from '../context/ThemeContext'
 import {connectToMsgWS, getWebService} from './pages/Messages/MessageWebService'
 import {Message} from '../models/MessageModel'
 import {addDialogMessage, getDialogUsers, setDialogUsersData, setWritingUsers} from "../redux/actions/messageActions";
+import {userDataSelector} from "../redux/selectors/selectors";
 
 
 /**
@@ -18,7 +18,7 @@ import {addDialogMessage, getDialogUsers, setDialogUsersData, setWritingUsers} f
 const AppWrapper: React.FC = () => {
     const theme = useTheme(),
         dispatch = useDispatch(),
-        {userData: user, isAuth} = useSelector((state: RootState) => state.userData)
+        {userData: user, isAuth} = useSelector(userDataSelector)
 
     const addDialogMsg = (message: Message) => dispatch(addDialogMessage(message))
     const setWritingUsersList = (payload: Message) => dispatch(setWritingUsers(payload))

@@ -47,12 +47,12 @@ export const getPostById = (postId: number): any => async (dispatch: Dispatch) =
 
 export const changeSection = (sectionId: number): ChangeSectionAction => ({
     type: CHANGE_SECTION,
-    sectionId: sectionId
+    sectionId
 })
 
 export const setPostsAction = (posts: Array<Post>): SetPostsAction => ({
     type: SET_POSTS,
-    posts: posts
+    posts
 })
 
 export const setPostsCountAction = (count: number): SetPostCountAction => ({

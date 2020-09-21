@@ -10,6 +10,8 @@ import {connectToMsgWS, getWebService} from './pages/Messages/MessageWebService'
 import {Message} from '../models/MessageModel'
 import {addDialogMessage, getDialogUsers, setDialogUsersData, setWritingUsers} from "../redux/actions/messageActions";
 import {userDataSelector} from "../redux/selectors/selectors";
+import {UserState} from "../models/UserModel";
+import {Dispatch} from "redux";
 
 
 /**
@@ -17,8 +19,9 @@ import {userDataSelector} from "../redux/selectors/selectors";
  */
 const AppWrapper: React.FC = () => {
     const theme = useTheme(),
-        dispatch = useDispatch(),
-        {userData: user, isAuth} = useSelector(userDataSelector)
+        dispatch: Dispatch = useDispatch(),
+        {userData: user, isAuth}: UserState = useSelector(userDataSelector),
+        authContext = {user, isAuth}
 
     const addDialogMsg = (message: Message) => dispatch(addDialogMessage(message))
     const setWritingUsersList = (payload: Message) => dispatch(setWritingUsers(payload))
@@ -35,7 +38,7 @@ const AppWrapper: React.FC = () => {
     }, [user.username, isAuth])
 
     return (
-        <AuthContext.Provider value={{isAuth, user}}>
+        <AuthContext.Provider value={authContext}>
             <ThemeContext.Provider value={theme}>
                 <App/>
             </ThemeContext.Provider>

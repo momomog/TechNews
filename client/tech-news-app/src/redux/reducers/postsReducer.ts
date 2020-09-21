@@ -8,7 +8,7 @@ import {
 } from '../actions/postActions'
 
 
-const initialState: PostState = {
+ export const initialState: PostState = {
     sectionId: 1,            // Активная секция новостей
     postsCount: 0,           // Общее количество постов секции
     postPage: 1,             // Активная вкладка пагинатора

@@ -37,7 +37,8 @@ $ npm run build
 | Google Drive | https://www.google.ru/drive/ |
 
 ### Todos
-
+- переделать стилевую часть приложения под концепцию BEM,  
+- применить адаптивно-отзывчивую верстку без использования bootstrap  
 
 
 License

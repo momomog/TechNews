@@ -2,7 +2,7 @@ import {UserAction, UserInitial, UserState} from '../../models/UserModel'
 import {SET_IS_AUTH, SET_USER_DATA} from '../actions/userActions'
 
 
-const initialState: UserState = {
+export const initialState: UserState = {
     isAuth: false,         // авторизация
     userData: UserInitial  // данные авторизованного пользователя
 }

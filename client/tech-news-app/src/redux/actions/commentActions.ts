@@ -13,12 +13,6 @@ export const setPostComments = (comments: Array<Comment>, commentsCount: number)
     commentsCount
 })
 
-// export const getPostComments = (sectionId: number, postId: number) => ({
-//     type: GET_POST_COMMENTS,
-//     sectionName: getSectionName(sectionId),
-//     postId
-// })
-
 export const getPostComments = (sectionId: number, postId: number): any => async (dispatch: Dispatch) => {
     try {
         const response = await CommentAPI.getPostComments(getSectionName(sectionId), postId)

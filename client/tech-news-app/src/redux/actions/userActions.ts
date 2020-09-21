@@ -4,7 +4,6 @@ import history from '../../history'
 import AuthService from '../../common/AuthService'
 import ProfileAPI from '../../api/ProfileAPI'
 import {SetIsAuthAction, SetUserDataAction, User} from '../../models/UserModel'
-import {ErrorResponse} from '../../models/ResponseModel'
 import {Dispatch} from 'redux'
 import {SignInRequest} from '../../models/RequestsModel'
 
@@ -37,7 +36,7 @@ export const login = (loginRequest: SignInRequest, remember?: boolean): any => a
     }
 }
 
-export const getCurrentUserData = (): any => async (dispatch: Dispatch) => {
+export const getCurrentUserData = () => async (dispatch: Dispatch) => {
     try {
         const user: User = await ProfileAPI.getCurrentUser()
         dispatch(setUserDataAction(user))

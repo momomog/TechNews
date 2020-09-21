@@ -31,7 +31,7 @@ class AuthService {
     /**
      * Сет токена авторизации
      */
-    setToken = (token: string, remember?: boolean) => {
+    setToken = (token: string, remember?: boolean): void => {
         if (remember)
             localStorage.setItem('accessToken', token)
         else
@@ -50,7 +50,7 @@ class AuthService {
     /**
      * Удаление токена авторизации
      */
-    removeToken = () => {
+    removeToken = (): void => {
         sessionStorage.removeItem('accessToken')
         localStorage.removeItem('accessToken')
     }

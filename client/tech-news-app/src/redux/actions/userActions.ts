@@ -36,7 +36,7 @@ export const login = (loginRequest: SignInRequest, remember?: boolean): any => a
     }
 }
 
-export const getCurrentUserData = () => async (dispatch: Dispatch) => {
+export const getCurrentUserData = (): any => async (dispatch: Dispatch) => {
     try {
         const user: User = await ProfileAPI.getCurrentUser()
         dispatch(setUserDataAction(user))

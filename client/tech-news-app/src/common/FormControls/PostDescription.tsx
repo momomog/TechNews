@@ -7,7 +7,7 @@ import {change} from 'redux-form'
  */
 export const PostDescription = ({input, meta, ...props}) => {
     const isError = meta.visited && meta.error
-    const [value, setValue] = useState(props.initValue)
+    const [value, setValue] = useState<string>(props.initValue)
 
     return (
         <div style={{width: '100%'}}>
@@ -18,7 +18,7 @@ export const PostDescription = ({input, meta, ...props}) => {
                     initialValue={props.initValue}
                     onChange={() => {
                     }}
-                    onEditorChange={val => {
+                    onEditorChange={(val: string) => {
                         if (val) {
                             setValue(val)
                             meta.dispatch(change(meta.form, input.name, val))

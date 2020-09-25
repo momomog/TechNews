@@ -4,6 +4,7 @@ import PostAPI from '../../../api/PostAPI'
 import {Post} from '../../../models/PostModel'
 import Spinner from '../../core/Spinner'
 import PostSearch from './PostSearch'
+import {Nullable} from "../../../models/Common";
 
 /**
  * Поиск по сайту. Оболочка
@@ -13,8 +14,8 @@ const PostSearchWrapper: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [posts, setSearchPosts] = useState<Array<Post>>([])
 
-    const query = new URLSearchParams(useLocation().search)
-    const search_query = query.get('search_query')
+    const query: URLSearchParams = new URLSearchParams(useLocation().search)
+    const search_query: Nullable<string> = query.get('search_query')
 
     if (search_query && search_query !== searchText)
         setSearchText(search_query)

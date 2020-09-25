@@ -8,7 +8,7 @@ import AdminPanelWrapper from './AdminPanel/AdminPanelWrapper'
 import ProfileWrapper from './Profile/ProfileWrapper'
 import ProfileEditWrapper from './editPages/ProfileEdit/ProfileEditWrapper'
 import PostEditWrapper from './editPages/PostEdit/PostEditWrapper'
-import {RedirectComponentWrapper} from '../core/RedirectComponent'
+import RedirectComponentWrapper from '../core/RedirectComponent'
 import {NotFoundComponent} from '../core/NotFoundComponent'
 import MessagesWrapper from './Messages/MessagesWrapper'
 import History from '../Footer/info/History'
@@ -17,10 +17,23 @@ import ProjectStructure from '../Footer/info/ProjectStructure'
 import RegistrationWrapper from './authentication/Registration/RegistrationWrapper'
 import AuthorizationWrapper from './authentication/Authorization/AuthorizationWrapper'
 
+type RouteProp = {
+    path: string | Array<string>
+    component: React.FC | React.FC<SpecificRedirectCompProps>
+    exact: boolean
+}
+
+// TODO избавиться
+interface SpecificRedirectCompProps {
+    location: {
+        redirectUrl: string
+    }
+}
+
 /**
  * Базовые роуты приложения независимо от авторизованности пользователя
  */
-const baseRoutes = [{
+const baseRoutes: Array<RouteProp> = [{
     path: '/posts/post/:postId',
     component: PostReviewWrapper,
     exact: true
@@ -53,7 +66,7 @@ const baseRoutes = [{
 /**
  * Роуты авторизованного пользователя
  */
-const authRoutes = [{
+const authRoutes: Array<RouteProp> = [{
     path: '/messages',
     component: MessagesWrapper,
     exact: false
@@ -82,7 +95,7 @@ const authRoutes = [{
 /**
  * Роуты гостевого пользователя
  */
-const guestRoutes = [{
+const guestRoutes: Array<RouteProp> = [{
     path: '/registration',
     component: RegistrationWrapper,
     exact: false
@@ -95,7 +108,7 @@ const guestRoutes = [{
 /**
  * Роуты обработки ошибок
  */
-const postfixRoutes = [{
+const postfixRoutes: Array<RouteProp> = [{
     path: '/redirect-to/:pageName',
     component: RedirectComponentWrapper,
     exact: true
@@ -106,13 +119,12 @@ const postfixRoutes = [{
 }]
 
 export const getRoutes = (isAuth: boolean) => {
-    // @ts-ignore
-    const routes = baseRoutes.concat(isAuth ? authRoutes : guestRoutes, postfixRoutes)
+    const routes: Array<RouteProp> = baseRoutes.concat(isAuth ? authRoutes : guestRoutes, postfixRoutes)
 
-    return routes.map(route => <Route key={route.path}
-                                      path={route.path}
-                                      exact={route.exact}
-                                      component={route.component}/>
+    return routes.map((route: RouteProp) => <Route key={typeof route.path === 'string' ? route.path : route.path[0]}
+                                                   path={route.path}
+                                                   exact={route.exact}
+                                                   component={route.component}/>
     )
 }
 

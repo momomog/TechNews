@@ -3,13 +3,14 @@ import {KeyboardDatePicker, MuiPickersUtilsProvider} from '@material-ui/pickers'
 import * as moment from 'moment'
 import DateFnsUtils from '@date-io/date-fns'
 import {change} from 'redux-form'
+import {Nullable} from "../../models/Common";
 
 /**
  * Контроль формы. DatePicker
  */
 export const DatePicker = ({input, meta, ...props}) => {
     const isError = meta.touched && meta.error,
-        [initValue, setInitValue] = useState<Date | null>(null)
+        [initValue, setInitValue] = useState<Nullable<Date>>(null)
 
     useEffect(() => setInitValue(props.initValue || null), [props.initValue])
 
@@ -26,7 +27,7 @@ export const DatePicker = ({input, meta, ...props}) => {
                     minDateMessage="Введена слишком ранняя дата"
                     maxDateMessage="Введена слишком поздняя дата"
                     value={initValue}
-                    onChange={(value: Date | null) => {
+                    onChange={(value: Nullable<Date>) => {
                         let date = value
                         // Сетаем дате 12 часов, иначе ф-ция JSON.stringify() отнимет у даты 4 часа и получится предыдущий день
                         if (value)

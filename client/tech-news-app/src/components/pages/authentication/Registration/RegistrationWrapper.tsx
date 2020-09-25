@@ -5,13 +5,14 @@ import {NotificationManager} from 'react-notifications'
 import {SignUpRequest} from '../../../../models/RequestsModel'
 import {useHistory} from 'react-router'
 import {ErrorResponse} from '../../../../models/ResponseModel'
+import {History} from "history";
 
 
 /**
  * Регистрация. Оболочка
  */
 const RegistrationWrapper: React.FC = () => {
-    const history = useHistory()
+    const history: History = useHistory()
 
     const signup = (signupRequest: SignUpRequest) => {
         AuthAPI.signup(signupRequest)

@@ -3,12 +3,13 @@ import React, {useState} from 'react'
 import okIcon from '../../static/ok-icon.png'
 import {change} from 'redux-form'
 import errorIcon from '../../static/error-icon.png'
+import {Nullable} from "../../models/Common";
 
 /**
  * Контроль формы. Input type="file"
  */
 export const FileInput = ({input, meta, ...props}) => {
-    const [value, setValue] = useState(undefined)
+    const [value, setValue] = useState<Nullable<File>>()
     const isError = meta.touched && meta.error && !value
 
     return (
@@ -24,15 +25,16 @@ export const FileInput = ({input, meta, ...props}) => {
             <>
                 <input {...input}
                        {...props}
-                       onChange={(e: any) => {
-                           const file = e.target.files[0]
-                           setValue(file)
+                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                           const file: Nullable<File> = e.target.files && e.target.files[0]
+                           if (file)
+                               setValue(file)
                            meta.dispatch(change(meta.form, input.name, file))
 
                            if (typeof props.onPreviewRender === 'function')
                                props.onPreviewRender(file)
                        }}
-                       value={undefined}
+                    // value={undefined}
                        style={{
                            backgroundImage: isError ? `url(${errorIcon})` : meta.touched ? `url(${okIcon})` : '',
                            backgroundPosition: `100% -10%`,

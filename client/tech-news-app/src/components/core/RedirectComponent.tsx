@@ -9,8 +9,21 @@ interface Props {
 }
 
 
-const RedirectComponent: React.FC<Props & RouteComponentProps<any>> = (props) => {
-    return <Redirect to={props.location.redirectUrl}/>
+const RedirectComponent: React.FC<Props> = ({location}) => {
+    return <Redirect to={location.redirectUrl}/>
 }
 
-export const RedirectComponentWrapper = compose(withRouter)(RedirectComponent)
+export default RedirectComponent
+
+// interface Props {
+//     location: {
+//         redirectUrl: string
+//     }
+// }
+//
+//
+// const RedirectComponent: React.FC<Props & RouteComponentProps<any>> = (props) => {
+//     return <Redirect to={props.location.redirectUrl}/>
+// }
+//
+// export const RedirectComponentWrapper = compose(withRouter)(RedirectComponent)

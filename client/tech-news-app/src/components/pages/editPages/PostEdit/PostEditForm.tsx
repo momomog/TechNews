@@ -25,15 +25,9 @@ interface OwnProps {
 
 /**
  * Редактор поста. Форма
- * @param categories
- * @param post
- * @param initialize
- * @param submitSucceeded
- * @param invalid
- * @param handleSubmit
  */
 const PostEditForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps> = ({categories, post, initialize, submitSucceeded, invalid, handleSubmit}) => {
-    const history = useHistory()
+    const history: History = useHistory()
 
     useEffect(() => {
         initialize({

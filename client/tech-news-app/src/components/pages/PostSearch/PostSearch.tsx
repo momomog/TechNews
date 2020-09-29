@@ -14,7 +14,7 @@ interface Props {
  */
 const PostSearch: React.FC<Props> = ({posts, searchText}) => {
     const oneTimePostShowCount = 15
-    const initialPosts = useMemo(postsInit, [posts, searchText])
+    const initialPosts: Array<Post> = useMemo(postsInit, [posts, searchText])
 
     const [showPosts, setShowPosts] = useState<Array<Post>>(initialPosts)
     const [showPostsCount, setShowPostsCount] = useState<number>(oneTimePostShowCount)

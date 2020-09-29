@@ -7,7 +7,7 @@ import errorIcon from '../../static/error-icon.png'
  * Контроль формы. Select
  */
 export const Select = ({input, meta, ...props}) => {
-    const isError = meta.touched && meta.error
+    const isError: boolean = meta.touched && meta.error
 
     return (
         <div style={{width: '100%'}}>

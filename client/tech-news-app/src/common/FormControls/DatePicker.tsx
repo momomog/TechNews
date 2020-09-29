@@ -9,7 +9,7 @@ import {Nullable} from "../../models/Common";
  * Контроль формы. DatePicker
  */
 export const DatePicker = ({input, meta, ...props}) => {
-    const isError = meta.touched && meta.error,
+    const isError: boolean = meta.touched && meta.error,
         [initValue, setInitValue] = useState<Nullable<Date>>(null)
 
     useEffect(() => setInitValue(props.initValue || null), [props.initValue])

@@ -6,14 +6,15 @@ import ProfileAPI from '../../../../api/ProfileAPI'
 import {NotificationManager} from 'react-notifications'
 import {ProfileRequest} from '../../../../models/RequestsModel'
 import {getCurrentUserData} from '../../../../redux/actions/userActions'
+import {Dispatch} from 'redux'
 
 
 /**
  * Редактор профиля. Оболочка
  */
 const ProfileEditWrapper: React.FC = () => {
-    const history = useHistory(),
-        dispatch = useDispatch()
+    const history: History = useHistory(),
+        dispatch: Dispatch = useDispatch()
 
     const updateUserData = async (userDataRequest: ProfileRequest) => {
         try {

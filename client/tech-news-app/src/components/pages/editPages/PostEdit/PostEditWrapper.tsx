@@ -7,16 +7,18 @@ import PostAPI from '../../../../api/PostAPI'
 import {PostRequest} from '../../../../models/RequestsModel'
 import {getPostById} from '../../../../redux/actions/postActions'
 import {postsDataSelector} from "../../../../redux/selectors/selectors";
+import {PostState} from "../../../../models/PostModel";
+import {Dispatch} from "redux";
 
 
 /**
  * Редактор поста. Оболочка
  */
 const PostEditWrapper: React.FC = () => {
-    const {params}: any = useRouteMatch(),
-        history = useHistory(),
-        {postData, sectionId} = useSelector(postsDataSelector),
-        dispatch = useDispatch()
+    const {params}: Params = useRouteMatch(),
+        history: History = useHistory(),
+        {postData, sectionId}: PostState = useSelector(postsDataSelector),
+        dispatch: Dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getPostById(params.postId))

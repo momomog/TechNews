@@ -9,15 +9,16 @@ import ErrorBoundary from './core/ErrorBoundary'
 /**
  * Корневой компонент
  */
-const App = () =>
-    (
+const App = () => {
+    return (
         <Router history={history}>
             <HeaderWrapper/>
-                <ErrorBoundary>
-                    <SwitchRouter/>
-                </ErrorBoundary>
+            <ErrorBoundary>
+                <SwitchRouter/>
+            </ErrorBoundary>
             <Footer/>
         </Router>
     )
+}
 
 export default App

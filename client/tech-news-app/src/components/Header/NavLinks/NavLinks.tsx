@@ -10,7 +10,7 @@ import {
 } from '../../../common/Const'
 import {ChangeSectionAction, SetPostPageAction} from '../../../models/PostModel'
 import {Search} from './Search'
-import {ThemeContext} from '../../../context/ThemeContext'
+import {AppThemeContext, ThemeContext} from '../../../context/ThemeContext'
 
 interface Props {
     setPosts: (sectionId: number) => void
@@ -22,8 +22,8 @@ interface Props {
  * Панель навигации по категории постов
  */
 const NavLinks: React.FC<Props> = ({setPosts, setPostPage, changeSection}) => {
-    const {isLight} = useContext(ThemeContext)
-    const navbarClasses = ['navbar', 'navbar-expand-lg', isLight ? 'background-light' : 'navbar-dark-background']
+    const {isLight}: AppThemeContext = useContext(ThemeContext)
+    const navbarClasses: Array<string> = ['navbar', 'navbar-expand-lg', isLight ? 'background-light' : 'navbar-dark-background']
 
     const setPostsAndChangeSection = (sectionId: number) => {
         setPosts(sectionId)

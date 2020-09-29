@@ -1,12 +1,12 @@
 import React, {useContext} from 'react'
-import {ThemeContext} from '../../../context/ThemeContext'
+import {AppThemeContext, ThemeContext} from '../../../context/ThemeContext'
 import reactLogo from '../../../static/react-logo.png'
 import springLogo from '../../../static/spring-logo.png'
 import {NavLink} from 'react-router-dom'
 
 const Technologies: React.FC = () => {
-    const {isLight} = useContext(ThemeContext)
-    const cardClasses = ['panel', 'panel-default', isLight ? 'background-light' : 'background-dark']
+    const {isLight}: AppThemeContext = useContext(ThemeContext)
+    const cardClasses: Array<string> = ['panel', 'panel-default', isLight ? 'background-light' : 'background-dark']
 
     return (
         <div className="row history-container">
@@ -25,7 +25,8 @@ const Technologies: React.FC = () => {
                             <li>Использование Virtual DOM, позволяющее повысить производительность высоконагруженных
                                 приложений
                             </li>
-                            <li>Использование компонентного подхода, благодаря чему возможно переиспользование одного и того же
+                            <li>Использование компонентного подхода, благодаря чему возможно переиспользование одного и
+                                того же
                                 кода
                             </li>
                             <li>Как правило, очень простая миграция между версиями</li>
@@ -75,10 +76,12 @@ const Technologies: React.FC = () => {
                             который разбит на следующие слои: controllers, services, dao. Контроллеры "читают" запросы
                             к серверу и обращаются к соответствующему сервису. Spring Security при этом ограничивает
                             доступ к ресурсам, недоступным пользователю. Сервисы обращаются к слою ДАО, где и происходит
-                            непосредственное написание HQL-запросов, запрос в базу данных и возврат результатов запроса.</p>
+                            непосредственное написание HQL-запросов, запрос в базу данных и возврат результатов запроса.
+                        </p>
                         <p>В качестве базы данных используется <i>Postgres</i>, ввиду своей легкости и доступности. Для
                             обращения к базе данных используется технология <i>Hibernate</i>.</p>
-                        <p>Файловая структура приложения подробно расписана на <NavLink to="/project-struct">этой</NavLink> странице.</p>
+                        <p>Файловая структура приложения подробно расписана на <NavLink
+                            to="/project-struct">этой</NavLink> странице.</p>
                     </div>
                 </div>
             </div>

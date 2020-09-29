@@ -10,7 +10,7 @@ import {Nullable} from "../../models/Common";
  */
 export const FileInput = ({input, meta, ...props}) => {
     const [value, setValue] = useState<Nullable<File>>()
-    const isError = meta.touched && meta.error && !value
+    const isError: boolean = meta.touched && meta.error && !value
 
     return (
         <div style={{width: '100%'}}>

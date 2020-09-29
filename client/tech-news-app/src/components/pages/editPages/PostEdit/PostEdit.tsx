@@ -11,8 +11,6 @@ interface Props {
 
 /**
  * Редактор поста
- * @param post
- * @param updatePostData
  */
 const PostEdit: React.FC<Props> = ({post, updatePostData}) => {
 

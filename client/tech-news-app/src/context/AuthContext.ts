@@ -1,8 +1,13 @@
-import {createContext} from 'react'
-import {UserInitial} from "../models/UserModel";
+import React, {createContext} from 'react'
+import {User, UserInitial} from "../models/UserModel";
 
-export const AuthContext = createContext({
-    isAuth:false,
+export type AppAuthContext = {
+    isAuth: boolean
+    user: User
+}
+
+export const AuthContext: React.Context<AppAuthContext> = createContext<AppAuthContext>({
+    isAuth: false,
     user: UserInitial
 })
 

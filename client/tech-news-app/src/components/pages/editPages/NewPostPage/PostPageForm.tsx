@@ -25,13 +25,9 @@ interface OwnProps {
 
 /**
  * Новый пост. Форма
- * @param categories
- * @param handleSubmit
- * @param invalid
- * @param submitSucceeded
  */
 const PostPageForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps> = ({categories, handleSubmit, invalid, submitSucceeded}) => {
-    const [photo, setPhoto] = useState(nocard)
+    const [photo, setPhoto] = useState<string>(nocard)
 
     const onLoadPhoto = (file: File) => {
         const reader = new FileReader()

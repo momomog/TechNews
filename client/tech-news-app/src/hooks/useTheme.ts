@@ -6,6 +6,13 @@ const DARK_THEME = 'dark'
 const LIGHT_THEME_BACKGROUND = 'linear-gradient(to right, #c4c0ad, #DBDBDB, #F2F2F2, #c4c0ad)'
 const DARK_THEME_BACKGROUND = 'linear-gradient(to right, #262424, #908d8d, #908d8d, #262424)'
 
+export type Theme = {
+    theme: string
+    isLight: boolean
+    isDark: boolean
+    changeTheme: () => void
+}
+
 /**
  * Хук глобальной темы приложения
  */

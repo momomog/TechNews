@@ -11,8 +11,8 @@ interface Props {
  * Редактор профиля
  */
 const ProfileEdit: React.FC<Props> = ({updateUserData}) => {
-    const {isLight} = useContext(ThemeContext)
-    const cardClasses = ['panel', 'panel-default', isLight ? 'background-light' : 'background-dark']
+    const {isLight}: boolean = useContext(ThemeContext)
+    const cardClasses: Array<string> = ['panel', 'panel-default', isLight ? 'background-light' : 'background-dark']
 
     const updateProfileData = (formData: ProfileRequest) => updateUserData(formData)
 

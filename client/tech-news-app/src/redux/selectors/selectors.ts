@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect'
-import {RootState} from "../reducers/rootReducer";
+import {RootState} from '../reducers/rootReducer'
 
 const selectPostData = (state: RootState) => state.postsData
 const selectUserData = (state: RootState) => state.userData

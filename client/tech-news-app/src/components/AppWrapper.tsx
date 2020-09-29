@@ -4,7 +4,7 @@ import App from './App'
 import AuthService from '../common/AuthService'
 import {getCurrentUserData, setIsAuthAction} from '../redux/actions/userActions'
 import {AuthContext} from '../context/AuthContext'
-import {useTheme} from '../hooks/useTheme'
+import {Theme, useTheme} from '../hooks/useTheme'
 import {ThemeContext} from '../context/ThemeContext'
 import {connectToMsgWS, getWebService} from './pages/Messages/MessageWebService'
 import {Message} from '../models/MessageModel'
@@ -18,7 +18,7 @@ import {Dispatch} from "redux";
  * Оболочка для корневого компонента
  */
 const AppWrapper: React.FC = () => {
-    const theme = useTheme(),
+    const theme: Theme = useTheme(),
         dispatch: Dispatch = useDispatch(),
         {userData: user, isAuth}: UserState = useSelector(userDataSelector),
         authContext = {user, isAuth}

@@ -3,11 +3,11 @@ import TreeView from '@material-ui/lab/TreeView'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import TreeItem from '@material-ui/lab/TreeItem'
-import {ThemeContext} from '../../../context/ThemeContext'
+import {AppThemeContext, ThemeContext} from '../../../context/ThemeContext'
 
 const ProjectStructure: React.FC = () => {
-    const {isLight} = useContext(ThemeContext)
-    const cardClasses = ['panel', 'mh-75', 'panel-default', isLight ? 'background-light' : 'background-dark']
+    const {isLight}: AppThemeContext = useContext(ThemeContext)
+    const cardClasses: Array<string> = ['panel', 'mh-75', 'panel-default', isLight ? 'background-light' : 'background-dark']
 
     const nodeId = () => Math.random().toString()
 
@@ -56,7 +56,8 @@ const ProjectStructure: React.FC = () => {
                                     <TreeItem nodeId={nodeId()} label="Footer">
                                         <TreeItem nodeId={nodeId()} label="Footer">
                                             <TreeItem nodeId={nodeId()} label="History.tsx"/>
-                                            <TreeItem nodeId={nodeId()} label="ProjectStructure.tsx <== вы находитесь здесь"/>
+                                            <TreeItem nodeId={nodeId()}
+                                                      label="ProjectStructure.tsx <== вы находитесь здесь"/>
                                             <TreeItem nodeId={nodeId()} label="Technologies.tsx"/>
                                         </TreeItem>
                                         <TreeItem nodeId={nodeId()} label="Footer.tsx"/>

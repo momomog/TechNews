@@ -6,8 +6,8 @@ import {NavLink} from 'react-router-dom'
 import {ChangeSectionAction, SetPostPageAction} from '../../../models/PostModel'
 import AuthUser from './AuthUser/AuthUser'
 import {SetIsAuthAction, User} from '../../../models/UserModel'
-import {AuthContext} from '../../../context/AuthContext'
-import {ThemeContext} from '../../../context/ThemeContext'
+import {AppAuthContext, AuthContext} from '../../../context/AuthContext'
+import {AppThemeContext, ThemeContext} from '../../../context/ThemeContext'
 
 import lightIcon from '../../../static/day-theme.png'
 import darkIcon from '../../../static/dark-theme.png'
@@ -24,9 +24,9 @@ interface Props {
  * Верхний компонент шапки. Содержит лого и информацию об авторизованном юзере
  */
 const Login: React.FC<Props> = ({setPosts, changeSection, setPostPage, setCurrentUserData, setIsAuth}) => {
-    const {isAuth, user} = useContext(AuthContext)
-    const {isLight, changeTheme} = useContext(ThemeContext)
-    const changeThemeIcon = isLight ? lightIcon : darkIcon
+    const {isAuth, user}: AppAuthContext = useContext(AuthContext)
+    const {isLight, changeTheme}: AppThemeContext = useContext(ThemeContext)
+    const changeThemeIcon: string = isLight ? lightIcon : darkIcon
 
     const onLogoClick = () => {
         setPosts(SECTION_ALL_POSTS)

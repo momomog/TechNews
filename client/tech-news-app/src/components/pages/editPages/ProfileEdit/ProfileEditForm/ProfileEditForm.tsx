@@ -6,12 +6,13 @@ import ProfileField from './ProfileField'
 import {DatePicker} from '../../../../../common/FormControls/DatePicker'
 import {ProfileRequest} from '../../../../../models/RequestsModel'
 import {AuthContext} from '../../../../../context/AuthContext'
+import {UserState} from "../../../../../models/UserModel";
 
 /**
  * Редактор профиля. Форма
  */
 const ProfileEditForm: React.FC<InjectedFormProps<ProfileRequest>> = ({initialize, handleSubmit, invalid, submitSucceeded}) => {
-    const {user} = useContext(AuthContext)
+    const {user}: UserState = useContext(AuthContext)
 
     useEffect(() => {
         initialize({

@@ -1,8 +1,16 @@
-import React from "react";
+import React from 'react'
 
-export const ThemeContext = React.createContext({
+export type AppThemeContext = {
+    theme: string
+    isLight: boolean
+    isDark: boolean
+    changeTheme: () => void
+}
+
+export const ThemeContext: React.Context<AppThemeContext> = React.createContext<AppThemeContext>({
     theme: 'light',
     isLight: true,
     isDark: false,
-    changeTheme: () => {}
+    changeTheme: () => {
+    }
 })

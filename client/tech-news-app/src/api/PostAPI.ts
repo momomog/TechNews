@@ -52,7 +52,7 @@ class PostAPI {
      * Создание нового поста
      */
     createNewPost = (postDataRequest: PostRequest, photoBody: File): Promise<boolean> => {
-        const formData = new FormData()
+        const formData: FormData = new FormData()
 
         formData.append('post', new Blob([JSON.stringify(postDataRequest)], {
             type: 'application/json'
@@ -75,7 +75,7 @@ class PostAPI {
      * Обновление содержимого поста
      */
     updatePostData = (postId: number, postDataRequest: PostRequest, photoBody: File): Promise<boolean> => {
-        const formData = new FormData()
+        const formData: FormData = new FormData()
         formData.append('post', new Blob([JSON.stringify(postDataRequest)], {
             type: 'application/json'
         }))

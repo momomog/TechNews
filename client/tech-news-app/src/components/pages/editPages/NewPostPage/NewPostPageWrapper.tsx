@@ -7,14 +7,15 @@ import {NotificationManager} from 'react-notifications'
 import PostAPI from '../../../../api/PostAPI'
 import {PostRequest} from '../../../../models/RequestsModel'
 import {changeSection, getPosts, setPostPageAction} from '../../../../redux/actions/postActions'
+import {Dispatch} from 'redux'
 
 
 /**
  * Новый пост. Оболочка
  */
 const NewPostPageWrapper: React.FC = () => {
-    const dispatch = useDispatch(),
-        history = useHistory()
+    const dispatch: Dispatch = useDispatch(),
+        history: History = useHistory()
 
     const createNewPost = async (formData: PostRequest) => {
         try {

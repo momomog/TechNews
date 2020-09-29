@@ -11,7 +11,6 @@ interface Props {
 
 /**
  * Новый пост
- * @param createNewPost
  */
 const NewPostPage: React.FC<Props> = ({createNewPost}) => {
 

@@ -1,12 +1,12 @@
 import React, {useContext} from 'react'
-import {ThemeContext} from '../../../context/ThemeContext'
+import {AppThemeContext, ThemeContext} from '../../../context/ThemeContext'
 import {NavLink} from 'react-router-dom'
 import thinkingMan from '../../../static/thinking-man.jpg'
 import writingCodeMan from '../../../static/writting-code-man.jpg'
 
 const History: React.FC = () => {
-    const {isLight} = useContext(ThemeContext)
-    const cardClasses = ['panel', 'panel-default', isLight ? 'background-light' : 'background-dark']
+    const {isLight}: AppThemeContext = useContext(ThemeContext)
+    const cardClasses: Array<string> = ['panel', 'panel-default', isLight ? 'background-light' : 'background-dark']
 
     return (
         <div className="row history-container">

@@ -6,7 +6,7 @@ import {change} from 'redux-form'
  * Контроль формы. PostDescription - tinymce editor
  */
 export const PostDescription = ({input, meta, ...props}) => {
-    const isError = meta.visited && meta.error
+    const isError: boolean = meta.visited && meta.error
     const [value, setValue] = useState<string>(props.initValue)
 
     return (

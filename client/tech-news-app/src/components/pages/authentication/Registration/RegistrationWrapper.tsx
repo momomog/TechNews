@@ -5,7 +5,7 @@ import {NotificationManager} from 'react-notifications'
 import {SignUpRequest} from '../../../../models/RequestsModel'
 import {useHistory} from 'react-router'
 import {ErrorResponse} from '../../../../models/ResponseModel'
-import {History} from "history";
+import {History} from 'history'
 
 
 /**

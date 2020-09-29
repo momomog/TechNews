@@ -1,6 +1,6 @@
-import {createBrowserHistory} from "history";
+import {createBrowserHistory, History} from "history"
 
-const history = createBrowserHistory()
+const history: History = createBrowserHistory()
 
 // if (!jest) {
     history.listen(_ => {

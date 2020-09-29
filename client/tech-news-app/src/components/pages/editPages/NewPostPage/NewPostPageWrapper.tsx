@@ -8,6 +8,7 @@ import PostAPI from '../../../../api/PostAPI'
 import {PostRequest} from '../../../../models/RequestsModel'
 import {changeSection, getPosts, setPostPageAction} from '../../../../redux/actions/postActions'
 import {Dispatch} from 'redux'
+import {History} from 'history'
 
 
 /**

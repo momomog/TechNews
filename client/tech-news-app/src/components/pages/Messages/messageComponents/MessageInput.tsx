@@ -22,7 +22,7 @@ export const MessageInput: React.FC<Props> = ({writingUsers, dialogUser, scrollT
         return () => clearTimeout(timeout)
     }, [dialogUser])
 
-    const inputKeyListener = e => {
+    const inputKeyListener = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter') {
             e.preventDefault()
             sendMessage()
@@ -42,7 +42,7 @@ export const MessageInput: React.FC<Props> = ({writingUsers, dialogUser, scrollT
         }
     }
 
-    const writeMessage = e => {
+    const writeMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setMessageText(e.target.value)
         if (!timeout) {
             sendPayloadToMsgWS(null, '', true)

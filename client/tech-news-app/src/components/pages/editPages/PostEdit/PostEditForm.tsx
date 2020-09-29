@@ -17,6 +17,7 @@ import {FileInput} from '../../../../common/FormControls/FileInput'
 import {PostDescription} from '../../../../common/FormControls/PostDescription'
 import {PostRequest} from '../../../../models/RequestsModel'
 import {Post} from '../../../../models/PostModel'
+import {History} from 'history'
 
 interface OwnProps {
     categories: Array<{ id: number, title: string }>

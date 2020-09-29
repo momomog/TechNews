@@ -7,6 +7,7 @@ import {NotificationManager} from 'react-notifications'
 import {ProfileRequest} from '../../../../models/RequestsModel'
 import {getCurrentUserData} from '../../../../redux/actions/userActions'
 import {Dispatch} from 'redux'
+import {History} from 'history'
 
 
 /**

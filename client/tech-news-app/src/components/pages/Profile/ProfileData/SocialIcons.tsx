@@ -9,7 +9,7 @@ interface Props {
  * Профиль. Социальные иконки
  */
 const SocialIcons: React.FC<Props> = ({user}) => {
-    const {profileData} = user
+    const {profileData}: User = user
 
     return (
         <>

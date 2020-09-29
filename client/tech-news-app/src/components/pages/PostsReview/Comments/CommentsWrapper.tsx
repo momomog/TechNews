@@ -1,23 +1,25 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {useRouteMatch} from 'react-router-dom'
+import {match, useRouteMatch} from 'react-router-dom'
 import Comments from './Comments'
 import CommentAPI from '../../../../api/CommentAPI'
 import {NotificationManager} from 'react-notifications'
-import {CommentRequest} from '../../../../models/CommentModel'
+import {CommentRequest, CommentState} from '../../../../models/CommentModel'
 import {getPostComments} from '../../../../redux/actions/commentActions'
 import {commentsDataSelector, postsDataSelector} from "../../../../redux/selectors/selectors";
+import {Dispatch} from "redux";
+import {PostState} from "../../../../models/PostModel";
 
 
 /**
  * Список комментариев. Оболочка
  */
 const CommentsWrapper: React.FC = () => {
-    const {params}: any = useRouteMatch(),
-        dispatch = useDispatch(),
-        {sectionId} = useSelector(postsDataSelector),
-        {commentsCount, postComments} = useSelector(commentsDataSelector),
-        postId = params.postId
+    const {params}: match<{postId: string}> = useRouteMatch(),
+        dispatch: Dispatch = useDispatch(),
+        {sectionId}: PostState = useSelector(postsDataSelector),
+        {commentsCount, postComments}: CommentState = useSelector(commentsDataSelector),
+        postId: number = +params.postId
 
     useEffect(() => {
         dispatch(getPostComments(sectionId, postId))

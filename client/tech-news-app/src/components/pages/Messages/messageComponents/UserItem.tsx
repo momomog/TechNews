@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const UserItem: React.FC<Props> = ({user, unreadMessages, readDialogMessages, getMessages, dialogUser}) => {
-    const unreadMsgsForUser = unreadMessages.filter(msg => user.id !== msg.dialogUserId)
+    const unreadMsgsForUser: Array<Message> = unreadMessages.filter(msg => user.id !== msg.dialogUserId)
 
     const openDialog = () => unreadMsgsForUser.length > 0 ? readDialogMessages(user) : getMessages(user)
 

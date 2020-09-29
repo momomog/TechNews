@@ -5,7 +5,7 @@ import {NotificationManager} from 'react-notifications'
 import {User} from '../../../models/UserModel'
 import ProfileData from './ProfileData/ProfileData'
 import SocialIcons from './ProfileData/SocialIcons'
-import {ThemeContext} from '../../../context/ThemeContext'
+import {AppThemeContext, ThemeContext} from '../../../context/ThemeContext'
 
 interface Props {
     user: User
@@ -19,12 +19,12 @@ interface Props {
  * Профиль
  */
 const Profile: React.FC<Props> = ({user, isAuth, isCurrentUser, redirectToDialogPage, onLoadPhoto}) => {
-    const [isLoading, setIsLoading] = useState(false)
-    const [isOpenModal, setIsOpenModal] = useState(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
     const [picture, setPicture] = useState(undefined)
 
-    const {isLight} = useContext(ThemeContext)
-    const cardClasses = ['panel', 'panel-default', isLight ? 'background-light' : 'background-dark']
+    const {isLight}: AppThemeContext = useContext(ThemeContext)
+    const cardClasses: Array<string> = ['panel', 'panel-default', isLight ? 'background-light' : 'background-dark']
 
     const changePhoto = (e) => {
         if (e.target.files[0].type.includes('image')) {

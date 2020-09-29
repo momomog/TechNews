@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import {Post} from '../../../../models/PostModel'
-import {AuthContext} from '../../../../context/AuthContext'
+import {AppAuthContext, AuthContext} from '../../../../context/AuthContext'
 
 interface Props {
     post: Post
@@ -11,9 +11,9 @@ interface Props {
  * Оценка поста
  */
 const PostRating: React.FC<Props> = ({post, postRating}) => {
-    const {user, isAuth} = useContext(AuthContext)
-    const [isRating, setIsRating] = useState(false)
-    const [rating, setRating] = useState(0)
+    const {user, isAuth}: AppAuthContext = useContext(AuthContext)
+    const [isRating, setIsRating] = useState<boolean>(false)
+    const [rating, setRating] = useState<number>(0)
 
     const onRating = e => {
         setIsRating(true)
@@ -21,7 +21,7 @@ const PostRating: React.FC<Props> = ({post, postRating}) => {
         postRating(post.id, +e.target.value)
     }
 
-    const isRatedByUser = () => {
+    const isRatedByUser = (): boolean => {
         const ratedUsers = post.ratedUsers
         let isRated = false
 

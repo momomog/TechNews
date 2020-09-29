@@ -1,10 +1,10 @@
 import React, {useContext, useEffect} from 'react'
 import {User} from '../../../models/UserModel'
-import {ThemeContext} from '../../../context/ThemeContext'
+import {AppThemeContext, ThemeContext} from '../../../context/ThemeContext'
 import {MessageItem} from './messageComponents/MessageItem'
 import {UserItem} from './messageComponents/UserItem'
 import {DialogUser, Message} from '../../../models/MessageModel'
-import {AuthContext} from '../../../context/AuthContext'
+import {AppAuthContext, AuthContext} from '../../../context/AuthContext'
 import {MessageInput} from './messageComponents/MessageInput'
 
 interface Props {
@@ -20,9 +20,9 @@ interface Props {
  * Сообщения
  */
 const Messages: React.FC<Props> = ({users, writingUsers, readDialogMessages, getMessages, messages, dialogUser}) => {
-    const {isLight} = useContext(ThemeContext)
-    const {user} = useContext(AuthContext)
-    const cardClasses = ['panel', 'panel-default', isLight ? 'background-light' : 'background-dark']
+    const {isLight}: AppThemeContext = useContext(ThemeContext)
+    const {user}: AppAuthContext = useContext(AuthContext)
+    const cardClasses: Array<string> = ['panel', 'panel-default', isLight ? 'background-light' : 'background-dark']
     const messagesListRef: React.RefObject<HTMLDivElement> = React.createRef()
 
     useEffect(() => {

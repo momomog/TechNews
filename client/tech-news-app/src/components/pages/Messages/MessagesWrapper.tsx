@@ -5,7 +5,7 @@ import Messages from './Messages'
 import {User} from '../../../models/UserModel'
 import Spinner from '../../core/Spinner'
 import {RootState} from '../../../redux/reducers/rootReducer'
-import {AuthContext} from '../../../context/AuthContext'
+import {AppAuthContext, AuthContext} from '../../../context/AuthContext'
 import {getDialogMessages, getDialogUsers, readDialogMessages} from '../../../redux/actions/messageActions'
 import {DialogUser, Message} from '../../../models/MessageModel'
 
@@ -23,7 +23,7 @@ interface Props {
  * Сообщения. Оболочка
  */
 const MessagesWrapper: React.FC<Props> = ({users, writingUsers, readDialogMessages, getDialogMessages, messages, getDialogUsers, dialogUser}) => {
-    const {isAuth} = useContext(AuthContext)
+    const {isAuth}: AppAuthContext = useContext(AuthContext)
 
     const getMessages = (dialogUser: User) => getDialogMessages(dialogUser)
 

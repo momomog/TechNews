@@ -16,8 +16,8 @@ export type Theme = {
 /**
  * Хук глобальной темы приложения
  */
-export const useTheme = () => {
-    const [theme, setTheme] = useState(localStorage.getItem('theme') || LIGHT_THEME)
+export const useTheme = (): Theme => {
+    const [theme, setTheme] = useState<string>(localStorage.getItem('theme') || LIGHT_THEME)
 
     useEffect(() => {
         if (theme) {

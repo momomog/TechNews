@@ -3,9 +3,10 @@ import {NavLink} from 'react-router-dom'
 import Hyphenated from 'react-hyphen'
 import ru from 'hyphenated-ru'
 import {Post, PostInitial} from '../../../models/PostModel'
-import {ThemeContext} from '../../../context/ThemeContext'
+import {AppThemeContext, ThemeContext} from '../../../context/ThemeContext'
 import {setPostData} from "../../../redux/actions/postActions";
 import {useDispatch} from "react-redux";
+import {Dispatch} from "redux";
 
 interface Props {
     post: Post
@@ -15,9 +16,9 @@ interface Props {
  * Пост
  */
 const PostItem: React.FC<Props> = ({post}) => {
-    const {isLight} = useContext(ThemeContext)
-    const cardClasses = ['row', 'well', 'post', 'center-block', isLight ? 'background-light' : 'background-dark']
-    const dispatch = useDispatch()
+    const {isLight}: AppThemeContext = useContext(ThemeContext)
+    const cardClasses: Array<string> = ['row', 'well', 'post', 'center-block', isLight ? 'background-light' : 'background-dark']
+    const dispatch: Dispatch = useDispatch()
 
     const postClick = () => {
         dispatch(setPostData(PostInitial))

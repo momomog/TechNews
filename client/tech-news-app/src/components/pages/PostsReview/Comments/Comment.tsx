@@ -5,7 +5,7 @@ import {NavLink} from 'react-router-dom'
 import Popup from 'reactjs-popup'
 import AuthService from '../../../../common/AuthService'
 import {Comment, CommentRequest} from '../../../../models/CommentModel'
-import {AuthContext} from '../../../../context/AuthContext'
+import {AppAuthContext, AuthContext} from '../../../../context/AuthContext'
 
 interface Props {
     comment: Comment
@@ -22,7 +22,7 @@ interface Props {
  * Комментарий
  */
 const CommentItem: React.FC<Props> = ({comment, commentAction, firstCommentId}) => {
-    const {isAuth, user} = useContext(AuthContext)
+    const {isAuth, user}: AppAuthContext = useContext(AuthContext)
     const [isEditMode, setIsEditMode] = useState<boolean>(false)
     const [isAnswerMode, setIsAnswerMode] = useState<boolean>(false)
     const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false)

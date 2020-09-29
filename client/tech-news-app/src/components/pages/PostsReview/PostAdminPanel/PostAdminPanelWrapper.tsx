@@ -5,7 +5,10 @@ import PostAdminPanel from './PostAdminPanel'
 import PostAPI from '../../../../api/PostAPI'
 import {NotificationManager} from 'react-notifications'
 import {getPosts} from '../../../../redux/actions/postActions'
-import {postsDataSelector} from "../../../../redux/selectors/selectors";
+import {postsDataSelector} from '../../../../redux/selectors/selectors'
+import {History} from 'history'
+import {Dispatch} from "redux";
+import {PostState} from "../../../../models/PostModel";
 
 interface Props {
     postId: number
@@ -15,9 +18,9 @@ interface Props {
  * Панель управления постом. Оболочка
  */
 const PostAdminPanelWrapper: React.FC<Props> = ({postId}) => {
-    const history = useHistory()
-    const dispatch = useDispatch()
-    const {sectionId} = useSelector(postsDataSelector)
+    const history: History = useHistory()
+    const dispatch: Dispatch = useDispatch()
+    const {sectionId}: PostState = useSelector(postsDataSelector)
 
     const deletePostById = async () => {
         try {

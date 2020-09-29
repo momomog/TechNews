@@ -3,14 +3,16 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useHistory, useLocation} from 'react-router-dom'
 import Profile from './Profile'
 import ProfileAPI from '../../../api/ProfileAPI'
-import {User, UserInitial} from '../../../models/UserModel'
+import {User, UserInitial, UserState} from '../../../models/UserModel'
 import Spinner from '../../core/Spinner'
 import {ErrorResponse} from '../../../models/ResponseModel'
 import {NotificationManager} from 'react-notifications'
 import {getCurrentUserData} from '../../../redux/actions/userActions'
 import MessageAPI from '../../../api/MessageAPI'
 import {getDialogMessages, getDialogUsers} from '../../../redux/actions/messageActions'
-import {userDataSelector} from "../../../redux/selectors/selectors";
+import {userDataSelector} from '../../../redux/selectors/selectors'
+import {Location, History} from 'history'
+import {Dispatch} from "redux";
 
 
 /**
@@ -18,13 +20,13 @@ import {userDataSelector} from "../../../redux/selectors/selectors";
  */
 const ProfileWrapper: React.FC = () => {
     const [someUser, setSomeUser] = useState<User>(UserInitial),
-        {pathname} = useLocation(),
-        {isAuth, userData: currentUser} = useSelector(userDataSelector),
-        history = useHistory(),
-        dispatch = useDispatch(),
-        path = pathname.split('/')
+        {pathname}: Location = useLocation(),
+        {isAuth, userData: currentUser}: UserState = useSelector(userDataSelector),
+        history: History = useHistory(),
+        dispatch: Dispatch = useDispatch(),
+        path: Array<string> = pathname.split('/')
 
-    const isCurrentUser = useMemo(() => {
+    const isCurrentUser: boolean = useMemo((): boolean => {
             return ((path[1] === 'profile' && path.length === 2)
                 || (path[1] === 'profile' && currentUser && currentUser.username === path[2]))
         }, [path, currentUser]

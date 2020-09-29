@@ -8,7 +8,7 @@ import {getRoutes} from './routes'
  */
 const SwitchRouter = () => {
     const {isAuth}: AppAuthContext = useContext(AuthContext)
-    const routes: Array<Route> = useMemo(() => getRoutes(isAuth), [isAuth])
+    const routes = useMemo(() => getRoutes(isAuth), [isAuth])
 
     return (
         <div className="container main-content">

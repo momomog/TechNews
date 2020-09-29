@@ -8,11 +8,13 @@ interface Props {
 }
 
 export const MessageItem: React.FC<Props> = ({message, prevMessage}) => {
-    const showFullInfo = !prevMessage || prevMessage && message.mainUserId !== prevMessage.mainUserId
-    const msgStyle = ['row', 'message-item']
+    const showFullInfo: boolean = !prevMessage || prevMessage && message.mainUserId !== prevMessage.mainUserId
+    const msgStyle: Array<string> = ['row', 'message-item']
+
     if (message.new)
         msgStyle.push('scale-up-center-message')
 
+    // todo переделать
     const style = {
         padding: !showFullInfo ? '3px 0' : '5px 0',
         backgroundColor: message.isRead ? '' : '#d5d5d5'

@@ -2,8 +2,8 @@ import React, {useContext, useState} from 'react'
 import {Comment, CommentRequest} from '../../../../models/CommentModel'
 import Common from '../../../../common/Common'
 import CommentItem from './Comment'
-import {AuthContext} from '../../../../context/AuthContext'
-import {ThemeContext} from '../../../../context/ThemeContext'
+import {AppAuthContext, AuthContext} from '../../../../context/AuthContext'
+import {AppThemeContext, ThemeContext} from '../../../../context/ThemeContext'
 
 interface Props {
     comments: Array<Comment>
@@ -20,11 +20,10 @@ interface Props {
  * Список комментариев
  */
 const Comments: React.FC<Props> = ({comments, commentsCount, commentAction}) => {
-    const {isAuth} = useContext(AuthContext)
-    const [commentText, setCommentText] = useState('')
-
-    const {isLight} = useContext(ThemeContext)
-    const textAreaClasses = ['form-control', 'text-area', isLight ? 'background-light' : 'navbar-dark-background']
+    const {isAuth}: AppAuthContext = useContext(AuthContext)
+    const [commentText, setCommentText] = useState<string>('')
+    const {isLight}: AppThemeContext = useContext(ThemeContext)
+    const textAreaClasses: Array<string> = ['form-control', 'text-area', isLight ? 'background-light' : 'navbar-dark-background']
 
     const addNewCommentary = () => {
         if (commentText.trim()) {

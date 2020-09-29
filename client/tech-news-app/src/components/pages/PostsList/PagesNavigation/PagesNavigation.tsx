@@ -1,7 +1,7 @@
 import React, {useContext, useMemo} from 'react'
 import {NavLink} from 'react-router-dom'
 import {getSectionName} from '../../../../common/Const'
-import {ThemeContext} from '../../../../context/ThemeContext'
+import {AppThemeContext, ThemeContext} from '../../../../context/ThemeContext'
 
 interface Props {
     postPage: number
@@ -14,8 +14,8 @@ interface Props {
  * Пагинатор
  */
 const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, sectionId}) => {
-    const {isLight} = useContext(ThemeContext)
-    const navItemClasses = ['page-link', isLight ? 'background-pagination-light' : 'background-pagination-dark' ]
+    const {isLight}: AppThemeContext = useContext(ThemeContext)
+    const navItemClasses: Array<string> = ['page-link', isLight ? 'background-pagination-light' : 'background-pagination-dark' ]
 
     const onePagePostsCount = 10
     const maxPagesCount = 7

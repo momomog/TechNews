@@ -10,7 +10,7 @@ import ru from 'hyphenated-ru'
 import Hyphenated from 'react-hyphen'
 import {Post} from '../../../models/PostModel'
 import PostRating from './PostRating/PostRating'
-import {ThemeContext} from '../../../context/ThemeContext'
+import {AppThemeContext, ThemeContext} from '../../../context/ThemeContext'
 
 interface Props {
     post: Post
@@ -21,8 +21,8 @@ interface Props {
  * Просмотр содержимого поста
  */
 const PostReview: React.FC<Props> = ({post, postRating}) => {
-    const {isLight} = useContext(ThemeContext)
-    const cardClasses = ['center-block', 'post-review-wrapper', isLight ? 'background-light' : 'background-dark']
+    const {isLight}: AppThemeContext = useContext(ThemeContext)
+    const cardClasses: Array<string> = ['center-block', 'post-review-wrapper', isLight ? 'background-light' : 'background-dark']
 
     return (
         <div className="scale-up-center">

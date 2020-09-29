@@ -5,14 +5,13 @@ import {required} from '../../../../../common/Validators'
 import ProfileField from './ProfileField'
 import {DatePicker} from '../../../../../common/FormControls/DatePicker'
 import {ProfileRequest} from '../../../../../models/RequestsModel'
-import {AuthContext} from '../../../../../context/AuthContext'
-import {UserState} from "../../../../../models/UserModel";
+import {AppAuthContext, AuthContext} from '../../../../../context/AuthContext'
 
 /**
  * Редактор профиля. Форма
  */
 const ProfileEditForm: React.FC<InjectedFormProps<ProfileRequest>> = ({initialize, handleSubmit, invalid, submitSucceeded}) => {
-    const {user}: UserState = useContext(AuthContext)
+    const {user}: AppAuthContext = useContext(AuthContext)
 
     useEffect(() => {
         initialize({

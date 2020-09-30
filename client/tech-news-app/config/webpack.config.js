@@ -32,7 +32,8 @@ const postcssNormalize = require('postcss-normalize');
 
 const appPackageJson = require(paths.appPackageJson);
 
-// Это удалит все файлы .map из папки build/static/js
+// использовать ли сурс карты
+// production === false
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 
 const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
@@ -88,8 +89,9 @@ module.exports = function (webpackEnv) {
      */
     const getStyleLoaders = (cssOptions, preProcessor) => {
         const loaders = [
-            // Превращает CSS в модули JS, которые внедряют теги <style>
+            // Внедрение css в теги <style>
             isEnvDevelopment && require.resolve('style-loader'),
+            // Импорт css в отдельный файл
             isEnvProduction && {
                 loader: MiniCssExtractPlugin.loader,
                 options: shouldUseRelativeAssetPaths ? {publicPath: '../../'} : {},
@@ -97,17 +99,20 @@ module.exports = function (webpackEnv) {
                 loader: require.resolve('css-loader'),
                 options: cssOptions,
             },
-            // Применяет автоматический префикс .css к импортируемым файлам
             {
                 loader: require.resolve('postcss-loader'),
                 options: {
                     ident: 'postcss',
                     plugins: () => [
+                        // баги с флекс позиционированием
                         require('postcss-flexbugs-fixes'),
+                        // полифил для перевода современного css в формат старых браузеров
                         require('postcss-preset-env')({
+                            // автопрефиксы для кроссбраузерности
                             autoprefixer: {
                                 flexbox: 'no-2009'
                             },
+                            // стадия профилирования
                             stage: 3
                         }),
                         postcssNormalize()
@@ -116,10 +121,10 @@ module.exports = function (webpackEnv) {
                 }
             }].filter(Boolean);
         // Для препроцессоров (scss, sass)
-        // sass-loader??
         if (preProcessor) {
             loaders.push(
                 {
+                    // загрузка файлов по url()
                     loader: require.resolve('resolve-url-loader'),
                     options: {
                         sourceMap: isEnvProduction && shouldUseSourceMap
@@ -145,15 +150,6 @@ module.exports = function (webpackEnv) {
                 : false
             : isEnvDevelopment && 'cheap-module-source-map',
         entry: [
-            // Включить альтернативный клиент для WebpackDevServer.
-            // Задача клиента - подключиться к WebpackDevServer через сокет и получать уведомления об изменениях.
-            // Когда вы сохраняете файл, клиент применяет горячие обновления (в случае изменений CSS) или обновляет страницу (в случае изменений JS).
-            // Когда вы делаете синтаксическую ошибку, этот клиент будет отображать наложение синтаксической ошибки.
-            // Примечание: вместо стандартного клиента WebpackDevServer мы используем пользовательский,
-            // чтобы улучшить работу пользователей Create React App. Вы можете заменить строку ниже этими двумя строками,
-            // если предпочитаете стандартный клиент:
-            // require.resolve ('webpack-dev-server / client') + '? /',
-            // require.resolve ('webpack / hot / dev-server'),
             isEnvDevelopment &&
             require.resolve('react-dev-utils/webpackHotDevClient'),
             // Точка входа в приложение
@@ -362,7 +358,7 @@ module.exports = function (webpackEnv) {
                                 compact: isEnvProduction
                             }
                         },
-                        // Для загрузки файла web.config
+                        // Для загрузки .mp3
                         {
                             "test": /\.mp3$/,
                             "loader": "file-loader",

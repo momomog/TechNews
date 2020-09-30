@@ -110,7 +110,7 @@ const PostEditForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps
                 <div className="col-12 mt-5 d-flex justify-content-end">
                     <button type="button"
                             className="btn btn-light mr-3"
-                            onClick={() => history.goBack()}
+                            onClick={() => history.back()}
                             disabled={submitSucceeded}>
                         Вернуться назад
                     </button>

@@ -6,7 +6,7 @@ interface Props {
     size?: number
 }
 
-const Spinner: React.FC<Props> = ({size = 220}) => {
+const Spinner: React.FC<Props> = ({size = 220}: Props) => {
     return (
         <div className="d-flex justify-content-center">
             <img src={spinner}

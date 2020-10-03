@@ -2,13 +2,24 @@ import React, {useEffect, useState} from 'react'
 import {KeyboardDatePicker, MuiPickersUtilsProvider} from '@material-ui/pickers'
 import * as moment from 'moment'
 import DateFnsUtils from '@date-io/date-fns'
-import {change} from 'redux-form'
-import {Nullable} from "../../models/Common";
+import {change, FormAction} from 'redux-form'
+import {Nullable} from '../../models/Common'
+
+interface Props {
+    name: string
+    className: string
+    initValue: Date
+    meta: {
+        touched: boolean
+        error: boolean
+        dispatch: (action: FormAction) => void
+    }
+}
 
 /**
  * Контроль формы. DatePicker
  */
-export const DatePicker = ({input, meta, ...props}) => {
+export const DatePicker: React.FC<Props> = ({meta, ...props}: Props): React.ReactElement => {
     const isError: boolean = meta.touched && meta.error,
         [initValue, setInitValue] = useState<Nullable<Date>>(null)
 

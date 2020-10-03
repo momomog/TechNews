@@ -1,5 +1,5 @@
 import React, {useContext, useMemo} from 'react'
-import {Route, Switch} from 'react-router-dom'
+import {Switch} from 'react-router-dom'
 import {AppAuthContext, AuthContext} from '../../context/AuthContext'
 import {getRoutes} from './routes'
 

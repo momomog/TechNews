@@ -23,7 +23,7 @@ interface Props {
 /**
  * Верхний компонент шапки. Содержит лого и информацию об авторизованном юзере
  */
-const Login: React.FC<Props> = ({setPosts, changeSection, setPostPage, setCurrentUserData, setIsAuth}) => {
+const Login: React.FC<Props> = ({setPosts, changeSection, setPostPage, setCurrentUserData, setIsAuth}: Props) => {
     const {isAuth, user}: AppAuthContext = useContext(AuthContext)
     const {isLight, changeTheme}: AppThemeContext = useContext(ThemeContext)
     const changeThemeIcon: string = isLight ? lightIcon : darkIcon

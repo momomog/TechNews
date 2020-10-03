@@ -9,7 +9,7 @@ interface Props {
 /**
  * Профиль. Компонент отображения данных
  */
-const UserInfoLine: React.FC<Props> = ({name, value, isNeedBorder}) => {
+const UserInfoLine: React.FC<Props> = ({name, value, isNeedBorder}: Props) => {
     return (
         <>
             <div className="col-sm-3"/>

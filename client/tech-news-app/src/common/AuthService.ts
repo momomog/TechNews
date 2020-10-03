@@ -1,4 +1,4 @@
-import jwt_decode from 'jwt-decode'
+import {default as jwtDecode} from 'jwt-decode'
 
 interface JwtUserData {
     sub: string
@@ -18,7 +18,7 @@ class AuthService {
         let isAuth = false
 
         if (this.getToken()) {
-            const user: JwtUserData = this.decodeJWTToken()
+            const user: JwtUserData = this._decodeJWTToken()
 
             if (user && user.sub && user.exp > parseInt((new Date().getTime() / 1000).toString()))
                 isAuth = true
@@ -59,14 +59,17 @@ class AuthService {
      * Проверка является ли пользователь администратором
      */
     isAdmin = (): boolean => {
-        const user: JwtUserData = this.decodeJWTToken()
         let isAdmin = false
 
-        if (user && user.roles) {
-            user.roles.forEach(role => {
-                if (role.authority === 'ROLE_ADMIN')
-                    return isAdmin = true
-            })
+        if (this.getToken()) {
+            const user: JwtUserData = this._decodeJWTToken()
+
+            if (user && user.roles) {
+                user.roles.forEach(role => {
+                    if (role.authority === 'ROLE_ADMIN')
+                        return isAdmin = true
+                })
+            }
         }
         return isAdmin
     }
@@ -74,9 +77,8 @@ class AuthService {
     /**
      * Раскодирование JWT-токена
      */
-    private decodeJWTToken = () => {
-        if (this.getToken())
-            return jwt_decode(this.getToken())
+    private _decodeJWTToken = (): JwtUserData => {
+        return jwtDecode(this.getToken())
     }
 }
 

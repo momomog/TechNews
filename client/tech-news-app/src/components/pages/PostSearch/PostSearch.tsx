@@ -12,7 +12,7 @@ interface Props {
 /**
  * Поиск по сайту
  */
-const PostSearch: React.FC<Props> = ({posts, searchText}) => {
+const PostSearch: React.FC<Props> = ({posts, searchText}: Props) => {
     const oneTimePostShowCount = 15
     const initialPosts: Array<Post> = useMemo(postsInit, [posts, searchText])
 

@@ -1,14 +1,27 @@
-import React, {useState} from 'react'
+import React, {DetailedHTMLProps, InputHTMLAttributes, useState} from 'react'
 
 import okIcon from '../../static/ok-icon.png'
-import {change} from 'redux-form'
+import {change, FormAction} from 'redux-form'
 import errorIcon from '../../static/error-icon.png'
-import {Nullable} from "../../models/Common";
+import {Nullable} from '../../models/Common'
+
+interface Props {
+    placeholder: string
+    showlabel: boolean
+    input: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {name: string}
+    onPreviewRender: (File) => void
+    meta: {
+        touched: boolean
+        form: string
+        error: boolean
+        dispatch: (action: FormAction) => void
+    }
+}
 
 /**
  * Контроль формы. Input type="file"
  */
-export const FileInput = ({input, meta, ...props}) => {
+export const FileInput: React.FC<Props> = ({input, meta, ...props}: Props): React.ReactElement => {
     const [value, setValue] = useState<Nullable<File>>()
     const isError: boolean = meta.touched && meta.error && !value
 

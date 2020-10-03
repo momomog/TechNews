@@ -20,7 +20,7 @@ interface Props {
 /**
  * Просмотр содержимого поста
  */
-const PostReview: React.FC<Props> = ({post, postRating}) => {
+const PostReview: React.FC<Props> = ({post, postRating}: Props) => {
     const {isLight}: AppThemeContext = useContext(ThemeContext)
     const cardClasses: Array<string> = ['center-block', 'post-review-wrapper', isLight ? 'background-light' : 'background-dark']
 

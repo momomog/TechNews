@@ -11,7 +11,7 @@ import {getCurrentUserData} from '../../../redux/actions/userActions'
 import MessageAPI from '../../../api/MessageAPI'
 import {getDialogMessages, getDialogUsers} from '../../../redux/actions/messageActions'
 import {userDataSelector} from '../../../redux/selectors/selectors'
-import {Location, History} from 'history'
+import {History, Location} from 'history'
 import {Dispatch} from "redux";
 
 
@@ -59,6 +59,7 @@ const ProfileWrapper: React.FC = () => {
             dispatch(getDialogMessages(someUser))
             history.push('/messages')
         } catch (e) {
+            console.log(e)
         }
     }
 

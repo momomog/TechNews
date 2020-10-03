@@ -10,7 +10,7 @@ interface Props {
 /**
  * Профиль. Компонент отображения данных
  */
-const ProfileData: React.FC<Props> = ({user}) => {
+const ProfileData: React.FC<Props> = ({user}: Props) => {
 
     return (
         <>

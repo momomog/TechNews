@@ -10,7 +10,7 @@ interface Props {
 /**
  * Оценка поста
  */
-const PostRating: React.FC<Props> = ({post, postRating}) => {
+const PostRating: React.FC<Props> = ({post, postRating}: Props) => {
     const {user, isAuth}: AppAuthContext = useContext(AuthContext)
     const [isRating, setIsRating] = useState<boolean>(false)
     const [rating, setRating] = useState<number>(0)

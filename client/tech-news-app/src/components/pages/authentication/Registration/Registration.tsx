@@ -9,7 +9,7 @@ interface Props {
 /**
  * Регистрация
  */
-const Registration: React.FC<Props> = ({signup}) => {
+const Registration: React.FC<Props> = ({signup}: Props) => {
 
     const onRegistrationClick = (formData: SignUpRequest) => {
         signup({

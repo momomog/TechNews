@@ -23,10 +23,12 @@ interface OwnProps {
     categories: Array<{ id: number, title: string }>
 }
 
+type ComponentProps = InjectedFormProps<PostRequest, OwnProps> & OwnProps
+
 /**
  * Новый пост. Форма
  */
-const PostPageForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps> = ({categories, handleSubmit, invalid, submitSucceeded}) => {
+const PostPageForm: React.FC<ComponentProps> = ({categories, handleSubmit, invalid, submitSucceeded}: ComponentProps) => {
     const [photo, setPhoto] = useState<string>(nocard)
 
     const onLoadPhoto = (file: File) => {

@@ -11,7 +11,7 @@ interface Props {
     triggerModal: () => void
 }
 
-const ProfilePictureModal: React.FC<Props> = ({isOpenModal, picture, onLoadPhoto, triggerModal}) => {
+const ProfilePictureModal: React.FC<Props> = ({isOpenModal, picture, onLoadPhoto, triggerModal}: Props) => {
     const [isOpen, setIsOpen] = useState<boolean>(isOpenModal)
     const [base64picture, setBase64picture] = useState<string>('')
     const [fileName, setFileName] = useState<string>('')

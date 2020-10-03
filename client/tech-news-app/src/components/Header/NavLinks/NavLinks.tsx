@@ -21,7 +21,7 @@ interface Props {
 /**
  * Панель навигации по категории постов
  */
-const NavLinks: React.FC<Props> = ({setPosts, setPostPage, changeSection}) => {
+const NavLinks: React.FC<Props> = ({setPosts, setPostPage, changeSection}: Props) => {
     const {isLight}: AppThemeContext = useContext(ThemeContext)
     const navbarClasses: Array<string> = ['navbar', 'navbar-expand-lg', isLight ? 'background-light' : 'navbar-dark-background']
 

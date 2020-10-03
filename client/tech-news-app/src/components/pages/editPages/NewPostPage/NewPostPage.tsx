@@ -12,7 +12,7 @@ interface Props {
 /**
  * Новый пост
  */
-const NewPostPage: React.FC<Props> = ({createNewPost}) => {
+const NewPostPage: React.FC<Props> = ({createNewPost}: Props) => {
 
     const createPost = (formData: PostRequest) => createNewPost(formData)
 

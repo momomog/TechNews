@@ -22,7 +22,7 @@ interface Props {
 /**
  * Сообщения. Оболочка
  */
-const MessagesWrapper: React.FC<Props> = ({users, writingUsers, readDialogMessages, getDialogMessages, messages, getDialogUsers, dialogUser}) => {
+const MessagesWrapper: React.FC<Props> = ({users, writingUsers, readDialogMessages, getDialogMessages, messages, getDialogUsers, dialogUser}: Props) => {
     const {isAuth}: AppAuthContext = useContext(AuthContext)
 
     const getMessages = (dialogUser: User) => getDialogMessages(dialogUser)

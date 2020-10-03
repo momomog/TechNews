@@ -10,7 +10,7 @@ import {AppAuthContext, AuthContext} from '../../../../../context/AuthContext'
 /**
  * Редактор профиля. Форма
  */
-const ProfileEditForm: React.FC<InjectedFormProps<ProfileRequest>> = ({initialize, handleSubmit, invalid, submitSucceeded}) => {
+const ProfileEditForm: React.FC<InjectedFormProps<ProfileRequest>> = ({initialize, handleSubmit, invalid, submitSucceeded}: InjectedFormProps<ProfileRequest>) => {
     const {user}: AppAuthContext = useContext(AuthContext)
 
     useEffect(() => {

@@ -15,7 +15,7 @@ interface Props {
 /**
  * Пост
  */
-const PostItem: React.FC<Props> = ({post}) => {
+const PostItem: React.FC<Props> = ({post}: Props) => {
     const {isLight}: AppThemeContext = useContext(ThemeContext)
     const cardClasses: Array<string> = ['row', 'well', 'post', 'center-block', isLight ? 'background-light' : 'background-dark']
     const dispatch: Dispatch = useDispatch()

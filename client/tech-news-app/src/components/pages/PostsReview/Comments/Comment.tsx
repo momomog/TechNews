@@ -21,7 +21,7 @@ interface Props {
 /**
  * Комментарий
  */
-const CommentItem: React.FC<Props> = ({comment, commentAction, firstCommentId}) => {
+const CommentItem: React.FC<Props> = ({comment, commentAction, firstCommentId}: Props) => {
     const {isAuth, user}: AppAuthContext = useContext(AuthContext)
     const [isEditMode, setIsEditMode] = useState<boolean>(false)
     const [isAnswerMode, setIsAnswerMode] = useState<boolean>(false)

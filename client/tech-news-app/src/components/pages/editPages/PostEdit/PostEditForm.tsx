@@ -24,10 +24,12 @@ interface OwnProps {
     post: Post
 }
 
+type ComponentProps = InjectedFormProps<PostRequest, OwnProps> & OwnProps
+
 /**
  * Редактор поста. Форма
  */
-const PostEditForm: React.FC<InjectedFormProps<PostRequest, OwnProps> & OwnProps> = ({categories, post, initialize, submitSucceeded, invalid, handleSubmit}) => {
+const PostEditForm: React.FC<ComponentProps> = ({categories, post, initialize, submitSucceeded, invalid, handleSubmit}: ComponentProps) => {
     const history: History = useHistory()
 
     useEffect(() => {

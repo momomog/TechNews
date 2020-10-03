@@ -12,7 +12,7 @@ interface Props {
 /**
  * Редактор поста
  */
-const PostEdit: React.FC<Props> = ({post, updatePostData}) => {
+const PostEdit: React.FC<Props> = ({post, updatePostData}: Props) => {
 
     const updatePost = (formData: PostRequest) => updatePostData(formData)
 

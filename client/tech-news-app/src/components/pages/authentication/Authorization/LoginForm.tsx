@@ -8,7 +8,7 @@ import {SignInRequest} from '../../../../models/RequestsModel'
 /**
  * Форма авторизации
  */
-const LoginForm: React.FC<InjectedFormProps<SignInRequest>> = ({handleSubmit, invalid}) => {
+const LoginForm: React.FC<InjectedFormProps<SignInRequest>> = ({handleSubmit, invalid}: InjectedFormProps<SignInRequest>) => {
     return (
         <form className="form-horizontal"
               onSubmit={handleSubmit}>

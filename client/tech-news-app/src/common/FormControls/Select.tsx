@@ -1,12 +1,26 @@
-import React from 'react'
+import React, {DetailedHTMLProps, InputHTMLAttributes} from 'react'
 
 import okIcon from '../../static/ok-icon.png'
 import errorIcon from '../../static/error-icon.png'
+import {FormAction} from 'redux-form'
+
+interface Props {
+    placeholder: string
+    showlabel: boolean
+    input: DetailedHTMLProps<InputHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> & {name: string}
+    meta: {
+        touched: boolean
+        form: string
+        error: boolean
+        dispatch: (action: FormAction) => void
+    }
+    options: Array<{id: number, title: string}>
+}
 
 /**
  * Контроль формы. Select
  */
-export const Select = ({input, meta, ...props}) => {
+export const Select: React.FC<Props> = ({input, meta, ...props}: Props): React.ReactElement => {
     const isError: boolean = meta.touched && meta.error
 
     return (

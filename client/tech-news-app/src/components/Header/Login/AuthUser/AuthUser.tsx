@@ -13,7 +13,7 @@ interface Props {
 /**
  * Авторизованный пользователь
  */
-const AuthUser: React.FC<Props> = ({user, isAuth, setIsAuth, setCurrentUserData}) => {
+const AuthUser: React.FC<Props> = ({user, isAuth, setIsAuth, setCurrentUserData}: Props) => {
     const onLogout = () => {
         AuthService.removeToken()
         setIsAuth(false)

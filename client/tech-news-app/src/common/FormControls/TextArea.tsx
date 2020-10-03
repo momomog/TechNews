@@ -1,12 +1,23 @@
-import React from 'react'
+import React, {DetailedHTMLProps, InputHTMLAttributes} from 'react'
 
 import okIcon from '../../static/ok-icon.png'
 import errorIcon from '../../static/error-icon.png'
 
+interface Props {
+    label: string
+    showlabel: boolean
+    input: DetailedHTMLProps<InputHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> & {name: string}
+    meta: {
+        touched: boolean
+        error: boolean
+    }
+    options: Array<{id: number, title: string}>
+}
+
 /**
  * Контроль формы. TextArea
  */
-export const TextArea = ({input, meta, ...props}) => {
+export const TextArea: React.FC<Props> = ({input, meta, ...props}: Props): React.ReactElement => {
     const isError: boolean = meta.touched && meta.error
 
     return (

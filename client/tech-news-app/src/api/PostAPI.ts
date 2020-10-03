@@ -44,8 +44,8 @@ class PostAPI {
     /**
      * Поиск постов по ключевому слову
      */
-    searchPosts = (search_query: string): Promise<Array<Post>> => request({
-        url: `posts/search?search_query=${search_query}`
+    searchPosts = (searchQuery: string): Promise<Array<Post>> => request({
+        url: `posts/search?search_query=${searchQuery}`
     })
 
     /**

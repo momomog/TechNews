@@ -8,17 +8,17 @@ import {changeSection, getPosts, setPostPageAction} from '../../redux/actions/po
 import {setIsAuthAction, setUserDataAction} from '../../redux/actions/userActions'
 
 interface Props {
-    changeSection: (sectionId: number) => ChangeSectionAction,
-    setPostPage: (pageNumber: number) => SetPostPageAction,
-    setIsAuth: (isAuth: boolean) => SetIsAuthAction,
-    setCurrentUserData: (userData: User) => void,
+    changeSection: (sectionId: number) => ChangeSectionAction
+    setPostPage: (pageNumber: number) => SetPostPageAction
+    setIsAuth: (isAuth: boolean) => SetIsAuthAction
+    setCurrentUserData: (userData: User) => void
     getPosts: (sectionId: number) => void
 }
 
 /**
  * Шапка сайта. Оболочка
  */
-const HeaderWrapper: React.FC<Props> = ({getPosts, ...props}) => {
+const HeaderWrapper: React.FC<Props> = ({getPosts, ...props}: Props) => {
 
     const setPosts = (sectionId: number) => getPosts(sectionId)
 

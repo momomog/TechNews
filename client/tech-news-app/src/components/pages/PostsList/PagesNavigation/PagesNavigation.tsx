@@ -13,7 +13,7 @@ interface Props {
 /**
  * Пагинатор
  */
-const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, sectionId}) => {
+const PagesNavigation: React.FC<Props> = ({postPage, postsCount, setPosts, sectionId}: Props) => {
     const {isLight}: AppThemeContext = useContext(ThemeContext)
     const navItemClasses: Array<string> = ['page-link', isLight ? 'background-pagination-light' : 'background-pagination-dark' ]
 

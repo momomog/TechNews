@@ -1,7 +1,8 @@
-import {call, put, takeLatest, select} from '@redux-saga/core/effects'
+import {call, put, select, takeLatest} from '@redux-saga/core/effects'
 import {
     GET_DIALOG_MESSAGES,
-    GET_DIALOG_USERS, READ_DIALOG_MESSAGES,
+    GET_DIALOG_USERS,
+    READ_DIALOG_MESSAGES,
     setDialogMessages,
     setDialogUser,
     setDialogUsers

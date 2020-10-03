@@ -12,7 +12,7 @@ interface Props {
 /**
  * Редактор профиля. Компонент формы
  */
-const ProfileField: React.FC<Props> = ({isSocial, name, label, validators}) => {
+const ProfileField: React.FC<Props> = ({isSocial, name, label, validators}: Props) => {
     return (
         <div className="col-sm-5 mt-4 d-flex justify-content-end">
             <div className="w-50 d-flex justify-content-end">

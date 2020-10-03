@@ -18,7 +18,7 @@ interface Props {
 /**
  * Профиль
  */
-const Profile: React.FC<Props> = ({user, isAuth, isCurrentUser, redirectToDialogPage, onLoadPhoto}) => {
+const Profile: React.FC<Props> = ({user, isAuth, isCurrentUser, redirectToDialogPage, onLoadPhoto}: Props) => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
     const [picture, setPicture] = useState(undefined)

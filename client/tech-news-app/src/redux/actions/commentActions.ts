@@ -18,5 +18,6 @@ export const getPostComments = (sectionId: number, postId: number): any => async
         const response = await CommentAPI.getPostComments(getSectionName(sectionId), postId)
         dispatch(setPostComments(response.comments, response.commentsCount))
     } catch (e) {
+        console.log(e)
     }
 }

@@ -6,10 +6,10 @@ import {withStyles} from '@material-ui/core/styles'
 import Slider from '@material-ui/core/Slider'
 import DialogActions from '@material-ui/core/DialogActions'
 
-const Cutter = (props) => {
+const Cutter = (props: any) => {
     const classes = props.classes
 
-    const [crop, setCrop] = useState({x: 0, y: 0})
+    const [crop, setCrop] = useState<{x: number, y: number}>({x: 0, y: 0})
     const [zoom, setZoom] = useState<number>(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
 
@@ -68,7 +68,8 @@ const Cutter = (props) => {
         </>
     )
 }
-const styles = theme => ({
+
+const styles: any = (theme: any) => ({
     cropContainer: {
         position: 'relative',
         width: '100%',
@@ -113,7 +114,7 @@ const styles = theme => ({
     }
 })
 
-// @ts-ignore
+
 export const ProfileImageCutter = withStyles(styles)(Cutter)
 
 const createImage: any = url =>

@@ -1,7 +1,8 @@
 import PostAPI from '../../api/PostAPI'
 import {
     ChangeSectionAction,
-    Post, SetIsLoadingAction,
+    Post,
+    SetIsLoadingAction,
     SetPostCountAction,
     SetPostDataAction,
     SetPostPageAction,
@@ -19,7 +20,7 @@ export const SET_POSTS = 'SET-POSTS'
 export const SET_IS_LOADING = 'SET-IS-LOADING'
 
 
-export const getPosts = (sectionId: number, postPage: number = 1, setPage: boolean = false): any => async (dispatch: Dispatch) => {
+export const getPosts = (sectionId: number, postPage = 1, setPage = false): any => async (dispatch: Dispatch) => {
     try {
         if (setPage)
             dispatch(setPostPageAction(postPage))
@@ -60,7 +61,7 @@ export const setPostsCountAction = (count: number): SetPostCountAction => ({
     postsCount: count
 })
 
-export const setPostPageAction = (postPageNumber: number = 1): SetPostPageAction => ({
+export const setPostPageAction = (postPageNumber = 1): SetPostPageAction => ({
     type: SET_POST_PAGE,
     postPage: postPageNumber
 })

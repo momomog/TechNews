@@ -16,7 +16,7 @@ interface Props {
 /**
  * Шапка сайта
  */
-const Header: React.FC<Props> = props => {
+const Header: React.FC<Props> = (props: Props) => {
     return (
         <div className="header-wrapper">
 

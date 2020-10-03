@@ -10,7 +10,7 @@ interface Props {
 /**
  * Список постов
  */
-const PostsList: React.FC<Props> = ({posts}) => {
+const PostsList: React.FC<Props> = ({posts}: Props) => {
     return (
         <>
             <PagesNavigationWrapper/>

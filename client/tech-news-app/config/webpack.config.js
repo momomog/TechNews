@@ -25,8 +25,7 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const eslint = require('eslint');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const postcssNormalize = require('postcss-normalize');
 
@@ -237,7 +236,7 @@ module.exports = function (webpackEnv) {
                 name: false
             },
             runtimeChunk: {
-                name: entrypoint => `runtime-${entrypoint.name}`,
+                name: entrypoint => `runtime-${entrypoint.name}`
             },
         },
         resolve: {
@@ -303,17 +302,19 @@ module.exports = function (webpackEnv) {
                     enforce: 'pre',
                     use: [{
                         loader: require.resolve('eslint-loader'),
-                        options: {
-                            cache: true,
-                            formatter: require.resolve('react-dev-utils/eslintFormatter'),
-                            eslintPath: require.resolve('eslint'),
-                            resolvePluginsRelativeTo: __dirname
-                        }
+                        // options: {
+                        //     cache: true,
+                        //     formatter: require.resolve('react-dev-utils/eslintFormatter'),
+                        //     // eslintPath: path.resolve(__dirname, '../.eslintrc.js'),
+                        //     eslintPath: require.resolve('eslint'),
+                        //     resolvePluginsRelativeTo: __dirname
+                        // }
                     }],
                     include: paths.appSrc
-                }, {
+                },
+                {
                     // «oneOf» будет проходить по всем следующим загрузчикам, пока один из них не будет соответствовать требованиям.
-                    // Когда ни один загрузчик не совпадает, он возвращается к file-loader в конце списка загрузчиков.
+                    // Когда ни один загрузчик не совпадет, отработает к file-loader в конце списка загрузчиков.
                     oneOf: [
                         // "url" loader works like "file" loader except that it embeds assets
                         // smaller than specified limit in bytes as data URLs to avoid requests.
@@ -356,14 +357,6 @@ module.exports = function (webpackEnv) {
                                 // See #6846 for context on why cacheCompression is disabled
                                 cacheCompression: false,
                                 compact: isEnvProduction
-                            }
-                        },
-                        // Для загрузки .mp3
-                        {
-                            "test": /\.mp3$/,
-                            "loader": "file-loader",
-                            "options": {
-                                "name": "[name].[ext]"
                             }
                         },
                         // Process any JS outside of the app with Babel.
@@ -612,6 +605,6 @@ module.exports = function (webpackEnv) {
         },
         // Turn off performance processing because we utilize
         // our own hints via the FileSizeReporter
-        performance: false,
+        performance: false
     };
 };

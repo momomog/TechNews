@@ -15,7 +15,7 @@ interface Props {
 /**
  * Панель администратора
  */
-const AdminPanel: React.FC<Props> = ({deletePostById , updatePosts}) => {
+const AdminPanel: React.FC<Props> = ({deletePostById , updatePosts}: Props) => {
     const [delPostId, setDelPostId] = useState<number>(0)
     const [openModal, setOpenModal] = useState<boolean>(false)
     const [day, setDay] = useState<string>(new Date().getDate().toString())

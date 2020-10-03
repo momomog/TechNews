@@ -1,12 +1,26 @@
-import React from 'react'
+import React, {DetailedHTMLProps, InputHTMLAttributes} from 'react'
 
 import okIcon from '../../static/ok-icon.png'
 import errorIcon from '../../static/error-icon.png'
+import {FormAction} from "redux-form";
+
+interface Props {
+    label: string
+    showlabel: boolean
+    input: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {name: string}
+    meta: {
+        touched: boolean
+        form: string
+        error: boolean
+        dispatch: (action: FormAction) => void
+    }
+}
+
 
 /**
  * Контроль формы. Для type="file" используется компонент FileInput
  */
-export const Input = ({input, meta, ...props}) => {
+export const Input: React.FC<Props> = ({input, meta, ...props}: Props): React.ReactElement => {
     const isError: boolean = meta.touched && meta.error
 
     return (

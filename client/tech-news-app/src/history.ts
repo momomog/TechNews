@@ -1,9 +1,9 @@
-import {createBrowserHistory, History} from "history"
+import {createBrowserHistory, History} from 'history'
 
 const history: History = createBrowserHistory()
 
 // if (!jest) {
-    history.listen(_ => {
+    history.listen(() => {
         window.scrollTo(0, 0)
     })
 // }

@@ -1,6 +1,7 @@
 import {PostAction, PostInitial, PostState} from '../../models/PostModel'
 import {
-    CHANGE_SECTION, SET_IS_LOADING,
+    CHANGE_SECTION,
+    SET_IS_LOADING,
     SET_POST_DATA,
     SET_POST_PAGE,
     SET_POSTS,
@@ -8,7 +9,7 @@ import {
 } from '../actions/postActions'
 
 
- export const initialState: PostState = {
+export const initialState: PostState = {
     sectionId: 1,            // Активная секция новостей
     postsCount: 0,           // Общее количество постов секции
     postPage: 1,             // Активная вкладка пагинатора

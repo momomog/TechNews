@@ -15,10 +15,10 @@ const PostSearchWrapper: React.FC = () => {
     const [posts, setSearchPosts] = useState<Array<Post>>([])
 
     const query: URLSearchParams = new URLSearchParams(useLocation().search)
-    const search_query: Nullable<string> = query.get('search_query')
+    const searchQuery: Nullable<string> = query.get('search_query')
 
-    if (search_query && search_query !== searchText)
-        setSearchText(search_query)
+    if (searchQuery && searchQuery !== searchText)
+        setSearchText(searchQuery)
 
     useEffect(() => {
         setIsLoading(true)

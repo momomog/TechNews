@@ -7,7 +7,7 @@ interface Props {
     prevMessage: Message
 }
 
-export const MessageItem: React.FC<Props> = ({message, prevMessage}) => {
+export const MessageItem: React.FC<Props> = ({message, prevMessage}: Props) => {
     const showFullInfo: boolean = !prevMessage || prevMessage && message.mainUserId !== prevMessage.mainUserId
     const msgStyle: Array<string> = ['row', 'message-item']
 

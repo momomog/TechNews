@@ -1,7 +1,6 @@
 import needle from 'needle'
 import {SECTION_GAMES, SECTION_HARDWARE, SECTION_MOBILE, SECTION_NOTEBOOKS, SECTION_OTHER} from "../../../common/Const";
 
-
 export const postInitProcess = async (day, month, postNum) => {
     try {
         const resp = await needle('get', `https://4pda.ru/2020/0${month}/${day}/${postNum}`)
@@ -27,6 +26,14 @@ export const postInitProcess = async (day, month, postNum) => {
     }
 }
 
+function getFullDescription(fullDescNode) {
+    const source = fullDescNode.querySelector('.mb_source')
+    const sourceText = source && source.querySelector('a').innerText
+    if (sourceText === '4pda.ru')
+        fullDescNode.querySelector('.mb_source').innerHTML = ''
+    return fullDescNode.innerHTML
+}
+
 function getCategory(fullDescription) {
     let categoryId
 
@@ -45,12 +52,4 @@ function getCategory(fullDescription) {
         else categoryId = SECTION_OTHER
     }
     return categoryId
-}
-
-function getFullDescription(fullDescNode) {
-    const source = fullDescNode.querySelector('.mb_source')
-    const sourceText = source && source.querySelector('a').innerText
-    if (sourceText === '4pda.ru')
-        fullDescNode.querySelector('.mb_source').innerHTML = ''
-    return fullDescNode.innerHTML
 }

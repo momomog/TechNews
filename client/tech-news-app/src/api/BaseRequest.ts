@@ -22,6 +22,7 @@ export const request = (opts: Options): Promise<any> => {
     const headers = opts.headers
         ? opts.headers
         : new Headers({
+            /* eslint-disable */
             'Content-Type': 'application/json'
         })
 
@@ -34,7 +35,7 @@ export const request = (opts: Options): Promise<any> => {
     }
 
     const options: Options = Object.assign({}, defaults, opts)
-    const url: string = `${API_BASE_URL}/${options.url}`
+    const url = `${API_BASE_URL}/${options.url}`
 
     return fetch(url, options)
         .then(response =>

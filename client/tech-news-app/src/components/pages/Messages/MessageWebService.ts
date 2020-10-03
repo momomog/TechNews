@@ -1,8 +1,7 @@
 import {User} from '../../../models/UserModel'
 import {DialogUser, Message} from '../../../models/MessageModel'
 import {WS_BASE_URL} from '../../../api/BaseRequest'
-// @ts-ignore
-import incomingMessageSound from '../../../static/incoming_message.mp3'
+
 import store from '../../../redux/reduxStore'
 
 let webService: WebSocket
@@ -130,5 +129,5 @@ const saveMsgToDB = (msg: Message, dialogUser: User) => {
 // Воспроизведение звука сообщения
 const playMsgSound = () => {
     if (window.location.pathname !== '/messages')
-        new Audio(incomingMessageSound).play()
+        new Audio('../../../static/incoming_message.mp3').play()
 }

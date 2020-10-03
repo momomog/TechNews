@@ -19,7 +19,7 @@ interface Props {
 /**
  * Сообщения
  */
-const Messages: React.FC<Props> = ({users, writingUsers, readDialogMessages, getMessages, messages, dialogUser}) => {
+const Messages: React.FC<Props> = ({users, writingUsers, readDialogMessages, getMessages, messages, dialogUser}: Props) => {
     const {isLight}: AppThemeContext = useContext(ThemeContext)
     const {user}: AppAuthContext = useContext(AuthContext)
     const cardClasses: Array<string> = ['panel', 'panel-default', isLight ? 'background-light' : 'background-dark']

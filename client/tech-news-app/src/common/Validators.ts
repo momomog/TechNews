@@ -18,12 +18,12 @@ export const required = (value: string): string | undefined =>
     value && value.toString().trim() ? undefined : 'Необходимо заполнить это поле'
 
 // Необходимость загрузки файла
-export const requiredFile = (value: File) =>
+export const requiredFile = (value: File): string | undefined =>
     (value && value.name) || (value && value[0] && value[0].name) ? undefined : 'Необходимо загрузить изображение'
 
 // Проверка на одинаковые пароли
-export const isSamePasswords = (value: string, values: any): string | undefined =>
-    values.password && values.password.trim() === values.repeatPassword.trim() ? undefined : 'Введенные пароли не совпадают'
+export const isSamePasswords = (value: string, values: {password: string}): string | undefined =>
+    values.password && values.password.trim() === value.trim() ? undefined : 'Введенные пароли не совпадают'
 
 // Минимальная длина поля
 const minLength = (min: number) => (value: string): string | undefined =>
@@ -44,13 +44,13 @@ export const maxLength200 = maxLength(200)
 export const maxLength1000 = maxLength(1000)
 export const maxLength20000 = maxLength(20000)
 
-type asyncError = {
-    username?: string,
+type AsyncError = {
+    username?: string
     email?: string
 }
 
 // Проверка на занятость почтового адреса или юзернейма
-export const usernameEmailValidate = async (values, dispatch, props, field): Promise<asyncError | undefined> => {
+export const usernameEmailValidate = async (values, dispatch, props, field): Promise<AsyncError | undefined> => {
     const asyncErrors = {...props.asyncErrors}
 
     if (field === 'username') {

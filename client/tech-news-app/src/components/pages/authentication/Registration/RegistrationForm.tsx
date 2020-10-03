@@ -18,7 +18,7 @@ import {SignUpRequest} from '../../../../models/RequestsModel'
 /**
  * Форма регистрации
  */
-const RegistrationForm: React.FC<InjectedFormProps<SignUpRequest>> = ({handleSubmit, invalid, submitting}) => {
+const RegistrationForm: React.FC<InjectedFormProps<SignUpRequest>> = ({handleSubmit, invalid, submitting}: InjectedFormProps<SignUpRequest>) => {
     return (
         <form onSubmit={handleSubmit}>
 

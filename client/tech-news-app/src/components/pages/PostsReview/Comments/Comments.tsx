@@ -19,7 +19,7 @@ interface Props {
 /**
  * Список комментариев
  */
-const Comments: React.FC<Props> = ({comments, commentsCount, commentAction}) => {
+const Comments: React.FC<Props> = ({comments, commentsCount, commentAction}: Props) => {
     const {isAuth}: AppAuthContext = useContext(AuthContext)
     const [commentText, setCommentText] = useState<string>('')
     const {isLight}: AppThemeContext = useContext(ThemeContext)

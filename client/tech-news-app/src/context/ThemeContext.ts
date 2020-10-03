@@ -11,6 +11,5 @@ export const ThemeContext: React.Context<AppThemeContext> = React.createContext<
     theme: 'light',
     isLight: true,
     isDark: false,
-    changeTheme: () => {
-    }
+    changeTheme: () => {}
 })

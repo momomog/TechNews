@@ -1,5 +1,4 @@
-import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom'
-import {compose} from 'redux'
+import {Redirect} from 'react-router-dom'
 import React from 'react'
 
 interface Props {
@@ -9,7 +8,7 @@ interface Props {
 }
 
 
-const RedirectComponent: React.FC<Props> = ({location}) => {
+const RedirectComponent: React.FC<Props> = ({location}: Props) => {
     return <Redirect to={location.redirectUrl}/>
 }
 

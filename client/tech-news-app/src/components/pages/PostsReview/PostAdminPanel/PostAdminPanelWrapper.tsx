@@ -17,7 +17,7 @@ interface Props {
 /**
  * Панель управления постом. Оболочка
  */
-const PostAdminPanelWrapper: React.FC<Props> = ({postId}) => {
+const PostAdminPanelWrapper: React.FC<Props> = ({postId}: Props) => {
     const history: History = useHistory()
     const dispatch: Dispatch = useDispatch()
     const {sectionId}: PostState = useSelector(postsDataSelector)

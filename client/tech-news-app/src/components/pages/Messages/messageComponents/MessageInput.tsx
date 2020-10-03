@@ -14,7 +14,7 @@ interface Props {
 // Таймер отправки статуса набора сообщения (раз в 2 секунды)
 let timeout
 
-export const MessageInput: React.FC<Props> = ({writingUsers, dialogUser, scrollToBottomMessage}) => {
+export const MessageInput: React.FC<Props> = ({writingUsers, dialogUser, scrollToBottomMessage}: Props) => {
     const [messageText, setMessageText] = useState<string>('')
     const [showPicker, setShowPicker] = useState<boolean>(false)
 

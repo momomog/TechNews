@@ -3,11 +3,14 @@ import Spinner from '../../../core/Spinner'
 import {NavLink} from 'react-router-dom'
 import {Post} from '../../../../models/PostModel'
 
+interface Props {
+    post: Post
+}
 
 /**
  * Рекомендуемый пост
  */
-const PostItem: React.FC<{ post: Post }> = ({post}) => {
+const PostItem: React.FC<Props> = ({post}: Props) => {
 
     const linkPropInit = () => ({pathname: `/redirect-to/post`, redirectUrl: `/posts/post/${post.id}`})
 
@@ -33,7 +36,7 @@ const PostItem: React.FC<{ post: Post }> = ({post}) => {
 /**
  * Рекомендуемые посты
  */
-const RecommendedPosts: React.FC<{ posts: Array<Post> }> = ({posts}) => {
+const RecommendedPosts: React.FC<{ posts: Array<Post> }> = ({posts}: { posts: Array<Post> }) => {
     return (
         <>
             <hr className="mt-3"/>

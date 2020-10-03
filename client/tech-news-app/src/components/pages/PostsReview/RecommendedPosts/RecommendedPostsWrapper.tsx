@@ -12,7 +12,7 @@ interface Props {
 /**
  * Рекомендуемые посты. Оболочка
  */
-const RecommendedPostsWrapper: React.FC<Props> = ({categoryId, postId, isVisible}) => {
+const RecommendedPostsWrapper: React.FC<Props> = ({categoryId, postId, isVisible}: Props) => {
     const [posts, setPosts] = useState<Array<Post>>([]);
 
     (async () => {
@@ -22,6 +22,7 @@ const RecommendedPostsWrapper: React.FC<Props> = ({categoryId, postId, isVisible
                 setPosts(posts)
             }
         } catch (e) {
+            console.log(e)
         }
     })()
 

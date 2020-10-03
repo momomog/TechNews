@@ -1,5 +1,6 @@
 import {
-    AddDialogMessageAction, DialogUser,
+    AddDialogMessageAction,
+    DialogUser,
     Message,
     SetDialogMessagesAction,
     SetDialogUserAction,

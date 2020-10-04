@@ -37,7 +37,7 @@ const PostEditWrapper: React.FC = () => {
 
             await PostAPI.updatePostData(+params.postId, request, photo)
             NotificationManager.success('Данные поста успешно обновлены', 'Успешно')
-            history.back()
+            history.goBack()
         } catch (e) {
             NotificationManager.error('Не удалось обновить данные поста', 'Ошибка')
         }

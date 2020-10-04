@@ -27,7 +27,7 @@ const PostAdminPanelWrapper: React.FC<Props> = ({postId}: Props) => {
             await PostAPI.deletePostById(postId)
             dispatch(getPosts(sectionId))
             setTimeout(() => {
-                history.back()
+                history.goBack()
                 NotificationManager.success(`Пост номер ${postId} успешно удален`, 'Успешно')
             }, 1000)
         } catch (e) {

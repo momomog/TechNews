@@ -112,7 +112,7 @@ const PostEditForm: React.FC<ComponentProps> = ({categories, post, initialize, s
                 <div className="col-12 mt-5 d-flex justify-content-end">
                     <button type="button"
                             className="btn btn-light mr-3"
-                            onClick={() => history.back()}
+                            onClick={() => history.goBack()}
                             disabled={submitSucceeded}>
                         Вернуться назад
                     </button>

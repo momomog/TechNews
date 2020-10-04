@@ -22,16 +22,6 @@ export const MessageInput: React.FC<Props> = ({writingUsers, dialogUser, scrollT
         return () => clearTimeout(timeout)
     }, [dialogUser])
 
-    const inputKeyListener = (e: React.KeyboardEvent) => {
-        if (e.key === 'Enter') {
-            e.preventDefault()
-            sendMessage()
-        } else if (e.key === 'Tab') {
-            e.preventDefault()
-            setShowPicker(!showPicker)
-        }
-    }
-
     const sendMessage = () => {
         if (messageText.trim()) {
             sendPayloadToMsgWS(null, messageText)
@@ -39,6 +29,16 @@ export const MessageInput: React.FC<Props> = ({writingUsers, dialogUser, scrollT
             sendPayloadToMsgWS(null, '', false)
             setMessageText('')
             setShowPicker(false)
+        }
+    }
+
+    const inputKeyListener = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+            e.preventDefault()
+            sendMessage()
+        } else if (e.key === 'Tab') {
+            e.preventDefault()
+            setShowPicker(!showPicker)
         }
     }
 

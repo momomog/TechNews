@@ -6,22 +6,22 @@ import store from '../../../redux/reduxStore'
 
 let webService: WebSocket
 
-export const getWebService = () => {
+export function getWebService() {
     return webService
 }
 
 // Подключение к WS
-export const connectToMsgWS = (user: User,
+export function connectToMsgWS (user: User,
                                addDialogMessage: (message: Message) => void,
                                setWritingUsers: (payload: Message) => void,
                                getDialogUsers: () => void,
-                               setDialogUsersData: (payload: Message, userId: number) => void) => {
+                               setDialogUsersData: (payload: Message, userId: number) => void) {
     webService = new WebSocket(`${WS_BASE_URL}/chat/${user.username}`)
     webService.onmessage = event => onWSMessage(event, user, addDialogMessage, setWritingUsers, getDialogUsers, setDialogUsersData)
 }
 
 // Отправка данных в WS
-export const sendPayloadToMsgWS = (msgData, messageText: string, isWriting?: boolean, isRead?: boolean) => {
+export function sendPayloadToMsgWS (msgData, messageText: string, isWriting?: boolean, isRead?: boolean) {
     const currentUser: User = store.getState().userData.userData
     const dialogUser: User = store.getState().messagesData.dialogUser
     let json
@@ -55,12 +55,12 @@ export const sendPayloadToMsgWS = (msgData, messageText: string, isWriting?: boo
 }
 
 // Обработчик события отправки данных
-const onWSMessage = (event,
+function onWSMessage(event,
                      user: User,
                      addDialogMessage: (message: Message) => void,
                      setWritingUsers: (payload: Message) => void,
                      getDialogUsers: () => void,
-                     setDialogUsersData: (payload: Message, userId: number) => void) => {
+                     setDialogUsersData: (payload: Message, userId: number) => void) {
     const msg: Message = JSON.parse(event.data)
 
     // сет пользователей, печатающих сообщение текущему пользователю
@@ -91,11 +91,11 @@ const onWSMessage = (event,
 
 // Если сообщение от человека, которого нет в списке диалогов, то обновление списка диалогов
 // Иначе пуш нового сообщения в диалог с пользователем
-const checkMsgUserInUsersList = (usersList: Array<DialogUser>,
+function checkMsgUserInUsersList(usersList: Array<DialogUser>,
                                  message: Message,
                                  dialogUser: User,
                                  getDialogUsers: () => void,
-                                 setDialogUsersData: (payload: Message, userId: number) => void) => {
+                                 setDialogUsersData: (payload: Message, userId: number) => void) {
     let isInclude = false
     usersList.forEach(item => {
         if (item.user.id === message.mainUserId) {
@@ -111,7 +111,7 @@ const checkMsgUserInUsersList = (usersList: Array<DialogUser>,
 }
 
 // сохранение сообщения в БД
-const saveMsgToDB = (msg: Message, dialogUser: User) => {
+function saveMsgToDB(msg: Message, dialogUser: User) {
     const msgData = {
         mainUserId: msg.mainUserId,
         mainUserUsername: msg.mainUserUsername,
@@ -127,7 +127,7 @@ const saveMsgToDB = (msg: Message, dialogUser: User) => {
 }
 
 // Воспроизведение звука сообщения
-const playMsgSound = () => {
+function playMsgSound() {
     if (window.location.pathname !== '/messages')
         new Audio('../../../static/incoming_message.mp3').play()
 }

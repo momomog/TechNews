@@ -34,9 +34,15 @@ module.exports = {
         camelcase: "warn",
         "no-debugger": isProd ? "error" : "off",
         "react/no-unescaped-entities": ["off"],
-        "@typescript-eslint/no-use-before-define": ["warn"],
-        "@typescript-eslint/no-empty-function": ["warn"],
-        "no-use-before-define": "warn",
+        "@typescript-eslint/no-use-before-define": ["warn", {functions: false}],
+        "@typescript-eslint/no-empty-function": ["off"],
+        "no-use-before-define": ["warn", {functions: false}],
+        "@typescript-eslint/explicit-function-return-type": [
+            "off",
+            {
+                allowVoid: true
+            }
+        ],
         "@typescript-eslint/member-delimiter-style": ["warn", {
             multiline: {
                 delimiter: 'none',

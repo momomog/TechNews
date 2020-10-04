@@ -25,15 +25,14 @@ const Messages: React.FC<Props> = ({users, writingUsers, readDialogMessages, get
     const cardClasses: Array<string> = ['panel', 'panel-default', isLight ? 'background-light' : 'background-dark']
     const messagesListRef: React.RefObject<HTMLDivElement> = React.createRef()
 
-    useEffect(() => {
-        scrollToBottomMessage()
-    }, [user, messages])
-
-
     const scrollToBottomMessage = () => {
         if (messagesListRef.current)
             messagesListRef.current.scrollTo(0, messagesListRef.current.scrollHeight)
     }
+
+    useEffect(() => {
+        scrollToBottomMessage()
+    }, [user, messages])
 
     return (
         <div className="row">

@@ -9,7 +9,7 @@ type State = {
 /**
  * Компонент обработки ошибки
  */
-export default class ErrorBoundary extends React.Component<any, State> {
+export default class ErrorBoundary extends React.Component<{}, State> {
     constructor(props) {
         super(props)
         this.state = {

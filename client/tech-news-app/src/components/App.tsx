@@ -9,7 +9,7 @@ import ErrorBoundary from './core/ErrorBoundary'
 /**
  * Корневой компонент
  */
-const App = () => {
+const App: React.FC = (): React.ReactElement => {
     return (
         <Router history={history}>
             <HeaderWrapper/>

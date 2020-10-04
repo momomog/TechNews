@@ -58,11 +58,11 @@ const ProfileEditForm: React.FC<InjectedFormProps<ProfileRequest>> = ({initializ
                 <h5 className="card-header w-100">Основная информация</h5>
                 <div className="row p-2 ml-4">
                     <ProfileField label={'Фамилия'}
-                                  validators={required}
+                                  validator={required}
                                   name={'lastName'}/>
 
                     <ProfileField label={'Имя'}
-                                  validators={required}
+                                  validator={required}
                                   name={'firstName'}/>
                     <div className="col-sm-2"/>
                 </div>

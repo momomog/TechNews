@@ -2,7 +2,7 @@ import React from 'react'
 
 interface Props {
     name: string
-    value: any
+    value: string
     isNeedBorder: boolean
 }
 

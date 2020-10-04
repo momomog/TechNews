@@ -6,13 +6,13 @@ interface Props {
     isSocial?: boolean
     name: string
     label: string
-    validators?: any
+    validator?: (value: string) => string | undefined
 }
 
 /**
  * Редактор профиля. Компонент формы
  */
-const ProfileField: React.FC<Props> = ({isSocial, name, label, validators}: Props) => {
+const ProfileField: React.FC<Props> = ({isSocial, name, label, validator}: Props) => {
     return (
         <div className="col-sm-5 mt-4 d-flex justify-content-end">
             <div className="w-50 d-flex justify-content-end">
@@ -27,7 +27,7 @@ const ProfileField: React.FC<Props> = ({isSocial, name, label, validators}: Prop
                 <Field component={Input}
                        className="input-group-form mt-3"
                        name={name}
-                       validate={validators}/>
+                       validate={validator}/>
             </div>
         </div>
     )

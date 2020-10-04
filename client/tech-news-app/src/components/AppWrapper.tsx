@@ -17,7 +17,7 @@ import {Dispatch} from "redux";
 /**
  * Оболочка для корневого компонента
  */
-const AppWrapper: React.FC = () => {
+const AppWrapper: React.FC = (): React.ReactElement => {
     const theme: Theme = useTheme(),
         dispatch: Dispatch = useDispatch(),
         {userData: user, isAuth}: UserState = useSelector(userDataSelector),

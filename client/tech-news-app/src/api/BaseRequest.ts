@@ -18,6 +18,7 @@ export const WS_BASE_URL: string = process.env.NODE_ENV === 'production'
 /**
  * Базовый запрос приложения
  */
+/* eslint-disable */
 export const request = (opts: Options): Promise<any> => {
     const headers = opts.headers
         ? opts.headers

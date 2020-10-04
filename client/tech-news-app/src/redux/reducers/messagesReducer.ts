@@ -11,7 +11,7 @@ import {UserInitial} from '../../models/UserModel'
 export const initialState: MessageState = {
     dialogUser: UserInitial,  // юзер, с которым идет переписка
     dialogMessages: [],       // сообщения диалога
-    usersList: [],            // пользователи, с которыми юзер ведет переписку
+    usersList: [],            // пользователи, с которыми есть диалоги
     writingUsers: []          // люди, набирающие текст сообщения
 }
 

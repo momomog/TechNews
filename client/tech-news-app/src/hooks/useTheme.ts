@@ -20,13 +20,9 @@ export const useTheme = (): Theme => {
     const [theme, setTheme] = useState<string>(localStorage.getItem('theme') || LIGHT_THEME)
 
     useEffect(() => {
-        if (theme) {
-            document.body.style.background = theme === LIGHT_THEME
-                ? LIGHT_THEME_BACKGROUND
-                : DARK_THEME_BACKGROUND
-        } else {
-            document.body.style.background = LIGHT_THEME_BACKGROUND
-        }
+        document.body.style.background = theme === LIGHT_THEME
+            ? LIGHT_THEME_BACKGROUND
+            : DARK_THEME_BACKGROUND
     }, [theme])
 
     const changeTheme = () => {

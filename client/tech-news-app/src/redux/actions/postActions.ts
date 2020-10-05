@@ -49,7 +49,7 @@ export const setIsLoading = (isLoading: boolean): SetIsLoadingAction => ({
     isLoading
 })
 
-export const getPosts = (sectionId: number, postPage = 1, setPage = false): any => async (dispatch: Dispatch) => {
+export const getPosts = (sectionId: number, postPage = 1, setPage = false): ReturnType<typeof getPosts> => async (dispatch: Dispatch) => {
     try {
         if (setPage)
             dispatch(setPostPageAction(postPage))
@@ -66,7 +66,7 @@ export const getPosts = (sectionId: number, postPage = 1, setPage = false): any 
     }
 }
 
-export const getPostById = (postId: number): any => async (dispatch: Dispatch) => {
+export const getPostById = (postId: number): ReturnType<typeof getPostById> => async (dispatch: Dispatch) => {
     try {
         const post = await PostAPI.getPostById(postId)
         dispatch(setPostData(post))

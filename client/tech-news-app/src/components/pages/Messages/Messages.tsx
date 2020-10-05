@@ -55,16 +55,21 @@ const Messages: React.FC<Props> = ({users, writingUsers, readDialogMessages, get
                                 <div ref={messagesListRef} className="messages-list">
                                     {
                                         dialogUser.id > 0
-                                            ? messages.map((message, idx, arr) => <MessageItem key={message.id}
-                                                                                               prevMessage={arr[idx - 1]}
-                                                                                               message={message}/>)
-                                            : <div className="not-chosen-dialog-center">Выберите собеседника для начала диалога</div>
+                                            ? messages.map((message, idx, arr) => (
+                                                <MessageItem key={message.id}
+                                                             prevMessage={arr[idx - 1]}
+                                                             message={message}/>
+                                            ))
+                                            : <div className="not-chosen-dialog-center">Выберите собеседника для начала
+                                                диалога</div>
                                     }
                                 </div>
                                 {
-                                    dialogUser.id > 0 && <MessageInput writingUsers={writingUsers}
-                                                        dialogUser={dialogUser}
-                                                        scrollToBottomMessage={scrollToBottomMessage}/>
+                                    dialogUser.id > 0 && (
+                                        <MessageInput writingUsers={writingUsers}
+                                                      dialogUser={dialogUser}
+                                                      scrollToBottomMessage={scrollToBottomMessage}/>
+                                    )
                                 }
                             </div>
                         </div>

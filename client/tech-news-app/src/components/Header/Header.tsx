@@ -16,20 +16,20 @@ interface Props {
 /**
  * Шапка сайта
  */
-const Header: React.FC<Props> = (props: Props) => {
+const Header: React.FC<Props> = ({changeSection, setCurrentUserData, setIsAuth, setPostPage, setPosts}: Props) => {
     return (
         <div className="header-wrapper">
 
             <NotificationContainer/>
 
-            <Login changeSection={props.changeSection}
-                   setPosts={props.setPosts}
-                   setPostPage={props.setPostPage}
-                   setIsAuth={props.setIsAuth}
-                   setCurrentUserData={props.setCurrentUserData}/>
-            <NavLinks changeSection={props.changeSection}
-                      setPosts={props.setPosts}
-                      setPostPage={props.setPostPage}/>
+            <Login changeSection={changeSection}
+                   setPosts={setPosts}
+                   setPostPage={setPostPage}
+                   setIsAuth={setIsAuth}
+                   setCurrentUserData={setCurrentUserData}/>
+            <NavLinks changeSection={changeSection}
+                      setPosts={setPosts}
+                      setPostPage={setPostPage}/>
         </div>
     )
 }

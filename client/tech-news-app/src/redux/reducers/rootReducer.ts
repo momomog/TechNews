@@ -5,7 +5,7 @@ import {combineReducers, Reducer} from 'redux'
 import {postsReducer} from './postsReducer'
 import {commentsReducer} from './commentsReducer'
 import {userReducer} from './userReducer'
-import {reducer as formReducer} from 'redux-form'
+import {FormStateMap, reducer as formReducer} from 'redux-form'
 import {messagesReducer} from './messagesReducer'
 import {MessageState} from '../../models/MessageModel'
 
@@ -16,7 +16,7 @@ export interface RootState {
     messagesData: MessageState
 }
 
-const rootReducer: Reducer = combineReducers({
+const rootReducer: Reducer = combineReducers<RootState & {form: FormStateMap}>({
     postsData: postsReducer,
     commentsData: commentsReducer,
     userData: userReducer,

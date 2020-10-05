@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {sendPayloadToMsgWS} from '../MessageWebService'
 import {User} from '../../../../models/UserModel'
 import {Picker} from 'emoji-mart'
@@ -11,15 +11,17 @@ interface Props {
     scrollToBottomMessage: () => void
 }
 
-// Таймер отправки статуса набора сообщения (раз в 2 секунды)
-let timeout
-
+/*
+ * Тестовое поле ввода сообщения
+ */
 export const MessageInput: React.FC<Props> = ({writingUsers, dialogUser, scrollToBottomMessage}: Props) => {
     const [messageText, setMessageText] = useState<string>('')
     const [showPicker, setShowPicker] = useState<boolean>(false)
+    // Таймер отправки статуса набора сообщения (раз в 2 секунды)
+    const timeout = useRef<number>(0)
 
     useEffect(() => {
-        return () => clearTimeout(timeout)
+        return () => clearTimeout(timeout.current)
     }, [dialogUser])
 
     const sendMessage = () => {
@@ -44,11 +46,11 @@ export const MessageInput: React.FC<Props> = ({writingUsers, dialogUser, scrollT
 
     const writeMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setMessageText(e.target.value)
-        if (!timeout) {
+        if (!timeout.current) {
             sendPayloadToMsgWS(null, '', true)
-            timeout = setTimeout(() => {
+            timeout.current = window.setTimeout(() => {
                 sendPayloadToMsgWS(null, '', false)
-                timeout = null
+                timeout.current = 0
             }, 2000)
         }
     }
@@ -64,10 +66,10 @@ export const MessageInput: React.FC<Props> = ({writingUsers, dialogUser, scrollT
                 <div className="col-md-11 pl-0 pr-0">
                 <textarea className="form-control message-text-area"
                           rows={1}
-                          onChange={e => writeMessage(e)}
+                          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => writeMessage(e)}
                           placeholder="Введите текст сообщения..."
                           value={messageText}
-                          onKeyDown={e => inputKeyListener(e)}/>
+                          onKeyDown={(e: React.KeyboardEvent) => inputKeyListener(e)}/>
                 </div>
                 <div className="col-md-1 pl-3">
                     <img src={sendIcon}

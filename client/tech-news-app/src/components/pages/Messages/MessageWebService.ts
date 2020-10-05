@@ -1,27 +1,31 @@
 import {User} from '../../../models/UserModel'
 import {DialogUser, Message} from '../../../models/MessageModel'
 import {WS_BASE_URL} from '../../../api/BaseRequest'
-
+import {
+    addDialogMessage,
+    setWritingUsers,
+    getDialogUsers,
+    setDialogUsersData
+} from '../../../redux/actions/messageActions'
 import store from '../../../redux/reduxStore'
+import {Dispatch} from 'redux'
+
 
 let webService: WebSocket
+const dispatch: Dispatch = store.dispatch
 
-export function getWebService() {
+export function getWebService(): WebSocket {
     return webService
 }
 
 // Подключение к WS
-export function connectToMsgWS (user: User,
-                               addDialogMessage: (message: Message) => void,
-                               setWritingUsers: (payload: Message) => void,
-                               getDialogUsers: () => void,
-                               setDialogUsersData: (payload: Message, userId: number) => void) {
+export function connectToMsgWS(user: User) {
     webService = new WebSocket(`${WS_BASE_URL}/chat/${user.username}`)
-    webService.onmessage = event => onWSMessage(event, user, addDialogMessage, setWritingUsers, getDialogUsers, setDialogUsersData)
+    webService.onmessage = (event: MessageEvent) => onWSMessage(event, user)
 }
 
 // Отправка данных в WS
-export function sendPayloadToMsgWS (msgData, messageText: string, isWriting?: boolean, isRead?: boolean) {
+export function sendPayloadToMsgWS(msgData, messageText: string, isWriting?: boolean, isRead?: boolean) {
     const currentUser: User = store.getState().userData.userData
     const dialogUser: User = store.getState().messagesData.dialogUser
     let json
@@ -55,22 +59,18 @@ export function sendPayloadToMsgWS (msgData, messageText: string, isWriting?: bo
 }
 
 // Обработчик события отправки данных
-function onWSMessage(event,
-                     user: User,
-                     addDialogMessage: (message: Message) => void,
-                     setWritingUsers: (payload: Message) => void,
-                     getDialogUsers: () => void,
-                     setDialogUsersData: (payload: Message, userId: number) => void) {
+function onWSMessage(event: MessageEvent,
+                     user: User) {
     const msg: Message = JSON.parse(event.data)
 
     // сет пользователей, печатающих сообщение текущему пользователю
     if (msg.isWriting !== undefined) {
-        setWritingUsers(msg)
+        dispatch(setWritingUsers(msg))
     } else if (msg.text) {
         const dialogUser: User = store.getState().messagesData.dialogUser
         const usersList: Array<DialogUser> = store.getState().messagesData.usersList
 
-        checkMsgUserInUsersList(usersList, msg, dialogUser, getDialogUsers, setDialogUsersData)
+        checkMsgUserInUsersList(usersList, msg, dialogUser)
 
         if (user.id === msg.dialogUserId)
             saveMsgToDB(msg, dialogUser)
@@ -79,7 +79,7 @@ function onWSMessage(event,
             msg.id = Math.random()
             msg.new = true
             msg.isRead = true
-            addDialogMessage(msg)
+            dispatch(addDialogMessage(msg))
         }
         playMsgSound()
     }
@@ -93,21 +93,19 @@ function onWSMessage(event,
 // Иначе пуш нового сообщения в диалог с пользователем
 function checkMsgUserInUsersList(usersList: Array<DialogUser>,
                                  message: Message,
-                                 dialogUser: User,
-                                 getDialogUsers: () => void,
-                                 setDialogUsersData: (payload: Message, userId: number) => void) {
+                                 dialogUser: User) {
     let isInclude = false
     usersList.forEach(item => {
         if (item.user.id === message.mainUserId) {
             isInclude = true
             if (item.user.id !== dialogUser.id)
-                setDialogUsersData(message, item.user.id)
+                dispatch(setDialogUsersData(message, item.user.id))
             return
         }
     })
 
     if (!isInclude)
-        getDialogUsers()
+        dispatch(getDialogUsers())
 }
 
 // сохранение сообщения в БД

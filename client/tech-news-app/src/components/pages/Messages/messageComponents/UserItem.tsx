@@ -11,6 +11,9 @@ interface Props {
     readDialogMessages: (dialogUser: User) => void
 }
 
+/*
+ * Пользователь списка диалогов
+ */
 export const UserItem: React.FC<Props> = ({user, unreadMessages, readDialogMessages, getMessages, dialogUser}: Props) => {
     const unreadMsgsForUser: Array<Message> = unreadMessages.filter(msg => user.id !== msg.dialogUserId)
 

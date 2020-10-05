@@ -1,17 +1,19 @@
 class Common {
     // Возраст
-    getUserAge = (date: string): string => {
-        const birthDate: Date = new Date(date.replace(/\./g, ':')),
-            difference = new Date().getTime() - birthDate.getTime(),
-            age = Math.floor((difference / (1000 * 60 * 60 * 24) / 365)),
-            ageStr = age.toString()
+    getUserAge = (date: string): string | undefined => {
+        if (date) {
+            const birthDate: Date = new Date(date.replace(/\./g, ':')),
+                difference = new Date().getTime() - birthDate.getTime(),
+                age = Math.floor((difference / (1000 * 60 * 60 * 24) / 365)),
+                ageStr = age.toString()
 
-        if (ageStr.endsWith('1') && !ageStr.endsWith('11'))
-            return `${age} год`
-        else if (['2', '3', '4'].includes(ageStr[ageStr.length - 1]))
-            return `${age} года`
-        else
-            return `${age} лет`
+            if (ageStr.endsWith('1') && !ageStr.endsWith('11'))
+                return `${age} год`
+            else if (['2', '3', '4'].includes(ageStr[ageStr.length - 1]))
+                return `${age} года`
+            else
+                return `${age} лет`
+        }
     }
 
     // Окончание количества комментариев в зависимости от значения

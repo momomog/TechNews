@@ -56,7 +56,7 @@ export const addDialogMessage = (message: Message): AddDialogMessageAction => ({
     message
 })
 
-export const setWritingUsers = (payload: Message): any => (dispatch, getState) => {
+export const setWritingUsers = (payload: Message): ReturnType<typeof setWritingUsers> => (dispatch, getState) => {
     let users = [...getState().messagesData.writingUsers]
     if (payload.isWriting && !users.includes(payload.mainUserId)) {
         users.push(payload.mainUserId)
@@ -66,7 +66,7 @@ export const setWritingUsers = (payload: Message): any => (dispatch, getState) =
     dispatch(setWritingUsersData(users))
 }
 
-export const setDialogUsersData = (msg: Message, userId: number): any => (dispatch, getState) => {
+export const setDialogUsersData = (msg: Message, userId: number): ReturnType<typeof setDialogUsersData> => (dispatch, getState) => {
     const dialogUsers: Array<DialogUser> = [...getState().messagesData.usersList]
     msg.isRead = false
     msg.id = Math.random()

@@ -7,11 +7,9 @@ import {AuthContext} from '../context/AuthContext'
 import {Theme, useTheme} from '../hooks/useTheme'
 import {ThemeContext} from '../context/ThemeContext'
 import {connectToMsgWS, getWebService} from './pages/Messages/MessageWebService'
-import {Message} from '../models/MessageModel'
-import {addDialogMessage, getDialogUsers, setDialogUsersData, setWritingUsers} from "../redux/actions/messageActions";
-import {userDataSelector} from "../redux/selectors/selectors";
-import {UserState} from "../models/UserModel";
-import {Dispatch} from "redux";
+import {userDataSelector} from '../redux/selectors/selectors'
+import {UserState} from '../models/UserModel'
+import {Dispatch} from 'redux'
 
 
 /**
@@ -23,18 +21,13 @@ const AppWrapper: React.FC = (): React.ReactElement => {
         {userData: user, isAuth}: UserState = useSelector(userDataSelector),
         authContext = {user, isAuth}
 
-    const addDialogMsg = (message: Message) => dispatch(addDialogMessage(message))
-    const setWritingUsersList = (payload: Message) => dispatch(setWritingUsers(payload))
-    const setDialogUsersInfo = (payload: Message, userId: number) => dispatch(setDialogUsersData(payload, userId))
-    const getDialogUsersList = () => dispatch(getDialogUsers())
-
     useEffect(() => {
         if (AuthService.isAuth() && !isAuth) {
             dispatch(setIsAuthAction(true))
             dispatch(getCurrentUserData())
         }
         if (user.username && !getWebService())
-            connectToMsgWS(user, addDialogMsg, setWritingUsersList, getDialogUsersList, setDialogUsersInfo)
+            connectToMsgWS(user)
     }, [user.username, isAuth])
 
     return (

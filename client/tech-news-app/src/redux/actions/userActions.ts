@@ -20,7 +20,7 @@ export const setUserDataAction = (userData: User): SetUserDataAction => ({
     userData: userData
 })
 
-export const login = (loginRequest: SignInRequest, remember?: boolean): any => async (dispatch: Dispatch) => {
+export const login = (loginRequest: SignInRequest, remember?: boolean): ReturnType<typeof login> => async (dispatch: Dispatch) => {
     try {
         const response = await AuthAPI.login(loginRequest)
         if (!response.success && response.message) {
@@ -36,7 +36,7 @@ export const login = (loginRequest: SignInRequest, remember?: boolean): any => a
     }
 }
 
-export const getCurrentUserData = (): any => async (dispatch: Dispatch) => {
+export const getCurrentUserData = (): ReturnType<typeof getCurrentUserData> => async (dispatch: Dispatch) => {
     try {
         const user: User = await ProfileAPI.getCurrentUser()
         dispatch(setUserDataAction(user))

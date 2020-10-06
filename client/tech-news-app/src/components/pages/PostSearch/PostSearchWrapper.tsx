@@ -26,9 +26,8 @@ const PostSearchWrapper: React.FC = () => {
         PostAPI.searchPosts(searchText)
             .then((response: Array<Post>) => {
                 setSearchPosts(response)
-                setIsLoading(false)
             })
-            .catch(() => setIsLoading(false))
+            .finally(() => setIsLoading(false))
     }, [searchText])
 
     return (

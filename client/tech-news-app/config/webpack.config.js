@@ -45,12 +45,6 @@ const imageInlineSizeLimit = parseInt(
 // Используется ли typescript
 const useTypeScript = fs.existsSync(paths.appTsConfig);
 
-// regex стилей
-const cssRegex = /\.css$/;
-const cssModuleRegex = /\.module\.css$/;
-const sassRegex = /\.(scss|sass)$/;
-const sassModuleRegex = /\.module\.(scss|sass)$/;
-
 
 /**
  * webpack config
@@ -189,11 +183,6 @@ module.exports = function (webpackEnv) {
                 new TerserPlugin({
                     terserOptions: {
                         parse: {
-                            // We want terser to parse ecma 8 code. However, we don't want it
-                            // to apply any minification steps that turns valid ecma 5 code
-                            // into invalid ecma 5 code. This is why the 'compress' and 'output'
-                            // sections only apply transformations that are ecma 5 safe
-                            // https://github.com/facebook/create-react-app/pull/4234
                             ecma: 8
                         },
                         compress: {
@@ -301,14 +290,7 @@ module.exports = function (webpackEnv) {
                     test: /\.(js|mjs|jsx|ts|tsx)$/,
                     enforce: 'pre',
                     use: [{
-                        loader: require.resolve('eslint-loader'),
-                        // options: {
-                        //     cache: true,
-                        //     formatter: require.resolve('react-dev-utils/eslintFormatter'),
-                        //     // eslintPath: path.resolve(__dirname, '../.eslintrc.js'),
-                        //     eslintPath: require.resolve('eslint'),
-                        //     resolvePluginsRelativeTo: __dirname
-                        // }
+                        loader: require.resolve('eslint-loader')
                     }],
                     include: paths.appSrc
                 },
@@ -316,9 +298,6 @@ module.exports = function (webpackEnv) {
                     // «oneOf» будет проходить по всем следующим загрузчикам, пока один из них не будет соответствовать требованиям.
                     // Когда ни один загрузчик не совпадет, отработает к file-loader в конце списка загрузчиков.
                     oneOf: [
-                        // "url" loader works like "file" loader except that it embeds assets
-                        // smaller than specified limit in bytes as data URLs to avoid requests.
-                        // A missing `test` is equivalent to a match.
                         {
                             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
                             loader: require.resolve('url-loader'),
@@ -437,9 +416,6 @@ module.exports = function (webpackEnv) {
                 }
             ]
         },
-
-
-
         plugins: [
             // Generates an `index.html` file with the <script> injected.
             new HtmlWebpackPlugin(

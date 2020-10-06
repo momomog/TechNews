@@ -4,9 +4,9 @@ import Hyphenated from 'react-hyphen'
 import ru from 'hyphenated-ru'
 import {Post, PostInitial} from '../../../models/PostModel'
 import {AppThemeContext, ThemeContext} from '../../../context/ThemeContext'
-import {setPostData} from "../../../redux/actions/postActions";
-import {useDispatch} from "react-redux";
-import {Dispatch} from "redux";
+import {setPostData} from '../../../redux/actions/postActions'
+import {useDispatch} from 'react-redux'
+import {Dispatch} from 'redux'
 
 interface Props {
     post: Post

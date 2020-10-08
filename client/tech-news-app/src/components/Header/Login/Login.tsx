@@ -3,35 +3,31 @@ import {SECTION_ALL_POSTS} from '../../../common/Const'
 import AuthButtons from './AuthButtons/AuthButtons'
 import logo from '../../../static/logo.png'
 import {NavLink} from 'react-router-dom'
-import {ChangeSectionAction, SetPostPageAction} from '../../../models/PostModel'
 import AuthUser from './AuthUser/AuthUser'
-import {SetIsAuthAction, User} from '../../../models/UserModel'
 import {AppAuthContext, AuthContext} from '../../../context/AuthContext'
 import {AppThemeContext, ThemeContext} from '../../../context/ThemeContext'
+import {Dispatch} from 'redux'
+import {useDispatch} from 'react-redux'
+import {changeSection, getPosts, setPostPage} from '../../../redux/actions/postActions'
 
 import lightIcon from '../../../static/day-theme.png'
 import darkIcon from '../../../static/dark-theme.png'
 
-interface Props {
-    setCurrentUserData: (userData: User) => void
-    setIsAuth: (isAuth: boolean) => SetIsAuthAction
-    changeSection: (sectionId: number) => ChangeSectionAction
-    setPostPage: (pageNumber: number) => SetPostPageAction
-    setPosts: (sectionId: number) => void
-}
+
 
 /**
  * Верхний компонент шапки. Содержит лого и информацию об авторизованном юзере
  */
-const Login: React.FC<Props> = ({setPosts, changeSection, setPostPage, setCurrentUserData, setIsAuth}: Props) => {
+const Login: React.FC = () => {
     const {isAuth, user}: AppAuthContext = useContext(AuthContext)
+    const dispatch: Dispatch = useDispatch()
     const {isLight, changeTheme}: AppThemeContext = useContext(ThemeContext)
     const changeThemeIcon: string = isLight ? lightIcon : darkIcon
 
     const onLogoClick = () => {
-        setPosts(SECTION_ALL_POSTS)
-        setPostPage(1)
-        changeSection(SECTION_ALL_POSTS)
+        dispatch(getPosts(SECTION_ALL_POSTS))
+        dispatch(setPostPage())
+        dispatch(changeSection(SECTION_ALL_POSTS))
     }
 
     return (
@@ -52,9 +48,7 @@ const Login: React.FC<Props> = ({setPosts, changeSection, setPostPage, setCurren
                     }
                     {
                         isAuth && user.id > 0
-                        && <AuthUser setCurrentUserData={setCurrentUserData}
-                                     setIsAuth={setIsAuth}
-                                     isAuth={isAuth}
+                        && <AuthUser isAuth={isAuth}
                                      user={user}/>
                     }
                 </div>

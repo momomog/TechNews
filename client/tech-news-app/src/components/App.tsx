@@ -2,9 +2,9 @@ import React from 'react'
 import {Router} from 'react-router-dom'
 import history from '../history'
 import Footer from './Footer/Footer'
-import HeaderWrapper from './Header/HeaderWrapper'
 import SwitchRouter from './pages/SwitchRouter'
 import ErrorBoundary from './core/ErrorBoundary'
+import Header from './Header/Header'
 
 /**
  * Корневой компонент
@@ -12,7 +12,7 @@ import ErrorBoundary from './core/ErrorBoundary'
 const App: React.FC = (): React.ReactElement => {
     return (
         <Router history={history}>
-            <HeaderWrapper/>
+            <Header/>
             <ErrorBoundary>
                 <SwitchRouter/>
             </ErrorBoundary>

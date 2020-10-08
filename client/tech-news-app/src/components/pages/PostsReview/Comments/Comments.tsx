@@ -4,11 +4,12 @@ import Common from '../../../../common/Common'
 import CommentItem from './Comment'
 import {AppAuthContext, AuthContext} from '../../../../context/AuthContext'
 import {AppThemeContext, ThemeContext} from '../../../../context/ThemeContext'
+import {CommentActions as Actions} from './CommentsWrapper'
 
 interface Props {
     comments: Array<Comment>
     commentsCount: number
-    commentAction: (action: string,
+    commentAction: (action: Actions,
                     actionIndefiniteForm: string,
                     commentId: number,
                     updateCommentText?: string,
@@ -27,7 +28,7 @@ const Comments: React.FC<Props> = ({comments, commentsCount, commentAction}: Pro
 
     const addNewCommentary = () => {
         if (commentText.trim()) {
-            commentAction('ADD_NEW', 'добавить', 0, '', {commentText})
+            commentAction(Actions.ADD_NEW, 'добавить', 0, '', {commentText})
             setCommentText('')
         }
     }

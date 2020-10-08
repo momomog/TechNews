@@ -7,11 +7,11 @@ type Options = {
     headers?: Headers
 }
 
-export const API_BASE_URL: string = process.env.NODE_ENV === 'production'
+export const API_BASE_URL = process.env.NODE_ENV === 'production'
     ? 'http://87.76.1.16:9001/api'
     : 'http://localhost:8081/api'
 
-export const WS_BASE_URL: string = process.env.NODE_ENV === 'production'
+export const WS_BASE_URL = process.env.NODE_ENV === 'production'
     ? 'ws://87.76.1.16:9001/api'
     : 'ws://localhost:8081/api'
 
@@ -20,6 +20,8 @@ export const WS_BASE_URL: string = process.env.NODE_ENV === 'production'
  */
 /* eslint-disable */
 export const request = (opts: Options): Promise<any> => {
+    const controller: AbortController = new AbortController()
+
     const headers = opts.headers
         ? opts.headers
         : new Headers({
@@ -30,13 +32,16 @@ export const request = (opts: Options): Promise<any> => {
     if (AuthService.getToken())
         headers.append('Authorization', `Bearer ${AuthService.getToken()}`)
 
-    const defaults = {
+    const defaults: RequestInit = {
         headers,
-        method: 'GET'
+        method: 'GET',
+        signal: controller.signal
     }
 
     const options: Options = Object.assign({}, defaults, opts)
     const url = `${API_BASE_URL}/${options.url}`
+
+    setTimeout(() => controller.abort(), 10000)
 
     return fetch(url, options)
         .then(response =>

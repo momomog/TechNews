@@ -17,7 +17,8 @@ import 'emoji-mart/css/emoji-mart.css'
 ReactDOM.render(
     <Provider store={store}>
         <AppWrapper/>
-    </Provider>, document.getElementById('root'))
+    </Provider>, document.getElementById('root')
+)
 
 
 serviceWorker.unregister()

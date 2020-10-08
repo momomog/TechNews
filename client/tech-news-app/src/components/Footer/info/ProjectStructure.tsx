@@ -77,7 +77,6 @@ const ProjectStructure: React.FC = () => {
                                             <TreeItem nodeId={nodeId()} label="Search.tsx"/>
                                         </TreeItem>
                                         <TreeItem nodeId={nodeId()} label="Header.tsx"/>
-                                        <TreeItem nodeId={nodeId()} label="HeaderWrapper.tsx"/>
                                     </TreeItem>
                                     <TreeItem nodeId={nodeId()} label="pages">
                                         <TreeItem nodeId={nodeId()} label="AdminPanel">

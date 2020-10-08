@@ -1,6 +1,4 @@
-const path = require('path');
-
-const isProd = process.env.NODE_ENV = 'production'
+const path = require('path')
 
 module.exports = {
     root: true,
@@ -17,22 +15,22 @@ module.exports = {
         project: './tsconfig.json',
         tsconfigRootDir: path.resolve(__dirname),
         ecmaFeatures: {
-            jsx: true,  // Allows for the parsing of JSX
-        },
+            jsx: true  // Allows for the parsing of JSX
+        }
     },
     plugins: [
         'react',
         '@typescript-eslint',
-        'eslint-plugin-node',
+        'eslint-plugin-node'
     ],
     env: {
         es6: true,
         browser: true,
-        node: true,
+        node: true
     },
     rules: {
         camelcase: "warn",
-        "no-debugger": isProd ? "error" : "off",
+        "no-debugger": "error",
         "react/no-unescaped-entities": ["off"],
         "@typescript-eslint/no-use-before-define": ["warn", {functions: false}],
         "@typescript-eslint/no-empty-function": ["off"],
@@ -54,7 +52,7 @@ module.exports = {
             }
         }],
         "@typescript-eslint/naming-convention": [
-            "error",
+            "warn",
             {
                 "selector": "default",
                 "format": ["camelCase"]
@@ -97,4 +95,4 @@ module.exports = {
             version: 'detect'
         }
     }
-};
+}

@@ -6,16 +6,23 @@ import CommentAPI from '../../../../api/CommentAPI'
 import {NotificationManager} from 'react-notifications'
 import {CommentRequest, CommentState} from '../../../../models/CommentModel'
 import {getPostComments} from '../../../../redux/actions/commentActions'
-import {commentsDataSelector, postsDataSelector} from "../../../../redux/selectors/selectors";
-import {Dispatch} from "redux";
-import {PostState} from "../../../../models/PostModel";
+import {commentsDataSelector, postsDataSelector} from '../../../../redux/selectors/selectors'
+import {Dispatch} from 'redux'
+import {PostState} from '../../../../models/PostModel'
+
+export enum CommentActions {
+    LIKE,
+    DELETE,
+    UPDATE,
+    ADD_NEW
+}
 
 
 /**
  * Список комментариев. Оболочка
  */
 const CommentsWrapper: React.FC = () => {
-    const {params}: match<{postId: string}> = useRouteMatch(),
+    const {params}: match<{ postId: string }> = useRouteMatch(),
         dispatch: Dispatch = useDispatch(),
         {sectionId}: PostState = useSelector(postsDataSelector),
         {commentsCount, postComments}: CommentState = useSelector(commentsDataSelector),
@@ -26,19 +33,19 @@ const CommentsWrapper: React.FC = () => {
     }, [postId, sectionId])
 
     const commentAction = async (
-        action: string,
+        action: CommentActions,
         actionIndefiniteForm: string,
         commentId?: number,
         updateCommentText?: string,
         request?: CommentRequest) => {
         try {
-            if (action === 'LIKE' && commentId)
+            if (action === CommentActions.ADD_NEW && commentId)
                 await CommentAPI.likeComment(postId, commentId)
-            else if (action === 'DELETE' && commentId)
+            else if (action === CommentActions.DELETE && commentId)
                 await CommentAPI.deleteComment(postId, commentId)
-            else if (action === 'UPDATE' && commentId && updateCommentText)
+            else if (action === CommentActions.UPDATE && commentId && updateCommentText)
                 await CommentAPI.updateComment(postId, commentId, updateCommentText)
-            else if (action === 'ADD_NEW' && request)
+            else if (action === CommentActions.ADD_NEW && request)
                 await CommentAPI.sendNewPostComment({
                     postId: postId,
                     commentText: request && request.commentText,

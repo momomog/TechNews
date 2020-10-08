@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import App from './App'
 import AuthService from '../common/AuthService'
-import {getCurrentUserData, setIsAuthAction} from '../redux/actions/userActions'
+import {getCurrentUserData, setIsAuth} from '../redux/actions/userActions'
 import {AuthContext} from '../context/AuthContext'
 import {Theme, useTheme} from '../hooks/useTheme'
 import {ThemeContext} from '../context/ThemeContext'
@@ -23,7 +23,7 @@ const AppWrapper: React.FC = (): React.ReactElement => {
 
     useEffect(() => {
         if (AuthService.isAuth() && !isAuth) {
-            dispatch(setIsAuthAction(true))
+            dispatch(setIsAuth(true))
             dispatch(getCurrentUserData())
         }
         if (user.username && !getWebService())

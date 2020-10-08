@@ -6,7 +6,7 @@ import {getSectionName} from '../../../../common/Const'
 import {NotificationManager} from 'react-notifications'
 import PostAPI from '../../../../api/PostAPI'
 import {PostRequest} from '../../../../models/RequestsModel'
-import {changeSection, getPosts, setPostPageAction} from '../../../../redux/actions/postActions'
+import {changeSection, getPosts, setPostPage} from '../../../../redux/actions/postActions'
 import {Dispatch} from 'redux'
 import {History} from 'history'
 
@@ -28,7 +28,7 @@ const NewPostPageWrapper: React.FC = () => {
             }, formData.photo && formData.photo[0])
 
             dispatch(changeSection(formData.categoryId))
-            dispatch(setPostPageAction())
+            dispatch(setPostPage())
             dispatch(getPosts(formData.categoryId))
             history.push(`/posts/${getSectionName(formData.categoryId)}`)
         } catch (e) {

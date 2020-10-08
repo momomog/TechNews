@@ -6,11 +6,12 @@ import Popup from 'reactjs-popup'
 import AuthService from '../../../../common/AuthService'
 import {Comment, CommentRequest} from '../../../../models/CommentModel'
 import {AppAuthContext, AuthContext} from '../../../../context/AuthContext'
+import {CommentActions as Actions} from './CommentsWrapper'
 
 interface Props {
     comment: Comment
     firstCommentId?: number
-    commentAction: (action: string,
+    commentAction: (action: Actions,
                     actionIndefiniteForm: string,
                     commentId: number,
                     updateCommentText?: string,
@@ -34,24 +35,24 @@ const CommentItem: React.FC<Props> = ({comment, commentAction, firstCommentId}: 
 
     const onLike = () => {
         if (isAuth && !comment.isDeleted)
-            commentAction('LIKE', 'оценить', comment.id)
+            commentAction(Actions.LIKE, 'оценить', comment.id)
         else
             NotificationManager.warning('Необходима авторизация на сайте', 'Ошибка')
     }
 
     const onDeleteCommentary = () => {
-        commentAction('DELETE', 'удалить', comment.id)
+        commentAction(Actions.DELETE, 'удалить', comment.id)
         setCommentEditText('')
     }
 
     const onUpdateCommentary = () => {
-        commentAction('UPDATE', 'обновить', comment.id, commentEditText)
+        commentAction(Actions.UPDATE, 'обновить', comment.id, commentEditText)
         setIsEditMode(false)
     }
 
     const onAddCommentary = () => {
         if (commentAnswerText.trim()) {
-            commentAction('ADD_NEW', 'добавить', 0, '',
+            commentAction(Actions.ADD_NEW, 'добавить', 0, '',
                 {
                     commentText: commentAnswerText,
                     parentCommentId: commentAnswerParentId,

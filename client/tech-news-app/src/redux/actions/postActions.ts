@@ -24,17 +24,17 @@ export const changeSection = (sectionId: number): ChangeSectionAction => ({
     sectionId
 })
 
-export const setPostsAction = (posts: Array<Post>): SetPostsAction => ({
+export const setPosts = (posts: Array<Post>): SetPostsAction => ({
     type: SET_POSTS,
     posts
 })
 
-export const setPostsCountAction = (count: number): SetPostCountAction => ({
+export const setPostsCount = (count: number): SetPostCountAction => ({
     type: SET_POSTS_COUNT,
     postsCount: count
 })
 
-export const setPostPageAction = (postPageNumber = 1): SetPostPageAction => ({
+export const setPostPage = (postPageNumber = 1): SetPostPageAction => ({
     type: SET_POST_PAGE,
     postPage: postPageNumber
 })
@@ -52,13 +52,13 @@ export const setIsLoading = (isLoading: boolean): SetIsLoadingAction => ({
 export const getPosts = (sectionId: number, postPage = 1, setPage = false): ReturnType<typeof getPosts> => async (dispatch: Dispatch) => {
     try {
         if (setPage)
-            dispatch(setPostPageAction(postPage))
+            dispatch(setPostPage(postPage))
         else
             dispatch(setIsLoading(true))
 
         const resp = await PostAPI.getPosts(getSectionName(sectionId), postPage)
-        dispatch(setPostsAction(resp.posts))
-        dispatch(setPostsCountAction(resp.postsCount))
+        dispatch(setPosts(resp.posts))
+        dispatch(setPostsCount(resp.postsCount))
     } catch (error) {
         history.push(`/error/${error.code}`)
     } finally {

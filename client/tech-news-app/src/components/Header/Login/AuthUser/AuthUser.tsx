@@ -1,11 +1,12 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 import AuthService from '../../../../common/AuthService'
-import {SetIsAuthAction, User, UserInitial} from '../../../../models/UserModel'
+import {User, UserInitial} from '../../../../models/UserModel'
+import {Dispatch} from 'redux'
+import {useDispatch} from 'react-redux'
+import {setIsAuth, setUserData} from '../../../../redux/actions/userActions'
 
 interface Props {
-    setCurrentUserData: (userData: User) => void
-    setIsAuth: (isAuth: boolean) => SetIsAuthAction
     isAuth: boolean
     user: User
 }
@@ -13,11 +14,13 @@ interface Props {
 /**
  * Авторизованный пользователь
  */
-const AuthUser: React.FC<Props> = ({user, isAuth, setIsAuth, setCurrentUserData}: Props) => {
+const AuthUser: React.FC<Props> = ({user, isAuth}: Props) => {
+    const dispatch: Dispatch = useDispatch()
+
     const onLogout = () => {
         AuthService.removeToken()
-        setIsAuth(false)
-        setCurrentUserData(UserInitial)
+        dispatch(setIsAuth(false))
+        dispatch(setUserData(UserInitial))
     }
 
     return (

@@ -8,27 +8,26 @@ import {
     SECTION_NOTEBOOKS,
     SECTION_OTHER
 } from '../../../common/Const'
-import {ChangeSectionAction, SetPostPageAction} from '../../../models/PostModel'
 import {Search} from './Search'
 import {AppThemeContext, ThemeContext} from '../../../context/ThemeContext'
+import {Dispatch} from 'redux'
+import {useDispatch} from 'react-redux'
+import {changeSection, getPosts, setPostPage} from '../../../redux/actions/postActions'
 
-interface Props {
-    setPosts: (sectionId: number) => void
-    changeSection: (sectionId: number) => ChangeSectionAction
-    setPostPage: (pageNumber: number) => SetPostPageAction
-}
+
 
 /**
  * Панель навигации по категории постов
  */
-const NavLinks: React.FC<Props> = ({setPosts, setPostPage, changeSection}: Props) => {
+const NavLinks: React.FC = () => {
     const {isLight}: AppThemeContext = useContext(ThemeContext)
+    const dispatch: Dispatch = useDispatch()
     const navbarClasses: Array<string> = ['navbar', 'navbar-expand-lg', isLight ? 'background-light' : 'navbar-dark-background']
 
     const setPostsAndChangeSection = (sectionId: number) => {
-        setPosts(sectionId)
-        setPostPage(1)
-        changeSection(sectionId)
+        dispatch(getPosts(sectionId))
+        dispatch(setPostPage())
+        dispatch(changeSection(sectionId))
     }
 
     return (

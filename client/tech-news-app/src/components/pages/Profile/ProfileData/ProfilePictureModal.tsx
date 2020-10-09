@@ -39,7 +39,7 @@ const ProfilePictureModal: React.FC<Props> = ({isOpenModal, picture, onLoadPhoto
         reader.onerror = () => console.log('there are some problems')
     }
 
-    const getCroppedPicture = value => {
+    const getCroppedPicture = (value: File) => {
         onLoadPhoto(value)
         onCloseModal()
     }

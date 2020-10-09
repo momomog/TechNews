@@ -23,19 +23,15 @@ const ProfileData: React.FC<Props> = ({user}: Props) => {
             <div className="clearfix section mb-1"/>
 
             <UserInfoLine name={'Дата регистрации'}
-                          isNeedBorder
                           value={user.createAt}/>
 
             <UserInfoLine name={'Email'}
-                          isNeedBorder
                           value={user.email}/>
 
             <UserInfoLine name={'Дата рождения'}
-                          isNeedBorder
                           value={`${user.profileData.birthDate}, ${Common.getUserAge(user.profileData.birthDate)}`}/>
 
             <UserInfoLine name={'Страна'}
-                          isNeedBorder
                           value={user.profileData.country && user.profileData.country}/>
 
             <UserInfoLine name={'Город'}
@@ -48,7 +44,6 @@ const ProfileData: React.FC<Props> = ({user}: Props) => {
             <div className="clearfix section mb-1"/>
 
             <UserInfoLine name={'Репутация'}
-                          isNeedBorder
                           value={'**не реализовано**'}/>
 
             <UserInfoLine name={'Количество комментариев'}

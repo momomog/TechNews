@@ -3,13 +3,13 @@ import React from 'react'
 interface Props {
     name: string
     value: string
-    isNeedBorder: boolean
+    isNeedBorder?: boolean
 }
 
 /**
  * Профиль. Компонент отображения данных
  */
-const UserInfoLine: React.FC<Props> = ({name, value, isNeedBorder}: Props) => {
+const UserInfoLine: React.FC<Props> = ({name, value, isNeedBorder = true}: Props) => {
     return (
         <>
             <div className="col-sm-3"/>

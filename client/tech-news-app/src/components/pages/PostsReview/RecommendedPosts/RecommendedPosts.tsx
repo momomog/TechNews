@@ -1,7 +1,10 @@
 import React from 'react'
 import Spinner from '../../../core/Spinner'
 import {NavLink} from 'react-router-dom'
-import {Post} from '../../../../models/PostModel'
+import {Post, PostInitial} from '../../../../models/PostModel'
+import {setPostData} from '../../../../redux/actions/postActions'
+import {Dispatch} from 'redux'
+import {useDispatch} from 'react-redux'
 
 interface Props {
     post: Post
@@ -11,6 +14,7 @@ interface Props {
  * Рекомендуемый пост
  */
 const PostItem: React.FC<Props> = ({post}: Props) => {
+    const dispatch: Dispatch = useDispatch()
 
     const linkPropInit = () => ({pathname: `/redirect-to/post`, redirectUrl: `/posts/post/${post.id}`})
 
@@ -23,7 +27,7 @@ const PostItem: React.FC<Props> = ({post}: Props) => {
                          src={post.photoId}/>
                 </div>
                 <div className="text-center">
-                    <NavLink to={linkPropInit()}>
+                    <NavLink to={linkPropInit()} onClick={() => dispatch(setPostData(PostInitial))}>
                         {post.title}
                     </NavLink>
                 </div>

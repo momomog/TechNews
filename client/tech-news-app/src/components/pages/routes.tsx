@@ -1,21 +1,22 @@
 import {Route} from 'react-router-dom'
-import React from 'react'
-import PostReviewWrapper from './PostsReview/PostReviewWrapper'
-import PostSearchWrapper from './PostSearch/PostSearchWrapper'
-import PostsListWrapper from './PostsList/PostsListWrapper'
-import NewPostPageWrapper from './editPages/NewPostPage/NewPostPageWrapper'
-import AdminPanelWrapper from './AdminPanel/AdminPanelWrapper'
-import ProfileWrapper from './Profile/ProfileWrapper'
-import ProfileEditWrapper from './editPages/ProfileEdit/ProfileEditWrapper'
-import PostEditWrapper from './editPages/PostEdit/PostEditWrapper'
-import RedirectComponentWrapper from '../core/RedirectComponent'
-import {NotFoundComponent} from '../core/NotFoundComponent'
-import MessagesWrapper from './Messages/MessagesWrapper'
-import History from '../Footer/info/History'
-import Technologies from '../Footer/info/Technologies'
-import ProjectStructure from '../Footer/info/ProjectStructure'
-import RegistrationWrapper from './authentication/Registration/RegistrationWrapper'
-import AuthorizationWrapper from './authentication/Authorization/AuthorizationWrapper'
+import React, {lazy} from 'react'
+
+const PostReviewWrapper = lazy(() => import('./PostsReview/PostReviewWrapper'))
+const PostSearchWrapper = lazy(() => import('./PostSearch/PostSearchWrapper'))
+const PostsListWrapper = lazy(() => import('./PostsList/PostsListWrapper'))
+const NewPostPageWrapper = lazy(() => import('./PostsReview/PostReviewWrapper'))
+const AdminPanelWrapper = lazy(() => import('./AdminPanel/AdminPanelWrapper'))
+const ProfileWrapper = lazy(() => import('./Profile/ProfileWrapper'))
+const ProfileEditWrapper = lazy(() => import('./editPages/ProfileEdit/ProfileEditWrapper'))
+const PostEditWrapper = lazy(() => import('./editPages/PostEdit/PostEditWrapper'))
+const RedirectComponentWrapper = lazy(() => import('../core/RedirectComponent'))
+const MessagesWrapper = lazy(() => import('./Messages/MessagesWrapper'))
+const History = lazy(() => import('../Footer/info/History'))
+const Technologies = lazy(() => import('../Footer/info/Technologies'))
+const ProjectStructure = lazy(() => import('../Footer/info/ProjectStructure'))
+const RegistrationWrapper = lazy(() => import('./authentication/Registration/RegistrationWrapper'))
+const AuthorizationWrapper = lazy(() => import('./authentication/Authorization/AuthorizationWrapper'))
+const NotFoundComponent = lazy(() => import('../core/NotFoundComponent'))
 
 type RouteProp = {
     path: string | Array<string>
@@ -115,7 +116,7 @@ const postfixRoutes: Array<RouteProp> = [{
 }, {
     path: ['/error/:code', '*'],
     component: NotFoundComponent,
-    exact: false
+    exact: true
 }]
 
 export const getRoutes = (isAuth: boolean) => {

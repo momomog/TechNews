@@ -1,7 +1,8 @@
-import React, {useContext, useMemo} from 'react'
+import React, {useContext, useMemo, Suspense} from 'react'
 import {Switch} from 'react-router-dom'
 import {AppAuthContext, AuthContext} from '../../context/AuthContext'
 import {getRoutes} from './routes'
+import Spinner from '../core/Spinner'
 
 /**
  * Главный роутер приложения
@@ -12,11 +13,13 @@ const SwitchRouter = () => {
 
     return (
         <div className="container main-content">
-            <Switch>
-                {
-                    routes
-                }
-            </Switch>
+            <Suspense fallback={<Spinner/>}>
+                <Switch>
+                    {
+                        routes
+                    }
+                </Switch>
+            </Suspense>
         </div>
     )
 }

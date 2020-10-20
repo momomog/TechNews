@@ -8,12 +8,11 @@ import javax.websocket.EndpointConfig;
 
 public class PayloadDecoder implements Decoder.Text<Payload> {
 
-    private static Gson gson = new Gson();
+    private static final Gson gson = new Gson();
 
     @Override
     public Payload decode(String s) throws DecodeException {
-        Payload message = gson.fromJson(s, Payload.class);
-        return message;
+        return gson.fromJson(s, Payload.class);
     }
 
     @Override

@@ -2,7 +2,7 @@ import React from 'react'
 import {match, NavLink, useRouteMatch} from 'react-router-dom'
 import Common from '../../common/Common'
 
-export const NotFoundComponent: React.FC = () => {
+const NotFoundComponent: React.FC = () => {
     const {params}: match<{ code: string }> = useRouteMatch()
 
     const code = params.code === 'undefined' ? 404 : params.code
@@ -40,3 +40,5 @@ export const NotFoundComponent: React.FC = () => {
         </div>
     )
 }
+
+export default NotFoundComponent

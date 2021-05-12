@@ -30,7 +30,7 @@
         <projectlombok.version>1.18.8</projectlombok.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
         <commons-io.version>2.6</commons-io.version>
-        <spring-security-version>5.1.6.RELEASE</spring-security-version>
+        <spring-security-version>5.2.10.RELEASE</spring-security-version>
         <spring-core.version>5.1.9.RELEASE</spring-core.version>
         <jjwt.version>0.9.0</jjwt.version>
         <websocket-api.version>1.1</websocket-api.version>
